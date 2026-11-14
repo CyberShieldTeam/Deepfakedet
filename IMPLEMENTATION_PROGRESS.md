@@ -42,6 +42,13 @@ Updated: 2026-11-14. Published model branch: `codex/phase1-audit` at `26de131eef
 
 ## Next session entry point
 
+### 2026-11-15 — Community Forensics publisher-code parity
+
+- Added `ai_service/parity_community.py`. Executed exact reviewed publisher AST definitions at `ee5b71d43db0f3779e1edd64ee927b13f2dd6ad4`, strict-loaded pinned weights and compared with the VERITAS adapter on the same cached screening inputs.
+- All parameters identical; 71 image comparisons passed with maximum tensor/logit/sigmoid differences 0.0; nine oversized images skipped. None of the compared inputs changed under EXIF orientation.
+- Saved source/checkpoint/manifest hashes and runtime versions in `reports/community_parity_2026-11-15.json`; methodology and limits in `docs/COMMUNITY_PARITY.md`. Syntax compilation and diff checks passed. No production inference code changed.
+- Poor screening performance is not explained by an adapter mismatch on this set/runtime. Next work is error/data review and model comparison on development data; this parity pass does not complete Phase 2a or validate the separate face classifier.
+
 ### 2026-11-15 — real-weight screening and abstention decision
 
 - Added pinned Community Forensics adapter and bounded Mirage subset preparation, plus a direct-local reproducible scoring command. Weights and source images remain ignored; raw report and manifest are in `reports/image_screening_2026-11-15.json`.

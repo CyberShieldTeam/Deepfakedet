@@ -2,6 +2,10 @@
 
 ## Measured screening checkpoint — 2026-11-15
 
+Publisher-code parity subsequently passed on all 71 eligible screening inputs: strict-loaded
+parameters, tensors, logits and sigmoid outputs matched exactly. See `docs/COMMUNITY_PARITY.md`.
+This verifies the adapter in the tested runtime; it does not improve or validate detector accuracy.
+
 Community Forensics now has an optional `VERITAS_IMAGE_MODEL=community` adapter with
 strict pinned safetensors loading and publisher test preprocessing. On an 80-image
 Mirage subset, 71 images were scored and nine were skipped for exceeding pixel limits.

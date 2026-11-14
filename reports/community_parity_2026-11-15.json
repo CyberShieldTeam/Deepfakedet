@@ -1,0 +1,874 @@
+{
+  "publisher_repo": "https://github.com/JeongsooP/Community-Forensics",
+  "publisher_commit": "ee5b71d43db0f3779e1edd64ee927b13f2dd6ad4",
+  "source_sha256": {
+    "models.py": "988f2f566aa4c177dd845bfccdab9eac2b3fa5174649332b09ee8cc840c8bb97",
+    "custom_transforms.py": "85e49fee816b20859d6f1f96fbe51d296c2d4c7b6c371326b764f57a58a25bdb",
+    "dataloader.py": "e33032c6bf5e18c5ae3ae0a0391a8571a7bb2cfa4b140c0eb80f5ce86f14562b"
+  },
+  "checkpoint": {
+    "model": "OwensLab/commfor-model-384",
+    "revision": "6076002bf0d9dd37537f965ee2f06f826c333b61",
+    "sha256": "b89f36275f3bf5e2b040eee36597a8f19db051bff9a473a9cf7b2466284fb387"
+  },
+  "manifest_sha256": "9b4b42655d1f3c07a830fa78fba44392f85f806aeafdcbdd81f780417213cb0f",
+  "runtime": {
+    "python": "3.13.12",
+    "torch": "2.15.0+cpu",
+    "timm": "1.0.31",
+    "torchvision": "0.29.2+cpu",
+    "device": "cpu",
+    "dtype": "float32"
+  },
+  "deviations": [
+    "AST extracts exact publisher model and test-transform definitions; distributed evaluation loop is not run",
+    "Initial pretrained backbone download disabled; all reference weights then strict-loaded from pinned safetensors",
+    "Same oriented RGB input for transform/model parity; raw publisher versus EXIF-oriented input difference also recorded"
+  ],
+  "parameters_identical": true,
+  "compared": 71,
+  "skipped": 9,
+  "tolerance": {
+    "tensor": 0,
+    "logit": 1e-06,
+    "score": 1e-07
+  },
+  "passed": true,
+  "rows": [
+    {
+      "id": "Animal/0_real/37a051d6a468f2c16df432f105e1810a00a52a929867818a0bc4e57d91da9e4d.jpg",
+      "image_sha256": "4269eb6095cd99c9e17a3b1462cc7d8fe21f6bc4da763585fe2df706698d9a64",
+      "status": "skipped",
+      "reason": "24-million-pixel service limit"
+    },
+    {
+      "id": "Animal/0_real/109a0c9fc22ae3735a8ab8236daaefe3165ba00cfa8c54939123666f4a8c19c0.jpg",
+      "image_sha256": "70d931ecf900a581504a95a92b94279ec858f7dc39dac60661b7849713f52a5a",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -3.905855655670166,
+      "publisher_logit": -3.905855655670166,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/0_real/3764991afd492526fac414a0bef5276e6786d81ac4b47a58d2fa7fa820fb4220.jpg",
+      "image_sha256": "d93814fe3dddfbc6a95a84f1f336dc7e5c84ccc546960f6aff11b1a6f4a94e9e",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -12.400300979614258,
+      "publisher_logit": -12.400300979614258,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/0_real/363d3467a4bd1868dd6e38541ce73897dced78b211db11acd6f1cd87583334e5.png",
+      "image_sha256": "5649e2c947abcf6b8e2cb83b5761290a2715eb1573d9a3983bd4a06ce7585dca",
+      "status": "skipped",
+      "reason": "24-million-pixel service limit"
+    },
+    {
+      "id": "Animal/0_real/1528fd54b7f53422712b358b0ca76ca397d0f0e20694f0fb5f2669ba78d01898.png",
+      "image_sha256": "639c3076a856defbff38c28697c723c5a8e04c7379af3246c96deaecc34f5c82",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -11.456608772277832,
+      "publisher_logit": -11.456608772277832,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/0_real/3cf6b00aa498bc5cd73c6c82e38da0cb0cdfd09a4f3129fec33492caa6643acd.jpg",
+      "image_sha256": "bc5ff3195a66df38aa5fe03e775670d83d6bd1d50885cc4bec2fd817dae8fdb8",
+      "status": "skipped",
+      "reason": "24-million-pixel service limit"
+    },
+    {
+      "id": "Animal/0_real/0febf9563c5014dbbfdd7a893b673bdd0d488497a6f4b47cb1124d3158c0b593.jpg",
+      "image_sha256": "89477d905a730def650f640604149169a81cfb2602b8a163d9f429d4170d58e2",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -4.526305198669434,
+      "publisher_logit": -4.526305198669434,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/0_real/10112de6b46fc5ca2bbd48d52f0cb76a89d535559dc6276d4f3a6f1ad54e6574.png",
+      "image_sha256": "9a94d03cdc2954823123fc7fe48051ab48e90222cc8fdb0cd129825dece52d88",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -9.351015090942383,
+      "publisher_logit": -9.351015090942383,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/0_real/31606859b50f307d3fba027bb3f7190b07d55a239819a967d3debf7d7f5e3183.jpg",
+      "image_sha256": "87f07bcde9bc66c48091036724db01cc566eb87b2e6b94624887cc78bcda1028",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -7.135162353515625,
+      "publisher_logit": -7.135162353515625,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/0_real/2e415006aa72dead65e13f5a0f1ba09502ca4abdff2dac59598da7021669581b.png",
+      "image_sha256": "99c9f87e90ea173e69ebe803cb4a1bbb5216f6a62be08d1fe787fd74f1e97173",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -0.2932186722755432,
+      "publisher_logit": -0.2932186722755432,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_4446.jpg",
+      "image_sha256": "f790fa47145f6c5d0fad7fe755369d29919bd8279c0fd34ba4163b0f255c138b",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -11.53780746459961,
+      "publisher_logit": -11.53780746459961,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_4588.jpg",
+      "image_sha256": "abf062e9ffc849331ca07f58cbfdd064f828487c873f490ca014d77eeb721da6",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -6.166663646697998,
+      "publisher_logit": -6.166663646697998,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_4081.jpg",
+      "image_sha256": "900db10eb0b9fcc4e7ef09a684adfb317886dc42624ea810f0184fca0ddaa41e",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": 3.4724485874176025,
+      "publisher_logit": 3.4724485874176025,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/1_fake/Flux_xhs_v2/img_1265.jpg",
+      "image_sha256": "1c3f2f9909c9a4debd51d662e47f181004fa5f348237b1f532b7f254a6d36a8a",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -6.2976813316345215,
+      "publisher_logit": -6.2976813316345215,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/1_fake/Flux_xhs_v2/img_1408.jpg",
+      "image_sha256": "603a8c27c36eb718655542a4bbd0dbf31b233fa2e58a18c1604c907c311d04ff",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -0.3324139416217804,
+      "publisher_logit": -0.3324139416217804,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_4823.jpg",
+      "image_sha256": "4a53e580fda827e311ad8198ae94f5c2ca26cc0c6b0ed46b141a78501daa6b51",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -9.872282981872559,
+      "publisher_logit": -9.872282981872559,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_5270.jpg",
+      "image_sha256": "545fe71d2e6b14718d0775b06a9bc3b8a4a31d017782f12bd561483c33231ac4",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -6.508370876312256,
+      "publisher_logit": -6.508370876312256,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_5247.jpg",
+      "image_sha256": "fabcabd3528e88293da7b575d0cb2166ea22adc42b7d063b10e7f93c74b086e0",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -6.820201396942139,
+      "publisher_logit": -6.820201396942139,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/1_fake/Flux_xhs_v2/img_840.jpg",
+      "image_sha256": "1128796d508fb3f63fbe869415a2fd5602a312b464acaa70823e672a2aae404a",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -5.578096389770508,
+      "publisher_logit": -5.578096389770508,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_5111.jpg",
+      "image_sha256": "641e7139ed9820cfa543ff53c2a9be8d437dc32d902e35ad68552afe69e30af1",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -8.290037155151367,
+      "publisher_logit": -8.290037155151367,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/0_real/12618f0fa70f7bcbc67c8ed691402a57045d6517d25d82d8f5687695bde8ef5d.png",
+      "image_sha256": "e1de487d25ab524231690ed73632543ff9e520ce25245c66242b67cb521b575e",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -4.599919319152832,
+      "publisher_logit": -4.599919319152832,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/0_real/05b4fdf57995cbe2fc7e25e1ad1ba84ada4bfe3d516d94db94a78e04175a5195.jpg",
+      "image_sha256": "0305b05448b88e38163de91ccd23e196935406494507f58c817d79f2a0f5c2b8",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -6.215537071228027,
+      "publisher_logit": -6.215537071228027,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/0_real/061dd554fe453fe65b25a1034a9687ab8f3279ee515581743b9255db8d435cb3.png",
+      "image_sha256": "dc0c200b0f43a3839cc576b6aaf58226af7ec14977d29205b6c39a377f5c6b96",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -7.783194541931152,
+      "publisher_logit": -7.783194541931152,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/0_real/10d5989e74ed54b90d358554e8fd13f8c57e64a81a2ff8da690d0c8843d34fce.jpg",
+      "image_sha256": "6d677e31b9bef5c4c3fda8e469a06a097fadfef67f3b2360b6d6929a3a87f5f5",
+      "status": "skipped",
+      "reason": "24-million-pixel service limit"
+    },
+    {
+      "id": "Human/0_real/0590593f873d3eea2042b495acff2419f1e854024df188a12b6675a98d8ef6de.jpg",
+      "image_sha256": "ea00a3366e89e8ba9d21f4b7253d0a3c7b358d20d2c50207280c7053701a0634",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -5.505865097045898,
+      "publisher_logit": -5.505865097045898,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/0_real/1084ad44cef60d7eb5602498b3783b5d6e5ebe59c0d5037a09268b0afdd5b2c7.jpg",
+      "image_sha256": "dcd2be9a929f225fb47f9f958dba1ba4872146f774caac85ab6c4f7af17f1e2d",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -4.042017459869385,
+      "publisher_logit": -4.042017459869385,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/0_real/10e0edb8103d57356f768215e098bf8a6f7854ea5a0372ee15242d9f92144aa6.jpg",
+      "image_sha256": "bd41db8db13f4f4f1206f59a7e10570f991e7b4588cc0a5a4ff902fe3981ca9e",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -9.380111694335938,
+      "publisher_logit": -9.380111694335938,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/0_real/009356c66fa8d8939c357f72b72aaa5eb16b02a31317511cedcc147e36945e9d.jpg",
+      "image_sha256": "52b5c85473d37a1e9a1ba13b9981f6fedc2a0f4cd0a2683905fb9170c43db3df",
+      "status": "skipped",
+      "reason": "24-million-pixel service limit"
+    },
+    {
+      "id": "Human/0_real/09ce2f681c1b655cca3dbc07f189b447dd62ed62ece5c2f25df0ffab64aef649.jpg",
+      "image_sha256": "fff2445e0e060f8c52be31e862bfe5debdee46a9718715ef59e113a8705c44f6",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -7.584688186645508,
+      "publisher_logit": -7.584688186645508,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/0_real/02faf1ceb0e33ac311a7ecc95ce6f057b2a6a3c808e2826d0169bcb414af1723.jpg",
+      "image_sha256": "1840e01e61788e3821b7d2efe500cd466a207e52cae980c670a1b87b8e0df199",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -10.956525802612305,
+      "publisher_logit": -10.956525802612305,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5398.jpg",
+      "image_sha256": "b0b35039eee3ae7f85ea2c30bb7214734dab86de35293f3af8613a158bb32402",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -1.559000015258789,
+      "publisher_logit": -1.559000015258789,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_4963.jpg",
+      "image_sha256": "7b1d0bd1c0d281b6d94b5a98f3bbf4c6cc5bb8834eaa471f8203d7e9e2e072cf",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -5.103823661804199,
+      "publisher_logit": -5.103823661804199,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5842.jpg",
+      "image_sha256": "6bf945317345f180f20a61fe2b138462c362c69cf1002f04d3cef32aa85342ee",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -9.066510200500488,
+      "publisher_logit": -9.066510200500488,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5626.jpg",
+      "image_sha256": "d99b5bbb912d31db4451fdbfb32578ae527557b1b6649785b31aa5ac2f128816",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": 0.15933310985565186,
+      "publisher_logit": 0.15933310985565186,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5554.jpg",
+      "image_sha256": "4d6de3638618f557febe94be4e198bd687a015530518b1890d7fba21de906a10",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -7.830246925354004,
+      "publisher_logit": -7.830246925354004,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5402.jpg",
+      "image_sha256": "8c9dc17de3297b2fa9c38cf699ee81b28255ef1497c6dcebc41e7a58c69b909c",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -0.7780621647834778,
+      "publisher_logit": -0.7780621647834778,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5614.jpg",
+      "image_sha256": "37ff3b61e6dcf22ab18d1ec514ded0ed4a52ed1880fe7e93c24f6054259490a0",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -8.11235237121582,
+      "publisher_logit": -8.11235237121582,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5562.jpg",
+      "image_sha256": "e5ec5c8bade53a6131da0c6da7c2c045e02cf19e5df3c3777a66ce6c24096d3e",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -5.959725379943848,
+      "publisher_logit": -5.959725379943848,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5633.jpg",
+      "image_sha256": "192f4486118449ef5cc08514858d8d02894feafeff175957c58ae4fce85b0a29",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -4.48591947555542,
+      "publisher_logit": -4.48591947555542,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_4297.jpg",
+      "image_sha256": "15038b4db177d8803536ec8d6d63b9e6eabb831b23cec06cab35b8fe9a833f02",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -5.815487861633301,
+      "publisher_logit": -5.815487861633301,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/0_real/089b827715454adb53c63b460954e9a31df422bc7c8558da007f552a372931a8.jpg",
+      "image_sha256": "1c69e5c7830d25df5a09793f50f194f73118bcdfa6fc64ad0becd172eb004661",
+      "status": "skipped",
+      "reason": "24-million-pixel service limit"
+    },
+    {
+      "id": "Object/0_real/24fbb4667a42099b802d2f1bfa5ca752d618e867f54f99e126c6340282891db8.jpg",
+      "image_sha256": "c3fa1709a43ef03b2c2d2b169bb1619413341508c5410bbaf49d690a6d319128",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -6.581463813781738,
+      "publisher_logit": -6.581463813781738,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/0_real/08b0b8db5325c55cca73b7de97e3f4d302db045482f534a9161f7b0008047868.jpg",
+      "image_sha256": "150a6727ab4f5621f07646f760e8da255c3d0bb1f999e2a460a1be160c0e042f",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -6.906968116760254,
+      "publisher_logit": -6.906968116760254,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/0_real/1ff173c68dfe1026939d164d3ca7adf8315d11216f402eaaa7c1f45df75ed42f.jpg",
+      "image_sha256": "abfef3e73c0c466ec8b6f0fbf78b747129769621aaaf62ec4d23eb20479cbcb3",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -6.530623435974121,
+      "publisher_logit": -6.530623435974121,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/0_real/111d9837aa101a1da16ad9f7a937b751977014b114c67eaa85b3efd0bba62121.jpg",
+      "image_sha256": "d95bde2ce1518e040bc247442f9c2a300981e06ec486ecc5f3121b93730a88a4",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -8.232385635375977,
+      "publisher_logit": -8.232385635375977,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/0_real/14e7a0dd8ebe2ff3e569767b6cb0c4103e46565bcc84cb944e86bfd2ecc5e7df.jpg",
+      "image_sha256": "44d93852dcd9aa797b9526b4cb6bdd286a833d59971a5f931fb1059ab8086fff",
+      "status": "skipped",
+      "reason": "24-million-pixel service limit"
+    },
+    {
+      "id": "Object/0_real/1fc773dec296325230ef2fb0bb9ee481fbe1bcc9e4f191fb0595fb835c48c5e5.jpg",
+      "image_sha256": "a063d9530e5c7b03eff211cca2994f99cfb05a9fbc140ade3b439f440d7f4ca9",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -7.65369176864624,
+      "publisher_logit": -7.65369176864624,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/0_real/24a791bc27327a34009d26297dfcbb0cd84c7ac9b411d9b27493f35460a53223.jpg",
+      "image_sha256": "ff7a97ce83de860d2c37b9d999923db9623ff9a218660ec2fe6dec2612a500c8",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -7.890254974365234,
+      "publisher_logit": -7.890254974365234,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/0_real/1af29d0077778e602e8ca7d7df9289c32299dd3d81badda62a09d63887afbb57.jpg",
+      "image_sha256": "774bcce2f6494e377e7bea1fc20ad43aa22e7ac4327ce570e146cadb4081fe3e",
+      "status": "skipped",
+      "reason": "24-million-pixel service limit"
+    },
+    {
+      "id": "Object/0_real/1bdeca5775f88d4a5f66a717f7a88d3c8890882b80f2d445163e9c7ccc5bd1aa.jpg",
+      "image_sha256": "a9db4d3a8c7bcad53ae006270435e305503fdd97c10d7890c0c0097df0523a9b",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -11.771060943603516,
+      "publisher_logit": -11.771060943603516,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_4106.jpg",
+      "image_sha256": "cc7c4dea1fe43170433a1d11f20bd25293280ef2decf52adf847cde303d61271",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -9.321595191955566,
+      "publisher_logit": -9.321595191955566,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_4296.jpg",
+      "image_sha256": "69404c482ebc5f0259d49413973e743ef7e26cbe1b14bb9f3d99f3b36d556771",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -3.472703695297241,
+      "publisher_logit": -3.472703695297241,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_5493.jpg",
+      "image_sha256": "37b476af19f0ae0927f7938c082d78690708cf783637d8c0c64a7e45278d5b6f",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -4.499368667602539,
+      "publisher_logit": -4.499368667602539,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_5955.jpg",
+      "image_sha256": "8f7f0ad3ebd3ca61c8fef187d3b82b8050fdda2c5d0c696ec036ca2c6740e98f",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -8.799229621887207,
+      "publisher_logit": -8.799229621887207,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_4819.jpg",
+      "image_sha256": "a9bf377547b5c21a3315a0bf7ce7ff862ef37ae10240ef707e33ed46292cf756",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -6.399823188781738,
+      "publisher_logit": -6.399823188781738,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_4995.jpg",
+      "image_sha256": "99921d615445261bcfb6bdfec513e9cab737b0cdd91934a34f004605ac3a8f32",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -10.338489532470703,
+      "publisher_logit": -10.338489532470703,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_4392.jpg",
+      "image_sha256": "953cdeaf4af2de78931ef2ff951ef36300028692f763c1a43302ba575d7df1d8",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -11.437772750854492,
+      "publisher_logit": -11.437772750854492,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_4349.jpg",
+      "image_sha256": "408ad1c892cdba1382f88660553e3a5ff9de516b1c089fbcc08b335502e6eede",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": 0.5555005073547363,
+      "publisher_logit": 0.5555005073547363,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_5315.jpg",
+      "image_sha256": "40b9d164928b65ad0f1d8b0f718955f7e3e5cd641183be54436980129a5b97cc",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -8.592609405517578,
+      "publisher_logit": -8.592609405517578,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_5728.jpg",
+      "image_sha256": "bc54411682390b2df24544765fab1b36bd5ecd301684401e07de1642605eb688",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -8.461175918579102,
+      "publisher_logit": -8.461175918579102,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/0_real/0b5bf8f777c3645c038b7fefec3b7838e0c4fe0c6ae585927d787b2bc517192e.jpg",
+      "image_sha256": "f7aa0f1b5c5bee4eb913f7358524fa657c5049bfd1a1ddec32807b37980feaa5",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -5.641426086425781,
+      "publisher_logit": -5.641426086425781,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/0_real/0afece98e0b5698238968bdf182c4162d2b1d0d2246eb05346854acf350e3d89.jpg",
+      "image_sha256": "b2ab9756eb79fe6b63850dcbd2493e955ae28221e1f10b06567acf681788879f",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -6.263617515563965,
+      "publisher_logit": -6.263617515563965,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/0_real/1486963cdffeb17caa5e67f4f7069915dbedfe4caceb9e8f184d30fe228f480f.jpg",
+      "image_sha256": "0ec4025daebd5c0510f2b0b0d3b55732b8037e98c8ecbd2bec8b599519edf521",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -7.835543155670166,
+      "publisher_logit": -7.835543155670166,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/0_real/1a299d23a77bce06d41c9e156e6faca59a2b636999c9280adc99c6fb875c5e8e.jpg",
+      "image_sha256": "e17122906986ffb1be5066fa1ee5692f2b9c27e64ba43576fde9dd99964ed5c2",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -7.962754249572754,
+      "publisher_logit": -7.962754249572754,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/0_real/11212b64d7b9ac05f01a74834280b9b14b3e8f871c23ddc6c89a06a68aa8f549.png",
+      "image_sha256": "eaf6ce8a0fdd08df44eff4364efb0c517aa4b9b266a20a035c0836a245248236",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -3.9811737537384033,
+      "publisher_logit": -3.9811737537384033,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/0_real/07ad65a798bde28aa92622aa54e8dfc6828ebf2d16ba4d2a0f0b6c146731f620.jpg",
+      "image_sha256": "a36f9996b49f0b935cb17a9eb4de084386101db6dde55ff0d78e8c5509a6515e",
+      "status": "skipped",
+      "reason": "24-million-pixel service limit"
+    },
+    {
+      "id": "Scene/0_real/11c2f844bb52ad703f27cd9f3af59d2d7f4a1111e698ff2857cf805d6b0ef43a.jpg",
+      "image_sha256": "4c138854e9c0ec624604172066197a5e790bd779cfbbff79f7626a040ff2ebad",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -11.15985107421875,
+      "publisher_logit": -11.15985107421875,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/0_real/1152fa348fc5ef3b664313deda5fa63a66d16de4e55da068a71b4e2b692e0215.jpg",
+      "image_sha256": "0b67a423e95ff75dab7d1f74a90e8bf379e6a5d90cceba7a5c60ae22d3b4be3f",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -2.16772723197937,
+      "publisher_logit": -2.16772723197937,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/0_real/06828b457133fdcc4a22fa2b60b257ad076de83be029025ff46ff945acbb4300.jpg",
+      "image_sha256": "1a05c458ed759c24e0718265a9212a98d0339b44ad87fef32500b5ea058b9a25",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -9.915458679199219,
+      "publisher_logit": -9.915458679199219,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/0_real/090ccab1d8a2748ce2ccf9a8d7680fc8bae9ec483ae193d80a2a6031db1577bc.jpg",
+      "image_sha256": "1766fb1ac636c4e1a02f712218535e5e1da8dd848e8aaa874951b70292346869",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -4.944489479064941,
+      "publisher_logit": -4.944489479064941,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_5613.jpg",
+      "image_sha256": "b6fc8c310e924574178504a23d334a5098371877059f1556485a3b783b2c9ce2",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -8.113306045532227,
+      "publisher_logit": -8.113306045532227,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_4203.jpg",
+      "image_sha256": "81b331d1fea07b8a023ed3cd8f53e671e7e666ef288fa7d318c71110d44bdd8b",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -4.699985980987549,
+      "publisher_logit": -4.699985980987549,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_5331.jpg",
+      "image_sha256": "53731fab6a44a2ddbe16e34283451e269f5a4382829406f9e3736fb1b74c0087",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -4.141327857971191,
+      "publisher_logit": -4.141327857971191,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_4409.jpg",
+      "image_sha256": "ae26d1a234e70fd73f3485ff9bfaa273a65d66f305704668e3277dac145c97b8",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -2.058103561401367,
+      "publisher_logit": -2.058103561401367,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_5094.jpg",
+      "image_sha256": "9b52b3f3844569ebd14f53d33088bb9c480a68f675546a36587321e82a00139d",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -8.902238845825195,
+      "publisher_logit": -8.902238845825195,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_4048.jpg",
+      "image_sha256": "edc709b3f5911b4fee1eac31d1a7ab2e51665b1204ec8943fae5515bb7d4840d",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -5.55452299118042,
+      "publisher_logit": -5.55452299118042,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_5899.jpg",
+      "image_sha256": "f385e09dd65431abad1225043120b9db64167f0dda1c70c960de2551908aa0e1",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -8.532672882080078,
+      "publisher_logit": -8.532672882080078,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_4479.jpg",
+      "image_sha256": "9e8d98ac1a11ed46a9c2967b89f59f03065e16e285b3870b3341d4cd122dbfe0",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -5.89540958404541,
+      "publisher_logit": -5.89540958404541,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_5434.jpg",
+      "image_sha256": "704498e8918f86ff1d25e38335500ee29ffd5083e678af4e33e20b1c8bc39dd2",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -2.311464548110962,
+      "publisher_logit": -2.311464548110962,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_5442.jpg",
+      "image_sha256": "d54ad66d8aa248d2d2ecf256152102bd5b8f770bfe4e8731317911257de1ccae",
+      "status": "compared",
+      "tensor_max_abs_difference": 0.0,
+      "local_logit": -9.59705924987793,
+      "publisher_logit": -9.59705924987793,
+      "logit_abs_difference": 0.0,
+      "score_abs_difference": 0.0,
+      "publisher_raw_vs_oriented_tensor_difference": 0.0
+    }
+  ]
+}
