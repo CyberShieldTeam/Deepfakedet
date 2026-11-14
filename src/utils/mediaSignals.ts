@@ -145,6 +145,7 @@ export interface VideoSignals {
   measurements: Record<string, number | string | boolean>;
   frames: { t: number; diff: number; z: number; thumb: string }[];
   keyframes: string[];
+  sampledFrames: { timestampSeconds: number; imageData: string }[];
 }
 
 /** Sample N frames, compute mean absolute difference between consecutive frames, flag z>3 spikes. */
@@ -199,6 +200,8 @@ export async function analyzeVideo(file: File, n = 16, onProgress?: (p: number) 
   return {
     frames,
     keyframes: frames.filter((_, i) => i % Math.ceil(n / 6) === 0).map(f => f.thumb),
+    sampledFrames: frames.filter((_, i) => i % Math.ceil(n / 6) === 0)
+      .map(f => ({ timestampSeconds: Number(f.t.toFixed(3)), imageData: f.thumb })),
     measurements: {
       duration: Number(dur.toFixed(2)), width: v.videoWidth, height: v.videoHeight, framesSampled: n,
       fileSizeKB: Math.round(file.size / 1024), meanFrameDiff: Number(mean.toFixed(2)), cutCount: cuts.length,

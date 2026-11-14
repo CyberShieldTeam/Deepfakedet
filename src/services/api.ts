@@ -20,7 +20,7 @@ export const createInvestigation = (p: Partial<Investigation>) => post<{ investi
 export const deleteInvestigation = (id: string) => req(`/api/investigations/${id}`, { method: 'DELETE' });
 export const attachResult = (id: string, kind: 'media' | 'claim' | 'campaign', result: any) =>
   post<{ investigation: Investigation }>(`/api/investigations/${id}/attach`, { kind, result }).then(d => d.investigation);
-export const analyzeMedia = (p: { modality: string; fileName: string; mimeType: string; measurements: any; mediaData?: string; keyframes?: string[]; detailTiles?: string[] }) =>
+export const analyzeMedia = (p: { modality: string; fileName: string; mimeType: string; measurements: any; mediaData?: string; keyframes?: string[]; sampledFrames?: { timestampSeconds: number; imageData: string }[]; detailTiles?: string[] }) =>
   post<{ result: ForensicAnalysisResult }>('/api/forensics/analyze-media', p).then(d => d.result);
 export const verifyClaim = (claimText: string) => post<{ result: ClaimVerificationResult }>('/api/claims/verify', { claimText }).then(d => d.result);
 export const analyzeCampaign = (p: { datasetName: string; posts?: any[]; csv?: string; isSimulated?: boolean }) =>

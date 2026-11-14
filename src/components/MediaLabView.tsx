@@ -53,6 +53,13 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
           <div>Experimental AASIST speech screening · {r.localAudio.segments.length} scored segment(s) · {r.localAudio.processing_ms} ms. Raw softmax values are not calibrated or used as a verdict.</div>
           {r.localAudio.segments.slice(0, 8).map((s, i) => <div key={i} className="font-mono">{s.start_seconds.toFixed(1)}–{s.end_seconds.toFixed(1)}s · raw spoof output {s.raw_spoof_softmax.toFixed(3)}</div>)}
         </div>}
+        {r.localVideo && <div className="space-y-1 text-xs text-slate-400">
+          <div>{r.localVideo.frames.length} sampled frame(s) screened locally. Raw image scores are experimental and were not used for a video verdict.</div>
+          {r.localVideo.frames.map((frame, i) => <div key={i} className="font-mono">
+            {frame.timestampSeconds.toFixed(1)}s · {frame.image.model_status === 'ready' && frame.image.fake_probability != null
+              ? `raw fake-class output ${frame.image.fake_probability.toFixed(3)}` : 'image classifier unavailable'} · {frame.image.face_boxes.length} face candidate(s)
+          </div>)}
+        </div>}
         {r.aiGeneration && <div className="text-[11px] text-slate-400">Overall <Term k="confidence">confidence</Term>: {r.confidenceScore}%</div>}
         {r.provenance && (
           <div className="text-[11px] text-slate-400">
@@ -148,21 +155,21 @@ export const MediaLabView: React.FC<{ attach: AttachFn; active: Investigation | 
     if (!file || !modality) return;
     setBusy(true); setError(''); setResult(null); setSaved('');
     try {
-      let measurements: any, mediaData: string | undefined, keyframes: string[] | undefined, detailTiles: string[] | undefined;
+      let measurements: any, mediaData: string | undefined, keyframes: string[] | undefined, sampledFrames: VideoSignals['sampledFrames'] | undefined, detailTiles: string[] | undefined;
       if (modality === 'image') {
         setStage('Looking at the image…');
         const s = await analyzeImage(file); setImg(s); setView('ela');
         measurements = s.measurements; mediaData = s.previewDataUrl; detailTiles = s.detailTiles;
       } else if (modality === 'video') {
         const s = await analyzeVideo(file, 16, p => setStage(`Reading video frames… ${Math.round(p * 100)}%`)); setVid(s);
-        measurements = s.measurements; keyframes = s.keyframes;
+        measurements = s.measurements; keyframes = s.keyframes; sampledFrames = s.sampledFrames;
       } else {
         setStage('Listening to the audio…');
         const s = await analyzeAudio(file); setAud(s);
         measurements = s.measurements; mediaData = await smallDataUrl(file);
       }
       setStage('Asking the AI checker… (usually 10–30 seconds)');
-      setResult(await analyzeMedia({ modality, fileName: file.name, mimeType: file.type, measurements, mediaData, keyframes, detailTiles }));
+      setResult(await analyzeMedia({ modality, fileName: file.name, mimeType: file.type, measurements, mediaData, keyframes, sampledFrames, detailTiles }));
     } catch (e: any) {
       setError(e.message || 'The check failed. Please try again.');
     } finally {
@@ -272,6 +279,8 @@ export const MediaLabView: React.FC<{ attach: AttachFn; active: Investigation | 
                       <div key={i} className={`overflow-hidden rounded border ${f.z > 3 ? 'border-rose-500' : 'border-slate-800'}`}>
                         <img src={f.thumb} className="w-full" alt={`frame ${i}`} />
                         <div className={`px-1 text-[9px] font-mono ${f.z > 3 ? 'text-rose-300' : 'text-slate-500'}`}>{f.t.toFixed(1)}s z{f.z}</div>
+                        {result?.localVideo?.frames.some(frame => Math.abs(frame.timestampSeconds - f.t) < 0.01) &&
+                          <div className="px-1 pb-0.5 text-[9px] text-cyan-300">Local frame screened</div>}
                       </div>
                     ))}
                   </div>

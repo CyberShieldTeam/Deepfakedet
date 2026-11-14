@@ -7,7 +7,7 @@ Updated: 2026-11-14. Working branch: `codex/phase1-audit`. Baseline commit: `fa8
 - [x] Phase 1 — repository audit and staged implementation plan (`IMPLEMENTATION_PLAN.md`).
 - [ ] Phase 2a — dedicated general-image and facial-manipulation detectors. General-image ViT inference and Express/UI contract, YuNet face candidates, live HTTP upload smoke, and browser UI upload verification implemented. Representative evaluation, calibration, and a face-manipulation classifier remain open.
 - [ ] Phase 2b — AASIST audio detector and segment-level output. Official checkpoint inference, resampling, segments, Express/UI contract, live HTTP smoke, and browser WAV upload verification implemented. Speech activity detection, representative evaluation/calibration, video-audio extraction, and file-format coverage remain open.
-- [ ] Phase 2c — frame-level video detector and evidence timeline.
+- [ ] Phase 2c — frame-level video detector and evidence timeline. Browser-sampled, timestamped JPEG frames now receive local image screening and appear on the video timeline. Server-side decode, representative evaluation, face-manipulation inference, and quality-aware aggregation remain open.
 - [ ] Phase 2d — trained/evaluated temporal video analysis.
 - [ ] Phase 3 — evidence-based multilingual text verification with local models.
 - [ ] Phase 4 — modality and reasoning-model fine-tuning pipelines and completed training runs.
@@ -32,7 +32,7 @@ Updated: 2026-11-14. Working branch: `codex/phase1-audit`. Baseline commit: `fa8
 
 ## Next session entry point
 
-Read `MODEL_CARD.md`. The pinned candidate failed the five-fixture smoke check and is restricted to an experimental raw score. Evaluate a stronger model on representative held-out images before permitting local verdicts. Then select a separately licensed face-manipulation model and add face-crop inference. Live HTTP and browser UI uploads pass with the quarantined model. Never mark the engine complete based on an adapter or mock result.
+Read `MODEL_CARD.md`, `AUDIO_MODEL_CARD.md`, and `VIDEO_ENGINE.md`. The image checkpoint remains quarantined as an experimental raw score, including when applied to video frames. Evaluate stronger image and face-manipulation models on representative held-out data before permitting local verdicts. For Phase 2c, move video decoding to a validated server upload path and add quality-aware frame selection and aggregation. Never mark an engine complete based on an adapter, mock result, or transport smoke.
 
 ## Phase 2a partial implementation
 
@@ -56,3 +56,10 @@ Read `MODEL_CARD.md`. The pinned candidate failed the five-fixture smoke check a
 - Added Express adapter and UI evidence display. If Gemini is available, AASIST evidence stays separate from its verdict. If the local audio service is unavailable, the existing fallback remains. The model registry checks Python audio health before advertising readiness.
 - A real-weight software smoke on the existing 44.1 kHz WAV fixture produced three timestamped segments. The live HTTP upload through Express to Python passed with an inconclusive response and no decision probability. This is not an accuracy test; the fixture has no verified authenticity label. Phase 2b remains open.
 - The browser WAV upload also displayed an inconclusive AASIST result and three timestamped segment outputs. The raw spoof-class output rounded to 1.000 on this fixture, demonstrating why it must not be presented as a calibrated probability or verdict. Updated the UI to show raw decimals and a clear missing-calibration message. The model registry health check reported AASIST `ONLINE` with `No VERITAS accuracy benchmark; scores uncalibrated`. Added pre-decode duration/channel checks to reject oversized compressed clips before sample allocation. Thirteen Python tests, Node tests, TypeScript checks, build, and the live HTTP smoke passed; the build retained its large-chunk warning.
+
+## Phase 2c partial implementation
+
+- The browser now sends up to six timestamped JPEG frames from its existing 16-frame sampler. Express validates the frame count and ascending timestamps, screens each frame through the optional local image endpoint, and returns per-frame raw outputs and face candidates as separate evidence. The UI marks screened frames on the existing timeline and shows their experimental outputs in technical details.
+- When Gemini is unavailable and local screening succeeds, the video result is always `inconclusive` with zero confidence and no decision probability. With Gemini available, local frame evidence is attached separately and does not change its verdict. The Dima image checkpoint remains quarantined; no frame score is treated as a calibrated video probability.
+- Added a 3-second FFmpeg-generated transport clip and extracted frames with explicit source and no authenticity label. The live Express-to-Python HTTP smoke passed on three timestamped frames using cached Dima and YuNet. A browser upload of the clip displayed 16 sampled frames, six marked as locally screened, and an inconclusive result with no calibrated probability. These tests check transport and rendering, not detection accuracy.
+- `npm run lint`, `npm test`, `npm run build`, and `git diff --check` passed for this slice. Phase 2c remains open: server-side original-video decode, validated upload limits, frame quality/face selection, aggregation, representative evaluation, and video audio extraction are not implemented. Phase 2d temporal model work has not begun.

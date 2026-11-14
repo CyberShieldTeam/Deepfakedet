@@ -11,6 +11,7 @@ import { AI_DIRECT_PROMPT, calibrate, calibrateDirect, elaIndicators, IMAGE_PROM
 import { buildDemoInvestigation, demoPosts, DEMO_TIMELINE, DEMO_VERIFIED_REGISTRY } from './server/demoScenario';
 import { callLocalImage, localImageResult, type LocalImageResponse } from './server/localImage';
 import { callLocalAudio, localAudioResult, type LocalAudioResponse } from './server/localAudio';
+import { callLocalVideoFrames, localVideoResult, type LocalVideoEvidence } from './server/localVideo';
 import { ClaimVerificationResult, ForensicAnalysisResult, Investigation, LiveEvent, ModelRegistryItem, RiskLevel, GroundedSource } from './src/types';
 
 // ---------------------------------------------------------------- Gemini (server-side only)
@@ -544,7 +545,7 @@ async function geminiImageAnalysis(fileName: string, mediaData: string, measurem
 
 app.post('/api/forensics/analyze-media', async (req, res) => {
   try {
-    const { modality = 'image', fileName = 'upload', mimeType, measurements = {}, mediaData, keyframes, detailTiles } = req.body || {};
+    const { modality = 'image', fileName = 'upload', mimeType, measurements = {}, mediaData, keyframes, sampledFrames, detailTiles } = req.body || {};
     if (!['image', 'video', 'audio'].includes(modality)) return res.status(400).json({ error: 'modality must be image | video | audio' });
     const h = heuristicMedia(modality, measurements);
 
@@ -552,6 +553,7 @@ app.post('/api/forensics/analyze-media', async (req, res) => {
     let geminiFailure = '';
     let localEvidence: LocalImageResponse | null = null;
     let localAudioEvidence: LocalAudioResponse | null = null;
+    let localVideoEvidence: LocalVideoEvidence | null = null;
     if (modality === 'image' && process.env.VERITAS_AI_SERVICE_URL && typeof mediaData === 'string') {
       try {
         const local = await callLocalImage(mediaData, process.env.VERITAS_AI_SERVICE_URL);
@@ -570,6 +572,14 @@ app.post('/api/forensics/analyze-media', async (req, res) => {
         if (!geminiUsable()) result = localAudioResult(localAudioEvidence, fileName, measurements, h.findings);
       } catch (e: any) {
         console.warn(`[local-audio] ${String(e?.message || e).slice(0, 160)}`);
+      }
+    }
+    if (modality === 'video' && process.env.VERITAS_AI_SERVICE_URL && sampledFrames) {
+      try {
+        localVideoEvidence = await callLocalVideoFrames(sampledFrames, process.env.VERITAS_AI_SERVICE_URL);
+        if (!geminiUsable()) result = localVideoResult(localVideoEvidence, fileName, measurements, h.findings);
+      } catch (e: any) {
+        console.warn(`[local-video] ${String(e?.message || e).slice(0, 160)}`);
       }
     }
     if (!result && modality === 'image' && geminiUsable() && typeof mediaData === 'string') {
@@ -624,6 +634,8 @@ Be calibrated: if evidence is weak say "inconclusive". Respond ONLY with JSON:
       }
       if (localAudioEvidence && modality === 'audio')
         result = localAudioResult(localAudioEvidence, fileName, measurements, h.findings);
+      if (localVideoEvidence && modality === 'video')
+        result = localVideoResult(localVideoEvidence, fileName, measurements, h.findings);
     }
     if (!result) {
       const authenticity = h.score >= 60 ? 'suspicious_artifacts' : h.score >= 35 ? 'inconclusive' : 'likely_authentic';
@@ -671,6 +683,14 @@ Be calibrated: if evidence is weak say "inconclusive". Respond ONLY with JSON:
       result.localAudio = localAudioEvidence;
       result.modelsUsed.push({ name: 'AASIST', version: localAudioEvidence.revision, provider: 'Experimental local model; no verdict' });
       result.limitations.push('AASIST segment scores were not calibrated and did not determine this verdict.');
+    }
+    if (localVideoEvidence && result && !result.localVideo) {
+      result.localVideo = localVideoEvidence;
+      const scored = localVideoEvidence.frames.find(frame => frame.image.model_status === 'ready')?.image;
+      if (scored) result.modelsUsed.push({ name: scored.model, version: scored.revision, provider: 'Experimental sampled-frame evidence; no verdict' });
+      if (localVideoEvidence.frames.some(frame => frame.image.face_analysis !== 'not_performed'))
+        result.modelsUsed.push({ name: 'YuNet face detector', version: '2023mar', provider: 'OpenCV Zoo' });
+      result.limitations.push('Local frame scores were experimental and did not determine this video verdict.');
     }
     if (result.riskLevel === 'High' || result.riskLevel === 'Critical')
       raiseAlert('suspicious_media', result.riskLevel === 'Critical' ? 'critical' : 'high', `Suspicious ${modality} detected`, `${fileName}: ${result.headlineSummary}`, false);

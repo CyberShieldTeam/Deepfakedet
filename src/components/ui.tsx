@@ -38,6 +38,7 @@ export const EngineBadge: React.FC<{ engine?: AnalysisEngine; note?: string }> =
     local_pretrained: ['Local pretrained image model', 'border-sky-500/40 bg-sky-500/10 text-sky-300', Cpu],
     local_image_screening: ['Local image screening (no classifier)', 'border-amber-500/40 bg-amber-500/10 text-amber-300', ScanSearch],
     local_aasist: ['Local AASIST speech screening', 'border-sky-500/40 bg-sky-500/10 text-sky-300', Cpu],
+    local_video_frames: ['Local video frame screening', 'border-sky-500/40 bg-sky-500/10 text-sky-300', ScanSearch],
     heuristic: ['Basic checks (AI unavailable)', 'border-amber-500/40 bg-amber-500/10 text-amber-300', AlertTriangle],
     simulated_demo: ['Demo data — not real', 'border-fuchsia-500/40 bg-fuchsia-500/10 text-fuchsia-300', FlaskConical],
     graph_heuristics: ['Pattern analysis (computed)', 'border-sky-500/40 bg-sky-500/10 text-sky-300', Cpu]

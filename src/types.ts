@@ -83,6 +83,8 @@ export interface ForensicAnalysisResult {
   localImage?: { classification: 'REAL' | 'MANIPULATED' | 'INCONCLUSIVE'; fake_probability: number | null; model_confidence: number | null; model_status: 'ready' | 'unavailable' | 'skipped'; model: string; revision: string; scope: string; face_analysis: string; face_boxes: { x: number; y: number; width: number; height: number; confidence: number }[]; signals: string[]; explanation: string; processing_ms: number };
   /** Experimental AASIST speech anti-spoofing evidence, never a calibrated verdict. */
   localAudio?: { classification: 'INCONCLUSIVE'; model: string; revision: string; scope: 'speech_anti_spoofing'; sample_rate_input: number; sample_rate_model: 16000; duration_seconds: number; segments: { start_seconds: number; end_seconds: number; raw_bonafide_logit: number; raw_spoof_softmax: number }[]; processing_ms: number; explanation: string };
+  /** Experimental image evidence from browser-sampled video frames; no video verdict. */
+  localVideo?: { scope: 'sampled_video_frames'; frames: { timestampSeconds: number; image: NonNullable<ForensicAnalysisResult['localImage']> }[]; samplingNote: string };
 }
 
 export type IndicatorStrength = 'weak' | 'moderate' | 'strong';
@@ -109,7 +111,7 @@ export interface ProvenanceInfo {
   generatorHints: string[];
 }
 
-export type AnalysisEngine = 'gemini' | 'heuristic' | 'simulated_demo' | 'graph_heuristics' | 'local_pretrained' | 'local_image_screening' | 'local_aasist';
+export type AnalysisEngine = 'gemini' | 'heuristic' | 'simulated_demo' | 'graph_heuristics' | 'local_pretrained' | 'local_image_screening' | 'local_aasist' | 'local_video_frames';
 
 export interface GroundedSource {
   title: string;
