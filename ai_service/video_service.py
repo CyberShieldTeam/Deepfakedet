@@ -2,6 +2,7 @@
 import base64
 import binascii
 import math
+import subprocess
 import tempfile
 from pathlib import Path
 
@@ -13,6 +14,7 @@ MAX_VIDEO_BYTES = 8 * 1024 * 1024
 MAX_DURATION_SECONDS = 120
 MAX_FRAME_COUNT = 3600
 MAX_FRAME_PIXELS = 1920 * 1080
+MAX_AUDIO_SECONDS = 60
 
 
 class VideoRequest(BaseModel):
@@ -103,6 +105,59 @@ def decode_sampled_frames(raw: bytes):
             path.unlink(missing_ok=True)
 
 
+def extract_audio_track(raw: bytes, video_duration: float):
+    """Decode the first minute of the original video's audio to bounded mono 16 kHz WAV."""
+    path = None
+    try:
+        import imageio_ffmpeg
+
+        with tempfile.NamedTemporaryFile(suffix=".video", delete=False) as temporary:
+            temporary.write(raw)
+            path = Path(temporary.name)
+        command = [imageio_ffmpeg.get_ffmpeg_exe(), "-nostdin", "-hide_banner", "-loglevel", "error",
+                   "-i", str(path), "-map", "0:a:0?", "-vn", "-t", str(MAX_AUDIO_SECONDS),
+                   "-ac", "1", "-ar", "16000", "-c:a", "pcm_s16le", "-f", "wav", "pipe:1"]
+        completed = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                   timeout=25, check=False)
+        if completed.returncode != 0:
+            if b"Output file does not contain any stream" in completed.stderr:
+                return None, "no_audio", "No audio track was found in the original video."
+            return None, "extraction_failed", "Audio extraction failed; frame evidence remains available."
+        if not completed.stdout:
+            return None, "no_audio", "No audio track was found in the original video."
+        if len(completed.stdout) > 2 * 1024 * 1024:
+            return None, "extraction_failed", "Decoded audio exceeded the screening limit."
+        return completed.stdout, "decoded", ("Only the first 60 seconds of audio were extracted."
+                                             if video_duration > MAX_AUDIO_SECONDS else "Audio track extracted from the original video.")
+    except (ImportError, OSError, subprocess.TimeoutExpired):
+        return None, "extraction_failed", "Audio extraction was unavailable or timed out."
+    finally:
+        if path is not None:
+            path.unlink(missing_ok=True)
+
+
+def screen_video_audio(raw: bytes, video_duration: float):
+    try:
+        wav, status, note = extract_audio_track(raw, video_duration)
+    except Exception:
+        return {"status": "extraction_failed", "note": "Audio extraction failed; frame evidence remains available.",
+                "truncated": False}
+    if status != "decoded":
+        return {"status": status, "note": note, "truncated": False}
+    from ai_service import audio_service
+    if audio_service.model is None or audio_service.torch_module is None:
+        return {"status": "model_unavailable", "note": "Audio was extracted, but AASIST is unavailable.",
+                "truncated": video_duration > MAX_AUDIO_SECONDS}
+    try:
+        evidence = audio_service.analyze_audio(audio_service.AudioRequest(
+            audio_base64=base64.b64encode(wav).decode("ascii")))
+    except Exception:
+        return {"status": "extraction_failed", "note": "Extracted audio could not be screened by AASIST.",
+                "truncated": video_duration > MAX_AUDIO_SECONDS}
+    return {"status": "analyzed", "note": note + " AASIST scores are raw and uncalibrated; speech presence was not verified.",
+            "truncated": video_duration > MAX_AUDIO_SECONDS, "evidence": evidence}
+
+
 @router.post("/v1/video/analyze")
 def analyze_video(request: VideoRequest):
     if len(request.video_base64) > 4 * math.ceil(MAX_VIDEO_BYTES / 3):
@@ -120,4 +175,5 @@ def analyze_video(request: VideoRequest):
               for timestamp, jpg, quality in samples]
     return {"scope": "server_decoded_frames", "frames": frames,
             "samplingNote": "Up to six JPEG frames chosen from nearby original-video positions using heuristic exposure/detail measurements; model scores are experimental.",
-            "videoMetadata": {"durationSeconds": round(duration, 3), "width": width, "height": height}}
+            "videoMetadata": {"durationSeconds": round(duration, 3), "width": width, "height": height},
+            "audioTrack": screen_video_audio(raw, duration)}

@@ -697,6 +697,10 @@ Be calibrated: if evidence is weak say "inconclusive". Respond ONLY with JSON:
       if (localVideoEvidence.frames.some(frame => frame.image.face_analysis !== 'not_performed'))
         result.modelsUsed.push({ name: 'YuNet face detector', version: '2023mar', provider: 'OpenCV Zoo' });
       result.limitations.push('Local frame scores were experimental and did not determine this video verdict.');
+      if (localVideoEvidence.audioTrack?.status === 'analyzed') {
+        result.modelsUsed.push({ name: 'AASIST', version: localVideoEvidence.audioTrack.evidence!.revision, provider: 'Experimental video-audio evidence; no verdict' });
+        result.limitations.push('Video AASIST segment scores were uncalibrated, speech presence was not verified, and they did not determine this verdict.');
+      }
     }
     if (result.riskLevel === 'High' || result.riskLevel === 'Critical')
       raiseAlert('suspicious_media', result.riskLevel === 'Critical' ? 'critical' : 'high', `Suspicious ${modality} detected`, `${fileName}: ${result.headlineSummary}`, false);

@@ -8,9 +8,10 @@ import cv2
 import numpy as np
 from fastapi import HTTPException
 
-from ai_service import app as image_app, video_service
+from ai_service import app as image_app, audio_service, video_service
 
 CLIP = Path(__file__).resolve().parents[1] / "test" / "fixtures" / "video" / "test_pattern_3s.mp4"
+CLIP_WITH_TONE = CLIP.with_name("test_pattern_with_tone_3s.mp4")
 
 
 class VideoServiceTests(unittest.TestCase):
@@ -23,6 +24,7 @@ class VideoServiceTests(unittest.TestCase):
         self.assertEqual(result["videoMetadata"]["width"], 320)
         self.assertEqual(result["videoMetadata"]["height"], 180)
         self.assertEqual(len(result["frames"]), 6)
+        self.assertEqual(result["audioTrack"]["status"], "no_audio")
         timestamps = [frame["timestampSeconds"] for frame in result["frames"]]
         self.assertEqual(timestamps, sorted(set(timestamps)))
         self.assertTrue(all(0 <= frame["quality"]["meanLuma"] <= 255 and
@@ -76,6 +78,40 @@ class VideoServiceTests(unittest.TestCase):
             with self.subTest(expected=expected), self.assertRaises(HTTPException) as caught:
                 video_service.analyze_video(video_service.VideoRequest(video_base64=data))
             self.assertEqual(caught.exception.status_code, expected)
+
+    def test_extracts_track_and_reports_unavailable_model_separately(self):
+        raw = CLIP_WITH_TONE.read_bytes()
+        wav, status, _ = video_service.extract_audio_track(raw, 3)
+        self.assertEqual(status, "decoded")
+        samples, rate, duration = audio_service.prepare_audio(wav)
+        self.assertEqual(rate, 16000)
+        self.assertAlmostEqual(duration, 3, places=1)
+        self.assertGreater(len(samples), 0)
+        with patch.object(audio_service, "model", None):
+            result = video_service.screen_video_audio(raw, 3)
+        self.assertEqual(result["status"], "model_unavailable")
+        self.assertNotIn("evidence", result)
+
+    def test_audio_evidence_is_attached_without_a_video_verdict(self):
+        mocked = {"classification": "INCONCLUSIVE", "scope": "speech_anti_spoofing",
+                  "segments": [{"start_seconds": 0, "end_seconds": 3, "raw_spoof_softmax": 0.8}]}
+        with patch.object(audio_service, "model", object()), patch.object(audio_service, "torch_module", object()), \
+             patch.object(audio_service, "analyze_audio", return_value=mocked):
+            result = video_service.screen_video_audio(CLIP_WITH_TONE.read_bytes(), 3)
+        self.assertEqual(result["status"], "analyzed")
+        self.assertEqual(result["evidence"], mocked)
+        self.assertFalse(result["truncated"])
+
+    def test_audio_inference_failure_keeps_frame_response(self):
+        with patch.object(image_app, "model", None), patch.object(image_app, "face_detector", object()), \
+             patch.object(image_app, "detect_faces", return_value=("none_found", [])), \
+             patch.object(audio_service, "model", object()), patch.object(audio_service, "torch_module", object()), \
+             patch.object(audio_service, "analyze_audio", side_effect=RuntimeError("test failure")):
+            result = video_service.analyze_video(video_service.VideoRequest(
+                video_base64=base64.b64encode(CLIP_WITH_TONE.read_bytes()).decode("ascii")))
+        self.assertEqual(len(result["frames"]), 6)
+        self.assertEqual(result["audioTrack"]["status"], "extraction_failed")
+        self.assertNotIn("evidence", result["audioTrack"])
 
 
 if __name__ == "__main__":

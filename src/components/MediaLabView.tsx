@@ -61,6 +61,14 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
               ? `raw fake-class output ${frame.image.fake_probability.toFixed(3)}` : 'image classifier unavailable'} · {frame.image.face_boxes.length} face candidate(s)
             {frame.quality && <span> · detail {frame.quality.laplacianVariance.toFixed(1)}, luma {frame.quality.meanLuma.toFixed(0)}, clipped {(frame.quality.clippedFraction * 100).toFixed(1)}% (selection heuristics)</span>}
           </div>)}
+          {r.localVideo.audioTrack && <div>
+            Video audio: {r.localVideo.audioTrack.status.replaceAll('_', ' ')}. {r.localVideo.audioTrack.note}
+            {r.localVideo.audioTrack.evidence && <div className="mt-1 space-y-0.5 font-mono">
+              {r.localVideo.audioTrack.evidence.segments.map((segment, i) => <div key={i}>
+                {segment.start_seconds.toFixed(1)}–{segment.end_seconds.toFixed(1)}s · raw AASIST spoof output {segment.raw_spoof_softmax.toFixed(3)}
+              </div>)}
+            </div>}
+          </div>}
         </div>}
         {r.aiGeneration && <div className="text-[11px] text-slate-400">Overall <Term k="confidence">confidence</Term>: {r.confidenceScore}%</div>}
         {r.provenance && (

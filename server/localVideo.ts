@@ -1,13 +1,21 @@
 import type { ForensicAnalysisResult } from '../src/types';
 import { callLocalImage, type LocalImageResponse } from './localImage';
+import type { LocalAudioResponse } from './localAudio';
 
 export interface SampledVideoFrame { timestampSeconds: number; imageData: string }
 export interface FrameQuality { laplacianVariance: number; meanLuma: number; clippedFraction: number; selectionScore: number }
+export interface VideoAudioTrack {
+  status: 'analyzed' | 'no_audio' | 'model_unavailable' | 'extraction_failed';
+  note: string;
+  truncated: boolean;
+  evidence?: LocalAudioResponse;
+}
 export interface LocalVideoEvidence {
   scope: 'sampled_video_frames' | 'server_decoded_frames';
   frames: { timestampSeconds: number; image: LocalImageResponse; quality?: FrameQuality }[];
   samplingNote: string;
   videoMetadata?: { durationSeconds: number; width: number; height: number };
+  audioTrack?: VideoAudioTrack;
 }
 
 export async function callLocalVideo(mediaData: string, endpoint: string, fetcher: typeof fetch = fetch): Promise<LocalVideoEvidence> {
@@ -34,6 +42,16 @@ export async function callLocalVideo(mediaData: string, endpoint: string, fetche
       !Number.isFinite(frame.quality.clippedFraction) || frame.quality.clippedFraction < 0 || frame.quality.clippedFraction > 1 ||
       !Number.isFinite(frame.quality.selectionScore) || frame.quality.selectionScore < 0))
     throw new Error('Invalid local video frame quality');
+  const audio = value.audioTrack;
+  if (!audio || !['analyzed', 'no_audio', 'model_unavailable', 'extraction_failed'].includes(audio.status) ||
+      typeof audio.note !== 'string' || typeof audio.truncated !== 'boolean' ||
+      (audio.status === 'analyzed' && (audio.evidence?.classification !== 'INCONCLUSIVE' ||
+        audio.evidence.scope !== 'speech_anti_spoofing' || audio.evidence.model !== 'clovaai/aasist' ||
+        !Array.isArray(audio.evidence.segments) || audio.evidence.segments.some(segment =>
+          !Number.isFinite(segment.start_seconds) || !Number.isFinite(segment.end_seconds) ||
+          !Number.isFinite(segment.raw_spoof_softmax) || segment.raw_spoof_softmax < 0 || segment.raw_spoof_softmax > 1))) ||
+      (audio.status !== 'analyzed' && audio.evidence !== undefined))
+    throw new Error('Invalid local video audio evidence');
   return value;
 }
 
@@ -62,6 +80,7 @@ export function localVideoResult(evidence: LocalVideoEvidence, fileName: string,
   const firstModel = evidence.frames.find(frame => frame.image.model_status === 'ready')?.image;
   const faceDetectorRan = evidence.frames.some(frame => frame.image.face_analysis !== 'not_performed');
   const source = evidence.scope === 'server_decoded_frames' ? 'original-video' : 'browser-sampled';
+  const audioScored = evidence.audioTrack?.status === 'analyzed';
   return {
     modality: 'video', fileName, engine: 'local_video_frames',
     engineNote: `${evidence.frames.length} ${source} frame(s) screened locally. Image-model scores are experimental and cannot determine video authenticity.`,
@@ -72,12 +91,15 @@ export function localVideoResult(evidence: LocalVideoEvidence, fileName: string,
       ? 'Only sampled, resized JPEG frames were screened; the full video was not analyzed.'
       : 'Frames were sampled and JPEG-compressed in the browser; the original video was not decoded by the server.',
       'The whole-image checkpoint failed an initial out-of-domain smoke check; raw scores cannot establish authenticity.',
-      'No face-manipulation classifier, video audio extraction, or temporal model was run.'],
+      'No face-manipulation classifier or temporal model was run.',
+      ...(audioScored ? ['Video AASIST segment scores are uncalibrated, speech presence was not verified, and they do not determine authenticity.'] :
+        [evidence.audioTrack?.note || 'Video audio extraction and AASIST were not run.'])],
     alternativeHypotheses: ['Cuts, compression, and changes in lighting can alter frame-level signals.'],
     compressionArtifacts: { elaScore: 0, doubleCompressionFound: false, noiseInconsistencyMapAvailable: false,
       notes: 'No image ELA was performed on the video frames.' },
     modelsUsed: [...(firstModel ? [{ name: firstModel.model, version: firstModel.revision, provider: 'Experimental local image checkpoint; no verdict' }] : []),
-      ...(faceDetectorRan ? [{ name: 'YuNet face detector', version: '2023mar', provider: 'OpenCV Zoo' }] : [])],
+      ...(faceDetectorRan ? [{ name: 'YuNet face detector', version: '2023mar', provider: 'OpenCV Zoo' }] : []),
+      ...(audioScored ? [{ name: 'AASIST', version: evidence.audioTrack!.evidence!.revision, provider: 'Experimental video-audio evidence; no verdict' }] : [])],
     measurements, analyzedAt: new Date().toISOString(), localVideo: evidence
   };
 }

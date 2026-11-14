@@ -33,11 +33,18 @@ const serverFetcher = (async (_url: string, init?: RequestInit) => {
   assert.equal(JSON.parse(String(init?.body)).video_base64, 'aGVsbG8=');
   return new Response(JSON.stringify({ scope: 'server_decoded_frames',
     frames: [{ timestampSeconds: 0.125, image: raw, quality: { laplacianVariance: 25, meanLuma: 128, clippedFraction: 0, selectionScore: 3.25 } }], samplingNote: 'Server decoded',
-    videoMetadata: { durationSeconds: 2, width: 320, height: 180 } }));
+    videoMetadata: { durationSeconds: 2, width: 320, height: 180 },
+    audioTrack: { status: 'analyzed', note: 'Experimental audio', truncated: false, evidence: {
+      classification: 'INCONCLUSIVE', model: 'clovaai/aasist', revision: 'pinned', scope: 'speech_anti_spoofing',
+      sample_rate_input: 16000, sample_rate_model: 16000, duration_seconds: 2,
+      segments: [{ start_seconds: 0, end_seconds: 2, raw_bonafide_logit: 1, raw_spoof_softmax: 0.8 }],
+      processing_ms: 10, explanation: 'Raw only' } } }));
 }) as typeof fetch;
 const serverEvidence = await callLocalVideo('data:video/mp4;base64,aGVsbG8=', 'http://127.0.0.1:8001', serverFetcher);
 assert.equal(serverEvidence.scope, 'server_decoded_frames');
 assert.equal(serverEvidence.frames[0].timestampSeconds, 0.125);
 assert.equal(localVideoResult(serverEvidence, 'clip.mp4', {}, []).aiGeneratedProbability, null);
+assert.equal(localVideoResult(serverEvidence, 'clip.mp4', {}, []).authenticity, 'inconclusive');
+assert.equal(serverEvidence.audioTrack?.evidence?.segments[0].raw_spoof_softmax, 0.8);
 await assert.rejects(callLocalVideo('data:text/plain;base64,aGVsbG8=', 'http://127.0.0.1:8001', serverFetcher));
 console.log('Local video frame contract tests passed');
