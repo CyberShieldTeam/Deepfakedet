@@ -10,6 +10,7 @@ import { analyzeCampaign, detectScriptLanguage, jaccard, parseCSV, tokenize } fr
 import { AI_DIRECT_PROMPT, calibrate, calibrateDirect, elaIndicators, IMAGE_PROMPT, overallVerdict, provenanceAssessment, RawDirectProbe, RawImageSample } from './server/imageDetection';
 import { buildDemoInvestigation, demoPosts, DEMO_TIMELINE, DEMO_VERIFIED_REGISTRY } from './server/demoScenario';
 import { callLocalImage, localImageResult, type LocalImageResponse } from './server/localImage';
+import { callLocalAudio, localAudioResult, type LocalAudioResponse } from './server/localAudio';
 import { ClaimVerificationResult, ForensicAnalysisResult, Investigation, LiveEvent, ModelRegistryItem, RiskLevel, GroundedSource } from './src/types';
 
 // ---------------------------------------------------------------- Gemini (server-side only)
@@ -293,13 +294,21 @@ setInterval(() => {
 }, 3500);
 
 // ---------------------------------------------------------------- Model registry (honest)
-function modelRegistry(): ModelRegistryItem[] {
+async function modelRegistry(): Promise<ModelRegistryItem[]> {
   const g = gemini.status === 'ready' ? 'ONLINE' : ai ? 'DEGRADED' : 'STANDBY';
+  let aasistReady = false;
+  if (process.env.VERITAS_AI_SERVICE_URL) {
+    try {
+      const response = await fetch(`${process.env.VERITAS_AI_SERVICE_URL.replace(/\/$/, '')}/health`, { signal: AbortSignal.timeout(1500) });
+      if (response.ok) aasistReady = (await response.json()).audio?.status === 'ready';
+    } catch { /* The registry reports the service as degraded below. */ }
+  }
   return [
     { id: 'gemini', name: `Google Gemini (${GEMINI_MODEL})`, task: 'Multimodal media reasoning, claim verification, translation', architecture: 'Hosted multimodal LLM + Google Search grounding', license: 'Google API ToS', version: GEMINI_MODEL, status: g as any, inferenceLatencyAvg: ai ? 'network-bound' : 'not configured', accuracyBenchmark: 'No in-house benchmark', description: ai ? `${gemini.status}: ${gemini.message}` : 'Set GEMINI_API_KEY in .env to enable. Fallback engines are used meanwhile.' },
     { id: 'ela', name: 'Browser ELA (JPEG re-encode residual)', task: 'Image compression inconsistency', architecture: 'Canvas re-encode at q=0.90, per-pixel |Δ|, 16×16 block stats', license: 'Project code', version: '1.0', status: 'ONLINE', inferenceLatencyAvg: '<1 s in browser', accuracyBenchmark: 'Signal only — not a classifier', description: 'Real computation on the uploaded pixels.' },
     { id: 'frames', name: 'Video frame sampler + temporal diff', task: 'Temporal anomaly indicators', architecture: 'HTMLVideoElement seek → canvas, mean abs frame difference, z-score spikes', license: 'Project code', version: '1.0', status: 'ONLINE', inferenceLatencyAvg: '1–4 s in browser', accuracyBenchmark: 'Signal only', description: 'Detects cuts/splices; does not detect face swaps on its own.' },
     { id: 'audio', name: 'WebAudio spectral statistics', task: 'Waveform, spectrogram, band-limit & pause analysis', architecture: 'AudioContext decode + radix-2 FFT', license: 'Project code', version: '1.0', status: 'ONLINE', inferenceLatencyAvg: '<2 s in browser', accuracyBenchmark: 'Signal only', description: 'Synthetic-voice indicators are heuristics, not a trained detector.' },
+    { id: 'aasist', name: 'AASIST speech anti-spoofing', task: 'Experimental segment-level speech spoof screening', architecture: 'Sinc front end + spectro-temporal graph attention', license: 'MIT (NAVER Clova AI)', version: 'a04c9863f63d', status: aasistReady ? 'ONLINE' : process.env.VERITAS_AI_SERVICE_URL ? 'DEGRADED' : 'STANDBY', inferenceLatencyAvg: aasistReady ? 'CPU-bound' : 'unavailable', accuracyBenchmark: 'No VERITAS accuracy benchmark; scores uncalibrated', description: aasistReady ? 'Local checkpoint loaded. Segment scores are experimental and do not determine authenticity.' : 'Run the Python service with verified AASIST weights and VERITAS_AUDIO_MODEL_ENABLED=1.' },
     { id: 'graph', name: 'Coordination graph heuristics', task: 'Coordinated account clustering', architecture: 'Token Jaccard + shared URL + 120 s sync window → union-find components', license: 'Project code', version: '1.0', status: 'ONLINE', inferenceLatencyAvg: '<100 ms', accuracyBenchmark: 'Transparent thresholds', description: 'Every edge carries a human-readable reason.' },
     { id: 'rules', name: 'Rule-based claim screener', task: 'Offline claim triage', architecture: 'Keyword signals + local verified-claims registry', license: 'Project code', version: '1.0', status: 'ONLINE', inferenceLatencyAvg: '<10 ms', accuracyBenchmark: 'n/a', description: 'Never produces external citations; returns Insufficient Evidence unless the local registry matches.' }
   ];
@@ -326,7 +335,7 @@ app.get('/api/health', (_req, res) => {
     searchGrounding: ai ? { status: grounding.status, message: grounding.message, retryAfter: grounding.blockedUntil > Date.now() ? new Date(grounding.blockedUntil).toISOString() : null } : null, activeInvestigations: investigations.length, streamClients: clients.size, timestamp: new Date().toISOString() });
 });
 
-app.get('/api/models', (_req, res) => res.json({ models: modelRegistry() }));
+app.get('/api/models', async (_req, res) => res.json({ models: await modelRegistry() }));
 
 app.get('/api/stats', (_req, res) => {
   const recentAlerts = recentEvents.filter(e => e.kind === 'alert' && Date.now() - new Date(e.ts).getTime() < 10 * 60000);
@@ -542,6 +551,7 @@ app.post('/api/forensics/analyze-media', async (req, res) => {
     let result: ForensicAnalysisResult | null = null;
     let geminiFailure = '';
     let localEvidence: LocalImageResponse | null = null;
+    let localAudioEvidence: LocalAudioResponse | null = null;
     if (modality === 'image' && process.env.VERITAS_AI_SERVICE_URL && typeof mediaData === 'string') {
       try {
         const local = await callLocalImage(mediaData, process.env.VERITAS_AI_SERVICE_URL);
@@ -552,6 +562,14 @@ app.post('/api/forensics/analyze-media', async (req, res) => {
         }
       } catch (e: any) {
         console.warn(`[local-image] ${String(e?.message || e).slice(0, 160)}`);
+      }
+    }
+    if (modality === 'audio' && process.env.VERITAS_AI_SERVICE_URL && typeof mediaData === 'string') {
+      try {
+        localAudioEvidence = await callLocalAudio(mediaData, process.env.VERITAS_AI_SERVICE_URL);
+        if (!geminiUsable()) result = localAudioResult(localAudioEvidence, fileName, measurements, h.findings);
+      } catch (e: any) {
+        console.warn(`[local-audio] ${String(e?.message || e).slice(0, 160)}`);
       }
     }
     if (!result && modality === 'image' && geminiUsable() && typeof mediaData === 'string') {
@@ -604,6 +622,8 @@ Be calibrated: if evidence is weak say "inconclusive". Respond ONLY with JSON:
         result = localImageResult(localEvidence, fileName, measurements, h.findings);
         result.provenance = provenanceFrom(measurements);
       }
+      if (localAudioEvidence && modality === 'audio')
+        result = localAudioResult(localAudioEvidence, fileName, measurements, h.findings);
     }
     if (!result) {
       const authenticity = h.score >= 60 ? 'suspicious_artifacts' : h.score >= 35 ? 'inconclusive' : 'likely_authentic';
@@ -646,6 +666,11 @@ Be calibrated: if evidence is weak say "inconclusive". Respond ONLY with JSON:
       }
       if (localEvidence.face_analysis !== 'not_performed')
         result.modelsUsed.push({ name: 'YuNet face detector', version: '2023mar', provider: 'OpenCV Zoo' });
+    }
+    if (localAudioEvidence && result && !result.localAudio) {
+      result.localAudio = localAudioEvidence;
+      result.modelsUsed.push({ name: 'AASIST', version: localAudioEvidence.revision, provider: 'Experimental local model; no verdict' });
+      result.limitations.push('AASIST segment scores were not calibrated and did not determine this verdict.');
     }
     if (result.riskLevel === 'High' || result.riskLevel === 'Critical')
       raiseAlert('suspicious_media', result.riskLevel === 'Critical' ? 'critical' : 'high', `Suspicious ${modality} detected`, `${fileName}: ${result.headlineSummary}`, false);

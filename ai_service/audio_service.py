@@ -46,6 +46,8 @@ def load_model():
             raise ValueError("AASIST checkpoint missing or checksum mismatch")
         import torch
         from ai_service.vendor.aasist_model import Model
+        # AASIST's small graph layers are much slower with excessive CPU threads.
+        torch.set_num_threads(min(torch.get_num_threads(), 4))
         loaded = Model(MODEL_CONFIG).eval()
         loaded.load_state_dict(torch.load(WEIGHTS, map_location="cpu", weights_only=True), strict=True)
         model = loaded
@@ -71,6 +73,11 @@ def prepare_audio(raw: bytes):
     from scipy.signal import resample_poly
 
     try:
+        info = sf.info(io.BytesIO(raw))
+        if info.samplerate < 8000 or info.samplerate > 192000 or info.channels > 8:
+            raise HTTPException(415, "Unsupported audio sample rate or channel count")
+        if info.duration > MAX_SECONDS:
+            raise HTTPException(413, "Audio exceeds 60 seconds")
         wave, sample_rate = sf.read(io.BytesIO(raw), dtype="float32", always_2d=True)
     except (RuntimeError, ValueError) as exc:
         raise HTTPException(415, "Audio format could not be decoded (try WAV, FLAC, OGG, or supported MP3)") from exc

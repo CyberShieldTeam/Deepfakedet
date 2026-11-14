@@ -47,6 +47,8 @@ export function localAudioResult(raw: LocalAudioResponse, fileName: string, meas
       'Raw segment softmax values are not calibrated probabilities or a verdict.',
       'Silence was skipped; speech presence was not verified.'],
     alternativeHypotheses: ['Recording channel, compression, background noise, and new synthesis methods can alter scores.'],
+    compressionArtifacts: { elaScore: 0, doubleCompressionFound: false, noiseInconsistencyMapAvailable: false,
+      notes: 'Image compression analysis does not apply to audio.' },
     modelsUsed: [{ name: 'AASIST', version: raw.revision, provider: 'NAVER Clova AI (local inference)' }],
     measurements, analyzedAt: new Date().toISOString(), localAudio: raw
   };

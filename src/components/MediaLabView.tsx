@@ -40,7 +40,7 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
           <div><div className="mb-1 text-slate-400"><Term k="confidence">How sure we are</Term></div><div className="mb-1 font-mono text-slate-200">{r.confidenceScore}%</div><Meter value={r.confidenceScore} color="#22d3ee" /></div>
           <div>
             <div className="mb-1 text-slate-400">Chance it is AI-made</div>
-            {r.aiGeneratedProbability != null ? (<><div className="mb-1 font-mono text-slate-200">{r.aiGeneratedProbability}%</div><Meter value={r.aiGeneratedProbability} /></>) : <div className="text-[11px] text-slate-500">Needs the AI checker, which isn’t available for this result</div>}
+            {r.aiGeneratedProbability != null ? (<><div className="mb-1 font-mono text-slate-200">{r.aiGeneratedProbability}%</div><Meter value={r.aiGeneratedProbability} /></>) : <div className="text-[11px] text-slate-500">No calibrated AI-made probability is available for this result</div>}
           </div>
         </div>
       )}
@@ -51,7 +51,7 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
         {r.localImage && <div className="text-xs text-slate-400">{r.localImage.model_status === 'ready' ? `Experimental local model: ${r.localImage.model} · raw fake-class score ${r.localImage.fake_probability == null ? 'n/a' : `${Math.round(r.localImage.fake_probability * 100)}%`} (not calibrated or used as a verdict)` : 'Whole-image classifier did not run'} · {r.localImage.processing_ms} ms · {r.localImage.face_boxes.length} unverified face candidate(s)</div>}
         {r.localAudio && <div className="space-y-1 text-xs text-slate-400">
           <div>Experimental AASIST speech screening · {r.localAudio.segments.length} scored segment(s) · {r.localAudio.processing_ms} ms. Raw softmax values are not calibrated or used as a verdict.</div>
-          {r.localAudio.segments.slice(0, 8).map((s, i) => <div key={i} className="font-mono">{s.start_seconds.toFixed(1)}–{s.end_seconds.toFixed(1)}s · raw spoof class {Math.round(s.raw_spoof_softmax * 100)}%</div>)}
+          {r.localAudio.segments.slice(0, 8).map((s, i) => <div key={i} className="font-mono">{s.start_seconds.toFixed(1)}–{s.end_seconds.toFixed(1)}s · raw spoof output {s.raw_spoof_softmax.toFixed(3)}</div>)}
         </div>}
         {r.aiGeneration && <div className="text-[11px] text-slate-400">Overall <Term k="confidence">confidence</Term>: {r.confidenceScore}%</div>}
         {r.provenance && (
