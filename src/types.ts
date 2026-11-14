@@ -79,6 +79,10 @@ export interface ForensicAnalysisResult {
   /** Images: was a real image edited / spliced? */
   manipulation?: DetectionAssessment;
   provenance?: ProvenanceInfo;
+  /** Raw local whole-image classifier output; probability is not calibrated confidence. */
+  localImage?: { classification: 'REAL' | 'MANIPULATED' | 'INCONCLUSIVE'; fake_probability: number | null; model_confidence: number | null; model_status: 'ready' | 'unavailable' | 'skipped'; model: string; revision: string; scope: string; face_analysis: string; face_boxes: { x: number; y: number; width: number; height: number; confidence: number }[]; signals: string[]; explanation: string; processing_ms: number };
+  /** Experimental AASIST speech anti-spoofing evidence, never a calibrated verdict. */
+  localAudio?: { classification: 'INCONCLUSIVE'; model: string; revision: string; scope: 'speech_anti_spoofing'; sample_rate_input: number; sample_rate_model: 16000; duration_seconds: number; segments: { start_seconds: number; end_seconds: number; raw_bonafide_logit: number; raw_spoof_softmax: number }[]; processing_ms: number; explanation: string };
 }
 
 export type IndicatorStrength = 'weak' | 'moderate' | 'strong';
@@ -105,7 +109,7 @@ export interface ProvenanceInfo {
   generatorHints: string[];
 }
 
-export type AnalysisEngine = 'gemini' | 'heuristic' | 'simulated_demo' | 'graph_heuristics';
+export type AnalysisEngine = 'gemini' | 'heuristic' | 'simulated_demo' | 'graph_heuristics' | 'local_pretrained' | 'local_image_screening' | 'local_aasist';
 
 export interface GroundedSource {
   title: string;

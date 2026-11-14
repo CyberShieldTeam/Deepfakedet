@@ -48,6 +48,11 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
       <Details title="Technical details (for experts)">
         <div><div className={`text-sm font-semibold ${cls}`}>{label}</div><p className="mt-1 text-xs text-slate-400">{r.headlineSummary}</p></div>
         {r.engineNote && <div className="rounded border border-slate-800 bg-slate-950/50 p-2 text-[11px] text-slate-400">{r.engineNote}</div>}
+        {r.localImage && <div className="text-xs text-slate-400">{r.localImage.model_status === 'ready' ? `Experimental local model: ${r.localImage.model} · raw fake-class score ${r.localImage.fake_probability == null ? 'n/a' : `${Math.round(r.localImage.fake_probability * 100)}%`} (not calibrated or used as a verdict)` : 'Whole-image classifier did not run'} · {r.localImage.processing_ms} ms · {r.localImage.face_boxes.length} unverified face candidate(s)</div>}
+        {r.localAudio && <div className="space-y-1 text-xs text-slate-400">
+          <div>Experimental AASIST speech screening · {r.localAudio.segments.length} scored segment(s) · {r.localAudio.processing_ms} ms. Raw softmax values are not calibrated or used as a verdict.</div>
+          {r.localAudio.segments.slice(0, 8).map((s, i) => <div key={i} className="font-mono">{s.start_seconds.toFixed(1)}–{s.end_seconds.toFixed(1)}s · raw spoof class {Math.round(s.raw_spoof_softmax * 100)}%</div>)}
+        </div>}
         {r.aiGeneration && <div className="text-[11px] text-slate-400">Overall <Term k="confidence">confidence</Term>: {r.confidenceScore}%</div>}
         {r.provenance && (
           <div className="text-[11px] text-slate-400">
@@ -173,12 +178,15 @@ export const MediaLabView: React.FC<{ attach: AttachFn; active: Investigation | 
 
   const demoFindings = active?.isSimulatedDemo ? active.mediaFindings || [] : [];
   const shown = demoIdx != null ? demoFindings[demoIdx] : result;
+  const faceBoxes = result?.localImage?.face_analysis === 'candidate_regions' ? result.localImage.face_boxes : [];
+  const imageWidth = Number(img?.measurements.width) || 0;
+  const imageHeight = Number(img?.measurements.height) || 0;
 
   return (
     <div className="space-y-4">
       <PageHeader
         title="Check a photo, video or audio"
-        subtitle="Find out whether a picture, video or voice message was made by AI or edited. Your file is examined in your browser and, when available, by Google’s Gemini AI."
+        subtitle="Check a picture, video or voice message for possible AI generation or editing. Your file is examined in your browser and, when available, by an AI checker."
         steps={['Choose a file', 'Press “Check this file”', 'Read the result on the right']}
       />
 
@@ -219,14 +227,22 @@ export const MediaLabView: React.FC<{ attach: AttachFn; active: Investigation | 
             <Card title={img ? 'Look closer (optional)' : 'Your image'} right={img && (
               <div className="flex gap-1">{([['original', 'Original'], ['ela', 'Edit heatmap'], ['split', 'Compare']] as const).map(([v, l]) => <button key={v} onClick={() => setView(v)} className={`rounded-md px-2 py-0.5 text-[11px] ${view === v ? 'bg-cyan-500/20 text-cyan-200' : 'text-slate-500 hover:text-slate-300'}`}>{l}</button>)}</div>
             )}>
-              <div className="relative mx-auto max-w-full overflow-hidden rounded-lg bg-black">
+              <div className="relative mx-auto w-fit max-w-full overflow-hidden rounded-lg bg-black">
                 <img src={objUrl} className="mx-auto max-h-[460px]" alt="evidence" />
+                {view === 'original' && imageWidth > 0 && imageHeight > 0 && faceBoxes.map((box, i) => {
+                  const left = Math.max(0, Math.min(100, box.x / imageWidth * 100));
+                  const top = Math.max(0, Math.min(100, box.y / imageHeight * 100));
+                  const right = Math.max(left, Math.min(100, (box.x + box.width) / imageWidth * 100));
+                  const bottom = Math.max(top, Math.min(100, (box.y + box.height) / imageHeight * 100));
+                  return <div key={i} className="pointer-events-none absolute border-2 border-cyan-300/90 bg-cyan-300/5" style={{ left: `${left}%`, top: `${top}%`, width: `${right - left}%`, height: `${bottom - top}%` }} aria-label={`Unverified face candidate ${i + 1}`} />;
+                })}
                 {busy && <div className="animate-scan-line" />}
                 {img && view === 'ela' && <img src={img.elaDataUrl} className="absolute inset-0 m-auto max-h-[460px]" alt="ELA" />}
                 {img && view === 'split' && (
                   <div className="absolute inset-0 m-auto" style={{ clipPath: `inset(0 0 0 ${split}%)` }}><img src={img.elaDataUrl} className="mx-auto max-h-[460px]" alt="ELA" /></div>
                 )}
               </div>
+              {faceBoxes.length > 0 && <p className="mt-2 text-xs text-cyan-200">{faceBoxes.length} face candidate(s) outlined on Original. These boxes locate possible faces; they do not indicate editing or a deepfake.</p>}
               {img && view === 'split' && <input type="range" value={split} onChange={e => setSplit(+e.target.value)} className="mt-2 w-full accent-cyan-400" />}
               {img && <p className="mt-2 text-xs leading-relaxed text-slate-400">The <Term k="ELA">edit heatmap</Term> shows how each part of the picture reacts to being re-saved. A bright, isolated patch can mean that area was pasted in or edited; an even texture is normal. It cannot tell whether an image was made by AI.</p>}
               {img && <p className="mt-1 font-mono text-[10px] text-slate-600">ELA = |original − JPEG(q=0.90) re-encode| × 15</p>}

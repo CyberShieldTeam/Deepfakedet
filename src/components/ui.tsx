@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle, Cpu, FlaskConical, Loader2, Sparkles } from 'lucide-react';
+import { AlertTriangle, Cpu, FlaskConical, Loader2, ScanSearch, Sparkles } from 'lucide-react';
 import { AnalysisEngine, RiskLevel } from '../types';
 
 export const Card: React.FC<{ title?: React.ReactNode; right?: React.ReactNode; className?: string; children: React.ReactNode }> = ({ title, right, className = '', children }) => (
@@ -35,6 +35,9 @@ export const SimulatedBadge: React.FC<{ label?: string }> = ({ label = 'Simulate
 export const EngineBadge: React.FC<{ engine?: AnalysisEngine; note?: string }> = ({ engine, note }) => {
   const map: Record<string, [string, string, React.ElementType]> = {
     gemini: ['Checked by Gemini AI', 'border-cyan-500/40 bg-cyan-500/10 text-cyan-300', Sparkles],
+    local_pretrained: ['Local pretrained image model', 'border-sky-500/40 bg-sky-500/10 text-sky-300', Cpu],
+    local_image_screening: ['Local image screening (no classifier)', 'border-amber-500/40 bg-amber-500/10 text-amber-300', ScanSearch],
+    local_aasist: ['Local AASIST speech screening', 'border-sky-500/40 bg-sky-500/10 text-sky-300', Cpu],
     heuristic: ['Basic checks (AI unavailable)', 'border-amber-500/40 bg-amber-500/10 text-amber-300', AlertTriangle],
     simulated_demo: ['Demo data — not real', 'border-fuchsia-500/40 bg-fuchsia-500/10 text-fuchsia-300', FlaskConical],
     graph_heuristics: ['Pattern analysis (computed)', 'border-sky-500/40 bg-sky-500/10 text-sky-300', Cpu]

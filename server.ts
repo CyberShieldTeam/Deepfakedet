@@ -9,6 +9,7 @@ import { INITIAL_INVESTIGATIONS } from './server/demoData';
 import { analyzeCampaign, detectScriptLanguage, jaccard, parseCSV, tokenize } from './server/campaign';
 import { AI_DIRECT_PROMPT, calibrate, calibrateDirect, elaIndicators, IMAGE_PROMPT, overallVerdict, provenanceAssessment, RawDirectProbe, RawImageSample } from './server/imageDetection';
 import { buildDemoInvestigation, demoPosts, DEMO_TIMELINE, DEMO_VERIFIED_REGISTRY } from './server/demoScenario';
+import { callLocalImage, localImageResult, type LocalImageResponse } from './server/localImage';
 import { ClaimVerificationResult, ForensicAnalysisResult, Investigation, LiveEvent, ModelRegistryItem, RiskLevel, GroundedSource } from './src/types';
 
 // ---------------------------------------------------------------- Gemini (server-side only)
@@ -540,13 +541,26 @@ app.post('/api/forensics/analyze-media', async (req, res) => {
 
     let result: ForensicAnalysisResult | null = null;
     let geminiFailure = '';
-    if (modality === 'image' && geminiUsable() && typeof mediaData === 'string') {
+    let localEvidence: LocalImageResponse | null = null;
+    if (modality === 'image' && process.env.VERITAS_AI_SERVICE_URL && typeof mediaData === 'string') {
+      try {
+        const local = await callLocalImage(mediaData, process.env.VERITAS_AI_SERVICE_URL);
+        localEvidence = local;
+        if (local.classification !== 'INCONCLUSIVE' || !geminiUsable()) {
+          result = localImageResult(local, fileName, measurements, h.findings);
+          result.provenance = provenanceFrom(measurements);
+        }
+      } catch (e: any) {
+        console.warn(`[local-image] ${String(e?.message || e).slice(0, 160)}`);
+      }
+    }
+    if (!result && modality === 'image' && geminiUsable() && typeof mediaData === 'string') {
       try {
         result = await geminiImageAnalysis(fileName, mediaData, measurements, h.findings, Array.isArray(detailTiles) ? detailTiles : []);
       } catch (e: any) {
         geminiFailure = noteGeminiFailure(e, 'image analysis').message;
       }
-    } else if (geminiUsable()) {
+    } else if (!result && geminiUsable()) {
       try {
         const parts: any[] = [];
         const pushData = (d: string) => {
@@ -586,6 +600,12 @@ Be calibrated: if evidence is weak say "inconclusive". Respond ONLY with JSON:
     }
 
     if (!result) {
+      if (localEvidence && modality === 'image') {
+        result = localImageResult(localEvidence, fileName, measurements, h.findings);
+        result.provenance = provenanceFrom(measurements);
+      }
+    }
+    if (!result) {
       const authenticity = h.score >= 60 ? 'suspicious_artifacts' : h.score >= 35 ? 'inconclusive' : 'likely_authentic';
       result = {
         modality, fileName, engine: 'heuristic',
@@ -617,6 +637,15 @@ Be calibrated: if evidence is weak say "inconclusive". Respond ONLY with JSON:
         const o = overallVerdict(result.aiGeneration, result.manipulation);
         Object.assign(result, { authenticity: o.authenticity, riskLevel: o.risk, confidenceScore: o.confidence, aiGeneratedProbability: result.aiGeneration.probability });
       }
+    }
+    if (localEvidence && result && !result.localImage) {
+      result.localImage = localEvidence;
+      if (localEvidence.model_status === 'ready') {
+        result.modelsUsed.push({ name: localEvidence.model, version: localEvidence.revision, provider: 'Experimental local model; no verdict' });
+        result.limitations.push('Experimental local model score failed initial fixture validation and did not determine this verdict.');
+      }
+      if (localEvidence.face_analysis !== 'not_performed')
+        result.modelsUsed.push({ name: 'YuNet face detector', version: '2023mar', provider: 'OpenCV Zoo' });
     }
     if (result.riskLevel === 'High' || result.riskLevel === 'Critical')
       raiseAlert('suspicious_media', result.riskLevel === 'Critical' ? 'critical' : 'high', `Suspicious ${modality} detected`, `${fileName}: ${result.headlineSummary}`, false);
