@@ -27,7 +27,7 @@ async function analyze(relativePath: string, mimeType: string) {
   assert.equal(result.aiGeneratedProbability, null);
   assert.equal(result.localImage.classification, 'INCONCLUSIVE');
   assert.equal(result.localImage.scope, 'general_ai_generated_image');
-  assert.equal(result.localImage.model, 'dima806/ai_vs_real_image_detection');
+  assert.equal(result.localImage.model, process.env.VERITAS_EXPECT_IMAGE_MODEL || 'dima806/ai_vs_real_image_detection');
   assert.equal(result.localImage.model_status, expectReady ? 'ready' : 'unavailable');
   if (expectReady) assert.ok(result.localImage.fake_probability >= 0 && result.localImage.fake_probability <= 1);
   else assert.equal(result.localImage.fake_probability, null);

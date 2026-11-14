@@ -20,6 +20,7 @@ MODEL_KIND = os.getenv("VERITAS_IMAGE_MODEL", "dima").lower()
 MODELS = {
     "dima": ("dima806/ai_vs_real_image_detection", "9d17b51b9367d6b5720ac81dc339455c45d50ae3"),
     "smaug": ("abacusai/Smaug-AI-Image-Detector", "c7c95951e04a87b884a4ad479401b1128c3903bd"),
+    "community": ("OwensLab/commfor-model-384", "6076002bf0d9dd37537f965ee2f06f826c333b61"),
 }
 MODEL_ID, MODEL_REVISION = MODELS.get(MODEL_KIND, ("unrecognized", "unrecognized"))
 MAX_BYTES = 10 * 1024 * 1024
@@ -55,7 +56,10 @@ async def lifespan(_app: FastAPI):
     if os.getenv("VERITAS_IMAGE_MODEL_ENABLED", "0") == "1":
         try:
             import torch
-            if MODEL_KIND == "dima":
+            if MODEL_KIND == "community":
+                from ai_service.community_model import load
+                model, processor = load()
+            elif MODEL_KIND == "dima":
                 from transformers import AutoImageProcessor, AutoModelForImageClassification
                 processor = AutoImageProcessor.from_pretrained(MODEL_ID, revision=MODEL_REVISION)
                 model = AutoModelForImageClassification.from_pretrained(
@@ -159,7 +163,10 @@ def analyze_image(request: ImageRequest):
                 "face_analysis": face_status, "face_boxes": faces, "face_manipulation": face_evidence, "signals": [],
                 "explanation": "Classifier unavailable; face candidates are unverified regions, not manipulation analysis.",
                 "processing_ms": round((time.monotonic() - start) * 1000)}
-    if MODEL_KIND == "smaug":
+    if MODEL_KIND == "community":
+        from ai_service.community_model import score
+        fake_probability = score(model, processor, image)
+    elif MODEL_KIND == "smaug":
         fake_probability = smaug_probability(image)
     else:
         inputs = processor(images=image, return_tensors="pt")

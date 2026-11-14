@@ -1,0 +1,2209 @@
+{
+  "task": "general_ai_generated_image",
+  "model": [
+    "OwensLab/commfor-model-384",
+    "6076002bf0d9dd37537f965ee2f06f826c333b61"
+  ],
+  "threshold": 0.5,
+  "threshold_policy": "Predeclared diagnostic threshold; no automatic calibration or deployment approval",
+  "manifest_sample_count": 80,
+  "rows": [
+    {
+      "id": "Animal/0_real/37a051d6a468f2c16df432f105e1810a00a52a929867818a0bc4e57d91da9e4d.jpg",
+      "sha256": "4269eb6095cd99c9e17a3b1462cc7d8fe21f6bc4da763585fe2df706698d9a64",
+      "label": "genuine",
+      "split": "test",
+      "group": "Animal/0_real/37a051d6a468f2c16df432f105e1810a00a52a929867818a0bc4e57d91da9e4d.jpg",
+      "domain": "Animal",
+      "score": null,
+      "error": "ValueError"
+    },
+    {
+      "id": "Animal/0_real/109a0c9fc22ae3735a8ab8236daaefe3165ba00cfa8c54939123666f4a8c19c0.jpg",
+      "sha256": "70d931ecf900a581504a95a92b94279ec858f7dc39dac60661b7849713f52a5a",
+      "label": "genuine",
+      "split": "test",
+      "group": "Animal/0_real/109a0c9fc22ae3735a8ab8236daaefe3165ba00cfa8c54939123666f4a8c19c0.jpg",
+      "domain": "Animal",
+      "score": 0.01972675323486328
+    },
+    {
+      "id": "Animal/0_real/3764991afd492526fac414a0bef5276e6786d81ac4b47a58d2fa7fa820fb4220.jpg",
+      "sha256": "d93814fe3dddfbc6a95a84f1f336dc7e5c84ccc546960f6aff11b1a6f4a94e9e",
+      "label": "genuine",
+      "split": "test",
+      "group": "Animal/0_real/3764991afd492526fac414a0bef5276e6786d81ac4b47a58d2fa7fa820fb4220.jpg",
+      "domain": "Animal",
+      "score": 4.117332537134644e-06
+    },
+    {
+      "id": "Animal/0_real/363d3467a4bd1868dd6e38541ce73897dced78b211db11acd6f1cd87583334e5.png",
+      "sha256": "5649e2c947abcf6b8e2cb83b5761290a2715eb1573d9a3983bd4a06ce7585dca",
+      "label": "genuine",
+      "split": "test",
+      "group": "Animal/0_real/363d3467a4bd1868dd6e38541ce73897dced78b211db11acd6f1cd87583334e5.png",
+      "domain": "Animal",
+      "score": null,
+      "error": "ValueError"
+    },
+    {
+      "id": "Animal/0_real/1528fd54b7f53422712b358b0ca76ca397d0f0e20694f0fb5f2669ba78d01898.png",
+      "sha256": "639c3076a856defbff38c28697c723c5a8e04c7379af3246c96deaecc34f5c82",
+      "label": "genuine",
+      "split": "test",
+      "group": "Animal/0_real/1528fd54b7f53422712b358b0ca76ca397d0f0e20694f0fb5f2669ba78d01898.png",
+      "domain": "Animal",
+      "score": 1.0579214176686946e-05
+    },
+    {
+      "id": "Animal/0_real/3cf6b00aa498bc5cd73c6c82e38da0cb0cdfd09a4f3129fec33492caa6643acd.jpg",
+      "sha256": "bc5ff3195a66df38aa5fe03e775670d83d6bd1d50885cc4bec2fd817dae8fdb8",
+      "label": "genuine",
+      "split": "test",
+      "group": "Animal/0_real/3cf6b00aa498bc5cd73c6c82e38da0cb0cdfd09a4f3129fec33492caa6643acd.jpg",
+      "domain": "Animal",
+      "score": null,
+      "error": "ValueError"
+    },
+    {
+      "id": "Animal/0_real/0febf9563c5014dbbfdd7a893b673bdd0d488497a6f4b47cb1124d3158c0b593.jpg",
+      "sha256": "89477d905a730def650f640604149169a81cfb2602b8a163d9f429d4170d58e2",
+      "label": "genuine",
+      "split": "test",
+      "group": "Animal/0_real/0febf9563c5014dbbfdd7a893b673bdd0d488497a6f4b47cb1124d3158c0b593.jpg",
+      "domain": "Animal",
+      "score": 0.010704751126468182
+    },
+    {
+      "id": "Animal/0_real/10112de6b46fc5ca2bbd48d52f0cb76a89d535559dc6276d4f3a6f1ad54e6574.png",
+      "sha256": "9a94d03cdc2954823123fc7fe48051ab48e90222cc8fdb0cd129825dece52d88",
+      "label": "genuine",
+      "split": "test",
+      "group": "Animal/0_real/10112de6b46fc5ca2bbd48d52f0cb76a89d535559dc6276d4f3a6f1ad54e6574.png",
+      "domain": "Animal",
+      "score": 8.686963701620698e-05
+    },
+    {
+      "id": "Animal/0_real/31606859b50f307d3fba027bb3f7190b07d55a239819a967d3debf7d7f5e3183.jpg",
+      "sha256": "87f07bcde9bc66c48091036724db01cc566eb87b2e6b94624887cc78bcda1028",
+      "label": "genuine",
+      "split": "test",
+      "group": "Animal/0_real/31606859b50f307d3fba027bb3f7190b07d55a239819a967d3debf7d7f5e3183.jpg",
+      "domain": "Animal",
+      "score": 0.0007959623471833766
+    },
+    {
+      "id": "Animal/0_real/2e415006aa72dead65e13f5a0f1ba09502ca4abdff2dac59598da7021669581b.png",
+      "sha256": "99c9f87e90ea173e69ebe803cb4a1bbb5216f6a62be08d1fe787fd74f1e97173",
+      "label": "genuine",
+      "split": "test",
+      "group": "Animal/0_real/2e415006aa72dead65e13f5a0f1ba09502ca4abdff2dac59598da7021669581b.png",
+      "domain": "Animal",
+      "score": 0.4272160828113556
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_4446.jpg",
+      "sha256": "f790fa47145f6c5d0fad7fe755369d29919bd8279c0fd34ba4163b0f255c138b",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Animal/1_fake/Digicam/img_4446.jpg",
+      "domain": "Animal",
+      "score": 9.754155144037213e-06
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_4588.jpg",
+      "sha256": "abf062e9ffc849331ca07f58cbfdd064f828487c873f490ca014d77eeb721da6",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Animal/1_fake/Digicam/img_4588.jpg",
+      "domain": "Animal",
+      "score": 0.002093831542879343
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_4081.jpg",
+      "sha256": "900db10eb0b9fcc4e7ef09a684adfb317886dc42624ea810f0184fca0ddaa41e",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Animal/1_fake/Digicam/img_4081.jpg",
+      "domain": "Animal",
+      "score": 0.9698936343193054
+    },
+    {
+      "id": "Animal/1_fake/Flux_xhs_v2/img_1265.jpg",
+      "sha256": "1c3f2f9909c9a4debd51d662e47f181004fa5f348237b1f532b7f254a6d36a8a",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Animal/1_fake/Flux_xhs_v2/img_1265.jpg",
+      "domain": "Animal",
+      "score": 0.0018371861660853028
+    },
+    {
+      "id": "Animal/1_fake/Flux_xhs_v2/img_1408.jpg",
+      "sha256": "603a8c27c36eb718655542a4bbd0dbf31b233fa2e58a18c1604c907c311d04ff",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Animal/1_fake/Flux_xhs_v2/img_1408.jpg",
+      "domain": "Animal",
+      "score": 0.4176533818244934
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_4823.jpg",
+      "sha256": "4a53e580fda827e311ad8198ae94f5c2ca26cc0c6b0ed46b141a78501daa6b51",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Animal/1_fake/Digicam/img_4823.jpg",
+      "domain": "Animal",
+      "score": 5.1582166634034365e-05
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_5270.jpg",
+      "sha256": "545fe71d2e6b14718d0775b06a9bc3b8a4a31d017782f12bd561483c33231ac4",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Animal/1_fake/Digicam/img_5270.jpg",
+      "domain": "Animal",
+      "score": 0.0014886870048940182
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_5247.jpg",
+      "sha256": "fabcabd3528e88293da7b575d0cb2166ea22adc42b7d063b10e7f93c74b086e0",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Animal/1_fake/Digicam/img_5247.jpg",
+      "domain": "Animal",
+      "score": 0.0010903109796345234
+    },
+    {
+      "id": "Animal/1_fake/Flux_xhs_v2/img_840.jpg",
+      "sha256": "1128796d508fb3f63fbe869415a2fd5602a312b464acaa70823e672a2aae404a",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Animal/1_fake/Flux_xhs_v2/img_840.jpg",
+      "domain": "Animal",
+      "score": 0.0037655208725482225
+    },
+    {
+      "id": "Animal/1_fake/Digicam/img_5111.jpg",
+      "sha256": "641e7139ed9820cfa543ff53c2a9be8d437dc32d902e35ad68552afe69e30af1",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Animal/1_fake/Digicam/img_5111.jpg",
+      "domain": "Animal",
+      "score": 0.0002509421610739082
+    },
+    {
+      "id": "Human/0_real/12618f0fa70f7bcbc67c8ed691402a57045d6517d25d82d8f5687695bde8ef5d.png",
+      "sha256": "e1de487d25ab524231690ed73632543ff9e520ce25245c66242b67cb521b575e",
+      "label": "genuine",
+      "split": "test",
+      "group": "Human/0_real/12618f0fa70f7bcbc67c8ed691402a57045d6517d25d82d8f5687695bde8ef5d.png",
+      "domain": "Human",
+      "score": 0.009952597320079803
+    },
+    {
+      "id": "Human/0_real/05b4fdf57995cbe2fc7e25e1ad1ba84ada4bfe3d516d94db94a78e04175a5195.jpg",
+      "sha256": "0305b05448b88e38163de91ccd23e196935406494507f58c817d79f2a0f5c2b8",
+      "label": "genuine",
+      "split": "test",
+      "group": "Human/0_real/05b4fdf57995cbe2fc7e25e1ad1ba84ada4bfe3d516d94db94a78e04175a5195.jpg",
+      "domain": "Human",
+      "score": 0.001994158374145627
+    },
+    {
+      "id": "Human/0_real/061dd554fe453fe65b25a1034a9687ab8f3279ee515581743b9255db8d435cb3.png",
+      "sha256": "dc0c200b0f43a3839cc576b6aaf58226af7ec14977d29205b6c39a377f5c6b96",
+      "label": "genuine",
+      "split": "test",
+      "group": "Human/0_real/061dd554fe453fe65b25a1034a9687ab8f3279ee515581743b9255db8d435cb3.png",
+      "domain": "Human",
+      "score": 0.0004165054124314338
+    },
+    {
+      "id": "Human/0_real/10d5989e74ed54b90d358554e8fd13f8c57e64a81a2ff8da690d0c8843d34fce.jpg",
+      "sha256": "6d677e31b9bef5c4c3fda8e469a06a097fadfef67f3b2360b6d6929a3a87f5f5",
+      "label": "genuine",
+      "split": "test",
+      "group": "Human/0_real/10d5989e74ed54b90d358554e8fd13f8c57e64a81a2ff8da690d0c8843d34fce.jpg",
+      "domain": "Human",
+      "score": null,
+      "error": "ValueError"
+    },
+    {
+      "id": "Human/0_real/0590593f873d3eea2042b495acff2419f1e854024df188a12b6675a98d8ef6de.jpg",
+      "sha256": "ea00a3366e89e8ba9d21f4b7253d0a3c7b358d20d2c50207280c7053701a0634",
+      "label": "genuine",
+      "split": "test",
+      "group": "Human/0_real/0590593f873d3eea2042b495acff2419f1e854024df188a12b6675a98d8ef6de.jpg",
+      "domain": "Human",
+      "score": 0.0040464322082698345
+    },
+    {
+      "id": "Human/0_real/1084ad44cef60d7eb5602498b3783b5d6e5ebe59c0d5037a09268b0afdd5b2c7.jpg",
+      "sha256": "dcd2be9a929f225fb47f9f958dba1ba4872146f774caac85ab6c4f7af17f1e2d",
+      "label": "genuine",
+      "split": "test",
+      "group": "Human/0_real/1084ad44cef60d7eb5602498b3783b5d6e5ebe59c0d5037a09268b0afdd5b2c7.jpg",
+      "domain": "Human",
+      "score": 0.0172589048743248
+    },
+    {
+      "id": "Human/0_real/10e0edb8103d57356f768215e098bf8a6f7854ea5a0372ee15242d9f92144aa6.jpg",
+      "sha256": "bd41db8db13f4f4f1206f59a7e10570f991e7b4588cc0a5a4ff902fe3981ca9e",
+      "label": "genuine",
+      "split": "test",
+      "group": "Human/0_real/10e0edb8103d57356f768215e098bf8a6f7854ea5a0372ee15242d9f92144aa6.jpg",
+      "domain": "Human",
+      "score": 8.437866199528798e-05
+    },
+    {
+      "id": "Human/0_real/009356c66fa8d8939c357f72b72aaa5eb16b02a31317511cedcc147e36945e9d.jpg",
+      "sha256": "52b5c85473d37a1e9a1ba13b9981f6fedc2a0f4cd0a2683905fb9170c43db3df",
+      "label": "genuine",
+      "split": "test",
+      "group": "Human/0_real/009356c66fa8d8939c357f72b72aaa5eb16b02a31317511cedcc147e36945e9d.jpg",
+      "domain": "Human",
+      "score": null,
+      "error": "ValueError"
+    },
+    {
+      "id": "Human/0_real/09ce2f681c1b655cca3dbc07f189b447dd62ed62ece5c2f25df0ffab64aef649.jpg",
+      "sha256": "fff2445e0e060f8c52be31e862bfe5debdee46a9718715ef59e113a8705c44f6",
+      "label": "genuine",
+      "split": "test",
+      "group": "Human/0_real/09ce2f681c1b655cca3dbc07f189b447dd62ed62ece5c2f25df0ffab64aef649.jpg",
+      "domain": "Human",
+      "score": 0.000507915101479739
+    },
+    {
+      "id": "Human/0_real/02faf1ceb0e33ac311a7ecc95ce6f057b2a6a3c808e2826d0169bcb414af1723.jpg",
+      "sha256": "1840e01e61788e3821b7d2efe500cd466a207e52cae980c670a1b87b8e0df199",
+      "label": "genuine",
+      "split": "test",
+      "group": "Human/0_real/02faf1ceb0e33ac311a7ecc95ce6f057b2a6a3c808e2826d0169bcb414af1723.jpg",
+      "domain": "Human",
+      "score": 1.7443504475522786e-05
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5398.jpg",
+      "sha256": "b0b35039eee3ae7f85ea2c30bb7214734dab86de35293f3af8613a158bb32402",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Human/1_fake/Digicam/img_5398.jpg",
+      "domain": "Human",
+      "score": 0.17379018664360046
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_4963.jpg",
+      "sha256": "7b1d0bd1c0d281b6d94b5a98f3bbf4c6cc5bb8834eaa471f8203d7e9e2e072cf",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Human/1_fake/Digicam/img_4963.jpg",
+      "domain": "Human",
+      "score": 0.006036814767867327
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5842.jpg",
+      "sha256": "6bf945317345f180f20a61fe2b138462c362c69cf1002f04d3cef32aa85342ee",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Human/1_fake/Digicam/img_5842.jpg",
+      "domain": "Human",
+      "score": 0.00011545547749847174
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5626.jpg",
+      "sha256": "d99b5bbb912d31db4451fdbfb32578ae527557b1b6649785b31aa5ac2f128816",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Human/1_fake/Digicam/img_5626.jpg",
+      "domain": "Human",
+      "score": 0.5397492051124573
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5554.jpg",
+      "sha256": "4d6de3638618f557febe94be4e198bd687a015530518b1890d7fba21de906a10",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Human/1_fake/Digicam/img_5554.jpg",
+      "domain": "Human",
+      "score": 0.00039736932376399636
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5402.jpg",
+      "sha256": "8c9dc17de3297b2fa9c38cf699ee81b28255ef1497c6dcebc41e7a58c69b909c",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Human/1_fake/Digicam/img_5402.jpg",
+      "domain": "Human",
+      "score": 0.3147376775741577
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5614.jpg",
+      "sha256": "37ff3b61e6dcf22ab18d1ec514ded0ed4a52ed1880fe7e93c24f6054259490a0",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Human/1_fake/Digicam/img_5614.jpg",
+      "domain": "Human",
+      "score": 0.00029972291667945683
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5562.jpg",
+      "sha256": "e5ec5c8bade53a6131da0c6da7c2c045e02cf19e5df3c3777a66ce6c24096d3e",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Human/1_fake/Digicam/img_5562.jpg",
+      "domain": "Human",
+      "score": 0.002573978155851364
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5633.jpg",
+      "sha256": "192f4486118449ef5cc08514858d8d02894feafeff175957c58ae4fce85b0a29",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Human/1_fake/Digicam/img_5633.jpg",
+      "domain": "Human",
+      "score": 0.011141003109514713
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_4297.jpg",
+      "sha256": "15038b4db177d8803536ec8d6d63b9e6eabb831b23cec06cab35b8fe9a833f02",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Human/1_fake/Digicam/img_4297.jpg",
+      "domain": "Human",
+      "score": 0.0029721655882894993
+    },
+    {
+      "id": "Object/0_real/089b827715454adb53c63b460954e9a31df422bc7c8558da007f552a372931a8.jpg",
+      "sha256": "1c69e5c7830d25df5a09793f50f194f73118bcdfa6fc64ad0becd172eb004661",
+      "label": "genuine",
+      "split": "test",
+      "group": "Object/0_real/089b827715454adb53c63b460954e9a31df422bc7c8558da007f552a372931a8.jpg",
+      "domain": "Object",
+      "score": null,
+      "error": "ValueError"
+    },
+    {
+      "id": "Object/0_real/24fbb4667a42099b802d2f1bfa5ca752d618e867f54f99e126c6340282891db8.jpg",
+      "sha256": "c3fa1709a43ef03b2c2d2b169bb1619413341508c5410bbaf49d690a6d319128",
+      "label": "genuine",
+      "split": "test",
+      "group": "Object/0_real/24fbb4667a42099b802d2f1bfa5ca752d618e867f54f99e126c6340282891db8.jpg",
+      "domain": "Object",
+      "score": 0.0013839013408869505
+    },
+    {
+      "id": "Object/0_real/08b0b8db5325c55cca73b7de97e3f4d302db045482f534a9161f7b0008047868.jpg",
+      "sha256": "150a6727ab4f5621f07646f760e8da255c3d0bb1f999e2a460a1be160c0e042f",
+      "label": "genuine",
+      "split": "test",
+      "group": "Object/0_real/08b0b8db5325c55cca73b7de97e3f4d302db045482f534a9161f7b0008047868.jpg",
+      "domain": "Object",
+      "score": 0.0009997868910431862
+    },
+    {
+      "id": "Object/0_real/1ff173c68dfe1026939d164d3ca7adf8315d11216f402eaaa7c1f45df75ed42f.jpg",
+      "sha256": "abfef3e73c0c466ec8b6f0fbf78b747129769621aaaf62ec4d23eb20479cbcb3",
+      "label": "genuine",
+      "split": "test",
+      "group": "Object/0_real/1ff173c68dfe1026939d164d3ca7adf8315d11216f402eaaa7c1f45df75ed42f.jpg",
+      "domain": "Object",
+      "score": 0.0014559736009687185
+    },
+    {
+      "id": "Object/0_real/111d9837aa101a1da16ad9f7a937b751977014b114c67eaa85b3efd0bba62121.jpg",
+      "sha256": "d95bde2ce1518e040bc247442f9c2a300981e06ec486ecc5f3121b93730a88a4",
+      "label": "genuine",
+      "split": "test",
+      "group": "Object/0_real/111d9837aa101a1da16ad9f7a937b751977014b114c67eaa85b3efd0bba62121.jpg",
+      "domain": "Object",
+      "score": 0.00026583054568618536
+    },
+    {
+      "id": "Object/0_real/14e7a0dd8ebe2ff3e569767b6cb0c4103e46565bcc84cb944e86bfd2ecc5e7df.jpg",
+      "sha256": "44d93852dcd9aa797b9526b4cb6bdd286a833d59971a5f931fb1059ab8086fff",
+      "label": "genuine",
+      "split": "test",
+      "group": "Object/0_real/14e7a0dd8ebe2ff3e569767b6cb0c4103e46565bcc84cb944e86bfd2ecc5e7df.jpg",
+      "domain": "Object",
+      "score": null,
+      "error": "ValueError"
+    },
+    {
+      "id": "Object/0_real/1fc773dec296325230ef2fb0bb9ee481fbe1bcc9e4f191fb0595fb835c48c5e5.jpg",
+      "sha256": "a063d9530e5c7b03eff211cca2994f99cfb05a9fbc140ade3b439f440d7f4ca9",
+      "label": "genuine",
+      "split": "test",
+      "group": "Object/0_real/1fc773dec296325230ef2fb0bb9ee481fbe1bcc9e4f191fb0595fb835c48c5e5.jpg",
+      "domain": "Object",
+      "score": 0.00047406507655978203
+    },
+    {
+      "id": "Object/0_real/24a791bc27327a34009d26297dfcbb0cd84c7ac9b411d9b27493f35460a53223.jpg",
+      "sha256": "ff7a97ce83de860d2c37b9d999923db9623ff9a218660ec2fe6dec2612a500c8",
+      "label": "genuine",
+      "split": "test",
+      "group": "Object/0_real/24a791bc27327a34009d26297dfcbb0cd84c7ac9b411d9b27493f35460a53223.jpg",
+      "domain": "Object",
+      "score": 0.0003742339904420078
+    },
+    {
+      "id": "Object/0_real/1af29d0077778e602e8ca7d7df9289c32299dd3d81badda62a09d63887afbb57.jpg",
+      "sha256": "774bcce2f6494e377e7bea1fc20ad43aa22e7ac4327ce570e146cadb4081fe3e",
+      "label": "genuine",
+      "split": "test",
+      "group": "Object/0_real/1af29d0077778e602e8ca7d7df9289c32299dd3d81badda62a09d63887afbb57.jpg",
+      "domain": "Object",
+      "score": null,
+      "error": "ValueError"
+    },
+    {
+      "id": "Object/0_real/1bdeca5775f88d4a5f66a717f7a88d3c8890882b80f2d445163e9c7ccc5bd1aa.jpg",
+      "sha256": "a9db4d3a8c7bcad53ae006270435e305503fdd97c10d7890c0c0097df0523a9b",
+      "label": "genuine",
+      "split": "test",
+      "group": "Object/0_real/1bdeca5775f88d4a5f66a717f7a88d3c8890882b80f2d445163e9c7ccc5bd1aa.jpg",
+      "domain": "Object",
+      "score": 7.724846000201069e-06
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_4106.jpg",
+      "sha256": "cc7c4dea1fe43170433a1d11f20bd25293280ef2decf52adf847cde303d61271",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Object/1_fake/Digicam/img_4106.jpg",
+      "domain": "Object",
+      "score": 8.946306479629129e-05
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_4296.jpg",
+      "sha256": "69404c482ebc5f0259d49413973e743ef7e26cbe1b14bb9f3d99f3b36d556771",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Object/1_fake/Digicam/img_4296.jpg",
+      "domain": "Object",
+      "score": 0.03009895235300064
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_5493.jpg",
+      "sha256": "37b476af19f0ae0927f7938c082d78690708cf783637d8c0c64a7e45278d5b6f",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Object/1_fake/Digicam/img_5493.jpg",
+      "domain": "Object",
+      "score": 0.010993804782629013
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_5955.jpg",
+      "sha256": "8f7f0ad3ebd3ca61c8fef187d3b82b8050fdda2c5d0c696ec036ca2c6740e98f",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Object/1_fake/Digicam/img_5955.jpg",
+      "domain": "Object",
+      "score": 0.0001508264831500128
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_4819.jpg",
+      "sha256": "a9bf377547b5c21a3315a0bf7ce7ff862ef37ae10240ef707e33ed46292cf756",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Object/1_fake/Digicam/img_4819.jpg",
+      "domain": "Object",
+      "score": 0.0016590938903391361
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_4995.jpg",
+      "sha256": "99921d615445261bcfb6bdfec513e9cab737b0cdd91934a34f004605ac3a8f32",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Object/1_fake/Digicam/img_4995.jpg",
+      "domain": "Object",
+      "score": 3.236212069168687e-05
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_4392.jpg",
+      "sha256": "953cdeaf4af2de78931ef2ff951ef36300028692f763c1a43302ba575d7df1d8",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Object/1_fake/Digicam/img_4392.jpg",
+      "domain": "Object",
+      "score": 1.0780371667351574e-05
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_4349.jpg",
+      "sha256": "408ad1c892cdba1382f88660553e3a5ff9de516b1c089fbcc08b335502e6eede",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Object/1_fake/Digicam/img_4349.jpg",
+      "domain": "Object",
+      "score": 0.6354107856750488
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_5315.jpg",
+      "sha256": "40b9d164928b65ad0f1d8b0f718955f7e3e5cd641183be54436980129a5b97cc",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Object/1_fake/Digicam/img_5315.jpg",
+      "domain": "Object",
+      "score": 0.00018543709302321076
+    },
+    {
+      "id": "Object/1_fake/Digicam/img_5728.jpg",
+      "sha256": "bc54411682390b2df24544765fab1b36bd5ecd301684401e07de1642605eb688",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Object/1_fake/Digicam/img_5728.jpg",
+      "domain": "Object",
+      "score": 0.0002114784438163042
+    },
+    {
+      "id": "Scene/0_real/0b5bf8f777c3645c038b7fefec3b7838e0c4fe0c6ae585927d787b2bc517192e.jpg",
+      "sha256": "f7aa0f1b5c5bee4eb913f7358524fa657c5049bfd1a1ddec32807b37980feaa5",
+      "label": "genuine",
+      "split": "test",
+      "group": "Scene/0_real/0b5bf8f777c3645c038b7fefec3b7838e0c4fe0c6ae585927d787b2bc517192e.jpg",
+      "domain": "Scene",
+      "score": 0.003535263007506728
+    },
+    {
+      "id": "Scene/0_real/0afece98e0b5698238968bdf182c4162d2b1d0d2246eb05346854acf350e3d89.jpg",
+      "sha256": "b2ab9756eb79fe6b63850dcbd2493e955ae28221e1f10b06567acf681788879f",
+      "label": "genuine",
+      "split": "test",
+      "group": "Scene/0_real/0afece98e0b5698238968bdf182c4162d2b1d0d2246eb05346854acf350e3d89.jpg",
+      "domain": "Scene",
+      "score": 0.0019007247174158692
+    },
+    {
+      "id": "Scene/0_real/1486963cdffeb17caa5e67f4f7069915dbedfe4caceb9e8f184d30fe228f480f.jpg",
+      "sha256": "0ec4025daebd5c0510f2b0b0d3b55732b8037e98c8ecbd2bec8b599519edf521",
+      "label": "genuine",
+      "split": "test",
+      "group": "Scene/0_real/1486963cdffeb17caa5e67f4f7069915dbedfe4caceb9e8f184d30fe228f480f.jpg",
+      "domain": "Scene",
+      "score": 0.0003952711704187095
+    },
+    {
+      "id": "Scene/0_real/1a299d23a77bce06d41c9e156e6faca59a2b636999c9280adc99c6fb875c5e8e.jpg",
+      "sha256": "e17122906986ffb1be5066fa1ee5692f2b9c27e64ba43576fde9dd99964ed5c2",
+      "label": "genuine",
+      "split": "test",
+      "group": "Scene/0_real/1a299d23a77bce06d41c9e156e6faca59a2b636999c9280adc99c6fb875c5e8e.jpg",
+      "domain": "Scene",
+      "score": 0.0003480715968180448
+    },
+    {
+      "id": "Scene/0_real/11212b64d7b9ac05f01a74834280b9b14b3e8f871c23ddc6c89a06a68aa8f549.png",
+      "sha256": "eaf6ce8a0fdd08df44eff4364efb0c517aa4b9b266a20a035c0836a245248236",
+      "label": "genuine",
+      "split": "test",
+      "group": "Scene/0_real/11212b64d7b9ac05f01a74834280b9b14b3e8f871c23ddc6c89a06a68aa8f549.png",
+      "domain": "Scene",
+      "score": 0.018321767449378967
+    },
+    {
+      "id": "Scene/0_real/07ad65a798bde28aa92622aa54e8dfc6828ebf2d16ba4d2a0f0b6c146731f620.jpg",
+      "sha256": "a36f9996b49f0b935cb17a9eb4de084386101db6dde55ff0d78e8c5509a6515e",
+      "label": "genuine",
+      "split": "test",
+      "group": "Scene/0_real/07ad65a798bde28aa92622aa54e8dfc6828ebf2d16ba4d2a0f0b6c146731f620.jpg",
+      "domain": "Scene",
+      "score": null,
+      "error": "ValueError"
+    },
+    {
+      "id": "Scene/0_real/11c2f844bb52ad703f27cd9f3af59d2d7f4a1111e698ff2857cf805d6b0ef43a.jpg",
+      "sha256": "4c138854e9c0ec624604172066197a5e790bd779cfbbff79f7626a040ff2ebad",
+      "label": "genuine",
+      "split": "test",
+      "group": "Scene/0_real/11c2f844bb52ad703f27cd9f3af59d2d7f4a1111e698ff2857cf805d6b0ef43a.jpg",
+      "domain": "Scene",
+      "score": 1.423416779289255e-05
+    },
+    {
+      "id": "Scene/0_real/1152fa348fc5ef3b664313deda5fa63a66d16de4e55da068a71b4e2b692e0215.jpg",
+      "sha256": "0b67a423e95ff75dab7d1f74a90e8bf379e6a5d90cceba7a5c60ae22d3b4be3f",
+      "label": "genuine",
+      "split": "test",
+      "group": "Scene/0_real/1152fa348fc5ef3b664313deda5fa63a66d16de4e55da068a71b4e2b692e0215.jpg",
+      "domain": "Scene",
+      "score": 0.10268625617027283
+    },
+    {
+      "id": "Scene/0_real/06828b457133fdcc4a22fa2b60b257ad076de83be029025ff46ff945acbb4300.jpg",
+      "sha256": "1a05c458ed759c24e0718265a9212a98d0339b44ad87fef32500b5ea058b9a25",
+      "label": "genuine",
+      "split": "test",
+      "group": "Scene/0_real/06828b457133fdcc4a22fa2b60b257ad076de83be029025ff46ff945acbb4300.jpg",
+      "domain": "Scene",
+      "score": 4.940256985719316e-05
+    },
+    {
+      "id": "Scene/0_real/090ccab1d8a2748ce2ccf9a8d7680fc8bae9ec483ae193d80a2a6031db1577bc.jpg",
+      "sha256": "1766fb1ac636c4e1a02f712218535e5e1da8dd848e8aaa874951b70292346869",
+      "label": "genuine",
+      "split": "test",
+      "group": "Scene/0_real/090ccab1d8a2748ce2ccf9a8d7680fc8bae9ec483ae193d80a2a6031db1577bc.jpg",
+      "domain": "Scene",
+      "score": 0.007072178181260824
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_5613.jpg",
+      "sha256": "b6fc8c310e924574178504a23d334a5098371877059f1556485a3b783b2c9ce2",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Scene/1_fake/Digicam/img_5613.jpg",
+      "domain": "Scene",
+      "score": 0.00029943729168735445
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_4203.jpg",
+      "sha256": "81b331d1fea07b8a023ed3cd8f53e671e7e666ef288fa7d318c71110d44bdd8b",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Scene/1_fake/Digicam/img_4203.jpg",
+      "domain": "Scene",
+      "score": 0.009013423696160316
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_5331.jpg",
+      "sha256": "53731fab6a44a2ddbe16e34283451e269f5a4382829406f9e3736fb1b74c0087",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Scene/1_fake/Digicam/img_5331.jpg",
+      "domain": "Scene",
+      "score": 0.015652816742658615
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_4409.jpg",
+      "sha256": "ae26d1a234e70fd73f3485ff9bfaa273a65d66f305704668e3277dac145c97b8",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Scene/1_fake/Digicam/img_4409.jpg",
+      "domain": "Scene",
+      "score": 0.11323612183332443
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_5094.jpg",
+      "sha256": "9b52b3f3844569ebd14f53d33088bb9c480a68f675546a36587321e82a00139d",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Scene/1_fake/Digicam/img_5094.jpg",
+      "domain": "Scene",
+      "score": 0.0001360653986921534
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_4048.jpg",
+      "sha256": "edc709b3f5911b4fee1eac31d1a7ab2e51665b1204ec8943fae5515bb7d4840d",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Scene/1_fake/Digicam/img_4048.jpg",
+      "domain": "Scene",
+      "score": 0.003854995360597968
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_5899.jpg",
+      "sha256": "f385e09dd65431abad1225043120b9db64167f0dda1c70c960de2551908aa0e1",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Scene/1_fake/Digicam/img_5899.jpg",
+      "domain": "Scene",
+      "score": 0.00019688913016580045
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_4479.jpg",
+      "sha256": "9e8d98ac1a11ed46a9c2967b89f59f03065e16e285b3870b3341d4cd122dbfe0",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Scene/1_fake/Digicam/img_4479.jpg",
+      "domain": "Scene",
+      "score": 0.0027444958686828613
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_5434.jpg",
+      "sha256": "704498e8918f86ff1d25e38335500ee29ffd5083e678af4e33e20b1c8bc39dd2",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Scene/1_fake/Digicam/img_5434.jpg",
+      "domain": "Scene",
+      "score": 0.09017791599035263
+    },
+    {
+      "id": "Scene/1_fake/Digicam/img_5442.jpg",
+      "sha256": "d54ad66d8aa248d2d2ecf256152102bd5b8f770bfe4e8731317911257de1ccae",
+      "label": "synthetic",
+      "split": "test",
+      "group": "Scene/1_fake/Digicam/img_5442.jpg",
+      "domain": "Scene",
+      "score": 6.79235890856944e-05
+    }
+  ],
+  "splits": {
+    "calibration": {
+      "total": 0,
+      "scored": 0,
+      "failed_or_skipped": 0,
+      "genuine": 0,
+      "synthetic": 0,
+      "tp": 0,
+      "fp": 0,
+      "tn": 0,
+      "fn": 0,
+      "false_positive_rate": null,
+      "recall": null,
+      "auroc": null
+    },
+    "test": {
+      "total": 80,
+      "scored": 71,
+      "failed_or_skipped": 9,
+      "genuine": 31,
+      "synthetic": 40,
+      "tp": 3,
+      "fp": 0,
+      "tn": 31,
+      "fn": 37,
+      "false_positive_rate": 0.0,
+      "recall": 0.075,
+      "auroc": 0.5758064516129032
+    }
+  },
+  "test_domains": {
+    "Animal": {
+      "total": 20,
+      "scored": 17,
+      "failed_or_skipped": 3,
+      "genuine": 7,
+      "synthetic": 10,
+      "tp": 1,
+      "fp": 0,
+      "tn": 7,
+      "fn": 9,
+      "false_positive_rate": 0.0,
+      "recall": 0.1,
+      "auroc": 0.5571428571428572
+    },
+    "Human": {
+      "total": 20,
+      "scored": 18,
+      "failed_or_skipped": 2,
+      "genuine": 8,
+      "synthetic": 10,
+      "tp": 1,
+      "fp": 0,
+      "tn": 8,
+      "fn": 9,
+      "false_positive_rate": 0.0,
+      "recall": 0.1,
+      "auroc": 0.6625
+    },
+    "Object": {
+      "total": 20,
+      "scored": 17,
+      "failed_or_skipped": 3,
+      "genuine": 7,
+      "synthetic": 10,
+      "tp": 1,
+      "fp": 0,
+      "tn": 7,
+      "fn": 9,
+      "false_positive_rate": 0.0,
+      "recall": 0.1,
+      "auroc": 0.4857142857142857
+    },
+    "Scene": {
+      "total": 20,
+      "scored": 19,
+      "failed_or_skipped": 1,
+      "genuine": 9,
+      "synthetic": 10,
+      "tp": 0,
+      "fp": 0,
+      "tn": 9,
+      "fn": 10,
+      "false_positive_rate": 0.0,
+      "recall": 0.0,
+      "auroc": 0.5555555555555556
+    }
+  },
+  "deployment_authorized": false,
+  "manifest": {
+    "task": "general_ai_generated_image",
+    "dataset": "Yunncheng/Mirage-Test",
+    "revision": "820a191bb0844ae74a1bd9eb57b28268257a4053",
+    "limitations": [
+      "Subset of first API listing (max 1000 per stratum), hash-ordered; not random population sampling",
+      "Source/identity and training overlap unverified; group is file identity only",
+      "Human synthetic images are not a facial-manipulation ground-truth benchmark",
+      "Test-only diagnostics; no threshold fitting or calibration"
+    ],
+    "samples": [
+      {
+        "id": "Animal/0_real/37a051d6a468f2c16df432f105e1810a00a52a929867818a0bc4e57d91da9e4d.jpg",
+        "path": "Animal/0_real/37a051d6a468f2c16df432f105e1810a00a52a929867818a0bc4e57d91da9e4d.jpg",
+        "sha256": "4269eb6095cd99c9e17a3b1462cc7d8fe21f6bc4da763585fe2df706698d9a64",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/0_real/37a051d6a468f2c16df432f105e1810a00a52a929867818a0bc4e57d91da9e4d.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/0_real/37a051d6a468f2c16df432f105e1810a00a52a929867818a0bc4e57d91da9e4d.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/0_real/109a0c9fc22ae3735a8ab8236daaefe3165ba00cfa8c54939123666f4a8c19c0.jpg",
+        "path": "Animal/0_real/109a0c9fc22ae3735a8ab8236daaefe3165ba00cfa8c54939123666f4a8c19c0.jpg",
+        "sha256": "70d931ecf900a581504a95a92b94279ec858f7dc39dac60661b7849713f52a5a",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/0_real/109a0c9fc22ae3735a8ab8236daaefe3165ba00cfa8c54939123666f4a8c19c0.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/0_real/109a0c9fc22ae3735a8ab8236daaefe3165ba00cfa8c54939123666f4a8c19c0.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/0_real/3764991afd492526fac414a0bef5276e6786d81ac4b47a58d2fa7fa820fb4220.jpg",
+        "path": "Animal/0_real/3764991afd492526fac414a0bef5276e6786d81ac4b47a58d2fa7fa820fb4220.jpg",
+        "sha256": "d93814fe3dddfbc6a95a84f1f336dc7e5c84ccc546960f6aff11b1a6f4a94e9e",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/0_real/3764991afd492526fac414a0bef5276e6786d81ac4b47a58d2fa7fa820fb4220.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/0_real/3764991afd492526fac414a0bef5276e6786d81ac4b47a58d2fa7fa820fb4220.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/0_real/363d3467a4bd1868dd6e38541ce73897dced78b211db11acd6f1cd87583334e5.png",
+        "path": "Animal/0_real/363d3467a4bd1868dd6e38541ce73897dced78b211db11acd6f1cd87583334e5.png",
+        "sha256": "5649e2c947abcf6b8e2cb83b5761290a2715eb1573d9a3983bd4a06ce7585dca",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/0_real/363d3467a4bd1868dd6e38541ce73897dced78b211db11acd6f1cd87583334e5.png",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/0_real/363d3467a4bd1868dd6e38541ce73897dced78b211db11acd6f1cd87583334e5.png",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/0_real/1528fd54b7f53422712b358b0ca76ca397d0f0e20694f0fb5f2669ba78d01898.png",
+        "path": "Animal/0_real/1528fd54b7f53422712b358b0ca76ca397d0f0e20694f0fb5f2669ba78d01898.png",
+        "sha256": "639c3076a856defbff38c28697c723c5a8e04c7379af3246c96deaecc34f5c82",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/0_real/1528fd54b7f53422712b358b0ca76ca397d0f0e20694f0fb5f2669ba78d01898.png",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/0_real/1528fd54b7f53422712b358b0ca76ca397d0f0e20694f0fb5f2669ba78d01898.png",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/0_real/3cf6b00aa498bc5cd73c6c82e38da0cb0cdfd09a4f3129fec33492caa6643acd.jpg",
+        "path": "Animal/0_real/3cf6b00aa498bc5cd73c6c82e38da0cb0cdfd09a4f3129fec33492caa6643acd.jpg",
+        "sha256": "bc5ff3195a66df38aa5fe03e775670d83d6bd1d50885cc4bec2fd817dae8fdb8",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/0_real/3cf6b00aa498bc5cd73c6c82e38da0cb0cdfd09a4f3129fec33492caa6643acd.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/0_real/3cf6b00aa498bc5cd73c6c82e38da0cb0cdfd09a4f3129fec33492caa6643acd.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/0_real/0febf9563c5014dbbfdd7a893b673bdd0d488497a6f4b47cb1124d3158c0b593.jpg",
+        "path": "Animal/0_real/0febf9563c5014dbbfdd7a893b673bdd0d488497a6f4b47cb1124d3158c0b593.jpg",
+        "sha256": "89477d905a730def650f640604149169a81cfb2602b8a163d9f429d4170d58e2",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/0_real/0febf9563c5014dbbfdd7a893b673bdd0d488497a6f4b47cb1124d3158c0b593.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/0_real/0febf9563c5014dbbfdd7a893b673bdd0d488497a6f4b47cb1124d3158c0b593.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/0_real/10112de6b46fc5ca2bbd48d52f0cb76a89d535559dc6276d4f3a6f1ad54e6574.png",
+        "path": "Animal/0_real/10112de6b46fc5ca2bbd48d52f0cb76a89d535559dc6276d4f3a6f1ad54e6574.png",
+        "sha256": "9a94d03cdc2954823123fc7fe48051ab48e90222cc8fdb0cd129825dece52d88",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/0_real/10112de6b46fc5ca2bbd48d52f0cb76a89d535559dc6276d4f3a6f1ad54e6574.png",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/0_real/10112de6b46fc5ca2bbd48d52f0cb76a89d535559dc6276d4f3a6f1ad54e6574.png",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/0_real/31606859b50f307d3fba027bb3f7190b07d55a239819a967d3debf7d7f5e3183.jpg",
+        "path": "Animal/0_real/31606859b50f307d3fba027bb3f7190b07d55a239819a967d3debf7d7f5e3183.jpg",
+        "sha256": "87f07bcde9bc66c48091036724db01cc566eb87b2e6b94624887cc78bcda1028",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/0_real/31606859b50f307d3fba027bb3f7190b07d55a239819a967d3debf7d7f5e3183.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/0_real/31606859b50f307d3fba027bb3f7190b07d55a239819a967d3debf7d7f5e3183.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/0_real/2e415006aa72dead65e13f5a0f1ba09502ca4abdff2dac59598da7021669581b.png",
+        "path": "Animal/0_real/2e415006aa72dead65e13f5a0f1ba09502ca4abdff2dac59598da7021669581b.png",
+        "sha256": "99c9f87e90ea173e69ebe803cb4a1bbb5216f6a62be08d1fe787fd74f1e97173",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/0_real/2e415006aa72dead65e13f5a0f1ba09502ca4abdff2dac59598da7021669581b.png",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/0_real/2e415006aa72dead65e13f5a0f1ba09502ca4abdff2dac59598da7021669581b.png",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/1_fake/Digicam/img_4446.jpg",
+        "path": "Animal/1_fake/Digicam/img_4446.jpg",
+        "sha256": "f790fa47145f6c5d0fad7fe755369d29919bd8279c0fd34ba4163b0f255c138b",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/1_fake/Digicam/img_4446.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/1_fake/Digicam/img_4446.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/1_fake/Digicam/img_4588.jpg",
+        "path": "Animal/1_fake/Digicam/img_4588.jpg",
+        "sha256": "abf062e9ffc849331ca07f58cbfdd064f828487c873f490ca014d77eeb721da6",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/1_fake/Digicam/img_4588.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/1_fake/Digicam/img_4588.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/1_fake/Digicam/img_4081.jpg",
+        "path": "Animal/1_fake/Digicam/img_4081.jpg",
+        "sha256": "900db10eb0b9fcc4e7ef09a684adfb317886dc42624ea810f0184fca0ddaa41e",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/1_fake/Digicam/img_4081.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/1_fake/Digicam/img_4081.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/1_fake/Flux_xhs_v2/img_1265.jpg",
+        "path": "Animal/1_fake/Flux_xhs_v2/img_1265.jpg",
+        "sha256": "1c3f2f9909c9a4debd51d662e47f181004fa5f348237b1f532b7f254a6d36a8a",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/1_fake/Flux_xhs_v2/img_1265.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/1_fake/Flux_xhs_v2/img_1265.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/1_fake/Flux_xhs_v2/img_1408.jpg",
+        "path": "Animal/1_fake/Flux_xhs_v2/img_1408.jpg",
+        "sha256": "603a8c27c36eb718655542a4bbd0dbf31b233fa2e58a18c1604c907c311d04ff",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/1_fake/Flux_xhs_v2/img_1408.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/1_fake/Flux_xhs_v2/img_1408.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/1_fake/Digicam/img_4823.jpg",
+        "path": "Animal/1_fake/Digicam/img_4823.jpg",
+        "sha256": "4a53e580fda827e311ad8198ae94f5c2ca26cc0c6b0ed46b141a78501daa6b51",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/1_fake/Digicam/img_4823.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/1_fake/Digicam/img_4823.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/1_fake/Digicam/img_5270.jpg",
+        "path": "Animal/1_fake/Digicam/img_5270.jpg",
+        "sha256": "545fe71d2e6b14718d0775b06a9bc3b8a4a31d017782f12bd561483c33231ac4",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/1_fake/Digicam/img_5270.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/1_fake/Digicam/img_5270.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/1_fake/Digicam/img_5247.jpg",
+        "path": "Animal/1_fake/Digicam/img_5247.jpg",
+        "sha256": "fabcabd3528e88293da7b575d0cb2166ea22adc42b7d063b10e7f93c74b086e0",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/1_fake/Digicam/img_5247.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/1_fake/Digicam/img_5247.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/1_fake/Flux_xhs_v2/img_840.jpg",
+        "path": "Animal/1_fake/Flux_xhs_v2/img_840.jpg",
+        "sha256": "1128796d508fb3f63fbe869415a2fd5602a312b464acaa70823e672a2aae404a",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/1_fake/Flux_xhs_v2/img_840.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/1_fake/Flux_xhs_v2/img_840.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Animal"
+      },
+      {
+        "id": "Animal/1_fake/Digicam/img_5111.jpg",
+        "path": "Animal/1_fake/Digicam/img_5111.jpg",
+        "sha256": "641e7139ed9820cfa543ff53c2a9be8d437dc32d902e35ad68552afe69e30af1",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Animal/1_fake/Digicam/img_5111.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Animal/1_fake/Digicam/img_5111.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Animal"
+      },
+      {
+        "id": "Human/0_real/12618f0fa70f7bcbc67c8ed691402a57045d6517d25d82d8f5687695bde8ef5d.png",
+        "path": "Human/0_real/12618f0fa70f7bcbc67c8ed691402a57045d6517d25d82d8f5687695bde8ef5d.png",
+        "sha256": "e1de487d25ab524231690ed73632543ff9e520ce25245c66242b67cb521b575e",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/0_real/12618f0fa70f7bcbc67c8ed691402a57045d6517d25d82d8f5687695bde8ef5d.png",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/0_real/12618f0fa70f7bcbc67c8ed691402a57045d6517d25d82d8f5687695bde8ef5d.png",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/0_real/05b4fdf57995cbe2fc7e25e1ad1ba84ada4bfe3d516d94db94a78e04175a5195.jpg",
+        "path": "Human/0_real/05b4fdf57995cbe2fc7e25e1ad1ba84ada4bfe3d516d94db94a78e04175a5195.jpg",
+        "sha256": "0305b05448b88e38163de91ccd23e196935406494507f58c817d79f2a0f5c2b8",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/0_real/05b4fdf57995cbe2fc7e25e1ad1ba84ada4bfe3d516d94db94a78e04175a5195.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/0_real/05b4fdf57995cbe2fc7e25e1ad1ba84ada4bfe3d516d94db94a78e04175a5195.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/0_real/061dd554fe453fe65b25a1034a9687ab8f3279ee515581743b9255db8d435cb3.png",
+        "path": "Human/0_real/061dd554fe453fe65b25a1034a9687ab8f3279ee515581743b9255db8d435cb3.png",
+        "sha256": "dc0c200b0f43a3839cc576b6aaf58226af7ec14977d29205b6c39a377f5c6b96",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/0_real/061dd554fe453fe65b25a1034a9687ab8f3279ee515581743b9255db8d435cb3.png",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/0_real/061dd554fe453fe65b25a1034a9687ab8f3279ee515581743b9255db8d435cb3.png",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/0_real/10d5989e74ed54b90d358554e8fd13f8c57e64a81a2ff8da690d0c8843d34fce.jpg",
+        "path": "Human/0_real/10d5989e74ed54b90d358554e8fd13f8c57e64a81a2ff8da690d0c8843d34fce.jpg",
+        "sha256": "6d677e31b9bef5c4c3fda8e469a06a097fadfef67f3b2360b6d6929a3a87f5f5",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/0_real/10d5989e74ed54b90d358554e8fd13f8c57e64a81a2ff8da690d0c8843d34fce.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/0_real/10d5989e74ed54b90d358554e8fd13f8c57e64a81a2ff8da690d0c8843d34fce.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/0_real/0590593f873d3eea2042b495acff2419f1e854024df188a12b6675a98d8ef6de.jpg",
+        "path": "Human/0_real/0590593f873d3eea2042b495acff2419f1e854024df188a12b6675a98d8ef6de.jpg",
+        "sha256": "ea00a3366e89e8ba9d21f4b7253d0a3c7b358d20d2c50207280c7053701a0634",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/0_real/0590593f873d3eea2042b495acff2419f1e854024df188a12b6675a98d8ef6de.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/0_real/0590593f873d3eea2042b495acff2419f1e854024df188a12b6675a98d8ef6de.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/0_real/1084ad44cef60d7eb5602498b3783b5d6e5ebe59c0d5037a09268b0afdd5b2c7.jpg",
+        "path": "Human/0_real/1084ad44cef60d7eb5602498b3783b5d6e5ebe59c0d5037a09268b0afdd5b2c7.jpg",
+        "sha256": "dcd2be9a929f225fb47f9f958dba1ba4872146f774caac85ab6c4f7af17f1e2d",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/0_real/1084ad44cef60d7eb5602498b3783b5d6e5ebe59c0d5037a09268b0afdd5b2c7.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/0_real/1084ad44cef60d7eb5602498b3783b5d6e5ebe59c0d5037a09268b0afdd5b2c7.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/0_real/10e0edb8103d57356f768215e098bf8a6f7854ea5a0372ee15242d9f92144aa6.jpg",
+        "path": "Human/0_real/10e0edb8103d57356f768215e098bf8a6f7854ea5a0372ee15242d9f92144aa6.jpg",
+        "sha256": "bd41db8db13f4f4f1206f59a7e10570f991e7b4588cc0a5a4ff902fe3981ca9e",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/0_real/10e0edb8103d57356f768215e098bf8a6f7854ea5a0372ee15242d9f92144aa6.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/0_real/10e0edb8103d57356f768215e098bf8a6f7854ea5a0372ee15242d9f92144aa6.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/0_real/009356c66fa8d8939c357f72b72aaa5eb16b02a31317511cedcc147e36945e9d.jpg",
+        "path": "Human/0_real/009356c66fa8d8939c357f72b72aaa5eb16b02a31317511cedcc147e36945e9d.jpg",
+        "sha256": "52b5c85473d37a1e9a1ba13b9981f6fedc2a0f4cd0a2683905fb9170c43db3df",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/0_real/009356c66fa8d8939c357f72b72aaa5eb16b02a31317511cedcc147e36945e9d.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/0_real/009356c66fa8d8939c357f72b72aaa5eb16b02a31317511cedcc147e36945e9d.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/0_real/09ce2f681c1b655cca3dbc07f189b447dd62ed62ece5c2f25df0ffab64aef649.jpg",
+        "path": "Human/0_real/09ce2f681c1b655cca3dbc07f189b447dd62ed62ece5c2f25df0ffab64aef649.jpg",
+        "sha256": "fff2445e0e060f8c52be31e862bfe5debdee46a9718715ef59e113a8705c44f6",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/0_real/09ce2f681c1b655cca3dbc07f189b447dd62ed62ece5c2f25df0ffab64aef649.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/0_real/09ce2f681c1b655cca3dbc07f189b447dd62ed62ece5c2f25df0ffab64aef649.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/0_real/02faf1ceb0e33ac311a7ecc95ce6f057b2a6a3c808e2826d0169bcb414af1723.jpg",
+        "path": "Human/0_real/02faf1ceb0e33ac311a7ecc95ce6f057b2a6a3c808e2826d0169bcb414af1723.jpg",
+        "sha256": "1840e01e61788e3821b7d2efe500cd466a207e52cae980c670a1b87b8e0df199",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/0_real/02faf1ceb0e33ac311a7ecc95ce6f057b2a6a3c808e2826d0169bcb414af1723.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/0_real/02faf1ceb0e33ac311a7ecc95ce6f057b2a6a3c808e2826d0169bcb414af1723.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/1_fake/Digicam/img_5398.jpg",
+        "path": "Human/1_fake/Digicam/img_5398.jpg",
+        "sha256": "b0b35039eee3ae7f85ea2c30bb7214734dab86de35293f3af8613a158bb32402",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/1_fake/Digicam/img_5398.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/1_fake/Digicam/img_5398.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/1_fake/Digicam/img_4963.jpg",
+        "path": "Human/1_fake/Digicam/img_4963.jpg",
+        "sha256": "7b1d0bd1c0d281b6d94b5a98f3bbf4c6cc5bb8834eaa471f8203d7e9e2e072cf",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/1_fake/Digicam/img_4963.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/1_fake/Digicam/img_4963.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/1_fake/Digicam/img_5842.jpg",
+        "path": "Human/1_fake/Digicam/img_5842.jpg",
+        "sha256": "6bf945317345f180f20a61fe2b138462c362c69cf1002f04d3cef32aa85342ee",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/1_fake/Digicam/img_5842.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/1_fake/Digicam/img_5842.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/1_fake/Digicam/img_5626.jpg",
+        "path": "Human/1_fake/Digicam/img_5626.jpg",
+        "sha256": "d99b5bbb912d31db4451fdbfb32578ae527557b1b6649785b31aa5ac2f128816",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/1_fake/Digicam/img_5626.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/1_fake/Digicam/img_5626.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/1_fake/Digicam/img_5554.jpg",
+        "path": "Human/1_fake/Digicam/img_5554.jpg",
+        "sha256": "4d6de3638618f557febe94be4e198bd687a015530518b1890d7fba21de906a10",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/1_fake/Digicam/img_5554.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/1_fake/Digicam/img_5554.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/1_fake/Digicam/img_5402.jpg",
+        "path": "Human/1_fake/Digicam/img_5402.jpg",
+        "sha256": "8c9dc17de3297b2fa9c38cf699ee81b28255ef1497c6dcebc41e7a58c69b909c",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/1_fake/Digicam/img_5402.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/1_fake/Digicam/img_5402.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/1_fake/Digicam/img_5614.jpg",
+        "path": "Human/1_fake/Digicam/img_5614.jpg",
+        "sha256": "37ff3b61e6dcf22ab18d1ec514ded0ed4a52ed1880fe7e93c24f6054259490a0",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/1_fake/Digicam/img_5614.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/1_fake/Digicam/img_5614.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/1_fake/Digicam/img_5562.jpg",
+        "path": "Human/1_fake/Digicam/img_5562.jpg",
+        "sha256": "e5ec5c8bade53a6131da0c6da7c2c045e02cf19e5df3c3777a66ce6c24096d3e",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/1_fake/Digicam/img_5562.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/1_fake/Digicam/img_5562.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/1_fake/Digicam/img_5633.jpg",
+        "path": "Human/1_fake/Digicam/img_5633.jpg",
+        "sha256": "192f4486118449ef5cc08514858d8d02894feafeff175957c58ae4fce85b0a29",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/1_fake/Digicam/img_5633.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/1_fake/Digicam/img_5633.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Human"
+      },
+      {
+        "id": "Human/1_fake/Digicam/img_4297.jpg",
+        "path": "Human/1_fake/Digicam/img_4297.jpg",
+        "sha256": "15038b4db177d8803536ec8d6d63b9e6eabb831b23cec06cab35b8fe9a833f02",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Human/1_fake/Digicam/img_4297.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Human/1_fake/Digicam/img_4297.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Human"
+      },
+      {
+        "id": "Object/0_real/089b827715454adb53c63b460954e9a31df422bc7c8558da007f552a372931a8.jpg",
+        "path": "Object/0_real/089b827715454adb53c63b460954e9a31df422bc7c8558da007f552a372931a8.jpg",
+        "sha256": "1c69e5c7830d25df5a09793f50f194f73118bcdfa6fc64ad0becd172eb004661",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/0_real/089b827715454adb53c63b460954e9a31df422bc7c8558da007f552a372931a8.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/0_real/089b827715454adb53c63b460954e9a31df422bc7c8558da007f552a372931a8.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/0_real/24fbb4667a42099b802d2f1bfa5ca752d618e867f54f99e126c6340282891db8.jpg",
+        "path": "Object/0_real/24fbb4667a42099b802d2f1bfa5ca752d618e867f54f99e126c6340282891db8.jpg",
+        "sha256": "c3fa1709a43ef03b2c2d2b169bb1619413341508c5410bbaf49d690a6d319128",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/0_real/24fbb4667a42099b802d2f1bfa5ca752d618e867f54f99e126c6340282891db8.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/0_real/24fbb4667a42099b802d2f1bfa5ca752d618e867f54f99e126c6340282891db8.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/0_real/08b0b8db5325c55cca73b7de97e3f4d302db045482f534a9161f7b0008047868.jpg",
+        "path": "Object/0_real/08b0b8db5325c55cca73b7de97e3f4d302db045482f534a9161f7b0008047868.jpg",
+        "sha256": "150a6727ab4f5621f07646f760e8da255c3d0bb1f999e2a460a1be160c0e042f",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/0_real/08b0b8db5325c55cca73b7de97e3f4d302db045482f534a9161f7b0008047868.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/0_real/08b0b8db5325c55cca73b7de97e3f4d302db045482f534a9161f7b0008047868.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/0_real/1ff173c68dfe1026939d164d3ca7adf8315d11216f402eaaa7c1f45df75ed42f.jpg",
+        "path": "Object/0_real/1ff173c68dfe1026939d164d3ca7adf8315d11216f402eaaa7c1f45df75ed42f.jpg",
+        "sha256": "abfef3e73c0c466ec8b6f0fbf78b747129769621aaaf62ec4d23eb20479cbcb3",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/0_real/1ff173c68dfe1026939d164d3ca7adf8315d11216f402eaaa7c1f45df75ed42f.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/0_real/1ff173c68dfe1026939d164d3ca7adf8315d11216f402eaaa7c1f45df75ed42f.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/0_real/111d9837aa101a1da16ad9f7a937b751977014b114c67eaa85b3efd0bba62121.jpg",
+        "path": "Object/0_real/111d9837aa101a1da16ad9f7a937b751977014b114c67eaa85b3efd0bba62121.jpg",
+        "sha256": "d95bde2ce1518e040bc247442f9c2a300981e06ec486ecc5f3121b93730a88a4",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/0_real/111d9837aa101a1da16ad9f7a937b751977014b114c67eaa85b3efd0bba62121.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/0_real/111d9837aa101a1da16ad9f7a937b751977014b114c67eaa85b3efd0bba62121.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/0_real/14e7a0dd8ebe2ff3e569767b6cb0c4103e46565bcc84cb944e86bfd2ecc5e7df.jpg",
+        "path": "Object/0_real/14e7a0dd8ebe2ff3e569767b6cb0c4103e46565bcc84cb944e86bfd2ecc5e7df.jpg",
+        "sha256": "44d93852dcd9aa797b9526b4cb6bdd286a833d59971a5f931fb1059ab8086fff",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/0_real/14e7a0dd8ebe2ff3e569767b6cb0c4103e46565bcc84cb944e86bfd2ecc5e7df.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/0_real/14e7a0dd8ebe2ff3e569767b6cb0c4103e46565bcc84cb944e86bfd2ecc5e7df.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/0_real/1fc773dec296325230ef2fb0bb9ee481fbe1bcc9e4f191fb0595fb835c48c5e5.jpg",
+        "path": "Object/0_real/1fc773dec296325230ef2fb0bb9ee481fbe1bcc9e4f191fb0595fb835c48c5e5.jpg",
+        "sha256": "a063d9530e5c7b03eff211cca2994f99cfb05a9fbc140ade3b439f440d7f4ca9",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/0_real/1fc773dec296325230ef2fb0bb9ee481fbe1bcc9e4f191fb0595fb835c48c5e5.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/0_real/1fc773dec296325230ef2fb0bb9ee481fbe1bcc9e4f191fb0595fb835c48c5e5.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/0_real/24a791bc27327a34009d26297dfcbb0cd84c7ac9b411d9b27493f35460a53223.jpg",
+        "path": "Object/0_real/24a791bc27327a34009d26297dfcbb0cd84c7ac9b411d9b27493f35460a53223.jpg",
+        "sha256": "ff7a97ce83de860d2c37b9d999923db9623ff9a218660ec2fe6dec2612a500c8",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/0_real/24a791bc27327a34009d26297dfcbb0cd84c7ac9b411d9b27493f35460a53223.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/0_real/24a791bc27327a34009d26297dfcbb0cd84c7ac9b411d9b27493f35460a53223.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/0_real/1af29d0077778e602e8ca7d7df9289c32299dd3d81badda62a09d63887afbb57.jpg",
+        "path": "Object/0_real/1af29d0077778e602e8ca7d7df9289c32299dd3d81badda62a09d63887afbb57.jpg",
+        "sha256": "774bcce2f6494e377e7bea1fc20ad43aa22e7ac4327ce570e146cadb4081fe3e",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/0_real/1af29d0077778e602e8ca7d7df9289c32299dd3d81badda62a09d63887afbb57.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/0_real/1af29d0077778e602e8ca7d7df9289c32299dd3d81badda62a09d63887afbb57.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/0_real/1bdeca5775f88d4a5f66a717f7a88d3c8890882b80f2d445163e9c7ccc5bd1aa.jpg",
+        "path": "Object/0_real/1bdeca5775f88d4a5f66a717f7a88d3c8890882b80f2d445163e9c7ccc5bd1aa.jpg",
+        "sha256": "a9db4d3a8c7bcad53ae006270435e305503fdd97c10d7890c0c0097df0523a9b",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/0_real/1bdeca5775f88d4a5f66a717f7a88d3c8890882b80f2d445163e9c7ccc5bd1aa.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/0_real/1bdeca5775f88d4a5f66a717f7a88d3c8890882b80f2d445163e9c7ccc5bd1aa.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/1_fake/Digicam/img_4106.jpg",
+        "path": "Object/1_fake/Digicam/img_4106.jpg",
+        "sha256": "cc7c4dea1fe43170433a1d11f20bd25293280ef2decf52adf847cde303d61271",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/1_fake/Digicam/img_4106.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/1_fake/Digicam/img_4106.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/1_fake/Digicam/img_4296.jpg",
+        "path": "Object/1_fake/Digicam/img_4296.jpg",
+        "sha256": "69404c482ebc5f0259d49413973e743ef7e26cbe1b14bb9f3d99f3b36d556771",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/1_fake/Digicam/img_4296.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/1_fake/Digicam/img_4296.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/1_fake/Digicam/img_5493.jpg",
+        "path": "Object/1_fake/Digicam/img_5493.jpg",
+        "sha256": "37b476af19f0ae0927f7938c082d78690708cf783637d8c0c64a7e45278d5b6f",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/1_fake/Digicam/img_5493.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/1_fake/Digicam/img_5493.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/1_fake/Digicam/img_5955.jpg",
+        "path": "Object/1_fake/Digicam/img_5955.jpg",
+        "sha256": "8f7f0ad3ebd3ca61c8fef187d3b82b8050fdda2c5d0c696ec036ca2c6740e98f",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/1_fake/Digicam/img_5955.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/1_fake/Digicam/img_5955.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/1_fake/Digicam/img_4819.jpg",
+        "path": "Object/1_fake/Digicam/img_4819.jpg",
+        "sha256": "a9bf377547b5c21a3315a0bf7ce7ff862ef37ae10240ef707e33ed46292cf756",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/1_fake/Digicam/img_4819.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/1_fake/Digicam/img_4819.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/1_fake/Digicam/img_4995.jpg",
+        "path": "Object/1_fake/Digicam/img_4995.jpg",
+        "sha256": "99921d615445261bcfb6bdfec513e9cab737b0cdd91934a34f004605ac3a8f32",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/1_fake/Digicam/img_4995.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/1_fake/Digicam/img_4995.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/1_fake/Digicam/img_4392.jpg",
+        "path": "Object/1_fake/Digicam/img_4392.jpg",
+        "sha256": "953cdeaf4af2de78931ef2ff951ef36300028692f763c1a43302ba575d7df1d8",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/1_fake/Digicam/img_4392.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/1_fake/Digicam/img_4392.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/1_fake/Digicam/img_4349.jpg",
+        "path": "Object/1_fake/Digicam/img_4349.jpg",
+        "sha256": "408ad1c892cdba1382f88660553e3a5ff9de516b1c089fbcc08b335502e6eede",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/1_fake/Digicam/img_4349.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/1_fake/Digicam/img_4349.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/1_fake/Digicam/img_5315.jpg",
+        "path": "Object/1_fake/Digicam/img_5315.jpg",
+        "sha256": "40b9d164928b65ad0f1d8b0f718955f7e3e5cd641183be54436980129a5b97cc",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/1_fake/Digicam/img_5315.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/1_fake/Digicam/img_5315.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Object"
+      },
+      {
+        "id": "Object/1_fake/Digicam/img_5728.jpg",
+        "path": "Object/1_fake/Digicam/img_5728.jpg",
+        "sha256": "bc54411682390b2df24544765fab1b36bd5ecd301684401e07de1642605eb688",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Object/1_fake/Digicam/img_5728.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Object/1_fake/Digicam/img_5728.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Object"
+      },
+      {
+        "id": "Scene/0_real/0b5bf8f777c3645c038b7fefec3b7838e0c4fe0c6ae585927d787b2bc517192e.jpg",
+        "path": "Scene/0_real/0b5bf8f777c3645c038b7fefec3b7838e0c4fe0c6ae585927d787b2bc517192e.jpg",
+        "sha256": "f7aa0f1b5c5bee4eb913f7358524fa657c5049bfd1a1ddec32807b37980feaa5",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/0_real/0b5bf8f777c3645c038b7fefec3b7838e0c4fe0c6ae585927d787b2bc517192e.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/0_real/0b5bf8f777c3645c038b7fefec3b7838e0c4fe0c6ae585927d787b2bc517192e.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/0_real/0afece98e0b5698238968bdf182c4162d2b1d0d2246eb05346854acf350e3d89.jpg",
+        "path": "Scene/0_real/0afece98e0b5698238968bdf182c4162d2b1d0d2246eb05346854acf350e3d89.jpg",
+        "sha256": "b2ab9756eb79fe6b63850dcbd2493e955ae28221e1f10b06567acf681788879f",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/0_real/0afece98e0b5698238968bdf182c4162d2b1d0d2246eb05346854acf350e3d89.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/0_real/0afece98e0b5698238968bdf182c4162d2b1d0d2246eb05346854acf350e3d89.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/0_real/1486963cdffeb17caa5e67f4f7069915dbedfe4caceb9e8f184d30fe228f480f.jpg",
+        "path": "Scene/0_real/1486963cdffeb17caa5e67f4f7069915dbedfe4caceb9e8f184d30fe228f480f.jpg",
+        "sha256": "0ec4025daebd5c0510f2b0b0d3b55732b8037e98c8ecbd2bec8b599519edf521",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/0_real/1486963cdffeb17caa5e67f4f7069915dbedfe4caceb9e8f184d30fe228f480f.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/0_real/1486963cdffeb17caa5e67f4f7069915dbedfe4caceb9e8f184d30fe228f480f.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/0_real/1a299d23a77bce06d41c9e156e6faca59a2b636999c9280adc99c6fb875c5e8e.jpg",
+        "path": "Scene/0_real/1a299d23a77bce06d41c9e156e6faca59a2b636999c9280adc99c6fb875c5e8e.jpg",
+        "sha256": "e17122906986ffb1be5066fa1ee5692f2b9c27e64ba43576fde9dd99964ed5c2",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/0_real/1a299d23a77bce06d41c9e156e6faca59a2b636999c9280adc99c6fb875c5e8e.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/0_real/1a299d23a77bce06d41c9e156e6faca59a2b636999c9280adc99c6fb875c5e8e.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/0_real/11212b64d7b9ac05f01a74834280b9b14b3e8f871c23ddc6c89a06a68aa8f549.png",
+        "path": "Scene/0_real/11212b64d7b9ac05f01a74834280b9b14b3e8f871c23ddc6c89a06a68aa8f549.png",
+        "sha256": "eaf6ce8a0fdd08df44eff4364efb0c517aa4b9b266a20a035c0836a245248236",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/0_real/11212b64d7b9ac05f01a74834280b9b14b3e8f871c23ddc6c89a06a68aa8f549.png",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/0_real/11212b64d7b9ac05f01a74834280b9b14b3e8f871c23ddc6c89a06a68aa8f549.png",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/0_real/07ad65a798bde28aa92622aa54e8dfc6828ebf2d16ba4d2a0f0b6c146731f620.jpg",
+        "path": "Scene/0_real/07ad65a798bde28aa92622aa54e8dfc6828ebf2d16ba4d2a0f0b6c146731f620.jpg",
+        "sha256": "a36f9996b49f0b935cb17a9eb4de084386101db6dde55ff0d78e8c5509a6515e",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/0_real/07ad65a798bde28aa92622aa54e8dfc6828ebf2d16ba4d2a0f0b6c146731f620.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/0_real/07ad65a798bde28aa92622aa54e8dfc6828ebf2d16ba4d2a0f0b6c146731f620.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/0_real/11c2f844bb52ad703f27cd9f3af59d2d7f4a1111e698ff2857cf805d6b0ef43a.jpg",
+        "path": "Scene/0_real/11c2f844bb52ad703f27cd9f3af59d2d7f4a1111e698ff2857cf805d6b0ef43a.jpg",
+        "sha256": "4c138854e9c0ec624604172066197a5e790bd779cfbbff79f7626a040ff2ebad",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/0_real/11c2f844bb52ad703f27cd9f3af59d2d7f4a1111e698ff2857cf805d6b0ef43a.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/0_real/11c2f844bb52ad703f27cd9f3af59d2d7f4a1111e698ff2857cf805d6b0ef43a.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/0_real/1152fa348fc5ef3b664313deda5fa63a66d16de4e55da068a71b4e2b692e0215.jpg",
+        "path": "Scene/0_real/1152fa348fc5ef3b664313deda5fa63a66d16de4e55da068a71b4e2b692e0215.jpg",
+        "sha256": "0b67a423e95ff75dab7d1f74a90e8bf379e6a5d90cceba7a5c60ae22d3b4be3f",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/0_real/1152fa348fc5ef3b664313deda5fa63a66d16de4e55da068a71b4e2b692e0215.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/0_real/1152fa348fc5ef3b664313deda5fa63a66d16de4e55da068a71b4e2b692e0215.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/0_real/06828b457133fdcc4a22fa2b60b257ad076de83be029025ff46ff945acbb4300.jpg",
+        "path": "Scene/0_real/06828b457133fdcc4a22fa2b60b257ad076de83be029025ff46ff945acbb4300.jpg",
+        "sha256": "1a05c458ed759c24e0718265a9212a98d0339b44ad87fef32500b5ea058b9a25",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/0_real/06828b457133fdcc4a22fa2b60b257ad076de83be029025ff46ff945acbb4300.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/0_real/06828b457133fdcc4a22fa2b60b257ad076de83be029025ff46ff945acbb4300.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/0_real/090ccab1d8a2748ce2ccf9a8d7680fc8bae9ec483ae193d80a2a6031db1577bc.jpg",
+        "path": "Scene/0_real/090ccab1d8a2748ce2ccf9a8d7680fc8bae9ec483ae193d80a2a6031db1577bc.jpg",
+        "sha256": "1766fb1ac636c4e1a02f712218535e5e1da8dd848e8aaa874951b70292346869",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/0_real/090ccab1d8a2748ce2ccf9a8d7680fc8bae9ec483ae193d80a2a6031db1577bc.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/0_real/090ccab1d8a2748ce2ccf9a8d7680fc8bae9ec483ae193d80a2a6031db1577bc.jpg",
+        "split": "test",
+        "label": "genuine",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/1_fake/Digicam/img_5613.jpg",
+        "path": "Scene/1_fake/Digicam/img_5613.jpg",
+        "sha256": "b6fc8c310e924574178504a23d334a5098371877059f1556485a3b783b2c9ce2",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/1_fake/Digicam/img_5613.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/1_fake/Digicam/img_5613.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/1_fake/Digicam/img_4203.jpg",
+        "path": "Scene/1_fake/Digicam/img_4203.jpg",
+        "sha256": "81b331d1fea07b8a023ed3cd8f53e671e7e666ef288fa7d318c71110d44bdd8b",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/1_fake/Digicam/img_4203.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/1_fake/Digicam/img_4203.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/1_fake/Digicam/img_5331.jpg",
+        "path": "Scene/1_fake/Digicam/img_5331.jpg",
+        "sha256": "53731fab6a44a2ddbe16e34283451e269f5a4382829406f9e3736fb1b74c0087",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/1_fake/Digicam/img_5331.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/1_fake/Digicam/img_5331.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/1_fake/Digicam/img_4409.jpg",
+        "path": "Scene/1_fake/Digicam/img_4409.jpg",
+        "sha256": "ae26d1a234e70fd73f3485ff9bfaa273a65d66f305704668e3277dac145c97b8",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/1_fake/Digicam/img_4409.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/1_fake/Digicam/img_4409.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/1_fake/Digicam/img_5094.jpg",
+        "path": "Scene/1_fake/Digicam/img_5094.jpg",
+        "sha256": "9b52b3f3844569ebd14f53d33088bb9c480a68f675546a36587321e82a00139d",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/1_fake/Digicam/img_5094.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/1_fake/Digicam/img_5094.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/1_fake/Digicam/img_4048.jpg",
+        "path": "Scene/1_fake/Digicam/img_4048.jpg",
+        "sha256": "edc709b3f5911b4fee1eac31d1a7ab2e51665b1204ec8943fae5515bb7d4840d",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/1_fake/Digicam/img_4048.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/1_fake/Digicam/img_4048.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/1_fake/Digicam/img_5899.jpg",
+        "path": "Scene/1_fake/Digicam/img_5899.jpg",
+        "sha256": "f385e09dd65431abad1225043120b9db64167f0dda1c70c960de2551908aa0e1",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/1_fake/Digicam/img_5899.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/1_fake/Digicam/img_5899.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/1_fake/Digicam/img_4479.jpg",
+        "path": "Scene/1_fake/Digicam/img_4479.jpg",
+        "sha256": "9e8d98ac1a11ed46a9c2967b89f59f03065e16e285b3870b3341d4cd122dbfe0",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/1_fake/Digicam/img_4479.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/1_fake/Digicam/img_4479.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/1_fake/Digicam/img_5434.jpg",
+        "path": "Scene/1_fake/Digicam/img_5434.jpg",
+        "sha256": "704498e8918f86ff1d25e38335500ee29ffd5083e678af4e33e20b1c8bc39dd2",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/1_fake/Digicam/img_5434.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/1_fake/Digicam/img_5434.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Scene"
+      },
+      {
+        "id": "Scene/1_fake/Digicam/img_5442.jpg",
+        "path": "Scene/1_fake/Digicam/img_5442.jpg",
+        "sha256": "d54ad66d8aa248d2d2ecf256152102bd5b8f770bfe4e8731317911257de1ccae",
+        "source": "https://huggingface.co/datasets/Yunncheng/Mirage-Test/resolve/820a191bb0844ae74a1bd9eb57b28268257a4053/Scene/1_fake/Digicam/img_5442.jpg",
+        "license": "MIT (dataset declaration; underlying source rights not independently audited)",
+        "group": "Scene/1_fake/Digicam/img_5442.jpg",
+        "split": "test",
+        "label": "synthetic",
+        "domain": "Scene"
+      }
+    ]
+  },
+  "manifest_sha256": "9b4b42655d1f3c07a830fa78fba44392f85f806aeafdcbdd81f780417213cb0f",
+  "python": "3.13.12",
+  "runtime": {
+    "torch": "2.15.0+cpu",
+    "timm": "1.0.31",
+    "torchvision": "0.29.2+cpu"
+  },
+  "mean_seconds": 0.6481591676063442,
+  "face_screening": [
+    {
+      "id": "Human/0_real/12618f0fa70f7bcbc67c8ed691402a57045d6517d25d82d8f5687695bde8ef5d.png",
+      "image_label": "genuine",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              1174,
+              867,
+              1723,
+              1528
+            ],
+            "raw_fake_score": 0.999714
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/0_real/05b4fdf57995cbe2fc7e25e1ad1ba84ada4bfe3d516d94db94a78e04175a5195.jpg",
+      "image_label": "genuine",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              1418,
+              2437,
+              1907,
+              3065
+            ],
+            "raw_fake_score": 0.904722
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/0_real/061dd554fe453fe65b25a1034a9687ab8f3279ee515581743b9255db8d435cb3.png",
+      "image_label": "genuine",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              1193,
+              1603,
+              2313,
+              3031
+            ],
+            "raw_fake_score": 0.98152
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/0_real/10d5989e74ed54b90d358554e8fd13f8c57e64a81a2ff8da690d0c8843d34fce.jpg",
+      "image_label": "genuine",
+      "detection_status": "none_found",
+      "evidence": {
+        "status": "no_faces",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/0_real/0590593f873d3eea2042b495acff2419f1e854024df188a12b6675a98d8ef6de.jpg",
+      "image_label": "genuine",
+      "detection_status": "none_found",
+      "evidence": {
+        "status": "no_faces",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/0_real/1084ad44cef60d7eb5602498b3783b5d6e5ebe59c0d5037a09268b0afdd5b2c7.jpg",
+      "image_label": "genuine",
+      "detection_status": "none_found",
+      "evidence": {
+        "status": "no_faces",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/0_real/10e0edb8103d57356f768215e098bf8a6f7854ea5a0372ee15242d9f92144aa6.jpg",
+      "image_label": "genuine",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              2222,
+              1221,
+              2724,
+              1889
+            ],
+            "raw_fake_score": 0.999197
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/0_real/009356c66fa8d8939c357f72b72aaa5eb16b02a31317511cedcc147e36945e9d.jpg",
+      "image_label": "genuine",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              4481,
+              956,
+              5615,
+              2376
+            ],
+            "raw_fake_score": 0.999558
+          },
+          {
+            "face_index": 1,
+            "crop_bounds": [
+              1930,
+              467,
+              2956,
+              1866
+            ],
+            "raw_fake_score": 0.933567
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/0_real/09ce2f681c1b655cca3dbc07f189b447dd62ed62ece5c2f25df0ffab64aef649.jpg",
+      "image_label": "genuine",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              1384,
+              1152,
+              2052,
+              2059
+            ],
+            "raw_fake_score": 0.074905
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/0_real/02faf1ceb0e33ac311a7ecc95ce6f057b2a6a3c808e2826d0169bcb414af1723.jpg",
+      "image_label": "genuine",
+      "detection_status": "none_found",
+      "evidence": {
+        "status": "no_faces",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5398.jpg",
+      "image_label": "synthetic",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              360,
+              102,
+              650,
+              511
+            ],
+            "raw_fake_score": 0.977211
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_4963.jpg",
+      "image_label": "synthetic",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              751,
+              393,
+              828,
+              483
+            ],
+            "raw_fake_score": 0.012801
+          },
+          {
+            "face_index": 1,
+            "crop_bounds": [
+              301,
+              303,
+              374,
+              390
+            ],
+            "raw_fake_score": 0.030773
+          },
+          {
+            "face_index": 2,
+            "crop_bounds": [
+              172,
+              581,
+              253,
+              679
+            ],
+            "raw_fake_score": 0.003151
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5842.jpg",
+      "image_label": "synthetic",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              351,
+              122,
+              666,
+              549
+            ],
+            "raw_fake_score": 0.999868
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5626.jpg",
+      "image_label": "synthetic",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              319,
+              156,
+              725,
+              639
+            ],
+            "raw_fake_score": 0.667186
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5554.jpg",
+      "image_label": "synthetic",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              402,
+              129,
+              587,
+              373
+            ],
+            "raw_fake_score": 0.750531
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5402.jpg",
+      "image_label": "synthetic",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              438,
+              60,
+              630,
+              311
+            ],
+            "raw_fake_score": 0.112916
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5614.jpg",
+      "image_label": "synthetic",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              501,
+              334,
+              577,
+              432
+            ],
+            "raw_fake_score": 0.890443
+          },
+          {
+            "face_index": 1,
+            "crop_bounds": [
+              342,
+              449,
+              426,
+              547
+            ],
+            "raw_fake_score": 0.050256
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5562.jpg",
+      "image_label": "synthetic",
+      "detection_status": "none_found",
+      "evidence": {
+        "status": "no_faces",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_5633.jpg",
+      "image_label": "synthetic",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              618,
+              167,
+              737,
+              312
+            ],
+            "raw_fake_score": 0.718639
+          },
+          {
+            "face_index": 1,
+            "crop_bounds": [
+              396,
+              226,
+              511,
+              386
+            ],
+            "raw_fake_score": 0.738261
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    },
+    {
+      "id": "Human/1_fake/Digicam/img_4297.jpg",
+      "image_label": "synthetic",
+      "detection_status": "candidate_regions",
+      "evidence": {
+        "status": "analyzed",
+        "model": "sakshamkr1/deitfake-v2",
+        "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+        "classification": "INCONCLUSIVE",
+        "faces": [
+          {
+            "face_index": 0,
+            "crop_bounds": [
+              383,
+              166,
+              710,
+              549
+            ],
+            "raw_fake_score": 0.580373
+          }
+        ],
+        "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+      }
+    }
+  ],
+  "face_evaluation_note": "Human real/generated labels do not label face manipulation; no manipulation accuracy metric is justified."
+}

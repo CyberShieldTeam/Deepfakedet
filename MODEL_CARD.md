@@ -1,5 +1,16 @@
 # Image engine model record
 
+## Measured screening checkpoint — 2026-11-15
+
+Community Forensics now has an optional `VERITAS_IMAGE_MODEL=community` adapter with
+strict pinned safetensors loading and publisher test preprocessing. On an 80-image
+Mirage subset, 71 images were scored and nine were skipped for exceeding pixel limits.
+At threshold 0.5 it detected 3/40 generated images and flagged 0/31 genuine images;
+AUROC was 0.575806. These results do not support promotion. Human-subset DeiTFake outputs
+also showed high raw scores on several publisher-labeled genuine inputs. Calibration
+is deliberately not fitted to this test subset. See `docs/IMAGE_SCREENING_RESULTS.md`
+and the checked-in raw report. Phase 2a remains incomplete; default verdicts abstain.
+
 ## Phase 2a face classifier implementation
 
 Optional `VERITAS_FACE_MODEL_ENABLED=1` loads Apache-2.0 `sakshamkr1/deitfake-v2`

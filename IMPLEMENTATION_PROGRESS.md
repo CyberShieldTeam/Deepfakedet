@@ -42,6 +42,14 @@ Updated: 2026-11-14. Published model branch: `codex/phase1-audit` at `26de131eef
 
 ## Next session entry point
 
+### 2026-11-15 — real-weight screening and abstention decision
+
+- Added pinned Community Forensics adapter and bounded Mirage subset preparation, plus a direct-local reproducible scoring command. Weights and source images remain ignored; raw report and manifest are in `reports/image_screening_2026-11-15.json`.
+- Ran 80 samples across four domains: 71 scored, nine genuine samples skipped at the pixel limit; 3/40 synthetic detections, 0/31 genuine false positives, AUROC 0.575806 at predeclared 0.5 threshold. No model promotion or fitted calibration follows.
+- Ran face screening on 20 Human samples; generated-image labels do not establish facial-manipulation accuracy. High raw outputs on several genuine-labeled inputs reinforce abstention.
+- TypeScript, full Node/API suite and Python discovery passed (25 passed, one optional AASIST-weight test skipped). See `docs/IMAGE_SCREENING_RESULTS.md` for limitations and remaining acceptance requirements. Phase 2a remains incomplete rather than relabeling a small screening subset as validation.
+- Live HTTP uploads passed with cached Community Forensics, YuNet and DeiTFake all loaded: raw outputs traversed Express and the response retained `inconclusive`, confidence 0 and null decision probability. Model identity is now configurable in the smoke script.
+
 ### Phase 2a evaluation foundation
 
 - Added optional pinned DeiTFake v2 face-crop inference, crop guards, separate health/evidence states, Express validation, and UI evidence display. Verified publisher revision, Apache-2.0 declaration, safetensors availability, labels and processor settings.
