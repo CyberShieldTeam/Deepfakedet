@@ -1,0 +1,18 @@
+{
+  "date_local": "2026-11-15",
+  "timezone": "Asia/Calcutta",
+  "measurement": "Preflight inventory, rounded to two decimal GiB values",
+  "ram_total_gib": 15.72,
+  "ram_available_gib": 3.48,
+  "disk_free_gib": 757.82,
+  "logical_cpu_count": 20,
+  "cuda_available": false,
+  "method": "Windows GlobalMemoryStatusEx via ctypes; shutil.disk_usage; os.cpu_count; torch.cuda.is_available",
+  "candidate_decisions": {
+    "Smaug": "Deferred before weights download: 878 MB main checkpoint, approximately 1.76 GB float32 parameter storage before framework and activation costs, limited free RAM and incompatible transformers major version in existing service environment",
+    "UniversalFakeDetect": "Deferred: CLIP ViT-L/14 backbone and separate head require additional memory/runtime validation; no GPU. No local latency or accuracy measurement claimed",
+    "Dima": "343 MB safetensors baseline allowed; one model per benchmark process",
+    "Organika-SDXL": "347 MB safetensors research-only candidate allowed; one model per benchmark process",
+    "CommunityForensics": "Cached small ViT baseline allowed; one model per benchmark process"
+  }
+}

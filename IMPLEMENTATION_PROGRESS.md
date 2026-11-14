@@ -1,11 +1,11 @@
 # VERITAS AI implementation progress
 
-Updated: 2026-11-14. Published model branch: `codex/phase1-audit` at `26de131eef4f745811c9dc9405f21adfb8e4435d`. Local integration branch: `codex/integrate-figma-upgrade` (not pushed; this account has read-only GitHub access). Baseline commit: `fa888241d838de9ce835d2277183add633f28d29`.
+Updated: 2026-11-15. Published model branch: `codex/phase1-audit` at `26de131eef4f745811c9dc9405f21adfb8e4435d`. Local integration branch: `codex/integrate-figma-upgrade` (not pushed; this account has read-only GitHub access). Baseline commit: `fa888241d838de9ce835d2277183add633f28d29`.
 
 ## Checklist
 
 - [x] Phase 1 — repository audit and staged implementation plan (`IMPLEMENTATION_PLAN.md`).
-- [ ] Phase 2a — dedicated general-image and facial-manipulation detectors. General-image ViT inference and Express/UI contract, YuNet face candidates, live HTTP upload smoke, and browser UI upload verification implemented. Representative evaluation, calibration, and a face-manipulation classifier remain open.
+- [ ] Phase 2a — dedicated general-image and facial-manipulation detectors. General-image inference, YuNet, optional experimental face-crop classifier, Express/UI contracts, real HTTP/browser verification and development benchmarking implemented. Independently source-audited evaluation, calibration and validated face-manipulation detection remain open.
 - [ ] Phase 2b — AASIST audio detector and segment-level output. Official checkpoint inference, resampling, segments, Express/UI contract, live HTTP smoke, browser WAV upload, and bounded video-audio extraction implemented. Speech activity detection, representative evaluation/calibration, and file-format coverage remain open.
 - [ ] Phase 2c — frame-level video detector and evidence timeline. Browser-sampled frames and bounded server-side original-video decoding supply timestamped local image evidence; original-video frame selection uses documented exposure/detail heuristics, and video audio is separate AASIST evidence when available. Representative evaluation, face-manipulation inference, quality-aware aggregation, and a long-clip upload/job path remain open.
 - [ ] Phase 2d — trained/evaluated temporal video analysis.
@@ -41,6 +41,17 @@ Updated: 2026-11-14. Published model branch: `codex/phase1-audit` at `26de131eef
 - Runtime files changed: none. Planning files added: `IMPLEMENTATION_PLAN.md`, `IMPLEMENTATION_PROGRESS.md`.
 
 ## Next session entry point
+
+### 2026-11-15 — failure analysis and fair development benchmarking
+
+- Reviewed attached AGENT history, plan, progress, model cards and completed parity; did not repeat the parity investigation. Production inference and face integrations were preserved.
+- Found the original 40 synthetic examples all came from Digicam. Original scored-set imbalance (31 genuine / 40 synthetic) resulted from nine genuine images over the pixel limit. Visual case review, source-size/JPEG metadata, threshold sweeps and paired JPEG75/max512 experiments are recorded without assuming a unique cause.
+- Added benchmark statistics/uncertainty, process memory and latency, fixed checkpoint processors, source/perceptual overlap guards, final-role rejection and a separate partition audit. Initial fresh reserved set is documented as single-generator-biased; V2 improves selection by enumerating six generator folders per category.
+- Prepared 96 fresh generator-stratified development images and 96 unscored reserved images. Every cached checksum passed; no known cross-partition SHA/group/pHash overlap was detected (minimum distance 12, guard threshold 6). Original-source/identity and training overlap remain unverified, so the final split is provisional.
+- Benchmarked Community, Dima and Organika SDXL on both exposed-original and V2 development sets with fixed 0.5 threshold and three variants. V2 original AUROCs: 0.634 / 0.608 / 0.734; recalls 20.83% / 95.83% / 75.00%; FPRs 0/48 / 85.42% / 43.75%. No candidate promoted; no threshold fitted or model fine-tuned. Reserved samples were not scored.
+- Investigated Smaug, UniversalFakeDetect and TruFor. Smaug/CLIP comparisons were deferred at resource/runtime preflight (no GPU; 3.48 GiB available RAM; Smaug publisher runtime requires transformers 5.x while service pins <5). TruFor addresses manipulation localization and was not conflated with full-generation detection.
+- `npm run lint`, full `npm test`, `npm run build` and live image HTTP uploads passed; Python discovery ran 30 tests, 29 passed and one optional AASIST weight test skipped. Four new benchmark regressions and actual split audit passed. Existing Vite chunk warning remains.
+- Reports: `docs/IMAGE_FAILURE_ANALYSIS.md`, `docs/IMAGE_MODEL_BENCHMARK.md`, per-image model JSONs, partition manifests, overlap audit and resource inventory. Code commit `d960acb` is local; no push/merge occurred. Recommended next work: isolated modern-candidate runtime with adequate memory, plus source/identity-audited independent evaluation data. Image outputs remain inconclusive.
 
 ### 2026-11-15 — Community Forensics publisher-code parity
 

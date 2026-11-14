@@ -1,5 +1,31 @@
 # Image engine model record
 
+## Failure analysis and comparative development benchmark — 2026-11-15
+
+Completed feasible comparisons without repeating publisher parity. Auditing revealed all
+40 old synthetic examples were from the Digicam folder. The new V2 development set has
+96 fresh eligible images (48 genuine / 48 synthetic), six generator folders and four
+categories. Another 96 images remain unscored and provisionally reserved; identity/source
+and training overlap still require independent audit.
+
+At a fixed diagnostic threshold 0.5: Community achieved AUROC 0.634, recall 20.83%, FPR
+0/48; Dima AUROC 0.608, recall 95.83%, FPR 85.42%; SDXL AUROC 0.734, recall 75.00%, FPR
+43.75%. These are exploratory development estimates, not final validation or calibrated
+probabilities. Raw per-image data and uncertainty intervals are recorded in the benchmark
+reports. Paired JPEG75/resizing tests do not identify a universal preprocessing correction.
+
+The additional benchmark-only candidate is `Organika/sdxl-detector` at
+`b37fede8562cb72b89ec201c0987f96ba21b518a`: Swin, documented processor, checked
+`artificial=0` / `human=1` classes, safetensors loading and CC-BY-NC-3.0 terms. It is not
+integrated into production or recommended as a deployment winner. Smaug and CLIP-based
+UniversalFakeDetect were investigated but not downloaded for this run because of measured
+RAM/runtime constraints. Their publisher claims are not VERITAS results.
+
+**Decision: no production winner; keep all experimental outputs inconclusive.** No default
+model, inference threshold, service contract or face pipeline changed. No fine-tuning ran.
+See `docs/IMAGE_FAILURE_ANALYSIS.md` and `docs/IMAGE_MODEL_BENCHMARK.md` for measured
+trade-offs, exact versions, licensing, resource constraints and next experiments.
+
 ## Measured screening checkpoint — 2026-11-15
 
 Publisher-code parity subsequently passed on all 71 eligible screening inputs: strict-loaded

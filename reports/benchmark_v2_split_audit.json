@@ -1,0 +1,38 @@
+{
+  "manifest_sha256": {
+    "development": "2ca3ee43d1f3b311c78c87914f37e9eb270815f2e8b439b102fd0fc0eb8e2947",
+    "reserved_final": "89403a85f0aa68b045f42790ac4431d41517c1497e814e62c6b0c3737270be1f"
+  },
+  "samples": {
+    "development": 96,
+    "reserved_final": 96
+  },
+  "counts": {
+    "development": {
+      "Animal/genuine": 12,
+      "Animal/synthetic": 12,
+      "Human/genuine": 12,
+      "Human/synthetic": 12,
+      "Object/genuine": 12,
+      "Object/synthetic": 12,
+      "Scene/genuine": 12,
+      "Scene/synthetic": 12
+    },
+    "reserved_final": {
+      "Animal/genuine": 12,
+      "Animal/synthetic": 12,
+      "Human/genuine": 12,
+      "Human/synthetic": 12,
+      "Object/genuine": 12,
+      "Object/synthetic": 12,
+      "Scene/genuine": 12,
+      "Scene/synthetic": 12
+    }
+  },
+  "known_overlap_issues": [],
+  "minimum_cross_partition_phash_distance": 12,
+  "passed": true,
+  "all_cached_checksums_verified": true,
+  "heldout_scored": false,
+  "limitation": "No identity recognition or original-source audit; passing this check does not establish population, identity or training-set independence"
+}

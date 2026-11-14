@@ -1,0 +1,1251 @@
+[
+  {
+    "model": {
+      "id": "OwensLab/commfor-model-384",
+      "revision": "6076002bf0d9dd37537f965ee2f06f826c333b61",
+      "preprocessing": "Resize short side 440, center crop 384, ImageNet norm; sigmoid"
+    },
+    "representative_errors": {
+      "false_negative": [
+        {
+          "id": "Scene/1_fake/ultrarealisticFinetune_v4/img_9499.jpg",
+          "group": "Scene/1_fake/ultrarealisticFinetune_v4/img_9499.jpg",
+          "label": "synthetic",
+          "domain": "Scene",
+          "sha256": "54690a9cde8d958b9a13b085f98f045f3c5191d1d2c438af1c9b9614e7c04e61",
+          "generator": "ultrarealisticFinetune_v4",
+          "width": 1024,
+          "height": 1024,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 36.234375,
+          "variant": "original",
+          "score": 5.182704171602381e-06,
+          "seconds": 0.4488796000077855
+        },
+        {
+          "id": "Object/1_fake/ultrarealisticFinetune_v4/img_9124.jpg",
+          "group": "Object/1_fake/ultrarealisticFinetune_v4/img_9124.jpg",
+          "label": "synthetic",
+          "domain": "Object",
+          "sha256": "9b0208fef7abecf582bbc8b917a1d2a1f63b8146dfab8c08ff888df6c31b4300",
+          "generator": "ultrarealisticFinetune_v4",
+          "width": 1024,
+          "height": 1024,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 36.234375,
+          "variant": "original",
+          "score": 1.1548832844709978e-05,
+          "seconds": 0.4164462999906391
+        },
+        {
+          "id": "Object/1_fake/amateurphoto-v6-forcu/img_3913.jpg",
+          "group": "Object/1_fake/amateurphoto-v6-forcu/img_3913.jpg",
+          "label": "synthetic",
+          "domain": "Object",
+          "sha256": "ec5441fb16ee1921835b539431043388cbc2556fda20aa2899c3b3dae6ee53de",
+          "generator": "amateurphoto-v6-forcu",
+          "width": 1024,
+          "height": 1024,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 36.234375,
+          "variant": "original",
+          "score": 1.4671919416286983e-05,
+          "seconds": 0.5276124000083655
+        },
+        {
+          "id": "Animal/1_fake/Digicam/img_4867.jpg",
+          "group": "Animal/1_fake/Digicam/img_4867.jpg",
+          "label": "synthetic",
+          "domain": "Animal",
+          "sha256": "3974bb14569f293c40ece5c818a58316b14263b0a4206a3293cdbb612865f003",
+          "generator": "Digicam",
+          "width": 1024,
+          "height": 1024,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 36.234375,
+          "variant": "original",
+          "score": 2.5406367058167234e-05,
+          "seconds": 0.45935029999236576
+        }
+      ],
+      "false_positive": []
+    },
+    "associations": {
+      "resolution": {
+        "max_side_above_2048": {
+          "total": 48,
+          "scored": 48,
+          "failed_or_skipped": 0,
+          "genuine": 48,
+          "synthetic": 0,
+          "tp": 0,
+          "fp": 0,
+          "tn": 48,
+          "fn": 0,
+          "false_positive_rate": 0.0,
+          "recall": null,
+          "auroc": null
+        },
+        "max_side_at_most_2048": {
+          "total": 48,
+          "scored": 48,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 48,
+          "tp": 10,
+          "fp": 0,
+          "tn": 0,
+          "fn": 38,
+          "false_positive_rate": null,
+          "recall": 0.20833333333333334,
+          "auroc": null
+        }
+      },
+      "format": {
+        "JPEG": {
+          "total": 96,
+          "scored": 96,
+          "failed_or_skipped": 0,
+          "genuine": 48,
+          "synthetic": 48,
+          "tp": 10,
+          "fp": 0,
+          "tn": 48,
+          "fn": 38,
+          "false_positive_rate": 0.0,
+          "recall": 0.20833333333333334,
+          "auroc": 0.6341145833333334
+        }
+      },
+      "generator": {
+        "not_recorded": {
+          "total": 48,
+          "scored": 48,
+          "failed_or_skipped": 0,
+          "genuine": 48,
+          "synthetic": 0,
+          "tp": 0,
+          "fp": 0,
+          "tn": 48,
+          "fn": 0,
+          "false_positive_rate": 0.0,
+          "recall": null,
+          "auroc": null
+        },
+        "Digicam": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 0,
+          "fp": 0,
+          "tn": 0,
+          "fn": 8,
+          "false_positive_rate": null,
+          "recall": 0.0,
+          "auroc": null
+        },
+        "Flux_xhs_v2": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 0,
+          "fp": 0,
+          "tn": 0,
+          "fn": 8,
+          "false_positive_rate": null,
+          "recall": 0.0,
+          "auroc": null
+        },
+        "amateurphoto-v6-forcu": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 7,
+          "false_positive_rate": null,
+          "recall": 0.125,
+          "auroc": null
+        },
+        "realistic_photography_v1": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 2,
+          "fp": 0,
+          "tn": 0,
+          "fn": 6,
+          "false_positive_rate": null,
+          "recall": 0.25,
+          "auroc": null
+        },
+        "sd3.5": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 4,
+          "fp": 0,
+          "tn": 0,
+          "fn": 4,
+          "false_positive_rate": null,
+          "recall": 0.5,
+          "auroc": null
+        },
+        "ultrarealisticFinetune_v4": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 3,
+          "fp": 0,
+          "tn": 0,
+          "fn": 5,
+          "false_positive_rate": null,
+          "recall": 0.375,
+          "auroc": null
+        }
+      },
+      "jpeg_quantization": {
+        "mean_quantization_above_10": {
+          "total": 96,
+          "scored": 96,
+          "failed_or_skipped": 0,
+          "genuine": 48,
+          "synthetic": 48,
+          "tp": 10,
+          "fp": 0,
+          "tn": 48,
+          "fn": 38,
+          "false_positive_rate": 0.0,
+          "recall": 0.20833333333333334,
+          "auroc": 0.6341145833333334
+        }
+      }
+    },
+    "paired": {
+      "jpeg75": {
+        "n": 96,
+        "mean_score_change": -0.0011651597217579024,
+        "threshold_flips": 1,
+        "corrected": 0,
+        "worsened": 1
+      },
+      "max512": {
+        "n": 96,
+        "mean_score_change": -0.020056640796719687,
+        "threshold_flips": 0,
+        "corrected": 0,
+        "worsened": 0
+      }
+    },
+    "threshold_sweep": {
+      "0.01": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 27,
+        "fp": 20,
+        "tn": 28,
+        "fn": 21,
+        "false_positive_rate": 0.4166666666666667,
+        "recall": 0.5625,
+        "auroc": 0.6341145833333334
+      },
+      "0.05": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 21,
+        "fp": 10,
+        "tn": 38,
+        "fn": 27,
+        "false_positive_rate": 0.20833333333333334,
+        "recall": 0.4375,
+        "auroc": 0.6341145833333334
+      },
+      "0.1": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 16,
+        "fp": 7,
+        "tn": 41,
+        "fn": 32,
+        "false_positive_rate": 0.14583333333333334,
+        "recall": 0.3333333333333333,
+        "auroc": 0.6341145833333334
+      },
+      "0.25": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 14,
+        "fp": 3,
+        "tn": 45,
+        "fn": 34,
+        "false_positive_rate": 0.0625,
+        "recall": 0.2916666666666667,
+        "auroc": 0.6341145833333334
+      },
+      "0.5": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 10,
+        "fp": 0,
+        "tn": 48,
+        "fn": 38,
+        "false_positive_rate": 0.0,
+        "recall": 0.20833333333333334,
+        "auroc": 0.6341145833333334
+      },
+      "0.75": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 8,
+        "fp": 0,
+        "tn": 48,
+        "fn": 40,
+        "false_positive_rate": 0.0,
+        "recall": 0.16666666666666666,
+        "auroc": 0.6341145833333334
+      },
+      "0.9": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 4,
+        "fp": 0,
+        "tn": 48,
+        "fn": 44,
+        "false_positive_rate": 0.0,
+        "recall": 0.08333333333333333,
+        "auroc": 0.6341145833333334
+      },
+      "0.99": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 1,
+        "fp": 0,
+        "tn": 48,
+        "fn": 47,
+        "false_positive_rate": 0.0,
+        "recall": 0.020833333333333332,
+        "auroc": 0.6341145833333334
+      }
+    },
+    "caution": "Development diagnostics only; association does not identify a cause. Thresholds not selected on held-out data."
+  },
+  {
+    "model": {
+      "id": "dima806/ai_vs_real_image_detection",
+      "revision": "9d17b51b9367d6b5720ac81dc339455c45d50ae3",
+      "labels": {
+        "0": "REAL",
+        "1": "FAKE"
+      },
+      "fake_index": 1,
+      "preprocessing": {
+        "_processor_class": null,
+        "image_processor_type": "ViTImageProcessor",
+        "do_resize": true,
+        "do_rescale": true,
+        "do_normalize": true,
+        "size": {
+          "height": 224,
+          "width": 224
+        },
+        "resample": 2,
+        "rescale_factor": 0.00392156862745098,
+        "image_mean": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "image_std": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "do_convert_rgb": null
+      }
+    },
+    "representative_errors": {
+      "false_negative": [
+        {
+          "id": "Animal/1_fake/sd3.5/img_3100.jpg",
+          "group": "Animal/1_fake/sd3.5/img_3100.jpg",
+          "label": "synthetic",
+          "domain": "Animal",
+          "sha256": "4e64ab52fefcc8b8359f225773dea1af7bade42828cd56373b52735c191990e5",
+          "generator": "sd3.5",
+          "width": 1024,
+          "height": 1024,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 36.234375,
+          "variant": "original",
+          "score": 0.38087740540504456,
+          "seconds": 0.4449497000023257
+        },
+        {
+          "id": "Animal/1_fake/Flux_xhs_v2/img_323.jpg",
+          "group": "Animal/1_fake/Flux_xhs_v2/img_323.jpg",
+          "label": "synthetic",
+          "domain": "Animal",
+          "sha256": "41194bbd9a75117a22c5e13c22de4dddb4b08b6e0408e75781d098d77e766d19",
+          "generator": "Flux_xhs_v2",
+          "width": 1024,
+          "height": 1024,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 36.234375,
+          "variant": "original",
+          "score": 0.4369344711303711,
+          "seconds": 0.4104287999798544
+        }
+      ],
+      "false_positive": [
+        {
+          "id": "Scene/0_real/059b8b209840f55878ef4008a7a56661e77dd1c32f009357d7e892ce637342b7.jpg",
+          "group": "Scene/0_real/059b8b209840f55878ef4008a7a56661e77dd1c32f009357d7e892ce637342b7.jpg",
+          "label": "genuine",
+          "domain": "Scene",
+          "sha256": "6d82da0eeef82a790e4014753f82a2386489eb14203f36efdcc2f983058e819f",
+          "generator": "not_recorded",
+          "width": 2916,
+          "height": 5184,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 38.6328125,
+          "variant": "original",
+          "score": 0.9951300621032715,
+          "seconds": 0.6147389999823645
+        },
+        {
+          "id": "Object/0_real/112dff71838871b200185f6b70377669239a8da51233db031fa6b67ecba468e1.jpg",
+          "group": "Object/0_real/112dff71838871b200185f6b70377669239a8da51233db031fa6b67ecba468e1.jpg",
+          "label": "genuine",
+          "domain": "Object",
+          "sha256": "09fcc34bc859b6e8012508af17afd88a01c4ff9a5c4509b72748c28c5d601e2c",
+          "generator": "not_recorded",
+          "width": 5418,
+          "height": 3386,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 38.6328125,
+          "variant": "original",
+          "score": 0.994607150554657,
+          "seconds": 0.6583098000264727
+        },
+        {
+          "id": "Scene/0_real/1b27504f3970fd3ba08282d24c97622d6214785017e85187ef651963af4727a0.jpg",
+          "group": "Scene/0_real/1b27504f3970fd3ba08282d24c97622d6214785017e85187ef651963af4727a0.jpg",
+          "label": "genuine",
+          "domain": "Scene",
+          "sha256": "c5bdd3d18fc50df954969f2d5084732596a03d1bee9e83c1bf14c399f0cde645",
+          "generator": "not_recorded",
+          "width": 4000,
+          "height": 3000,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 38.6328125,
+          "variant": "original",
+          "score": 0.9943621158599854,
+          "seconds": 0.6584240999945905
+        },
+        {
+          "id": "Human/0_real/09df356554a4a515cab488a5c79e403d56a46bb190f5d127cdd06daf698c7c9f.jpg",
+          "group": "Human/0_real/09df356554a4a515cab488a5c79e403d56a46bb190f5d127cdd06daf698c7c9f.jpg",
+          "label": "genuine",
+          "domain": "Human",
+          "sha256": "f047dd18d02cdc30019c2f9096c3681bd4968908bc33344ec36b79a7d22a8213",
+          "generator": "not_recorded",
+          "width": 3599,
+          "height": 5398,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 38.6328125,
+          "variant": "original",
+          "score": 0.9920810461044312,
+          "seconds": 0.8597324999864213
+        }
+      ]
+    },
+    "associations": {
+      "resolution": {
+        "max_side_above_2048": {
+          "total": 48,
+          "scored": 48,
+          "failed_or_skipped": 0,
+          "genuine": 48,
+          "synthetic": 0,
+          "tp": 0,
+          "fp": 41,
+          "tn": 7,
+          "fn": 0,
+          "false_positive_rate": 0.8541666666666666,
+          "recall": null,
+          "auroc": null
+        },
+        "max_side_at_most_2048": {
+          "total": 48,
+          "scored": 48,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 48,
+          "tp": 46,
+          "fp": 0,
+          "tn": 0,
+          "fn": 2,
+          "false_positive_rate": null,
+          "recall": 0.9583333333333334,
+          "auroc": null
+        }
+      },
+      "format": {
+        "JPEG": {
+          "total": 96,
+          "scored": 96,
+          "failed_or_skipped": 0,
+          "genuine": 48,
+          "synthetic": 48,
+          "tp": 46,
+          "fp": 41,
+          "tn": 7,
+          "fn": 2,
+          "false_positive_rate": 0.8541666666666666,
+          "recall": 0.9583333333333334,
+          "auroc": 0.6080729166666666
+        }
+      },
+      "generator": {
+        "not_recorded": {
+          "total": 48,
+          "scored": 48,
+          "failed_or_skipped": 0,
+          "genuine": 48,
+          "synthetic": 0,
+          "tp": 0,
+          "fp": 41,
+          "tn": 7,
+          "fn": 0,
+          "false_positive_rate": 0.8541666666666666,
+          "recall": null,
+          "auroc": null
+        },
+        "Digicam": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 8,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0,
+          "false_positive_rate": null,
+          "recall": 1.0,
+          "auroc": null
+        },
+        "Flux_xhs_v2": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 7,
+          "fp": 0,
+          "tn": 0,
+          "fn": 1,
+          "false_positive_rate": null,
+          "recall": 0.875,
+          "auroc": null
+        },
+        "amateurphoto-v6-forcu": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 8,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0,
+          "false_positive_rate": null,
+          "recall": 1.0,
+          "auroc": null
+        },
+        "realistic_photography_v1": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 8,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0,
+          "false_positive_rate": null,
+          "recall": 1.0,
+          "auroc": null
+        },
+        "sd3.5": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 7,
+          "fp": 0,
+          "tn": 0,
+          "fn": 1,
+          "false_positive_rate": null,
+          "recall": 0.875,
+          "auroc": null
+        },
+        "ultrarealisticFinetune_v4": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 8,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0,
+          "false_positive_rate": null,
+          "recall": 1.0,
+          "auroc": null
+        }
+      },
+      "jpeg_quantization": {
+        "mean_quantization_above_10": {
+          "total": 96,
+          "scored": 96,
+          "failed_or_skipped": 0,
+          "genuine": 48,
+          "synthetic": 48,
+          "tp": 46,
+          "fp": 41,
+          "tn": 7,
+          "fn": 2,
+          "false_positive_rate": 0.8541666666666666,
+          "recall": 0.9583333333333334,
+          "auroc": 0.6080729166666666
+        }
+      }
+    },
+    "paired": {
+      "jpeg75": {
+        "n": 96,
+        "mean_score_change": 0.0002209879457950592,
+        "threshold_flips": 0,
+        "corrected": 0,
+        "worsened": 0
+      },
+      "max512": {
+        "n": 96,
+        "mean_score_change": 0.0010251278678576152,
+        "threshold_flips": 0,
+        "corrected": 0,
+        "worsened": 0
+      }
+    },
+    "threshold_sweep": {
+      "0.01": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 48,
+        "fp": 48,
+        "tn": 0,
+        "fn": 0,
+        "false_positive_rate": 1.0,
+        "recall": 1.0,
+        "auroc": 0.6080729166666666
+      },
+      "0.05": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 48,
+        "fp": 48,
+        "tn": 0,
+        "fn": 0,
+        "false_positive_rate": 1.0,
+        "recall": 1.0,
+        "auroc": 0.6080729166666666
+      },
+      "0.1": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 48,
+        "fp": 48,
+        "tn": 0,
+        "fn": 0,
+        "false_positive_rate": 1.0,
+        "recall": 1.0,
+        "auroc": 0.6080729166666666
+      },
+      "0.25": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 48,
+        "fp": 48,
+        "tn": 0,
+        "fn": 0,
+        "false_positive_rate": 1.0,
+        "recall": 1.0,
+        "auroc": 0.6080729166666666
+      },
+      "0.5": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 46,
+        "fp": 41,
+        "tn": 7,
+        "fn": 2,
+        "false_positive_rate": 0.8541666666666666,
+        "recall": 0.9583333333333334,
+        "auroc": 0.6080729166666666
+      },
+      "0.75": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 34,
+        "fp": 26,
+        "tn": 22,
+        "fn": 14,
+        "false_positive_rate": 0.5416666666666666,
+        "recall": 0.7083333333333334,
+        "auroc": 0.6080729166666666
+      },
+      "0.9": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 21,
+        "fp": 15,
+        "tn": 33,
+        "fn": 27,
+        "false_positive_rate": 0.3125,
+        "recall": 0.4375,
+        "auroc": 0.6080729166666666
+      },
+      "0.99": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 7,
+        "fp": 5,
+        "tn": 43,
+        "fn": 41,
+        "false_positive_rate": 0.10416666666666667,
+        "recall": 0.14583333333333334,
+        "auroc": 0.6080729166666666
+      }
+    },
+    "caution": "Development diagnostics only; association does not identify a cause. Thresholds not selected on held-out data."
+  },
+  {
+    "model": {
+      "id": "Organika/sdxl-detector",
+      "revision": "b37fede8562cb72b89ec201c0987f96ba21b518a",
+      "labels": {
+        "0": "artificial",
+        "1": "human"
+      },
+      "fake_index": 0,
+      "preprocessing": {
+        "_processor_class": null,
+        "image_processor_type": "ViTImageProcessor",
+        "do_resize": true,
+        "do_rescale": true,
+        "do_normalize": true,
+        "size": {
+          "height": 224,
+          "width": 224
+        },
+        "resample": 3,
+        "rescale_factor": 0.00392156862745098,
+        "image_mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "image_std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "do_convert_rgb": null
+      }
+    },
+    "representative_errors": {
+      "false_negative": [
+        {
+          "id": "Animal/1_fake/amateurphoto-v6-forcu/img_2589.jpg",
+          "group": "Animal/1_fake/amateurphoto-v6-forcu/img_2589.jpg",
+          "label": "synthetic",
+          "domain": "Animal",
+          "sha256": "206fbae7d50078fa4bd8553e30e3c48bd8986826e7a6090a4523a2475896f943",
+          "generator": "amateurphoto-v6-forcu",
+          "width": 1024,
+          "height": 1024,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 36.234375,
+          "variant": "original",
+          "score": 4.93506888687989e-08,
+          "seconds": 0.619023000006564
+        },
+        {
+          "id": "Human/1_fake/Flux_xhs_v2/img_6.jpg",
+          "group": "Human/1_fake/Flux_xhs_v2/img_6.jpg",
+          "label": "synthetic",
+          "domain": "Human",
+          "sha256": "a9c08fecd90c3ed78912dfd31f0312c2f817a7d76cd15ebc2096448baf4f1e8f",
+          "generator": "Flux_xhs_v2",
+          "width": 1024,
+          "height": 1024,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 36.234375,
+          "variant": "original",
+          "score": 3.494751581456512e-05,
+          "seconds": 0.5661575999984052
+        },
+        {
+          "id": "Object/1_fake/ultrarealisticFinetune_v4/img_9124.jpg",
+          "group": "Object/1_fake/ultrarealisticFinetune_v4/img_9124.jpg",
+          "label": "synthetic",
+          "domain": "Object",
+          "sha256": "9b0208fef7abecf582bbc8b917a1d2a1f63b8146dfab8c08ff888df6c31b4300",
+          "generator": "ultrarealisticFinetune_v4",
+          "width": 1024,
+          "height": 1024,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 36.234375,
+          "variant": "original",
+          "score": 0.003634470282122493,
+          "seconds": 0.5986429000040516
+        },
+        {
+          "id": "Scene/1_fake/Digicam/img_5907.jpg",
+          "group": "Scene/1_fake/Digicam/img_5907.jpg",
+          "label": "synthetic",
+          "domain": "Scene",
+          "sha256": "94918cbdaaf7b97380bc97cec1151e60b7313dfbed4ebec2a20f2cea4b8a9f4e",
+          "generator": "Digicam",
+          "width": 1024,
+          "height": 1024,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 36.234375,
+          "variant": "original",
+          "score": 0.006429415196180344,
+          "seconds": 0.6110648000030778
+        }
+      ],
+      "false_positive": [
+        {
+          "id": "Human/0_real/0aeb26dc7c88ceb6d6075e97dadc60025ddcec0b80b1ab763d250dfd37c016a1.png",
+          "group": "Human/0_real/0aeb26dc7c88ceb6d6075e97dadc60025ddcec0b80b1ab763d250dfd37c016a1.png",
+          "label": "genuine",
+          "domain": "Human",
+          "sha256": "65e79a54edd898c3afac8dfea4d1da3117c9ac3b5255fff5fd43b38d7d22c769",
+          "generator": "not_recorded",
+          "width": 2223,
+          "height": 3145,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 38.6328125,
+          "variant": "original",
+          "score": 0.9999608993530273,
+          "seconds": 0.8877892000018619
+        },
+        {
+          "id": "Scene/0_real/059b8b209840f55878ef4008a7a56661e77dd1c32f009357d7e892ce637342b7.jpg",
+          "group": "Scene/0_real/059b8b209840f55878ef4008a7a56661e77dd1c32f009357d7e892ce637342b7.jpg",
+          "label": "genuine",
+          "domain": "Scene",
+          "sha256": "6d82da0eeef82a790e4014753f82a2386489eb14203f36efdcc2f983058e819f",
+          "generator": "not_recorded",
+          "width": 2916,
+          "height": 5184,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 38.6328125,
+          "variant": "original",
+          "score": 0.9998254179954529,
+          "seconds": 1.0788205999997444
+        },
+        {
+          "id": "Animal/0_real/3794a9403ed8a93e6535f393cac7996ca674a528e630b11191810f56e364f939.jpg",
+          "group": "Animal/0_real/3794a9403ed8a93e6535f393cac7996ca674a528e630b11191810f56e364f939.jpg",
+          "label": "genuine",
+          "domain": "Animal",
+          "sha256": "071a817e4b56d5f251fab9d910acedbadfb796d6f4e2005d0b739a4cec6c7341",
+          "generator": "not_recorded",
+          "width": 4187,
+          "height": 2554,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 38.6328125,
+          "variant": "original",
+          "score": 0.9997648596763611,
+          "seconds": 0.9197722999961115
+        },
+        {
+          "id": "Object/0_real/1bf16380c9a07ff892258afc0d75b9168bcf791215c737a34510c43d4ec447d2.jpg",
+          "group": "Object/0_real/1bf16380c9a07ff892258afc0d75b9168bcf791215c737a34510c43d4ec447d2.jpg",
+          "label": "genuine",
+          "domain": "Object",
+          "sha256": "b1643081cd1e8e79b2392071394f4166766431ec4a9a4e605e5243dfdc318a1e",
+          "generator": "not_recorded",
+          "width": 3648,
+          "height": 5472,
+          "format": "JPEG",
+          "jpeg_quantization_mean": 38.6328125,
+          "variant": "original",
+          "score": 0.9997574687004089,
+          "seconds": 1.152054100006353
+        }
+      ]
+    },
+    "associations": {
+      "resolution": {
+        "max_side_above_2048": {
+          "total": 48,
+          "scored": 48,
+          "failed_or_skipped": 0,
+          "genuine": 48,
+          "synthetic": 0,
+          "tp": 0,
+          "fp": 21,
+          "tn": 27,
+          "fn": 0,
+          "false_positive_rate": 0.4375,
+          "recall": null,
+          "auroc": null
+        },
+        "max_side_at_most_2048": {
+          "total": 48,
+          "scored": 48,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 48,
+          "tp": 36,
+          "fp": 0,
+          "tn": 0,
+          "fn": 12,
+          "false_positive_rate": null,
+          "recall": 0.75,
+          "auroc": null
+        }
+      },
+      "format": {
+        "JPEG": {
+          "total": 96,
+          "scored": 96,
+          "failed_or_skipped": 0,
+          "genuine": 48,
+          "synthetic": 48,
+          "tp": 36,
+          "fp": 21,
+          "tn": 27,
+          "fn": 12,
+          "false_positive_rate": 0.4375,
+          "recall": 0.75,
+          "auroc": 0.7335069444444444
+        }
+      },
+      "generator": {
+        "not_recorded": {
+          "total": 48,
+          "scored": 48,
+          "failed_or_skipped": 0,
+          "genuine": 48,
+          "synthetic": 0,
+          "tp": 0,
+          "fp": 21,
+          "tn": 27,
+          "fn": 0,
+          "false_positive_rate": 0.4375,
+          "recall": null,
+          "auroc": null
+        },
+        "Digicam": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 6,
+          "fp": 0,
+          "tn": 0,
+          "fn": 2,
+          "false_positive_rate": null,
+          "recall": 0.75,
+          "auroc": null
+        },
+        "Flux_xhs_v2": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 7,
+          "fp": 0,
+          "tn": 0,
+          "fn": 1,
+          "false_positive_rate": null,
+          "recall": 0.875,
+          "auroc": null
+        },
+        "amateurphoto-v6-forcu": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 4,
+          "fp": 0,
+          "tn": 0,
+          "fn": 4,
+          "false_positive_rate": null,
+          "recall": 0.5,
+          "auroc": null
+        },
+        "realistic_photography_v1": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 8,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0,
+          "false_positive_rate": null,
+          "recall": 1.0,
+          "auroc": null
+        },
+        "sd3.5": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 7,
+          "fp": 0,
+          "tn": 0,
+          "fn": 1,
+          "false_positive_rate": null,
+          "recall": 0.875,
+          "auroc": null
+        },
+        "ultrarealisticFinetune_v4": {
+          "total": 8,
+          "scored": 8,
+          "failed_or_skipped": 0,
+          "genuine": 0,
+          "synthetic": 8,
+          "tp": 4,
+          "fp": 0,
+          "tn": 0,
+          "fn": 4,
+          "false_positive_rate": null,
+          "recall": 0.5,
+          "auroc": null
+        }
+      },
+      "jpeg_quantization": {
+        "mean_quantization_above_10": {
+          "total": 96,
+          "scored": 96,
+          "failed_or_skipped": 0,
+          "genuine": 48,
+          "synthetic": 48,
+          "tp": 36,
+          "fp": 21,
+          "tn": 27,
+          "fn": 12,
+          "false_positive_rate": 0.4375,
+          "recall": 0.75,
+          "auroc": 0.7335069444444444
+        }
+      }
+    },
+    "paired": {
+      "jpeg75": {
+        "n": 96,
+        "mean_score_change": 0.0029574397641412378,
+        "threshold_flips": 0,
+        "corrected": 0,
+        "worsened": 0
+      },
+      "max512": {
+        "n": 96,
+        "mean_score_change": -0.04521776640670916,
+        "threshold_flips": 3,
+        "corrected": 2,
+        "worsened": 1
+      }
+    },
+    "threshold_sweep": {
+      "0.01": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 44,
+        "fp": 31,
+        "tn": 17,
+        "fn": 4,
+        "false_positive_rate": 0.6458333333333334,
+        "recall": 0.9166666666666666,
+        "auroc": 0.7335069444444444
+      },
+      "0.05": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 41,
+        "fp": 30,
+        "tn": 18,
+        "fn": 7,
+        "false_positive_rate": 0.625,
+        "recall": 0.8541666666666666,
+        "auroc": 0.7335069444444444
+      },
+      "0.1": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 41,
+        "fp": 29,
+        "tn": 19,
+        "fn": 7,
+        "false_positive_rate": 0.6041666666666666,
+        "recall": 0.8541666666666666,
+        "auroc": 0.7335069444444444
+      },
+      "0.25": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 38,
+        "fp": 26,
+        "tn": 22,
+        "fn": 10,
+        "false_positive_rate": 0.5416666666666666,
+        "recall": 0.7916666666666666,
+        "auroc": 0.7335069444444444
+      },
+      "0.5": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 36,
+        "fp": 21,
+        "tn": 27,
+        "fn": 12,
+        "false_positive_rate": 0.4375,
+        "recall": 0.75,
+        "auroc": 0.7335069444444444
+      },
+      "0.75": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 35,
+        "fp": 20,
+        "tn": 28,
+        "fn": 13,
+        "false_positive_rate": 0.4166666666666667,
+        "recall": 0.7291666666666666,
+        "auroc": 0.7335069444444444
+      },
+      "0.9": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 34,
+        "fp": 16,
+        "tn": 32,
+        "fn": 14,
+        "false_positive_rate": 0.3333333333333333,
+        "recall": 0.7083333333333334,
+        "auroc": 0.7335069444444444
+      },
+      "0.99": {
+        "total": 96,
+        "scored": 96,
+        "failed_or_skipped": 0,
+        "genuine": 48,
+        "synthetic": 48,
+        "tp": 28,
+        "fp": 11,
+        "tn": 37,
+        "fn": 20,
+        "false_positive_rate": 0.22916666666666666,
+        "recall": 0.5833333333333334,
+        "auroc": 0.7335069444444444
+      }
+    },
+    "caution": "Development diagnostics only; association does not identify a cause. Thresholds not selected on held-out data."
+  }
+]
