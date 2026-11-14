@@ -59,6 +59,7 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
           {r.localVideo.frames.map((frame, i) => <div key={i} className="font-mono">
             {frame.timestampSeconds.toFixed(1)}s · {frame.image.model_status === 'ready' && frame.image.fake_probability != null
               ? `raw fake-class output ${frame.image.fake_probability.toFixed(3)}` : 'image classifier unavailable'} · {frame.image.face_boxes.length} face candidate(s)
+            {frame.quality && <span> · detail {frame.quality.laplacianVariance.toFixed(1)}, luma {frame.quality.meanLuma.toFixed(0)}, clipped {(frame.quality.clippedFraction * 100).toFixed(1)}% (selection heuristics)</span>}
           </div>)}
         </div>}
         {r.aiGeneration && <div className="text-[11px] text-slate-400">Overall <Term k="confidence">confidence</Term>: {r.confidenceScore}%</div>}

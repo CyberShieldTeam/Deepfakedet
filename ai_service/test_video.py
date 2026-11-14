@@ -4,6 +4,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+import cv2
+import numpy as np
 from fastapi import HTTPException
 
 from ai_service import app as image_app, video_service
@@ -23,8 +25,50 @@ class VideoServiceTests(unittest.TestCase):
         self.assertEqual(len(result["frames"]), 6)
         timestamps = [frame["timestampSeconds"] for frame in result["frames"]]
         self.assertEqual(timestamps, sorted(set(timestamps)))
+        self.assertTrue(all(0 <= frame["quality"]["meanLuma"] <= 255 and
+                            frame["quality"]["laplacianVariance"] >= 0 and
+                            0 <= frame["quality"]["clippedFraction"] <= 1 and
+                            frame["quality"]["selectionScore"] >= 0 for frame in result["frames"]))
         self.assertTrue(all(frame["image"]["classification"] == "INCONCLUSIVE" and
                             frame["image"]["fake_probability"] is None for frame in result["frames"]))
+
+    def test_quality_prefers_detail_over_flat_frame(self):
+        flat = np.full((180, 320, 3), 128, dtype=np.uint8)
+        checker = np.indices((180, 320)).sum(axis=0) % 2
+        detailed = np.repeat((checker * 128 + 64).astype(np.uint8)[:, :, None], 3, axis=2)
+        self.assertGreater(video_service.frame_quality(detailed)["selectionScore"],
+                           video_service.frame_quality(flat)["selectionScore"])
+        self.assertEqual(video_service.frame_quality(flat)["laplacianVariance"], 0)
+
+    def test_selector_chooses_clear_neighbor_within_each_time_window(self):
+        flat = np.full((180, 320, 3), 128, dtype=np.uint8)
+        checker = np.indices((180, 320)).sum(axis=0) % 2
+        detailed = np.repeat((checker * 128 + 64).astype(np.uint8)[:, :, None], 3, axis=2)
+        clear_indices = {0, 4, 9, 13, 18, 22}
+
+        class FakeCapture:
+            index = 0
+
+            def isOpened(self):
+                return True
+
+            def get(self, property_id):
+                return {cv2.CAP_PROP_FPS: 24, cv2.CAP_PROP_FRAME_COUNT: 24,
+                        cv2.CAP_PROP_FRAME_WIDTH: 320, cv2.CAP_PROP_FRAME_HEIGHT: 180}[property_id]
+
+            def set(self, _property_id, value):
+                self.index = value
+                return True
+
+            def read(self):
+                return True, detailed if self.index in clear_indices else flat
+
+            def release(self):
+                pass
+
+        with patch("cv2.VideoCapture", return_value=FakeCapture()):
+            _, _, _, samples = video_service.decode_sampled_frames(b"xxxxftypfake")
+        self.assertEqual([round(timestamp * 24) for timestamp, _, _ in samples], sorted(clear_indices))
 
     def test_rejects_invalid_and_oversized_inputs_before_decode(self):
         for data, expected in (("not-base64", 400), (base64.b64encode(b"hello").decode(), 415),

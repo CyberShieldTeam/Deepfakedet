@@ -32,7 +32,7 @@ await assert.rejects(callLocalVideoFrames([], 'http://127.0.0.1:8001', fetcher))
 const serverFetcher = (async (_url: string, init?: RequestInit) => {
   assert.equal(JSON.parse(String(init?.body)).video_base64, 'aGVsbG8=');
   return new Response(JSON.stringify({ scope: 'server_decoded_frames',
-    frames: [{ timestampSeconds: 0.125, image: raw }], samplingNote: 'Server decoded',
+    frames: [{ timestampSeconds: 0.125, image: raw, quality: { laplacianVariance: 25, meanLuma: 128, clippedFraction: 0, selectionScore: 3.25 } }], samplingNote: 'Server decoded',
     videoMetadata: { durationSeconds: 2, width: 320, height: 180 } }));
 }) as typeof fetch;
 const serverEvidence = await callLocalVideo('data:video/mp4;base64,aGVsbG8=', 'http://127.0.0.1:8001', serverFetcher);

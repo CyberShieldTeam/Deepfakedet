@@ -31,6 +31,8 @@ assert.equal(result.confidenceScore, 0);
 assert.equal(result.aiGeneratedProbability, null);
 assert.equal(result.localVideo.frames.length, 6);
 assert.equal(result.localVideo.videoMetadata.width, 320);
+assert.ok(result.localVideo.frames.every((frame: { quality: { selectionScore: number; meanLuma: number } }) =>
+  frame.quality.selectionScore >= 0 && frame.quality.meanLuma >= 0 && frame.quality.meanLuma <= 255));
 assert.ok(result.localVideo.frames.every((frame: { image: { classification: string; model_status: string; fake_probability: number } }) =>
   frame.image.classification === 'INCONCLUSIVE' && frame.image.model_status === 'ready' &&
   frame.image.fake_probability >= 0 && frame.image.fake_probability <= 1));

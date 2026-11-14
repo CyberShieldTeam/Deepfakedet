@@ -19,6 +19,22 @@ class VideoRequest(BaseModel):
     video_base64: str
 
 
+def frame_quality(bgr):
+    """Simple exposure/detail measurements for choosing among nearby frames, not forgery evidence."""
+    import cv2
+    import numpy as np
+
+    gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
+    luma = float(gray.mean())
+    clipped = float(np.count_nonzero((gray <= 5) | (gray >= 250)) / gray.size)
+    detail = float(cv2.Laplacian(gray, cv2.CV_64F).var())
+    # Bounded exposure factor keeps a highly detailed but nearly black/white frame from winning.
+    exposure_factor = max(0.0, 1.0 - abs(luma - 127.5) / 127.5)
+    score = math.log1p(detail) * exposure_factor * (1.0 - clipped)
+    return {"laplacianVariance": round(detail, 3), "meanLuma": round(luma, 3),
+            "clippedFraction": round(clipped, 5), "selectionScore": round(score, 5)}
+
+
 def decode_sampled_frames(raw: bytes):
     import cv2
 
@@ -45,26 +61,41 @@ def decode_sampled_frames(raw: bytes):
         count = int(count)
         duration = count / fps
         frames = []
-        # Match the browser's six selections from its 16-position timeline.
+        # Stay near the browser's six timeline positions while preferring a clearer neighboring frame.
+        radius = max(1, round(count / 32))
         for slot in range(0, 16, 3):
-            index = min(count - 1, round((slot + 0.5) * count / 16))
-            if frames and index <= frames[-1][0]:
-                continue
-            if not cap.set(cv2.CAP_PROP_POS_FRAMES, index):
-                raise HTTPException(400, "Could not seek to a sampled video frame")
-            ok, bgr = cap.read()
-            if not ok or bgr is None:
+            target = min(count - 1, round((slot + 0.5) * count / 16))
+            candidates = sorted({max(0, target - radius), target, min(count - 1, target + radius)})
+            previous_index = frames[-1][0] if frames else -1
+            best = None
+            for index in candidates:
+                if index <= previous_index:
+                    continue
+                if not cap.set(cv2.CAP_PROP_POS_FRAMES, index):
+                    continue
+                ok, bgr = cap.read()
+                if not ok or bgr is None:
+                    continue
+                frame_height, frame_width = bgr.shape[:2]
+                if frame_width * frame_height > MAX_FRAME_PIXELS:
+                    raise HTTPException(413, "Decoded video frame exceeds pixel limit")
+                scaled_height = max(1, round(frame_height * 480 / frame_width))
+                small = cv2.resize(bgr, (480, scaled_height), interpolation=cv2.INTER_AREA)
+                quality = frame_quality(small)
+                if best is None or quality["selectionScore"] > best[2]["selectionScore"]:
+                    best = (index, small, quality)
+            if best is None:
+                if frames:
+                    continue
                 raise HTTPException(400, "Could not decode a sampled video frame")
-            frame_height, frame_width = bgr.shape[:2]
-            if frame_width * frame_height > MAX_FRAME_PIXELS:
-                raise HTTPException(413, "Decoded video frame exceeds pixel limit")
-            scaled_height = max(1, round(frame_height * 480 / frame_width))
-            small = cv2.resize(bgr, (480, scaled_height), interpolation=cv2.INTER_AREA)
+            index, small, quality = best
             encoded_ok, jpg = cv2.imencode(".jpg", small, [cv2.IMWRITE_JPEG_QUALITY, 75])
             if not encoded_ok:
                 raise HTTPException(400, "Could not encode a sampled video frame")
-            frames.append((index, base64.b64encode(jpg.tobytes()).decode("ascii")))
-        return duration, int(width), int(height), [(round(i / fps, 3), jpg) for i, jpg in frames]
+            frames.append((index, base64.b64encode(jpg.tobytes()).decode("ascii"), quality))
+        if not frames:
+            raise HTTPException(400, "Could not decode sampled video frames")
+        return duration, int(width), int(height), [(round(i / fps, 3), jpg, quality) for i, jpg, quality in frames]
     finally:
         if cap is not None:
             cap.release()
@@ -84,9 +115,9 @@ def analyze_video(request: VideoRequest):
         raise HTTPException(413, "Video exceeds 8 MB or is empty")
     duration, width, height, samples = decode_sampled_frames(raw)
     from ai_service import app as image_app
-    frames = [{"timestampSeconds": timestamp,
+    frames = [{"timestampSeconds": timestamp, "quality": quality,
                "image": image_app.analyze_image(image_app.ImageRequest(image_base64=jpg))}
-              for timestamp, jpg in samples]
+              for timestamp, jpg, quality in samples]
     return {"scope": "server_decoded_frames", "frames": frames,
-            "samplingNote": "Six or fewer JPEG frames decoded from the original video by the local server; scores are experimental.",
+            "samplingNote": "Up to six JPEG frames chosen from nearby original-video positions using heuristic exposure/detail measurements; model scores are experimental.",
             "videoMetadata": {"durationSeconds": round(duration, 3), "width": width, "height": height}}

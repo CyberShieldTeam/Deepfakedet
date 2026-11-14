@@ -2,9 +2,10 @@ import type { ForensicAnalysisResult } from '../src/types';
 import { callLocalImage, type LocalImageResponse } from './localImage';
 
 export interface SampledVideoFrame { timestampSeconds: number; imageData: string }
+export interface FrameQuality { laplacianVariance: number; meanLuma: number; clippedFraction: number; selectionScore: number }
 export interface LocalVideoEvidence {
   scope: 'sampled_video_frames' | 'server_decoded_frames';
-  frames: { timestampSeconds: number; image: LocalImageResponse }[];
+  frames: { timestampSeconds: number; image: LocalImageResponse; quality?: FrameQuality }[];
   samplingNote: string;
   videoMetadata?: { durationSeconds: number; width: number; height: number };
 }
@@ -27,6 +28,12 @@ export async function callLocalVideo(mediaData: string, endpoint: string, fetche
         (i > 0 && frame.timestampSeconds <= value.frames[i - 1].timestampSeconds) ||
         frame.image?.classification !== 'INCONCLUSIVE' || !['ready', 'unavailable', 'skipped'].includes(frame.image?.model_status)))
     throw new Error('Invalid local video service response');
+  if (value.frames.some(frame => !frame.quality ||
+      !Number.isFinite(frame.quality.laplacianVariance) || frame.quality.laplacianVariance < 0 ||
+      !Number.isFinite(frame.quality.meanLuma) || frame.quality.meanLuma < 0 || frame.quality.meanLuma > 255 ||
+      !Number.isFinite(frame.quality.clippedFraction) || frame.quality.clippedFraction < 0 || frame.quality.clippedFraction > 1 ||
+      !Number.isFinite(frame.quality.selectionScore) || frame.quality.selectionScore < 0))
+    throw new Error('Invalid local video frame quality');
   return value;
 }
 
