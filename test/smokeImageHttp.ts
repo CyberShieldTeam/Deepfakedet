@@ -48,4 +48,11 @@ assert.equal(landscape.face_boxes.length, 0);
 const portrait = await analyze('test/fixtures/face/headshot_cc0.jpg', 'image/jpeg');
 assert.equal(portrait.face_analysis, 'candidate_regions');
 assert.ok(portrait.face_boxes.length > 0);
+if (process.env.VERITAS_EXPECT_FACE_READY === '1') {
+  assert.equal(portrait.face_manipulation.status, 'analyzed');
+  assert.equal(portrait.face_manipulation.classification, 'INCONCLUSIVE');
+  assert.ok(portrait.face_manipulation.faces.length > 0);
+  assert.ok(portrait.face_manipulation.faces.every((face: any) =>
+    Number.isFinite(face.raw_fake_score) && face.raw_fake_score >= 0 && face.raw_fake_score <= 1));
+}
 console.log(`Live image HTTP smoke passed: Express → Python ${expectReady ? 'inference' : 'face-only screening'}, inconclusive verdict, YuNet face candidates.`);

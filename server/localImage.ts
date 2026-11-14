@@ -1,6 +1,7 @@
 import type { ForensicAnalysisResult } from '../src/types';
 
 export interface LocalImageResponse {
+  face_manipulation?: import('../src/types').LocalImageEvidence['face_manipulation'];
   classification: 'REAL' | 'MANIPULATED' | 'INCONCLUSIVE';
   fake_probability: number | null;
   model_confidence: number | null;
@@ -24,7 +25,18 @@ export async function callLocalImage(mediaData: string, endpoint: string, fetche
   });
   if (!response.ok) throw new Error(`Local image service returned HTTP ${response.status}`);
   const value = await response.json() as LocalImageResponse;
-  if (!['REAL', 'MANIPULATED', 'INCONCLUSIVE'].includes(value.classification) ||
+  const face = value.face_manipulation;
+  if (face && (face.classification !== 'INCONCLUSIVE' ||
+      !['unavailable', 'analyzed', 'no_faces', 'no_usable_faces', 'failed'].includes(face.status) ||
+      !face.model || !face.revision || typeof face.note !== 'string' || !Array.isArray(face.faces) ||
+      face.faces.length > 10 || (face.status !== 'analyzed' && face.faces.length > 0) ||
+      face.faces.some(f => !Number.isInteger(f.face_index) || f.face_index < 0 ||
+        f.face_index >= value.face_boxes?.length || !Array.isArray(f.crop_bounds) || f.crop_bounds.length !== 4 ||
+        f.crop_bounds.some(n => !Number.isFinite(n) || n < 0) ||
+        f.crop_bounds[2] <= f.crop_bounds[0] || f.crop_bounds[3] <= f.crop_bounds[1] ||
+        !Number.isFinite(f.raw_fake_score) || f.raw_fake_score < 0 || f.raw_fake_score > 1)))
+    throw new Error('Invalid face classifier evidence');
+  if (value.classification !== 'INCONCLUSIVE' ||
       value.scope !== 'general_ai_generated_image' || !value.model || !value.revision ||
       !['ready', 'unavailable', 'skipped'].includes(value.model_status) ||
       !['not_performed', 'none_found', 'candidate_regions'].includes(value.face_analysis) ||
@@ -40,27 +52,25 @@ export async function callLocalImage(mediaData: string, endpoint: string, fetche
 
 export function localImageResult(raw: LocalImageResponse, fileName: string, measurements: Record<string, any>, signalFindings: string[]): ForensicAnalysisResult {
   const classifierRan = raw.model_status === 'ready';
-  const suspicious = raw.classification === 'MANIPULATED';
-  const clean = raw.classification === 'REAL';
-  const probability = raw.fake_probability === null ? null : Math.round(raw.fake_probability * 100);
-  const decisionProbability = raw.classification === 'INCONCLUSIVE' ? null : probability;
+  const decisionProbability = null;
+  const faceRan = raw.face_manipulation?.status === 'analyzed';
   return {
     modality: 'image', fileName, engine: classifierRan ? 'local_pretrained' : 'local_image_screening',
     engineNote: classifierRan
-      ? `${raw.model}@${raw.revision.slice(0, 12)}; experimental whole-image classifier. ${raw.face_boxes.length} unverified face candidate(s); face manipulation was not checked. Model probability is not calibrated confidence.`
-      : `Whole-image classifier ${raw.model_status}; ${raw.face_boxes.length} unverified face candidate(s). Face manipulation was not checked.`,
-    authenticity: suspicious ? 'likely_synthetic' : clean ? 'likely_authentic' : 'inconclusive',
+      ? `${raw.model}@${raw.revision.slice(0, 12)}; experimental whole-image classifier. ${raw.face_boxes.length} unverified face candidate(s). Face classifier: ${raw.face_manipulation?.status || 'unavailable'}. Model probability is not calibrated confidence.`
+      : `Whole-image classifier ${raw.model_status}; ${raw.face_boxes.length} unverified face candidate(s). Face classifier: ${raw.face_manipulation?.status || 'unavailable'}.`,
+    authenticity: 'inconclusive',
     confidenceScore: 0, aiGeneratedProbability: decisionProbability,
-    aiGeneration: { verdict: suspicious ? 'likely' : clean ? 'no_indicators_found' : 'inconclusive', probability: decisionProbability,
+    aiGeneration: { verdict: 'inconclusive', probability: decisionProbability,
       confidence: 0, indicators: [], counterIndicators: [], rationale: raw.explanation },
-    headlineSummary: suspicious ? 'Local model flagged possible AI generation.' : clean ? 'Local model found no strong AI-generation signal.' : classifierRan ? 'Local model result is inconclusive.' : 'Image authenticity could not be determined.',
-    detailedFindings: [...raw.signals, ...signalFindings.map(s => `[Browser signal] ${s}`)],
+    headlineSummary: classifierRan ? 'Local model result is inconclusive.' : 'Image authenticity could not be determined.',
+    detailedFindings: [...raw.signals, ...(faceRan ? ['Experimental face classifier ran; scores do not determine authenticity.'] : []), ...signalFindings.map(s => `[Browser signal] ${s}`)],
     limitations: [...(classifierRan ? ['Pretrained classifier failed the initial out-of-domain fixture smoke test; its score cannot establish authenticity.'] : ['Whole-image classifier did not run.']),
       'Face candidates do not establish manipulation or authenticity.', 'A real-looking result is not proof of authenticity.'],
     alternativeHypotheses: ['Compression, resizing, and newer generators can change classifier output.'],
     compressionArtifacts: { elaScore: Number(measurements.elaScore) || 0, doubleCompressionFound: false,
       noiseInconsistencyMapAvailable: true, notes: 'ELA is a separate browser signal, not evidence for this model score.' },
-    modelsUsed: [...(classifierRan ? [{ name: raw.model, version: raw.revision, provider: 'Hugging Face checkpoint (local inference)' }] : []),
+    modelsUsed: [...(faceRan ? [{ name: raw.face_manipulation!.model, version: raw.face_manipulation!.revision, provider: 'Experimental face-crop inference' }] : []), ...(classifierRan ? [{ name: raw.model, version: raw.revision, provider: 'Hugging Face checkpoint (local inference)' }] : []),
       ...(raw.face_analysis !== 'not_performed' ? [{ name: 'YuNet face detector', version: '2023mar', provider: 'OpenCV Zoo' }] : [])],
     measurements, analyzedAt: new Date().toISOString(),
     localImage: raw

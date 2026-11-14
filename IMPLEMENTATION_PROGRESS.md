@@ -42,6 +42,19 @@ Updated: 2026-11-14. Published model branch: `codex/phase1-audit` at `26de131eef
 
 ## Next session entry point
 
+### Phase 2a evaluation foundation
+
+- Added optional pinned DeiTFake v2 face-crop inference, crop guards, separate health/evidence states, Express validation, and UI evidence display. Verified publisher revision, Apache-2.0 declaration, safetensors availability, labels and processor settings.
+- Installed the native Python inference runtime and checksum-verified YuNet. Actual DeiTFake headshot inference returned raw fake-class output 0.997509; distant portrait returned no faces. These fixtures do not establish accuracy. The face model remains experimental and cannot supply a verdict.
+- Added face crop, unavailable/failure, and malformed upstream evidence tests. Representative evaluation and calibration remain incomplete; Phase 2a is not marked complete.
+- Verified actual Express-to-Python image uploads with DeiTFake enabled and the whole-image classifier disabled: landscape had no faces, headshot carried experimental face scores, and both remained inconclusive. Python discovery: 26 tests, 25 passed, one optional AASIST-weight test skipped. Node/API suite, TypeScript and build passed; existing bundle warning remains.
+- Final connected-service Chromium run: all seven workflows passed, including a new actual headshot upload that verifies DeiTFake evidence in the HTTP response and rendered panel. Unified the uncertainty headline for inconclusive local evidence. React checklist reviewed the two edited components; no new hooks or client inference were introduced.
+
+- Added `ai_service/evaluate_image.py` and `docs/IMAGE_EVALUATION.md`: provenance/checksum manifests, source-group split isolation, duplicate checks, per-sample raw scores, split/domain diagnostics and tie-corrected AUROC. Failed samples remain counted; model identity drift aborts evaluation.
+- Closed an existing quarantine bypass in `server/localImage.ts`: the adapter rejects non-inconclusive classifications and the mapper always abstains, including when invoked directly. Regression tests cover forged upstream verdicts.
+- TypeScript check, complete Node/API suite, and 10 Python evaluation/image tests passed (one optional YuNet real-weight test skipped). Evaluation metrics were tested using synthetic score rows, not a detector benchmark.
+- No representative dataset or new checkpoint inference was run in this slice. Face classifier integration, representative evaluation, calibration, and phase completion remain open. See `docs/IMAGE_EVALUATION.md` for the next evaluation run.
+
 Read `MODEL_CARD.md`, `AUDIO_MODEL_CARD.md`, and `VIDEO_ENGINE.md`. The image checkpoint remains quarantined as an experimental raw score, including when applied to video frames. Evaluate stronger image and face-manipulation models on representative held-out data before permitting local verdicts. For Phase 2c, add a streaming upload/job path and quality-aware frame selection and aggregation. Never mark an engine complete based on an adapter, mock result, or transport smoke.
 
 ## Phase 2a partial implementation

@@ -1,5 +1,28 @@
 # Image engine model record
 
+## Phase 2a face classifier implementation
+
+Optional `VERITAS_FACE_MODEL_ENABLED=1` loads Apache-2.0 `sakshamkr1/deitfake-v2`
+at verified revision `f70338d328ba268d2b9d5c6af11044cf0b0e1400`, using safetensors,
+no remote code, and checked `Fake=0`, `Real=1` labels. The pinned processor resizes to
+224x224 and normalizes RGB with mean/std 0.5. YuNet regions are clamped, expanded by
+20% on each side, and rejected below 32 pixels. This VERITAS crop policy is unvalidated.
+The publisher describes face data derived from OpenForensics; this does not establish
+performance on face swaps, every manipulation type, or VERITAS inputs.
+
+Real inference ran locally: `headshot_cc0.jpg` produced one crop with raw fake-class
+score `0.997509`; `portrait_cc0.jpg` had no detected face and no classifier output.
+These are software smoke fixtures without independently established manipulation labels.
+The high headshot score warrants caution, not a fabricated accuracy claim. All outputs
+remain `INCONCLUSIVE`. No threshold or representative accuracy benchmark is validated.
+Run `python -m ai_service.smoke_face_classifier` to reproduce. Face evidence is passed
+through Express and shown independently in the image evidence panel.
+
+The older statement below that no crop classifier exists describes the earlier checkpoint;
+the implementation above supersedes it. Phase 2a remains open pending representative
+whole-image and face evaluations and calibration decisions. The new face-classifier path
+passed live HTTP uploads and has a real-weight browser upload regression test.
+
 Candidate checkpoint: [dima806/ai_vs_real_image_detection](https://huggingface.co/dima806/ai_vs_real_image_detection), pinned at `9d17b51b9367d6b5720ac81dc339455c45d50ae3`. The model card lists Apache-2.0 and a ViT image classifier derived from `google/vit-base-patch16-224-in21k`; its config maps class 0 to `REAL` and class 1 to `FAKE`.
 
 Scope: whole-image real versus AI-generated classification. It is **not** a facial manipulation detector, edit localizer, provenance verifier, or universal deepfake model. Processor normalization is loaded from the same pinned checkpoint. The service converts decoded JPEG/PNG/WEBP to RGB and uses the checkpoint's `AutoImageProcessor`. Optional face boxes now come from the [OpenCV Zoo YuNet](https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet) detector (MIT license, pinned 2023mar ONNX and SHA-256), replacing the unreliable Haar cascade. The boxes are still face candidates and never manipulation scores. No face-crop classifier or Grad-CAM is present.

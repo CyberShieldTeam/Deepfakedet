@@ -69,8 +69,24 @@ test("Image measurements are processed without fabricating classifier output", a
     });
   await page.getByRole("button", { name: /Check this file/ }).click();
   await expect(page.getByText("Authenticity remains undetermined", { exact: true })).toBeVisible();
-  await expect(page.getByText("UNAVAILABLE", { exact: true })).toBeVisible();
+  if (!process.env.VERITAS_EXPECT_FACE_READY)
+    await expect(page.getByText("UNAVAILABLE", { exact: true })).toBeVisible();
   await expect(page.getByText("LIVE ANALYSIS MODE", { exact: true })).toBeVisible();
+});
+
+test("Pinned face classifier evidence survives browser upload", async ({ page }) => {
+  test.skip(process.env.VERITAS_EXPECT_FACE_READY !== "1", "Requires actual YuNet and face checkpoint");
+  await page.goto("/");
+  await page.getByRole("button", { name: "Media forensics", exact: true }).first().click();
+  await page.locator("input[type=file]").setInputFiles("test/fixtures/face/headshot_cc0.jpg");
+  const response = page.waitForResponse(r => r.url().includes("/api/forensics/analyze-media") && r.request().method() === "POST");
+  await page.getByRole("button", { name: /Check this file/ }).click();
+  const { result } = await (await response).json();
+  expect(result.authenticity).toBe("inconclusive");
+  expect(result.aiGeneratedProbability).toBeNull();
+  expect(result.localImage.face_manipulation.status).toBe("analyzed");
+  await expect(page.getByText("Face classifier: analyzed", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Face 1: raw fake-class output/)).toBeVisible();
 });
 
 test("Network sample exposes evidence; mobile navigation fits viewport", async ({ page }) => {
@@ -154,6 +170,8 @@ test("Real browser video frame extraction reports its actual interval", async ({
     timeout: 30000,
   });
   await expect(
-    page.getByText("Sampled-frame evidence · not a video-level probability", { exact: true }),
+    page.getByText(process.env.VERITAS_EXPECT_FACE_READY === "1"
+      ? "Experimental local video evidence"
+      : "Sampled-frame evidence · not a video-level probability", { exact: true }),
   ).toBeVisible();
 });

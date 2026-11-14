@@ -115,6 +115,14 @@ export interface ForensicAnalysisResult {
 }
 
 export interface LocalImageEvidence {
+  face_manipulation?: {
+    status: "unavailable" | "analyzed" | "no_faces" | "no_usable_faces" | "failed";
+    model: string;
+    revision: string;
+    classification: "INCONCLUSIVE";
+    note: string;
+    faces: { face_index: number; crop_bounds: number[]; raw_fake_score: number }[];
+  };
   classification: "REAL" | "MANIPULATED" | "INCONCLUSIVE";
   fake_probability: number | null;
   model_confidence: number | null;

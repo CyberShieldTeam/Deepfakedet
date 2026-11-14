@@ -148,6 +148,9 @@ const CHECK_SOURCE = "Find the original source before sharing. Do not forward it
 
 /** Everyday-language reading of a media result. */
 export function plainMedia(r: ForensicAnalysisResult): Plain {
+  if ((r.localImage || r.localAudio || r.localVideo) && r.authenticity === "inconclusive")
+    return { tone: "amber", headline: "Authenticity remains undetermined",
+      explain: r.headlineSummary, advice: "Experimental scores need independent validation. Check the source and context before sharing." };
   const kind = r.modality === "image" ? "image" : r.modality === "video" ? "video" : "audio clip";
   if (r.inference)
     return {

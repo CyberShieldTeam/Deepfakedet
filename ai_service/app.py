@@ -14,7 +14,7 @@ from typing import Literal
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from PIL import Image, ImageOps, UnidentifiedImageError
-from ai_service import audio_service, video_service
+from ai_service import audio_service, video_service, face_service
 
 MODEL_KIND = os.getenv("VERITAS_IMAGE_MODEL", "dima").lower()
 MODELS = {
@@ -51,6 +51,7 @@ async def lifespan(_app: FastAPI):
     global model, processor, torch_module, load_error, face_detector
     load_face_detector()
     audio_service.load_model()
+    face_service.load_model()
     if os.getenv("VERITAS_IMAGE_MODEL_ENABLED", "0") == "1":
         try:
             import torch
@@ -122,7 +123,7 @@ def health():
     return {"status": "ready" if model is not None else "unavailable", "model": MODEL_ID,
             "revision": MODEL_REVISION, "reason": load_error if model is None else None,
             "face_detector": "ready" if face_detector is not None else "unavailable",
-            "audio": audio_service.health()}
+            "audio": audio_service.health(), "face_classifier": face_service.health()}
 
 
 @app.post("/v1/image/analyze")
@@ -150,11 +151,12 @@ def analyze_image(request: ImageRequest):
     except (UnidentifiedImageError, OSError, Image.DecompressionBombError):
         raise HTTPException(400, "Corrupt or unsupported image")
     face_status, faces = detect_faces(image)
+    face_evidence = face_service.analyze(image, faces)
     if not model_ready:
         return {"classification": "INCONCLUSIVE", "fake_probability": None,
                 "model_confidence": None, "model_status": "unavailable", "model": MODEL_ID,
                 "revision": MODEL_REVISION, "scope": "general_ai_generated_image",
-                "face_analysis": face_status, "face_boxes": faces, "signals": [],
+                "face_analysis": face_status, "face_boxes": faces, "face_manipulation": face_evidence, "signals": [],
                 "explanation": "Classifier unavailable; face candidates are unverified regions, not manipulation analysis.",
                 "processing_ms": round((time.monotonic() - start) * 1000)}
     if MODEL_KIND == "smaug":
@@ -169,7 +171,7 @@ def analyze_image(request: ImageRequest):
     # its softmax score to a real/fake decision before independent validation/calibration.
     return {"classification": "INCONCLUSIVE", "fake_probability": round(fake_probability, 6),
             "model_confidence": None, "model_status": "ready", "model": MODEL_ID, "revision": MODEL_REVISION,
-            "scope": "general_ai_generated_image", "face_analysis": face_status, "face_boxes": faces,
+            "scope": "general_ai_generated_image", "face_analysis": face_status, "face_boxes": faces, "face_manipulation": face_evidence,
             "signals": [], "explanation": "Experimental whole-image classifier score only; face boxes are unverified candidates, not manipulation analysis.",
             "processing_ms": round((time.monotonic() - start) * 1000)}
 

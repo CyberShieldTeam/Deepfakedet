@@ -94,6 +94,13 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
                 : "Whole-image classifier unavailable"}
             </p>
             <p>{r.localImage.face_boxes.length} unverified YuNet face candidate(s).</p>
+            {r.localImage.face_manipulation && <div>
+              <p>Face classifier: {r.localImage.face_manipulation.status.replaceAll("_", " ")}</p>
+              {r.localImage.face_manipulation.faces.map(face => <p key={face.face_index}>
+                Face {face.face_index + 1}: raw fake-class output {face.raw_fake_score.toFixed(3)}
+              </p>)}
+              <p>{r.localImage.face_manipulation.note}</p>
+            </div>}
             <p className="text-amber-300">Raw output is uncalibrated and was not used as a verdict.</p>
           </div>
         </Card>
