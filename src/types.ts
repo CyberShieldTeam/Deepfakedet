@@ -3,13 +3,23 @@
  * Digital Forensics, Claim Verification & Campaign Intelligence Platform
  */
 
-export type ModalityType = 'image' | 'video' | 'audio' | 'text_claim' | 'social_dataset';
+export type ModalityType = "image" | "video" | "audio" | "text_claim" | "social_dataset";
 
-export type RiskLevel = 'Critical' | 'High' | 'Medium' | 'Low' | 'Informational';
+export type RiskLevel = "Critical" | "High" | "Medium" | "Low" | "Informational";
 
-export type VerificationVerdict = 'Supported' | 'Contradicted' | 'Mixed Evidence' | 'Insufficient Evidence';
+export type VerificationVerdict =
+  | "Supported"
+  | "Contradicted"
+  | "Mixed Evidence"
+  | "Insufficient Evidence"
+  | "Refuted"
+  | "Misleading Context";
 
-export type MediaAuthenticity = 'likely_synthetic' | 'suspicious_artifacts' | 'inconclusive' | 'likely_authentic';
+export type MediaAuthenticity =
+  | "likely_synthetic"
+  | "suspicious_artifacts"
+  | "inconclusive"
+  | "likely_authentic";
 
 export interface FaceBoundingBox {
   id: string;
@@ -42,9 +52,9 @@ export interface AudioSpectralAnalysis {
 }
 
 export interface ForensicAnalysisResult {
-  modality: 'image' | 'video' | 'audio';
+  modality: "image" | "video" | "audio";
   authenticity: MediaAuthenticity;
-  confidenceScore: number; // 0 - 100
+  confidenceScore: number | null; // null when not independently estimated
   headlineSummary: string;
   detailedFindings: string[];
   faces?: FaceBoundingBox[];
@@ -79,18 +89,39 @@ export interface ForensicAnalysisResult {
   /** Images: was a real image edited / spliced? */
   manipulation?: DetectionAssessment;
   provenance?: ProvenanceInfo;
+  misleadingContext?: { status: string; reason: string };
+  inference?: {
+    status: string;
+    modelId: string;
+    version: string;
+    calibration: string;
+    trainingData: string;
+    license: string;
+    limitations: string;
+  };
+  sampledFrames?: {
+    timestamp: number | null;
+    status: string;
+    probability: number | null;
+    thumbnail: string;
+  }[];
+  audioSegments?: { start: number; end: number; probability: number }[];
 }
 
-export type IndicatorStrength = 'weak' | 'moderate' | 'strong';
-export interface DetectionIndicator { indicator: string; location?: string; strength: IndicatorStrength }
+export type IndicatorStrength = "weak" | "moderate" | "strong";
+export interface DetectionIndicator {
+  indicator: string;
+  location?: string;
+  strength: IndicatorStrength;
+}
 
 /** One detection question (AI generation OR manipulation), answered separately and calibrated by the server. */
 export interface DetectionAssessment {
-  verdict: 'likely' | 'possible' | 'inconclusive' | 'no_indicators_found';
+  verdict: "likely" | "possible" | "inconclusive" | "no_indicators_found";
   /** Calibrated 0–100 likelihood; null when no model ran. */
   probability: number | null;
   /** How much the evidence supports the verdict (agreement + indicator quality), 0–100. */
-  confidence: number;
+  confidence: number | null;
   indicators: DetectionIndicator[];
   counterIndicators: string[];
   rationale: string;
@@ -100,12 +131,18 @@ export interface DetectionAssessment {
 
 /** Embedded provenance metadata (C2PA Content Credentials / IPTC digital source type). */
 export interface ProvenanceInfo {
+  verified?: boolean;
   c2paManifest: boolean;
   declaresAIGenerated: boolean;
   generatorHints: string[];
 }
 
-export type AnalysisEngine = 'gemini' | 'heuristic' | 'simulated_demo' | 'graph_heuristics';
+export type AnalysisEngine =
+  | "gemini"
+  | "heuristic"
+  | "simulated_demo"
+  | "graph_heuristics"
+  | "model_adapter";
 
 export interface GroundedSource {
   title: string;
@@ -113,8 +150,12 @@ export interface GroundedSource {
   domain: string;
   publishDate?: string;
   excerpt: string;
-  stance: 'supports' | 'contradicts' | 'mixed' | 'neutral';
-  credibilityRating: 'High Authority' | 'Established News' | 'Independent / Regional' | 'Unverified Source';
+  stance: "supports" | "contradicts" | "mixed" | "neutral";
+  credibilityRating:
+    | "High Authority"
+    | "Established News"
+    | "Independent / Regional"
+    | "Unverified Source";
   isSimulated?: boolean;
   /** Search grounding only: the passage of the model's answer this source was cited for. */
   citedFor?: string;
@@ -123,17 +164,29 @@ export interface GroundedSource {
 }
 
 /** How a claim result was produced — shown to the user so verified results are never confused with AI opinion. */
-export type VerificationMode = 'search_grounded' | 'ai_knowledge_only' | 'insufficient_external_evidence' | 'rule_based' | 'simulated_demo';
+export type VerificationMode =
+  | "search_grounded"
+  | "ai_knowledge_only"
+  | "insufficient_external_evidence"
+  | "rule_based"
+  | "simulated_demo"
+  | "analyst_reviewed";
 
 /** search-verified outcomes vs. what the model merely finds plausible. */
-export type ClaimAssessment = 'verified_true' | 'verified_false' | 'verified_mixed' | 'plausible' | 'implausible' | 'unverified';
+export type ClaimAssessment =
+  | "verified_true"
+  | "verified_false"
+  | "verified_mixed"
+  | "plausible"
+  | "implausible"
+  | "unverified";
 
 export interface ClaimVerificationResult {
   originalInput: string;
   extractedClaims: string[];
   targetClaim: string;
   verdict: VerificationVerdict;
-  confidenceScore: number; // 0 - 100
+  confidenceScore: number | null; // null when not independently estimated
   verdictRationale: string;
   sources: GroundedSource[];
   supportingCount: number;
@@ -155,9 +208,13 @@ export interface ClaimVerificationResult {
   confidenceNote?: string;
   searchQueries?: string[];
   modelUsed?: string;
+  evidenceSufficiency?: string;
+  retrieval?: { lexical: string; semantic: string; source: string };
 }
 
 export interface SocialPostNode {
+  postingStats?: { totalPosts: number; peakPostsPerMinute: number; countZScore: number };
+  posts?: { id?: string; timestamp: string; content: string }[];
   id: string;
   accountHandle: string;
   displayName: string;
@@ -169,7 +226,7 @@ export interface SocialPostNode {
   urls: string[];
   hashtags: string[];
   clusterId: number;
-  botLikelihoodScore: number; // 0 - 100
+  botLikelihoodScore: number | null; // legacy field; null when no bot model ran
   amplificationWeight: number; // size on graph
   language?: string;
   suspicious?: boolean;
@@ -184,7 +241,12 @@ export interface NetworkEdge {
   source: string;
   target: string;
   weight: number; // 0 - 1
-  coordinationType: 'semantic_copy' | 'temporal_burst' | 'shared_url' | 'hashtag_cascade' | 'retweet_ring';
+  coordinationType:
+    | "semantic_copy"
+    | "temporal_burst"
+    | "shared_url"
+    | "hashtag_cascade"
+    | "retweet_ring";
   description: string;
 }
 
@@ -203,10 +265,18 @@ export interface CampaignCluster {
 }
 
 export interface CampaignAnalysisResult {
+  classification?:
+    | "Organic viral activity"
+    | "Legitimate coordinated campaign"
+    | "Suspicious coordinated amplification"
+    | "Insufficient evidence";
+  methodology?: string;
+  candidatePairs?: number;
+  truncated?: boolean;
   datasetName: string;
   totalPosts: number;
   totalAccounts: number;
-  overallCoordinationIndex: number; // 0 - 100
+  overallCoordinationIndex: number | null; // legacy index; null for multi-signal DBSCAN
   clusters: CampaignCluster[];
   nodes: SocialPostNode[];
   edges: NetworkEdge[];
@@ -223,12 +293,12 @@ export interface CampaignAnalysisResult {
 export interface TimelineEntry {
   time: string;
   label: string;
-  severity: 'critical' | 'high' | 'medium' | 'info';
+  severity: "critical" | "high" | "medium" | "info";
   module: string;
 }
 
 export interface MultilingualVariant {
-  language: 'English' | 'Hindi' | 'Telugu' | string;
+  language: "English" | "Hindi" | "Telugu" | string;
   original: string;
   translation: string;
   posts: number;
@@ -241,21 +311,28 @@ export interface LiveEvent {
   handle: string;
   language: string;
   text: string;
-  kind: 'post' | 'alert';
-  severity: 'critical' | 'high' | 'medium' | 'info';
-  alertType?: 'suspicious_media' | 'claim_contradicted' | 'campaign_detected' | 'similar_content' | 'propagation_burst' | 'system';
+  kind: "post" | "alert";
+  severity: "critical" | "high" | "medium" | "info";
+  alertType?:
+    | "suspicious_media"
+    | "claim_contradicted"
+    | "campaign_detected"
+    | "similar_content"
+    | "propagation_burst"
+    | "system";
   title?: string;
   investigationId?: string;
   isSimulated: boolean;
 }
 
 export interface Investigation {
+  ownerId?: string;
   id: string;
   title: string;
   caseNumber: string;
   targetSubject: string;
   modality: ModalityType;
-  status: 'In Progress' | 'Verified' | 'Suspicious' | 'Critical Flag' | 'Archived';
+  status: "In Progress" | "Verified" | "Suspicious" | "Critical Flag" | "Archived";
   riskLevel: RiskLevel;
   createdAt: string;
   updatedAt: string;
@@ -284,7 +361,7 @@ export interface ModelRegistryItem {
   architecture: string;
   license: string;
   version: string;
-  status: 'ONLINE' | 'STANDBY' | 'DEGRADED';
+  status: "ONLINE" | "STANDBY" | "DEGRADED";
   inferenceLatencyAvg: string;
   accuracyBenchmark: string;
   description: string;

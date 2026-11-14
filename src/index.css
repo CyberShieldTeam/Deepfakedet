@@ -1,96 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --color-slate-500: #8391a8;
+  --color-slate-600: #74839b;
+}
 
 @layer base {
   body {
-    background-color: #060a12;
-    color: #e2e8f0;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background: #0b111c;
+    color: #d9e2ef;
+    font-family: "DM Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
-  
-  code, pre, .font-mono {
-    font-family: 'JetBrains Mono', monospace;
+  code,
+  pre,
+  .font-mono {
+    font-family: "IBM Plex Mono", monospace;
+  }
+  button,
+  a,
+  summary,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:not(:disabled),
+  summary {
+    cursor: pointer;
+  }
+  select option {
+    background: #101a2a;
+    color: #d9e2ef;
+  }
+  ::selection {
+    background: #1a5369;
+    color: #e2f8ff;
+  }
+  :focus-visible {
+    outline: 2px solid #48cde1;
+    outline-offset: 4px;
+    border-radius: 4px;
   }
 }
-
-/* Cyber Forensics Grid & Holographic Background */
+.app-shell {
+  background: #0b111c;
+}
+.sidebar {
+  background: #0a101b;
+}
+.workspace-header {
+  background: #0d1421ed;
+}
+.brand-mark {
+  background: linear-gradient(140deg, #193f53, #101e30);
+  border: 1px solid #285269;
+  box-shadow: 0 0 22px #1fb8d20a;
+}
+.nav-item.active {
+  background: linear-gradient(90deg, #0e3b4c66, #10354444);
+  border: 1px solid #24697b55;
+  box-shadow: inset 2px 0 #41c5dc;
+}
+.panel,
+.metric-card {
+  background: linear-gradient(120deg, #101927, #0e1623);
+}
+.command-hero {
+  background:
+    radial-gradient(ellipse at 85% 30%, #093b543b, transparent 60%),
+    linear-gradient(100deg, #112535aa, #0e1b2b 60%, #0e1a29);
+}
+.hero-orbit {
+  border: 1px solid #2b688a;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 35px #0c344133,
+    0 0 0 36px #28618355,
+    0 0 0 70px #0c344111,
+    0 0 0 71px #28618344,
+    0 0 0 110px #0c344111,
+    0 0 0 111px #28618333;
+  transform: rotate(-25deg);
+}
+.hero-engine {
+  backdrop-filter: blur(8px);
+}
 .bg-cyber-grid {
   background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(14, 165, 233, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(14, 165, 233, 0.04) 1px, transparent 1px);
+  background-image:
+    linear-gradient(to right, #0ea5e908 1px, transparent 1px),
+    linear-gradient(to bottom, #0ea5e908 1px, transparent 1px);
 }
-
 .bg-radial-forensics {
-  background: radial-gradient(circle at 50% 20%, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0) 70%);
+  background: radial-gradient(circle at 50% 20%, #06b6d414, transparent 70%);
 }
-
-/* Animated Scanning Laser Line */
-@keyframes forensic-scan {
-  0% {
-    top: 0%;
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    top: 100%;
-    opacity: 0.8;
-  }
-}
-
-.animate-scan-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.8), rgba(56, 189, 248, 1), rgba(6, 182, 212, 0.8), transparent);
-  box-shadow: 0 0 15px rgba(6, 182, 212, 0.9), 0 0 30px rgba(56, 189, 248, 0.5);
-  animation: forensic-scan 2.2s ease-in-out infinite alternate;
-  pointer-events: none;
-  z-index: 25;
-}
-
-/* Glowing Neon & Forensic Border Effects */
 .border-glow-cyan {
-  box-shadow: 0 0 15px rgba(6, 182, 212, 0.15), inset 0 0 15px rgba(6, 182, 212, 0.05);
+  box-shadow: 0 0 15px #06b6d419;
 }
-
 .border-glow-rose {
-  box-shadow: 0 0 20px rgba(244, 63, 94, 0.25), inset 0 0 15px rgba(244, 63, 94, 0.1);
+  box-shadow: 0 0 15px #f43f5e19;
 }
-
-.border-glow-emerald {
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25), inset 0 0 15px rgba(16, 185, 129, 0.1);
-}
-
-/* Custom Sleek Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #090e17;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
-}
-
-@keyframes slidein {
-  from { opacity: 0; transform: translateX(24px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-/* Accessibility: clear keyboard focus, and hide the native marker on custom <details> toggles */
-:focus-visible {
-  outline: 2px solid #22d3ee;
-  outline-offset: 2px;
-  border-radius: 6px;
+  background: #283449;
+  border-radius: 5px;
 }
 details > summary::-webkit-details-marker {
   display: none;
+}
+@keyframes slidein {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+main > div {
+  animation: slidein 0.25s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
