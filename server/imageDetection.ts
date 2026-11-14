@@ -8,7 +8,12 @@
  * confidence are decided here, so a single over- or under-confident model answer cannot produce certainty.
  * Missing EXIF is never evidence of AI generation; ELA only ever supports the manipulation question.
  */
-import { DetectionAssessment, DetectionIndicator, IndicatorStrength, ProvenanceInfo } from '../src/types';
+import {
+  DetectionAssessment,
+  DetectionIndicator,
+  IndicatorStrength,
+  ProvenanceInfo,
+} from "../src/types";
 
 export interface RawAssessment {
   probability?: number;
@@ -33,7 +38,10 @@ export interface RawImageSample {
 export const AI_DIRECT_PROMPT = `Is this image AI-generated (made by a text-to-image model) or a real photograph? Examine fine details: buildings, windows, roofs, trees, water, edges. Do not use missing metadata as evidence.
 Respond ONLY with JSON {"aiGeneratedProbability":0-100,"reasons":string[]}`;
 
-export interface RawDirectProbe { aiGeneratedProbability?: number; reasons?: string[] }
+export interface RawDirectProbe {
+  aiGeneratedProbability?: number;
+  reasons?: string[];
+}
 
 /**
  * Calibrate the direct probes (independent samples):
@@ -50,14 +58,17 @@ const median = (xs: number[]) => {
   return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2;
 };
 
-export function calibrateDirect(probes: RawDirectProbe[], explanatory: DetectionIndicator[] = []): DetectionAssessment {
-  const probs = probes.map(p => clamp(p.aiGeneratedProbability));
+export function calibrateDirect(
+  probes: RawDirectProbe[],
+  explanatory: DetectionIndicator[] = [],
+): DetectionAssessment {
+  const probs = probes.map((p) => clamp(p.aiGeneratedProbability));
   let used = probs;
   let outliers: number[] = [];
   let noMajority = false;
   if (probs.length >= 3) {
     const med = median(probs);
-    const inMajority = probs.map(p => Math.abs(p - med) <= 20);
+    const inMajority = probs.map((p) => Math.abs(p - med) <= 20);
     if (inMajority.filter(Boolean).length * 2 > probs.length) {
       used = probs.filter((_, i) => inMajority[i]);
       outliers = probs.filter((_, i) => !inMajority[i]);
@@ -66,33 +77,56 @@ export function calibrateDirect(probes: RawDirectProbe[], explanatory: Detection
   const center = median(used.length ? used : [50]);
   const spread = used.length > 1 ? Math.max(...used) - Math.min(...used) : 20;
   const agreement = Math.round(Math.max(0, 100 - spread) * (outliers.length ? 0.85 : 1));
-  const reasons = Array.from(new Set(probes.flatMap(p => p.reasons || []))).slice(0, 5);
-  let verdict: DetectionAssessment['verdict'];
+  const reasons = Array.from(new Set(probes.flatMap((p) => p.reasons || []))).slice(0, 5);
+  let verdict: DetectionAssessment["verdict"];
   let confidence: number;
-  if (noMajority || spread > 35) { verdict = 'inconclusive'; confidence = Math.min(40, agreement); }
-  else if (center >= 80) { verdict = 'likely'; confidence = Math.min(80, Math.round(agreement * 0.8)); }
-  else if (center >= 55) { verdict = 'possible'; confidence = Math.min(60, Math.round(agreement * 0.6)); }
-  else if (center <= 20) { verdict = 'no_indicators_found'; confidence = Math.min(55, Math.round(agreement * 0.55)); }
-  else { verdict = 'inconclusive'; confidence = Math.min(40, Math.round(agreement * 0.4)); }
-  const positive = verdict === 'likely' || verdict === 'possible';
-  const outlierNote = outliers.length ? ` ${outliers.length === 1 ? 'One check' : `${outliers.length} checks`} disagreed (${outliers.join('% / ')}%) and ${outliers.length === 1 ? 'was' : 'were'} outvoted.` : '';
+  if (noMajority || spread > 35) {
+    verdict = "inconclusive";
+    confidence = Math.min(40, agreement);
+  } else if (center >= 80) {
+    verdict = "likely";
+    confidence = Math.min(80, Math.round(agreement * 0.8));
+  } else if (center >= 55) {
+    verdict = "possible";
+    confidence = Math.min(60, Math.round(agreement * 0.6));
+  } else if (center <= 20) {
+    verdict = "no_indicators_found";
+    confidence = Math.min(55, Math.round(agreement * 0.55));
+  } else {
+    verdict = "inconclusive";
+    confidence = Math.min(40, Math.round(agreement * 0.4));
+  }
+  const positive = verdict === "likely" || verdict === "possible";
+  const outlierNote = outliers.length
+    ? ` ${outliers.length === 1 ? "One check" : `${outliers.length} checks`} disagreed (${outliers.join("% / ")}%) and ${outliers.length === 1 ? "was" : "were"} outvoted.`
+    : "";
   return {
     verdict,
     probability: Math.round(Math.min(90, center)),
     confidence,
-    indicators: mergeIndicators([positive ? reasons.map(r => ({ indicator: r, strength: 'moderate' as const })) : [], explanatory]),
+    indicators: mergeIndicators([
+      positive ? reasons.map((r) => ({ indicator: r, strength: "moderate" as const })) : [],
+      explanatory,
+    ]),
     counterIndicators: positive ? [] : reasons,
     rationale: positive
-      ? `Independent model checks rated the image ${probs.join('% / ')}% likely AI-generated.${outlierNote}`
-      : verdict === 'no_indicators_found'
-      ? `Independent model checks rated it ${probs.join('% / ')}% likely AI-generated.${outlierNote} This is not proof of authenticity.`
-      : `Model checks were split or mid-range (${probs.join('% / ')}%); the evidence is insufficient either way.`,
-    samples: probs
+      ? `Independent model checks rated the image ${probs.join("% / ")}% likely AI-generated.${outlierNote}`
+      : verdict === "no_indicators_found"
+        ? `Independent model checks rated it ${probs.join("% / ")}% likely AI-generated.${outlierNote} This is not proof of authenticity.`
+        : `Model checks were split or mid-range (${probs.join("% / ")}%); the evidence is insufficient either way.`,
+    samples: probs,
   };
 }
 
-export const IMAGE_PROMPT = (dims: string, tiles: number) => `You are an image-forensics analyst. Answer TWO SEPARATE questions about this image (${dims}).${tiles ? `
-The first picture is the full image; the next ${tiles} pictures are full-resolution close-up crops of it (top-left, top-right, bottom-left, bottom-right). Inspect the crops closely — generation artifacts are usually only visible in fine detail (windows, roofs, railings, foliage, people, text).` : ''}
+export const IMAGE_PROMPT = (
+  dims: string,
+  tiles: number,
+) => `You are an image-forensics analyst. Answer TWO SEPARATE questions about this image (${dims}).${
+  tiles
+    ? `
+The first picture is the full image; the next ${tiles} pictures are full-resolution close-up crops of it (top-left, top-right, bottom-left, bottom-right). Inspect the crops closely — generation artifacts are usually only visible in fine detail (windows, roofs, railings, foliage, people, text).`
+    : ""
+}
 
 Q1 — AI GENERATION: was this entire image produced by a text-to-image / generative model (e.g. GPT-image, DALL·E, Midjourney, Stable Diffusion, Imagen, Firefly)?
 Modern generators produce photorealistic lighting, plausible composition and consistent textures. Those properties are NOT evidence that an image is a real photograph. Look specifically for:
@@ -117,24 +151,35 @@ Respond ONLY with JSON:
  "manipulation":{"probability":0-100,"indicators":[{"indicator":string,"location":string,"strength":"weak"|"moderate"|"strong"}],"counterIndicators":string[],"rationale":string},
  "summary":string,"limitations":string[]}`;
 
-const STRENGTH: IndicatorStrength[] = ['weak', 'moderate', 'strong'];
+const STRENGTH: IndicatorStrength[] = ["weak", "moderate", "strong"];
 const clamp = (n: any) => Math.max(0, Math.min(100, Number.isFinite(Number(n)) ? Number(n) : 50));
 
-function cleanIndicators(raw?: RawAssessment['indicators']): DetectionIndicator[] {
+function cleanIndicators(raw?: RawAssessment["indicators"]): DetectionIndicator[] {
   return (raw || [])
-    .filter(i => i && i.indicator)
-    .map(i => ({ indicator: String(i.indicator), location: i.location ? String(i.location) : undefined, strength: STRENGTH.includes(i.strength as any) ? (i.strength as IndicatorStrength) : 'weak' }));
+    .filter((i) => i && i.indicator)
+    .map((i) => ({
+      indicator: String(i.indicator),
+      location: i.location ? String(i.location) : undefined,
+      strength: STRENGTH.includes(i.strength as any) ? (i.strength as IndicatorStrength) : "weak",
+    }));
 }
 
 /** Indicators from all samples, de-duplicated by their opening words, strongest kept. */
 function mergeIndicators(lists: DetectionIndicator[][]): DetectionIndicator[] {
   const map = new Map<string, DetectionIndicator>();
-  lists.flat().forEach(i => {
-    const key = i.indicator.toLowerCase().replace(/[^a-z ]/g, '').split(' ').slice(0, 5).join(' ');
+  lists.flat().forEach((i) => {
+    const key = i.indicator
+      .toLowerCase()
+      .replace(/[^a-z ]/g, "")
+      .split(" ")
+      .slice(0, 5)
+      .join(" ");
     const prev = map.get(key);
     if (!prev || STRENGTH.indexOf(i.strength) > STRENGTH.indexOf(prev.strength)) map.set(key, i);
   });
-  return Array.from(map.values()).sort((a, b) => STRENGTH.indexOf(b.strength) - STRENGTH.indexOf(a.strength));
+  return Array.from(map.values()).sort(
+    (a, b) => STRENGTH.indexOf(b.strength) - STRENGTH.indexOf(a.strength),
+  );
 }
 
 /**
@@ -147,43 +192,52 @@ function mergeIndicators(lists: DetectionIndicator[][]): DetectionIndicator[] {
  *  - otherwise inconclusive
  * Visual-only probability is capped at 90; confidence is capped per verdict (85 / 65 / 40 / 55).
  */
-const CAMERA_SPECIFIC = /noise|grain|sensor|aberration|fring|vignett|motion blur|depth of field|bokeh|lens|focus|legible|readable|text|sign|licen[cs]e|landmark|jpeg block/i;
+const CAMERA_SPECIFIC =
+  /noise|grain|sensor|aberration|fring|vignett|motion blur|depth of field|bokeh|lens|focus|legible|readable|text|sign|licen[cs]e|landmark|jpeg block/i;
 
 /** Camera evidence that names a concrete capture trait (not "looks realistic"). */
-export const specificCameraEvidence = (items?: string[]) => (items || []).filter(i => CAMERA_SPECIFIC.test(i));
+export const specificCameraEvidence = (items?: string[]) =>
+  (items || []).filter((i) => CAMERA_SPECIFIC.test(i));
 
-export function calibrate(raw: RawAssessment[], extra: DetectionIndicator[] = [], opts: { requireCameraEvidence?: boolean } = {}): DetectionAssessment {
-  const perSample = raw.map(r => cleanIndicators(r.indicators));
-  if (extra.length) perSample.forEach(list => list.push(...extra));
-  const probs = raw.map(r => clamp(r.probability));
+export function calibrate(
+  raw: RawAssessment[],
+  extra: DetectionIndicator[] = [],
+  opts: { requireCameraEvidence?: boolean } = {},
+): DetectionAssessment {
+  const perSample = raw.map((r) => cleanIndicators(r.indicators));
+  if (extra.length) perSample.forEach((list) => list.push(...extra));
+  const probs = raw.map((r) => clamp(r.probability));
   const mean = probs.reduce((s, p) => s + p, 0) / (probs.length || 1);
   const spread = probs.length > 1 ? Math.max(...probs) - Math.min(...probs) : 20; // one sample: assume moderate uncertainty
-  const good = (l: DetectionIndicator[]) => l.filter(i => i.strength !== 'weak');
-  const strongEnough = (l: DetectionIndicator[]) => l.some(i => i.strength === 'strong') || good(l).length >= 2;
+  const good = (l: DetectionIndicator[]) => l.filter((i) => i.strength !== "weak");
+  const strongEnough = (l: DetectionIndicator[]) =>
+    l.some((i) => i.strength === "strong") || good(l).length >= 2;
   const indicators = mergeIndicators(perSample);
   const goodCount = good(indicators).length;
   const agreement = Math.max(0, 100 - spread);
 
-  let verdict: DetectionAssessment['verdict'];
+  let verdict: DetectionAssessment["verdict"];
   let confidence: number;
   if (spread > 35) {
-    verdict = 'inconclusive';
+    verdict = "inconclusive";
     confidence = Math.min(40, agreement);
   } else if (mean >= 70 && perSample.length > 0 && perSample.every(strongEnough)) {
-    verdict = 'likely';
+    verdict = "likely";
     confidence = Math.min(85, Math.round(agreement * (0.6 + 0.08 * Math.min(4, goodCount))));
   } else if (mean >= 45 && goodCount >= 1) {
-    verdict = 'possible';
+    verdict = "possible";
     confidence = Math.min(65, Math.round(agreement * 0.65));
   } else if (
-    mean <= 25 && perSample.every(l => good(l).length === 0) &&
+    mean <= 25 &&
+    perSample.every((l) => good(l).length === 0) &&
     // For AI generation a clean verdict needs positive evidence of a real camera, not just an absence of artifacts.
-    (!opts.requireCameraEvidence || raw.every(r => specificCameraEvidence(r.cameraEvidence).length > 0))
+    (!opts.requireCameraEvidence ||
+      raw.every((r) => specificCameraEvidence(r.cameraEvidence).length > 0))
   ) {
-    verdict = 'no_indicators_found';
+    verdict = "no_indicators_found";
     confidence = Math.min(55, Math.round(agreement * 0.55)); // absence of evidence is weak evidence
   } else {
-    verdict = 'inconclusive';
+    verdict = "inconclusive";
     confidence = Math.min(40, Math.round(agreement * 0.4));
   }
   return {
@@ -191,49 +245,82 @@ export function calibrate(raw: RawAssessment[], extra: DetectionIndicator[] = []
     probability: Math.round(Math.min(90, mean)),
     confidence,
     indicators,
-    counterIndicators: Array.from(new Set(raw.flatMap(r => [...specificCameraEvidence(r.cameraEvidence), ...(r.counterIndicators || [])]))).slice(0, 6),
+    counterIndicators: Array.from(
+      new Set(
+        raw.flatMap((r) => [
+          ...specificCameraEvidence(r.cameraEvidence),
+          ...(r.counterIndicators || []),
+        ]),
+      ),
+    ).slice(0, 6),
     rationale:
-      opts.requireCameraEvidence && verdict === 'inconclusive' && mean <= 25
-        ? 'The model saw no generation artifacts but could not point to specific evidence of a real camera capture; realism alone does not establish authenticity.'
-        : raw.map(r => r.rationale).filter(Boolean)[0] || '',
-    samples: probs
+      opts.requireCameraEvidence && verdict === "inconclusive" && mean <= 25
+        ? "The model saw no generation artifacts but could not point to specific evidence of a real camera capture; realism alone does not establish authenticity."
+        : raw.map((r) => r.rationale).filter(Boolean)[0] || "",
+    samples: probs,
   };
 }
 
-/** Embedded provenance that declares AI generation outranks visual judgement (metadata can be stripped, rarely faked to claim AI). */
+/** Legacy presentation only: unsigned metadata must never become a classifier probability. */
 export function provenanceAssessment(p: ProvenanceInfo): DetectionAssessment | null {
-  if (!p.declaresAIGenerated) return null;
+  if (!p.declaresAIGenerated || p.verified !== true) return null;
   return {
-    verdict: 'likely',
-    probability: 97,
-    confidence: 95,
-    indicators: [{ indicator: `Embedded provenance metadata declares AI generation${p.generatorHints.length ? ` (${p.generatorHints.join(', ')})` : ''}`, location: 'file metadata', strength: 'strong' }],
+    verdict: "likely",
+    probability: null,
+    confidence: 0,
+    indicators: [
+      {
+        indicator: `Embedded provenance metadata declares AI generation${p.generatorHints.length ? ` (${p.generatorHints.join(", ")})` : ""}`,
+        location: "file metadata",
+        strength: "strong",
+      },
+    ],
     counterIndicators: [],
-    rationale: 'C2PA Content Credentials / IPTC digital-source-type metadata in the file states the image was produced by a generative model.'
+    rationale:
+      "C2PA Content Credentials / IPTC digital-source-type metadata in the file states the image was produced by a generative model.",
   };
 }
 
 /** ELA can support the manipulation question only (never AI generation). */
 export function elaIndicators(elaBlockRatio?: number): DetectionIndicator[] {
   if (!elaBlockRatio || elaBlockRatio <= 4) return [];
-  return [{
-    indicator: `Localized compression inconsistency (ELA: strongest block ${elaBlockRatio.toFixed(1)}× the median)`,
-    location: 'ELA heatmap bright region',
-    strength: elaBlockRatio > 10 ? 'moderate' : 'weak'
-  }];
+  return [
+    {
+      indicator: `Localized compression inconsistency (ELA: strongest block ${elaBlockRatio.toFixed(1)}× the median)`,
+      location: "ELA heatmap bright region",
+      strength: elaBlockRatio > 10 ? "moderate" : "weak",
+    },
+  ];
 }
 
 /** Combine the two assessments into the legacy single verdict used by dashboards and reports. */
 export function overallVerdict(ai: DetectionAssessment, manip: DetectionAssessment) {
   const drive = [ai, manip].sort((a, b) => rank(b.verdict) - rank(a.verdict))[0];
   const authenticity =
-    drive.verdict === 'likely' ? 'likely_synthetic'
-    : drive.verdict === 'possible' ? 'suspicious_artifacts'
-    : ai.verdict === 'no_indicators_found' && manip.verdict === 'no_indicators_found' ? 'likely_authentic'
-    : 'inconclusive';
+    drive.verdict === "likely"
+      ? "likely_synthetic"
+      : drive.verdict === "possible"
+        ? "suspicious_artifacts"
+        : ai.verdict === "no_indicators_found" && manip.verdict === "no_indicators_found"
+          ? "likely_authentic"
+          : "inconclusive";
   const risk =
-    drive.verdict === 'likely' ? ((drive.probability ?? 0) >= 85 && drive.confidence >= 75 ? 'Critical' : 'High')
-    : drive.verdict === 'possible' ? 'Medium' : 'Low';
-  return { authenticity: authenticity as 'likely_synthetic' | 'suspicious_artifacts' | 'inconclusive' | 'likely_authentic', confidence: drive.confidence, risk: risk as 'Critical' | 'High' | 'Medium' | 'Low' };
+    drive.verdict === "likely"
+      ? (drive.probability ?? 0) >= 85 && drive.confidence >= 75
+        ? "Critical"
+        : "High"
+      : drive.verdict === "possible"
+        ? "Medium"
+        : "Low";
+  return {
+    authenticity: authenticity as
+      | "likely_synthetic"
+      | "suspicious_artifacts"
+      | "inconclusive"
+      | "likely_authentic",
+    confidence: drive.confidence,
+    risk: risk as "Critical" | "High" | "Medium" | "Low",
+  };
 }
-const rank = (v: DetectionAssessment['verdict']) => ({ likely: 3, possible: 2, inconclusive: 1, no_indicators_found: 0 })[v];
+const rank = (v: DetectionAssessment["verdict"]) =>
+  ({ likely: 3, possible: 2, inconclusive: 1, no_indicators_found: 0 })[v];

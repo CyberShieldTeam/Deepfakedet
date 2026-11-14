@@ -11,4 +11,9 @@ __pycache__/
 *.pyc
 .model-cache/
 ai_service/models/
+.venv*/
 VERITAS-AI.zip
+
+# Upgrade verification outputs
+test-results/
+playwright-report/

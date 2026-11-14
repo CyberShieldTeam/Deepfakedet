@@ -1,6 +1,6 @@
 # VERITAS AI implementation progress
 
-Updated: 2026-11-14. Working branch: `codex/phase1-audit`. Baseline commit: `fa888241d838de9ce835d2277183add633f28d29`.
+Updated: 2026-11-14. Published model branch: `codex/phase1-audit` at `26de131eef4f745811c9dc9405f21adfb8e4435d`. Local integration branch: `codex/integrate-figma-upgrade` (not pushed; this account has read-only GitHub access). Baseline commit: `fa888241d838de9ce835d2277183add633f28d29`.
 
 ## Checklist
 
@@ -21,6 +21,16 @@ Updated: 2026-11-14. Working branch: `codex/phase1-audit`. Baseline commit: `fa8
 - [ ] Phase 12 — comprehensive QA and CI test gates.
 - [ ] Phase 13 — deployment baseline.
 - [ ] Phase 14 — full operating, model, dataset, and training documentation.
+
+## Cross-branch integration checkpoint — 2026-11-14
+
+- Integrated `figma-veritas-upgrade` into a local branch based on `codex/phase1-audit`; `main` was not modified. The source branches had diverged by six Codex commits and one Figma commit.
+- Retained the Figma security, ownership, atomic repository, evidence retrieval, sparse DBSCAN, professional UI, API, and browser-test architecture.
+- Reattached the pinned Python image/YuNet, AASIST, and bounded video evidence paths through `server/mediaPipeline.ts`. Their raw outputs remain separate experimental evidence and cannot become calibrated verdicts.
+- Extended the validated media contract to accept bounded MP4/MOV/WEBM original-video bytes so server decoding and video-audio extraction survive the secured Figma route.
+- Added shared local-evidence types, model-aware UI panels, original-video upload for clips up to 8 MiB, combined environment documentation, and a cross-branch regression test.
+- Verification on the integrated tree: TypeScript check passed; all legacy, 17 upgrade, local image/audio/video contract, cross-branch integration, and API security tests passed; 20 Python tests passed with two optional real-weight smokes skipped because weights are intentionally absent; production build passed with the existing large-chunk warning; all six Chromium end-to-end tests passed; `git diff --check` passed.
+- No model-accuracy claim follows from this integration. Representative evaluation, calibration, face-manipulation inference, temporal video inference, and trained multimodal fusion remain open.
 
 ## Phase 1 evidence
 

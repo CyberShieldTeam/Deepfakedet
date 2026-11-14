@@ -1,0 +1,159 @@
+import { test, expect } from "@playwright/test";
+import { encodeWav } from "../src/utils/audioSegments";
+
+test("Desktop overview, search, report, and live/demo isolation", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: "Investigation overview." })).toBeVisible();
+  await expect(page.getByText("DEMONSTRATION MODE", { exact: true })).toBeVisible();
+  await expect(page.locator("tbody tr").first()).toBeVisible();
+  await page.screenshot({ path: "test-results/veritas-desktop.png", fullPage: true });
+  await page.getByLabel("Search investigations").fill("nonexistent-case-query");
+  await expect(page.getByText("No matching investigations")).toBeVisible();
+  await page.getByLabel("Search investigations").fill("");
+  await page.getByRole("button", { name: "Export report", exact: true }).click();
+  await expect(page.locator('iframe[title=\"report\"]')).toBeVisible();
+  await expect(
+    page.frameLocator('iframe[title=\"report\"]').getByText("Executive evidence summary"),
+  ).toBeVisible();
+  const downloadPromise = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Download", exact: true }).click();
+  expect((await downloadPromise).suggestedFilename()).toMatch(/\.html$/);
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "Live analysis", exact: true }).click();
+  await expect(page.getByText("LIVE ANALYSIS MODE", { exact: true })).toBeVisible();
+  await expect(page.locator("tbody").getByText("SIMULATED", { exact: true })).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
+test("Real claim input remains unverified and saves to an owner-scoped live case", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Claim intelligence", exact: true }).first().click();
+  await page
+    .locator("textarea")
+    .first()
+    .fill("Live test: a dam near Hyderabad has collapsed. Evacuate now!");
+  await page.getByRole("button", { name: "Check this claim", exact: true }).click();
+  await expect(page.getByText("LIVE ANALYSIS MODE", { exact: true })).toBeVisible();
+  await expect(page.getByText("We couldn't verify this claim", { exact: true })).toBeVisible();
+  await expect(page.getByText("insufficient", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Save to a case", exact: true }).click();
+  await expect(page.getByRole("button", { name: /Saved to SUR-/ })).toBeVisible();
+  const data = await request.get("/api/investigations").then((r) => r.json());
+  for (const inv of data.investigations.filter((i: any) => i.title.startsWith("Claim: Live test:")))
+    await request.delete(`/api/investigations/${inv.id}`);
+});
+
+test("Image measurements are processed without fabricating classifier output", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Media forensics", exact: true }).first().click();
+  const image = await page.evaluate(() => {
+    const c = document.createElement("canvas");
+    c.width = 64;
+    c.height = 64;
+    const ctx = c.getContext("2d")!;
+    ctx.fillStyle = "#346987";
+    ctx.fillRect(0, 0, 64, 64);
+    return c.toDataURL("image/png").split(",")[1];
+  });
+  await page
+    .locator("input[type=file]")
+    .setInputFiles({
+      name: "generated-test-fixture.png",
+      mimeType: "image/png",
+      buffer: Buffer.from(image, "base64"),
+    });
+  await page.getByRole("button", { name: /Check this file/ }).click();
+  await expect(page.getByText("Authenticity remains undetermined", { exact: true })).toBeVisible();
+  await expect(page.getByText("UNAVAILABLE", { exact: true })).toBeVisible();
+  await expect(page.getByText("LIVE ANALYSIS MODE", { exact: true })).toBeVisible();
+});
+
+test("Network sample exposes evidence; mobile navigation fits viewport", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Network intelligence", exact: true }).first().click();
+  await page.getByRole("button", { name: "Try with sample posts", exact: true }).click();
+  await expect(page.getByText("synthetic dataset", { exact: true })).toBeVisible();
+  await expect(page.getByText("Insufficient evidence", { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Inspect @/ }).first()).toBeVisible();
+  await page
+    .getByRole("button", { name: /Inspect @/ })
+    .first()
+    .click();
+  await expect(page.getByText(/Bot likelihood is not estimated/)).toBeVisible();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole("button", { name: "Overview", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Investigation overview." })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
+    true,
+  );
+  await page.screenshot({ path: "test-results/veritas-mobile.png", fullPage: true });
+});
+
+test("Real decoded audio is segmented; no spoofing probability is invented", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Media forensics", exact: true }).first().click();
+  const samples = Float32Array.from(
+    { length: 16000 },
+    (_, i) => 0.3 * Math.sin((2 * Math.PI * 440 * i) / 16000),
+  );
+  await page
+    .locator("input[type=file]")
+    .setInputFiles({
+      name: "test-tone.wav",
+      mimeType: "audio/wav",
+      buffer: Buffer.from(encodeWav(samples, 16000)),
+    });
+  await page.getByRole("button", { name: /Check this file/ }).click();
+  await expect(page.getByText("Authenticity remains undetermined", { exact: true })).toBeVisible();
+  await expect(page.getByText("UNAVAILABLE", { exact: true })).toBeVisible();
+});
+
+test("Real browser video frame extraction reports its actual interval", async ({ page }) => {
+  test.setTimeout(45000);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Media forensics", exact: true }).first().click();
+  const bytes = await page.evaluate(async () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 160;
+    canvas.height = 100;
+    const stream = canvas.captureStream(10),
+      recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
+    const chunks: Blob[] = [];
+    recorder.ondataavailable = (e) => chunks.push(e.data);
+    const done = new Promise<Blob>(
+      (resolve) => (recorder.onstop = () => resolve(new Blob(chunks, { type: "video/webm" }))),
+    );
+    recorder.start();
+    let index = 0;
+    const timer = setInterval(() => {
+      const c = canvas.getContext("2d")!;
+      c.fillStyle = index++ % 2 ? "#285a77" : "#224d6d";
+      c.fillRect(0, 0, 160, 100);
+    }, 100);
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    clearInterval(timer);
+    recorder.stop();
+    const video = await done;
+    stream.getTracks().forEach((t) => t.stop());
+    return Array.from(new Uint8Array(await video.arrayBuffer()));
+  });
+  await page
+    .locator("input[type=file]")
+    .setInputFiles({
+      name: "recorded-test.webm",
+      mimeType: "video/webm",
+      buffer: Buffer.from(bytes),
+    });
+  await page.getByRole("button", { name: /Check this file/ }).click();
+  await expect(page.getByText("Authenticity remains undetermined", { exact: true })).toBeVisible({
+    timeout: 30000,
+  });
+  await expect(
+    page.getByText("Sampled-frame evidence · not a video-level probability", { exact: true }),
+  ).toBeVisible();
+});
