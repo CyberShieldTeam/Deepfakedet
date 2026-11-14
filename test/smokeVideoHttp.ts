@@ -14,21 +14,24 @@ const sampledFrames = await Promise.all([0, 1, 2].map(async i => ({
   timestampSeconds: i + 0.2,
   imageData: `data:image/jpeg;base64,${(await readFile(resolve(`test/fixtures/video/frame_${i}.jpg`))).toString('base64')}`
 })));
+const mediaData = `data:video/mp4;base64,${(await readFile(resolve('test/fixtures/video/test_pattern_3s.mp4'))).toString('base64')}`;
 const response = await fetch(`${apiUrl}/api/forensics/analyze-media`, {
   method: 'POST', headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ modality: 'video', fileName: 'test_pattern_3s.mp4', mimeType: 'video/mp4',
-    measurements: { duration: 3, framesSampled: 3 }, sampledFrames,
+    measurements: { duration: 3, framesSampled: 3 }, mediaData, sampledFrames,
     keyframes: sampledFrames.map(frame => frame.imageData) }),
   signal: AbortSignal.timeout(120_000)
 });
 if (!response.ok) throw new Error(`Express returned ${response.status}: ${await response.text()}`);
 const { result } = await response.json();
 assert.equal(result.engine, 'local_video_frames');
+assert.equal(result.localVideo.scope, 'server_decoded_frames');
 assert.equal(result.authenticity, 'inconclusive');
 assert.equal(result.confidenceScore, 0);
 assert.equal(result.aiGeneratedProbability, null);
-assert.deepEqual(result.localVideo.frames.map((frame: { timestampSeconds: number }) => frame.timestampSeconds), [0.2, 1.2, 2.2]);
+assert.equal(result.localVideo.frames.length, 6);
+assert.equal(result.localVideo.videoMetadata.width, 320);
 assert.ok(result.localVideo.frames.every((frame: { image: { classification: string; model_status: string; fake_probability: number } }) =>
   frame.image.classification === 'INCONCLUSIVE' && frame.image.model_status === 'ready' &&
   frame.image.fake_probability >= 0 && frame.image.fake_probability <= 1));
-console.log('Live video HTTP smoke passed: 3 timestamped frames screened, inconclusive video result.');
+console.log('Live video HTTP smoke passed: original clip decoded to 6 timestamped frames, inconclusive video result.');

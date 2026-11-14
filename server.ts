@@ -11,7 +11,7 @@ import { AI_DIRECT_PROMPT, calibrate, calibrateDirect, elaIndicators, IMAGE_PROM
 import { buildDemoInvestigation, demoPosts, DEMO_TIMELINE, DEMO_VERIFIED_REGISTRY } from './server/demoScenario';
 import { callLocalImage, localImageResult, type LocalImageResponse } from './server/localImage';
 import { callLocalAudio, localAudioResult, type LocalAudioResponse } from './server/localAudio';
-import { callLocalVideoFrames, localVideoResult, type LocalVideoEvidence } from './server/localVideo';
+import { callLocalVideo, callLocalVideoFrames, localVideoResult, type LocalVideoEvidence } from './server/localVideo';
 import { ClaimVerificationResult, ForensicAnalysisResult, Investigation, LiveEvent, ModelRegistryItem, RiskLevel, GroundedSource } from './src/types';
 
 // ---------------------------------------------------------------- Gemini (server-side only)
@@ -574,9 +574,15 @@ app.post('/api/forensics/analyze-media', async (req, res) => {
         console.warn(`[local-audio] ${String(e?.message || e).slice(0, 160)}`);
       }
     }
-    if (modality === 'video' && process.env.VERITAS_AI_SERVICE_URL && sampledFrames) {
+    if (modality === 'video' && process.env.VERITAS_AI_SERVICE_URL && (typeof mediaData === 'string' || sampledFrames)) {
       try {
-        localVideoEvidence = await callLocalVideoFrames(sampledFrames, process.env.VERITAS_AI_SERVICE_URL);
+        if (typeof mediaData === 'string') {
+          try { localVideoEvidence = await callLocalVideo(mediaData, process.env.VERITAS_AI_SERVICE_URL); }
+          catch (e: any) { console.warn(`[local-video-decode] ${String(e?.message || e).slice(0, 160)}`); }
+        }
+        if (!localVideoEvidence && sampledFrames)
+          localVideoEvidence = await callLocalVideoFrames(sampledFrames, process.env.VERITAS_AI_SERVICE_URL);
+        if (!localVideoEvidence) throw new Error('No video frame evidence available');
         if (!geminiUsable()) result = localVideoResult(localVideoEvidence, fileName, measurements, h.findings);
       } catch (e: any) {
         console.warn(`[local-video] ${String(e?.message || e).slice(0, 160)}`);

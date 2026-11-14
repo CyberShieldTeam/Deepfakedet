@@ -54,7 +54,8 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
           {r.localAudio.segments.slice(0, 8).map((s, i) => <div key={i} className="font-mono">{s.start_seconds.toFixed(1)}–{s.end_seconds.toFixed(1)}s · raw spoof output {s.raw_spoof_softmax.toFixed(3)}</div>)}
         </div>}
         {r.localVideo && <div className="space-y-1 text-xs text-slate-400">
-          <div>{r.localVideo.frames.length} sampled frame(s) screened locally. Raw image scores are experimental and were not used for a video verdict.</div>
+          <div>{r.localVideo.frames.length} {r.localVideo.scope === 'server_decoded_frames' ? 'original-video' : 'browser-sampled'} frame(s) screened locally. Raw image scores are experimental and were not used for a video verdict.</div>
+          <div>{r.localVideo.samplingNote}</div>
           {r.localVideo.frames.map((frame, i) => <div key={i} className="font-mono">
             {frame.timestampSeconds.toFixed(1)}s · {frame.image.model_status === 'ready' && frame.image.fake_probability != null
               ? `raw fake-class output ${frame.image.fake_probability.toFixed(3)}` : 'image classifier unavailable'} · {frame.image.face_boxes.length} face candidate(s)
@@ -163,6 +164,7 @@ export const MediaLabView: React.FC<{ attach: AttachFn; active: Investigation | 
       } else if (modality === 'video') {
         const s = await analyzeVideo(file, 16, p => setStage(`Reading video frames… ${Math.round(p * 100)}%`)); setVid(s);
         measurements = s.measurements; keyframes = s.keyframes; sampledFrames = s.sampledFrames;
+        mediaData = await smallDataUrl(file, 8 * 1024 * 1024);
       } else {
         setStage('Listening to the audio…');
         const s = await analyzeAudio(file); setAud(s);
@@ -186,6 +188,9 @@ export const MediaLabView: React.FC<{ attach: AttachFn; active: Investigation | 
   const demoFindings = active?.isSimulatedDemo ? active.mediaFindings || [] : [];
   const shown = demoIdx != null ? demoFindings[demoIdx] : result;
   const faceBoxes = result?.localImage?.face_analysis === 'candidate_regions' ? result.localImage.face_boxes : [];
+  const screenedFrameIndices = new Set(result?.localVideo && vid ? result.localVideo.frames.map(frame =>
+    vid.frames.reduce((best, candidate, index) =>
+      Math.abs(candidate.t - frame.timestampSeconds) < Math.abs(vid.frames[best].t - frame.timestampSeconds) ? index : best, 0)) : []);
   const imageWidth = Number(img?.measurements.width) || 0;
   const imageHeight = Number(img?.measurements.height) || 0;
 
@@ -279,7 +284,7 @@ export const MediaLabView: React.FC<{ attach: AttachFn; active: Investigation | 
                       <div key={i} className={`overflow-hidden rounded border ${f.z > 3 ? 'border-rose-500' : 'border-slate-800'}`}>
                         <img src={f.thumb} className="w-full" alt={`frame ${i}`} />
                         <div className={`px-1 text-[9px] font-mono ${f.z > 3 ? 'text-rose-300' : 'text-slate-500'}`}>{f.t.toFixed(1)}s z{f.z}</div>
-                        {result?.localVideo?.frames.some(frame => Math.abs(frame.timestampSeconds - f.t) < 0.01) &&
+                        {screenedFrameIndices.has(i) &&
                           <div className="px-1 pb-0.5 text-[9px] text-cyan-300">Local frame screened</div>}
                       </div>
                     ))}
