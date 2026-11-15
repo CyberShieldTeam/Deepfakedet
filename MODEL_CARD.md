@@ -1,5 +1,22 @@
 # Image engine model record
 
+## Supplemental provenance and image signals — 2026-11-15
+
+An independent evidence endpoint now validates embedded C2PA with optional SDK 0.39.0,
+separating signature/content binding from explicit operator signer trust. It extracts
+selected editable EXIF fields and bounded FFT/high-pass measurements on received original
+bytes. Missing metadata, generic computer-generated source declarations and residual
+measurements never become AI probabilities or classifier verdicts. This is not PRNU,
+new detector training, or evidence that existing model accuracy improved.
+
+Real SDK/HTTP smokes exercised absent, valid-untrusted, explicit test-trusted, altered
+binding invalid, and remote-only unavailable states; the reserved corpus was untouched.
+Two built-client browser checks passed. Development-mode browser navigation timed out
+before feature assertions and remains unresolved. See
+[provenance and signals](docs/IMAGE_PROVENANCE_AND_SIGNALS.md) and
+`reports/image_evidence_smoke.json` for exact evidence, setup and limits. The classifier
+search pause and production quarantine below remain in force.
+
 ## Advanced evaluation decision gate — 2026-11-15
 
 **PATH B recommended: pause further Phase 2a model searches; Engine 2 implementation

@@ -52,6 +52,10 @@ store and unconfigured external services; they do not measure ML accuracy.
 
 See [the model contract](docs/MODEL_CONTRACT.md) and `.env.example`.
 
+For original-byte C2PA verification, trust configuration and FFT/noise diagnostics, see
+[image provenance and signals](docs/IMAGE_PROVENANCE_AND_SIGNALS.md). These measurements
+do not enable authenticity verdicts or establish improved classifier accuracy.
+
 | Capability | Configuration / behavior |
 |---|---|
 | Image generation/manipulation classifier | `VERITAS_IMAGE_*`; null probabilities until a suitable trained model responds |
@@ -59,7 +63,8 @@ See [the model contract](docs/MODEL_CONTRACT.md) and `.env.example`.
 | Multilingual SBERT | `VERITAS_EMBEDDING_*`; may be locally hosted; lexical fallback is explicit |
 | Fact-check retrieval | `GOOGLE_FACT_CHECK_API_KEY`; real Google Fact Check Tools reviews, source URLs/dates when provided |
 | Explanation and translation | `APP_GEMINI_API_KEY`, optional `GEMINI_MODEL`; never supplies classifier probabilities or factual verdicts |
-| C2PA cryptographic verification | Not installed; byte markers are unverified hints only |
+| C2PA cryptographic verification | Optional pinned Python SDK, `ai_service/requirements-provenance.txt`; separate signature/binding and signer-trust results; no AI probability |
+| Image signal diagnostics | Python `/v1/image/evidence`; original-byte EXIF and bounded FFT/noise measurements, independent of classifier availability |
 
 An existing `GEMINI_API_KEY` in the repository's own `.env` remains compatible. Platform-reserved
 provider environment variables are not consumed as fallback credentials. New deployments should

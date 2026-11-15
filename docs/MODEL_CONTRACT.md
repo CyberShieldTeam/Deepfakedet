@@ -100,5 +100,11 @@ keys may be missed; this is not an exhaustive semantic nearest-neighbor search.
 - Temperature scaling requires a positive fitted temperature and a held-out calibration
   reference. Otherwise probabilities are labeled uncalibrated and no accuracy/confidence
   estimate is fabricated. No calibration set or accuracy benchmark ships with this project.
-- C2PA byte scans remain **unverified metadata hints**. A cryptographic verification
-  library/trust policy is not installed; metadata never supplies a probability.
+- Browser C2PA byte scans remain **unverified metadata hints**. Optional server
+  `/v1/image/evidence` uses pinned `c2pa-python==0.39.0` on separately supplied original
+  image bytes and distinguishes absent / valid-untrusted / valid-trusted / invalid /
+  unavailable / failed. Only operator-managed trust anchors can authorize the trusted
+  label; uploaded certificates are never automatically trusted. Remote manifest and
+  OCSP fetching are disabled, so revocation freshness is not assured. Separate EXIF
+  and max512 FFT/noise measurements never supply a probability. See
+  [image evidence](IMAGE_PROVENANCE_AND_SIGNALS.md) for limits and actual verification.

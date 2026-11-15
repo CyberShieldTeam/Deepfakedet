@@ -4,7 +4,7 @@ Updated: 2026-11-15. Published model branch: `codex/phase1-audit` at `26de131eef
 
 ## Checklist
 
-Latest decision (2026-11-15): **PATH B recommended. Pause further Phase 2a model searches;
+Classifier-search decision (2026-11-15): **PATH B recommended. Pause further Phase 2a model searches;
 Engine 2 implementation awaits explicit approval.** This closes the bounded advanced
 evaluation/decision task, not Phase 2a validation or production readiness. New evidence
 and proposed gates: `docs/ADVANCED_IMAGE_MODEL_EVALUATION.md`.
@@ -26,6 +26,34 @@ and proposed gates: `docs/ADVANCED_IMAGE_MODEL_EVALUATION.md`.
 - [ ] Phase 12 — comprehensive QA and CI test gates.
 - [ ] Phase 13 — deployment baseline.
 - [ ] Phase 14 — full operating, model, dataset, and training documentation.
+
+## C2PA/metadata and image signal diagnostics — 2026-11-15
+
+- User explicitly selected this slice after sharing a forensic-methods attachment and
+  article. Added independent Python `/v1/image/evidence`, optional pinned C2PA SDK 0.39.0,
+  explicit signer trust, original-byte validation and bounded EXIF/FFT/noise measurements.
+  Existing image classifier, face/audio/video implementations and inconclusive policy
+  are preserved. No model search, training, Engine 2 implementation or reserved-data
+  access occurred.
+- Added optional original-byte transport alongside resized classifier input, strict
+  Express validation, typed evidence responses, UI and escaped report export. Missing
+  EXIF/C2PA and generic `algorithmicMedia` are not turned into AI verdicts. Remote
+  manifests/OCSP are not fetched; test certificates are never production trust defaults.
+- Actual SDK smoke: unsigned absent, signed valid-untrusted, explicitly test-trusted
+  valid-trusted, changed image binding invalid, remote-only unavailable. All three
+  unsigned/signed/altered HTTP cases matched while sending a separate classifier resize;
+  no decision probability. `reports/image_evidence_smoke.json` retains hashes/results.
+- Checks: full Python 39 tests, 38 passed and one AASIST-weight skip; final seven image
+  evidence tests also passed. Node/API, TypeScript, build, pip check and existing real
+  YuNet HTTP smoke passed. Two browser upload tests passed against the built client and
+  real Express/Python API; screenshot inspected. Two development-server browser runs
+  timed out during initial navigation before feature assertions. Font isolation alone
+  did not resolve that; built-client validation bypassed Vite middleware, without fixing
+  or claiming resolution of development navigation. Existing build chunk warning remains.
+- Full scope, setup, limitations, method corrections and next research boundaries:
+  `docs/IMAGE_PROVENANCE_AND_SIGNALS.md`. This is provenance/measurement software, not
+  validated image detection or completed Phase 2a. No remote push/merge.
+  Local implementation commit: `fc836c1`.
 
 ## Advanced image evaluation decision — 2026-11-15
 
