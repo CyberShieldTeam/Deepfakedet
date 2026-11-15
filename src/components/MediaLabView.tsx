@@ -49,6 +49,11 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
         <div><div className={`text-sm font-semibold ${cls}`}>{label}</div><p className="mt-1 text-xs text-slate-400">{r.headlineSummary}</p></div>
         {r.engineNote && <div className="rounded border border-slate-800 bg-slate-950/50 p-2 text-[11px] text-slate-400">{r.engineNote}</div>}
         {r.localImage && <div className="text-xs text-slate-400">{r.localImage.model_status === 'ready' ? `Experimental local model: ${r.localImage.model} · raw fake-class score ${r.localImage.fake_probability == null ? 'n/a' : `${Math.round(r.localImage.fake_probability * 100)}%`} (not calibrated or used as a verdict)` : 'Whole-image classifier did not run'} · {r.localImage.processing_ms} ms · {r.localImage.face_boxes.length} unverified face candidate(s)</div>}
+        {r.originalImageProvenance && <div className="text-xs text-slate-400">
+          Original-file C2PA: {r.originalImageProvenance.status}. {r.originalImageProvenance.note}
+          {r.originalImageProvenance.aiDeclaration && <div>Active manifest declares AI generation; this is a provenance claim, not an image-authenticity verdict.</div>}
+          <div>EXIF: {r.originalImageProvenance.exif.present ? 'present' : 'absent'}{r.originalImageProvenance.exif.software ? ` · software ${r.originalImageProvenance.exif.software}` : ''}. Missing metadata proves nothing.</div>
+        </div>}
         {r.localAudio && <div className="space-y-1 text-xs text-slate-400">
           <div>Experimental AASIST speech screening · {r.localAudio.segments.length} scored segment(s) · {r.localAudio.processing_ms} ms. Raw softmax values are not calibrated or used as a verdict.</div>
           {r.localAudio.segments.slice(0, 8).map((s, i) => <div key={i} className="font-mono">{s.start_seconds.toFixed(1)}–{s.end_seconds.toFixed(1)}s · raw spoof output {s.raw_spoof_softmax.toFixed(3)}</div>)}
@@ -175,11 +180,12 @@ export const MediaLabView: React.FC<{ attach: AttachFn; active: Investigation | 
     if (!file || !modality) return;
     setBusy(true); setError(''); setResult(null); setSaved('');
     try {
-      let measurements: any, mediaData: string | undefined, keyframes: string[] | undefined, sampledFrames: VideoSignals['sampledFrames'] | undefined, detailTiles: string[] | undefined;
+      let measurements: any, mediaData: string | undefined, originalImageData: string | undefined, keyframes: string[] | undefined, sampledFrames: VideoSignals['sampledFrames'] | undefined, detailTiles: string[] | undefined;
       if (modality === 'image') {
         setStage('Looking at the image…');
         const s = await analyzeImage(file); setImg(s); setView('ela');
         measurements = s.measurements; mediaData = s.previewDataUrl; detailTiles = s.detailTiles;
+        originalImageData = await smallDataUrl(file, 8 * 1024 * 1024);
       } else if (modality === 'video') {
         const s = await analyzeVideo(file, 16, p => setStage(`Reading video frames… ${Math.round(p * 100)}%`)); setVid(s);
         measurements = s.measurements; keyframes = s.keyframes; sampledFrames = s.sampledFrames;
@@ -190,7 +196,7 @@ export const MediaLabView: React.FC<{ attach: AttachFn; active: Investigation | 
         measurements = s.measurements; mediaData = await smallDataUrl(file);
       }
       setStage('Asking the AI checker… (usually 10–30 seconds)');
-      setResult(await analyzeMedia({ modality, fileName: file.name, mimeType: file.type, measurements, mediaData, keyframes, sampledFrames, detailTiles }));
+      setResult(await analyzeMedia({ modality, fileName: file.name, mimeType: file.type, measurements, mediaData, originalImageData, keyframes, sampledFrames, detailTiles }));
     } catch (e: any) {
       setError(e.message || 'The check failed. Please try again.');
     } finally {

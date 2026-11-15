@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
-    "test": "tsx test/forensics.test.ts && tsx test/localImage.test.ts && tsx test/localAudio.test.ts && tsx test/localVideo.test.ts && tsx test/videoFaces.test.ts",
+    "test": "tsx test/forensics.test.ts && tsx test/localImage.test.ts && tsx test/imageProvenance.test.ts && tsx test/localAudio.test.ts && tsx test/localVideo.test.ts && tsx test/videoFaces.test.ts",
     "smoke:image:http": "tsx test/smokeImageHttp.ts",
     "smoke:audio:http": "tsx test/smokeAudioHttp.ts",
     "smoke:video:http": "tsx test/smokeVideoHttp.ts",

@@ -79,6 +79,7 @@ export interface ForensicAnalysisResult {
   /** Images: was a real image edited / spliced? */
   manipulation?: DetectionAssessment;
   provenance?: ProvenanceInfo;
+  originalImageProvenance?: { status: 'absent' | 'valid' | 'trusted' | 'invalid' | 'unknown' | 'unavailable'; note: string; aiDeclaration: boolean; claimGenerator?: string | null; exif: { present: boolean; software: string | null } };
   /** Raw local whole-image classifier output; probability is not calibrated confidence. */
   localImage?: { classification: 'REAL' | 'MANIPULATED' | 'INCONCLUSIVE'; fake_probability: number | null; model_confidence: number | null; model_status: 'ready' | 'unavailable' | 'skipped'; model: string; revision: string; scope: string; face_analysis: string; face_boxes: { x: number; y: number; width: number; height: number; confidence: number }[]; signals: string[]; explanation: string; processing_ms: number };
   /** Experimental AASIST speech anti-spoofing evidence, never a calibrated verdict. */

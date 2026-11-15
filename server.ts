@@ -10,6 +10,7 @@ import { analyzeCampaign, detectScriptLanguage, jaccard, parseCSV, tokenize } fr
 import { AI_DIRECT_PROMPT, calibrate, calibrateDirect, elaIndicators, IMAGE_PROMPT, overallVerdict, provenanceAssessment, RawDirectProbe, RawImageSample } from './server/imageDetection';
 import { buildDemoInvestigation, demoPosts, DEMO_TIMELINE, DEMO_VERIFIED_REGISTRY } from './server/demoScenario';
 import { callLocalImage, localImageResult, type LocalImageResponse } from './server/localImage';
+import { callImageProvenance, type ImageProvenance } from './server/imageProvenance';
 import { callLocalAudio, localAudioResult, type LocalAudioResponse } from './server/localAudio';
 import { callLocalVideo, callLocalVideoFrames, localVideoResult, type LocalVideoEvidence } from './server/localVideo';
 import { ClaimVerificationResult, ForensicAnalysisResult, Investigation, LiveEvent, ModelRegistryItem, RiskLevel, GroundedSource } from './src/types';
@@ -547,7 +548,7 @@ async function geminiImageAnalysis(fileName: string, mediaData: string, measurem
 
 app.post('/api/forensics/analyze-media', async (req, res) => {
   try {
-    const { modality = 'image', fileName = 'upload', mimeType, measurements = {}, mediaData, keyframes, sampledFrames, detailTiles } = req.body || {};
+    const { modality = 'image', fileName = 'upload', mimeType, measurements = {}, mediaData, originalImageData, keyframes, sampledFrames, detailTiles } = req.body || {};
     if (!['image', 'video', 'audio'].includes(modality)) return res.status(400).json({ error: 'modality must be image | video | audio' });
     const h = heuristicMedia(modality, measurements);
 
@@ -556,6 +557,11 @@ app.post('/api/forensics/analyze-media', async (req, res) => {
     let localEvidence: LocalImageResponse | null = null;
     let localAudioEvidence: LocalAudioResponse | null = null;
     let localVideoEvidence: LocalVideoEvidence | null = null;
+    let originalProvenance: ImageProvenance | null = null;
+    if (modality === 'image' && process.env.VERITAS_AI_SERVICE_URL && typeof originalImageData === 'string') {
+      try { originalProvenance = await callImageProvenance(originalImageData, process.env.VERITAS_AI_SERVICE_URL); }
+      catch (e: any) { console.warn(`[image-provenance] ${String(e?.message || e).slice(0, 160)}`); }
+    }
     if (modality === 'image' && process.env.VERITAS_AI_SERVICE_URL && typeof mediaData === 'string') {
       try {
         const local = await callLocalImage(mediaData, process.env.VERITAS_AI_SERVICE_URL);
@@ -703,6 +709,11 @@ Be calibrated: if evidence is weak say "inconclusive". Respond ONLY with JSON:
         result.modelsUsed.push({ name: 'AASIST', version: localVideoEvidence.audioTrack.evidence!.revision, provider: 'Experimental video-audio evidence; no verdict' });
         result.limitations.push('Video AASIST segment scores were uncalibrated, speech presence was not verified, and they did not determine this verdict.');
       }
+    }
+    if (originalProvenance) {
+      result.originalImageProvenance = originalProvenance;
+      result.detailedFindings.push(`Original-file C2PA: ${originalProvenance.status}${originalProvenance.aiDeclaration ? '; active manifest declares AI generation' : ''}.`);
+      result.limitations.push('C2PA validates a signed provenance claim, not the truth of the depicted event. Missing credentials do not establish authenticity.');
     }
     if (result.riskLevel === 'High' || result.riskLevel === 'Critical')
       raiseAlert('suspicious_media', result.riskLevel === 'Critical' ? 'critical' : 'high', `Suspicious ${modality} detected`, `${fileName}: ${result.headlineSummary}`, false);

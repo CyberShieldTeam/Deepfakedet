@@ -15,7 +15,8 @@ async function analyze(relativePath: string, mimeType: string) {
     body: JSON.stringify({
       modality: 'image', fileName: relativePath.split(/[\\/]/).at(-1), mimeType,
       measurements: { elaScore: 0 },
-      mediaData: `data:${mimeType};base64,${bytes.toString('base64')}`
+      mediaData: `data:${mimeType};base64,${bytes.toString('base64')}`,
+      originalImageData: `data:${mimeType};base64,${bytes.toString('base64')}`
     }),
     signal: AbortSignal.timeout(60_000)
   });
@@ -32,6 +33,8 @@ async function analyze(relativePath: string, mimeType: string) {
   if (expectReady) assert.ok(result.localImage.fake_probability >= 0 && result.localImage.fake_probability <= 1);
   else assert.equal(result.localImage.fake_probability, null);
   assert.ok(result.localImage.processing_ms > 0);
+  assert.equal(result.originalImageProvenance.status, 'absent');
+  assert.equal(result.originalImageProvenance.aiDeclaration, false);
   return result.localImage;
 }
 

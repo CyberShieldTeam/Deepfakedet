@@ -10,3 +10,4 @@ numpy>=2,<3
 soundfile>=0.12,<1
 scipy>=1.14,<2
 imageio-ffmpeg>=0.6,<1
+c2pa-python==0.39.0
