@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 const apiUrl = process.env.VERITAS_BASE_URL || 'http://127.0.0.1:3002';
 const modelUrl = process.env.VERITAS_AI_SERVICE_URL || 'http://127.0.0.1:8001';
 const expectReady = process.env.VERITAS_EXPECT_MODEL_READY !== '0';
+const expectFaceReady = process.env.VERITAS_EXPECT_FACE_MODEL_READY === '1';
 
 async function analyze(relativePath: string, mimeType: string) {
   const bytes = await readFile(resolve(relativePath));
@@ -43,6 +44,7 @@ assert.equal(healthResponse.status, 200);
 const health = await healthResponse.json();
 assert.equal(health.status, expectReady ? 'ready' : 'unavailable', health.reason);
 assert.equal(health.face_detector, 'ready');
+if (expectFaceReady) assert.equal(health.face_classifier.status, 'ready', health.face_classifier.reason);
 
 const landscape = await analyze('test/fixtures/eval/genuine/charminar_nikon_d60_2013.jpg', 'image/jpeg');
 assert.equal(landscape.face_analysis, 'none_found');
@@ -51,4 +53,10 @@ assert.equal(landscape.face_boxes.length, 0);
 const portrait = await analyze('test/fixtures/face/headshot_cc0.jpg', 'image/jpeg');
 assert.equal(portrait.face_analysis, 'candidate_regions');
 assert.ok(portrait.face_boxes.length > 0);
+if (expectFaceReady) {
+  assert.equal(portrait.face_model.status, 'ready');
+  assert.equal(portrait.face_model.faces.length, 1);
+  assert.ok(portrait.face_model.faces[0].rawFakeSoftmax >= 0 && portrait.face_model.faces[0].rawFakeSoftmax <= 1);
+  assert.equal(landscape.face_model.status, 'not_applicable');
+}
 console.log(`Live image HTTP smoke passed: Express → Python ${expectReady ? 'inference' : 'face-only screening'}, inconclusive verdict, YuNet face candidates.`);

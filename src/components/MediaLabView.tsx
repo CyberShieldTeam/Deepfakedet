@@ -49,6 +49,9 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
         <div><div className={`text-sm font-semibold ${cls}`}>{label}</div><p className="mt-1 text-xs text-slate-400">{r.headlineSummary}</p></div>
         {r.engineNote && <div className="rounded border border-slate-800 bg-slate-950/50 p-2 text-[11px] text-slate-400">{r.engineNote}</div>}
         {r.localImage && <div className="text-xs text-slate-400">{r.localImage.model_status === 'ready' ? `Experimental local model: ${r.localImage.model} · raw fake-class score ${r.localImage.fake_probability == null ? 'n/a' : `${Math.round(r.localImage.fake_probability * 100)}%`} (not calibrated or used as a verdict)` : 'Whole-image classifier did not run'} · {r.localImage.processing_ms} ms · {r.localImage.face_boxes.length} unverified face candidate(s)</div>}
+        {r.localImage?.face_model?.status === 'ready' && <div className="text-xs text-slate-400">
+          Experimental face-crop screening: {r.localImage.face_model.faces.map(face => `face ${face.boxIndex + 1} raw fake-class output ${face.rawFakeSoftmax.toFixed(3)}`).join(' · ')}. These values are uncalibrated and do not determine manipulation or authenticity.
+        </div>}
         {r.originalImageProvenance && <div className="text-xs text-slate-400">
           Original-file C2PA: {r.originalImageProvenance.status}. {r.originalImageProvenance.note}
           {r.originalImageProvenance.aiDeclaration && <div>Active manifest declares AI generation; this is a provenance claim, not an image-authenticity verdict.</div>}
@@ -71,6 +74,7 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
             {frame.timestampSeconds.toFixed(1)}s · {frame.image.model_status === 'ready' && frame.image.fake_probability != null
               ? `raw fake-class output ${frame.image.fake_probability.toFixed(3)}` : 'image classifier unavailable'} · {frame.image.face_boxes.length} face candidate(s)
             {frame.quality && <span> · detail {frame.quality.laplacianVariance.toFixed(1)}, luma {frame.quality.meanLuma.toFixed(0)}, clipped {(frame.quality.clippedFraction * 100).toFixed(1)}% (selection heuristics)</span>}
+            {frame.image.face_model?.status === 'ready' && <div className="pl-3 text-slate-500">Face-crop raw fake-class outputs: {frame.image.face_model.faces.map(face => `#${face.boxIndex + 1} ${face.rawFakeSoftmax.toFixed(3)}`).join(', ')}. No manipulation verdict.</div>}
             {frame.temporal?.status === 'measured' && <div className="pl-3 text-slate-500">
               Adjacent {frame.temporal.startSeconds!.toFixed(2)}–{frame.temporal.endSeconds!.toFixed(2)}s · median flow {frame.temporal.medianFlowPixels!.toFixed(2)} px · round-trip error {frame.temporal.meanRoundTripErrorPixels!.toFixed(2)} px · local residual {frame.temporal.maxTileResidual!.toFixed(1)}/255. Motion evidence only; no manipulation verdict.
             </div>}

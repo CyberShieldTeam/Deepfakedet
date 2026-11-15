@@ -2,7 +2,7 @@ import assert from 'assert';
 import { callLocalImage, localImageResult, type LocalImageResponse } from '../server/localImage';
 
 const raw: LocalImageResponse = {
-  classification: 'MANIPULATED', fake_probability: 0.96, model_confidence: null, model_status: 'ready',
+  classification: 'INCONCLUSIVE', fake_probability: 0.96, model_confidence: null, model_status: 'ready',
   model: 'dima806/ai_vs_real_image_detection', revision: 'test-revision',
   scope: 'general_ai_generated_image', face_analysis: 'not_performed', face_boxes: [], signals: [],
   explanation: 'Whole-image classifier', processing_ms: 42
@@ -16,7 +16,8 @@ const result = await callLocalImage(image, 'http://127.0.0.1:8001', fetcher as t
 assert.deepEqual(result, raw);
 const mapped = localImageResult(result, 'sample.png', { elaScore: 5 }, []);
 assert.equal(mapped.engine, 'local_pretrained');
-assert.equal(mapped.aiGeneratedProbability, 96);
+assert.equal(mapped.aiGeneratedProbability, null);
+assert.equal(mapped.authenticity, 'inconclusive');
 assert.equal(mapped.confidenceScore, 0, 'uncalibrated score must not be called confidence');
 assert.equal(mapped.localImage?.face_analysis, 'not_performed');
 const experimental = localImageResult({ ...raw, classification: 'INCONCLUSIVE' }, 'sample.png', {}, []);
@@ -35,4 +36,12 @@ await assert.rejects(callLocalImage(image, 'http://127.0.0.1:8001', (async () =>
 await assert.rejects(callLocalImage(image, 'http://127.0.0.1:8001', (async () => new Response(JSON.stringify({ ...raw, fake_probability: 5 }))) as typeof fetch));
 await assert.rejects(callLocalImage(image, 'http://127.0.0.1:8001', (async () => new Response(JSON.stringify({ ...raw, face_boxes: null }))) as typeof fetch));
 await assert.rejects(callLocalImage(image, 'http://127.0.0.1:8001', (async () => new Response(JSON.stringify({ ...raw, model_status: 'unavailable' }))) as typeof fetch));
+await assert.rejects(callLocalImage(image, 'http://127.0.0.1:8001', (async () => new Response(JSON.stringify({ ...raw, classification: 'MANIPULATED' }))) as typeof fetch));
+const withFace = { ...raw, face_analysis: 'candidate_regions', face_boxes: [{ x: 1, y: 2, width: 80, height: 80, confidence: 0.95 }],
+  face_model: { status: 'ready', model: 'sakshamkr1/deitfake-v2', revision: 'test', faces: [{ boxIndex: 0, rawFakeSoftmax: 0.9 }], note: 'Raw output' } };
+const faceResult = localImageResult(withFace as LocalImageResponse, 'face.jpg', {}, []);
+assert.equal(faceResult.authenticity, 'inconclusive');
+assert.equal(faceResult.manipulation, undefined);
+assert.ok(faceResult.modelsUsed.some(model => model.name === 'sakshamkr1/deitfake-v2'));
+await assert.rejects(callLocalImage(image, 'http://127.0.0.1:8001', (async () => new Response(JSON.stringify({ ...withFace, face_model: { ...withFace.face_model, faces: [{ boxIndex: 0, rawFakeSoftmax: 2 }] } }))) as typeof fetch));
 console.log('Local image contract tests passed');

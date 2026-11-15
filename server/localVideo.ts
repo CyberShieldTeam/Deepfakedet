@@ -108,6 +108,7 @@ export async function callLocalVideoFrames(input: unknown, endpoint: string, fet
 
 export function localVideoResult(evidence: LocalVideoEvidence, fileName: string, measurements: Record<string, any>, signalFindings: string[]): ForensicAnalysisResult {
   const firstModel = evidence.frames.find(frame => frame.image.model_status === 'ready')?.image;
+  const faceModel = evidence.frames.find(frame => frame.image.face_model?.status === 'ready')?.image.face_model;
   const faceDetectorRan = evidence.frames.some(frame => frame.image.face_analysis !== 'not_performed');
   const source = evidence.scope === 'server_decoded_frames' ? 'original-video' : 'browser-sampled';
   const audioScored = evidence.audioTrack?.status === 'analyzed';
@@ -124,6 +125,7 @@ export function localVideoResult(evidence: LocalVideoEvidence, fileName: string,
       : 'Frames were sampled and JPEG-compressed in the browser; the original video was not decoded by the server.',
       'The whole-image checkpoint failed an initial out-of-domain smoke check; raw scores cannot establish authenticity.',
       'Face candidate continuity is a geometric association only; it cannot verify identity or detect a face swap.',
+      ...(faceModel ? ['Face-crop frame scores are uncalibrated and cannot establish video manipulation or authenticity.'] : []),
       evidence.frames.some(frame => frame.temporal?.status === 'measured')
         ? 'Adjacent-frame optical-flow measurements are exploratory, not a trained or validated temporal manipulation detector.'
         : 'No temporal manipulation detector was run.',
@@ -134,6 +136,7 @@ export function localVideoResult(evidence: LocalVideoEvidence, fileName: string,
       notes: 'No image ELA was performed on the video frames.' },
     modelsUsed: [...(firstModel ? [{ name: firstModel.model, version: firstModel.revision, provider: 'Experimental local image checkpoint; no verdict' }] : []),
       ...(faceDetectorRan ? [{ name: 'YuNet face detector', version: '2023mar', provider: 'OpenCV Zoo' }] : []),
+      ...(faceModel ? [{ name: faceModel.model, version: faceModel.revision, provider: 'Experimental frame face-crop evidence; no verdict' }] : []),
       ...(audioScored ? [{ name: 'AASIST', version: evidence.audioTrack!.evidence!.revision, provider: 'Experimental video-audio evidence; no verdict' }] : [])],
     measurements, analyzedAt: new Date().toISOString(), localVideo: evidence
   };

@@ -566,7 +566,7 @@ app.post('/api/forensics/analyze-media', async (req, res) => {
       try {
         const local = await callLocalImage(mediaData, process.env.VERITAS_AI_SERVICE_URL);
         localEvidence = local;
-        if (local.classification !== 'INCONCLUSIVE' || !geminiUsable()) {
+        if (!geminiUsable()) {
           result = localImageResult(local, fileName, measurements, h.findings);
           result.provenance = provenanceFrom(measurements);
         }
@@ -692,6 +692,10 @@ Be calibrated: if evidence is weak say "inconclusive". Respond ONLY with JSON:
       }
       if (localEvidence.face_analysis !== 'not_performed')
         result.modelsUsed.push({ name: 'YuNet face detector', version: '2023mar', provider: 'OpenCV Zoo' });
+      if (localEvidence.face_model?.status === 'ready') {
+        result.modelsUsed.push({ name: localEvidence.face_model.model, version: localEvidence.face_model.revision, provider: 'Experimental face-crop checkpoint; no verdict' });
+        result.limitations.push('Face-crop scores are uncalibrated and did not determine this verdict.');
+      }
     }
     if (localAudioEvidence && result && !result.localAudio) {
       result.localAudio = localAudioEvidence;
