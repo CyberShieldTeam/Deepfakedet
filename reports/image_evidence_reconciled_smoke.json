@@ -1,0 +1,352 @@
+{
+  "scope": "software_smoke_not_accuracy",
+  "python": "3.13.12",
+  "sdk": "0.39.0",
+  "fixtures_revision": "48d07023d4f37e978c5b30745b49b26668774b08",
+  "fixtures_source": "https://github.com/contentauth/c2pa-python/tree/48d07023d4f37e978c5b30745b49b26668774b08/tests/fixtures",
+  "test_anchor_sha256": "05d6db32de9317f2c8c468bb205a115a6c3b6388fa0b452f92b59711bab94cff",
+  "note": "Published test certificate trusted only within this smoke; never configure it in production. Reserved data not accessed.",
+  "results": {
+    "unsigned": {
+      "sha256": "f999fd78bfe8a83c96e468a078830ba94485bc1bc6fd086fb94a43bd29dd0f23",
+      "scope": "image_provenance_and_signals",
+      "classification": "INCONCLUSIVE",
+      "decision_probability": null,
+      "metadata": {
+        "width": 1024,
+        "height": 683,
+        "format": "JPEG",
+        "exif_present": true,
+        "fields": {
+          "camera_make": "Canon",
+          "camera_model": "Canon EOS REBEL T3",
+          "software": "Adobe Lightroom 5.3 (Macintosh)",
+          "exposure_seconds": "0.016666666666666666",
+          "f_number": "5.6",
+          "iso": "800",
+          "lens_model": "EF-S18-55mm f/3.5-5.6 IS II"
+        },
+        "fields_verified": false,
+        "note": "Editable metadata; absent camera fields are not evidence of AI generation."
+      },
+      "c2pa": {
+        "status": "absent",
+        "sdk": "c2pa-python@0.39.0",
+        "trust_policy": "none",
+        "validation_state": null,
+        "validation_codes": [],
+        "source_types": [],
+        "ai_disclosure": "not_assessed",
+        "signer": null,
+        "note": "Embedded credentials only; remote manifest and OCSP fetching disabled. No authenticity verdict."
+      },
+      "signals": {
+        "status": "measured",
+        "analysis_width": 512,
+        "analysis_height": 342,
+        "high_frequency_energy_fraction": 0.00541805,
+        "noise_residual_std": 3.677207,
+        "laplacian_variance": 123.381717,
+        "note": "Descriptive FFT/high-pass measurements after max512 resize. Not PRNU extraction, an AI score or a calibrated detector."
+      },
+      "note": "Metadata and signal measurements do not establish authenticity. Missing credentials prove nothing."
+    },
+    "signed": {
+      "sha256": "4cbac1af485155f878d12a610da851c2938f2ce886189c61d9da7a0a43bd00b5",
+      "scope": "image_provenance_and_signals",
+      "classification": "INCONCLUSIVE",
+      "decision_probability": null,
+      "metadata": {
+        "width": 2048,
+        "height": 1365,
+        "format": "JPEG",
+        "exif_present": false,
+        "fields": {},
+        "fields_verified": false,
+        "note": "Editable metadata; absent camera fields are not evidence of AI generation."
+      },
+      "c2pa": {
+        "status": "valid_untrusted",
+        "sdk": "c2pa-python@0.39.0",
+        "trust_policy": "none",
+        "validation_state": "Valid",
+        "validation_codes": [
+          "assertion.dataHash.match",
+          "assertion.hashedURI.match",
+          "claimSignature.insideValidity",
+          "claimSignature.validated",
+          "signingCredential.ocsp.skipped",
+          "signingCredential.untrusted",
+          "timeStamp.trusted",
+          "timeStamp.validated"
+        ],
+        "source_types": [
+          "http://cv.iptc.org/newscodes/digitalsourcetype/algorithmicMedia"
+        ],
+        "ai_disclosure": "not_declared",
+        "signer": "C2PA Test Signing Cert",
+        "note": "Embedded credentials only; remote manifest and OCSP fetching disabled. No authenticity verdict.",
+        "claim_generator": "make_test_images/0.26.0 c2pa-rs/0.26.0"
+      },
+      "signals": {
+        "status": "measured",
+        "analysis_width": 512,
+        "analysis_height": 341,
+        "high_frequency_energy_fraction": 0.00017016,
+        "noise_residual_std": 0.235538,
+        "laplacian_variance": 0.788134,
+        "note": "Descriptive FFT/high-pass measurements after max512 resize. Not PRNU extraction, an AI score or a calibrated detector."
+      },
+      "note": "Metadata and signal measurements do not establish authenticity. Missing credentials prove nothing."
+    },
+    "altered": {
+      "sha256": "b31699e6d9c9c5084c5f8db89eb12cb83d6b9aa65eb52918bc3815f71b8dee93",
+      "scope": "image_provenance_and_signals",
+      "classification": "INCONCLUSIVE",
+      "decision_probability": null,
+      "metadata": {
+        "width": 2048,
+        "height": 1365,
+        "format": "JPEG",
+        "exif_present": false,
+        "fields": {},
+        "fields_verified": false,
+        "note": "Editable metadata; absent camera fields are not evidence of AI generation."
+      },
+      "c2pa": {
+        "status": "invalid",
+        "sdk": "c2pa-python@0.39.0",
+        "trust_policy": "none",
+        "validation_state": "Invalid",
+        "validation_codes": [
+          "assertion.dataHash.mismatch",
+          "assertion.hashedURI.match",
+          "claimSignature.insideValidity",
+          "claimSignature.validated",
+          "signingCredential.ocsp.skipped",
+          "signingCredential.untrusted",
+          "timeStamp.trusted",
+          "timeStamp.validated"
+        ],
+        "source_types": [
+          "http://cv.iptc.org/newscodes/digitalsourcetype/algorithmicMedia"
+        ],
+        "ai_disclosure": "not_assessed",
+        "signer": "C2PA Test Signing Cert",
+        "note": "Embedded credentials only; remote manifest and OCSP fetching disabled. No authenticity verdict.",
+        "claim_generator": "make_test_images/0.26.0 c2pa-rs/0.26.0"
+      },
+      "signals": {
+        "status": "measured",
+        "analysis_width": 512,
+        "analysis_height": 341,
+        "high_frequency_energy_fraction": 0.00016801,
+        "noise_residual_std": 1.337263,
+        "laplacian_variance": 16.158178,
+        "note": "Descriptive FFT/high-pass measurements after max512 resize. Not PRNU extraction, an AI score or a calibrated detector."
+      },
+      "note": "Metadata and signal measurements do not establish authenticity. Missing credentials prove nothing."
+    },
+    "remote": {
+      "sha256": "e6ad9f51be5bb83f137322a3f260b5881738e3528aee208727e75b6daaba6092",
+      "scope": "image_provenance_and_signals",
+      "classification": "INCONCLUSIVE",
+      "decision_probability": null,
+      "metadata": {
+        "width": 375,
+        "height": 375,
+        "format": "JPEG",
+        "exif_present": true,
+        "fields": {
+          "software": "Adobe Photoshop 21.1 (Macintosh)",
+          "orientation": "1"
+        },
+        "fields_verified": false,
+        "note": "Editable metadata; absent camera fields are not evidence of AI generation."
+      },
+      "c2pa": {
+        "status": "unavailable",
+        "sdk": "c2pa-python@0.39.0",
+        "trust_policy": "none",
+        "validation_state": null,
+        "validation_codes": [],
+        "source_types": [],
+        "ai_disclosure": "not_assessed",
+        "signer": null,
+        "note": "Remote credentials referenced; fetching disabled. No authenticity inference."
+      },
+      "signals": {
+        "status": "measured",
+        "analysis_width": 375,
+        "analysis_height": 375,
+        "high_frequency_energy_fraction": 0.0748447,
+        "noise_residual_std": 16.525869,
+        "laplacian_variance": 4153.520981,
+        "note": "Descriptive FFT/high-pass measurements after max512 resize. Not PRNU extraction, an AI score or a calibrated detector."
+      },
+      "note": "Metadata and signal measurements do not establish authenticity. Missing credentials prove nothing."
+    },
+    "explicit_test_trust": {
+      "status": "valid_trusted",
+      "sdk": "c2pa-python@0.39.0",
+      "trust_policy": "operator_anchors",
+      "validation_state": "Trusted",
+      "validation_codes": [
+        "assertion.dataHash.match",
+        "assertion.hashedURI.match",
+        "claimSignature.insideValidity",
+        "claimSignature.validated",
+        "signingCredential.ocsp.skipped",
+        "signingCredential.trusted",
+        "timeStamp.trusted",
+        "timeStamp.validated"
+      ],
+      "source_types": [
+        "http://cv.iptc.org/newscodes/digitalsourcetype/algorithmicMedia"
+      ],
+      "ai_disclosure": "not_declared",
+      "signer": "C2PA Test Signing Cert",
+      "note": "Embedded credentials only; remote manifest and OCSP fetching disabled. No authenticity verdict.",
+      "claim_generator": "make_test_images/0.26.0 c2pa-rs/0.26.0"
+    },
+    "http": {
+      "unsigned": {
+        "scope": "image_provenance_and_signals",
+        "classification": "INCONCLUSIVE",
+        "decision_probability": null,
+        "metadata": {
+          "width": 1024,
+          "height": 683,
+          "format": "JPEG",
+          "exif_present": true,
+          "fields": {
+            "camera_make": "Canon",
+            "camera_model": "Canon EOS REBEL T3",
+            "software": "Adobe Lightroom 5.3 (Macintosh)",
+            "exposure_seconds": "0.016666666666666666",
+            "f_number": "5.6",
+            "iso": "800",
+            "lens_model": "EF-S18-55mm f/3.5-5.6 IS II"
+          },
+          "fields_verified": false,
+          "note": "Editable metadata; absent camera fields are not evidence of AI generation."
+        },
+        "c2pa": {
+          "status": "absent",
+          "sdk": "c2pa-python@0.39.0",
+          "trust_policy": "none",
+          "validation_state": null,
+          "validation_codes": [],
+          "source_types": [],
+          "ai_disclosure": "not_assessed",
+          "signer": null,
+          "note": "Embedded credentials only; remote manifest and OCSP fetching disabled. No authenticity verdict."
+        },
+        "signals": {
+          "status": "measured",
+          "analysis_width": 512,
+          "analysis_height": 342,
+          "high_frequency_energy_fraction": 0.00541805,
+          "noise_residual_std": 3.677207,
+          "laplacian_variance": 123.381717,
+          "note": "Descriptive FFT/high-pass measurements after max512 resize. Not PRNU extraction, an AI score or a calibrated detector."
+        },
+        "note": "Metadata and signal measurements do not establish authenticity. Missing credentials prove nothing."
+      },
+      "signed": {
+        "scope": "image_provenance_and_signals",
+        "classification": "INCONCLUSIVE",
+        "decision_probability": null,
+        "metadata": {
+          "width": 2048,
+          "height": 1365,
+          "format": "JPEG",
+          "exif_present": false,
+          "fields": {},
+          "fields_verified": false,
+          "note": "Editable metadata; absent camera fields are not evidence of AI generation."
+        },
+        "c2pa": {
+          "status": "valid_untrusted",
+          "sdk": "c2pa-python@0.39.0",
+          "trust_policy": "none",
+          "validation_state": "Valid",
+          "validation_codes": [
+            "assertion.dataHash.match",
+            "assertion.hashedURI.match",
+            "claimSignature.insideValidity",
+            "claimSignature.validated",
+            "signingCredential.ocsp.skipped",
+            "signingCredential.untrusted",
+            "timeStamp.trusted",
+            "timeStamp.validated"
+          ],
+          "source_types": [
+            "http://cv.iptc.org/newscodes/digitalsourcetype/algorithmicMedia"
+          ],
+          "ai_disclosure": "not_declared",
+          "signer": "C2PA Test Signing Cert",
+          "note": "Embedded credentials only; remote manifest and OCSP fetching disabled. No authenticity verdict.",
+          "claim_generator": "make_test_images/0.26.0 c2pa-rs/0.26.0"
+        },
+        "signals": {
+          "status": "measured",
+          "analysis_width": 512,
+          "analysis_height": 341,
+          "high_frequency_energy_fraction": 0.00017016,
+          "noise_residual_std": 0.235538,
+          "laplacian_variance": 0.788134,
+          "note": "Descriptive FFT/high-pass measurements after max512 resize. Not PRNU extraction, an AI score or a calibrated detector."
+        },
+        "note": "Metadata and signal measurements do not establish authenticity. Missing credentials prove nothing."
+      },
+      "altered": {
+        "scope": "image_provenance_and_signals",
+        "classification": "INCONCLUSIVE",
+        "decision_probability": null,
+        "metadata": {
+          "width": 2048,
+          "height": 1365,
+          "format": "JPEG",
+          "exif_present": false,
+          "fields": {},
+          "fields_verified": false,
+          "note": "Editable metadata; absent camera fields are not evidence of AI generation."
+        },
+        "c2pa": {
+          "status": "invalid",
+          "sdk": "c2pa-python@0.39.0",
+          "trust_policy": "none",
+          "validation_state": "Invalid",
+          "validation_codes": [
+            "assertion.dataHash.mismatch",
+            "assertion.hashedURI.match",
+            "claimSignature.insideValidity",
+            "claimSignature.validated",
+            "signingCredential.ocsp.skipped",
+            "signingCredential.untrusted",
+            "timeStamp.trusted",
+            "timeStamp.validated"
+          ],
+          "source_types": [
+            "http://cv.iptc.org/newscodes/digitalsourcetype/algorithmicMedia"
+          ],
+          "ai_disclosure": "not_assessed",
+          "signer": "C2PA Test Signing Cert",
+          "note": "Embedded credentials only; remote manifest and OCSP fetching disabled. No authenticity verdict.",
+          "claim_generator": "make_test_images/0.26.0 c2pa-rs/0.26.0"
+        },
+        "signals": {
+          "status": "measured",
+          "analysis_width": 512,
+          "analysis_height": 341,
+          "high_frequency_energy_fraction": 0.00016801,
+          "noise_residual_std": 1.337263,
+          "laplacian_variance": 16.158178,
+          "note": "Descriptive FFT/high-pass measurements after max512 resize. Not PRNU extraction, an AI score or a calibrated detector."
+        },
+        "note": "Metadata and signal measurements do not establish authenticity. Missing credentials prove nothing."
+      }
+    }
+  }
+}

@@ -25,14 +25,39 @@ def analyze_pair(first_bgr, second_bgr):
         raise ValueError("No valid temporal pixels")
     # A small high-residual region is visible without turning it into a calibrated anomaly score.
     tile = max(16, min(height, width) // 8)
-    local_means = [float(residual[row:row + tile, col:col + tile][valid[row:row + tile, col:col + tile]].mean())
-                   for row in range(0, height - tile + 1, tile)
-                   for col in range(0, width - tile + 1, tile)
-                   if valid[row:row + tile, col:col + tile].mean() >= 0.8]
+    regions = [dict(x=col,y=row,width=tile,height=tile,residual=round(float(
+                  residual[row:row+tile,col:col+tile][valid[row:row+tile,col:col+tile]].mean()),3))
+               for row in range(0,height-tile+1,tile) for col in range(0,width-tile+1,tile)
+               if valid[row:row+tile,col:col+tile].mean()>=.8]
+    local_means = [r['residual'] for r in regions]
+    mean_residual = float(residual[valid].mean())
+    strong = sorted((r for r in regions if r['residual'] > max(25,mean_residual*3)), key=lambda r:r['residual'],reverse=True)[:3]
+    histograms = [cv2.calcHist([g],[0],None,[32],[0,256]) for g in (first,second)]
+    histograms = [cv2.normalize(h,None,alpha=1,norm_type=cv2.NORM_L1) for h in histograms]
+    histogram_distance = float(cv2.compareHist(*histograms,cv2.HISTCMP_BHATTACHARYYA))
+    global_vector = np.median(forward[valid],axis=0)
+    coherence = float((np.linalg.norm(forward[valid]-global_vector,axis=1)<max(1,float(np.median(magnitude[valid]))*.2)).mean())
+    if histogram_distance>.65 and float(cv2.absdiff(first,second).mean())>45:
+        observation='scene_transition_candidate'
+    elif min(float(first.mean()),float(second.mean()))<20:
+        observation='insufficient_light'
+    elif min(float(cv2.Laplacian(g,cv2.CV_64F).var()) for g in (first,second))<8:
+        observation='insufficient_texture'
+    elif float(np.median(magnitude[valid]))>min(width,height)*.1 or float(valid.mean())<.5:
+        observation='motion_ambiguous'
+    elif strong:
+        observation='localized_change_candidate'
+    elif coherence>.75 and float(np.median(magnitude[valid]))>1:
+        observation='coherent_motion'
+    else:
+        observation='no_localized_change_observed'
     return {"scope": "adjacent_original_frames", "method": "farneback_forward_backward_v1",
             "medianFlowPixels": round(float(np.median(magnitude[valid])), 4),
             "p95FlowPixels": round(float(np.percentile(magnitude[valid], 95)), 4),
             "meanRoundTripErrorPixels": round(float(round_trip[valid].mean()), 4),
             "meanMotionCompensatedResidual": round(float(residual[valid].mean()), 4),
             "maxTileResidual": round(max(local_means) if local_means else float(residual[valid].mean()), 4),
-            "validPixelFraction": round(float(valid.mean()), 4)}
+            "validPixelFraction": round(float(valid.mean()), 4),
+            "observation":observation,"regions":strong if observation=='localized_change_candidate' else [],
+            "histogramDistance":round(histogram_distance,4),"motionCoherence":round(coherence,4),
+            "analysisWidth":width,"analysisHeight":height}

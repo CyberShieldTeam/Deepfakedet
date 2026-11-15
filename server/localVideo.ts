@@ -25,6 +25,40 @@ export interface VideoAudioTrack {
   truncated: boolean;
   evidence?: LocalAudioResponse;
 }
+export interface TemporalInterval {
+  startSeconds:number; endSeconds:number; observation:string;
+  analysisWidth:number; analysisHeight:number;
+  medianFlowPixels:number; meanRoundTripErrorPixels:number; maxTileResidual:number;
+  regions:{x:number;y:number;width:number;height:number;residual:number}[];
+}
+export interface TemporalDiagnostics {
+  status:'measured'|'partial'|'insufficient_evidence'|'timed_out'|'failed';
+  classification:'INCONCLUSIVE'; decisionProbability:null; method:'bounded_farneback_v1';
+  intervals:TemporalInterval[];sampledFrames:number;processedPairs:number;note:string;
+  requestedIntervalSeconds?:number;effectiveIntervalSeconds?:number;durationSeconds?:number;
+  sourceFrameCount?:number;elapsedSeconds?:number;peakWorkingSetBytes?:number|null;
+}
+export function validateTemporalDiagnostics(d:TemporalDiagnostics):boolean {
+  if(!d || !['measured','partial','insufficient_evidence','timed_out','failed'].includes(d.status) ||
+    d.classification!=='INCONCLUSIVE' || d.decisionProbability!==null || d.method!=='bounded_farneback_v1' ||
+    typeof d.note!=='string' || !Array.isArray(d.intervals) || d.intervals.length>24 ||
+    !Number.isInteger(d.sampledFrames) || d.sampledFrames<0 || d.sampledFrames>25 ||
+    d.processedPairs!==d.intervals.length || d.processedPairs>Math.max(0,d.sampledFrames-1)) return false;
+  if(['failed','timed_out'].includes(d.status)) return d.intervals.length===0;
+  if(!Number.isFinite(d.durationSeconds) || d.durationSeconds!<=0 || d.durationSeconds!>120 ||
+    !Number.isFinite(d.effectiveIntervalSeconds) || d.effectiveIntervalSeconds!<=0 ||
+    !Number.isInteger(d.sourceFrameCount) || d.sourceFrameCount!<1 || d.sourceFrameCount!>3600) return false;
+  const observations=['scene_transition_candidate','insufficient_light','insufficient_texture','motion_ambiguous',
+    'localized_change_candidate','coherent_motion','no_localized_change_observed'];
+  return d.intervals.every((r,i)=>r && observations.includes(r.observation) &&
+    [r.startSeconds,r.endSeconds,r.medianFlowPixels,r.meanRoundTripErrorPixels,r.maxTileResidual].every(n=>Number.isFinite(n)&&n>=0) &&
+    r.endSeconds>r.startSeconds && r.endSeconds<=d.durationSeconds! && (i===0 || r.startSeconds>=d.intervals[i-1].endSeconds) &&
+    Number.isInteger(r.analysisWidth) && Number.isInteger(r.analysisHeight) &&
+    r.analysisWidth>0 && r.analysisHeight>0 && r.analysisWidth<=480 && r.analysisHeight<=480 &&
+    Array.isArray(r.regions) && r.regions.length<=3 && r.regions.every(b=>
+      [b.x,b.y,b.width,b.height,b.residual].every(n=>Number.isFinite(n)&&n>=0) &&
+      b.width>0 && b.height>0 && b.x+b.width<=r.analysisWidth && b.y+b.height<=r.analysisHeight && b.residual<=255));
+}
 export interface LocalVideoEvidence {
   scope: 'sampled_video_frames' | 'server_decoded_frames';
   frames: { timestampSeconds: number; image: LocalImageResponse; quality?: FrameQuality; temporal?: TemporalMeasurement }[];
@@ -32,18 +66,21 @@ export interface LocalVideoEvidence {
   videoMetadata?: { durationSeconds: number; width: number; height: number };
   audioTrack?: VideoAudioTrack;
   faceContinuity?: FaceContinuity;
+  temporalDiagnostics?:TemporalDiagnostics;
 }
 
-export async function callLocalVideo(mediaData: string, endpoint: string, fetcher: typeof fetch = fetch): Promise<LocalVideoEvidence> {
+export async function callLocalVideo(mediaData: string, endpoint: string, fetcher: typeof fetch = fetch, interval=1): Promise<LocalVideoEvidence> {
   const match = /^data:video\/(?:mp4|quicktime|webm);base64,([A-Za-z0-9+/=]+)$/.exec(mediaData);
   if (!match || match[1].length > 4 * Math.ceil(8 * 1024 * 1024 / 3))
     throw new Error('Unsupported or oversized original video');
   const response = await fetcher(`${endpoint.replace(/\/$/, '')}/v1/video/analyze`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ video_base64: match[1] }), signal: AbortSignal.timeout(120_000)
+    body: JSON.stringify({ video_base64: match[1], temporal_interval_seconds:interval }), signal: AbortSignal.timeout(120_000)
   });
   if (!response.ok) throw new Error(`Local video service returned HTTP ${response.status}`);
   const value = await response.json() as LocalVideoEvidence;
+  if(value.temporalDiagnostics && !validateTemporalDiagnostics(value.temporalDiagnostics))
+    throw new Error('Invalid bounded temporal diagnostics');
   if (value.scope !== 'server_decoded_frames' || !Array.isArray(value.frames) ||
       value.frames.length < 1 || value.frames.length > 6 || typeof value.samplingNote !== 'string' ||
       !value.videoMetadata || !Number.isFinite(value.videoMetadata.durationSeconds) ||

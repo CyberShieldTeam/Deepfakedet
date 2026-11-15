@@ -176,6 +176,7 @@ export interface LocalAudioEvidence {
 }
 
 export interface LocalVideoEvidence {
+  temporalDiagnostics?: import('../server/localVideo').TemporalDiagnostics;
   scope: "sampled_video_frames" | "server_decoded_frames";
   frames: {
     timestampSeconds: number;

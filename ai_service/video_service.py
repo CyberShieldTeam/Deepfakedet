@@ -7,7 +7,7 @@ import tempfile
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 router = APIRouter()
 MAX_VIDEO_BYTES = 8 * 1024 * 1024
@@ -19,6 +19,7 @@ MAX_AUDIO_SECONDS = 60
 
 class VideoRequest(BaseModel):
     video_base64: str
+    temporal_interval_seconds: float = Field(default=1, ge=.25, le=60)
 
 
 def frame_quality(bgr):
@@ -82,8 +83,10 @@ def decode_sampled_frames(raw: bytes):
                 frame_height, frame_width = bgr.shape[:2]
                 if frame_width * frame_height > MAX_FRAME_PIXELS:
                     raise HTTPException(413, "Decoded video frame exceeds pixel limit")
-                scaled_height = max(1, round(frame_height * 480 / frame_width))
-                small = cv2.resize(bgr, (480, scaled_height), interpolation=cv2.INTER_AREA)
+                scale = min(1, 480/max(frame_width,frame_height))
+                scaled_height = max(1, round(frame_height * scale))
+                scaled_width = max(1, round(frame_width * scale))
+                small = cv2.resize(bgr, (scaled_width, scaled_height), interpolation=cv2.INTER_AREA)
                 quality = frame_quality(small)
                 if best is None or quality["selectionScore"] > best[2]["selectionScore"]:
                     best = (index, small, quality)
@@ -97,7 +100,7 @@ def decode_sampled_frames(raw: bytes):
             if adjacent_index >= 0 and cap.set(cv2.CAP_PROP_POS_FRAMES, adjacent_index):
                 adjacent_ok, adjacent_bgr = cap.read()
                 if adjacent_ok and adjacent_bgr is not None and adjacent_bgr.shape[:2] == (frame_height, frame_width):
-                    adjacent = cv2.resize(adjacent_bgr, (480, scaled_height), interpolation=cv2.INTER_AREA)
+                    adjacent = cv2.resize(adjacent_bgr, (scaled_width, scaled_height), interpolation=cv2.INTER_AREA)
                     earlier, later = (small, adjacent) if adjacent_index > index else (adjacent, small)
                     temporal = {"status": "measured", "startSeconds": round(min(index, adjacent_index) / fps, 3),
                                 "endSeconds": round(max(index, adjacent_index) / fps, 3),
@@ -181,11 +184,13 @@ def analyze_video(request: VideoRequest):
     if not raw or len(raw) > MAX_VIDEO_BYTES:
         raise HTTPException(413, "Video exceeds 8 MB or is empty")
     duration, width, height, samples = decode_sampled_frames(raw)
+    from ai_service.temporal_video import analyze_bytes
+    temporal_diagnostics = analyze_bytes(raw,request.temporal_interval_seconds)
     from ai_service import app as image_app
     frames = [{"timestampSeconds": timestamp, "quality": quality, "temporal": temporal,
                "image": image_app.analyze_image(image_app.ImageRequest(image_base64=jpg))}
               for timestamp, jpg, quality, temporal in samples]
-    return {"scope": "server_decoded_frames", "frames": frames,
+    return {"scope": "server_decoded_frames", "frames": frames, "temporalDiagnostics": temporal_diagnostics,
             "samplingNote": "Up to six JPEG frames chosen from nearby original-video positions; adjacent originals provide experimental Farneback motion measurements, not a manipulation verdict.",
             "videoMetadata": {"durationSeconds": round(duration, 3), "width": width, "height": height},
             "audioTrack": screen_video_audio(raw, duration)}

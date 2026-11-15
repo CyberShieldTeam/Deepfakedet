@@ -206,6 +206,10 @@ assert.equal(
   "unsigned metadata cannot establish AI generation",
 );
 assert.equal(overallVerdict(none, none).authenticity, "likely_authentic");
+for(const verificationStatus of ['invalid','validated'] as const) {
+  assert.equal(provenanceAssessment({c2paManifest:true,declaresAIGenerated:true,
+    generatorHints:['OpenAI'],verificationStatus}),null,'Even a verified disclosure does not create a calibrated authenticity score');
+}
 assert.equal(overallVerdict(likely, none).authenticity, "likely_synthetic");
 
 console.log("--- ALL TESTS PASSED ---");

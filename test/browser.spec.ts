@@ -4,6 +4,11 @@ import { encodeWav } from "../src/utils/audioSegments";
 test.beforeEach(async ({ page }) => {
   // Cosmetic external fonts must not gate functional tests in restricted networks.
   await page.route(/^https:\/\/fonts\.(googleapis|gstatic)\.com\//, route => route.abort());
+  if(process.env.VERITAS_TEST_TOKEN) {
+    const origin=new URL(process.env.VERITAS_TEST_URL || 'http://127.0.0.1:3000').origin;
+    await page.route(`${origin}/api/**`,route=>route.continue({headers:{...route.request().headers(),
+      authorization:`Bearer ${process.env.VERITAS_TEST_TOKEN}`}}));
+  }
 });
 
 test("Desktop overview, search, report, and live/demo isolation", async ({ page }) => {
@@ -94,6 +99,23 @@ test("Signed image provenance survives browser upload without a classifier verdi
   await expect(page.getByText("Image provenance and measured signals", { exact: true })).toBeVisible();
   await expect(page.getByText(/Signature and file binding valid; signer not trusted/)).toBeVisible();
   await page.screenshot({ path: "test-results/image-provenance.png", fullPage: true });
+});
+
+test("Bounded temporal observations survive a real video upload", async ({ page }) => {
+  test.skip(process.env.VERITAS_EXPECT_TEMPORAL !== '1','Requires local Python/OpenCV service');
+  await page.goto('/');
+  await page.getByRole('button',{name:'Media forensics',exact:true}).first().click();
+  await page.locator('input[type=file]').setInputFiles('test/fixtures/video/headshot_cc0_3s.mp4');
+  const response=page.waitForResponse(r=>r.url().includes('/api/forensics/analyze-media') && r.request().method()==='POST');
+  await page.getByRole('button',{name:/Check this file/}).click();
+  const {result}=await(await response).json();
+  expect(result.authenticity).toBe('inconclusive');
+  expect(result.aiGeneratedProbability).toBeNull();
+  expect(result.localVideo.temporalDiagnostics.decisionProbability).toBeNull();
+  expect(result.localVideo.temporalDiagnostics.intervals.length).toBeGreaterThan(0);
+  await expect(page.getByText('Temporal motion observations · not a deepfake verdict',{exact:true})).toBeVisible();
+  await page.getByRole('button',{name:/Inspect video at/}).first().click();
+  await page.screenshot({path:'test-results/temporal-observations.png',fullPage:true});
 });
 
 test("Pinned face classifier evidence survives browser upload", async ({ page }) => {
@@ -192,7 +214,7 @@ test("Real browser video frame extraction reports its actual interval", async ({
     timeout: 30000,
   });
   await expect(
-    page.getByText(process.env.VERITAS_EXPECT_FACE_READY === "1"
+    page.getByText(process.env.VERITAS_EXPECT_FACE_READY === "1" || process.env.VERITAS_EXPECT_TEMPORAL === "1"
       ? "Experimental local video evidence"
       : "Sampled-frame evidence · not a video-level probability", { exact: true }),
   ).toBeVisible();

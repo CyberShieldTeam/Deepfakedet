@@ -1,0 +1,121 @@
+{
+  "probes": [
+    {
+      "path": "/",
+      "status": 200,
+      "elapsedMs": 48.70860000000005,
+      "bytes": 1313
+    },
+    {
+      "path": "/src/main.tsx",
+      "status": 200,
+      "elapsedMs": 10.43730000000005,
+      "bytes": 1233
+    },
+    {
+      "path": "/api/health",
+      "status": 200,
+      "elapsedMs": 25.66949999999997,
+      "bytes": 1346
+    }
+  ],
+  "navigationMs": 438.88599999999997,
+  "navigationError": null,
+  "errors": [],
+  "failures": [
+    {
+      "path": "/css2",
+      "error": {
+        "errorText": "net::ERR_FAILED"
+      }
+    },
+    {
+      "path": "/css2",
+      "error": {
+        "errorText": "net::ERR_FAILED"
+      }
+    }
+  ],
+  "responses": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/src/main.tsx",
+      "status": 200
+    },
+    {
+      "path": "/src/App.tsx",
+      "status": 200
+    },
+    {
+      "path": "/src/index.css",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/.vite/deps/react_jsx-dev-runtime.js",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/.vite/deps/react.js",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/.vite/deps/react-dom_client.js",
+      "status": 200
+    },
+    {
+      "path": "/src/hooks/useLiveStream.ts",
+      "status": 200
+    },
+    {
+      "path": "/src/services/api.ts",
+      "status": 200
+    },
+    {
+      "path": "/src/components/ui.tsx",
+      "status": 200
+    },
+    {
+      "path": "/src/components/DashboardView.tsx",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/.vite/deps/react-dom-CAgWe78a.js",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/.vite/deps/react-D57lpOvP.js",
+      "status": 200
+    },
+    {
+      "path": "/src/components/ForceGraph.tsx",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/.vite/deps/lucide-react.js",
+      "status": 200
+    },
+    {
+      "path": "/@vite/client",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/vite/dist/client/env.mjs",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/.vite/deps/recharts.js",
+      "status": 200
+    },
+    {
+      "path": "/api/investigations",
+      "status": 200
+    }
+  ],
+  "pending": [
+    "/css2"
+  ],
+  "bodyText": "VERITASAI\nSURAKSHA SUCHAN\nIntelligence workspace\nEvidence-led investigation\nWORKSPACE\nOverview\nInvestigations\nINTELLIGENCE ENGINES\nMedia forensics\nClaim intelligence\nNetwork intelligence\nMultilingual analysis\nMONITORING\nAlerts & activity\nConnecting to backend\nDevelopment · single analyst\nClassifier availability is reported separately.\nVA\nAnalyst workspace\nManage access\nWorkspace\nOverview\nLive analysis\nDemonstration\nDEMONSTRATION MODE\n/\nSynthetic case records. No live inference is represented.\nSwitch to live analysis\nINTELLIGENCE COMMAND CENTER\nInvestigation overview.\n\nA clear view of your evidence. A stronger foundation for the truth.\n\nExport report\nNew investigation\nTotal investigations\n00\n0 active cases\nMedia analyzed\n00\nImage · video · audio\nClaims assessed\n00\n0 awaiting evidence\nNetwork investigations\n00\nSynthetic campaign datasets\nTHREE ENGINES. ONE INVESTIGATION.\nSee beyond the surface.\n\nConnect media authenticity, factual accuracy, and distribution patterns.\nFollow the evidence — not an unexplained fake-or-real score.\n\nStart an analysis\nAUTHENTICITY\nMedia forensics\nACCURACY\nClaim intelligence\nDISTRIBUTION\nNetwork intelligence\nRecent investigations\n0\nView all\nAll statuses\nIn "
+}

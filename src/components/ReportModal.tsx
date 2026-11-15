@@ -81,6 +81,10 @@ ${media.filter(m => m.imageDiagnostics).map(m => {
   const d = m.imageDiagnostics!;
   return `<div class="box"><h3>Image provenance: ${esc(m.fileName || "image")}</h3><p>Content Credentials: ${esc(d.c2pa.status)}; SDK validation: ${esc(d.c2pa.validation_state || "not assessed")}; trust policy: ${esc(d.c2pa.trust_policy)}; signer declaration: ${esc(d.c2pa.signer || "not provided")}; AI-use disclosure: ${esc(d.c2pa.ai_disclosure)}.</p><p>${esc(d.c2pa.note)}</p><p>EXIF ${d.metadata.exif_present ? "present (editable)" : "absent"}; high-frequency energy fraction: ${esc(d.signals.high_frequency_energy_fraction ?? "not measured")}; noise residual standard deviation: ${esc(d.signals.noise_residual_std ?? "not measured")}.</p><p>${esc(d.note)}</p></div>`;
 }).join("")}
+${media.filter(m=>m.localVideo?.temporalDiagnostics).map(m=>{
+  const d=m.localVideo!.temporalDiagnostics!;
+  return `<div class="box"><h3>Temporal observations: ${esc(m.fileName)}</h3><p>${esc(d.status)}; ${esc(d.processedPairs)} sparse comparisons. ${esc(d.note)}</p><ul>${d.intervals.map(i=>`<li>${esc(i.startSeconds)}–${esc(i.endSeconds)} seconds: ${esc(i.observation)}; ${esc(i.regions.length)} localized region(s).</li>`).join('')}</ul><p>Classification: INCONCLUSIVE. No authenticity probability.</p></div>`;
+}).join('')}
 <h2>3. Claim verification (${claims.length})</h2>
 ${
   claims.length

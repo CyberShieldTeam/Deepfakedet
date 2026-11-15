@@ -1,5 +1,27 @@
 # Image engine model record
 
+## Reconciliation and diagnostic validation — 2026-11-15
+
+Merged both feature histories in `855b414`, preserving all earlier model/parity reports
+and both evaluation protocols. Both provenance routes now share the same original-byte
+offline verifier and explicit signer-trust policy. They preserve signature/binding,
+trust and disclosure distinctions without creating an authenticity score. The remote
+square-crop policy remains a separately named legacy experiment; one integrated face
+inference produces both current and compatibility fields.
+
+Vite development navigation is now fixed locally by excluding inference environments,
+caches and generated outputs from its watcher, with HMR retained. A broad-watching
+crossover reproduced the stall after caches were warm. Actual production browser
+workflows also passed. See `docs/DEV_NAVIGATION_DIAGNOSIS.md` for raw evidence.
+
+CPU temporal observations and resource measurements are implemented separately from
+image detection (`docs/TEMPORAL_DIAGNOSTICS.md`). The normal moving test pattern triggers
+localized-change candidates, underscoring that these are observations rather than fake
+labels. No new authenticity accuracy or calibration was measured. Image/face/audio
+outputs remain experimental, reserved images remain sealed, and trained temporal Phase
+2d remains incomplete. Future-method feasibility and actual vendor-access uncertainty
+are recorded in `docs/FORENSIC_CAPABILITY_FEASIBILITY.md`.
+
 ## Supplemental provenance and image signals — 2026-11-15
 
 An independent evidence endpoint now validates embedded C2PA with optional SDK 0.39.0,

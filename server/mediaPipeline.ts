@@ -35,6 +35,7 @@ export async function analyzeMediaPipeline(input: {
   measurements: Record<string, any>;
   mediaData?: string;
   originalImageData?: string;
+  temporalIntervalSeconds?: number;
   keyframes?: string[];
   frameTimes?: number[];
   audioSegments?: { start: number; end: number; data: string }[];
@@ -233,7 +234,7 @@ export async function analyzeMediaPipeline(input: {
     } else if (modality === "video") {
       if (mediaData) {
         try {
-          localVideo = await callLocalVideo(mediaData, localEndpoint);
+          localVideo = await callLocalVideo(mediaData, localEndpoint, fetch, input.temporalIntervalSeconds ?? 1);
         } catch (error) {
           console.warn(`[local-video-decode] ${String((error as Error)?.message || error).slice(0, 160)}`);
         }

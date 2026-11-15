@@ -1,5 +1,13 @@
 # Additional forensic methods roadmap
 
+Reconciled status (2026-11-15): current provenance/trust and descriptive image signals
+are implemented and covered by signed/tampered/re-encoded software fixtures. Bounded
+interval Farneback diagnostics, localization and UI/report evidence are now implemented;
+representative detection validation is still open. The earlier table below is retained
+as historical planning. Updated per-capability purpose, implementation, compute,
+license/access, datasets, limitations and independence review for all eight requested
+methods: [feasibility review](docs/FORENSIC_CAPABILITY_FEASIBILITY.md).
+
 Status: planned unless explicitly identified as implemented below. These methods add independent evidence; none should silently convert an inconclusive result into an authenticity verdict. Follow the incremental phase gates in `IMPLEMENTATION_PLAN.md` and record tests in `IMPLEMENTATION_PROGRESS.md`.
 
 | Order | Method | Implementation slice and acceptance gate | Dependencies / complexity |

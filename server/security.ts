@@ -61,6 +61,7 @@ export const mediaInput = z
     ),
     mediaData: dataUrl.optional(),
     originalImageData: dataUrl.optional(),
+    temporalIntervalSeconds: z.number().finite().min(.25).max(60).optional(),
     keyframes: z.array(dataUrl).max(48).optional(),
     frameTimes: z.array(z.number().finite().nonnegative()).max(48).optional(),
     detailTiles: z.array(dataUrl).max(4).optional(),

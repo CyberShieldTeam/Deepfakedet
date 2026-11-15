@@ -29,3 +29,14 @@ The repository includes a three-second, 320×180 H.264 test-pattern clip made wi
 - Define and validate quality-aware aggregation before any local video verdict or probability.
 - Add speech activity detection and representative AASIST evaluation/calibration before interpreting video speech scores. Add and evaluate a temporal model for Phase 2d.
 - Build a labeled temporal evaluation set with genuine captures, edited/fake clips, static encodes, camera motion, cuts, and recompression; measure whether local residuals or a trained model actually detect microscopic manipulations. Consider [Torchvision RAFT](https://docs.pytorch.org/vision/stable/models/raft.html) only after benchmarking against the current [OpenCV flow baseline](https://docs.opencv.org/4.12.0/d4/dee/tutorial_optical_flow.html).
+
+## Reconciled temporal diagnostics — 2026-11-15
+
+The retained adjacent-frame Farneback and geometric face continuity are now supplemented
+by bounded interval comparisons across the source span: <=25 samples / 24 pairs, CPU
+only, max480 long-side analysis, 6-second worker budget and 8-second parent deadline.
+The UI exposes interval observations and seek controls, with structured diagnostic
+output in exports. Scene/quality/motion observations never produce authenticity scores.
+See `docs/TEMPORAL_DIAGNOSTICS.md` for actual tests/resources and limitations. Historical
+sections above apply to their respective earlier snapshots; trained temporal detection,
+representative video evaluation/calibration and an overall supervised job path remain open.

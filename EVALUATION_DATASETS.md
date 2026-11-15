@@ -2,6 +2,15 @@
 
 Updated 2026-11-15. This is an acquisition and approval record, not an accuracy report.
 
+Integration update: the local six-generator Mirage development experiments and sealed
+96-image reserve are preserved in the benchmark reports. They are exploratory and do
+not meet verified source/identity independence requirements; resolution/compression
+confounds remain documented in `docs/ADVANCED_IMAGE_MODEL_EVALUATION.md`. The five smoke
+items below are the remote gated harness's admitted diagnostics, not the only historical
+experiments. Neither reserve nor earlier benchmarks was rerun during reconciliation.
+Temporal transport/control fixtures are described in `docs/TEMPORAL_DIAGNOSTICS.md`;
+their generated changes and resource measurements are not deepfake ground truth.
+
 ## Admission rules
 
 An evaluation row is admitted only when the file is locally present, its SHA-256 matches, the source and license are recorded, and the label has a documented basis. `group` must identify the underlying subject/source lineage (not merely the filename), and a group or identical file hash may occur in only one split. Crops, recompressions, frames, or manipulated derivatives of one source stay in the same group. Unknown or inferred labels are excluded rather than relabeled.

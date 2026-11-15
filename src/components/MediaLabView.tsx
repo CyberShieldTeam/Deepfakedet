@@ -43,7 +43,7 @@ const modalityOf = (f: File): "image" | "video" | "audio" | null => {
   return null;
 };
 
-export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
+export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (seconds:number)=>void }> = ({ r, onSeek }) => {
   const [label, cls] = AUTH_LABEL[r.authenticity] || AUTH_LABEL.inconclusive;
   return (
     <div className="space-y-4">
@@ -155,6 +155,25 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
             ))}
             {r.localVideo.audioTrack && <p>Video audio: {r.localVideo.audioTrack.status.replaceAll("_", " ")}. {r.localVideo.audioTrack.note}</p>}
             <p className="text-amber-300">Frame and audio outputs remain separate and do not form a video verdict.</p>
+          </div>
+        </Card>
+      )}
+      {r.localVideo?.temporalDiagnostics && (
+        <Card title="Temporal motion observations · not a deepfake verdict">
+          <div className="space-y-2 text-xs text-slate-400">
+            <p>{r.localVideo.temporalDiagnostics.status.replaceAll('_',' ')} · {r.localVideo.temporalDiagnostics.processedPairs} sampled comparisons.</p>
+            <p>{r.localVideo.temporalDiagnostics.note}</p>
+            <ol className="space-y-1" aria-label="Temporal observation intervals">
+              {r.localVideo.temporalDiagnostics.intervals.map((interval,index)=>(
+                <li key={index} className={interval.observation==='localized_change_candidate'?'border-l-4 border-amber-400 pl-2':'border-l-4 border-slate-600 pl-2'}>
+                  <button type="button" onClick={()=>onSeek?.(interval.startSeconds)} disabled={!onSeek}
+                    className="text-left underline underline-offset-2" aria-label={`Inspect video at ${interval.startSeconds.toFixed(2)} seconds`}>
+                    {interval.startSeconds.toFixed(2)}–{interval.endSeconds.toFixed(2)} s: {interval.observation.replaceAll('_',' ')}
+                  </button>
+                  {interval.regions.map((b,j)=><p key={j}>Change region in {interval.analysisWidth}×{interval.analysisHeight} analysis: ({b.x}, {b.y}), {b.width}×{b.height} px. Occlusion or legitimate motion may explain it.</p>)}
+                </li>
+              ))}
+            </ol>
           </div>
         </Card>
       )}
@@ -373,6 +392,7 @@ export const MediaLabView: React.FC<{
   active: Investigation | null;
   onLiveAnalysis?: () => void;
 }> = ({ attach, active, onLiveAnalysis }) => {
+  const videoElement = useRef<HTMLVideoElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [modality, setModality] = useState<"image" | "video" | "audio" | null>(null);
   const [objUrl, setObjUrl] = useState("");
@@ -502,6 +522,7 @@ export const MediaLabView: React.FC<{
           modality,
           fileName: file.name,
           originalImageData,
+          temporalIntervalSeconds: modality==='video' ? intervalSeconds : undefined,
           mimeType: file.type || extensionMime[file.name.split(".").pop()!.toLowerCase()],
           measurements,
           mediaData,
@@ -548,7 +569,7 @@ export const MediaLabView: React.FC<{
             }
             className="w-20 rounded border border-slate-700 bg-slate-900 p-2"
           />
-          seconds · capped at 32 frames; actual sampling gaps are reported.
+          seconds · preview capped at 32 frames; temporal observations use up to 25 sample points. Actual gaps are reported.
         </label>
       )}
       <PageHeader
@@ -719,7 +740,7 @@ export const MediaLabView: React.FC<{
 
           {modality === "video" && objUrl && (
             <Card title="Your video">
-              <video src={objUrl} controls className="max-h-72 w-full rounded-lg bg-black" />
+              <video ref={videoElement} src={objUrl} controls className="max-h-72 w-full rounded-lg bg-black" />
               {vid && (
                 <>
                   <p className="mt-3 text-xs text-slate-400">
@@ -819,7 +840,7 @@ export const MediaLabView: React.FC<{
                 <div className="text-sm text-cyan-200">{stage || "Checking…"}</div>
               </div>
             ) : shown ? (
-              <ResultPanel r={shown} />
+              <ResultPanel r={shown} onSeek={objUrl && modality==='video' ? seconds=>{if(videoElement.current)videoElement.current.currentTime=seconds;} : undefined} />
             ) : (
               <Empty
                 icon={ScanSearch}

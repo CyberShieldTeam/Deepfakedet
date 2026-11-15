@@ -1,6 +1,44 @@
 # VERITAS AI implementation progress
 
-Updated: 2026-11-15. Published model branch: `codex/phase1-audit` at `26de131eef4f745811c9dc9405f21adfb8e4435d`. Local integration branch: `codex/integrate-figma-upgrade` (not pushed; this account has read-only GitHub access). Baseline commit: `fa888241d838de9ce835d2277183add633f28d29`.
+Updated: 2026-11-15. Published integration branch: `codex/integrate-figma-upgrade`, tracking the same branch on origin. Reconciled local `ee28104` with fetched `codex/phase1-audit` at `6cadda8` in merge `855b414`, successfully pushed. Earlier read-only-access observations below are historical; Git push is now working. Baseline commit: `fa888241d838de9ce835d2277183add633f28d29`.
+
+## Current reconciliation, browser and temporal work — 2026-11-15
+
+- User approved reconciliation after the 11-local/7-remote divergence report. Both
+  histories and all evaluation artifacts are retained, with no force-push or main
+  merge. Independent evaluator/crop-policy variants remain under explicit names;
+  `docs/HISTORY_RECONCILIATION.md` maps their interfaces. Remote progress is preserved
+  separately as history. The original provenance commits remain ancestors.
+- Both provenance routes use the strict offline original-byte SDK validator and
+  operator trust anchors. SDK/HTTP fixtures again verified absent, untrusted-valid,
+  explicit test-trusted, altered binding invalid and remote-only unavailable states;
+  results saved separately as `reports/image_evidence_reconciled_smoke.json`. No
+  reserved images/manifests were opened or scored; original benchmark results unchanged.
+- Dev navigation root cause isolated to broad Vite watching in this Windows/OneDrive
+  workspace. Fixed watcher ignores preserve HMR. Fixed navigation .510 s versus a
+  12.01 s diagnostic timeout; restoring broad watching reproduced the timeout with
+  warm caches. Four raw reports and `docs/DEV_NAVIGATION_DIAGNOSIS.md` retain evidence.
+- Added bounded CPU temporal endpoint comparisons, quality/scene/camera-motion
+  observations, localized residual regions, explicit insufficient/partial/timeout
+  states, UI interval inspection/seek and report export. No probability or trained
+  temporal model. Worker <=25 frames/24 pairs, <=480 long side, hard 8-second deadline;
+  older classifier/audio stages have separate budgets, not a whole-endpoint 8-second SLA.
+- Resource smoke on three existing transport inputs: worker .299–.826 seconds,
+  subprocess .866–1.421 seconds, peak worker 83.00–108.34 MiB. These are single-run
+  software measurements; normal test patterns triggered candidate changes. No detector
+  accuracy or calibrated video-level conclusion follows.
+- Final checks: Python 54 tests, 53 passed/one optional AASIST-weight skip; Node/API,
+  TypeScript, production build, pip and diff checks passed. Development browser suite:
+  8 passed/one optional face-checkpoint skip. Actual NODE_ENV=production server with
+  temporary authentication: three forensic browser workflows passed. Real YuNet image
+  and video face/adjacent-flow HTTP smokes passed. Screenshots inspected; existing
+  non-failing build chunk warning remains. Initial missing psutil, fixture count
+  assumption and temporal-only browser expectation were corrected and checks rerun.
+- Phase 2a/2c representative validation/calibration, trained Phase 2d, and overall
+  production readiness remain open. Eight future methods reviewed without installing
+  heavy dependencies or claiming vendor scanning access. Next milestone: independent
+  annotated temporal/quality corpus and measured false-candidate burden/resource tails.
+
 
 ## Checklist
 

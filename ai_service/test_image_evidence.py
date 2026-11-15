@@ -88,6 +88,14 @@ class ImageEvidenceTests(unittest.TestCase):
             self.assertEqual(altered['status'], 'invalid')
             self.assertEqual(altered['ai_disclosure'], 'not_assessed')
             self.assertIn('assertion.dataHash.mismatch', altered['validation_codes'])
+            resized=io.BytesIO()
+            with Image.open(io.BytesIO(raw)) as image:
+                image.thumbnail((128,128))
+                image.save(resized,format='PNG')
+            response=analyze_evidence(EvidenceRequest(image_base64=base64.b64encode(resized.getvalue()).decode()))
+            self.assertEqual(response['c2pa']['status'],'absent')
+            self.assertEqual(response['classification'],'INCONCLUSIVE')
+            self.assertIsNone(response['decision_probability'])
         with patch.dict(os.environ, {'VERITAS_C2PA_TRUST_ANCHORS': str(FIXTURES/'test-anchors.pem')}):
             self.assertEqual(c2pa_evidence(raw, 'image/jpeg')['status'], 'valid_trusted')
 

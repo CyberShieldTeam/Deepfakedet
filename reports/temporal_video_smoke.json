@@ -1,0 +1,673 @@
+{
+  "scope": "software_transport_and_resource_measurements_not_accuracy",
+  "python": "3.13.12",
+  "opencv": "4.14.0",
+  "cpuLogical": 20,
+  "ramTotalBytes": 16876888064,
+  "policy": "No ground-truth deepfake labels or accuracy inferred. Reserved images untouched.",
+  "results": [
+    {
+      "file": "test_pattern_3s.mp4",
+      "sha256": "e35c20be48c3bb5c613dad7b2df1bb1c5f5695795f161f0c3d9f2a2f805cc200",
+      "wallSeconds": 0.8703789999999572,
+      "observations": {
+        "localized_change_candidate": 6
+      },
+      "result": {
+        "status": "measured",
+        "classification": "INCONCLUSIVE",
+        "decisionProbability": null,
+        "method": "bounded_farneback_v1",
+        "requestedIntervalSeconds": 0.5,
+        "effectiveIntervalSeconds": 0.5,
+        "sampledFrames": 7,
+        "processedPairs": 6,
+        "sourceFrameCount": 24,
+        "durationSeconds": 3.0,
+        "intervals": [
+          {
+            "startSeconds": 0.0,
+            "endSeconds": 0.5,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 16.3648,
+            "meanRoundTripErrorPixels": 3.7596,
+            "meanMotionCompensatedResidual": 5.5101,
+            "maxTileResidual": 57.517,
+            "validPixelFraction": 0.9859,
+            "observation": "localized_change_candidate",
+            "regions": [
+              {
+                "x": 176,
+                "y": 154,
+                "width": 22,
+                "height": 22,
+                "residual": 57.517
+              },
+              {
+                "x": 198,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 49.944
+              },
+              {
+                "x": 22,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 49.112
+              }
+            ],
+            "histogramDistance": 0.0385,
+            "motionCoherence": 0.8326,
+            "analysisWidth": 320,
+            "analysisHeight": 180
+          },
+          {
+            "startSeconds": 0.5,
+            "endSeconds": 1.0,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 19.6181,
+            "meanRoundTripErrorPixels": 2.7372,
+            "meanMotionCompensatedResidual": 8.0015,
+            "maxTileResidual": 90.254,
+            "validPixelFraction": 0.9908,
+            "observation": "localized_change_candidate",
+            "regions": [
+              {
+                "x": 0,
+                "y": 110,
+                "width": 22,
+                "height": 22,
+                "residual": 90.254
+              },
+              {
+                "x": 154,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 60.709
+              },
+              {
+                "x": 22,
+                "y": 110,
+                "width": 22,
+                "height": 22,
+                "residual": 55.585
+              }
+            ],
+            "histogramDistance": 0.0331,
+            "motionCoherence": 0.7725,
+            "analysisWidth": 320,
+            "analysisHeight": 180
+          },
+          {
+            "startSeconds": 1.0,
+            "endSeconds": 1.5,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 15.9435,
+            "meanRoundTripErrorPixels": 1.9745,
+            "meanMotionCompensatedResidual": 4.3822,
+            "maxTileResidual": 63.798,
+            "validPixelFraction": 0.9707,
+            "observation": "localized_change_candidate",
+            "regions": [
+              {
+                "x": 286,
+                "y": 110,
+                "width": 22,
+                "height": 22,
+                "residual": 63.798
+              },
+              {
+                "x": 110,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 49.163
+              },
+              {
+                "x": 132,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 36.312
+              }
+            ],
+            "histogramDistance": 0.0658,
+            "motionCoherence": 0.8603,
+            "analysisWidth": 320,
+            "analysisHeight": 180
+          },
+          {
+            "startSeconds": 1.5,
+            "endSeconds": 2.0,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 17.3225,
+            "meanRoundTripErrorPixels": 2.2158,
+            "meanMotionCompensatedResidual": 9.1606,
+            "maxTileResidual": 92.039,
+            "validPixelFraction": 0.9694,
+            "observation": "localized_change_candidate",
+            "regions": [
+              {
+                "x": 264,
+                "y": 88,
+                "width": 22,
+                "height": 22,
+                "residual": 92.039
+              },
+              {
+                "x": 286,
+                "y": 110,
+                "width": 22,
+                "height": 22,
+                "residual": 87.045
+              },
+              {
+                "x": 286,
+                "y": 88,
+                "width": 22,
+                "height": 22,
+                "residual": 69.2
+              }
+            ],
+            "histogramDistance": 0.0592,
+            "motionCoherence": 0.7904,
+            "analysisWidth": 320,
+            "analysisHeight": 180
+          },
+          {
+            "startSeconds": 2.0,
+            "endSeconds": 2.5,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 18.2736,
+            "meanRoundTripErrorPixels": 2.6566,
+            "meanMotionCompensatedResidual": 6.8831,
+            "maxTileResidual": 69.161,
+            "validPixelFraction": 0.9934,
+            "observation": "localized_change_candidate",
+            "regions": [
+              {
+                "x": 44,
+                "y": 110,
+                "width": 22,
+                "height": 22,
+                "residual": 69.161
+              },
+              {
+                "x": 0,
+                "y": 154,
+                "width": 22,
+                "height": 22,
+                "residual": 63.7
+              },
+              {
+                "x": 66,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 60.558
+              }
+            ],
+            "histogramDistance": 0.0452,
+            "motionCoherence": 0.8114,
+            "analysisWidth": 320,
+            "analysisHeight": 180
+          },
+          {
+            "startSeconds": 2.5,
+            "endSeconds": 2.875,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 17.2803,
+            "meanRoundTripErrorPixels": 2.9023,
+            "meanMotionCompensatedResidual": 6.5587,
+            "maxTileResidual": 66.576,
+            "validPixelFraction": 0.9924,
+            "observation": "localized_change_candidate",
+            "regions": [
+              {
+                "x": 0,
+                "y": 110,
+                "width": 22,
+                "height": 22,
+                "residual": 66.576
+              },
+              {
+                "x": 22,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 56.099
+              },
+              {
+                "x": 0,
+                "y": 154,
+                "width": 22,
+                "height": 22,
+                "residual": 55.696
+              }
+            ],
+            "histogramDistance": 0.024,
+            "motionCoherence": 0.8076,
+            "analysisWidth": 320,
+            "analysisHeight": 180
+          }
+        ],
+        "note": "Sparse endpoint comparisons only. Cuts, occlusion, lighting, compression and legitimate motion can explain changes. Not a deepfake classifier.",
+        "elapsedSeconds": 0.2987,
+        "peakWorkingSetBytes": 87027712
+      }
+    },
+    {
+      "file": "headshot_cc0_3s.mp4",
+      "sha256": "d8b44defe677e29c0ac54a36f6cf05b54e2c771955971aa50655c19964283fd2",
+      "wallSeconds": 1.4210228999727406,
+      "observations": {
+        "no_localized_change_observed": 6
+      },
+      "result": {
+        "status": "measured",
+        "classification": "INCONCLUSIVE",
+        "decisionProbability": null,
+        "method": "bounded_farneback_v1",
+        "requestedIntervalSeconds": 0.5,
+        "effectiveIntervalSeconds": 0.5,
+        "sampledFrames": 7,
+        "processedPairs": 6,
+        "sourceFrameCount": 24,
+        "durationSeconds": 3.0,
+        "intervals": [
+          {
+            "startSeconds": 0.0,
+            "endSeconds": 0.5,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 0.0065,
+            "meanRoundTripErrorPixels": 0.0004,
+            "meanMotionCompensatedResidual": 0.0077,
+            "maxTileResidual": 0.046,
+            "validPixelFraction": 0.9962,
+            "observation": "no_localized_change_observed",
+            "regions": [],
+            "histogramDistance": 0.0002,
+            "motionCoherence": 1.0,
+            "analysisWidth": 384,
+            "analysisHeight": 480
+          },
+          {
+            "startSeconds": 0.5,
+            "endSeconds": 1.0,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 0.0035,
+            "meanRoundTripErrorPixels": 0.0003,
+            "meanMotionCompensatedResidual": 0.0032,
+            "maxTileResidual": 0.033,
+            "validPixelFraction": 0.9956,
+            "observation": "no_localized_change_observed",
+            "regions": [],
+            "histogramDistance": 0.0001,
+            "motionCoherence": 1.0,
+            "analysisWidth": 384,
+            "analysisHeight": 480
+          },
+          {
+            "startSeconds": 1.0,
+            "endSeconds": 1.5,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 0.0024,
+            "meanRoundTripErrorPixels": 0.0003,
+            "meanMotionCompensatedResidual": 0.0028,
+            "maxTileResidual": 0.066,
+            "validPixelFraction": 0.9956,
+            "observation": "no_localized_change_observed",
+            "regions": [],
+            "histogramDistance": 0.0001,
+            "motionCoherence": 1.0,
+            "analysisWidth": 384,
+            "analysisHeight": 480
+          },
+          {
+            "startSeconds": 1.5,
+            "endSeconds": 2.0,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 0.0005,
+            "meanRoundTripErrorPixels": 0.0002,
+            "meanMotionCompensatedResidual": 0.0022,
+            "maxTileResidual": 0.066,
+            "validPixelFraction": 0.9958,
+            "observation": "no_localized_change_observed",
+            "regions": [],
+            "histogramDistance": 0.0001,
+            "motionCoherence": 1.0,
+            "analysisWidth": 384,
+            "analysisHeight": 480
+          },
+          {
+            "startSeconds": 2.0,
+            "endSeconds": 2.5,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 0.0,
+            "meanRoundTripErrorPixels": 0.0,
+            "meanMotionCompensatedResidual": 0.0001,
+            "maxTileResidual": 0.005,
+            "validPixelFraction": 0.9959,
+            "observation": "no_localized_change_observed",
+            "regions": [],
+            "histogramDistance": 0.0,
+            "motionCoherence": 1.0,
+            "analysisWidth": 384,
+            "analysisHeight": 480
+          },
+          {
+            "startSeconds": 2.5,
+            "endSeconds": 2.875,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 0.0,
+            "meanRoundTripErrorPixels": 0.0,
+            "meanMotionCompensatedResidual": 0.0,
+            "maxTileResidual": 0.0,
+            "validPixelFraction": 0.996,
+            "observation": "no_localized_change_observed",
+            "regions": [],
+            "histogramDistance": 0.0,
+            "motionCoherence": 1.0,
+            "analysisWidth": 384,
+            "analysisHeight": 480
+          }
+        ],
+        "note": "Sparse endpoint comparisons only. Cuts, occlusion, lighting, compression and legitimate motion can explain changes. Not a deepfake classifier.",
+        "elapsedSeconds": 0.8261,
+        "peakWorkingSetBytes": 113602560
+      }
+    },
+    {
+      "file": "test_pattern_with_tone_3s.mp4",
+      "sha256": "1ebb3f1e0d01641b1a3118328e509da72d1e1dfd5c710ee557a0ac4af5f4b679",
+      "wallSeconds": 0.8664148999960162,
+      "observations": {
+        "localized_change_candidate": 6
+      },
+      "result": {
+        "status": "measured",
+        "classification": "INCONCLUSIVE",
+        "decisionProbability": null,
+        "method": "bounded_farneback_v1",
+        "requestedIntervalSeconds": 0.5,
+        "effectiveIntervalSeconds": 0.5,
+        "sampledFrames": 7,
+        "processedPairs": 6,
+        "sourceFrameCount": 24,
+        "durationSeconds": 3.0,
+        "intervals": [
+          {
+            "startSeconds": 0.0,
+            "endSeconds": 0.5,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 16.3648,
+            "meanRoundTripErrorPixels": 3.7596,
+            "meanMotionCompensatedResidual": 5.5101,
+            "maxTileResidual": 57.517,
+            "validPixelFraction": 0.9859,
+            "observation": "localized_change_candidate",
+            "regions": [
+              {
+                "x": 176,
+                "y": 154,
+                "width": 22,
+                "height": 22,
+                "residual": 57.517
+              },
+              {
+                "x": 198,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 49.944
+              },
+              {
+                "x": 22,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 49.112
+              }
+            ],
+            "histogramDistance": 0.0385,
+            "motionCoherence": 0.8326,
+            "analysisWidth": 320,
+            "analysisHeight": 180
+          },
+          {
+            "startSeconds": 0.5,
+            "endSeconds": 1.0,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 19.6181,
+            "meanRoundTripErrorPixels": 2.7372,
+            "meanMotionCompensatedResidual": 8.0015,
+            "maxTileResidual": 90.254,
+            "validPixelFraction": 0.9908,
+            "observation": "localized_change_candidate",
+            "regions": [
+              {
+                "x": 0,
+                "y": 110,
+                "width": 22,
+                "height": 22,
+                "residual": 90.254
+              },
+              {
+                "x": 154,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 60.709
+              },
+              {
+                "x": 22,
+                "y": 110,
+                "width": 22,
+                "height": 22,
+                "residual": 55.585
+              }
+            ],
+            "histogramDistance": 0.0331,
+            "motionCoherence": 0.7725,
+            "analysisWidth": 320,
+            "analysisHeight": 180
+          },
+          {
+            "startSeconds": 1.0,
+            "endSeconds": 1.5,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 15.9435,
+            "meanRoundTripErrorPixels": 1.9745,
+            "meanMotionCompensatedResidual": 4.3822,
+            "maxTileResidual": 63.798,
+            "validPixelFraction": 0.9707,
+            "observation": "localized_change_candidate",
+            "regions": [
+              {
+                "x": 286,
+                "y": 110,
+                "width": 22,
+                "height": 22,
+                "residual": 63.798
+              },
+              {
+                "x": 110,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 49.163
+              },
+              {
+                "x": 132,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 36.312
+              }
+            ],
+            "histogramDistance": 0.0658,
+            "motionCoherence": 0.8603,
+            "analysisWidth": 320,
+            "analysisHeight": 180
+          },
+          {
+            "startSeconds": 1.5,
+            "endSeconds": 2.0,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 17.3225,
+            "meanRoundTripErrorPixels": 2.2158,
+            "meanMotionCompensatedResidual": 9.1606,
+            "maxTileResidual": 92.039,
+            "validPixelFraction": 0.9694,
+            "observation": "localized_change_candidate",
+            "regions": [
+              {
+                "x": 264,
+                "y": 88,
+                "width": 22,
+                "height": 22,
+                "residual": 92.039
+              },
+              {
+                "x": 286,
+                "y": 110,
+                "width": 22,
+                "height": 22,
+                "residual": 87.045
+              },
+              {
+                "x": 286,
+                "y": 88,
+                "width": 22,
+                "height": 22,
+                "residual": 69.2
+              }
+            ],
+            "histogramDistance": 0.0592,
+            "motionCoherence": 0.7904,
+            "analysisWidth": 320,
+            "analysisHeight": 180
+          },
+          {
+            "startSeconds": 2.0,
+            "endSeconds": 2.5,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 18.2736,
+            "meanRoundTripErrorPixels": 2.6566,
+            "meanMotionCompensatedResidual": 6.8831,
+            "maxTileResidual": 69.161,
+            "validPixelFraction": 0.9934,
+            "observation": "localized_change_candidate",
+            "regions": [
+              {
+                "x": 44,
+                "y": 110,
+                "width": 22,
+                "height": 22,
+                "residual": 69.161
+              },
+              {
+                "x": 0,
+                "y": 154,
+                "width": 22,
+                "height": 22,
+                "residual": 63.7
+              },
+              {
+                "x": 66,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 60.558
+              }
+            ],
+            "histogramDistance": 0.0452,
+            "motionCoherence": 0.8114,
+            "analysisWidth": 320,
+            "analysisHeight": 180
+          },
+          {
+            "startSeconds": 2.5,
+            "endSeconds": 2.875,
+            "scope": "adjacent_original_frames",
+            "method": "farneback_forward_backward_v1",
+            "medianFlowPixels": 0.0,
+            "p95FlowPixels": 17.2803,
+            "meanRoundTripErrorPixels": 2.9023,
+            "meanMotionCompensatedResidual": 6.5587,
+            "maxTileResidual": 66.576,
+            "validPixelFraction": 0.9924,
+            "observation": "localized_change_candidate",
+            "regions": [
+              {
+                "x": 0,
+                "y": 110,
+                "width": 22,
+                "height": 22,
+                "residual": 66.576
+              },
+              {
+                "x": 22,
+                "y": 132,
+                "width": 22,
+                "height": 22,
+                "residual": 56.099
+              },
+              {
+                "x": 0,
+                "y": 154,
+                "width": 22,
+                "height": 22,
+                "residual": 55.696
+              }
+            ],
+            "histogramDistance": 0.024,
+            "motionCoherence": 0.8076,
+            "analysisWidth": 320,
+            "analysisHeight": 180
+          }
+        ],
+        "note": "Sparse endpoint comparisons only. Cuts, occlusion, lighting, compression and legitimate motion can explain changes. Not a deepfake classifier.",
+        "elapsedSeconds": 0.3128,
+        "peakWorkingSetBytes": 87916544
+      }
+    }
+  ]
+}

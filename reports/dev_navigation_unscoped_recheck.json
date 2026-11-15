@@ -1,0 +1,99 @@
+{
+  "probes": [
+    {
+      "path": "/",
+      "status": 200,
+      "elapsedMs": 1225.2912999999999,
+      "bytes": 1511
+    },
+    {
+      "path": "/src/main.tsx",
+      "status": 200,
+      "elapsedMs": 214.49710000000005,
+      "bytes": 1233
+    },
+    {
+      "path": "/api/health",
+      "status": 200,
+      "elapsedMs": 4.607699999999568,
+      "bytes": 1346
+    }
+  ],
+  "navigationMs": 12013.2297,
+  "navigationError": "TimeoutError: page.goto: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:3017/\", waiting until \"domcontentloaded\"\u001b[22m\n",
+  "errors": [],
+  "failures": [
+    {
+      "path": "/css2",
+      "error": {
+        "errorText": "net::ERR_FAILED"
+      }
+    }
+  ],
+  "responses": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/src/main.tsx",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/.vite/deps/react_jsx-dev-runtime.js",
+      "status": 200
+    },
+    {
+      "path": "/src/App.tsx",
+      "status": 200
+    },
+    {
+      "path": "/@react-refresh",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/.vite/deps/react-dom_client.js",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/.vite/deps/react-D57lpOvP.js",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/.vite/deps/react.js",
+      "status": 200
+    },
+    {
+      "path": "/src/services/api.ts",
+      "status": 200
+    },
+    {
+      "path": "/src/hooks/useLiveStream.ts",
+      "status": 200
+    },
+    {
+      "path": "/node_modules/.vite/deps/react-dom-CAgWe78a.js",
+      "status": 200
+    },
+    {
+      "path": "/src/components/DashboardView.tsx",
+      "status": 200
+    },
+    {
+      "path": "/src/components/ui.tsx",
+      "status": 200
+    },
+    {
+      "path": "/@vite/client",
+      "status": 200
+    }
+  ],
+  "pending": [
+    "/src/index.css",
+    "/node_modules/.vite/deps/lucide-react.js",
+    "/node_modules/.vite/deps/recharts.js",
+    "/src/components/ForceGraph.tsx",
+    "/node_modules/vite/dist/client/env.mjs"
+  ],
+  "bodyText": ""
+}
