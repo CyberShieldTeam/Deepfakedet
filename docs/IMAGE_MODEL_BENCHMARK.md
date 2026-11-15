@@ -1,5 +1,30 @@
 # Image model benchmark — 2026-11-15
 
+## Subsequent advanced-model decision gate
+
+See [advanced evaluation](ADVANCED_IMAGE_MODEL_EVALUATION.md) for the completed bounded
+feasibility assessment and proposed acceptance criteria. **PATH B recommended**;
+pause additional image-model searches pending audited independent data and evaluation
+resources. No new candidate completed inference. Smaug and the pinned UniversalFakeDetect
+CLIP candidate were deferred before checkpoint loading by conservative resource gates;
+the latter's unmodified publisher script additionally requires unavailable CUDA.
+No new accuracy, latency or peak inference-memory measurements exist for them.
+
+The new development-only audit (`reports/advanced_image_audit.json`) verified 96 hashes,
+found no decoded/pHash duplicates and a minimum within-development pHash distance of 14.
+It also established strong label confounds: genuine images are all larger/nonsquare,
+synthetics all 1024-square, and class JPEG tables differ. Source groups remain file IDs,
+training/source overlap and underlying image rights unresolved. Existing results below
+remain exploratory, retained without repeating inference. The 96 reserved images and
+their manifest were not accessed in this session. Current image verdicts stay
+`INCONCLUSIVE`; Engine 2 has not been started and needs explicit implementation approval.
+
+The advanced report supersedes the earlier recommendation below to immediately search
+more models, but retains that section as historical context. Regression checks this
+session: Python 31 passed / one optional AASIST skip (32 total); Node/API, TypeScript,
+production build and live Express-to-Python YuNet face-only HTTP smoke passed. The
+existing non-failing build chunk warning remains. No production inference code changed.
+
 ## Scope and selection status
 
 Whole-image generation detection is evaluated separately from facial manipulation and

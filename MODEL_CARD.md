@@ -1,5 +1,32 @@
 # Image engine model record
 
+## Advanced evaluation decision gate — 2026-11-15
+
+**PATH B recommended: pause further Phase 2a model searches; Engine 2 implementation
+requires explicit approval.** No image model is promoted and Phase 2a is not validated
+or production complete. Unsupported local authenticity remains `INCONCLUSIVE`.
+
+The new development-only audit verified all 96 checksums and found no decoded/pHash
+duplicate pairs (minimum within-development distance 14, rejection threshold <=6).
+However, every source group is a file ID, original identities and training overlap are
+unknown, and label confounds are severe: all synthetic images are 1024-square, all
+genuine images larger/nonsquare, with different JPEG quantization tables. Existing
+accuracy estimates remain exploratory. The 96 reserved images were not accessed.
+
+Smaug's pinned publisher runtime differs from the working service; it also failed the
+conservative free-memory admission budget. UniversalFakeDetect was pinned to official
+revision `030495aea3300a8b54c0ec37ec7fe1dd7e63c619`; its validation script requires CUDA,
+and the CPU loader exceeds the chosen safe headroom budget. Saved host snapshot:
+3.060 GiB free physical RAM, 3.457 GiB available commit, no CUDA. Admission budgets are
+5 GiB for Smaug and 4 GiB for UniversalFakeDetect, estimates rather than measured model
+minimums. Neither checkpoint was loaded or scored; their local quality, latency and
+peak inference memory remain unknown. No working dependencies were changed.
+
+[Advanced evaluation](docs/ADVANCED_IMAGE_MODEL_EVALUATION.md) records pinned sources,
+preprocessing, exact blockers, all existing comparisons, uncertainty and proposed
+exploration/independent-validation/calibration/final/production gates. Raw audit:
+`reports/advanced_image_audit.json`. The previous investigations below remain history.
+
 ## Failure analysis and comparative development benchmark — 2026-11-15
 
 Completed feasible comparisons without repeating publisher parity. Auditing revealed all

@@ -4,6 +4,11 @@ Updated: 2026-11-15. Published model branch: `codex/phase1-audit` at `26de131eef
 
 ## Checklist
 
+Latest decision (2026-11-15): **PATH B recommended. Pause further Phase 2a model searches;
+Engine 2 implementation awaits explicit approval.** This closes the bounded advanced
+evaluation/decision task, not Phase 2a validation or production readiness. New evidence
+and proposed gates: `docs/ADVANCED_IMAGE_MODEL_EVALUATION.md`.
+
 - [x] Phase 1 — repository audit and staged implementation plan (`IMPLEMENTATION_PLAN.md`).
 - [ ] Phase 2a — dedicated general-image and facial-manipulation detectors. General-image inference, YuNet, optional experimental face-crop classifier, Express/UI contracts, real HTTP/browser verification and development benchmarking implemented. Independently source-audited evaluation, calibration and validated face-manipulation detection remain open.
 - [ ] Phase 2b — AASIST audio detector and segment-level output. Official checkpoint inference, resampling, segments, Express/UI contract, live HTTP smoke, browser WAV upload, and bounded video-audio extraction implemented. Speech activity detection, representative evaluation/calibration, and file-format coverage remain open.
@@ -22,6 +27,28 @@ Updated: 2026-11-15. Published model branch: `codex/phase1-audit` at `26de131eef
 - [ ] Phase 13 — deployment baseline.
 - [ ] Phase 14 — full operating, model, dataset, and training documentation.
 
+## Advanced image evaluation decision — 2026-11-15
+
+- Advanced evaluation update: `ai_service/advanced_image_audit.py` audited only the
+  development manifest and 96 listed images; all checksums passed, no decoded/pHash
+  duplicates, minimum pHash distance 14. Source groups are filenames, independence and
+  individual rights remain unresolved. All synthetics are 1024-square and all genuine
+  images larger/nonsquare; quantization tables differ. Existing benchmark estimates
+  remain exploratory. Reserved images/manifest were not accessed or scored.
+- Smaug and official UniversalFakeDetect were investigated with pinned sources and
+  preprocessing. Saved resources: 3.060 GiB free RAM / 3.457 GiB available commit, no
+  CUDA. Conservative free-memory gates (5/4 GiB respectively) deferred checkpoint loads;
+  publisher UFD validation also hardcodes CUDA. These are preflight deferrals, not
+  failed checkpoint loads or successful inference. Local accuracy, latency and peak
+  inference memory remain unmeasured for both. Main environment unchanged.
+- Proposed project-specific gates distinguish exploration, source-independent
+  validation, separate calibration, a locked final test, and production approval.
+  The three already measured models do not qualify; no further candidate search or
+  Engine 2 implementation was started. Image verdicts remain `INCONCLUSIVE`.
+- This session's checks: Python 32 total, 31 passed / one skipped (AASIST weights absent);
+  Node/API tests, TypeScript, production build and live Express-to-Python YuNet
+  face-only HTTP smoke passed. Existing Vite chunk warning remains. Application,
+  face/audio/video code and contracts unchanged. Local audit commit: `db67a14`.
 ## Cross-branch integration checkpoint — 2026-11-14
 
 - Integrated `figma-veritas-upgrade` into a local branch based on `codex/phase1-audit`; `main` was not modified. The source branches had diverged by six Codex commits and one Figma commit.
