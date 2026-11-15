@@ -60,6 +60,7 @@ export const mediaInput = z
       z.union([z.number().finite(), z.string().max(2000), z.boolean()]),
     ),
     mediaData: dataUrl.optional(),
+    originalImageData: dataUrl.optional(),
     keyframes: z.array(dataUrl).max(48).optional(),
     frameTimes: z.array(z.number().finite().nonnegative()).max(48).optional(),
     detailTiles: z.array(dataUrl).max(4).optional(),
@@ -89,6 +90,7 @@ export const mediaInput = z
       ctx.addIssue({ code: "custom", message: "Audio segments require audio modality" });
     const inputs = [
       v.mediaData,
+      v.originalImageData,
       ...(v.keyframes || []),
       ...(v.detailTiles || []),
       ...(v.audioSegments || []).map((s) => s.data),
@@ -128,6 +130,9 @@ export const mediaInput = z
           message: "Media signature does not match its declared type",
         });
     }
+    if (v.originalImageData && (v.modality !== "image" || !v.originalImageData.startsWith("data:image/") ||
+        Buffer.from(v.originalImageData.split(",")[1], "base64").length > 10 * 1024 * 1024))
+      ctx.addIssue({ code: "custom", message: "Original image evidence must be an image up to 10 MiB" });
     if (bytes > 24 * 1024 * 1024)
       ctx.addIssue({ code: "custom", message: "Combined decoded media exceeds 24 MiB" });
     if (v.modality === "image" && !v.mediaData)

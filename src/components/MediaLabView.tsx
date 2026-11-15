@@ -85,6 +85,31 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
           </p>
         </div>
       )}
+      {r.imageDiagnostics && (
+        <Card title="Image provenance and measured signals">
+          <div className="space-y-2 text-xs text-slate-400">
+            <p className="text-slate-200">Content Credentials: {{
+              absent: "No embedded credentials found",
+              valid_untrusted: "Signature and file binding valid; signer not trusted by this deployment",
+              valid_trusted: "Validated under the configured signer trust policy",
+              invalid: "Credential validation failed; this does not prove AI generation",
+              unavailable: "Verification SDK unavailable",
+              failed: "Credentials could not be verified",
+            }[r.imageDiagnostics.c2pa.status]}</p>
+            {r.imageDiagnostics.c2pa.signer && <p>Signer declaration: {r.imageDiagnostics.c2pa.signer}</p>}
+            <p>AI-use disclosure in active credentials: {r.imageDiagnostics.c2pa.ai_disclosure.replaceAll("_", " ")}. A declaration is not independent proof.</p>
+            <p>Camera metadata: {r.imageDiagnostics.metadata.exif_present ? "present, editable" : "absent; absence proves nothing"}.</p>
+            {Object.entries(r.imageDiagnostics.metadata.fields).map(([key, value]) => <p key={key}>{key.replaceAll("_", " ")}: {value}</p>)}
+            {r.imageDiagnostics.signals.status === "measured" && <p>
+              High-frequency energy fraction: {r.imageDiagnostics.signals.high_frequency_energy_fraction?.toFixed(4)} ·
+              noise residual standard deviation: {r.imageDiagnostics.signals.noise_residual_std?.toFixed(3)}.
+              These measurements are not an AI score or a camera fingerprint.
+            </p>}
+            <p>{r.imageDiagnostics.note}</p>
+            <p>{r.imageDiagnostics.c2pa.note}</p>
+          </div>
+        </Card>
+      )}
       {r.localImage && (
         <Card title="Experimental local image screening">
           <div className="space-y-1 text-xs text-slate-400">
@@ -412,6 +437,7 @@ export const MediaLabView: React.FC<{
     try {
       let measurements: any,
         mediaData: string | undefined,
+        originalImageData: string | undefined,
         keyframes: string[] | undefined,
         detailTiles: string[] | undefined,
         frameTimes: number[] | undefined,
@@ -423,6 +449,13 @@ export const MediaLabView: React.FC<{
         setView("ela");
         measurements = s.measurements;
         mediaData = s.previewDataUrl;
+        if (s.measurements.analysisInput !== "original file bytes") {
+          originalImageData = await smallDataUrl(file, 10 * 1024 * 1024);
+          if (originalImageData && !originalImageData.startsWith("data:image/")) {
+            const mime = /\.png$/i.test(file.name) ? "image/png" : /\.webp$/i.test(file.name) ? "image/webp" : "image/jpeg";
+            originalImageData = originalImageData.replace(/^data:[^;]*;base64,/, `data:${mime};base64,`);
+          }
+        }
         detailTiles = s.detailTiles;
       } else if (modality === "video") {
         const s = await analyzeVideo(
@@ -466,6 +499,7 @@ export const MediaLabView: React.FC<{
         await analyzeMedia({
           modality,
           fileName: file.name,
+          originalImageData,
           mimeType: file.type || extensionMime[file.name.split(".").pop()!.toLowerCase()],
           measurements,
           mediaData,

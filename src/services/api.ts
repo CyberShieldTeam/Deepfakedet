@@ -67,6 +67,7 @@ export const analyzeMedia = (p: {
   mimeType: string;
   measurements: any;
   mediaData?: string;
+  originalImageData?: string;
   keyframes?: string[];
   frameTimes?: number[];
   detailTiles?: string[];

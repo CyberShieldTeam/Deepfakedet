@@ -8,6 +8,7 @@ const previousFetch = globalThis.fetch;
 try {
   process.env.VERITAS_AI_SERVICE_URL = "http://127.0.0.1:8001";
   globalThis.fetch = (async (input: string | URL | Request) => {
+    if (String(input).endsWith("/v1/image/evidence")) return new Response('optional evidence unavailable', { status: 503 });
     assert.match(String(input), /\/v1\/image\/analyze$/);
     return new Response(
       JSON.stringify({

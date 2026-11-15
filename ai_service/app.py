@@ -14,7 +14,7 @@ from typing import Literal
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from PIL import Image, ImageOps, UnidentifiedImageError
-from ai_service import audio_service, video_service, face_service
+from ai_service import audio_service, video_service, face_service, image_evidence
 
 MODEL_KIND = os.getenv("VERITAS_IMAGE_MODEL", "dima").lower()
 MODELS = {
@@ -96,6 +96,7 @@ async def lifespan(_app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 app.include_router(audio_service.router)
 app.include_router(video_service.router)
+app.include_router(image_evidence.router)
 
 
 class ImageRequest(BaseModel):

@@ -1,6 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { encodeWav } from "../src/utils/audioSegments";
 
+test.beforeEach(async ({ page }) => {
+  // Cosmetic external fonts must not gate functional tests in restricted networks.
+  await page.route(/^https:\/\/fonts\.(googleapis|gstatic)\.com\//, route => route.abort());
+});
+
 test("Desktop overview, search, report, and live/demo isolation", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -72,6 +77,23 @@ test("Image measurements are processed without fabricating classifier output", a
   if (!process.env.VERITAS_EXPECT_FACE_READY)
     await expect(page.getByText("UNAVAILABLE", { exact: true })).toBeVisible();
   await expect(page.getByText("LIVE ANALYSIS MODE", { exact: true })).toBeVisible();
+});
+
+test("Signed image provenance survives browser upload without a classifier verdict", async ({ page }) => {
+  test.skip(process.env.VERITAS_EXPECT_IMAGE_EVIDENCE !== "1", "Requires SDK, Python service and cached official signed fixture");
+  await page.goto("/");
+  await page.getByRole("button", { name: "Media forensics", exact: true }).first().click();
+  await page.locator("input[type=file]").setInputFiles(".model-cache/provenance-fixtures/C.jpg");
+  const response = page.waitForResponse(r => r.url().includes("/api/forensics/analyze-media") && r.request().method() === "POST");
+  await page.getByRole("button", { name: /Check this file/ }).click();
+  const { result } = await (await response).json();
+  expect(result.imageDiagnostics.c2pa.status).toBe("valid_untrusted");
+  expect(result.imageDiagnostics.c2pa.ai_disclosure).toBe("not_declared");
+  expect(result.authenticity).toBe("inconclusive");
+  expect(result.aiGeneratedProbability).toBeNull();
+  await expect(page.getByText("Image provenance and measured signals", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Signature and file binding valid; signer not trusted/)).toBeVisible();
+  await page.screenshot({ path: "test-results/image-provenance.png", fullPage: true });
 });
 
 test("Pinned face classifier evidence survives browser upload", async ({ page }) => {

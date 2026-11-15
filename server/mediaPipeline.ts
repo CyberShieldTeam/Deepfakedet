@@ -1,4 +1,5 @@
 import { classify, modelConfig } from "./inference";
+import { callImageEvidence } from "./imageEvidence";
 import type { DetectionAssessment, ForensicAnalysisResult } from "../src/types";
 import { callLocalImage, localImageResult, type LocalImageResponse } from "./localImage";
 import { callLocalAudio, localAudioResult, type LocalAudioResponse } from "./localAudio";
@@ -33,6 +34,7 @@ export async function analyzeMediaPipeline(input: {
   fileName: string;
   measurements: Record<string, any>;
   mediaData?: string;
+  originalImageData?: string;
   keyframes?: string[];
   frameTimes?: number[];
   audioSegments?: { start: number; end: number; data: string }[];
@@ -43,7 +45,7 @@ export async function analyzeMediaPipeline(input: {
     "AI generation, manipulation, misleading context and factual accuracy are different questions.",
     "Browser measurements are client-supplied screening evidence, not trusted server forensic attestation.",
     "ELA, ordinary scene differences, codec bandwidth and missing metadata do not prove deepfaking.",
-    "C2PA byte-pattern hints are unverified; cryptographic verification is not installed.",
+    "Browser C2PA byte-pattern hints are unverified; consult the separate server provenance result when available.",
   ];
   if (m.elaBlockRatio !== undefined)
     findings.push(
@@ -259,6 +261,19 @@ export async function analyzeMediaPipeline(input: {
   } else if (localVideo) {
     if (available.length === 0) result = localVideoResult(localVideo, fileName, m, findings);
     else result.localVideo = localVideo;
+  }
+  if (modality === "image" && mediaData) {
+    // Keep credentials on original bytes, even when the classifier received a resize.
+    const evidenceData = input.originalImageData || (!String(m.analysisInput || "").startsWith("lossless PNG resize") ? mediaData : undefined);
+    if (evidenceData) {
+      try {
+        result.imageDiagnostics = await callImageEvidence(evidenceData, localEndpoint);
+      } catch {
+        result.limitations.push("Server provenance and image diagnostics unavailable; no metadata or signal verdict inferred.");
+      }
+    } else {
+      result.limitations.push("Original image was not supplied within evidence limits; provenance was not checked on the resized classifier input.");
+    }
   }
   return result;
 }

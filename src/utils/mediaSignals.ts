@@ -37,7 +37,7 @@ async function readProvenance(
   const text = new TextDecoder("latin1").decode(bytes);
   const c2paManifest = /c2pa/.test(text) && /jumb|jumd/.test(text);
   const sourceType =
-    /compositeWithTrainedAlgorithmicMedia|trainedAlgorithmicMedia|algorithmicMedia/.exec(text)?.[0];
+    /compositeWithTrainedAlgorithmicMedia|trainedAlgorithmicMedia/.exec(text)?.[0];
   const hints =
     c2paManifest || sourceType || /<x:xmpmeta/.test(text)
       ? Array.from(new Set((text.match(AI_GENERATORS) || []).map((h) => h.trim())))

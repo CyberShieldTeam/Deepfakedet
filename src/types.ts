@@ -108,10 +108,33 @@ export interface ForensicAnalysisResult {
   audioSegments?: { start: number; end: number; probability: number }[];
   /** Raw local whole-image screening; its score is experimental and never calibrated confidence. */
   localImage?: LocalImageEvidence;
+  imageDiagnostics?: ImageDiagnostics;
   /** Raw AASIST segment evidence; never an authenticity verdict. */
   localAudio?: LocalAudioEvidence;
   /** Timestamped image/audio evidence from local video screening; never a fused verdict. */
   localVideo?: LocalVideoEvidence;
+}
+
+export interface ImageDiagnostics {
+  scope: 'image_provenance_and_signals';
+  classification: 'INCONCLUSIVE';
+  decision_probability: null;
+  note: string;
+  metadata: {
+    width: number; height: number; format: string; exif_present: boolean;
+    fields: Record<string, string>; fields_verified: false; note: string;
+  };
+  c2pa: {
+    status: 'absent' | 'valid_untrusted' | 'valid_trusted' | 'invalid' | 'unavailable' | 'failed';
+    sdk: string | null; trust_policy: 'none' | 'operator_anchors'; validation_state: string | null;
+    validation_codes: string[]; source_types: string[];
+    ai_disclosure: 'declared' | 'not_declared' | 'not_assessed'; signer: string | null; note: string;
+  };
+  signals: {
+    status: 'measured' | 'skipped'; reason?: string; note?: string;
+    analysis_width?: number; analysis_height?: number; high_frequency_energy_fraction?: number;
+    noise_residual_std?: number; laplacian_variance?: number;
+  };
 }
 
 export interface LocalImageEvidence {
