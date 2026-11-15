@@ -11,6 +11,8 @@ Audit date: 2026-11-14. Baseline: `main` at `fa888241d838de9ce835d2277183add633f
 
 ## Delivery sequence and dependencies
 
+The additional provenance, signal, temporal, model-training, and physiological methods requested after the initial audit are sequenced with acceptance gates in `FORENSIC_METHODS_ROADMAP.md`.
+
 | Step | Deliverable and acceptance gate | Depends on | Complexity |
 | --- | --- | --- | --- |
 | 1. Audit | This plan, progress ledger, baseline type check/build/tests; no runtime change | Existing checkout | Small |

@@ -8,6 +8,8 @@ The existing browser sampler reads 16 evenly spaced video frames, computes simpl
 
 The selection score is an unvalidated convenience heuristic for avoiding flat or poorly exposed frames. It is not a deepfake score or a calibrated quality probability. The underlying image checkpoint remains experimental regardless of the selected frame.
 
+YuNet boxes are linked between adjacent sampled frames when their overlap is sufficient. The response exposes candidate counts, detector coverage, and geometric tracks with timestamps. Tracks describe continuity of detected regions; they do not establish identity, camera origin, or manipulation. A missed detection breaks a track.
+
 For larger clips or when server decoding fails, Express retains the browser-sampled path. It validates 1–6 ascending timestamps and screens the browser's JPEG frames through the image endpoint. This path does not decode the original video on the server. The UI marks the nearest corresponding timeline frame for each screened frame and labels whether screening used original-video or browser-sampled frames.
 
 On the original-video path, FFmpeg extracts at most the first 60 seconds of the first audio track as 16 kHz mono WAV. If AASIST is loaded, the existing audio engine scores its usable windows and attaches raw, uncalibrated segment outputs under `audioTrack`. The response distinguishes `analyzed`, `no_audio`, `model_unavailable`, and `extraction_failed`; audio failure does not erase frame evidence. AASIST is a speech anti-spoofing model, so a tone or other non-speech audio is outside its intended scope. No frame/audio fusion or video authenticity decision is made from these outputs.
@@ -16,11 +18,11 @@ When local frame screening is the only AI path available, the result is `inconcl
 
 ## Verification
 
-The repository includes a three-second, 320×180 H.264 test-pattern clip made with FFmpeg's `testsrc`, three extracted JPEG frames, and a second clip with a generated 440 Hz tone. They are transport fixtures without real/fake labels. Python tests decode the original clip, reject malformed or oversized input, select a detailed neighboring frame over a flat one, and distinguish absent audio from an extracted track. Node contract tests cover response mapping and the no-verdict result. A live HTTP smoke sends the tone clip through Express and Python with cached Dima, YuNet, and AASIST; a browser upload displays separate frame/audio evidence and an inconclusive result. Neither test measures detection accuracy.
+The repository includes a three-second, 320×180 H.264 test-pattern clip made with FFmpeg's `testsrc`, three extracted JPEG frames, and a second clip with a generated 440 Hz tone. It also includes a short H.264 video made from a CC0 headshot to exercise face-region continuity. These are transport fixtures without real/fake labels. Python tests decode the original clip, reject malformed or oversized input, select a detailed neighboring frame over a flat one, and distinguish absent audio from an extracted track. Node contract tests cover response mapping, geometric tracking, and the no-verdict result. Live HTTP smokes send the tone and headshot clips through Express and Python; browser uploads display separate frame, audio, and face-track evidence with an inconclusive result. Neither test measures detection accuracy. The browser's simple frame-difference display marked five spikes in the static headshot clip after H.264 encoding, showing that cue needs calibration before any forensic use.
 
 ## Open work
 
 - Add streaming/multipart upload and a job path for long clips. The current short-clip path uses base64 JSON and a synchronous decode.
-- Evaluate the frame-quality heuristic and add face continuity/coverage before selecting a production sampling policy. Evaluate image and face-manipulation models on held-out video frames.
+- Evaluate the frame-quality heuristic and geometric face continuity/coverage before selecting a production sampling policy. Correct the browser frame-difference false spikes. Evaluate image and face-manipulation models on held-out video frames.
 - Define and validate quality-aware aggregation before any local video verdict or probability.
 - Add speech activity detection and representative AASIST evaluation/calibration before interpreting video speech scores. Add and evaluate a temporal model for Phase 2d.

@@ -56,6 +56,12 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
         {r.localVideo && <div className="space-y-1 text-xs text-slate-400">
           <div>{r.localVideo.frames.length} {r.localVideo.scope === 'server_decoded_frames' ? 'original-video' : 'browser-sampled'} frame(s) screened locally. Raw image scores are experimental and were not used for a video verdict.</div>
           <div>{r.localVideo.samplingNote}</div>
+          {r.localVideo.faceContinuity && <div>
+            YuNet face candidates: {r.localVideo.faceContinuity.framesWithCandidates}/{r.localVideo.faceContinuity.detectorFrames} detector-screened frames · {r.localVideo.faceContinuity.tracks.length} geometric track(s). Tracks do not verify identity or detect manipulation.
+            {r.localVideo.faceContinuity.tracks.filter(track => track.frameIndices.length > 1).map(track => <div key={track.id} className="font-mono">
+              Track {track.id}: {track.frameIndices.length} sampled frames, {track.timestampsSeconds[0].toFixed(1)}–{track.timestampsSeconds.at(-1)!.toFixed(1)}s
+            </div>)}
+          </div>}
           {r.localVideo.frames.map((frame, i) => <div key={i} className="font-mono">
             {frame.timestampSeconds.toFixed(1)}s · {frame.image.model_status === 'ready' && frame.image.fake_probability != null
               ? `raw fake-class output ${frame.image.fake_probability.toFixed(3)}` : 'image classifier unavailable'} · {frame.image.face_boxes.length} face candidate(s)

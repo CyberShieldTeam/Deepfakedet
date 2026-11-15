@@ -1,6 +1,7 @@
 import type { ForensicAnalysisResult } from '../src/types';
 import { callLocalImage, type LocalImageResponse } from './localImage';
 import type { LocalAudioResponse } from './localAudio';
+import { computeFaceContinuity, type FaceContinuity } from './videoFaces';
 
 export interface SampledVideoFrame { timestampSeconds: number; imageData: string }
 export interface FrameQuality { laplacianVariance: number; meanLuma: number; clippedFraction: number; selectionScore: number }
@@ -16,6 +17,7 @@ export interface LocalVideoEvidence {
   samplingNote: string;
   videoMetadata?: { durationSeconds: number; width: number; height: number };
   audioTrack?: VideoAudioTrack;
+  faceContinuity?: FaceContinuity;
 }
 
 export async function callLocalVideo(mediaData: string, endpoint: string, fetcher: typeof fetch = fetch): Promise<LocalVideoEvidence> {
@@ -52,6 +54,7 @@ export async function callLocalVideo(mediaData: string, endpoint: string, fetche
           !Number.isFinite(segment.raw_spoof_softmax) || segment.raw_spoof_softmax < 0 || segment.raw_spoof_softmax > 1))) ||
       (audio.status !== 'analyzed' && audio.evidence !== undefined))
     throw new Error('Invalid local video audio evidence');
+  value.faceContinuity = computeFaceContinuity(value.frames);
   return value;
 }
 
@@ -73,7 +76,8 @@ export async function callLocalVideoFrames(input: unknown, endpoint: string, fet
     frames.push({ timestampSeconds: frame.timestampSeconds, image });
   }
   return { scope: 'sampled_video_frames', frames,
-    samplingNote: 'Browser-sampled JPEG frames at 480 px width; the original video was not decoded by the server.' };
+    samplingNote: 'Browser-sampled JPEG frames at 480 px width; the original video was not decoded by the server.',
+    faceContinuity: computeFaceContinuity(frames) };
 }
 
 export function localVideoResult(evidence: LocalVideoEvidence, fileName: string, measurements: Record<string, any>, signalFindings: string[]): ForensicAnalysisResult {
@@ -86,11 +90,14 @@ export function localVideoResult(evidence: LocalVideoEvidence, fileName: string,
     engineNote: `${evidence.frames.length} ${source} frame(s) screened locally. Image-model scores are experimental and cannot determine video authenticity.`,
     authenticity: 'inconclusive', confidenceScore: 0, aiGeneratedProbability: null,
     headlineSummary: 'Frame-level evidence is available, but video authenticity is undetermined.',
-    detailedFindings: [`Screened ${evidence.frames.length} sampled frame(s).`, ...signalFindings.map(s => `[Browser signal] ${s}`)],
+    detailedFindings: [`Screened ${evidence.frames.length} sampled frame(s).`,
+      ...(evidence.faceContinuity ? [`YuNet returned face candidates in ${evidence.faceContinuity.framesWithCandidates}/${evidence.faceContinuity.detectorFrames} detector-screened frame(s); geometric tracks do not verify identity or manipulation.`] : []),
+      ...signalFindings.map(s => `[Browser signal] ${s}`)],
     limitations: [evidence.scope === 'server_decoded_frames'
       ? 'Only sampled, resized JPEG frames were screened; the full video was not analyzed.'
       : 'Frames were sampled and JPEG-compressed in the browser; the original video was not decoded by the server.',
       'The whole-image checkpoint failed an initial out-of-domain smoke check; raw scores cannot establish authenticity.',
+      'Face candidate continuity is a geometric association only; it cannot verify identity or detect a face swap.',
       'No face-manipulation classifier or temporal model was run.',
       ...(audioScored ? ['Video AASIST segment scores are uncalibrated, speech presence was not verified, and they do not determine authenticity.'] :
         [evidence.audioTrack?.note || 'Video audio extraction and AASIST were not run.'])],
