@@ -2,6 +2,67 @@
 
 Updated: 2026-11-15. Published integration branch: `codex/integrate-figma-upgrade`, tracking the same branch on origin. Reconciled local `ee28104` with fetched `codex/phase1-audit` at `6cadda8` in merge `855b414`, successfully pushed. Earlier read-only-access observations below are historical; Git push is now working. Baseline commit: `fa888241d838de9ce835d2277183add633f28d29`.
 
+## Engine 3 structured episodes and attribution — 2026-11-15
+
+- Continued from `aa28502` on `codex/integrate-figma-upgrade`. Preserved Engine 1/2,
+  original union-find/sparse-DBSCAN implementations, earlier commits and raw reports.
+  `bede7ad` freezes the episode application, protocol, controls and exact measured
+  experiment code before subsequent subprocess-cleanup hardening. No main merge or
+  heavyweight model/dependency added. Scientific validation remains open.
+- Added named `analyzeDensityCampaignBaseline` and API `density_baseline_v1` comparison.
+  Default `episodes_v1` reuses lexical candidate generation, .65 association threshold,
+  120-second window, minSamples three, 80-entry lists and 200,000 candidate cap. Optional
+  observer hook does not alter legacy baseline results. No clustering threshold fitting.
+- Structured records bind each graph edge to actual account/post IDs, source input
+  references, original/UTC timestamps, declared/inferred precision, exact text/URL/tag
+  observations, one-to-one witnesses and pair-episode IDs. Missing IDs remain null with
+  labeled input references; conflicting supplied IDs reject. Duplicate rows collapse.
+  Shared coverage/warnings and candidate/evidence omission apply to every association.
+- Predeclared `docs/CAMPAIGN_EPISODE_PROTOCOL_V1.md`: per account-pair/content family,
+  <=300-second bins, >=30-minute conservative temporal separation, >=three precisely
+  identified separated episodes plus complete declared coverage/no truncation for
+  recurrence-review eligibility. Coverage is an attestation, not authenticated collection.
+  Missing windows/IDs or coarse precision cannot manufacture eligible recurrence. Pair
+  episodes are not independently established global events. New outputs abstain from
+  accusations: legacy suspicion false/zero and probabilities null, with descriptive states.
+- New evidence bounds <=5,000 pairs/20,000 witnesses/eight families per pair; edges without
+  retained witnesses are not reported. DBSCAN is reused on the retained graph. Current
+  HTML/panel display caps are disclosed separately from analysis truncation; complete
+  retained JSON remains downloadable and persists through signed owner-bound case/report
+  routes. Existing graph/community inspection, receipt integrity and modality separation
+  remain. Weight-total overflow is now rejected instead of producing NaN scores.
+- Explicit campaign embedding contract preserves generic raw inputs and supports pinned
+  E5 query-prefix similarity only under compatible format/revision. Unsupported settings
+  fail to lexical/Jaccard operation. Semantic values are diagnostic-only in episodes v1;
+  no retrieval cosine threshold is promoted to campaign detection. Actual cached E5 smoke
+  on English/Hindi/Telugu authored sentences returned finite 384-dimensional vectors in
+  384.23 ms; incompatible generic/E5 configuration rejected. No quality benchmark claimed.
+- Ten frozen authored controls cover all requested legitimate-sharing contexts and a
+  separated pattern. One-minute repeated official bulletins: legacy flags four accounts;
+  episodes yield one bin per pair and zero recurrence-review pairs. Scheduled bulletins
+  and repeated patterns show three pair episodes and six review-eligible pairs, with zero
+  automatic suspicious accounts; legitimate alternatives remain explicit. Not independent
+  false-positive rates or accuracy. Precision/recall/F1/AUROC remain unavailable/null.
+- Separate 3,000-short-post runs: sparse baseline/episodes 96.13/159.00 ms, dense
+  1,400.25/1,860.97 ms. Dense episode construction 82.32 ms and final graph 7.23 ms;
+  200,000 candidates hit the cap, 5,000 attributable edges retained, recurrence disabled.
+  Sampled whole-tree RSS baseline/new: sparse 125.84/138.05 MiB, dense 406.78/444.98 MiB.
+  Initial v1 sampler captured only the launcher (~40 MB); its correction file explicitly
+  supersedes those memory figures with v2. Exact raw records and caveats are preserved.
+  No concurrency, long-text worst-case or p95 SLA is claimed.
+- Full Node/API tests, TypeScript and production build passed (existing chunk warning).
+  Final Python 69 total: 68 passed, one optional absent-weight AASIST skip; includes actual
+  owned launcher/worker termination after cleanup hardening. Actual E5 HTTP contract
+  integration passed. Development browser ten passed/two expected skips; authenticated
+  production five passed; separate quoted-claim workflow one passed. Graph circles,
+  source inspection, JSON download, case saving, cross-owner/tamper rejection and export
+  attribution verified. Temporary services stopped. Media and claim workflows retained.
+- See `docs/CAMPAIGN_EPISODES.md`, `docs/CAMPAIGN_API.md`. Next: rights-cleared independent
+  campaign/event/account annotation with legitimate viral negatives, authenticated capture
+  and multi-window coverage, source/time-disjoint evaluation and real workload resource
+  tails. Implemented descriptive episodes do not establish malicious coordination or
+  close the incomplete scientific gates for any engine.
+
 ## Engine 2 reliability/runtime and Engine 3 readiness — 2026-11-15
 
 - Continued from `7b40c48`, retaining all previous implementations and artifacts. No main

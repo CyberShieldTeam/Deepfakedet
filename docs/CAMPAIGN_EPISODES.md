@@ -5,6 +5,12 @@ Implementation starts at `aa28502`. The previous sparse-DBSCAN method is retaine
 hook exposes qualifying post pairs without changing baseline results. No model or dependency
 was added. Engine 1/2 inference, prior artifacts and incomplete scientific validation remain.
 
+Exact measured application/profiler code and raw results are preserved in `bede7ad`.
+Subsequent timeout cleanup now terminates owned launcher **and** worker processes and
+has an actual subprocess-tree regression. That defensive change does not alter the
+measured campaign policy or historical report bytes. Use the frozen commit to reproduce
+the original profiler SHA recorded in the v2 resource report.
+
 ## Implemented policy and evidence
 
 The predeclared policy is `CAMPAIGN_EPISODE_PROTOCOL_V1.md`. `episodes_v1` reuses the
@@ -136,10 +142,13 @@ child reports. No claim of memory reduction is made; traceability has measurable
 
 Node/API suite, episode attribution/deduplication/UTC/precision/coverage/cap tests,
 ownership, tamper protection and escaped export passed. Python: 68 total, 67 passed,
-one optional absent-weight AASIST skip. TypeScript/build passed with the existing large
+one optional absent-weight AASIST skip. This initial checkpoint was 68 total; final
+cleanup hardening adds one actual process-tree test: **69 total, 68 passed / one skip**.
+TypeScript/build passed with the existing large
 chunk warning. Browser: development ten passed/two expected skips; authenticated production
 five passed; separate quoted-claim review one passed. Graph SVG/circles, post inspection,
-JSON download and case saving were exercised. Production auth returned 401 without a token;
+JSON download, case saving and the complete case-to-HTML-report download were exercised
+in development and production. Screenshot inspected. Production auth returned 401 without a token;
 built assets were served; temporary services stopped. No image/audio/temporal model changed.
 
 Next: lawfully usable, independently annotated campaign/event/account data with legitimate

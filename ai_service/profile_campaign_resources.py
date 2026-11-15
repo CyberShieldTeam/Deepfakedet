@@ -7,6 +7,23 @@ import subprocess
 import time
 import psutil
 
+def terminate_tree(process):
+    """tsx launches a worker child: timeout cleanup must cover that child as well."""
+    try:children=psutil.Process(process.pid).children(recursive=True)
+    except psutil.NoSuchProcess:children=[]
+    for child in reversed(children):
+        try:child.terminate()
+        except psutil.NoSuchProcess:pass
+    _,alive=psutil.wait_procs(children,timeout=2)
+    for child in alive:
+        try:child.kill()
+        except psutil.NoSuchProcess:pass
+    if process.poll() is None:
+        process.terminate()
+        try:process.wait(timeout=5)
+        except subprocess.TimeoutExpired:process.kill();process.wait(timeout=5)
+    psutil.wait_procs(alive,timeout=2)
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output',required=True);args=parser.parse_args()
     target=Path(args.output)
@@ -18,7 +35,7 @@ def main():
             if child.exists():raise ValueError('Refusing existing child report')
             with Path(str(child)+'.log').open('x',encoding='utf-8') as log:
                 start=time.perf_counter()
-                process=subprocess.Popen(['node','--max-old-space-size=1024','node_modules/tsx/dist/cli.mjs','test/evaluateCampaignEpisodes.ts',str(child),scenario,algorithm],stdout=log,stderr=log)
+                process=subprocess.Popen(['node','--max-old-space-size=1024','node_modules/tsx/dist/cli.mjs','test/evaluateCampaignEpisodes.ts',str(child),scenario,algorithm],stdout=log,stderr=log,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
                 peak=0
                 try:
                     while process.poll() is None:
@@ -35,10 +52,7 @@ def main():
                     if process.returncode:raise RuntimeError('Campaign run failed: '+str(child))
                     runs.append(dict(scenario=scenario,algorithm=algorithm,childReport=str(child),wallSeconds=time.perf_counter()-start,sampledPeakTreeRssBytes=peak,samplingIntervalSeconds=.02))
                 finally:
-                    if process.poll() is None:
-                        process.terminate()
-                        try:process.wait(timeout=5)
-                        except subprocess.TimeoutExpired:process.kill();process.wait(timeout=5)
+                    if process.poll() is None:terminate_tree(process)
     with target.open('x',encoding='utf-8') as file:json.dump(dict(scope='authored_resource_controls_not_accuracy',profilerSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),runs=runs,limitations=['20ms sampled process-tree RSS includes launcher and all descendant workers; can miss instantaneous peaks.','Separate fresh processes; OS caches were not flushed. No concurrency/SLA claim.']),file,indent=2)
     print(json.dumps(runs))
 if __name__=='__main__':main()

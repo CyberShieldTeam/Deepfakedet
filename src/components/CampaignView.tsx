@@ -283,11 +283,11 @@ export const CampaignView: React.FC<{
               right={
                 <div className="flex flex-wrap gap-2 text-[10px]">
                   {Object.entries(EDGE_LEGEND)
-                    .slice(0, 3)
+                    .slice(0, result.episodeEvidence?1:3)
                     .map(([k, c]) => (
                       <span key={k} className="flex items-center gap-1 text-slate-400">
                         <span className="h-0.5 w-3" style={{ background: c }} />
-                        {k.replace("_", " ")}
+                        {result.episodeEvidence?'observed post association':k.replace("_", " ")}
                       </span>
                     ))}
                 </div>
@@ -398,7 +398,7 @@ export const CampaignView: React.FC<{
                         className="rounded border border-slate-800 p-1.5 text-[11px] text-slate-400"
                       >
                         <span style={{ color: EDGE_LEGEND[e.coordinationType] }}>
-                          {e.coordinationType}
+                          {result.episodeEvidence?'observed association':e.coordinationType}
                         </span>{" "}
                         ↔{" "}
                         {

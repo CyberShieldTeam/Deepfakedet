@@ -12,7 +12,7 @@ export function CampaignEvidence({ result }: { result: CampaignAnalysisResult })
   const posts = new Map(evidence.posts.map((p) => [p.reference, p]));
   return (
     <section
-      className="space-y-3 rounded-lg border border-cyan-900 p-4"
+      className="min-w-0 break-words space-y-3 rounded-lg border border-cyan-900 p-4"
       aria-label="Campaign episode evidence"
     >
       <h3 className="font-semibold text-cyan-200">Campaign episodes and post evidence</h3>
@@ -46,7 +46,7 @@ export function CampaignEvidence({ result }: { result: CampaignAnalysisResult })
         Download campaign evidence JSON
       </button>
       <p className="text-sm text-slate-300">
-        {evidence.observation} · {evidence.episodes.length} bounded episodes ·{" "}
+        {evidence.observation} · {evidence.episodes.length} bounded pair episodes ·{" "}
         {evidence.associations.filter((a) => a.recurrenceEligible).length} pairs eligible for
         recurrence review.
       </p>
@@ -114,7 +114,7 @@ export function CampaignEvidence({ result }: { result: CampaignAnalysisResult })
                 {ep.id} · {ep.start} — {ep.end}
               </summary>
               <p className="my-2 text-slate-400">
-                Separated from previous bin: {String(ep.separatedFromPrevious)} · provided precise
+                First or conservatively separated bin: {String(ep.separatedFromPrevious)} · provided precise
                 IDs/times: {String(ep.preciseProvidedIds)}
               </p>
               {(openEpisode || association?.episodeIds[0]) === ep.id &&

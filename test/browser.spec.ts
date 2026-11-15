@@ -19,6 +19,12 @@ test('Episode campaign evidence survives graph inspection and export',async({pag
  const downloaded=page.waitForEvent('download');await region.getByRole('button',{name:'Download campaign evidence JSON'}).click();expect((await downloaded).suggestedFilename()).toBe('veritas-campaign-evidence.json');
  await page.getByRole('button',{name:'Save to a case',exact:true}).click();await expect(page.getByRole('button',{name:/Saved to SUR-/})).toBeVisible();
  await page.screenshot({path:'test-results/campaign-episode-evidence.png',fullPage:true});
+ await page.getByRole('button',{name:'Overview',exact:true}).first().click();
+ await page.getByRole('button',{name:'Export report',exact:true}).click();
+ const report=page.frameLocator('iframe[title="report"]');
+ await expect(report.getByRole('heading',{name:'Campaign episode evidence',exact:true})).toBeVisible();
+ await expect(report.getByText(/witness:/).first()).toBeVisible();
+ const htmlDownload=page.waitForEvent('download');await page.getByRole('button',{name:'Download',exact:true}).click();expect((await htmlDownload).suggestedFilename()).toMatch(/\.html$/);
 });
 
 test('Multilingual claim status reports unavailable evidence honestly', async ({page}) => {

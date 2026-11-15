@@ -176,6 +176,14 @@ benchmark results and reserved datasets are unchanged.
 
 ## Optional claim-retrieval embedding — Phase 3, 2026-11-15
 
+Engine 3 subsequently gained an explicit `e5-similarity` task contract for this same
+pinned model, with query prefixes on both sentences and strict model/revision checking.
+The actual cached HTTP smoke returned finite 384-dimensional outputs on three authored
+English/Hindi/Telugu sentences; generic/E5 format mismatch fails to lexical fallback.
+Cosine remains diagnostic-only in episodes v1 and does not change candidate thresholds
+or create a maliciousness/factual verdict. No new weights or independent multilingual
+campaign quality results are introduced. See `docs/CAMPAIGN_EPISODES.md`.
+
 Subsequent profiling/readiness: same pinned weights and preprocessing. New fresh-process
 starts 23.8–28.6 s (OS caches not flushed), peak 703.4–709.8 MiB, warm direct inference
 69–103 ms. Historical 70.789 s lacks a stage breakdown and is not a controlled before/after

@@ -35,6 +35,12 @@ The additional provenance, signal, temporal, model-training, and physiological m
 
 ## Risks and decisions
 
+Engine 3 episode slice from `aa28502` is now implemented as descriptive, traceable
+software (`docs/CAMPAIGN_EPISODES.md`, `docs/CAMPAIGN_API.md`), retaining a named original
+baseline and fixed thresholds. Controls/test completion does not close scientific
+coordination validation. The next Engine 3 gate is independent annotated campaign/event
+data and verified source coverage, not a new model or an unsupported maliciousness score.
+
 Current bounded readiness milestone: `docs/CLAIM_RUNTIME_PROFILE.md` separates E5
 startup/imports from warm inference/cache performance; `docs/CLAIM_EVALUATION_READINESS.md`
 defines independent multilingual admission/measurement gates. Engine 3's existing sparse

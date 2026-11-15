@@ -1,5 +1,20 @@
 # Image and video evaluation dataset readiness
 
+## Engine 3 episode controls — 2026-11-15
+
+Ten project-authored scenarios in `test/fixtures/campaign/episodeControls.ts` cover public
+health/emergency/news/sports sharing, repeated official bulletins, popular URLs, syndication,
+scheduled organizations, independent users and repeated separated patterns. Expected
+observations were specified before the comparison; contexts and IDs are fictional.
+The 3,000-post resource scenarios are also authored controls, not real account captures.
+No independently labeled campaign/event/account corpus is admitted, so no precision,
+recall, F1, AUROC or maliciousness probability is calculated. Future evaluation requires
+exact rights/source versions, verified capture windows, source/time-separated splits,
+legitimate viral negatives and independently reviewed recurrence/event labels. Claim
+truth labels do not substitute for account coordination labels; translations/copies of
+one event do not increase independent sample count. Existing reserves remain untouched.
+See `docs/CAMPAIGN_EPISODES.md` and the immutable software reports for current findings.
+
 ## Subsequent claim dataset review — 2026-11-15
 
 See `docs/CLAIM_EVALUATION_READINESS.md` for the current authoritative review: FEVER and

@@ -60,6 +60,8 @@ New default response fields:
 - `episodes`: account pair/family, bounded start/end, timestamp uncertainty, one-to-one
   witness IDs, separation and precision eligibility. These are pair episodes, not a global
   count of independently established real-world events.
+  The first bin seeds the separated count; its separation flag is true by convention,
+  not evidence of an earlier unobserved episode.
 - `associations`: graph edge ID, witness/episode IDs, separated-episode count and eligibility
   for review. Every association inherits shared coverage/warnings/truncation below.
 - `coverage`, `coverageComplete`, `duplicatesRemoved`, `omittedWitnesses`,

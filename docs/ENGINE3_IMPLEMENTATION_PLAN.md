@@ -1,5 +1,24 @@
 # Engine 3 readiness: preserve the existing campaign engine
 
+## Implemented episode slice — 2026-11-15
+
+The bounded plan below is now implemented from `aa28502`, with exact initial application/
+control measurements preserved in `bede7ad`. See `CAMPAIGN_EPISODES.md` and `CAMPAIGN_API.md`
+for current behavior, API compatibility, measured costs and limits. The historical
+readiness audit below remains context, not a statement that the episode implementation
+is still only planned. The legacy baseline, unchanged thresholds and previous artifacts
+remain. Source-bound witnesses, one-to-one pair episodes, missing-data safeguards,
+generic/E5 task contracts, graph inspection and complete retained JSON export are implemented.
+
+Authored controls and endpoint/browser tests passed; independent coordination validation
+is **not** complete. Next acceptance gate: lawfully obtained campaign/event/account labels,
+ordinary viral negatives, verified collection/coverage and platform/source/time-disjoint
+evaluation. Improve multi-window coverage and benchmark realistic long-text/concurrent
+loads before deployment claims. Diagnostic semantic compatibility is not validated
+multilingual campaign detection. No new classifier is selected or trained.
+
+## Historical readiness audit and proposed slice
+
 Assessment baseline: `7b40c48`. This milestone changes no campaign inference,
 threshold, graph or classification code. The next slice is planned, not implemented.
 
