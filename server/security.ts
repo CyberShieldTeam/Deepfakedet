@@ -151,12 +151,14 @@ export const mediaInput = z
   });
 export const campaignInput = z
   .object({
+    coverage:z.object({start:z.string().datetime({offset:true}),end:z.string().datetime({offset:true}),complete:z.boolean(),source:text(500)}).strict().refine(c=>Date.parse(c.start)<Date.parse(c.end)).optional(),
     datasetName: text(200).optional(),
     posts: z.array(z.record(z.string(), z.unknown())).min(2).max(3000).optional(),
     csv: text(2_000_000).optional(),
     isSimulated: z.boolean().optional(),
     config: z
       .object({
+        algorithm:z.enum(['density_baseline_v1','episodes_v1']).optional(),
         windowSeconds: z.number().min(10).max(3600).optional(),
         minSamples: z.number().int().min(3).max(20).optional(),
         threshold: z.number().min(0.4).max(1).optional(),
@@ -169,7 +171,7 @@ export const campaignInput = z
             semantic: z.number().nonnegative(),
           })
           .strict()
-          .refine((w) => Object.values(w).reduce((a, b) => a + b, 0) > 0)
+            .refine((w) => {const total=Object.values(w).reduce((a,b)=>a+b,0);return Number.isFinite(total)&&total>0;})
           .optional(),
       })
       .strict()

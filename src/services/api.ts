@@ -88,11 +88,12 @@ export const reviewClaim = (
     (d) => d.result,
   );
 export const analyzeCampaign = (p: {
+  coverage?:import('../../server/campaignEpisodes').CampaignCoverage;
   datasetName: string;
   posts?: any[];
   csv?: string;
   isSimulated?: boolean;
-  config?: { windowSeconds: number; minSamples: number; threshold: number };
+  config?: { windowSeconds: number; minSamples: number; threshold: number; algorithm?:'density_baseline_v1'|'episodes_v1' };
 }) => post<{ result: CampaignAnalysisResult }>("/api/campaigns/analyze", p).then((d) => d.result);
 export const runDemoScenario = () =>
   post<{ investigation: Investigation }>("/api/demo/scenario", {}).then((d) => d.investigation);

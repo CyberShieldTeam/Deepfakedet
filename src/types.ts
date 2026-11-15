@@ -408,6 +408,9 @@ export interface CampaignCluster {
 }
 
 export interface CampaignAnalysisResult {
+  algorithm?:'density_baseline_v1'|'episodes_v1';
+  episodeEvidence?:import('../server/campaignEpisodes').CampaignEpisodeEvidence;
+  embeddingCompatibility?:{status:'available'|'unavailable';format:string;modelId:string;version:string;usedForAdmissions:false;detail:string};
   classification?:
     | "Organic viral activity"
     | "Legitimate coordinated campaign"

@@ -114,6 +114,14 @@ ${list(c.tacticalSummary)}`
     : '<p class="muted">No campaign analysed.</p>'
 }
 ${inv.multilingual?.length ? `<h3>Multilingual propagation</h3><table><tr><th>Language</th><th>Original</th><th>Translation</th><th>Posts</th></tr>${inv.multilingual.map((v) => `<tr><td>${esc(v.language)}</td><td>${esc(v.original)}</td><td>${esc(v.translation)}</td><td>${v.posts}</td></tr>`).join("")}</table>` : ""}
+${c?.episodeEvidence ? (()=>{
+    const e=c.episodeEvidence;
+    return `<h3>Campaign episode evidence</h3><p>${esc(e.observation)}; coverage ${e.coverageComplete?'operator-declared complete':'unknown/incomplete'}; ${e.duplicatesRemoved} duplicates removed. No maliciousness, media-authenticity or factual verdict follows.</p>${list(e.warnings)}
+      <p>HTML view limited to 200 posts / 200 episodes / 500 witnesses; full retained records are available in the campaign JSON download and authenticated report JSON.</p>
+      <table><tr><th>Input reference / post ID</th><th>Account</th><th>UTC / original / resolution</th><th>Actual text</th></tr>${e.posts.slice(0,200).map(p=>`<tr><td>${esc(p.reference)} / ${esc(p.postId||'ID not supplied')}</td><td>${esc(p.accountId)}</td><td>${esc(p.timestamp)} / ${esc(p.originalTimestamp)} / ${p.resolutionMs}ms</td><td>${esc(p.content)}</td></tr>`).join('')}</table>
+      <ul>${e.episodes.slice(0,200).map(ep=>`<li>${esc(ep.id)}: ${esc(ep.source)} / ${esc(ep.target)}; ${esc(ep.start)} to ${esc(ep.end)}; separated ${esc(ep.separatedFromPrevious)}; witness IDs ${esc(ep.witnessIds.join(', '))}</li>`).join('')}</ul>
+      <ul>${e.witnesses.slice(0,500).map(w=>`<li>${esc(w.id)}: ${esc(w.sourcePost)} / ${esc(w.targetPost)}; ${esc(w.sourceTimestamp)} / ${esc(w.targetTimestamp)}; episode ${esc(w.episodeId)}; Jaccard ${esc(w.text)}, URL ${esc(w.url)}, hashtags ${esc(w.tag)}, gap ${esc(w.dt)}s; semantic ${esc(w.semanticCosine??'unavailable')} (diagnostic). URLs ${esc(w.sharedUrls.join(', '))}; tags ${esc(w.sharedHashtags.join(', '))}</li>`).join('')}</ul>`;
+  })():''}
 <h2>5. Evidence references</h2>
 ${(() => {
   const src = claims.flatMap((x) => x.sources);

@@ -20,6 +20,8 @@ import { inferenceRegistry, embed } from "./server/inference";
 import { verifyWithEvidence } from "./server/evidence";
 import { claimReviewSchema, reviewEvidence } from "./server/claimVerification";
 import { analyzeDensityCampaign } from "./server/densityCampaign";
+import { prepareCampaignPosts, analyzePreparedEpisodeCampaign } from "./server/campaignEpisodes";
+import { campaignEmbeddings } from "./server/campaignEmbedding";
 import { createServer as createViteServer } from "vite";
 import path from "path";
 import fs from "fs";
@@ -36,6 +38,7 @@ import {
 import { buildDemoInvestigation, demoPosts, DEMO_TIMELINE } from "./server/demoScenario";
 import {
   ClaimVerificationResult,
+  CampaignAnalysisResult,
   ForensicAnalysisResult,
   Investigation,
   LiveEvent,
@@ -914,14 +917,15 @@ app.post("/api/campaigns/analyze", validate(campaignInput), async (req, res) => 
       return res
         .status(400)
         .json({ error: "Dataset too large for the live demo (max 3000 posts)." });
-    const vectors = await embed(rows.map((p: any) => String(p.content || p.text || p.post || "")));
-    const result = analyzeDensityCampaign(
-      datasetName,
-      rows,
-      !!isSimulated,
-      req.body.config,
-      vectors,
-    );
+    let result: CampaignAnalysisResult;
+    if(req.body.config?.algorithm === 'density_baseline_v1') {
+      result={...analyzeDensityCampaign(datasetName,rows,!!isSimulated,req.body.config),algorithm:'density_baseline_v1'};
+    } else {
+      const prepared=prepareCampaignPosts(rows);
+      const embedding=await campaignEmbeddings(prepared.items.map(i=>i.record.content));
+      result=analyzePreparedEpisodeCampaign(datasetName,prepared,!!isSimulated,req.body.config,embedding.vectors,req.body.coverage);
+      result.embeddingCompatibility=embedding.metadata;
+    }
     if (result.classification === "Suspicious coordinated amplification") {
       const top = result.clusters[0];
       raiseAlert(

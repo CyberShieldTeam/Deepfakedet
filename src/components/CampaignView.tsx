@@ -24,6 +24,7 @@ import {
   fmtTime,
 } from "./ui";
 import { EDGE_LEGEND, ForceGraph } from "./ForceGraph";
+import { CampaignEvidence } from './CampaignEvidence';
 import { Details, PageHeader, VerdictBanner } from "./plain";
 import type { AttachFn } from "../App";
 
@@ -74,7 +75,7 @@ export const CampaignView: React.FC<{
     if (/\.json$/i.test(f.name) || text.trim().startsWith("[") || text.trim().startsWith("{")) {
       try {
         const data = JSON.parse(text);
-        run({ datasetName: f.name, posts: Array.isArray(data) ? data : data.posts || [] });
+        run({ datasetName: f.name, posts: Array.isArray(data) ? data : data.posts || [],coverage:Array.isArray(data)?undefined:data.coverage });
       } catch {
         setError("Invalid JSON file.");
       }
@@ -267,13 +268,14 @@ export const CampaignView: React.FC<{
             <Stat label="Accounts" value={result.totalAccounts} />
             <Stat label="Posts" value={result.totalPosts} />
             <Stat
-              label="Suspicious posts"
-              value={result.suspiciousPostCount ?? "—"}
+              label={result.episodeEvidence?'Recurrence review pairs':'Suspicious posts (baseline)'}
+              value={result.episodeEvidence?result.episodeEvidence.associations.filter(a=>a.recurrenceEligible).length:result.suspiciousPostCount ?? "—"}
               accent="text-orange-300"
             />
             <Stat label="Groups found" value={result.clusters.length} accent="text-rose-300" />
           </div>
 
+          <CampaignEvidence key={result.timestamp} result={result}/>
           <div className="grid gap-4 xl:grid-cols-3">
             <Card
               title="Account relationships · edges show measured associations"

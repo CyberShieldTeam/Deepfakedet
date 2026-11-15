@@ -1,0 +1,42 @@
+{
+  "scope": "authored_resource_controls_not_accuracy",
+  "profilerSha256": "4b4cca871f5e71e65b4c6f8189f105963090801932b252fd45c8b6394b52db20",
+  "runs": [
+    {
+      "scenario": "sparse3000",
+      "algorithm": "baseline",
+      "childReport": "reports\\campaign_episode_resources_v2_sparse3000_baseline.json",
+      "wallSeconds": 0.6840560999698937,
+      "sampledPeakTreeRssBytes": 131948544,
+      "samplingIntervalSeconds": 0.02
+    },
+    {
+      "scenario": "sparse3000",
+      "algorithm": "episodes",
+      "childReport": "reports\\campaign_episode_resources_v2_sparse3000_episodes.json",
+      "wallSeconds": 0.8067788999760523,
+      "sampledPeakTreeRssBytes": 144752640,
+      "samplingIntervalSeconds": 0.02
+    },
+    {
+      "scenario": "dense3000",
+      "algorithm": "baseline",
+      "childReport": "reports\\campaign_episode_resources_v2_dense3000_baseline.json",
+      "wallSeconds": 2.1076243999996223,
+      "sampledPeakTreeRssBytes": 426536960,
+      "samplingIntervalSeconds": 0.02
+    },
+    {
+      "scenario": "dense3000",
+      "algorithm": "episodes",
+      "childReport": "reports\\campaign_episode_resources_v2_dense3000_episodes.json",
+      "wallSeconds": 2.513010299997404,
+      "sampledPeakTreeRssBytes": 466595840,
+      "samplingIntervalSeconds": 0.02
+    }
+  ],
+  "limitations": [
+    "20ms sampled process-tree RSS includes launcher and all descendant workers; can miss instantaneous peaks.",
+    "Separate fresh processes; OS caches were not flushed. No concurrency/SLA claim."
+  ]
+}

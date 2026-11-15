@@ -1,0 +1,41 @@
+{
+  "scope": "authored_resource_controls_not_accuracy",
+  "runs": [
+    {
+      "scenario": "sparse3000",
+      "algorithm": "baseline",
+      "childReport": "reports\\campaign_episode_resources_v1_sparse3000_baseline.json",
+      "wallSeconds": 0.7522345000179484,
+      "sampledPeakRssBytes": 40460288,
+      "samplingIntervalSeconds": 0.02
+    },
+    {
+      "scenario": "sparse3000",
+      "algorithm": "episodes",
+      "childReport": "reports\\campaign_episode_resources_v1_sparse3000_episodes.json",
+      "wallSeconds": 0.7519872999982908,
+      "sampledPeakRssBytes": 40558592,
+      "samplingIntervalSeconds": 0.02
+    },
+    {
+      "scenario": "dense3000",
+      "algorithm": "baseline",
+      "childReport": "reports\\campaign_episode_resources_v1_dense3000_baseline.json",
+      "wallSeconds": 1.9166210000403225,
+      "sampledPeakRssBytes": 40628224,
+      "samplingIntervalSeconds": 0.02
+    },
+    {
+      "scenario": "dense3000",
+      "algorithm": "episodes",
+      "childReport": "reports\\campaign_episode_resources_v1_dense3000_episodes.json",
+      "wallSeconds": 2.3851712999748997,
+      "sampledPeakRssBytes": 40456192,
+      "samplingIntervalSeconds": 0.02
+    }
+  ],
+  "limitations": [
+    "20ms sampled RSS can miss instantaneous peaks; includes Node/tsx startup.",
+    "Separate fresh processes; OS caches were not flushed. No concurrency/SLA claim."
+  ]
+}

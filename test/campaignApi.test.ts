@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';import os from 'node:os';import path from 'node:path';
+import request from 'supertest';
+import {episodeControls,coverage} from './fixtures/campaign/episodeControls';
+const root=fs.mkdtempSync(path.join(os.tmpdir(),'campaign-api-'));
+process.env.VERITAS_EMBEDDED='true';process.env.NODE_ENV='production';process.env.APP_GEMINI_API_KEY='MY_DISABLED';
+process.env.VERITAS_STORE=path.join(root,'cases.json');
+const first='campaign-test-owner-one-not-secret-000000',second='campaign-test-owner-two-not-secret-000000';
+process.env.VERITAS_USERS=JSON.stringify({[first]:'analyst-a',[second]:'analyst-b'});delete process.env.VERITAS_EMBEDDING_ENDPOINT;
+try{
+ const {app}=await import('../server'),api=request(app),a={Authorization:`Bearer ${first}`},b={Authorization:`Bearer ${second}`};
+ const control=episodeControls.find(c=>c.name==='multi_episode_pattern')!;
+ const payload={datasetName:'Explicit fictional campaign API control',posts:control.rows,coverage};
+ await api.post('/api/campaigns/analyze').send(payload).expect(401);
+ const result=(await api.post('/api/campaigns/analyze').set(a).send(payload).expect(200)).body.result;
+ assert.equal(result.algorithm,'episodes_v1');assert.equal(result.episodeEvidence.associations.filter((x:any)=>x.recurrenceEligible).length,6);assert.equal(result.overallCoordinationIndex,null);
+ const baseline=(await api.post('/api/campaigns/analyze').set(a).send({...payload,config:{algorithm:'density_baseline_v1'}}).expect(200)).body.result;
+ assert.equal(baseline.algorithm,'density_baseline_v1');assert.ok(!baseline.episodeEvidence);
+ await api.post('/api/campaigns/analyze').set(a).send({...payload,coverage:{...coverage,start:'invalid'}}).expect(400);
+ await api.post('/api/campaigns/analyze').set(a).send({...payload,posts:[control.rows[0],{...control.rows[0],content:'conflict'}]}).expect(400);
+ await api.post('/api/campaigns/analyze').set(a).send({...payload,posts:Array(3001).fill(control.rows[0])}).expect(400);
+ await api.post('/api/campaigns/analyze').set(a).send({...payload,config:{weights:{text:1e308,url:1e308,temporal:0,hashtag:0,semantic:0}}}).expect(400);
+ const created=(await api.post('/api/investigations').set(a).send({title:'Campaign software control'}).expect(201)).body.investigation;
+ await api.post(`/api/investigations/${created.id}/attach`).set(b).send({kind:'campaign',result}).expect(404);
+ await api.post(`/api/investigations/${created.id}/attach`).set(a).send({kind:'campaign',result:{...result,classification:'Malicious'}}).expect(400);
+ const attached=(await api.post(`/api/investigations/${created.id}/attach`).set(a).send({kind:'campaign',result}).expect(200)).body.investigation;
+ assert.ok(!attached.claimResult);assert.ok(!attached.forensicResult);
+ const report=(await api.get(`/api/reports/${created.id}`).set(a).expect(200)).body.report;
+ assert.deepEqual(report.investigation.campaignResult.episodeEvidence,result.episodeEvidence);
+ console.log('Campaign API passed: episode/default and named baseline, validation, attribution persistence, receipt tamper protection, ownership and modality isolation.');
+}finally{fs.rmSync(root,{recursive:true,force:true});}

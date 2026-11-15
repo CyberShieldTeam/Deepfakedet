@@ -76,18 +76,21 @@ function validateRows(rows: any[]) {
   }
 }
 const colors = ["#20c5df", "#7481f9", "#e7b451", "#d084f3", "#56c5ab"];
+export interface PairObservation {left:number;right:number;text:number;url:number;tag:number;dt:number;score:number}
 export function analyzeDensityCampaign(
   datasetName: string,
   rows: any[],
   isSimulated: boolean,
   config: CoordinationConfig = {},
   vectors: number[][] | null = null,
+  observe?: (pair:PairObservation)=>void,
 ): CampaignAnalysisResult {
   validateRows(rows);
   const normalized = normalizePosts(rows);
   const posts = normalized
     .map((p, i) => ({
       ...p,
+      rowIndex:i,
       vector: vectors?.[i],
       postId: rows[i].post_id ?? rows[i].postId,
       allUrls: [
@@ -185,6 +188,7 @@ export function analyzeDensityCampaign(
         weights.semantic * semantic) /
       (weightTotal - (vectors ? 0 : weights.semantic) || 1);
     if (score < threshold) continue;
+    observe?.({left:a.rowIndex,right:b.rowIndex,text,url,tag,dt,score});
     const [source, target] = [a.accountId, b.accountId].sort(),
       pair = JSON.stringify([source, target]);
     const previous = relations.get(pair);
@@ -352,3 +356,6 @@ export function analyzeDensityCampaign(
     isSimulated,
   };
 }
+
+/** Named original behavior; observer is optional and does not alter baseline calculations. */
+export const analyzeDensityCampaignBaseline=analyzeDensityCampaign;

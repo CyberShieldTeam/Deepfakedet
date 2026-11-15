@@ -1,0 +1,50 @@
+{
+  "scope": "authored_campaign_software_controls_not_detection_accuracy",
+  "scenario": "dense3000",
+  "results": [
+    {
+      "algorithm": "density_baseline_v1",
+      "inputPosts": 3000,
+      "posts": 3000,
+      "accounts": 3000,
+      "candidatePairs": 200000,
+      "associations": 200000,
+      "communities": 1,
+      "truncated": true,
+      "legacySuspiciousAccounts": 0,
+      "classification": "Insufficient evidence",
+      "episodes": null,
+      "recurrenceEligiblePairs": null,
+      "separatedEpisodes": null,
+      "wallMs": 1271.7269,
+      "rssBeforeBytes": 63696896,
+      "rssAfterBytes": 385986560,
+      "stageTimings": null
+    }
+  ],
+  "code": {
+    "server/campaignEpisodes.ts": "759e8a09846c7cb26d8db4c41d9881aa39cdb50f9e4643553ce234dd8e5f5860",
+    "server/densityCampaign.ts": "2b9a6289562f8b557b44bc07593c2d8f87ef49a5907b3e81116583c06f609c3f",
+    "test/fixtures/campaign/episodeControls.ts": "f949180da696b1b87f47b2eea02150bcbdcc3ed19191efbc0aee628037f1df2f",
+    "test/evaluateCampaignEpisodes.ts": "9acfb94b6b0e10bb9cd511bd580ac0a618c699b75e6e599da51698923717b247"
+  },
+  "protocolSha256": "88e5d5e6bf0bc28f2947a745cb3397d95a38c1d8891ede0a1521e6d6c12325b9",
+  "independentCampaigns": 0,
+  "precision": null,
+  "recall": null,
+  "f1": null,
+  "auroc": null,
+  "limits": {
+    "inputPosts": 3000,
+    "candidatePairs": 200000,
+    "postingList": 80,
+    "evidencePairs": 5000,
+    "witnesses": 20000
+  },
+  "limitations": [
+    "Fictional contexts/expected observations, not independent campaign/account labels.",
+    "Control comparisons run baseline first; GC/host/cache effects limit latency conclusions.",
+    "RSS snapshots are not algorithm-isolated peak memory. Resource scenarios use separate child processes and external sampling.",
+    "Separated episodes do not prove independent real events, truth, common control or maliciousness."
+  ]
+}

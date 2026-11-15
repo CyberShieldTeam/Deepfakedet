@@ -1,0 +1,6 @@
+{
+  "superseded_memory_report": "campaign_episode_resources_v1.json",
+  "replacement_report": "campaign_episode_resources_v2.json",
+  "reason": "The v1 external sampler measured only the tsx launcher process, not its Node worker descendant. Its ~40 MB figures are not campaign worker memory. V2 samples the complete process tree. V1 child-report latency/counts and in-process RSS snapshots remain historical observations; do not use launcher-only peaks as algorithm memory.",
+  "application_algorithm_changed": false
+}

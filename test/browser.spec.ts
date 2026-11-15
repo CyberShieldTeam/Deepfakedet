@@ -1,5 +1,25 @@
 import { test, expect } from "@playwright/test";
 import { encodeWav } from "../src/utils/audioSegments";
+import {episodeControls,coverage as episodeCoverage} from './fixtures/campaign/episodeControls';
+
+test('Episode campaign evidence survives graph inspection and export',async({page})=>{
+ await page.goto('/');await page.getByRole('button',{name:'Network intelligence',exact:true}).first().click();
+ const control=episodeControls.find(c=>c.name==='multi_episode_pattern')!;
+ const response=page.waitForResponse(r=>r.url().includes('/api/campaigns/analyze')&&r.request().method()==='POST');
+ await page.locator('input[type=file]').setInputFiles({name:'authored-episodes.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({posts:control.rows,coverage:episodeCoverage}))});
+ const result=(await (await response).json()).result;expect(result.algorithm).toBe('episodes_v1');expect(result.episodeEvidence.associations.filter((a:any)=>a.recurrenceEligible)).toHaveLength(6);
+ expect(result.nodes.every((n:any)=>n.suspicious===false&&n.botLikelihoodScore===null)).toBe(true);
+ const region=page.getByRole('region',{name:'Campaign episode evidence'});
+ await expect(region.getByRole('heading',{name:'Campaign episodes and post evidence'})).toBeVisible();
+ await expect(region.getByText(/a-0 \(provided\)/)).toBeVisible();
+ await page.getByLabel('Inspect any account').selectOption('a');
+ await expect(page.getByText('Account details',{exact:true})).toBeVisible();
+ await expect(page.locator('svg[viewBox="0 0 900 520"]')).toBeVisible();
+ expect(await page.locator('svg[viewBox="0 0 900 520"] circle').count()).toBeGreaterThan(0);
+ const downloaded=page.waitForEvent('download');await region.getByRole('button',{name:'Download campaign evidence JSON'}).click();expect((await downloaded).suggestedFilename()).toBe('veritas-campaign-evidence.json');
+ await page.getByRole('button',{name:'Save to a case',exact:true}).click();await expect(page.getByRole('button',{name:/Saved to SUR-/})).toBeVisible();
+ await page.screenshot({path:'test-results/campaign-episode-evidence.png',fullPage:true});
+});
 
 test('Multilingual claim status reports unavailable evidence honestly', async ({page}) => {
   test.skip(process.env.VERITAS_EXPECT_CLAIM_CORPUS==='1','This workflow checks the unconfigured state');
