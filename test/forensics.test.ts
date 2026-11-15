@@ -72,7 +72,9 @@ assert(d5.confidence <= 55 && /not proof/.test(d5.rationale));
 assert.equal(elaIndicators(2).length, 0);
 assert.equal(elaIndicators(20)[0].strength, 'moderate');
 assert.equal(provenanceAssessment({ c2paManifest: false, declaresAIGenerated: false, generatorHints: [] }), null);
-assert.equal(provenanceAssessment({ c2paManifest: true, declaresAIGenerated: true, generatorHints: ['OpenAI'] })!.verdict, 'likely');
+assert.equal(provenanceAssessment({ c2paManifest: true, declaresAIGenerated: true, generatorHints: ['OpenAI'] }), null);
+assert.equal(provenanceAssessment({ c2paManifest: true, declaresAIGenerated: true, generatorHints: ['OpenAI'], verificationStatus: 'invalid' }), null);
+assert.equal(provenanceAssessment({ c2paManifest: true, declaresAIGenerated: true, generatorHints: ['OpenAI'], verificationStatus: 'validated' })!.verdict, 'likely');
 assert.equal(overallVerdict(none, none).authenticity, 'likely_authentic');
 assert.equal(overallVerdict(likely, none).authenticity, 'likely_synthetic');
 

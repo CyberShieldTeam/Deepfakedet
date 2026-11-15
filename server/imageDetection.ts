@@ -202,7 +202,7 @@ export function calibrate(raw: RawAssessment[], extra: DetectionIndicator[] = []
 
 /** Embedded provenance that declares AI generation outranks visual judgement (metadata can be stripped, rarely faked to claim AI). */
 export function provenanceAssessment(p: ProvenanceInfo): DetectionAssessment | null {
-  if (!p.declaresAIGenerated) return null;
+  if (p.verificationStatus !== 'validated' || !p.declaresAIGenerated) return null;
   return {
     verdict: 'likely',
     probability: 97,

@@ -441,8 +441,8 @@ function heuristicMedia(modality: string, m: Record<string, any>): { score: numb
     if (m.hasExif === false) f.push('No EXIF metadata (normal for screenshots, social-media re-uploads and generator output alike — not evidence either way).');
     else if (m.hasExif) f.push(`EXIF metadata present${m.exifSoftware ? ` (software tag: ${m.exifSoftware})` : ''}.`);
     if (m.exifSoftware && /photoshop|gimp|stable|midjourney|dall|firefly|canva/i.test(m.exifSoftware)) { score += 20; f.push(`Editing/generation software named in metadata: ${m.exifSoftware}.`); }
-    if (m.provenanceAI) { score += 45; f.push(`Embedded provenance metadata declares AI generation${m.provenanceHints ? ` (${m.provenanceHints})` : ''}.`); }
-    else if (m.c2paManifest) f.push('C2PA Content Credentials present (no AI-generation declaration found).');
+    if (m.aiDeclarationCandidate) f.push(`Unverified metadata text may declare AI generation${m.provenanceHints ? ` (${m.provenanceHints})` : ''}; signature and asset binding were not checked.`);
+    else if (m.c2paCandidate) f.push('C2PA-like byte strings found; no manifest or signature validation was performed.');
   } else if (modality === 'video') {
     if (m.cutCount > 0) { score += Math.min(30, m.cutCount * 12); f.push(`${m.cutCount} abrupt frame-difference spike(s) (z > 3) — scene cuts or splices at ${m.cutTimes || 'n/a'}.`); }
     else f.push('No abrupt temporal discontinuities among sampled frames.');
@@ -470,8 +470,10 @@ function heuristicMedia(modality: string, m: Record<string, any>): { score: numb
 
 /** Provenance fields are sent flat in measurements (so they also show in the signals table). */
 function provenanceFrom(m: Record<string, any>): ForensicAnalysisResult['provenance'] | undefined {
-  if (m.c2paManifest === undefined && m.provenanceAI === undefined) return undefined;
-  return { c2paManifest: !!m.c2paManifest, declaresAIGenerated: !!m.provenanceAI, generatorHints: m.provenanceHints ? String(m.provenanceHints).split(', ') : [] };
+  // Browser-supplied measurements are untrusted and cannot establish C2PA validation.
+  // The original-file verification endpoint will populate this after signature checks.
+  void m;
+  return undefined;
 }
 
 /** Images: two independent Gemini samples → separately calibrated AI-generation and manipulation assessments. */
@@ -534,7 +536,7 @@ async function geminiImageAnalysis(fileName: string, mediaData: string, measurem
     limitations: [
       ...Array.from(new Set(samples.flatMap(s => s.limitations || []))).slice(0, 3),
       'Visual AI-generation detection is probabilistic; modern generators can produce images with no visible artifacts.',
-      prov?.c2paManifest ? 'Provenance metadata was found and checked.' : 'No provenance metadata (C2PA) in this file — screenshots and re-uploads remove it.'
+      prov?.c2paManifest ? 'Verified provenance details are available.' : 'Cryptographic provenance was not checked on the original file.'
     ],
     alternativeHypotheses: [...aiGeneration.counterIndicators, ...manipulation.counterIndicators].slice(0, 4).concat(aiGeneration.counterIndicators.length ? [] : ['A real photograph that has been heavily processed or compressed.']),
     compressionArtifacts: { elaScore: Number(measurements.elaScore) || 0, doubleCompressionFound: false, noiseInconsistencyMapAvailable: true, notes: 'ELA computed in browser; used only for the manipulation assessment.' },
@@ -666,7 +668,7 @@ Be calibrated: if evidence is weak say "inconclusive". Respond ONLY with JSON:
         result.provenance = prov;
         result.aiGeneration = (prov && provenanceAssessment(prov)) || {
           verdict: 'inconclusive', probability: null, confidence: 0, indicators: [], counterIndicators: [],
-          rationale: 'AI-generation detection needs a vision model (Gemini) or embedded provenance metadata; neither is available for this file.'
+          rationale: 'AI-generation detection needs an evaluated vision model or verified provenance; neither is available for this file.'
         };
         result.manipulation = {
           verdict: ela.some(i => i.strength !== 'weak') ? 'possible' : 'inconclusive', probability: null, confidence: ela.length ? 35 : 15,

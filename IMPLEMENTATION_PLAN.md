@@ -20,7 +20,7 @@ The additional provenance, signal, temporal, model-training, and physiological m
 | 2b. Audio | Verify AASIST implementation and checkpoint provenance/license. Decode and resample audio, segment speech, return segment timestamps and calibrated anti-spoof scores. Extract video audio independently. | 2a service skeleton, permitted weights, audio fixtures | High |
 | 2c. Video frames | Server-side metadata/decoding and sampled frames, image/face inference per timestamp, quality-aware aggregation and traceable timeline. | 2a image inference, video decoder, async jobs for long clips | High |
 | 2d. Temporal video | Select and validate a temporal model or train one on video-separated data; report temporal predictions independently before fusion. | 2c frames, licensed video data and evaluation protocol | Very high |
-| 3. Text | Local multilingual embeddings plus keyword retrieval, evidence provenance, and a contradiction model evaluated for English/Hindi/Telugu. Keep unsupported claims insufficient; retain optional Search/Gemini. | Evidence corpus or configured retrieval source; language-specific evaluation | Very high |
+| 3. Text | Cloud-hosted multilingual embedding retrieval plus a cloud-hosted contradiction/verification model evaluated for English/Hindi/Telugu. Return cited source evidence and keep unsupported claims insufficient. No client-side LLM or model download. | Hosted model access, evidence corpus or configured retrieval source, language-specific evaluation | Very high |
 | 4–5. Training/provenance | Leakage-safe datasets, licenses, reproducible fine-tuning and evaluation scripts, model cards. Checkpoints count as trained only after a completed run and measured evaluation. | Dataset access, compute, selected models | Very high |
 | 6–7. Fusion/Gemini | Calibrated fusion with missing/contradictory modalities and Gemini as secondary explanation. | Evaluated modality models | High |
 | 8–10. Services/data/security | Incremental route extraction, jobs, PostgreSQL migration with backup and verification, identity/ownership, validation, limits, protected SSE/reports. | Stable API contracts and migration plan | Very high |
@@ -34,6 +34,8 @@ The additional provenance, signal, temporal, model-training, and physiological m
 4. Add tests for preprocessing, unsuitable files, class mapping, timeouts, unavailable service, response mapping, and a small real-weight evaluation separate from mocked integration tests. Run `npm run lint`, `npm test`, `npm run build`, Python tests, and a manual end-to-end image upload before marking the engine complete.
 
 ## Risks and decisions
+
+- Production inference is cloud hosted. The current Python service is a backend component that can run on managed CPU/GPU infrastructure; it is not a browser or end-user dependency. Move remaining browser ELA/video/audio signal extraction server-side in bounded slices so users need only upload media. See `CLOUD_DEPLOYMENT.md`.
 
 - Model weights, licenses, dataset permissions, and hardware requirements are unresolved. Do not select a checkpoint by architecture name alone or claim quality without an independent evaluation. AASIST speech anti-spoofing does not cover arbitrary synthetic sounds.
 - Current browser video sends keyframes, not the original video; server-side frame extraction and audio extraction require a new upload/job path. Existing lightweight flow should remain usable during migration.

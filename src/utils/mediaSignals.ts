@@ -22,18 +22,17 @@ const fileToDataURL = (f: Blob) =>
 const AI_GENERATORS = /(OpenAI|ChatGPT|DALL[·.\-]?E|GPT-4o|gpt-image|Adobe Firefly|Midjourney|Stable Diffusion|Imagen|Gemini|Bing Image Creator|Microsoft Designer|Ideogram|Leonardo\.Ai)/gi;
 
 /**
- * Provenance metadata: C2PA Content Credentials (JUMBF "c2pa" boxes) and the IPTC DigitalSourceType
- * values that mark generative-AI output. Their presence is meaningful; their absence proves nothing
- * (screenshots, messaging apps and most editors strip them).
+ * Byte-string hints only. This does not parse or cryptographically validate C2PA.
  */
-async function readProvenance(file: File): Promise<{ c2paManifest: boolean; provenanceAI: boolean; provenanceHints: string }> {
+async function readProvenance(file: File): Promise<{ c2paCandidate: boolean; aiDeclarationCandidate: boolean; provenanceHints: string }> {
   const bytes = new Uint8Array(await file.slice(0, Math.min(file.size, 30 * 1024 * 1024)).arrayBuffer());
   const text = new TextDecoder('latin1').decode(bytes);
   const c2paManifest = /c2pa/.test(text) && /jumb|jumd/.test(text);
   const sourceType = /compositeWithTrainedAlgorithmicMedia|trainedAlgorithmicMedia|algorithmicMedia/.exec(text)?.[0];
   const hints = c2paManifest || sourceType || /<x:xmpmeta/.test(text) ? Array.from(new Set((text.match(AI_GENERATORS) || []).map(h => h.trim()))) : [];
   const provenanceAI = !!sourceType || (c2paManifest && hints.length > 0);
-  return { c2paManifest, provenanceAI, provenanceHints: [...(sourceType ? [sourceType] : []), ...hints].slice(0, 4).join(', ') };
+  return { c2paCandidate: c2paManifest, aiDeclarationCandidate: provenanceAI,
+    provenanceHints: [...(sourceType ? [sourceType] : []), ...hints].slice(0, 4).join(', ') };
 }
 
 /** Scan JPEG APP1 for an Exif block and pull the ASCII Software tag if present. */
@@ -131,8 +130,8 @@ export async function analyzeImage(file: File, amplify = 15): Promise<ImageSigna
         elaBlockRatio: Number((p99 / Math.max(median, 0.05)).toFixed(2)),
         hasExif: exif.hasExif,
         ...(exif.software ? { exifSoftware: exif.software } : {}),
-        c2paManifest: provenance.c2paManifest,
-        provenanceAI: provenance.provenanceAI,
+        c2paCandidate: provenance.c2paCandidate,
+        aiDeclarationCandidate: provenance.aiDeclarationCandidate,
         ...(provenance.provenanceHints ? { provenanceHints: provenance.provenanceHints } : {})
       }
     };

@@ -109,6 +109,8 @@ export interface ProvenanceInfo {
   c2paManifest: boolean;
   declaresAIGenerated: boolean;
   generatorHints: string[];
+  /** Set only after original-file cryptographic verification, never from browser measurements. */
+  verificationStatus?: 'validated' | 'invalid' | 'unavailable';
 }
 
 export type AnalysisEngine = 'gemini' | 'heuristic' | 'simulated_demo' | 'graph_heuristics' | 'local_pretrained' | 'local_image_screening' | 'local_aasist' | 'local_video_frames';

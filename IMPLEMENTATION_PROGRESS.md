@@ -9,7 +9,7 @@ Updated: 2026-11-15. Working branch: `codex/phase1-audit`. Baseline commit: `fa8
 - [ ] Phase 2b — AASIST audio detector and segment-level output. Official checkpoint inference, resampling, segments, Express/UI contract, live HTTP smoke, browser WAV upload, and bounded video-audio extraction implemented. Speech activity detection, representative evaluation/calibration, and file-format coverage remain open.
 - [ ] Phase 2c — frame-level video detector and evidence timeline. Browser-sampled frames and bounded server-side original-video decoding supply timestamped local image evidence; original-video frame selection uses documented exposure/detail heuristics, YuNet boxes have geometric continuity tracks, and video audio is separate AASIST evidence when available. Representative evaluation, face-manipulation inference, quality-aware aggregation, and a long-clip upload/job path remain open.
 - [ ] Phase 2d — trained/evaluated temporal video analysis. Exploratory adjacent-original-frame Farneback motion and residual measurements are implemented; a validated microscopic-manipulation detector is not.
-- [ ] Phase 3 — evidence-based multilingual text verification with local models.
+- [ ] Phase 3 — evidence-based multilingual text verification with cloud-hosted models; no end-user LLM download or compute requirement.
 - [ ] Phase 4 — modality and reasoning-model fine-tuning pipelines and completed training runs.
 - [ ] Phase 5 — dataset and model provenance documentation.
 - [ ] Phase 6 — calibrated evidence fusion.
@@ -76,3 +76,9 @@ Read `MODEL_CARD.md`, `AUDIO_MODEL_CARD.md`, `VIDEO_ENGINE.md`, and `FORENSIC_ME
 
 - Added adjacent-original-frame Farneback dense optical flow for each sampled video position, with forward/backward disagreement, motion-compensated residual, and a local tile residual. Measurements appear per timestamp in the API and technical details, separate from image scores, face tracks, and audio. A controlled translated-texture test with a changed patch raises the local residual. This is a signal test, not a deepfake benchmark or a trained temporal detector. Phase 2d remains open until representative labeled evaluation, threshold calibration, and model work are completed.
 - Verification: 21 Python unit tests, Node tests, TypeScript check, production build, and live Express-to-Python HTTP smoke passed. The headshot video yielded six measured adjacent-frame windows while remaining `inconclusive` with no video authenticity probability. The existing large-chunk build warning remains. The user's shared detection article and requested C2PA/EXIF, PRNU/frequency, flow/RAFT, discriminator, rPPG/geometry, and vendor-watermark methods remain tracked in `FORENSIC_METHODS_ROADMAP.md`.
+
+## Cloud direction and provenance safety
+
+- Phase 3 is now specified for cloud-hosted text retrieval and verification. The end user should not download or run a local LLM. The current Python service is a server-side component that can be hosted; `CLOUD_DEPLOYMENT.md` records the remaining browser signal computation and deployment work.
+- Browser byte-string matching for C2PA-like and AI-declaration text is now labeled as an unverified candidate. It no longer adds heuristic risk points or supplies a confirmed provenance result. Original-byte cryptographic C2PA validation and structured EXIF extraction remain open; no verified provenance claim is made by this change.
+- `npm run lint`, `npm test`, `npm run build`, and `git diff --check` passed. The provenance unit test now rejects unsigned or invalid declaration objects. The build retains its existing large-chunk warning. No cloud deployment or hosted Phase 3 inference was tested or claimed.
