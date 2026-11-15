@@ -4,6 +4,7 @@ from PIL import Image
 
 MODEL_ID = "sakshamkr1/deitfake-v2"
 REVISION = "f70338d328ba268d2b9d5c6af11044cf0b0e1400"
+MODEL_PATH = os.getenv("VERITAS_FACE_MODEL_PATH")
 model = None
 processor = None
 torch_module = None
@@ -19,9 +20,11 @@ def load_model():
     try:
         import torch
         from transformers import AutoImageProcessor, AutoModelForImageClassification
-        candidate_processor = AutoImageProcessor.from_pretrained(MODEL_ID, revision=REVISION)
+        source = MODEL_PATH or MODEL_ID
+        revision = None if MODEL_PATH else REVISION
+        candidate_processor = AutoImageProcessor.from_pretrained(source, revision=revision)
         candidate = AutoModelForImageClassification.from_pretrained(
-            MODEL_ID, revision=REVISION, use_safetensors=True, trust_remote_code=False).eval()
+            source, revision=revision, use_safetensors=True, trust_remote_code=False).eval()
         if candidate.config.id2label.get(0) != "Fake" or candidate.config.id2label.get(1) != "Real":
             raise ValueError("Unexpected face checkpoint class order")
         if torch.cuda.is_available():

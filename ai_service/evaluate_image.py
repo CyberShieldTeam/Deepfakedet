@@ -4,6 +4,11 @@ import asyncio
 import base64
 import hashlib
 import json
+import os
+import platform
+import subprocess
+import sys
+import time
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -27,7 +32,7 @@ def load_manifest(path: Path, root: Path):
            row.get("label") not in TASK_LABELS[row["task"]] or \
            row.get("split") not in {"train", "validation", "holdout", "smoke"} or \
            not all(isinstance(row.get(key), str) and row[key].strip() for key in
-                   ("path", "group", "source", "license", "sha256")):
+                   ("path", "group", "source", "license", "license_uri", "label_basis", "sha256")):
             raise ValueError("Manifest row has missing or invalid fields")
         item = (resolved_root / row["path"]).resolve()
         if not item.is_relative_to(resolved_root) or item.suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp"}:
@@ -69,26 +74,35 @@ def roc_auc(positive, negative):
 
 
 async def collect(manifest: Path, root: Path, task: str):
-    from ai_service import app as service
     rows = load_manifest(manifest, root)
     gate = benchmark_gate(rows, task)
     output = []
-    async with service.lifespan(service.app):
-        health = service.health()
-        ready = health["status"] == "ready" if task == "general_image" else health["face_classifier"]["status"] == "ready"
-        if not ready:
-            raise RuntimeError(f"Requested {task} checkpoint is unavailable")
-        for row, path in rows:
-            if row["task"] != task:
-                continue
-            response = service.analyze_image(service.ImageRequest(
-                image_base64=base64.b64encode(path.read_bytes()).decode("ascii")))
-            if response["classification"] != "INCONCLUSIVE":
-                raise RuntimeError("Experimental checkpoint produced a forbidden verdict")
-            output.append({"path": row["path"], "label": row["label"], "split": row["split"],
-                           "group": row["group"], "rawFakeSoftmax": response["fake_probability"] if task == "general_image" else None,
-                           "faceScores": response["face_model"]["faces"] if task == "face_manipulation" else [],
-                           "faceStatus": response["face_model"]["status"] if task == "face_manipulation" else None})
+    started = time.monotonic()
+    if task == "general_image" and os.getenv("VERITAS_IMAGE_MODEL_PATH"):
+        output, model_name, revision = collect_general_direct(rows)
+    else:
+        from ai_service import app as service
+        async with service.lifespan(service.app):
+            health = service.health()
+            ready = health["status"] == "ready" if task == "general_image" else health["face_classifier"]["status"] == "ready"
+            if not ready:
+                raise RuntimeError(f"Requested {task} checkpoint is unavailable")
+            for row, path in rows:
+                if row["task"] != task:
+                    continue
+                item_started = time.monotonic()
+                response = service.analyze_image(service.ImageRequest(
+                    image_base64=base64.b64encode(path.read_bytes()).decode("ascii")))
+                if response["classification"] != "INCONCLUSIVE":
+                    raise RuntimeError("Experimental checkpoint produced a forbidden verdict")
+                output.append({"path": row["path"], "label": row["label"], "split": row["split"],
+                               "group": row["group"], "rawFakeSoftmax": response["fake_probability"] if task == "general_image" else None,
+                               "faceScores": response["face_model"]["faces"] if task == "face_manipulation" else [],
+                               "faceStatus": response["face_model"]["status"] if task == "face_manipulation" else None,
+                               "elapsedSeconds": round(time.monotonic() - item_started, 6)})
+                log_item(task, row["path"], output[-1]["elapsedSeconds"])
+            model_name = health["model"] if task == "general_image" else health["face_classifier"]["model"]
+            revision = health["revision"] if task == "general_image" else health["face_classifier"]["revision"]
     metrics = None
     if gate["eligible"] and task == "general_image":
         holdout = [item for item in output if item["split"] == "holdout"]
@@ -96,10 +110,54 @@ async def collect(manifest: Path, root: Path, task: str):
             metrics = {"holdoutRocAuc": roc_auc(
                 [item["rawFakeSoftmax"] for item in holdout if item["label"] == "synthetic"],
                 [item["rawFakeSoftmax"] for item in holdout if item["label"] == "real"])}
-    return {"task": task, "model": health["model"] if task == "general_image" else health["face_classifier"]["model"],
+    return {"schemaVersion": 2, "task": task,
+            "manifestSha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
+            "model": model_name, "revision": revision,
             "benchmark": gate, "verdict": "INCONCLUSIVE", "items": output,
             "metrics": metrics,
+            "runtime": {"python": platform.python_version(), "platform": platform.platform(),
+                        "elapsedSeconds": round(time.monotonic() - started, 6),
+                        "offline": os.getenv("HF_HUB_OFFLINE") == "1"},
             "note": "Scores are uncalibrated. Holdout ROC AUC is emitted only after the sample/group gate; no verdict threshold is set."}
+
+
+def log_item(task: str, path: str, elapsed: float):
+    print(json.dumps({"event": "item_complete", "task": task, "path": path,
+                      "elapsedSeconds": elapsed}), file=sys.stderr, flush=True)
+
+
+def collect_general_direct(rows):
+    """Evaluate a pinned local snapshot without loading the unrelated web application."""
+    snapshot = Path(os.environ["VERITAS_IMAGE_MODEL_PATH"])
+    print(json.dumps({"event": "stage_start", "stage": "load_direct_checkpoint"}),
+          file=sys.stderr, flush=True)
+    import torch
+    from PIL import Image, ImageOps
+    from transformers import AutoImageProcessor, AutoModelForImageClassification
+    processor = AutoImageProcessor.from_pretrained(snapshot, local_files_only=True)
+    model = AutoModelForImageClassification.from_pretrained(
+        snapshot, use_safetensors=True, local_files_only=True).eval()
+    if model.config.id2label.get(0) != "REAL" or model.config.id2label.get(1) != "FAKE":
+        raise ValueError("Unexpected checkpoint labels")
+    print(json.dumps({"event": "stage_end", "stage": "load_direct_checkpoint"}),
+          file=sys.stderr, flush=True)
+    output = []
+    for row, path in rows:
+        if row["task"] != "general_image":
+            continue
+        item_started = time.monotonic()
+        with Image.open(path) as source:
+            image = ImageOps.exif_transpose(source).convert("RGB")
+        inputs = processor(images=image, return_tensors="pt")
+        with torch.inference_mode():
+            logits = model(**inputs).logits[0]
+            raw = torch.softmax(logits, dim=-1)[1].item()
+        elapsed = round(time.monotonic() - item_started, 6)
+        output.append({"path": row["path"], "label": row["label"], "split": row["split"],
+                       "group": row["group"], "rawFakeSoftmax": round(raw, 6),
+                       "faceScores": [], "faceStatus": None, "elapsedSeconds": elapsed})
+        log_item("general_image", row["path"], elapsed)
+    return output, "dima806/ai_vs_real_image_detection", "9d17b51b9367d6b5720ac81dc339455c45d50ae3"
 
 
 def main():
@@ -108,9 +166,44 @@ def main():
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--task", choices=TASK_LABELS, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--model-snapshot", type=Path,
+                        help="Pinned local general-image snapshot; disables ambiguous Hub cache lookup")
+    parser.add_argument("--face-model-snapshot", type=Path,
+                        help="Pinned local face-model snapshot; disables ambiguous Hub cache lookup")
+    parser.add_argument("--offline", action="store_true", help="Forbid Hugging Face network access")
+    parser.add_argument("--timeout-seconds", type=float,
+                        help="Run evaluation in a disposable child with this hard deadline (1..3600 seconds)")
+    parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
+    if args.timeout_seconds is not None and not 1 <= args.timeout_seconds <= 3600:
+        parser.error("--timeout-seconds must be between 1 and 3600")
+    if args.timeout_seconds is not None and not args.worker:
+        command = [sys.executable, "-m", "ai_service.evaluate_image", *sys.argv[1:], "--worker"]
+        try:
+            completed = subprocess.run(command, timeout=args.timeout_seconds, check=False)
+        except subprocess.TimeoutExpired:
+            print(json.dumps({"event": "evaluation_timeout",
+                              "timeoutSeconds": args.timeout_seconds}), file=sys.stderr, flush=True)
+            raise SystemExit(124)
+        raise SystemExit(completed.returncode)
+    for snapshot, variable in ((args.model_snapshot, "VERITAS_IMAGE_MODEL_PATH"),
+                               (args.face_model_snapshot, "VERITAS_FACE_MODEL_PATH")):
+        if snapshot is not None:
+            resolved = snapshot.resolve()
+            if not resolved.is_dir():
+                parser.error(f"{snapshot} is not a snapshot directory")
+            os.environ[variable] = str(resolved)
+    if args.offline:
+        os.environ["HF_HUB_OFFLINE"] = "1"
+        os.environ["TRANSFORMERS_OFFLINE"] = "1"
+    print(json.dumps({"event": "evaluation_start", "task": args.task,
+                      "manifest": str(args.manifest), "offline": args.offline}),
+          file=sys.stderr, flush=True)
     result = asyncio.run(collect(args.manifest, args.root, args.task))
-    args.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    temporary = args.output.with_suffix(args.output.suffix + ".tmp")
+    temporary.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    temporary.replace(args.output)
     print(f"Wrote {len(result['items'])} diagnostic item(s); benchmark eligible: {result['benchmark']['eligible']}")
 
 

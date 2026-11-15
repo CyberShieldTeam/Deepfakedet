@@ -24,7 +24,8 @@ class EvaluationManifestTests(unittest.TestCase):
             sample.write_bytes(b"test")
             digest = hashlib.sha256(b"test").hexdigest()
             base = {"path": "sample.jpg", "task": "general_image", "label": "real", "group": "same-person",
-                    "split": "train", "source": "test", "license": "test", "sha256": digest}
+                    "split": "train", "source": "test", "license": "test", "license_uri": "test://license",
+                    "label_basis": "controlled test fixture", "sha256": digest}
             manifest = root / "manifest.json"
             manifest.write_text(json.dumps([{**base, "path": "../outside.jpg"}]))
             with self.assertRaises(ValueError):

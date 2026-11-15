@@ -5,16 +5,33 @@ import hashlib
 import io
 import math
 import os
+import json
+import sys
 import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 from threading import Lock
 from typing import Literal
 
+def _import_event(module: str, event: str):
+    if os.getenv("VERITAS_TIMING_LOG", "0") == "1":
+        print(json.dumps({"event": f"import_{event}", "module": module,
+                          "monotonicSeconds": round(time.monotonic(), 6)}),
+              file=sys.stderr, flush=True)
+
+
+_import_event("fastapi", "start")
 from fastapi import FastAPI, HTTPException
+_import_event("fastapi", "end")
+_import_event("pydantic", "start")
 from pydantic import BaseModel
+_import_event("pydantic", "end")
+_import_event("pillow", "start")
 from PIL import Image, ImageOps, UnidentifiedImageError
+_import_event("pillow", "end")
+_import_event("service_modules", "start")
 from ai_service import audio_service, video_service, provenance_service, face_service
+_import_event("service_modules", "end")
 
 MODEL_KIND = os.getenv("VERITAS_IMAGE_MODEL", "dima").lower()
 MODELS = {
@@ -22,6 +39,7 @@ MODELS = {
     "smaug": ("abacusai/Smaug-AI-Image-Detector", "c7c95951e04a87b884a4ad479401b1128c3903bd"),
 }
 MODEL_ID, MODEL_REVISION = MODELS.get(MODEL_KIND, ("unrecognized", "unrecognized"))
+MODEL_PATH = os.getenv("VERITAS_IMAGE_MODEL_PATH")
 MAX_BYTES = 10 * 1024 * 1024
 MAX_PIXELS = 24_000_000
 model = None
@@ -32,6 +50,13 @@ face_detector = None
 face_lock = Lock()
 FACE_MODEL = Path(__file__).resolve().parent / "models" / "face_detection_yunet_2023mar.onnx"
 FACE_MODEL_SHA256 = "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+
+
+def _timing(stage: str, event: str):
+    if os.getenv("VERITAS_TIMING_LOG", "0") == "1":
+        print(json.dumps({"event": f"startup_{event}", "stage": stage,
+                          "monotonicSeconds": round(time.monotonic(), 6)}),
+              file=sys.stderr, flush=True)
 
 
 def load_face_detector():
@@ -49,22 +74,40 @@ def load_face_detector():
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     global model, processor, torch_module, load_error, face_detector
+    _timing("face_detector", "start")
     load_face_detector()
+    _timing("face_detector", "end")
+    _timing("face_classifier", "start")
     face_service.load_model()
+    _timing("face_classifier", "end")
+    _timing("audio_classifier", "start")
     audio_service.load_model()
+    _timing("audio_classifier", "end")
     if os.getenv("VERITAS_IMAGE_MODEL_ENABLED", "0") == "1":
         try:
+            _timing("import_torch", "start")
             import torch
+            _timing("import_torch", "end")
             if MODEL_KIND == "dima":
+                _timing("import_transformers", "start")
                 from transformers import AutoImageProcessor, AutoModelForImageClassification
-                processor = AutoImageProcessor.from_pretrained(MODEL_ID, revision=MODEL_REVISION)
+                _timing("import_transformers", "end")
+                source = MODEL_PATH or MODEL_ID
+                revision = None if MODEL_PATH else MODEL_REVISION
+                _timing("load_processor", "start")
+                processor = AutoImageProcessor.from_pretrained(source, revision=revision)
+                _timing("load_processor", "end")
+                _timing("load_model", "start")
                 model = AutoModelForImageClassification.from_pretrained(
-                    MODEL_ID, revision=MODEL_REVISION, use_safetensors=True
+                    source, revision=revision, use_safetensors=True
                 ).eval()
+                _timing("load_model", "end")
                 if model.config.id2label.get(0) != "REAL" or model.config.id2label.get(1) != "FAKE":
                     raise ValueError("Unexpected checkpoint labels")
                 if torch.cuda.is_available():
+                    _timing("move_cuda", "start")
                     model.to("cuda")
+                    _timing("move_cuda", "end")
             elif MODEL_KIND == "smaug":
                 from huggingface_hub import snapshot_download
                 from sentence_transformers import SentenceTransformer
@@ -81,9 +124,11 @@ async def lifespan(_app: FastAPI):
                 raise ValueError(f"Unknown VERITAS_IMAGE_MODEL: {MODEL_KIND}")
             torch_module = torch
             load_error = ""
+            _timing("image_classifier", "ready")
         except Exception as exc:
             model = None
             load_error = f"Model load failed: {type(exc).__name__}: {exc}"
+            _timing("image_classifier", "failed")
     else:
         load_error = "Set VERITAS_IMAGE_MODEL_ENABLED=1 to load the checkpoint"
     yield
