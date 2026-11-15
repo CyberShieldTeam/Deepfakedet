@@ -1,0 +1,144 @@
+{
+  "scope": "authored_engine3_architecture_controls_not_accuracy",
+  "codeSha256": "0f1d92ceffd99d586dce9b342f26dca33e9440ea8ca6e0c8175cb9eede2b077d",
+  "results": [
+    {
+      "name": "single_public_news_event",
+      "intendedContext": "Independent public sharing, one event; software control only",
+      "posts": 4,
+      "accounts": 4,
+      "classification": "Insufficient evidence",
+      "suspiciousAccounts": 0,
+      "edges": [
+        {
+          "id": "relation-0",
+          "source": "a",
+          "target": "b",
+          "weight": 0.882,
+          "coordinationType": "semantic_copy",
+          "description": "Token similarity 100%; URL overlap 1; hashtag Jaccard 0.00; time gap 0s; SBERT unavailable; 1 matching post pairs. Single-event association; not evidence of malicious intent."
+        },
+        {
+          "id": "relation-1",
+          "source": "a",
+          "target": "c",
+          "weight": 0.882,
+          "coordinationType": "semantic_copy",
+          "description": "Token similarity 100%; URL overlap 1; hashtag Jaccard 0.00; time gap 0s; SBERT unavailable; 1 matching post pairs. Single-event association; not evidence of malicious intent."
+        },
+        {
+          "id": "relation-2",
+          "source": "b",
+          "target": "c",
+          "weight": 0.882,
+          "coordinationType": "semantic_copy",
+          "description": "Token similarity 100%; URL overlap 1; hashtag Jaccard 0.00; time gap 0s; SBERT unavailable; 1 matching post pairs. Single-event association; not evidence of malicious intent."
+        },
+        {
+          "id": "relation-3",
+          "source": "a",
+          "target": "d",
+          "weight": 0.882,
+          "coordinationType": "semantic_copy",
+          "description": "Token similarity 100%; URL overlap 1; hashtag Jaccard 0.00; time gap 0s; SBERT unavailable; 1 matching post pairs. Single-event association; not evidence of malicious intent."
+        },
+        {
+          "id": "relation-4",
+          "source": "b",
+          "target": "d",
+          "weight": 0.882,
+          "coordinationType": "semantic_copy",
+          "description": "Token similarity 100%; URL overlap 1; hashtag Jaccard 0.00; time gap 0s; SBERT unavailable; 1 matching post pairs. Single-event association; not evidence of malicious intent."
+        },
+        {
+          "id": "relation-5",
+          "source": "c",
+          "target": "d",
+          "weight": 0.882,
+          "coordinationType": "semantic_copy",
+          "description": "Token similarity 100%; URL overlap 1; hashtag Jaccard 0.00; time gap 0s; SBERT unavailable; 1 matching post pairs. Single-event association; not evidence of malicious intent."
+        }
+      ],
+      "clusters": 1,
+      "truncated": false,
+      "independentGroundTruth": null
+    },
+    {
+      "name": "repeated_legitimate_public_bulletin",
+      "intendedContext": "Legitimate repeated bulletins in one minute; recurrence does not establish independent coordinated episodes",
+      "posts": 12,
+      "accounts": 4,
+      "classification": "Suspicious coordinated amplification",
+      "suspiciousAccounts": 4,
+      "edges": [
+        {
+          "id": "relation-0",
+          "source": "a",
+          "target": "b",
+          "weight": 0.882,
+          "coordinationType": "semantic_copy",
+          "description": "Token similarity 100%; URL overlap 1; hashtag Jaccard 0.00; time gap 0s; SBERT unavailable; 9 matching post pairs. Repeated multi-signal activity merits review."
+        },
+        {
+          "id": "relation-1",
+          "source": "a",
+          "target": "c",
+          "weight": 0.882,
+          "coordinationType": "semantic_copy",
+          "description": "Token similarity 100%; URL overlap 1; hashtag Jaccard 0.00; time gap 0s; SBERT unavailable; 9 matching post pairs. Repeated multi-signal activity merits review."
+        },
+        {
+          "id": "relation-2",
+          "source": "b",
+          "target": "c",
+          "weight": 0.882,
+          "coordinationType": "semantic_copy",
+          "description": "Token similarity 100%; URL overlap 1; hashtag Jaccard 0.00; time gap 0s; SBERT unavailable; 9 matching post pairs. Repeated multi-signal activity merits review."
+        },
+        {
+          "id": "relation-3",
+          "source": "a",
+          "target": "d",
+          "weight": 0.882,
+          "coordinationType": "semantic_copy",
+          "description": "Token similarity 100%; URL overlap 1; hashtag Jaccard 0.00; time gap 0s; SBERT unavailable; 9 matching post pairs. Repeated multi-signal activity merits review."
+        },
+        {
+          "id": "relation-4",
+          "source": "b",
+          "target": "d",
+          "weight": 0.882,
+          "coordinationType": "semantic_copy",
+          "description": "Token similarity 100%; URL overlap 1; hashtag Jaccard 0.00; time gap 0s; SBERT unavailable; 9 matching post pairs. Repeated multi-signal activity merits review."
+        },
+        {
+          "id": "relation-5",
+          "source": "c",
+          "target": "d",
+          "weight": 0.882,
+          "coordinationType": "semantic_copy",
+          "description": "Token similarity 100%; URL overlap 1; hashtag Jaccard 0.00; time gap 0s; SBERT unavailable; 9 matching post pairs. Repeated multi-signal activity merits review."
+        }
+      ],
+      "clusters": 1,
+      "truncated": false,
+      "independentGroundTruth": null
+    },
+    {
+      "name": "shared_url_different_topics",
+      "intendedContext": "Unrelated topics sharing the same publisher URL",
+      "posts": 3,
+      "accounts": 3,
+      "classification": "Organic viral activity",
+      "suspiciousAccounts": 0,
+      "edges": [],
+      "clusters": 0,
+      "truncated": false,
+      "independentGroundTruth": null
+    }
+  ],
+  "limitations": [
+    "Scenarios describe intended fictional contexts; not independent account coordination labels.",
+    "Existing algorithm intentionally unchanged. A flagged legitimate-style scenario demonstrates a design risk, not a measured real-world false-positive rate."
+  ]
+}

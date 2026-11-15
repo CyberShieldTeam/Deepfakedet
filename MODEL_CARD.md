@@ -176,6 +176,15 @@ benchmark results and reserved datasets are unchanged.
 
 ## Optional claim-retrieval embedding — Phase 3, 2026-11-15
 
+Subsequent profiling/readiness: same pinned weights and preprocessing. New fresh-process
+starts 23.8–28.6 s (OS caches not flushed), peak 703.4–709.8 MiB, warm direct inference
+69–103 ms. Historical 70.789 s lacks a stage breakdown and is not a controlled before/after
+optimization claim. Persistent/cached operation is explicit; see
+`docs/CLAIM_RUNTIME_PROFILE.md`. Nine fictional topic queries still yield BM25 6/9,
+E5-only/hybrid 9/9 top-1 relevance; no independent language/entailment validation. The
+retrieval model is not automatically compatible with raw campaign text or its existing
+post-similarity thresholds; `docs/ENGINE3_IMPLEMENTATION_PLAN.md` records that next gate.
+
 This is a separate retrieval model, not an image/deepfake classifier or entailment model.
 `intfloat/multilingual-e5-small`, revision `614241f622f53c4eeff9890bdc4f31cfecc418b3`,
 [publisher MIT model card](https://huggingface.co/intfloat/multilingual-e5-small), is

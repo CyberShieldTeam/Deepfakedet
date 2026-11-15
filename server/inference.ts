@@ -161,67 +161,105 @@ export async function classify(
   }
 }
 const embeddingCache = new Map<string, { vector: number[]; expires: number }>();
-export async function embed(texts: string[]): Promise<number[][] | null> {
+export interface EmbeddingDiagnostics {
+  cacheHits: number;
+  uniqueMisses: number;
+  deduplicatedInputs: number;
+  requests: number;
+}
+export async function embedDetailed(
+  texts: string[],
+): Promise<{ vectors: number[][]; diagnostics: EmbeddingDiagnostics } | null> {
   const config = modelConfig("embedding");
-  if (!config.endpoint) return null;
+  if (
+    !config.endpoint ||
+    !texts.length ||
+    texts.length > 10000 ||
+    texts.some((t) => typeof t !== "string" || t.length > 20000)
+  )
+    return null;
   try {
     const keys = texts.map((text) =>
       crypto
         .createHash("sha256")
-        .update(`${owner()}\0${config.modelId}\0${config.version}\0${text}`)
+        .update(`${owner()}\0${config.endpoint}\0${config.modelId}\0${config.version}\0${text}`)
         .digest("hex"),
     );
-    const vectors: (number[] | undefined)[] = keys.map((key) => {
-      const entry = embeddingCache.get(key);
-      return entry && entry.expires > Date.now() ? entry.vector : undefined;
+    const unique = new Map<string, number>();
+    keys.forEach((key, i) => {
+      if (!unique.has(key)) unique.set(key, i);
     });
-    const missing = vectors.map((v, i) => (v ? null : i)).filter((i): i is number => i !== null);
-    const batches = Array.from({ length: Math.ceil(missing.length / 128) }, (_, i) =>
-      missing.slice(i * 128, (i + 1) * 128),
-    );
-    const deadline = Date.now() + 40000;
-    for (let i = 0; i < batches.length; i += 4) {
-      if (Date.now() > deadline) throw new Error("Embedding budget exceeded");
-      await Promise.all(
-        batches.slice(i, i + 4).map(async (indices) => {
-          const output = z
-            .object({
-              modelId: z.string(),
-              version: z.string(),
-              embeddings: z.array(z.array(z.number().finite()).min(8).max(4096)),
-            })
-            .parse(
-              await callEndpoint(config, {
-                texts: indices.map((j) => texts[j]),
-                modelId: config.modelId,
-                version: config.version,
-              }),
-            );
-          if (
-            output.modelId !== config.modelId ||
-            output.version !== config.version ||
-            output.embeddings.length !== indices.length
-          )
-            throw new Error("Embedding identity/shape mismatch");
-          indices.forEach((position, j) => {
-            vectors[position] = output.embeddings[j];
-            embeddingCache.set(keys[position], {
-              vector: output.embeddings[j],
-              expires: Date.now() + 30 * 60000,
-            });
-          });
-        }),
-      );
+    const values = new Map<string, number[]>();
+    const misses: number[] = [];
+    for (const [key, index] of unique) {
+      const entry = embeddingCache.get(key);
+      if (entry && entry.expires > Date.now()) values.set(key, entry.vector);
+      else {
+        embeddingCache.delete(key);
+        misses.push(index);
+      }
     }
+    const diagnostics = {
+      cacheHits: values.size,
+      uniqueMisses: misses.length,
+      deduplicatedInputs: texts.length - unique.size,
+      requests: 0,
+    };
+    // Sequential bounded requests match the single CPU encoder; no simultaneous busy-worker calls.
+    const batches: number[][] = [];
+    let batch: number[] = [],
+      chars = 0;
+    for (const index of misses) {
+      if (batch.length && (batch.length >= 32 || chars + texts[index].length > 60000)) {
+        batches.push(batch);
+        batch = [];
+        chars = 0;
+      }
+      batch.push(index);
+      chars += texts[index].length;
+    }
+    if (batch.length) batches.push(batch);
+    const deadline = Date.now() + 40000;
+    for (const indices of batches) {
+      if (Date.now() > deadline) throw new Error("Embedding budget exceeded");
+      const output = z
+        .object({
+          modelId: z.string(),
+          version: z.string(),
+          embeddings: z.array(z.array(z.number().finite()).min(8).max(4096)),
+        })
+        .parse(
+          await callEndpoint(config, {
+            texts: indices.map((i) => texts[i]),
+            modelId: config.modelId,
+            version: config.version,
+          }),
+        );
+      diagnostics.requests++;
+      if (
+        output.modelId !== config.modelId ||
+        output.version !== config.version ||
+        output.embeddings.length !== indices.length
+      )
+        throw new Error("Embedding identity/shape mismatch");
+      indices.forEach((index, i) => values.set(keys[index], output.embeddings[i]));
+    }
+    const vectors = keys.map((key) => values.get(key)!);
     if (vectors.some((v) => !v || v.length !== vectors[0]?.length || !v.some((x) => x !== 0)))
       throw new Error("Invalid embedding vectors");
+    // Never cache a partly valid response. A failed call cannot poison later queries.
+    for (const index of misses)
+      embeddingCache.set(keys[index], { vector: vectors[index], expires: Date.now() + 30 * 60000 });
     while (embeddingCache.size > 5000) embeddingCache.delete(embeddingCache.keys().next().value!);
     health.set("embedding", { status: "ready", at: new Date().toISOString() });
-    return vectors as number[][];
+    return { vectors, diagnostics };
   } catch {
     health.set("embedding", { status: "failed", at: new Date().toISOString() });
     return null;
   }
+}
+export async function embed(texts: string[]): Promise<number[][] | null> {
+  return (await embedDetailed(texts))?.vectors || null;
 }
 export function cosine(a: number[], b: number[]) {
   if (a.length !== b.length) return 0;

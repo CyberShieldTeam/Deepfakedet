@@ -35,6 +35,14 @@ The additional provenance, signal, temporal, model-training, and physiological m
 
 ## Risks and decisions
 
+Current bounded readiness milestone: `docs/CLAIM_RUNTIME_PROFILE.md` separates E5
+startup/imports from warm inference/cache performance; `docs/CLAIM_EVALUATION_READINESS.md`
+defines independent multilingual admission/measurement gates. Engine 3's existing sparse
+DBSCAN/account graph remains the baseline; the next slice is structured recurrence
+episodes and legitimate viral controls under `docs/ENGINE3_IMPLEMENTATION_PLAN.md`,
+including model-specific embedding input contracts. No campaign rewrite or scientific
+phase closure has occurred.
+
 - Production inference is cloud hosted. The current Python service is a backend component that can run on managed CPU/GPU infrastructure; it is not a browser or end-user dependency. Move remaining browser ELA/video/audio signal extraction server-side in bounded slices so users need only upload media. See `CLOUD_DEPLOYMENT.md`.
 
 - Model weights, licenses, dataset permissions, and hardware requirements are unresolved. Do not select a checkpoint by architecture name alone or claim quality without an independent evaluation. AASIST speech anti-spoofing does not cover arbitrary synthetic sounds.

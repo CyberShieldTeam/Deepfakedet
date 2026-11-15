@@ -61,7 +61,7 @@ assert.equal(
     { ...item, url: item.url + "?utm_source=x" },
     { ...item, url: "https://example.net/copy" },
   ]).length,
-  1,
+  2,
 );
 assert.equal(
   (

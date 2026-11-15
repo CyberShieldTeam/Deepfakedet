@@ -227,15 +227,15 @@ export async function googleEvidence(
 }
 
 export function deduplicateEvidence(items: RetrievedEvidence[]) {
-  const urls = new Set<string>(),
-    passages = new Set<string>();
+  const seen = new Set<string>();
   const unique: RetrievedEvidence[] = [];
   for (const item of items) {
     const url = sourceUrl(item.url),
       digest = hash(item.excerpt.normalize("NFC").replace(/\s+/gu, " ").trim().toLowerCase());
-    if (urls.has(url) || passages.has(digest)) continue;
-    urls.add(url);
-    passages.add(digest);
+    // Retain different passages from one URL and attribution/ratings from other publishers.
+    const key = JSON.stringify([url, digest, item.provider, item.publisherRating || ""]);
+    if (seen.has(key)) continue;
+    seen.add(key);
     unique.push({ ...item, url });
   }
   return unique;

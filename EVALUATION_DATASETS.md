@@ -1,5 +1,17 @@
 # Image and video evaluation dataset readiness
 
+## Subsequent claim dataset review — 2026-11-15
+
+See `docs/CLAIM_EVALUATION_READINESS.md` for the current authoritative review: FEVER and
+AVeriTeC (English), X-FACT (Hindi), IndicClaimBuster (Hindi/English/code-mix), IndicLink
+(permissive English/Hindi/Telugu adjacent fact-linking) and restricted MultiClaim v2
+(cross-language matching). Verified public licenses are distinguished from source rights,
+task compatibility, missing corpus snapshots and access approvals. X-FACT's listed release
+does not include Telugu; translated IndicLink sentences are not independent claims.
+No restricted data/access form or reserved evaluation split was used. No independent
+claim-evidence corpus is admitted. New BM25/E5/hybrid measurements remain explicitly
+fictional software controls; independent retrieval/verification metrics remain unavailable.
+
 ## Claim evidence readiness — Phase 3, 2026-11-15
 
 `test/fixtures/claims/retrieval_controls.json` is project-authored fictional software

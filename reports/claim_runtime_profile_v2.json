@@ -1,0 +1,279 @@
+{
+  "scope": "software_controls_runtime_not_factual_benchmark",
+  "python": "3.13.12",
+  "code": {
+    "ai_service/claim_embedding.py": "fa5b91fb06c1393ce6646201c8e4a8d1188d8ab86ad752847e13ed8964cb0210",
+    "ai_service/profile_claim_runtime.py": "950df08e803c3e20b2a370bc2529a249cc99b622235d22acd0acfc91f5a75ae0",
+    "server/inference.ts": "07cf684cf7fb3f7bc27cef3178182aa70b55931e2b9e5d72397cc93b875b30ab"
+  },
+  "runs": [
+    {
+      "processIndex": 0,
+      "processToReadySeconds": 28.57003480003914,
+      "startup": {
+        "status": "ready",
+        "modelId": "intfloat/multilingual-e5-small",
+        "version": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+        "error": "",
+        "loadingSeconds": 26.9255338999792,
+        "memory": {
+          "working_set_bytes": 741122048,
+          "peak_working_set_bytes": 744288256
+        },
+        "cpuThreads": 1,
+        "maxTokens": 512,
+        "batchSize": 8,
+        "moduleToLifespanSeconds": 0.8785405000089668,
+        "startupTimings": {
+          "resource_preflight": 0.02251280000200495,
+          "snapshot_verification": 0.4412637000204995,
+          "torch_import": 6.7727799999993294,
+          "transformers_import": 13.73939280002378,
+          "thread_setup": 0.001999500032979995,
+          "tokenizer_initialization": 2.2214016999932937,
+          "checkpoint_and_model_initialization": 3.7261430000071414
+        },
+        "requestCount": 13,
+        "recentRequests": [
+          {
+            "request": 1,
+            "texts": 2,
+            "tokenizationSeconds": 0.02107290003914386,
+            "forwardSeconds": 0.20794110000133514,
+            "poolingSeconds": 0.00855620001675561,
+            "elapsedSeconds": 0.23859080002876,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 2,
+            "texts": 2,
+            "tokenizationSeconds": 0.0012458999990485609,
+            "forwardSeconds": 0.07793710002442822,
+            "poolingSeconds": 0.0005679000169038773,
+            "elapsedSeconds": 0.07982929999707267,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 3,
+            "texts": 2,
+            "tokenizationSeconds": 0.0006800999981351197,
+            "forwardSeconds": 0.0770454999874346,
+            "poolingSeconds": 0.00033080001594498754,
+            "elapsedSeconds": 0.0781182000064291,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 4,
+            "texts": 2,
+            "tokenizationSeconds": 0.0011449999874457717,
+            "forwardSeconds": 0.07586709997849539,
+            "poolingSeconds": 0.0003478999715298414,
+            "elapsedSeconds": 0.07741450000321493,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 5,
+            "texts": 4,
+            "tokenizationSeconds": 0.0036563000176101923,
+            "forwardSeconds": 0.18732899997849017,
+            "poolingSeconds": 0.0005970000056549907,
+            "elapsedSeconds": 0.191644600010477,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 6,
+            "texts": 4,
+            "tokenizationSeconds": 0.0016728999908082187,
+            "forwardSeconds": 0.19060120003996417,
+            "poolingSeconds": 0.0005516000092029572,
+            "elapsedSeconds": 0.19290770002407953,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 7,
+            "texts": 4,
+            "tokenizationSeconds": 0.003819099976681173,
+            "forwardSeconds": 0.21458470000652596,
+            "poolingSeconds": 0.0005350999999791384,
+            "elapsedSeconds": 0.21902860002592206,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 8,
+            "texts": 1,
+            "tokenizationSeconds": 0.0023569000186398625,
+            "forwardSeconds": 0.04138450004393235,
+            "poolingSeconds": 0.00019150000298395753,
+            "elapsedSeconds": 0.043986500008031726,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 9,
+            "texts": 1,
+            "tokenizationSeconds": 0.001024700002744794,
+            "forwardSeconds": 0.05021409998880699,
+            "poolingSeconds": 0.00039410003228113055,
+            "elapsedSeconds": 0.05172250000759959,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 10,
+            "texts": 1,
+            "tokenizationSeconds": 0.0008413000032305717,
+            "forwardSeconds": 0.06093360000522807,
+            "poolingSeconds": 0.000332699972204864,
+            "elapsedSeconds": 0.062192599987611175,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 11,
+            "texts": 1,
+            "tokenizationSeconds": 0.0007015999872237444,
+            "forwardSeconds": 0.04936449998058379,
+            "poolingSeconds": 0.0001818999880924821,
+            "elapsedSeconds": 0.05031379999127239,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 12,
+            "texts": 1,
+            "tokenizationSeconds": 0.0006043999455869198,
+            "forwardSeconds": 0.05438500002492219,
+            "poolingSeconds": 0.0005097999819554389,
+            "elapsedSeconds": 0.055597900005523115,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 13,
+            "texts": 1,
+            "tokenizationSeconds": 0.0005380000220611691,
+            "forwardSeconds": 0.05659029999515042,
+            "poolingSeconds": 0.00037729996256530285,
+            "elapsedSeconds": 0.05756190000101924,
+            "atTokenLimit": 0
+          }
+        ]
+      },
+      "directInference": [
+        {
+          "repeat": 0,
+          "wallSeconds": 0.2684995000017807,
+          "serviceSeconds": 0.2386452999780886
+        },
+        {
+          "repeat": 1,
+          "wallSeconds": 0.08786329999566078,
+          "serviceSeconds": 0.07990169996628538
+        },
+        {
+          "repeat": 2,
+          "wallSeconds": 0.09592619998147711,
+          "serviceSeconds": 0.07816390000516549
+        },
+        {
+          "repeat": 3,
+          "wallSeconds": 0.10318450001068413,
+          "serviceSeconds": 0.07745199999772012
+        }
+      ],
+      "repeatedVectorsIdentical": true
+    },
+    {
+      "processIndex": 1,
+      "processToReadySeconds": 23.785980199987534,
+      "startup": {
+        "status": "ready",
+        "modelId": "intfloat/multilingual-e5-small",
+        "version": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+        "error": "",
+        "loadingSeconds": 22.1498072000104,
+        "memory": {
+          "working_set_bytes": 737525760,
+          "peak_working_set_bytes": 737525760
+        },
+        "cpuThreads": 1,
+        "maxTokens": 512,
+        "batchSize": 8,
+        "moduleToLifespanSeconds": 0.6412849000189453,
+        "startupTimings": {
+          "resource_preflight": 0.019103400001768023,
+          "snapshot_verification": 0.4445261000073515,
+          "torch_import": 5.075813999981619,
+          "transformers_import": 11.659777599968947,
+          "thread_setup": 0.00010429997928440571,
+          "tokenizer_initialization": 2.230826999992132,
+          "checkpoint_and_model_initialization": 2.7196153000113554
+        },
+        "requestCount": 4,
+        "recentRequests": [
+          {
+            "request": 1,
+            "texts": 2,
+            "tokenizationSeconds": 0.004100799968000501,
+            "forwardSeconds": 0.13668019999749959,
+            "poolingSeconds": 0.0006211000145412982,
+            "elapsedSeconds": 0.14152750000357628,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 2,
+            "texts": 2,
+            "tokenizationSeconds": 0.0014335000305436552,
+            "forwardSeconds": 0.067246199992951,
+            "poolingSeconds": 0.00030770001467317343,
+            "elapsedSeconds": 0.06906950002303347,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 3,
+            "texts": 2,
+            "tokenizationSeconds": 0.0016499000485055149,
+            "forwardSeconds": 0.05949769995640963,
+            "poolingSeconds": 0.00030130002414807677,
+            "elapsedSeconds": 0.06151049997424707,
+            "atTokenLimit": 0
+          },
+          {
+            "request": 4,
+            "texts": 2,
+            "tokenizationSeconds": 0.001157500024419278,
+            "forwardSeconds": 0.06241239997325465,
+            "poolingSeconds": 0.00028740003472194076,
+            "elapsedSeconds": 0.06395030004205182,
+            "atTokenLimit": 0
+          }
+        ]
+      },
+      "directInference": [
+        {
+          "repeat": 0,
+          "wallSeconds": 0.15015950001543388,
+          "serviceSeconds": 0.14157959999283776
+        },
+        {
+          "repeat": 1,
+          "wallSeconds": 0.09612489998107776,
+          "serviceSeconds": 0.06912420003209263
+        },
+        {
+          "repeat": 2,
+          "wallSeconds": 0.06896230002166703,
+          "serviceSeconds": 0.06153960002120584
+        },
+        {
+          "repeat": 3,
+          "wallSeconds": 0.0842129000229761,
+          "serviceSeconds": 0.06399140000576153
+        }
+      ],
+      "repeatedVectorsIdentical": true
+    }
+  ],
+  "limitations": [
+    "Two fresh processes with existing local files; OS/file caches were not flushed. Not a true disk-cold benchmark.",
+    "Historical 70.789s excluded pre-lifespan process startup and embedding computation; its internal stage breakdown was not recorded.",
+    "checkpoint_and_model_initialization includes architecture construction, file loading and eval setup; these are not separately measured.",
+    "processToReady includes interpreter/uvicorn/module/import/load/polling; startup phase timings are nested components, not extra durations.",
+    "No inference configuration or weights changed. Repeat equality only verifies these fixed controls."
+  ]
+}

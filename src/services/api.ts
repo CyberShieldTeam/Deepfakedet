@@ -81,7 +81,7 @@ export const verifyClaim = (claimText: string) =>
   );
 export const reviewClaim = (
   result: ClaimVerificationResult,
-  reviews: { url: string; stance: string; quote: string; contextConfirmed: boolean }[],
+  reviews: { url: string; sourceId?:string; stance: string; quote: string; contextConfirmed: boolean }[],
   note: string,
 ) =>
   post<{ result: ClaimVerificationResult }>("/api/claims/review", { result, reviews, note }).then(

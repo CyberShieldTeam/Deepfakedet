@@ -116,6 +116,14 @@ try {
   const report = (await api.get(`/api/reports/${id}`).set(a).expect(200)).body.report;
   assert.equal(report.investigation.claimResults[0].verificationStatus, "SUPPORTED");
   assert.equal(report.investigation.claimResults[0].sources[0].review.quote, excerpt);
+  corpus.documents.push({...corpus.documents[0],excerpt:'Software fixture: the fictional Amber Museum charges entry fees.'});
+  fs.writeFileSync(file,JSON.stringify(corpus));process.env.VERITAS_CLAIM_CORPUS_SHA256=createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+  const multi=(await api.post('/api/claims/verify').set(a).send({claimText:'The fictional Amber Museum has free entry.'}).expect(200)).body.result;
+  assert.equal(multi.sources.length,2);
+  await api.post('/api/claims/review').set(a).send({result:multi,reviews:[review],note:'Ambiguous same-URL review must be rejected.'}).expect(400);
+  const conflict=(await api.post('/api/claims/review').set(a).send({result:multi,reviews:multi.sources.map((s:any)=>({url:s.url,sourceId:s.id,
+    stance:s.excerpt===excerpt?'supports':'contradicts',quote:s.excerpt,contextConfirmed:true})),note:'Software control: distinct opposing passages retained from one source URL.'}).expect(200)).body.result;
+  assert.equal(conflict.verificationStatus,'CONFLICTING_EVIDENCE');assert.equal(conflict.sources[0].url,conflict.sources[1].url);
   delete process.env.VERITAS_CLAIM_CORPUS;
   delete process.env.VERITAS_CLAIM_CORPUS_SHA256;
   for (const [text, language] of [

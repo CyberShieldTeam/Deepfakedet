@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { performance } from "node:perf_hooks";
-import { embed, cosine, modelConfig } from "./inference";
+import { embedDetailed, cosine, modelConfig } from "./inference";
 import { analyzeClaim, claimTokens, normalizeClaim } from "./claimText";
 import {
   corpusEvidence,
@@ -54,33 +54,48 @@ export function bm25(query: string, documents: string[]) {
   );
 }
 
-export async function rankEvidence(claim: string, items: RetrievedEvidence[], semantic = true) {
+export async function rankEvidence(
+  claim: string,
+  items: RetrievedEvidence[],
+  semantic = true,
+  method: "bm25" | "e5" | "hybrid" = semantic ? "hybrid" : "bm25",
+) {
   const unique = deduplicateEvidence(items),
     texts = unique.map((e) => `${e.title} ${e.excerpt}`);
   const lexical = bm25(claim, texts),
     maxLex = Math.max(1, ...lexical);
   const e5 = process.env.VERITAS_CLAIM_EMBEDDING_FORMAT === "e5";
-  const vectors =
+  const encoded =
     semantic && unique.length
-      ? await embed([
+      ? await embedDetailed([
           `${e5 ? "query: " : ""}${claim}`,
           ...texts.map((t) => `${e5 ? "passage: " : ""}${t}`),
         ])
       : null;
+  const vectors = encoded?.vectors || null;
   const ranked = unique
     .map((e, i) => ({
       ...e,
       lexicalScore: lexical[i],
       semanticScore: vectors ? cosine(vectors[0], vectors[i + 1]) : null,
-      rank: vectors?.length
-        ? (0.5 * lexical[i]) / maxLex + 0.5 * Math.max(0, cosine(vectors[0], vectors[i + 1]))
-        : lexical[i] / maxLex,
+      rank:
+        method === "e5" && vectors
+          ? Math.max(0, cosine(vectors[0], vectors[i + 1]))
+          : vectors?.length
+            ? (0.5 * lexical[i]) / maxLex + 0.5 * Math.max(0, cosine(vectors[0], vectors[i + 1]))
+            : lexical[i] / maxLex,
     }))
-    .filter((e) => e.lexicalScore > 0 || (e.semanticScore ?? 0) > 0.65)
-    .sort((a, b) => b.rank - a.rank)
-    .slice(0, 8);
+    .filter((e) =>
+      method === "e5" && vectors
+        ? (e.semanticScore ?? 0) > 0.65
+        : e.lexicalScore > 0 || (e.semanticScore ?? 0) > 0.65,
+    )
+    .sort((a, b) => b.rank - a.rank);
   return {
-    ranked,
+    ranked: ranked.slice(0, 8),
+    candidateCount: ranked.length,
+    omittedCount: Math.max(0, ranked.length - 8),
+    embeddingDiagnostics: encoded?.diagnostics || null,
     duplicatesRemoved: items.length - unique.length,
     embeddingStatus: vectors
       ? `${modelConfig("embedding").modelId}@${modelConfig("embedding").version}; configured endpoint; language quality unvalidated`
@@ -130,6 +145,7 @@ export async function verifyWithEvidence(claim: string): Promise<ClaimVerificati
   }));
   const unavailable = !sources.length && !retrieval.providers.some((p) => p.status === "available");
   const missingEvidence = [
+    ...(retrieval.omittedCount ? [`${retrieval.omittedCount} relevant candidates omitted by the eight-source limit; decisive review is blocked until the query/corpus is narrowed.`] : []),
     ...(!sources.length
       ? ["No claim-specific evidence passages retrieved."]
       : [
@@ -185,6 +201,9 @@ export async function verifyWithEvidence(claim: string): Promise<ClaimVerificati
       source: retrieval.retrievalStatus,
     },
     retrievalDetails: {
+      candidateCount: retrieval.candidateCount,
+      omittedCount: retrieval.omittedCount,
+      embeddingDiagnostics: retrieval.embeddingDiagnostics,
       providers: retrieval.providers,
       duplicatesRemoved: retrieval.duplicatesRemoved,
       semanticMeasured: retrieval.semanticMeasured,
@@ -203,6 +222,7 @@ export const claimReviewSchema = z
         z
           .object({
             url: z.string().url(),
+            sourceId: z.string().max(80).optional(),
             stance: z.enum(["supports", "contradicts", "mixed", "neutral"]),
             quote: z.string().trim().max(10000).default(""),
             contextConfirmed: z.boolean().default(false),
@@ -226,10 +246,17 @@ export function reviewEvidence(
     throw new Error("Re-run claim verification before review");
   const seen = new Set<string>();
   for (const review of reviews) {
-    const source = result.sources.find((s) => s.url === review.url);
-    if (!source || seen.has(review.url))
+    const matches = result.sources.filter(
+      (s) => s.url === review.url && (!review.sourceId || s.id === review.sourceId),
+    );
+    const source = matches.length === 1 ? matches[0] : undefined;
+    if (!source || seen.has(source.id || review.url))
       throw new Error("Review must reference unique retrieved sources");
-    seen.add(review.url);
+    seen.add(source.id || review.url);
+    if (review.stance !== "neutral" && (result.retrievalDetails?.omittedCount || 0) > 0)
+      throw new Error(
+        "Ranked evidence was truncated; narrow the claim/corpus before a decisive review",
+      );
     if (
       review.stance !== "neutral" &&
       (!review.contextConfirmed ||
@@ -248,7 +275,7 @@ export function reviewEvidence(
   }
   const reviewedAt = new Date().toISOString();
   const sources = result.sources.map((s) => {
-    const review = reviews.find((r) => r.url === s.url);
+    const review = reviews.find((r) => r.url === s.url && (!r.sourceId || r.sourceId === s.id));
     return {
       ...s,
       stance: review?.stance || ("neutral" as const),

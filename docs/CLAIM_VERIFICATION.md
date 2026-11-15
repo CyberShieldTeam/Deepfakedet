@@ -1,5 +1,38 @@
 # Phase 3: auditable multilingual claim evidence — 2026-11-15
 
+## Subsequent reliability and readiness milestone
+
+The existing model process/cache remain. Stage-specific startup/inference timing,
+endpoint-aware cache isolation, within-request deduplication, sequential bounded batches
+and validated cache insertion are now implemented; see `CLAIM_RUNTIME_PROFILE.md`.
+Fresh-process ready times were 23.8–28.6 s, with OS caches not flushed; this is not causal
+proof of a reduction from the historical 70.8 s. Warm direct inference was 69–103 ms;
+application-cache repeats made zero embedding calls. Weights/quality settings unchanged.
+
+Deduplication now removes exact normalized URL/passage/provider/rating duplicates only.
+Distinct passages from one URL and attribution/ratings from different publishers survive.
+Review `sourceId` binds the exact returned passage. It is optional for a unique URL but
+required when that URL has multiple passages; ambiguous URL-only reviews are rejected.
+The UI keys controls by source ID. The eight-source ranking cap is disclosed through
+candidate/omitted counts and missing-evidence text; decisive review is blocked when
+ranked evidence was omitted. Quotes and context checks remain mandatory, and dates retain
+their publication/review/retrieval distinctions. Human review still cannot guarantee truth.
+
+`CLAIM_EVALUATION_READINESS.md` records authoritative English/Hindi/Telugu/code-mixed/
+cross-language dataset rights, annotation and access review. None is admitted as an
+independent corpus yet. BM25/E5-only/hybrid control comparisons and tested retrieval
+metrics are separate from agreement evaluation; factual accuracy and graded nDCG stay null.
+`ENGINE3_IMPLEMENTATION_PLAN.md` audits the unchanged campaign engine and defines the next
+bounded recurrence-evidence slice. Phases 2 and scientific Phase 3 validation remain open.
+
+Milestone checks: Python 68 total (67 passed, one optional AASIST-weight skip), full
+Node/API and TypeScript passed, production build passed with the existing chunk warning.
+New cache/resource/metric/source-ID/retained-conflict regressions passed. Development
+browser nine passed/two expected skips; authenticated production four passed; quoted
+operator-corpus review/case workflow one passed. No live Fact Check retrieval or independent
+factual accuracy is claimed. Temporary services were stopped. The initial new TypeScript
+fixture URL-type issue was corrected before the final checks.
+
 Implemented software, **scientific validation open**. Phase 2a–2d implementations,
 reports and unresolved validation remain intact. No deepfake model or temporal threshold
 was changed. Starting audit: `CLAIM_AUDIT.md`; baseline `dd6b1ca`, including `feb5d74`.
@@ -19,7 +52,7 @@ into `claimText.ts`, `claimSources.ts` and `claimVerification.ts`.
    Check Tools key. No claim-supplied URL is fetched. Unconfigured/available/unavailable
    providers are distinguished; failures and empty successful results differ.
 3. Canonicalize public HTTPS attribution URLs, remove tracking parameters/fragments,
-   deduplicate URLs and normalized identical passages. Rank at most eight candidates
+   deduplicate exact URL/passage/provider/rating records. Rank at most eight candidates
    with Unicode BM25 and optional embedding cosine. Short words and negation remain.
    Ranking measures relevance, never source credibility or entailment. Credibility is
    explicitly unverified, rather than inferred from a publisher/domain name.

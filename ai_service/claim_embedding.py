@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import threading
 import time
+MODULE_STARTED=time.perf_counter()
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -37,16 +38,33 @@ def verify_snapshot(path):
 
 class Encoder:
     def __init__(self,path):
+        self.startup_timings={}
+        started=time.perf_counter()
         import psutil
         if psutil.virtual_memory().available<2*2**30:raise RuntimeError('Embedding load requires 2 GiB available RAM headroom')
+        self.startup_timings['resource_preflight']=time.perf_counter()-started
+        started=time.perf_counter()
         verify_snapshot(path)
+        self.startup_timings['snapshot_verification']=time.perf_counter()-started
+        started=time.perf_counter()
         import torch
+        self.startup_timings['torch_import']=time.perf_counter()-started
+        started=time.perf_counter()
         from transformers import AutoModel,AutoTokenizer
+        self.startup_timings['transformers_import']=time.perf_counter()-started
+        started=time.perf_counter()
         torch.set_num_threads(1)
         self.torch=torch
+        self.startup_timings['thread_setup']=time.perf_counter()-started
+        started=time.perf_counter()
         self.tokenizer=AutoTokenizer.from_pretrained(path,local_files_only=True,trust_remote_code=False)
+        self.startup_timings['tokenizer_initialization']=time.perf_counter()-started
+        started=time.perf_counter()
         self.model=AutoModel.from_pretrained(path,local_files_only=True,trust_remote_code=False,use_safetensors=True).eval()
+        self.startup_timings['checkpoint_and_model_initialization']=time.perf_counter()-started
         self.lock=threading.Lock()
+        self.request_count=0
+        self.recent_requests=[]
 
     def encode(self,texts):
         if not texts or len(texts)>128 or sum(map(len,texts))>128000 or any(
@@ -54,14 +72,30 @@ class Encoder:
             raise ValueError('Bounded prefixed query/passages required')
         if not self.lock.acquire(blocking=False):raise RuntimeError('Embedding worker busy')
         try:
+            started=time.perf_counter()
+            tokenize_seconds=forward_seconds=pool_seconds=0.0
+            truncated_inputs=0
             result=[]
             with self.torch.inference_mode():
                 for i in range(0,len(texts),8):
+                    tick=time.perf_counter()
                     batch=self.tokenizer(texts[i:i+8],padding=True,truncation=True,max_length=512,return_tensors='pt')
+                    # A full-length sequence may be exactly 512 tokens; this is a warning, not proof of truncation.
+                    truncated_inputs+=int((batch['attention_mask'].sum(1)>=512).sum())
+                    tokenize_seconds+=time.perf_counter()-tick
+                    tick=time.perf_counter()
                     hidden=self.model(**batch).last_hidden_state
+                    forward_seconds+=time.perf_counter()-tick
+                    tick=time.perf_counter()
                     mask=batch['attention_mask'].unsqueeze(-1)
                     pooled=(hidden*mask).sum(1)/mask.sum(1)
                     result.extend(self.torch.nn.functional.normalize(pooled,p=2,dim=1).tolist())
+                    pool_seconds+=time.perf_counter()-tick
+            self.request_count+=1
+            self.recent_requests.append(dict(request=self.request_count,texts=len(texts),
+                tokenizationSeconds=tokenize_seconds,forwardSeconds=forward_seconds,poolingSeconds=pool_seconds,
+                elapsedSeconds=time.perf_counter()-started,atTokenLimit=truncated_inputs))
+            self.recent_requests=self.recent_requests[-32:]
             return result
         finally:self.lock.release()
 
@@ -74,9 +108,11 @@ class EmbeddingRequest(BaseModel):
 encoder=None
 load_error='Local embedding path not configured'
 loading_seconds=None
+module_to_lifespan_seconds=None
 @asynccontextmanager
 async def lifespan(_app):
-    global encoder,load_error,loading_seconds
+    global encoder,load_error,loading_seconds,module_to_lifespan_seconds
+    module_to_lifespan_seconds=time.perf_counter()-MODULE_STARTED
     if os.getenv('VERITAS_CLAIM_EMBEDDING_PATH'):
         try:
             started=time.perf_counter()
@@ -90,7 +126,11 @@ app=FastAPI(lifespan=lifespan)
 def health():
     from ai_service.image_benchmark import memory_usage
     return dict(status='ready' if encoder else 'unavailable',modelId=MODEL_ID,version=REVISION,error=load_error,
-                loadingSeconds=loading_seconds,memory=memory_usage(),cpuThreads=1,maxTokens=512,batchSize=8)
+                loadingSeconds=loading_seconds,memory=memory_usage(),cpuThreads=1,maxTokens=512,batchSize=8,
+                moduleToLifespanSeconds=module_to_lifespan_seconds,
+                startupTimings=encoder.startup_timings if encoder else None,
+                requestCount=encoder.request_count if encoder else 0,
+                recentRequests=list(encoder.recent_requests) if encoder else [])
 
 @app.post('/v1/embedding')
 def embedding(request:EmbeddingRequest):

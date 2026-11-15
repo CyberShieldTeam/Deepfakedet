@@ -95,6 +95,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
         <span className="text-[11px] text-slate-500">checked {fmtDate(r.timestamp)}</span>
       </div>
       <VerdictBanner {...plainClaim(r)} />
+      {(r.retrievalDetails?.omittedCount || 0)>0 && <p role="status" className="text-sm text-amber-200">Some ranked evidence was omitted. Narrow the claim or corpus before recording a decisive assessment.</p>}
       {r.verificationStatus && (
         <div className="rounded border border-cyan-900 p-3 text-sm" role="status">
           <b>Claim status: {r.verificationStatus}</b>
@@ -456,13 +457,13 @@ export const ClaimView: React.FC<{
                   stance. This creates an attributed human assessment, not an automated truth score.
                 </p>
                 {result.sources.map((s) => (
-                  <div key={s.url} className="mb-3 space-y-2">
-                    <span className="truncate">{s.title}</span>
+                  <div key={s.id || s.url} className="mb-3 space-y-2">
+                    <span className="truncate">{s.id ? `[${s.id}] ` : ''}{s.title}</span>
                     <select
-                      aria-label={`Stance for ${s.title}`}
+                      aria-label={`Stance for ${s.title}${s.id ? ` [${s.id}]` : ''}`}
                       disabled={s.provider === "google_fact_check"}
-                      value={reviews[s.url] || "neutral"}
-                      onChange={(e) => setReviews((v) => ({ ...v, [s.url]: e.target.value }))}
+                      value={reviews[s.id || s.url] || "neutral"}
+                      onChange={(e) => setReviews((v) => ({ ...v, [s.id || s.url]: e.target.value }))}
                       className="rounded border border-slate-700 bg-slate-900 p-2"
                     >
                       {["neutral", "supports", "contradicts", "mixed"].map((v) => (
@@ -476,9 +477,9 @@ export const ClaimView: React.FC<{
                       </p>
                     )}
                     <textarea
-                      aria-label={`Evidence quote for ${s.title}`}
-                      value={quotes[s.url] || ""}
-                      onChange={(e) => setQuotes((v) => ({ ...v, [s.url]: e.target.value }))}
+                      aria-label={`Evidence quote for ${s.title}${s.id ? ` [${s.id}]` : ''}`}
+                      value={quotes[s.id || s.url] || ""}
+                      onChange={(e) => setQuotes((v) => ({ ...v, [s.id || s.url]: e.target.value }))}
                       placeholder="Paste an exact passage from the retrieved excerpt for any non-neutral stance (at least 12 characters)"
                       className="w-full rounded border border-slate-700 bg-slate-950 p-2"
                       rows={2}
@@ -505,13 +506,14 @@ export const ClaimView: React.FC<{
                 <Button
                   disabled={
                     busy ||
+                      ((result.retrievalDetails?.omittedCount || 0)>0 && result.sources.some(s=>(reviews[s.id || s.url] || 'neutral')!=='neutral')) ||
                     reviewNote.trim().length < 20 ||
                     result.sources.some(
                       (s) =>
-                        (reviews[s.url] || "neutral") !== "neutral" &&
+                        (reviews[s.id || s.url] || "neutral") !== "neutral" &&
                         (!contextConfirmed ||
-                          (quotes[s.url] || "").trim().length < 12 ||
-                          !s.excerpt.includes((quotes[s.url] || "").trim())),
+                          (quotes[s.id || s.url] || "").trim().length < 12 ||
+                          !s.excerpt.includes((quotes[s.id || s.url] || "").trim())),
                     )
                   }
                   onClick={async () => {
@@ -522,8 +524,9 @@ export const ClaimView: React.FC<{
                           result,
                           result.sources.map((s) => ({
                             url: s.url,
-                            stance: reviews[s.url] || "neutral",
-                            quote: quotes[s.url] || "",
+                            sourceId: s.id,
+                            stance: reviews[s.id || s.url] || "neutral",
+                            quote: quotes[s.id || s.url] || "",
                             contextConfirmed,
                           })),
                           reviewNote,

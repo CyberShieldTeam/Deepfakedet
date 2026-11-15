@@ -2,6 +2,55 @@
 
 Updated: 2026-11-15. Published integration branch: `codex/integrate-figma-upgrade`, tracking the same branch on origin. Reconciled local `ee28104` with fetched `codex/phase1-audit` at `6cadda8` in merge `855b414`, successfully pushed. Earlier read-only-access observations below are historical; Git push is now working. Baseline commit: `fa888241d838de9ce835d2277183add633f28d29`.
 
+## Engine 2 reliability/runtime and Engine 3 readiness — 2026-11-15
+
+- Continued from `7b40c48`, retaining all previous implementations and artifacts. No main
+  merge, unrelated model, GPU dependency, reserved-data scoring or campaign rewrite.
+  Audit confirmed E5 already uses a persistent model and Express caches embeddings;
+  these were retained rather than duplicated.
+- Added named startup and bounded per-request timing scopes. Historical 70.789 s measured
+  Encoder setup/imports/hashes/tokenizer/model loading, not full process startup or query
+  computation. New fresh-process ready times 28.570/23.786 s with warm OS caches; Encoder
+  loads 26.926/22.150 s, mostly torch/transformers imports. Do not attribute the historical
+  difference causally to optimization. Peak working sets 709.81/703.36 MiB. Warm direct
+  HTTP inference 68.96–103.18 ms; repeated vectors identical on fixed controls.
+- Strengthened existing cache with endpoint identity, within-request text deduplication,
+  sequential <=32-text/60,000-character requests and whole-result validation before cache
+  insertion. Same weights, CPU thread one, 512 tokens/batch eight model computation and
+  existing fallback/TTL/cap. Warm application E5/hybrid queries made zero embedding calls;
+  measured .28–.53/.15–.53 ms excluding external evidence acquisition. No memory reduction
+  or latency percentile claim. `docs/CLAIM_RUNTIME_PROFILE.md` records exact scopes/limits.
+- Preserve distinct same-URL passages and cross-publisher attribution/ratings, removing
+  exact duplicate records only. Review source IDs prevent ambiguous URL assignment.
+  Candidate omission is disclosed and blocks decisive review until narrowed. Existing
+  exact quotes, context, receipt ownership, dates and null confidence remain. Regression
+  tests cover same-URL conflicts, numerical/date/location/negation and ambiguous language.
+- Reviewed authoritative FEVER, AVeriTeC, X-FACT, IndicClaimBuster, IndicLink and MultiClaim
+  terms, annotations and access. No independent corpus admitted or restricted data fetched.
+  Public permissive rights are distinguished from missing compatible evidence/lineage;
+  generated evidence/translations are not independent factual labels. Details and next
+  admission protocol: `docs/CLAIM_EVALUATION_READINESS.md`, `EVALUATION_DATASETS.md`.
+- Added tested Recall@K/Precision@K/MRR/optional graded nDCG math and source/translation/hash
+  split guards. New fixed BM25/E5-only/hybrid comparison: nine fictional queries, twice
+  per method (54 executions, not 54 independent samples). Top-1 relevance 6/9 vs 9/9 vs
+  9/9; cross-language 0/3 vs 3/3 vs 3/3. No parameter fitting. Independent retrieval,
+  agreement accuracy and graded nDCG remain unavailable/null. Old reports unchanged.
+- Engine 3 code unchanged. Authored public-news controls show four accounts flagged for
+  repeated one-minute legitimate-style bulletins, highlighting recurrence inflation and
+  same-event confounding, not a real-world false-positive rate. Documented shared E5
+  prefix-contract incompatibility, evidence-record gaps and a bounded episode-based
+  next slice with acceptance gates in `docs/ENGINE3_IMPLEMENTATION_PLAN.md`.
+- Verification: full Node/API suite passed; Python 68 total, 67 passed/one optional
+  absent-weight AASIST skip; actual embedding HTTP/profile integration passed. TypeScript
+  and production build passed (existing large-chunk warning). A new test fixture initially
+  needed explicit required URL typing; fixed and TypeScript rerun. Development browser
+  nine passed/two expected skips; authenticated production four passed; separate quoted
+  corpus review/case workflow one passed. Production auth 401 and built assets verified;
+  temporary workers/servers stopped. Final diff/preservation checks recorded before push.
+- **Scientific Phase 3 validation remains open.** Next: approved independent claim/evidence
+  corpus and frozen protocol; Engine 3 next implementation should add inspectable episodes
+  and legitimate-event controls, not new maliciousness models or a large rewrite.
+
 ## Phase 3 evidence-engine implementation — 2026-11-15
 
 - Explicit user authorization begins Phase 3 from `dd6b1ca`, retaining `feb5d74`, all

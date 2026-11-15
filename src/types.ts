@@ -310,6 +310,9 @@ export interface ClaimVerificationResult {
     ambiguities: string[];
   };
   retrievalDetails?: {
+    candidateCount?:number;
+    omittedCount?:number;
+    embeddingDiagnostics?:{cacheHits:number;uniqueMisses:number;deduplicatedInputs:number;requests:number}|null;
     providers: {
       provider: string;
       status: "unconfigured" | "available" | "unavailable";
