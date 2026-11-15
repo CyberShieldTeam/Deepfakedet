@@ -41,6 +41,14 @@ await assert.rejects(callLocalImage(image, 'http://127.0.0.1:8001', (async () =>
 await assert.rejects(callLocalImage(image, 'http://127.0.0.1:8001', (async () => new Response(JSON.stringify({ ...raw, face_boxes: null }))) as typeof fetch));
 await assert.rejects(callLocalImage(image, 'http://127.0.0.1:8001', (async () => new Response(JSON.stringify({ ...raw, model_status: 'unavailable' }))) as typeof fetch));
 console.log('Local image contract tests passed');
+await assert.rejects(callLocalImage(image, 'http://127.0.0.1:8001', (async () => new Response(JSON.stringify({ ...raw, classification: 'MANIPULATED' }))) as typeof fetch));
+const legacyFace = {...raw, face_boxes:[{x:1,y:2,width:80,height:80,confidence:.95}], face_model: {
+  status:'ready' as const,model:'sakshamkr1/deitfake-v2',revision:'test',faces:[{boxIndex:0,rawFakeSoftmax:.9}],note:'Raw output'}};
+assert.equal(localImageResult(legacyFace,'face.jpg',{},[]).authenticity,'inconclusive');
+assert.equal(localImageResult(legacyFace,'face.jpg',{},[]).manipulation,undefined);
+assert.ok(localImageResult(legacyFace,'face.jpg',{},[]).modelsUsed.some(m=>m.name==='sakshamkr1/deitfake-v2'));
+await assert.rejects(callLocalImage(image,'http://127.0.0.1:8001',(async()=>new Response(JSON.stringify({...legacyFace,
+  face_model:{...legacyFace.face_model,faces:[{boxIndex:0,rawFakeSoftmax:2}]}}))) as typeof fetch));
 const withFace = { ...raw, face_analysis: 'candidate_regions' as const,
   face_boxes: [{ x: 1, y: 2, width: 40, height: 50, confidence: 0.95 }],
   face_manipulation: { status: 'analyzed' as const, classification: 'INCONCLUSIVE' as const,

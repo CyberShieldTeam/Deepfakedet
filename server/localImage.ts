@@ -1,6 +1,7 @@
 import type { ForensicAnalysisResult } from '../src/types';
 
 export interface LocalImageResponse {
+  face_model?: import('../src/types').LocalImageEvidence['face_model'];
   face_manipulation?: import('../src/types').LocalImageEvidence['face_manipulation'];
   classification: 'REAL' | 'MANIPULATED' | 'INCONCLUSIVE';
   fake_probability: number | null;
@@ -25,6 +26,14 @@ export async function callLocalImage(mediaData: string, endpoint: string, fetche
   });
   if (!response.ok) throw new Error(`Local image service returned HTTP ${response.status}`);
   const value = await response.json() as LocalImageResponse;
+  const legacyFace = value.face_model;
+  if (legacyFace && (!['ready','unavailable','not_applicable'].includes(legacyFace.status) ||
+      !legacyFace.model || !legacyFace.revision || typeof legacyFace.note !== 'string' ||
+      !Array.isArray(legacyFace.faces) || legacyFace.faces.length > 10 ||
+      (legacyFace.status !== 'ready' && legacyFace.faces.length > 0) ||
+      legacyFace.faces.some(f => !Number.isInteger(f.boxIndex) || f.boxIndex < 0 || f.boxIndex >= value.face_boxes?.length ||
+        !Number.isFinite(f.rawFakeSoftmax) || f.rawFakeSoftmax < 0 || f.rawFakeSoftmax > 1)))
+    throw new Error('Invalid legacy face evidence');
   const face = value.face_manipulation;
   if (face && (face.classification !== 'INCONCLUSIVE' ||
       !['unavailable', 'analyzed', 'no_faces', 'no_usable_faces', 'failed'].includes(face.status) ||
@@ -70,7 +79,7 @@ export function localImageResult(raw: LocalImageResponse, fileName: string, meas
     alternativeHypotheses: ['Compression, resizing, and newer generators can change classifier output.'],
     compressionArtifacts: { elaScore: Number(measurements.elaScore) || 0, doubleCompressionFound: false,
       noiseInconsistencyMapAvailable: true, notes: 'ELA is a separate browser signal, not evidence for this model score.' },
-    modelsUsed: [...(faceRan ? [{ name: raw.face_manipulation!.model, version: raw.face_manipulation!.revision, provider: 'Experimental face-crop inference' }] : []), ...(classifierRan ? [{ name: raw.model, version: raw.revision, provider: 'Hugging Face checkpoint (local inference)' }] : []),
+    modelsUsed: [...(faceRan ? [{ name: raw.face_manipulation!.model, version: raw.face_manipulation!.revision, provider: 'Experimental face-crop inference' }] : raw.face_model?.status === 'ready' ? [{ name: raw.face_model.model, version: raw.face_model.revision, provider: 'Experimental face-crop inference' }] : []), ...(classifierRan ? [{ name: raw.model, version: raw.revision, provider: 'Hugging Face checkpoint (local inference)' }] : []),
       ...(raw.face_analysis !== 'not_performed' ? [{ name: 'YuNet face detector', version: '2023mar', provider: 'OpenCV Zoo' }] : [])],
     measurements, analyzedAt: new Date().toISOString(),
     localImage: raw

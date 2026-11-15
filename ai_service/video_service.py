@@ -39,6 +39,7 @@ def frame_quality(bgr):
 
 def decode_sampled_frames(raw: bytes):
     import cv2
+    from ai_service.temporal import analyze_pair
 
     if raw[:4] != b"\x1a\x45\xdf\xa3" and raw[4:8] != b"ftyp":
         raise HTTPException(415, "Supported video containers: MP4, MOV, WEBM")
@@ -91,13 +92,24 @@ def decode_sampled_frames(raw: bytes):
                     continue
                 raise HTTPException(400, "Could not decode a sampled video frame")
             index, small, quality = best
+            adjacent_index = index + 1 if index + 1 < count else index - 1
+            temporal = {"status": "unavailable", "note": "Adjacent original frame could not be decoded."}
+            if adjacent_index >= 0 and cap.set(cv2.CAP_PROP_POS_FRAMES, adjacent_index):
+                adjacent_ok, adjacent_bgr = cap.read()
+                if adjacent_ok and adjacent_bgr is not None and adjacent_bgr.shape[:2] == (frame_height, frame_width):
+                    adjacent = cv2.resize(adjacent_bgr, (480, scaled_height), interpolation=cv2.INTER_AREA)
+                    earlier, later = (small, adjacent) if adjacent_index > index else (adjacent, small)
+                    temporal = {"status": "measured", "startSeconds": round(min(index, adjacent_index) / fps, 3),
+                                "endSeconds": round(max(index, adjacent_index) / fps, 3),
+                                **analyze_pair(earlier, later)}
             encoded_ok, jpg = cv2.imencode(".jpg", small, [cv2.IMWRITE_JPEG_QUALITY, 75])
             if not encoded_ok:
                 raise HTTPException(400, "Could not encode a sampled video frame")
-            frames.append((index, base64.b64encode(jpg.tobytes()).decode("ascii"), quality))
+            frames.append((index, base64.b64encode(jpg.tobytes()).decode("ascii"), quality, temporal))
         if not frames:
             raise HTTPException(400, "Could not decode sampled video frames")
-        return duration, int(width), int(height), [(round(i / fps, 3), jpg, quality) for i, jpg, quality in frames]
+        return duration, int(width), int(height), [(round(i / fps, 3), jpg, quality, temporal)
+                                                  for i, jpg, quality, temporal in frames]
     finally:
         if cap is not None:
             cap.release()
@@ -170,10 +182,10 @@ def analyze_video(request: VideoRequest):
         raise HTTPException(413, "Video exceeds 8 MB or is empty")
     duration, width, height, samples = decode_sampled_frames(raw)
     from ai_service import app as image_app
-    frames = [{"timestampSeconds": timestamp, "quality": quality,
+    frames = [{"timestampSeconds": timestamp, "quality": quality, "temporal": temporal,
                "image": image_app.analyze_image(image_app.ImageRequest(image_base64=jpg))}
-              for timestamp, jpg, quality in samples]
+              for timestamp, jpg, quality, temporal in samples]
     return {"scope": "server_decoded_frames", "frames": frames,
-            "samplingNote": "Up to six JPEG frames chosen from nearby original-video positions using heuristic exposure/detail measurements; model scores are experimental.",
+            "samplingNote": "Up to six JPEG frames chosen from nearby original-video positions; adjacent originals provide experimental Farneback motion measurements, not a manipulation verdict.",
             "videoMetadata": {"durationSeconds": round(duration, 3), "width": width, "height": height},
             "audioTrack": screen_video_audio(raw, duration)}

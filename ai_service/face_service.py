@@ -6,6 +6,7 @@ MODEL_ID = "sakshamkr1/deitfake-v2"
 REVISION = "f70338d328ba268d2b9d5c6af11044cf0b0e1400"
 model = processor = torch_module = None
 reason = "Set VERITAS_FACE_MODEL_ENABLED=1 to load the experimental face checkpoint"
+MODEL_PATH = os.getenv("VERITAS_FACE_MODEL_PATH")
 
 
 def load_model():
@@ -17,10 +18,10 @@ def load_model():
         import torch
         from transformers import AutoImageProcessor, AutoModelForImageClassification
         loaded = AutoModelForImageClassification.from_pretrained(
-            MODEL_ID, revision=REVISION, use_safetensors=True, trust_remote_code=False).eval()
+            MODEL_PATH or MODEL_ID, revision=None if MODEL_PATH else REVISION, use_safetensors=True, trust_remote_code=False).eval()
         if loaded.config.id2label != {0: "Fake", 1: "Real"}:
             raise ValueError("Unexpected face checkpoint class mapping")
-        processor = AutoImageProcessor.from_pretrained(MODEL_ID, revision=REVISION, trust_remote_code=False, use_fast=False)
+        processor = AutoImageProcessor.from_pretrained(MODEL_PATH or MODEL_ID, revision=None if MODEL_PATH else REVISION, trust_remote_code=False, use_fast=False)
         torch.set_num_threads(min(torch.get_num_threads(), 4))
         model, torch_module, reason = loaded, torch, ""
     except Exception as error:
@@ -30,6 +31,14 @@ def load_model():
 def health():
     return {"status": "ready" if model is not None else "unavailable",
             "model": MODEL_ID, "revision": REVISION, "reason": reason or None}
+
+
+def legacy_projection(evidence):
+    """Compatibility representation of the same inference; never load/run a second model."""
+    return dict(status="ready" if evidence["status"] == "analyzed" else
+                "unavailable" if evidence["status"] in ("unavailable", "failed") else "not_applicable",
+                model=evidence["model"], revision=evidence["revision"], note=evidence["note"],
+                faces=[dict(boxIndex=f["face_index"], rawFakeSoftmax=f["raw_fake_score"]) for f in evidence["faces"]])
 
 
 def crop_face(image, box):

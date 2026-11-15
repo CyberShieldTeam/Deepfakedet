@@ -9,6 +9,7 @@ import numpy as np
 from fastapi import HTTPException
 
 from ai_service import app as image_app, audio_service, video_service
+from ai_service.temporal import analyze_pair
 
 CLIP = Path(__file__).resolve().parents[1] / "test" / "fixtures" / "video" / "test_pattern_3s.mp4"
 CLIP_WITH_TONE = CLIP.with_name("test_pattern_with_tone_3s.mp4")
@@ -24,6 +25,7 @@ class VideoServiceTests(unittest.TestCase):
         self.assertEqual(result["videoMetadata"]["width"], 320)
         self.assertEqual(result["videoMetadata"]["height"], 180)
         self.assertEqual(len(result["frames"]), 6)
+        self.assertTrue(all(frame["temporal"]["status"] == "measured" for frame in result["frames"]))
         self.assertEqual(result["audioTrack"]["status"], "no_audio")
         timestamps = [frame["timestampSeconds"] for frame in result["frames"]]
         self.assertEqual(timestamps, sorted(set(timestamps)))
@@ -70,7 +72,21 @@ class VideoServiceTests(unittest.TestCase):
 
         with patch("cv2.VideoCapture", return_value=FakeCapture()):
             _, _, _, samples = video_service.decode_sampled_frames(b"xxxxftypfake")
-        self.assertEqual([round(timestamp * 24) for timestamp, _, _ in samples], sorted(clear_indices))
+        self.assertEqual([round(timestamp * 24) for timestamp, _, _, _ in samples], sorted(clear_indices))
+
+    def test_adjacent_flow_exposes_local_change_without_a_verdict(self):
+        rng = np.random.default_rng(27)
+        gray = cv2.GaussianBlur(rng.integers(0, 256, (128, 128), dtype=np.uint8), (5, 5), 0)
+        first = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+        shifted = cv2.warpAffine(first, np.float32([[1, 0, 2], [0, 1, 0]]), (128, 128))
+        normal = analyze_pair(first, shifted)
+        patched = shifted.copy()
+        patched[48:80, 48:80] = 255 - patched[48:80, 48:80]
+        altered = analyze_pair(first, patched)
+        self.assertEqual(normal["method"], "farneback_forward_backward_v1")
+        self.assertGreater(normal["medianFlowPixels"], 0.5)
+        self.assertGreater(altered["maxTileResidual"], normal["maxTileResidual"])
+        self.assertNotIn("classification", altered)
 
     def test_rejects_invalid_and_oversized_inputs_before_decode(self):
         for data, expected in (("not-base64", 400), (base64.b64encode(b"hello").decode(), 415),

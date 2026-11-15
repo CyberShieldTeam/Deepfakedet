@@ -146,9 +146,11 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
         <Card title="Experimental local video evidence">
           <div className="space-y-1 text-xs text-slate-400">
             <p>{r.localVideo.frames.length} {r.localVideo.scope === "server_decoded_frames" ? "server-decoded" : "browser-sampled"} frame(s) screened.</p>
+            {r.localVideo.faceContinuity && <p>{r.localVideo.faceContinuity.tracks.length} geometric face-candidate track(s); these do not verify identity or manipulation.</p>}
             {r.localVideo.frames.map((frame, index) => (
               <div key={index} className="font-mono">
                 {frame.timestampSeconds.toFixed(1)} s · {frame.image.fake_probability == null ? "classifier unavailable" : `raw fake output ${frame.image.fake_probability.toFixed(3)}`} · {frame.image.face_boxes.length} face candidate(s)
+                {frame.temporal?.status === 'measured' && <p>Adjacent-frame median flow {frame.temporal.medianFlowPixels?.toFixed(2)} px; round-trip error {frame.temporal.meanRoundTripErrorPixels?.toFixed(2)} px. Motion observations only.</p>}
               </div>
             ))}
             {r.localVideo.audioTrack && <p>Video audio: {r.localVideo.audioTrack.status.replaceAll("_", " ")}. {r.localVideo.audioTrack.note}</p>}

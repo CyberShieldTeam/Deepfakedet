@@ -109,6 +109,7 @@ export interface ForensicAnalysisResult {
   /** Raw local whole-image screening; its score is experimental and never calibrated confidence. */
   localImage?: LocalImageEvidence;
   imageDiagnostics?: ImageDiagnostics;
+  originalImageProvenance?: import('../server/imageProvenance').ImageProvenance;
   /** Raw AASIST segment evidence; never an authenticity verdict. */
   localAudio?: LocalAudioEvidence;
   /** Timestamped image/audio evidence from local video screening; never a fused verdict. */
@@ -138,6 +139,7 @@ export interface ImageDiagnostics {
 }
 
 export interface LocalImageEvidence {
+  face_model?: { status: 'ready' | 'unavailable' | 'not_applicable'; model: string; revision: string; faces: { boxIndex: number; rawFakeSoftmax: number }[]; note: string };
   face_manipulation?: {
     status: "unavailable" | "analyzed" | "no_faces" | "no_usable_faces" | "failed";
     model: string;
@@ -179,8 +181,10 @@ export interface LocalVideoEvidence {
     timestampSeconds: number;
     image: LocalImageEvidence;
     quality?: { laplacianVariance: number; meanLuma: number; clippedFraction: number; selectionScore: number };
+    temporal?: import('../server/localVideo').TemporalMeasurement;
   }[];
   samplingNote: string;
+  faceContinuity?: import('../server/videoFaces').FaceContinuity;
   videoMetadata?: { durationSeconds: number; width: number; height: number };
   audioTrack?: {
     status: "analyzed" | "no_audio" | "model_unavailable" | "extraction_failed";
@@ -213,6 +217,7 @@ export interface DetectionAssessment {
 
 /** Embedded provenance metadata (C2PA Content Credentials / IPTC digital source type). */
 export interface ProvenanceInfo {
+  verificationStatus?: 'validated' | 'invalid' | 'unavailable';
   verified?: boolean;
   c2paManifest: boolean;
   declaresAIGenerated: boolean;

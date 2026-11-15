@@ -5,3 +5,5 @@
 `frame_0.jpg`, `frame_1.jpg`, and `frame_2.jpg` were extracted from that same clip near 0.2, 1.2, and 2.2 seconds for the live HTTP smoke test.
 
 `test_pattern_with_tone_3s.mp4` copies the test-pattern video stream and adds an FFmpeg `sine` 440 Hz AAC track for audio-extraction transport tests. The tone is not speech and has no real/fake label; AASIST outputs on it cannot evaluate speech deepfake detection.
+
+`headshot_cc0_3s.mp4` is a three-second, 480×600 H.264 loop of the [CC0 headshot fixture](../face/SOURCES.md), encoded locally with FFmpeg. It tests YuNet face-candidate continuity through video decoding and has no manipulation or identity-verification label.

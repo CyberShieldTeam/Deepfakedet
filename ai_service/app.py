@@ -3,9 +3,11 @@ import base64
 import binascii
 import hashlib
 import io
+import json
 import math
 import os
 import time
+import sys
 from contextlib import asynccontextmanager
 from pathlib import Path
 from threading import Lock
@@ -14,7 +16,11 @@ from typing import Literal
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from PIL import Image, ImageOps, UnidentifiedImageError
-from ai_service import audio_service, video_service, face_service, image_evidence
+from ai_service import audio_service, video_service, face_service, image_evidence, provenance_service
+
+def _timing(stage, event):
+    if os.getenv("VERITAS_TIMING_LOG", "0") == "1":
+        print(json.dumps(dict(event="stage_"+event, stage=stage, monotonicSeconds=time.monotonic())), file=sys.stderr, flush=True)
 
 MODEL_KIND = os.getenv("VERITAS_IMAGE_MODEL", "dima").lower()
 MODELS = {
@@ -23,6 +29,7 @@ MODELS = {
     "community": ("OwensLab/commfor-model-384", "6076002bf0d9dd37537f965ee2f06f826c333b61"),
 }
 MODEL_ID, MODEL_REVISION = MODELS.get(MODEL_KIND, ("unrecognized", "unrecognized"))
+MODEL_PATH = os.getenv("VERITAS_IMAGE_MODEL_PATH")
 MAX_BYTES = 10 * 1024 * 1024
 MAX_PIXELS = 24_000_000
 model = None
@@ -50,7 +57,9 @@ def load_face_detector():
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     global model, processor, torch_module, load_error, face_detector
+    _timing("face_detector", "start")
     load_face_detector()
+    _timing("face_detector", "end")
     audio_service.load_model()
     face_service.load_model()
     if os.getenv("VERITAS_IMAGE_MODEL_ENABLED", "0") == "1":
@@ -61,9 +70,10 @@ async def lifespan(_app: FastAPI):
                 model, processor = load()
             elif MODEL_KIND == "dima":
                 from transformers import AutoImageProcessor, AutoModelForImageClassification
-                processor = AutoImageProcessor.from_pretrained(MODEL_ID, revision=MODEL_REVISION)
+                source, revision = MODEL_PATH or MODEL_ID, None if MODEL_PATH else MODEL_REVISION
+                processor = AutoImageProcessor.from_pretrained(source, revision=revision)
                 model = AutoModelForImageClassification.from_pretrained(
-                    MODEL_ID, revision=MODEL_REVISION, use_safetensors=True
+                    source, revision=revision, use_safetensors=True
                 ).eval()
                 if model.config.id2label.get(0) != "REAL" or model.config.id2label.get(1) != "FAKE":
                     raise ValueError("Unexpected checkpoint labels")
@@ -97,6 +107,7 @@ app = FastAPI(lifespan=lifespan)
 app.include_router(audio_service.router)
 app.include_router(video_service.router)
 app.include_router(image_evidence.router)
+app.include_router(provenance_service.router)
 
 
 class ImageRequest(BaseModel):
@@ -161,7 +172,8 @@ def analyze_image(request: ImageRequest):
         return {"classification": "INCONCLUSIVE", "fake_probability": None,
                 "model_confidence": None, "model_status": "unavailable", "model": MODEL_ID,
                 "revision": MODEL_REVISION, "scope": "general_ai_generated_image",
-                "face_analysis": face_status, "face_boxes": faces, "face_manipulation": face_evidence, "signals": [],
+                "face_analysis": face_status, "face_boxes": faces, "face_manipulation": face_evidence,
+                "face_model": face_service.legacy_projection(face_evidence), "signals": [],
                 "explanation": "Classifier unavailable; face candidates are unverified regions, not manipulation analysis.",
                 "processing_ms": round((time.monotonic() - start) * 1000)}
     if MODEL_KIND == "community":
@@ -180,6 +192,7 @@ def analyze_image(request: ImageRequest):
     return {"classification": "INCONCLUSIVE", "fake_probability": round(fake_probability, 6),
             "model_confidence": None, "model_status": "ready", "model": MODEL_ID, "revision": MODEL_REVISION,
             "scope": "general_ai_generated_image", "face_analysis": face_status, "face_boxes": faces, "face_manipulation": face_evidence,
+            "face_model": face_service.legacy_projection(face_evidence),
             "signals": [], "explanation": "Experimental whole-image classifier score only; face boxes are unverified candidates, not manipulation analysis.",
             "processing_ms": round((time.monotonic() - start) * 1000)}
 

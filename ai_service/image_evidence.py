@@ -64,10 +64,15 @@ def c2pa_evidence(raw, mime):
         visit(store.get("validation_status", []))
         result["validation_codes"] = sorted(codes)[:32]
         active = store.get("manifests", {}).get(store.get("active_manifest"), {})
+        result["claim_generator"] = str(active.get("claim_generator", ""))[:120] or None
         signature = active.get("signature_info", {})
         result["signer"] = str(signature.get("issuer") or signature.get("common_name") or "")[:160] or None
         source_types = set()
         for assertion in active.get("assertions", []):
+            if assertion.get("label") == "stds.schema-org.CreativeWork":
+                value = assertion.get("data", {}).get("digitalSourceType")
+                if isinstance(value, str):
+                    source_types.add(value[:200])
             if not str(assertion.get("label", "")).startswith("c2pa.actions"):
                 continue
             for action in assertion.get("data", {}).get("actions", []):

@@ -268,6 +268,13 @@ export async function analyzeMediaPipeline(input: {
     if (evidenceData) {
       try {
         result.imageDiagnostics = await callImageEvidence(evidenceData, localEndpoint);
+        const d = result.imageDiagnostics;
+        result.originalImageProvenance = {
+          status: d.c2pa.status === 'valid_trusted' ? 'trusted' : d.c2pa.status === 'valid_untrusted' ? 'valid' :
+            d.c2pa.status === 'failed' ? 'unavailable' : d.c2pa.status,
+          aiDeclaration: d.c2pa.ai_disclosure === 'declared', note: d.c2pa.note,
+          exif: { present: d.metadata.exif_present, software: d.metadata.fields.software || null }
+        };
       } catch {
         result.limitations.push("Server provenance and image diagnostics unavailable; no metadata or signal verdict inferred.");
       }
