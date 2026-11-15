@@ -1,4 +1,30 @@
-# Image evaluation dataset readiness
+# Image and video evaluation dataset readiness
+
+## Video development readiness — 2026-11-15
+
+Only **20 procedural software controls**, one correlated source group, are admitted for
+the current temporal experiment. **Zero authentic camera recordings and zero independently
+labeled manipulated/generated videos were evaluated.** See
+`docs/VIDEO_TEMPORAL_EVALUATION.md` for exact inputs, admission evidence, protocol and
+results. Existing image reserves and benchmark artifacts were not opened or rescored.
+
+| Candidate / scope | Authoritative rights and labels | Current eligibility / blocker |
+|---|---|---|
+| Internal procedural controls: motion, cuts, light, occlusion, compression | User-authorized procedural generation; original textures, encoded/raw hashes, exact settings and software-only annotations | Admitted only as software controls with `ground_truth=not_applicable`. Not camera negatives or deepfake positives. |
+| FaceForensics++: face swap and reenactment | [Official repository](https://github.com/ondyari/FaceForensics), [official terms](https://kaldir.vc.in.tum.de/faceforensics/webpage/FaceForensics_TOS.pdf): application/acceptance; noncommercial research/education. Associates/colleagues may receive access only after agreeing to the terms. Labels derive from known manipulation pipelines; generated masks require independent review before localization use. | Not admitted: no approved local copy or accepted terms/intended-use review. Do not use mirrors to bypass access. |
+| DFDC: actor-based facial modifications | [Meta dataset page](https://ai.meta.com/datasets/dfdc/) describes consenting paid actors and original/manipulated sources; access instructions require AWS account/IAM/account-ID registration. Full applicable agreement and redistribution permissions have not been verified here. | Not admitted: access/terms review and source/identity/label audit required. Public landing-page descriptions are not a license grant. |
+| DAVIS: object motion, camera motion and occlusion | [Official code page](https://davischallenge.org/davis2017/code.html), [2019 challenge](https://davischallenge.org/challenge2019/unsupervised.html). Explicit CC-BY 4.0 grant on new 2019 annotations does not establish blanket rights to all underlying videos. Object masks are not manipulation labels. | Not admitted: verify video rights chain, capture provenance and identity/source groups. No independent authenticity/manipulation interval labels verified. |
+| GenVideo / DeMamba: generated videos and real-source collections | [Author repository](https://github.com/chenhaoxing/DeMamba): Apache 2.0 code license; real sources include Kinetics-400, Youku-mPLUG and MSR-VTT. Code licensing does not authorize every dataset source or generator output. | Not admitted: per-source rights, labels, generation provenance, group/identity review and quality-confound assessment needed. |
+| GenVidBench: real/generated cross-source videos | [Official project](https://genvidbench.github.io/), [author dataset](https://huggingface.co/datasets/jian-0/GenVidBench). Hub metadata queried at revision `701cafb6f999d7ea0cbf3c354df6177311a4d824`: ungated, license field absent/null. Known generator categories do not provide independent interval annotations. | Not admitted: no verified dataset-wide grant or source/identity evidence. Ungated download is not permission for all uses. |
+| TUM RGB-D: actual indoor camera motion | [Author paper](https://cvg.cit.tum.de/_media/spezial/bib/sturm12iros.pdf) states CC-BY 3.0. Kinect RGB/depth capture and motion-capture trajectory ground truth; no deepfake labels. [Official listing](https://webshare.cvg.cit.tum.de/g/rgbd/dataset/) identifies floor/desk translation sequences. | Permissive candidate, not admitted in this run: both tested compact `freiburg1_floor-rgb.avi` and `freiburg1_xyz-rgb.avi` preview links returned HTTP 404. Large raw archives were not downloaded. Curate supported CFR inputs within resource limits, retain attribution/transcoding/source evidence and audit identities/groups before evaluation. |
+
+No restricted dataset media were downloaded and no access agreement was submitted.
+TUM's permissive license is distinct from the access/rights blockers above; its current
+blocker is usable local input and curation, not a claim that restricted permission is
+required. Camera trajectories/object segmentation do not supply manipulation truth.
+Approval must include saved exact terms/version and label/grouping evidence, not only
+a URL or manifest flag. The current operator registry contains only the software corpus.
+Phase 2d remains scientifically unvalidated pending independent data and annotations.
 
 Updated 2026-11-15. This is an acquisition and approval record, not an accuracy report.
 
@@ -12,6 +38,9 @@ Temporal transport/control fixtures are described in `docs/TEMPORAL_DIAGNOSTICS.
 their generated changes and resource measurements are not deepfake ground truth.
 
 ## Admission rules
+
+The original image gates below remain unchanged. Video development admission and its
+separate operator registry are specified in `docs/VIDEO_TEMPORAL_EVALUATION.md`.
 
 An evaluation row is admitted only when the file is locally present, its SHA-256 matches, the source and license are recorded, and the label has a documented basis. `group` must identify the underlying subject/source lineage (not merely the filename), and a group or identical file hash may occur in only one split. Crops, recompressions, frames, or manipulated derivatives of one source stay in the same group. Unknown or inferred labels are excluded rather than relabeled.
 

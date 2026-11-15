@@ -37,6 +37,7 @@ export interface TemporalDiagnostics {
   intervals:TemporalInterval[];sampledFrames:number;processedPairs:number;note:string;
   requestedIntervalSeconds?:number;effectiveIntervalSeconds?:number;durationSeconds?:number;
   sourceFrameCount?:number;elapsedSeconds?:number;peakWorkingSetBytes?:number|null;
+  sourceFrameRate?:number;sourceWidth?:number;sourceHeight?:number;sourceFourcc?:number;
 }
 export function validateTemporalDiagnostics(d:TemporalDiagnostics):boolean {
   if(!d || !['measured','partial','insufficient_evidence','timed_out','failed'].includes(d.status) ||
@@ -45,6 +46,10 @@ export function validateTemporalDiagnostics(d:TemporalDiagnostics):boolean {
     !Number.isInteger(d.sampledFrames) || d.sampledFrames<0 || d.sampledFrames>25 ||
     d.processedPairs!==d.intervals.length || d.processedPairs>Math.max(0,d.sampledFrames-1)) return false;
   if(['failed','timed_out'].includes(d.status)) return d.intervals.length===0;
+  const metadata=[d.sourceFrameRate,d.sourceWidth,d.sourceHeight,d.sourceFourcc];
+  if(metadata.some(v=>v!==undefined) && (metadata.some(v=>!Number.isFinite(v) || v!<=0) ||
+    !Number.isInteger(d.sourceWidth) || !Number.isInteger(d.sourceHeight) || !Number.isInteger(d.sourceFourcc) ||
+    d.sourceWidth!*d.sourceHeight!>1920*1080)) return false;
   if(!Number.isFinite(d.durationSeconds) || d.durationSeconds!<=0 || d.durationSeconds!>120 ||
     !Number.isFinite(d.effectiveIntervalSeconds) || d.effectiveIntervalSeconds!<=0 ||
     !Number.isInteger(d.sourceFrameCount) || d.sourceFrameCount!<1 || d.sourceFrameCount!>3600) return false;

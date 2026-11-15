@@ -100,6 +100,23 @@ No test/product navigation timeout was increased to obtain these results.
 
 ## Remaining gate
 
+### Subsequent evaluation slice — 2026-11-15
+
+The dataset-readiness/control fallback is now implemented. See
+[evaluation report](VIDEO_TEMPORAL_EVALUATION.md) and the repository's
+`EVALUATION_DATASETS.md` video table. Twenty procedural clips (one correlated source
+group) were each tested at .5, .25 and 1-second spacing: 16, six and ten candidate
+intervals per source minute respectively. Baseline nuisance candidates concentrate in
+occlusion (12) and local patch appearance (four). These are not camera false-positive
+rates or deepfake true positives. Two frozen-output filters retained all candidates;
+neither was promoted. Existing Farneback thresholds and eight-second deadline remain.
+
+Additive native metadata fields enable evaluator consistency checks. Independent
+camera/manipulation counts remain zero; localization precision/recall remains unavailable.
+Phase 2d stays open. Python verification now totals 64 tests (63 passed, one optional
+AASIST weight skip), including actual worker termination under a test-only short budget.
+Earlier results above remain the historical implementation checks.
+
 This is implemented diagnostic software with controlled software tests, not a validated
 deepfake detector or completion of trained temporal Phase 2d. Next: acquire an authorized,
 source/identity-disjoint video corpus with ordinary cuts, camera/subject motion,

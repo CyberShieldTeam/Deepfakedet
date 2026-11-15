@@ -1,4 +1,5 @@
 import subprocess
+import time
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -64,6 +65,18 @@ class TemporalVideoTests(unittest.TestCase):
             result=analyze_file(CLIP)
         self.assertEqual(result['status'],'partial')
         self.assertEqual(result['processedPairs'],0)
+
+    def test_real_child_timeout_preserves_production_deadline(self):
+        from ai_service import temporal_video
+        self.assertEqual(temporal_video.HARD_SECONDS,8)
+        started=time.monotonic()
+        # Trigger an actual subprocess startup timeout without waiting eight seconds.
+        with patch('ai_service.temporal_video.HARD_SECONDS',.001):
+            result=analyze_bytes(CLIP.read_bytes())
+        self.assertEqual(result['status'],'timed_out')
+        self.assertLess(time.monotonic()-started,3)
+        self.assertEqual(temporal_video.HARD_SECONDS,8)
+        self.assertIsNone(result['decisionProbability'])
 
 
 if __name__=='__main__': unittest.main()

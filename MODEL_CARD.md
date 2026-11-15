@@ -159,3 +159,13 @@ The pinned weights loaded successfully from the ignored model cache. On one CC0 
 - [open-deepfake-detection](https://huggingface.co/prithivMLmods/open-deepfake-detection) supplies safetensors and an Apache-2.0 label mapping, but its own model card marks it deprecated. Do not adopt without a strong independent result.
 - [Community Forensics 384](https://huggingface.co/OwensLab/commfor-model-384) is an official MIT-licensed safetensors checkpoint for general synthetic-image detection. Its [project repository](https://github.com/JeongsooP/Community-Forensics) provides evaluation instructions. It is a promising replacement candidate, not a face-manipulation detector or a validated VERITAS model.
 - [DeiTFake v2](https://huggingface.co/sakshamkr1/deitfake-v2) is now an optional experimental face-crop adapter as described above. Its publisher explicitly limits production use without further validation; its in-domain metrics are not VERITAS results.
+
+## Temporal diagnostic evaluation supplement — 2026-11-15
+
+`docs/VIDEO_TEMPORAL_EVALUATION.md` records 20 procedural control clips, 60 executions
+and no independent camera or manipulated-video evaluation. Baseline candidate burden
+was 16 sampled intervals per source minute; this is not accuracy or a genuine-video
+false-positive rate. Neither tested offline filter improved the control count. No
+temporal policy, model, verdict or probability was promoted. Phase 2d remains open;
+local temporal results remain INCONCLUSIVE with null decision probability. Prior model
+benchmark results and reserved datasets are unchanged.

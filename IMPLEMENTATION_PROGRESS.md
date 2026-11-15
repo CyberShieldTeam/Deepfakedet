@@ -2,6 +2,50 @@
 
 Updated: 2026-11-15. Published integration branch: `codex/integrate-figma-upgrade`, tracking the same branch on origin. Reconciled local `ee28104` with fetched `codex/phase1-audit` at `6cadda8` in merge `855b414`, successfully pushed. Earlier read-only-access observations below are historical; Git push is now working. Baseline commit: `fa888241d838de9ce835d2277183add633f28d29`.
 
+## Temporal scientific-readiness assessment — 2026-11-15
+
+- Continued from `a6733103992bee8417cd8ad860b2f403570e5f17` on
+  `codex/integrate-figma-upgrade`; no main merge, history rewrite or reserved-data access.
+  `feb5d74` preserves exact experiment code and raw reports; later admission hardening
+  leaves the temporal policy and historical report bytes unchanged.
+- Added shared evaluation file verification and a gated development-only video evaluator:
+  hashes, reviewed dataset registry and evidence, source/identity-disjoint splits,
+  derivative lineage, CFR/native metadata/codec checks, independent annotation gates,
+  complete/incomplete denominators and structured reproducible reports. Validation media
+  are not opened/scored. Registry metadata requires real operator review; it cannot
+  automatically certify legal permissions, subject identities or independent truth.
+- Reviewed authoritative FaceForensics++, DFDC, DAVIS, GenVideo/DeMamba, GenVidBench
+  and permissively licensed TUM RGB-D sources. Exact access/license/label limitations
+  are recorded in `EVALUATION_DATASETS.md`. Both tested compact TUM preview URLs returned
+  HTTP 404. No restricted video was downloaded. Independent data remains unavailable.
+- Used the authorized fallback: 20 procedural H.264 software controls, one correlated
+  source group, with raw/encoded hashes and exact generation settings. No authentic
+  camera or independently labeled manipulated/generated video was evaluated. Sixty
+  executions span .5/.25/1-second sampling; baseline counts 16 intervals per source
+  minute (occlusion 12, patch appearance four), sensitivities six and ten. These are
+  control candidate burdens, not genuine-video false-positive rates or deepfake accuracy.
+- Neither predeclared offline filter removed candidates; neither was deployed. Existing
+  motion compensation, scene/quality gates, thresholds and eight-second deadline remain.
+  Native decoder metadata is additive; no heavyweight model, verdict or probability added.
+  Temporal/spatial localization precision/recall remains unavailable, not zero.
+- Measured across 60 runs: worker .1614–1.1863 s, subprocess wall .6764–1.7631 s,
+  worker peak 82.42–100.42 MiB; all completed. These are single-run observed ranges,
+  not service latency percentiles. `docs/VIDEO_TEMPORAL_EVALUATION.md` provides the
+  protocol, artifacts, limitations and independent-data next gate.
+- Final Python: 64 tests, 63 passed and one optional absent-weight AASIST skip; includes
+  actual worker kill with a temporary short test budget, unchanged production deadline.
+  Node/API contracts and HTML export escaping/temporal contents passed; TypeScript and
+  build passed with the existing large-chunk warning. Browser: development eight passed
+  and one optional face-checkpoint skip; authenticated actual production three passed,
+  unauthorized API access returned 401 and built assets were verified. A rerun initially
+  used `AI_SERVICE_URL` instead of `VERITAS_AI_SERVICE_URL`; three browser tests correctly
+  failed without evidence. Correcting the launcher restored all expected passes without
+  product changes or increased timeouts. Temporary servers were stopped.
+- **Phase 2d remains open and scientifically unvalidated.** Next: curate authorized
+  independent camera/manipulation data, audited groups/identities and complete independent
+  interval labels; freeze the next protocol before inference. No new model until the
+  bounded baseline has independent evidence of diagnostic utility and nuisance burden.
+
 ## Current reconciliation, browser and temporal work — 2026-11-15
 
 - User approved reconciliation after the 11-local/7-remote divergence report. Both

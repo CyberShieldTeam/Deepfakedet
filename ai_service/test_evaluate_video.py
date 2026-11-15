@@ -30,7 +30,8 @@ class VideoEvaluationTests(unittest.TestCase):
 
     def files(self,rows=None,role='development'):
         manifest=self.root/'manifest.json';registry=self.root/'registry.json'
-        manifest.write_text(json.dumps(dict(schema_version=1,task='video_temporal_diagnostics',evaluation_role=role,samples=rows or [self.row])))
+        manifest.write_text(json.dumps(dict(schema_version=1,task='video_temporal_diagnostics',evaluation_role=role,
+            protocol_sha256=self.registry['datasets']['controls']['evidence_sha256'],protocol_path='terms.md',samples=rows or [self.row])))
         registry.write_text(json.dumps(self.registry))
         return manifest,registry
 
@@ -72,6 +73,13 @@ class VideoEvaluationTests(unittest.TestCase):
         m,r=self.files([{**self.row,'cohort':'camera_recording','ground_truth':'authentic'}])
         with self.assertRaisesRegex(ValueError,'ground truth'):load_manifest(m,self.root,r)
 
+    def test_protocol_tampering_and_cyclic_lineage_rejected(self):
+        m,r=self.files([{**self.row,'parent_id':'one'}])
+        with self.assertRaisesRegex(ValueError,'Cyclic'):load_manifest(m,self.root,r)
+        m,r=self.files()
+        (self.root/'terms.md').write_text('changed after review')
+        with self.assertRaisesRegex(ValueError,'SHA-256'):load_manifest(m,self.root,r)
+
     def test_validation_media_not_read_and_runtime_metadata_mismatch_rejected(self):
         validation={**self.row,'split':'validation','path':'sealed-video.mp4'}
         m,r=self.files([validation])
@@ -96,6 +104,16 @@ class VideoEvaluationTests(unittest.TestCase):
         self.assertEqual(result['incomplete_videos'],1)
         self.assertIsNone(result['candidates_per_source_minute'])
         self.assertIsNone(result['candidate_intervals'])
+
+    def test_limits_reject_before_worker_execution(self):
+        for meta in ({'frames':3601},{'width':4096,'height':4096},{'fps':.1}):
+            m,r=self.files([{**self.row,'metadata':{**self.row['metadata'],**meta}}])
+            with patch('ai_service.evaluate_video.analyze_bytes') as worker:
+                with self.assertRaises(ValueError):evaluate(m,self.root,r)
+                worker.assert_not_called()
+        (self.root/'sample.mp4').write_bytes(b'x'*(8*1024*1024+1))
+        m,r=self.files()
+        with self.assertRaisesRegex(ValueError,'byte budget'):load_manifest(m,self.root,r)
 
 
 if __name__=='__main__':unittest.main()

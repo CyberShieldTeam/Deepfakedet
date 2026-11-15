@@ -33,6 +33,11 @@ def load_manifest(manifest_path, root, registry_path):
         raise ValueError('Only development video manifests are allowed; reserved/final data remain sealed')
     registry=json.loads(Path(registry_path).read_text(encoding='utf-8'))
     if registry.get('schema_version')!=1:raise ValueError('Unknown operator registry schema')
+    protocol_hash=manifest.get('protocol_sha256')
+    if not isinstance(protocol_hash,str) or len(protocol_hash)!=64:
+        raise ValueError('Reproducible protocol hash required')
+    if manifest.get('protocol_path'):
+        verified_file(root,manifest['protocol_path'],protocol_hash)
     rows=manifest.get('samples')
     if not isinstance(rows,list) or not rows:
         raise ValueError('Manifest must have samples')
@@ -56,7 +61,11 @@ def load_manifest(manifest_path, root, registry_path):
            not approval.get('source_identity_reviewed') or not approval.get('approval_reference'):
             raise ValueError('Dataset not authorized or grouping/terms review incomplete')
         verified_file(root,approval.get('evidence_path',''),approval.get('evidence_sha256',''))
+        if row['cohort']=='software_control' and approval.get('evidence_sha256')!=protocol_hash:
+            raise ValueError('Control protocol does not match its authorization record')
         if row['cohort']!='software_control':
+            if not manifest.get('protocol_path'):
+                raise ValueError('Independent evaluation requires a verifiable protocol file')
             if approval.get('independent_ground_truth') is not True:
                 raise ValueError('Independent ground truth not verified')
             for kind in ('label','grouping'):
@@ -83,12 +92,13 @@ def load_manifest(manifest_path, root, registry_path):
         encoding=row.get('encoding',{})
         if any(not isinstance(encoding.get(k),str) or not encoding[k] for k in ('codec','container','pixel_format')):
             raise ValueError('Encoding provenance is incomplete')
-        if not isinstance(row.get('conditions'),list) or not row['conditions']:
+        if not isinstance(row.get('conditions'),list) or not row['conditions'] or any(not isinstance(c,str) or not c for c in row['conditions']):
             raise ValueError('Conditions must be recorded, including unknown where appropriate')
         annotations=row.get('annotations',{})
         if annotations.get('status')=='independently_verified':
             if row['cohort']=='software_control' or annotations.get('complete_coverage') is not True or \
-               not annotations.get('reviewers') or annotations.get('video_sha256')!=row['sha256']:
+               not isinstance(annotations.get('reviewers'),list) or not annotations['reviewers'] or \
+               any(not isinstance(v,str) or not v for v in annotations['reviewers']) or annotations.get('video_sha256')!=row['sha256']:
                 raise ValueError('Independent annotations lack complete verified review')
             verified_file(root,annotations.get('evidence_path',''),annotations.get('evidence_sha256',''))
         elif annotations.get('status') not in ('none','software_generated'):
@@ -103,6 +113,13 @@ def load_manifest(manifest_path, root, registry_path):
     require_disjoint(rows)
     by_id={r['id']:r for r in rows}
     for row in rows:
+        ancestors=set()
+        cursor=row
+        while cursor.get('parent_id'):
+            if cursor['id'] in ancestors:
+                raise ValueError('Cyclic derivative lineage')
+            ancestors.add(cursor['id'])
+            cursor=by_id.get(cursor['parent_id'],{})
         if row.get('parent_id'):
             parent=by_id.get(row['parent_id'])
             if not parent or parent['split']!=row['split'] or parent['group']!=row['group'] or \
@@ -152,6 +169,11 @@ def evaluate(manifest_path,root,registry_path,interval=.5):
                     'width':output['sourceWidth'],'height':output['sourceHeight'],'fourcc':output['sourceFourcc']}
             if any(not math.isclose(row['metadata'][key],value,rel_tol=1e-5,abs_tol=1e-4) for key,value in actual.items()):
                 raise ValueError('Decoder metadata disagrees with manifest: '+row['id'])
+            fourcc=''.join(chr((int(actual['fourcc'])>>(8*i))&255) for i in range(4)).lower()
+            codec={'avc1':'h264','h264':'h264','vp80':'vp8','vp90':'vp9','vp09':'vp9',
+                   'hev1':'hevc','hvc1':'hevc','av01':'av1','mp4v':'mpeg4'}.get(fourcc)
+            if codec!=row['encoding']['codec'].lower():
+                raise ValueError('Codec claim unverified or disagrees with decoded FOURCC')
         spans=[[r['startSeconds'],r['endSeconds']] for r in output['intervals'] if r['observation']=='localized_change_candidate']
         item=dict(id=row['id'],sha256=row['sha256'],dataset=row['dataset'],cohort=row['cohort'],
             ground_truth=row['ground_truth'],group=row['group'],source_ids=row['source_ids'],conditions=row['conditions'],
