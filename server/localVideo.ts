@@ -5,6 +5,20 @@ import { computeFaceContinuity, type FaceContinuity } from './videoFaces';
 
 export interface SampledVideoFrame { timestampSeconds: number; imageData: string }
 export interface FrameQuality { laplacianVariance: number; meanLuma: number; clippedFraction: number; selectionScore: number }
+export interface TemporalMeasurement {
+  status: 'measured' | 'unavailable';
+  note?: string;
+  startSeconds?: number;
+  endSeconds?: number;
+  scope?: 'adjacent_original_frames';
+  method?: 'farneback_forward_backward_v1';
+  medianFlowPixels?: number;
+  p95FlowPixels?: number;
+  meanRoundTripErrorPixels?: number;
+  meanMotionCompensatedResidual?: number;
+  maxTileResidual?: number;
+  validPixelFraction?: number;
+}
 export interface VideoAudioTrack {
   status: 'analyzed' | 'no_audio' | 'model_unavailable' | 'extraction_failed';
   note: string;
@@ -13,7 +27,7 @@ export interface VideoAudioTrack {
 }
 export interface LocalVideoEvidence {
   scope: 'sampled_video_frames' | 'server_decoded_frames';
-  frames: { timestampSeconds: number; image: LocalImageResponse; quality?: FrameQuality }[];
+  frames: { timestampSeconds: number; image: LocalImageResponse; quality?: FrameQuality; temporal?: TemporalMeasurement }[];
   samplingNote: string;
   videoMetadata?: { durationSeconds: number; width: number; height: number };
   audioTrack?: VideoAudioTrack;
@@ -44,6 +58,18 @@ export async function callLocalVideo(mediaData: string, endpoint: string, fetche
       !Number.isFinite(frame.quality.clippedFraction) || frame.quality.clippedFraction < 0 || frame.quality.clippedFraction > 1 ||
       !Number.isFinite(frame.quality.selectionScore) || frame.quality.selectionScore < 0))
     throw new Error('Invalid local video frame quality');
+  if (value.frames.some(frame => !frame.temporal || !['measured', 'unavailable'].includes(frame.temporal.status) ||
+      (frame.temporal.status === 'measured' && (frame.temporal.scope !== 'adjacent_original_frames' ||
+        frame.temporal.method !== 'farneback_forward_backward_v1' ||
+        !Number.isFinite(frame.temporal.startSeconds) || !Number.isFinite(frame.temporal.endSeconds) ||
+        frame.temporal.endSeconds! <= frame.temporal.startSeconds! ||
+        [frame.temporal.medianFlowPixels, frame.temporal.p95FlowPixels,
+         frame.temporal.meanRoundTripErrorPixels, frame.temporal.meanMotionCompensatedResidual,
+         frame.temporal.maxTileResidual].some(n => !Number.isFinite(n) || n! < 0) ||
+        !Number.isFinite(frame.temporal.validPixelFraction) || frame.temporal.validPixelFraction! <= 0 ||
+        frame.temporal.validPixelFraction! > 1)) ||
+      (frame.temporal.status === 'unavailable' && typeof frame.temporal.note !== 'string')))
+    throw new Error('Invalid local video temporal evidence');
   const audio = value.audioTrack;
   if (!audio || !['analyzed', 'no_audio', 'model_unavailable', 'extraction_failed'].includes(audio.status) ||
       typeof audio.note !== 'string' || typeof audio.truncated !== 'boolean' ||
@@ -98,7 +124,9 @@ export function localVideoResult(evidence: LocalVideoEvidence, fileName: string,
       : 'Frames were sampled and JPEG-compressed in the browser; the original video was not decoded by the server.',
       'The whole-image checkpoint failed an initial out-of-domain smoke check; raw scores cannot establish authenticity.',
       'Face candidate continuity is a geometric association only; it cannot verify identity or detect a face swap.',
-      'No face-manipulation classifier or temporal model was run.',
+      evidence.frames.some(frame => frame.temporal?.status === 'measured')
+        ? 'Adjacent-frame optical-flow measurements are exploratory, not a trained or validated temporal manipulation detector.'
+        : 'No temporal manipulation detector was run.',
       ...(audioScored ? ['Video AASIST segment scores are uncalibrated, speech presence was not verified, and they do not determine authenticity.'] :
         [evidence.audioTrack?.note || 'Video audio extraction and AASIST were not run.'])],
     alternativeHypotheses: ['Cuts, compression, and changes in lighting can alter frame-level signals.'],

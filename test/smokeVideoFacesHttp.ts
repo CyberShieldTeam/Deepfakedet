@@ -22,6 +22,7 @@ assert.equal(result.confidenceScore, 0);
 assert.equal(result.localVideo.scope, 'server_decoded_frames');
 assert.equal(result.localVideo.frames.length, 6);
 assert.equal(result.localVideo.faceContinuity.detectorFrames, 6);
+assert.equal(result.localVideo.frames.filter((frame: { temporal?: { status: string } }) => frame.temporal?.status === 'measured').length, 6);
 assert.equal(result.localVideo.faceContinuity.framesWithCandidates, 6);
 assert.equal(result.localVideo.faceContinuity.tracks[0].frameIndices.length, 6);
 assert.equal(result.localVideo.audioTrack.status, 'no_audio');

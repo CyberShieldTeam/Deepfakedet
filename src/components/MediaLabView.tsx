@@ -66,6 +66,10 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult }> = ({ r }) => {
             {frame.timestampSeconds.toFixed(1)}s · {frame.image.model_status === 'ready' && frame.image.fake_probability != null
               ? `raw fake-class output ${frame.image.fake_probability.toFixed(3)}` : 'image classifier unavailable'} · {frame.image.face_boxes.length} face candidate(s)
             {frame.quality && <span> · detail {frame.quality.laplacianVariance.toFixed(1)}, luma {frame.quality.meanLuma.toFixed(0)}, clipped {(frame.quality.clippedFraction * 100).toFixed(1)}% (selection heuristics)</span>}
+            {frame.temporal?.status === 'measured' && <div className="pl-3 text-slate-500">
+              Adjacent {frame.temporal.startSeconds!.toFixed(2)}–{frame.temporal.endSeconds!.toFixed(2)}s · median flow {frame.temporal.medianFlowPixels!.toFixed(2)} px · round-trip error {frame.temporal.meanRoundTripErrorPixels!.toFixed(2)} px · local residual {frame.temporal.maxTileResidual!.toFixed(1)}/255. Motion evidence only; no manipulation verdict.
+            </div>}
+            {frame.temporal?.status === 'unavailable' && <div className="pl-3 text-slate-500">Adjacent-frame motion unavailable: {frame.temporal.note}</div>}
           </div>)}
           {r.localVideo.audioTrack && <div>
             Video audio: {r.localVideo.audioTrack.status.replaceAll('_', ' ')}. {r.localVideo.audioTrack.note}
