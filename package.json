@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "format": "oxfmt",
     "lint": "tsc --noEmit",
-    "test": "tsx test/forensics.test.ts && tsx test/upgrade.test.ts && tsx test/localImage.test.ts && tsx test/imageEvidence.test.ts && tsx test/imageProvenance.test.ts && tsx test/localAudio.test.ts && tsx test/localVideo.test.ts && tsx test/temporalDiagnostics.test.ts && tsx test/videoFaces.test.ts && tsx test/integrationMerge.test.ts && tsx test/api.test.ts",
+    "test": "tsx test/forensics.test.ts && tsx test/upgrade.test.ts && tsx test/localImage.test.ts && tsx test/imageEvidence.test.ts && tsx test/imageProvenance.test.ts && tsx test/localAudio.test.ts && tsx test/localVideo.test.ts && tsx test/temporalDiagnostics.test.ts && tsx test/videoFaces.test.ts && tsx test/integrationMerge.test.ts && tsx test/claimEvidence.test.ts && tsx test/claimApi.test.ts && tsx test/api.test.ts",
     "test:e2e": "playwright test",
     "smoke:image:http": "tsx test/smokeImageHttp.ts",
     "smoke:audio:http": "tsx test/smokeAudioHttp.ts",

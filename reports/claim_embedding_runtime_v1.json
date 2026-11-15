@@ -1,0 +1,14 @@
+{
+  "status": "ready",
+  "modelId": "intfloat/multilingual-e5-small",
+  "version": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "error": "",
+  "loadingSeconds": 70.78932610002812,
+  "memory": {
+    "working_set_bytes": 741081088,
+    "peak_working_set_bytes": 744275968
+  },
+  "cpuThreads": 1,
+  "maxTokens": 512,
+  "batchSize": 8
+}

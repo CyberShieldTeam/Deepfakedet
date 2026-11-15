@@ -2,6 +2,53 @@
 
 Updated: 2026-11-15. Published integration branch: `codex/integrate-figma-upgrade`, tracking the same branch on origin. Reconciled local `ee28104` with fetched `codex/phase1-audit` at `6cadda8` in merge `855b414`, successfully pushed. Earlier read-only-access observations below are historical; Git push is now working. Baseline commit: `fa888241d838de9ce835d2277183add633f28d29`.
 
+## Phase 3 evidence-engine implementation — 2026-11-15
+
+- Explicit user authorization begins Phase 3 from `dd6b1ca`, retaining `feb5d74`, all
+  Phase 2 functionality and incomplete validation. No main merge, temporal optimization,
+  image model search or reserved dataset access. Starting gaps were recorded before
+  implementation in `docs/CLAIM_AUDIT.md`.
+- Extended existing claim APIs, evidence pipeline, embedding adapter, receipts and case
+  workflow instead of creating a second system. Added Unicode normalization, approximate
+  English/Hindi/Telugu/mixed script diagnostics, conservative sentence candidates and
+  bounded exact entity-like spans. No full multilingual NER/translation/entailment claim.
+- Added modular provider states, operator-approved/hash-bound local corpus retrieval,
+  bounded optional Google Fact Check parsing, canonical URL/excerpt deduplication,
+  timestamps and attribution. No real Fact Check key was present; live external retrieval
+  was not run. Corpus review/rights remain operator responsibilities.
+- Automatic status abstains with UNAVAILABLE or INSUFFICIENT_EVIDENCE. Optional human
+  conclusions require signed owner-bound results, exact retrieved quotes and explicit
+  full-assertion/context review; contradictions/conflicts are distinct. Google reviewed-
+  claim metadata alone cannot satisfy that gate. Free-form Gemini claim summaries were
+  removed to keep explanations traceable; media Gemini paths remain. Confidence null.
+- Added optional separate offline-only pinned E5-small CPU service. MIT publisher
+  snapshot `614241f622f53c4eeff9890bdc4f31cfecc418b3` verified against six Git/LFS hashes;
+  safetensors, no remote code, CPU one thread, batches eight, 512 tokens, 2 GiB available
+  load headroom. Not enabled by default; no model download/startup in the browser or
+  existing media service. Actual weights remain in ignored cache.
+- Authored fictional retrieval controls: nine passages/queries, three languages.
+  BM25 topic top-1 hits 6/9; hybrid 9/9. Cross-language subset 0/3 versus 3/3. Three
+  negation/date/location mismatch queries measure topic relevance, not factual agreement.
+  Zero independently labeled factual claims; verification/entailment accuracy remains
+  unavailable. Raw hashed rankings/resources in `reports/claim_*_v1.json`.
+- Actual local model startup 70.789 s; peak working set 744,275,968 bytes (709.8 MiB).
+  Hybrid query wall times 33.85–594.51 ms with cache reuse, Node RSS 92,893,184 bytes.
+  Single-run diagnostics, no SLA/generalization claim. No new dependencies installed.
+- Final checks: Node/API contracts (including new claim unit and API suites) passed;
+  TypeScript and production build passed, retaining the existing large-chunk warning.
+  Python 66 total: 65 passed, one optional absent-weight AASIST skip. The first new test
+  used an unavailable Starlette TestClient dependency; aligned it to existing direct
+  function tests without installing dependencies, then reran the full suite successfully.
+- Actual browser: full development nine passed/two expected skips (optional face model
+  and separate corpus setup); authenticated production four passed, with 401 protection
+  and built assets verified. Dedicated fictional corpus quote/review/case workflow one
+  passed. Screenshot inspected. HTML export preserves escaped passages/status/reviewer
+  attribution; API tests confirm persisted review metadata. Temporary services stopped.
+- **Phase 3 remains partial and scientifically open.** Next milestone: rights-cleared,
+  independently annotated claim/evidence pairs in all three languages, audited splits,
+  frozen retrieval/abstention protocol and separate relevance/entailment evaluation.
+  See `docs/CLAIM_VERIFICATION.md` for API/configuration, actual measurements and limits.
+
 ## Temporal scientific-readiness assessment — 2026-11-15
 
 - Continued from `a6733103992bee8417cd8ad860b2f403570e5f17` on
@@ -87,7 +134,7 @@ Updated: 2026-11-15. Published integration branch: `codex/integrate-figma-upgrad
 ## Checklist
 
 Classifier-search decision (2026-11-15): **PATH B recommended. Pause further Phase 2a model searches;
-Engine 2 implementation awaits explicit approval.** This closes the bounded advanced
+Engine 2 implementation awaited explicit approval, now provided for Phase 3 above.** This closes the bounded advanced
 evaluation/decision task, not Phase 2a validation or production readiness. New evidence
 and proposed gates: `docs/ADVANCED_IMAGE_MODEL_EVALUATION.md`.
 
@@ -96,7 +143,7 @@ and proposed gates: `docs/ADVANCED_IMAGE_MODEL_EVALUATION.md`.
 - [ ] Phase 2b — AASIST audio detector and segment-level output. Official checkpoint inference, resampling, segments, Express/UI contract, live HTTP smoke, browser WAV upload, and bounded video-audio extraction implemented. Speech activity detection, representative evaluation/calibration, and file-format coverage remain open.
 - [ ] Phase 2c — frame-level video detector and evidence timeline. Browser-sampled frames and bounded server-side original-video decoding supply timestamped local image evidence; original-video frame selection uses documented exposure/detail heuristics, and video audio is separate AASIST evidence when available. Representative evaluation, face-manipulation inference, quality-aware aggregation, and a long-clip upload/job path remain open.
 - [ ] Phase 2d — trained/evaluated temporal video analysis.
-- [ ] Phase 3 — evidence-based multilingual text verification with local models.
+- [ ] Phase 3 — partial auditable multilingual evidence retrieval and attributed quote-based review implemented, optional pinned local E5-small software comparison complete; independent multilingual relevance/entailment validation remains open.
 - [ ] Phase 4 — modality and reasoning-model fine-tuning pipelines and completed training runs.
 - [ ] Phase 5 — dataset and model provenance documentation.
 - [ ] Phase 6 — calibrated evidence fusion.

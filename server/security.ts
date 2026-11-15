@@ -30,7 +30,7 @@ export const casePatch = caseCreate
   })
   .strict()
   .refine((v) => Object.keys(v).length > 0, "At least one editable field is required");
-export const claimInput = z.object({ claimText: text(10000) }).strict();
+export const claimInput = z.object({ claimText: text(10000).refine(v=>/[\p{L}\p{N}]/u.test(v), 'A textual assertion is required') }).strict();
 const dataUrl = z
   .string()
   .max(16 * 1024 * 1024)

@@ -1,5 +1,24 @@
 # Image and video evaluation dataset readiness
 
+## Claim evidence readiness — Phase 3, 2026-11-15
+
+`test/fixtures/claims/retrieval_controls.json` is project-authored fictional software
+test data: nine passages in English/Hindi/Telugu and nine topic-relevance queries.
+No externally retrieved article or independently labeled factual claim is included.
+Unit/API/browser evidence corpora are explicitly fictional controls, not real bulletins.
+The optional local E5/BM25 comparison is a software retrieval measurement only.
+
+No production evidence corpus or live Google Fact Check key is configured here.
+External article rights and independent entailment labels are unavailable, so no factual
+accuracy or scientific Phase 3 completion is claimed. An operator corpus requires the
+complete file SHA, exact source URLs/capture dates, per-document terms and rights/source
+approval; these are reviewed attestations, not proof supplied by a client flag. Google
+metadata does not grant article redistribution rights or substitute for article evidence.
+Next: acquire rights-cleared independent claim/evidence pairs with topic/source/time-
+disjoint splits and English/Hindi/Telugu labels before factual performance measurement.
+See `docs/CLAIM_VERIFICATION.md` for gates and current limits. All image/video reserves
+and previous results below remain unchanged.
+
 ## Video development readiness — 2026-11-15
 
 Only **20 procedural software controls**, one correlated source group, are admitted for

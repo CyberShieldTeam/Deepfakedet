@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "scope": "authored_software_controls_not_factual_benchmark",
+  "license": "Project-authored fictional software test data; no external articles",
+  "documents": [
+    {"id":"museum-en","language":"English","text":"The fictional Amber Museum opened on Monday in Northport. Entry is free."},
+    {"id":"library-en","language":"English","text":"The fictional Blue Library is closed on Tuesday in Southport. Books cannot be borrowed."},
+    {"id":"bridge-en","language":"English","text":"The fictional Green Bridge remains open on Wednesday in Eastport. It has not collapsed."},
+    {"id":"museum-hi","language":"Hindi","text":"काल्पनिक अंबर संग्रहालय सोमवार को उत्तरनगर में खुला। प्रवेश निःशुल्क है।"},
+    {"id":"library-hi","language":"Hindi","text":"काल्पनिक नीला पुस्तकालय मंगलवार को दक्षिणनगर में बंद है। किताबें उधार नहीं ली जा सकतीं।"},
+    {"id":"bridge-hi","language":"Hindi","text":"काल्पनिक हरा पुल बुधवार को पूर्वनगर में खुला है। वह टूटा नहीं है।"},
+    {"id":"museum-te","language":"Telugu","text":"కల్పిత అంబర్ సంగ్రహాలయం సోమవారం ఉత్తరనగరంలో ప్రారంభమైంది. ప్రవేశం ఉచితం."},
+    {"id":"library-te","language":"Telugu","text":"కల్పిత నీలి గ్రంథాలయం మంగళవారం దక్షిణనగరంలో మూసివేయబడింది. పుస్తకాలు తీసుకోలేరు."},
+    {"id":"bridge-te","language":"Telugu","text":"కల్పిత ఆకుపచ్చ వంతెన బుధవారం తూర్పునగరంలో తెరిచి ఉంది. అది కూలిపోలేదు."}
+  ],
+  "queries": [
+    {"id":"mono-en","language":"English","text":"Amber Museum free entry Monday","pool":"English","relevant":"museum-en","kind":"monolingual"},
+    {"id":"mono-hi","language":"Hindi","text":"नीला पुस्तकालय मंगलवार को बंद है","pool":"Hindi","relevant":"library-hi","kind":"monolingual"},
+    {"id":"mono-te","language":"Telugu","text":"ఆకుపచ్చ వంతెన బుధవారం తెరిచి ఉంది","pool":"Telugu","relevant":"bridge-te","kind":"monolingual"},
+    {"id":"cross-hi-en","language":"Hindi","text":"सोमवार को संग्रहालय में प्रवेश निःशुल्क है","pool":"English","relevant":"museum-en","kind":"cross_language"},
+    {"id":"cross-te-en","language":"Telugu","text":"మంగళవారం గ్రంథాలయం మూసివేయబడింది","pool":"English","relevant":"library-en","kind":"cross_language"},
+    {"id":"cross-en-te","language":"English","text":"The bridge has not collapsed and stays open","pool":"Telugu","relevant":"bridge-te","kind":"cross_language"},
+    {"id":"negation-en","language":"English","text":"The bridge collapsed","pool":"English","relevant":"bridge-en","kind":"negation_relevance_only"},
+    {"id":"date-hi","language":"Hindi","text":"नीला पुस्तकालय सोमवार को बंद है","pool":"Hindi","relevant":"library-hi","kind":"date_mismatch_relevance_only"},
+    {"id":"location-te","language":"Telugu","text":"ఆకుపచ్చ వంతెన దక్షిణనగరంలో ఉంది","pool":"Telugu","relevant":"bridge-te","kind":"location_mismatch_relevance_only"}
+  ]
+}

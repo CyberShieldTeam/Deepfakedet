@@ -237,6 +237,21 @@ export type AnalysisEngine =
   | "local_video_frames";
 
 export interface GroundedSource {
+  id?: string;
+  provider?: string;
+  publisher?: string;
+  publisherRating?: string;
+  language?: string;
+  license?: string;
+  relevance?: { lexicalScore: number; semanticScore: number | null; rank: number };
+  review?: {
+    quote: string;
+    contextConfirmed: boolean;
+    reviewedBy: string;
+    reviewedAt: string;
+    claim: string;
+    note: string;
+  };
   title: string;
   url: string;
   domain: string;
@@ -255,7 +270,7 @@ export interface GroundedSource {
   retrievedAt?: string;
 }
 
-/** How a claim result was produced — shown to the user so verified results are never confused with AI opinion. */
+/** How a claim result was produced â€” shown to the user so verified results are never confused with AI opinion. */
 export type VerificationMode =
   | "search_grounded"
   | "ai_knowledge_only"
@@ -274,6 +289,39 @@ export type ClaimAssessment =
   | "unverified";
 
 export interface ClaimVerificationResult {
+  normalizedClaim?: string;
+  verificationStatus?:
+    | "SUPPORTED"
+    | "CONTRADICTED"
+    | "INSUFFICIENT_EVIDENCE"
+    | "CONFLICTING_EVIDENCE"
+    | "UNAVAILABLE";
+  missingEvidence?: string[];
+  claimAnalysis?: {
+    normalized: string;
+    language: string;
+    languages: string[];
+    assertions: string[];
+    extraction: string;
+    truncated: boolean;
+    entityCandidates: string[];
+    entityMethod: string;
+    negationMarkers: string[];
+    ambiguities: string[];
+  };
+  retrievalDetails?: {
+    providers: {
+      provider: string;
+      status: "unconfigured" | "available" | "unavailable";
+      retrieved: number;
+      detail: string;
+    }[];
+    duplicatesRemoved: number;
+    semanticMeasured: boolean;
+    elapsedMs: number;
+    processRssBytes: number;
+    queries: string[];
+  };
   originalInput: string;
   extractedClaims: string[];
   targetClaim: string;

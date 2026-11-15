@@ -1,0 +1,638 @@
+{
+  "scope": "authored_software_controls_not_factual_benchmark",
+  "timestamp": "2026-11-15T14:01:46.707Z",
+  "fixtureSha256": "3c80b190c969e59fe020ce079369a74c44f3c51422bb31d7304da4da8f8cd330",
+  "code": {
+    "server/claimText.ts": "0d0c2b0c5b1f506c1ca835f72ec0ebcee4b1f0a799bb0206d48f86b00b96cf6f",
+    "server/claimSources.ts": "cbf7b14dd191aa6c1e814c18fb3ecab3d95ce39376c6de269a8b6fa161f6b031",
+    "server/claimVerification.ts": "56763c652fcf747e059a21dd406328408aa0f5fc188c1944ecdc32b7e7bfba8e",
+    "test/evaluateClaims.ts": "422617f48f2b2b52069b3b9310466d8aed12be5018a58ed4a6fa169a0cba17fd",
+    "ai_service/claim_embedding.py": "70d77e96cf29f895efef0864f877a7477d935ee665e796a4bef3198e46344183"
+  },
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "win32"
+  },
+  "model": {
+    "id": "intfloat/multilingual-e5-small",
+    "version": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "format": "e5"
+  },
+  "independentLabeledClaims": 0,
+  "factualAccuracy": null,
+  "entailmentAccuracy": null,
+  "processRssBytes": 92893184,
+  "results": [
+    {
+      "id": "mono-en",
+      "language": "English",
+      "pool": "English",
+      "kind": "monolingual",
+      "query": "Amber Museum free entry Monday",
+      "relevant": "museum-en",
+      "bm25": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 6.559799999999996,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-en",
+            "excerpt": "The fictional Amber Museum opened on Monday in Northport. Entry is free.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 5.085036905982926,
+            "semanticScore": null,
+            "rank": 1
+          }
+        ]
+      },
+      "hybrid": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 594.5108,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-en",
+            "excerpt": "The fictional Amber Museum opened on Monday in Northport. Entry is free.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 5.085036905982926,
+            "semanticScore": 0.9216045309796491,
+            "rank": 0.9608022654898245
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-en",
+            "excerpt": "The fictional Blue Library is closed on Tuesday in Southport. Books cannot be borrowed.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.7900304483788398,
+            "rank": 0.3950152241894199
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-en",
+            "excerpt": "The fictional Green Bridge remains open on Wednesday in Eastport. It has not collapsed.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.7573713724285199,
+            "rank": 0.37868568621425996
+          }
+        ]
+      },
+      "semanticStatus": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3; configured endpoint; language quality unvalidated"
+    },
+    {
+      "id": "mono-hi",
+      "language": "Hindi",
+      "pool": "Hindi",
+      "kind": "monolingual",
+      "query": "नीला पुस्तकालय मंगलवार को बंद है",
+      "relevant": "library-hi",
+      "bm25": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 1.0485999999998512,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-hi",
+            "excerpt": "काल्पनिक नीला पुस्तकालय मंगलवार को दक्षिणनगर में बंद है। किताबें उधार नहीं ली जा सकतीं।",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 3.973636014677195,
+            "semanticScore": null,
+            "rank": 1
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-hi",
+            "excerpt": "काल्पनिक हरा पुल बुधवार को पूर्वनगर में खुला है। वह टूटा नहीं है।",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0.3171370574832411,
+            "semanticScore": null,
+            "rank": 0.07981029372389667
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-hi",
+            "excerpt": "काल्पनिक अंबर संग्रहालय सोमवार को उत्तरनगर में खुला। प्रवेश निःशुल्क है।",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0.28247025362879774,
+            "semanticScore": null,
+            "rank": 0.07108609157594035
+          }
+        ]
+      },
+      "hybrid": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 460.2309,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-hi",
+            "excerpt": "काल्पनिक नीला पुस्तकालय मंगलवार को दक्षिणनगर में बंद है। किताबें उधार नहीं ली जा सकतीं।",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 3.973636014677195,
+            "semanticScore": 0.9042102985580638,
+            "rank": 0.9521051492790319
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-hi",
+            "excerpt": "काल्पनिक हरा पुल बुधवार को पूर्वनगर में खुला है। वह टूटा नहीं है।",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0.3171370574832411,
+            "semanticScore": 0.8442113662432457,
+            "rank": 0.4620108299835712
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-hi",
+            "excerpt": "काल्पनिक अंबर संग्रहालय सोमवार को उत्तरनगर में खुला। प्रवेश निःशुल्क है।",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0.28247025362879774,
+            "semanticScore": 0.8296513893543895,
+            "rank": 0.45036874046516495
+          }
+        ]
+      },
+      "semanticStatus": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3; configured endpoint; language quality unvalidated"
+    },
+    {
+      "id": "mono-te",
+      "language": "Telugu",
+      "pool": "Telugu",
+      "kind": "monolingual",
+      "query": "ఆకుపచ్చ వంతెన బుధవారం తెరిచి ఉంది",
+      "relevant": "bridge-te",
+      "bm25": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 0.18270000000006803,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-te",
+            "excerpt": "కల్పిత ఆకుపచ్చ వంతెన బుధవారం తూర్పునగరంలో తెరిచి ఉంది. అది కూలిపోలేదు.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 4.7780396468142685,
+            "semanticScore": null,
+            "rank": 1
+          }
+        ]
+      },
+      "hybrid": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 404.58979999999997,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-te",
+            "excerpt": "కల్పిత ఆకుపచ్చ వంతెన బుధవారం తూర్పునగరంలో తెరిచి ఉంది. అది కూలిపోలేదు.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 4.7780396468142685,
+            "semanticScore": 0.8705331122192842,
+            "rank": 0.935266556109642
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-te",
+            "excerpt": "కల్పిత అంబర్ సంగ్రహాలయం సోమవారం ఉత్తరనగరంలో ప్రారంభమైంది. ప్రవేశం ఉచితం.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.8318505708532947,
+            "rank": 0.41592528542664736
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-te",
+            "excerpt": "కల్పిత నీలి గ్రంథాలయం మంగళవారం దక్షిణనగరంలో మూసివేయబడింది. పుస్తకాలు తీసుకోలేరు.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.8195857864479317,
+            "rank": 0.40979289322396584
+          }
+        ]
+      },
+      "semanticStatus": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3; configured endpoint; language quality unvalidated"
+    },
+    {
+      "id": "cross-hi-en",
+      "language": "Hindi",
+      "pool": "English",
+      "kind": "cross_language",
+      "query": "सोमवार को संग्रहालय में प्रवेश निःशुल्क है",
+      "relevant": "museum-en",
+      "bm25": {
+        "rank": null,
+        "hit1": false,
+        "elapsedMs": 0.3421000000000731,
+        "items": []
+      },
+      "hybrid": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 72.87660000000005,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-en",
+            "excerpt": "The fictional Amber Museum opened on Monday in Northport. Entry is free.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.8447171129300585,
+            "rank": 0.42235855646502923
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-en",
+            "excerpt": "The fictional Blue Library is closed on Tuesday in Southport. Books cannot be borrowed.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.8011315235530416,
+            "rank": 0.4005657617765208
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-en",
+            "excerpt": "The fictional Green Bridge remains open on Wednesday in Eastport. It has not collapsed.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.7761464137614209,
+            "rank": 0.38807320688071045
+          }
+        ]
+      },
+      "semanticStatus": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3; configured endpoint; language quality unvalidated"
+    },
+    {
+      "id": "cross-te-en",
+      "language": "Telugu",
+      "pool": "English",
+      "kind": "cross_language",
+      "query": "మంగళవారం గ్రంథాలయం మూసివేయబడింది",
+      "relevant": "library-en",
+      "bm25": {
+        "rank": null,
+        "hit1": false,
+        "elapsedMs": 0.3809000000001106,
+        "items": []
+      },
+      "hybrid": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 66.59040000000005,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-en",
+            "excerpt": "The fictional Blue Library is closed on Tuesday in Southport. Books cannot be borrowed.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.8240686367574817,
+            "rank": 0.4120343183787408
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-en",
+            "excerpt": "The fictional Green Bridge remains open on Wednesday in Eastport. It has not collapsed.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.7613794652827907,
+            "rank": 0.38068973264139533
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-en",
+            "excerpt": "The fictional Amber Museum opened on Monday in Northport. Entry is free.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.7547250366618279,
+            "rank": 0.37736251833091394
+          }
+        ]
+      },
+      "semanticStatus": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3; configured endpoint; language quality unvalidated"
+    },
+    {
+      "id": "cross-en-te",
+      "language": "English",
+      "pool": "Telugu",
+      "kind": "cross_language",
+      "query": "The bridge has not collapsed and stays open",
+      "relevant": "bridge-te",
+      "bm25": {
+        "rank": null,
+        "hit1": false,
+        "elapsedMs": 0.21889999999984866,
+        "items": []
+      },
+      "hybrid": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 42.62440000000015,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-te",
+            "excerpt": "కల్పిత ఆకుపచ్చ వంతెన బుధవారం తూర్పునగరంలో తెరిచి ఉంది. అది కూలిపోలేదు.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.8400972990535711,
+            "rank": 0.42004864952678556
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-te",
+            "excerpt": "కల్పిత అంబర్ సంగ్రహాలయం సోమవారం ఉత్తరనగరంలో ప్రారంభమైంది. ప్రవేశం ఉచితం.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.7940550875275478,
+            "rank": 0.3970275437637739
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-te",
+            "excerpt": "కల్పిత నీలి గ్రంథాలయం మంగళవారం దక్షిణనగరంలో మూసివేయబడింది. పుస్తకాలు తీసుకోలేరు.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.7906897820511669,
+            "rank": 0.39534489102558346
+          }
+        ]
+      },
+      "semanticStatus": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3; configured endpoint; language quality unvalidated"
+    },
+    {
+      "id": "negation-en",
+      "language": "English",
+      "pool": "English",
+      "kind": "negation_relevance_only",
+      "query": "The bridge collapsed",
+      "relevant": "bridge-en",
+      "bm25": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 0.13810000000012224,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-en",
+            "excerpt": "The fictional Green Bridge remains open on Wednesday in Eastport. It has not collapsed.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 2.05857492954539,
+            "semanticScore": null,
+            "rank": 1
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-en",
+            "excerpt": "The fictional Amber Museum opened on Monday in Northport. Entry is free.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0.13845673087706645,
+            "semanticScore": null,
+            "rank": 0.06725853350776152
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-en",
+            "excerpt": "The fictional Blue Library is closed on Tuesday in Southport. Books cannot be borrowed.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0.1311978343068125,
+            "semanticScore": null,
+            "rank": 0.06373235796463618
+          }
+        ]
+      },
+      "hybrid": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 38.75909999999976,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-en",
+            "excerpt": "The fictional Green Bridge remains open on Wednesday in Eastport. It has not collapsed.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 2.05857492954539,
+            "semanticScore": 0.8325156188080607,
+            "rank": 0.9162578094040303
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-en",
+            "excerpt": "The fictional Blue Library is closed on Tuesday in Southport. Books cannot be borrowed.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0.1311978343068125,
+            "semanticScore": 0.7931127977756686,
+            "rank": 0.42842257787015237
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-en",
+            "excerpt": "The fictional Amber Museum opened on Monday in Northport. Entry is free.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0.13845673087706645,
+            "semanticScore": 0.7475656479955595,
+            "rank": 0.4074120907516605
+          }
+        ]
+      },
+      "semanticStatus": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3; configured endpoint; language quality unvalidated"
+    },
+    {
+      "id": "date-hi",
+      "language": "Hindi",
+      "pool": "Hindi",
+      "kind": "date_mismatch_relevance_only",
+      "query": "नीला पुस्तकालय सोमवार को बंद है",
+      "relevant": "library-hi",
+      "bm25": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 0.16149999999970532,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-hi",
+            "excerpt": "काल्पनिक नीला पुस्तकालय मंगलवार को दक्षिणनगर में बंद है। किताबें उधार नहीं ली जा सकतीं।",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 3.0435393092350407,
+            "semanticScore": null,
+            "rank": 1
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-hi",
+            "excerpt": "काल्पनिक अंबर संग्रहालय सोमवार को उत्तरनगर में खुला। प्रवेश निःशुल्क है।",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 1.319885809698893,
+            "semanticScore": null,
+            "rank": 0.4336680672051617
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-hi",
+            "excerpt": "काल्पनिक हरा पुल बुधवार को पूर्वनगर में खुला है। वह टूटा नहीं है।",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0.3171370574832411,
+            "semanticScore": null,
+            "rank": 0.10420008590687463
+          }
+        ]
+      },
+      "hybrid": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 34.10669999999982,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-hi",
+            "excerpt": "काल्पनिक नीला पुस्तकालय मंगलवार को दक्षिणनगर में बंद है। किताबें उधार नहीं ली जा सकतीं।",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 3.0435393092350407,
+            "semanticScore": 0.9032726087643346,
+            "rank": 0.9516363043821673
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-hi",
+            "excerpt": "काल्पनिक अंबर संग्रहालय सोमवार को उत्तरनगर में खुला। प्रवेश निःशुल्क है।",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 1.319885809698893,
+            "semanticScore": 0.8327700869702717,
+            "rank": 0.6332190770877166
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-hi",
+            "excerpt": "काल्पनिक हरा पुल बुधवार को पूर्वनगर में खुला है। वह टूटा नहीं है।",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0.3171370574832411,
+            "semanticScore": 0.8423836990858822,
+            "rank": 0.4732918924963784
+          }
+        ]
+      },
+      "semanticStatus": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3; configured endpoint; language quality unvalidated"
+    },
+    {
+      "id": "location-te",
+      "language": "Telugu",
+      "pool": "Telugu",
+      "kind": "location_mismatch_relevance_only",
+      "query": "ఆకుపచ్చ వంతెన దక్షిణనగరంలో ఉంది",
+      "relevant": "bridge-te",
+      "bm25": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 0.18249999999989086,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-te",
+            "excerpt": "కల్పిత ఆకుపచ్చ వంతెన బుధవారం తూర్పునగరంలో తెరిచి ఉంది. అది కూలిపోలేదు.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 2.8668237880885608,
+            "semanticScore": null,
+            "rank": 1
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-te",
+            "excerpt": "కల్పిత నీలి గ్రంథాలయం మంగళవారం దక్షిణనగరంలో మూసివేయబడింది. పుస్తకాలు తీసుకోలేరు.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0.9939458403476932,
+            "semanticScore": null,
+            "rank": 0.3467062902426944
+          }
+        ]
+      },
+      "hybrid": {
+        "rank": 1,
+        "hit1": true,
+        "elapsedMs": 33.85369999999966,
+        "items": [
+          {
+            "title": "Software control",
+            "url": "https://example.org/bridge-te",
+            "excerpt": "కల్పిత ఆకుపచ్చ వంతెన బుధవారం తూర్పునగరంలో తెరిచి ఉంది. అది కూలిపోలేదు.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 2.8668237880885608,
+            "semanticScore": 0.849369034054266,
+            "rank": 0.924684517027133
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/library-te",
+            "excerpt": "కల్పిత నీలి గ్రంథాలయం మంగళవారం దక్షిణనగరంలో మూసివేయబడింది. పుస్తకాలు తీసుకోలేరు.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0.9939458403476932,
+            "semanticScore": 0.8164341762074417,
+            "rank": 0.5815702332250681
+          },
+          {
+            "title": "Software control",
+            "url": "https://example.org/museum-te",
+            "excerpt": "కల్పిత అంబర్ సంగ్రహాలయం సోమవారం ఉత్తరనగరంలో ప్రారంభమైంది. ప్రవేశం ఉచితం.",
+            "retrievedAt": "2026-01-01T00:00:00.000Z",
+            "provider": "software_test",
+            "lexicalScore": 0,
+            "semanticScore": 0.8057442433602273,
+            "rank": 0.40287212168011366
+          }
+        ]
+      },
+      "semanticStatus": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3; configured endpoint; language quality unvalidated"
+    }
+  ],
+  "limitations": [
+    "Authored fictional examples and relevance labels, not independently annotated factual claims.",
+    "Negation/date/location mismatch queries test topic relevance only, never agreement or factual truth.",
+    "Small correlated examples, no confidence interval or real-world language quality claim.",
+    "Hybrid uses existing 0.5 lexical/0.5 cosine ranking and 0.65 semantic candidate gate; no threshold fitting.",
+    "Node RSS is whole-process current memory, not isolated model peak; first endpoint call can include warmup."
+  ]
+}

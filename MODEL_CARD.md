@@ -45,6 +45,10 @@ search pause and production quarantine below remain in force.
 requires explicit approval.** No image model is promoted and Phase 2a is not validated
 or production complete. Unsupported local authenticity remains `INCONCLUSIVE`.
 
+This is the historical decision gate. The user has since explicitly authorized Phase 3;
+the separate claim-retrieval supplement below records that work without reopening image
+model searches or closing Phase 2 validation.
+
 The new development-only audit verified all 96 checksums and found no decoded/pHash
 duplicate pairs (minimum within-development distance 14, rejection threshold <=6).
 However, every source group is a file ID, original identities and training overlap are
@@ -169,3 +173,24 @@ false-positive rate. Neither tested offline filter improved the control count. N
 temporal policy, model, verdict or probability was promoted. Phase 2d remains open;
 local temporal results remain INCONCLUSIVE with null decision probability. Prior model
 benchmark results and reserved datasets are unchanged.
+
+## Optional claim-retrieval embedding — Phase 3, 2026-11-15
+
+This is a separate retrieval model, not an image/deepfake classifier or entailment model.
+`intfloat/multilingual-e5-small`, revision `614241f622f53c4eeff9890bdc4f31cfecc418b3`,
+[publisher MIT model card](https://huggingface.co/intfloat/multilingual-e5-small), is
+optional server-side CPU inference. Six files are verified against pinned publisher
+Git/LFS hashes; weights SHA-256 `1a55775f53449dac10a2bcbc312469fac40b96d53198c407081a831f81c98477`.
+Safetensors only, offline load/no remote code, masked mean pool, L2-normalized 384-dimensional
+vectors, query/passage prefixes, max 512 tokens, batch eight, one CPU thread. Longer
+inputs truncate. It never runs in the browser and remains off by default.
+
+Nine authored fictional topic-relevance controls: BM25 6/9 top-1 hits, hybrid 9/9;
+cross-language subset 0/3 versus 3/3. These are not real-world factual accuracy or
+validated Telugu coverage. Negation/date/location mismatch passages can remain relevant
+without supporting a claim. No independent entailment evaluation or calibration ran.
+Cold startup 70.789 s; observed peak process working set 709.8 MiB. No model is allowed
+to create a truth verdict from similarity. Human review and automatic abstention are
+documented separately in `docs/CLAIM_VERIFICATION.md`; exact reports and environment are
+`reports/claim_retrieval_controls_v1.json`, `claim_embedding_runtime_v1.json` and
+`claim_embedding_environment_v1.json`. Phase 3 validation remains open.

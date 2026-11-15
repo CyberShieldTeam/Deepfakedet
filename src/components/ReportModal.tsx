@@ -96,6 +96,9 @@ ${
           ) => `<div class="box"><h3>3.${i + 1} ${esc(x.verdict)} <span class="tag">${esc(engineLabel(x.engine))}</span></h3>
 <p><b>Claim:</b> ${esc(x.targetClaim)}</p>${x.translatedText ? `<p><b>Original (${esc(x.detectedLanguage)}):</b> ${esc(x.originalInput)}<br><b>Translation:</b> ${esc(x.translatedText)}</p>` : ""}
 <p><b>Verification mode:</b> ${esc((x.verificationMode || "rule_based").replace(/_/g, " "))} · <b>Assessment:</b> ${esc((x.assessment || "unverified").replace(/_/g, " "))}</p>
+${x.verificationStatus ? `<p><b>Claim status:</b> ${esc(x.verificationStatus)} · distinct from media and dissemination observations.</p>` : ""}
+${x.normalizedClaim ? `<p><b>Normalized claim:</b> ${esc(x.normalizedClaim)}</p>` : ""}
+${x.missingEvidence?.length ? `<b>Missing evidence / review needs</b>${list(x.missingEvidence)}` : ""}
 <p><b>Confidence:</b> ${x.confidenceScore == null ? "not estimated" : esc(x.confidenceScore) + "%"}${x.confidenceNote ? ` (${esc(x.confidenceNote)})` : ""} · checked ${esc(new Date(x.timestamp).toLocaleString())}${x.modelUsed ? ` · ${esc(x.modelUsed)}` : ""}</p><p>${esc(x.verdictRationale)}</p>
 <b>Sub-claims</b>${list(x.extractedClaims)}<b>Contradicting evidence</b>${list(x.contradictingEvidence)}<b>Supporting evidence</b>${list(x.supportingEvidence)}</div>`,
         )
@@ -115,7 +118,7 @@ ${inv.multilingual?.length ? `<h3>Multilingual propagation</h3><table><tr><th>La
 ${(() => {
   const src = claims.flatMap((x) => x.sources);
   return src.length
-    ? `<ol>${src.map((s) => `<li>${s.url ? `<a href="${safeUrl(s.url)}">${esc(s.title)}</a>` : esc(s.title)} — ${esc(s.domain)}${s.isSimulated ? ' <span class="tag">FICTIONAL</span>' : ` · published: ${esc(s.publishDate || "not provided")}${s.retrievedAt ? ` · retrieved ${esc(new Date(s.retrievedAt).toLocaleString())}` : ""}`}${s.citedFor ? `<br><span class="muted">Cited for: ${esc(s.citedFor.slice(0, 200))}</span>` : ""}</li>`).join("")}</ol>`
+    ? `<ol>${src.map((s) => `<li>${s.id ? esc("[" + s.id + "] ") : ""}${s.url ? `<a href="${safeUrl(s.url)}">${esc(s.title)}</a>` : esc(s.title)} — ${esc(s.domain)}${s.isSimulated ? ' <span class="tag">FICTIONAL</span>' : ` · ${s.provider === "google_fact_check" ? "review date" : "published"}: ${esc(s.publishDate || "not provided")}${s.retrievedAt ? ` · retrieved ${esc(new Date(s.retrievedAt).toLocaleString())}` : ""}`}${s.excerpt ? `<blockquote>${esc(s.excerpt)}</blockquote>` : ""}${s.review ? `<p>Reviewed by ${esc(s.review.reviewedBy)} at ${esc(s.review.reviewedAt)}; quote: ${esc(s.review.quote)}</p>` : ""}${s.citedFor ? `<br><span class="muted">Cited for: ${esc(s.citedFor.slice(0, 200))}</span>` : ""}</li>`).join("")}</ol>`
     : '<p class="muted">No external sources were checked.</p>';
 })()}
 ${media.length ? `<p class="muted">Media files: ${media.map((m) => esc(m.fileName || m.modality)).join(", ")}</p>` : ""}

@@ -1,6 +1,40 @@
 import { test, expect } from "@playwright/test";
 import { encodeWav } from "../src/utils/audioSegments";
 
+test('Multilingual claim status reports unavailable evidence honestly', async ({page}) => {
+  test.skip(process.env.VERITAS_EXPECT_CLAIM_CORPUS==='1','This workflow checks the unconfigured state');
+  await page.goto('/');
+  await page.getByRole('button',{name:'Claim intelligence',exact:true}).first().click();
+  for(const claim of ['यह सॉफ्टवेयर परीक्षण है, पानी सुरक्षित नहीं है','ఇది సాఫ్ట్‌వేర్ పరీక్ష, నీరు సురక్షితం కాదు','Hyderabad में पानी safe కాదు']){
+    await page.locator('textarea').first().fill(claim);
+    await page.getByRole('button',{name:'Check this claim',exact:true}).click();
+    await expect(page.getByText('Claim status: UNAVAILABLE',{exact:true})).toBeVisible();
+    await expect(page.getByText('No news or official sources were checked for this result.',{exact:true})).toBeVisible();
+  }
+});
+
+test('Retrieved claim quotes support attributed review and case attachment', async ({page}) => {
+  test.skip(process.env.VERITAS_EXPECT_CLAIM_CORPUS!=='1','Requires the explicit fictional operator corpus test setup');
+  await page.goto('/');
+  await page.getByRole('button',{name:'Claim intelligence',exact:true}).first().click();
+  await page.locator('textarea').first().fill('The fictional Amber Museum has free entry.');
+  await page.getByRole('button',{name:'Check this claim',exact:true}).click();
+  await expect(page.getByText('Claim status: INSUFFICIENT_EVIDENCE',{exact:true})).toBeVisible();
+  await expect(page.getByRole('link',{name:'Fictional museum notice'})).toHaveAttribute('href','https://example.org/museum');
+  await page.getByText('Analyst review · assess source applicability',{exact:true}).click();
+  await page.getByLabel('Stance for Fictional museum notice').selectOption('supports');
+  const quote='Software fixture: the fictional Amber Museum opened on Monday. Entry is free.';
+  await page.getByLabel('Evidence quote for Fictional museum notice').fill(quote);
+  await page.getByLabel('Analyst review rationale').fill('Software test only: the exact fictional assertion and context were reviewed.');
+  await expect(page.getByRole('button',{name:'Record evidence assessment'})).toBeDisabled();
+  await page.getByRole('checkbox').check();
+  await page.getByRole('button',{name:'Record evidence assessment'}).click();
+  await expect(page.getByText('Claim status: SUPPORTED',{exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'Save to a case',exact:true}).click();
+  await expect(page.getByRole('button',{name:/Saved to SUR-/})).toBeVisible();
+  await page.screenshot({path:'test-results/claim-evidence-review.png',fullPage:true});
+});
+
 test.beforeEach(async ({ page }) => {
   // Cosmetic external fonts must not gate functional tests in restricted networks.
   await page.route(/^https:\/\/fonts\.(googleapis|gstatic)\.com\//, route => route.abort());

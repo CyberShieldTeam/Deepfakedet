@@ -43,7 +43,7 @@ const MODE: Record<string, [string, string, React.ElementType]> = {
     Brain,
   ],
   insufficient_external_evidence: [
-    "No useful sources found",
+    "Retrieved evidence needs review",
     "border-slate-500/50 bg-slate-700/30 text-slate-300",
     SearchX,
   ],
@@ -95,6 +95,28 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
         <span className="text-[11px] text-slate-500">checked {fmtDate(r.timestamp)}</span>
       </div>
       <VerdictBanner {...plainClaim(r)} />
+      {r.verificationStatus && (
+        <div className="rounded border border-cyan-900 p-3 text-sm" role="status">
+          <b>Claim status: {r.verificationStatus}</b>
+          <p className="mt-1 text-xs text-slate-400">
+            This claim assessment is separate from media provenance, manipulation observations and
+            dissemination indicators.
+          </p>
+        </div>
+      )}
+      {r.normalizedClaim && (
+        <p className="text-sm text-slate-300">Normalized claim: {r.normalizedClaim}</p>
+      )}
+      {r.missingEvidence?.length ? (
+        <div className="text-xs text-amber-200">
+          <b>Missing evidence / review needs</b>
+          <ul className="list-disc pl-4">
+            {r.missingEvidence.map((x) => (
+              <li key={x}>{x}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
       {r.evidenceSufficiency && (
         <div className="rounded border border-slate-700/80 p-3 text-xs text-slate-400">
           Evidence sufficiency:{" "}
@@ -159,12 +181,31 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
                   {s.isSimulated && <SimulatedBadge label="fictional" />}
                 </div>
                 <div className="mt-0.5 text-[11px] text-slate-500">
-                  {s.domain}
+                  {s.id ? `[${s.id}] ` : ""}
+                  {s.publisher || s.domain}
                   {s.isSimulated
                     ? ` · stance: ${s.stance}`
-                    : ` · published: ${s.publishDate || "date not provided"}${s.retrievedAt ? ` · found ${fmtDate(s.retrievedAt)}` : ""}`}
+                    : ` · ${s.provider==='google_fact_check' ? 'review date' : 'published'}: ${s.publishDate || "date not provided"}${s.retrievedAt ? ` · found ${fmtDate(s.retrievedAt)}` : ""}`}
                 </div>
                 <div className="mt-1 text-slate-400">{s.excerpt}</div>
+                {s.publisherRating && (
+                  <p className="mt-1 text-amber-200">
+                    Publisher rating: {s.publisherRating} (not a VERITAS verdict)
+                  </p>
+                )}
+                {s.relevance && (
+                  <p className="mt-1 text-slate-500">
+                    Relevance: BM25 {s.relevance.lexicalScore.toFixed(3)} · semantic{" "}
+                    {s.relevance.semanticScore?.toFixed(3) ?? "unavailable"} · source credibility:{" "}
+                    {s.credibilityRating}
+                  </p>
+                )}
+                {s.review && (
+                  <p className="mt-1 text-cyan-200">
+                    Reviewed by {s.review.reviewedBy} · {fmtDate(s.review.reviewedAt)} · quoted
+                    passage: “{s.review.quote}”
+                  </p>
+                )}
               </div>
             ))}
           </div>
@@ -173,9 +214,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
 
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-3">
-          <div className="mb-1 text-xs font-medium text-emerald-300">
-            {verified ? "Evidence that supports it" : "Points in favour (AI-stated, unsourced)"}
-          </div>
+          <div className="mb-1 text-xs font-medium text-emerald-300">Evidence that supports it</div>
           {r.supportingEvidence?.length ? (
             <ul className="list-disc space-y-1 pl-4 text-xs text-slate-300">
               {r.supportingEvidence.map((x, i) => (
@@ -187,9 +226,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
           )}
         </div>
         <div className="rounded-lg border border-rose-500/20 bg-rose-500/5 p-3">
-          <div className="mb-1 text-xs font-medium text-rose-300">
-            {verified ? "Evidence against it" : "Points against (AI-stated, unsourced)"}
-          </div>
+          <div className="mb-1 text-xs font-medium text-rose-300">Evidence against it</div>
           {r.contradictingEvidence?.length ? (
             <ul className="list-disc space-y-1 pl-4 text-xs text-slate-300">
               {r.contradictingEvidence.map((x, i) => (
@@ -283,6 +320,8 @@ export const ClaimView: React.FC<{
   const [saved, setSaved] = useState("");
   const [reviews, setReviews] = useState<Record<string, string>>({});
   const [reviewNote, setReviewNote] = useState("");
+  const [quotes, setQuotes] = useState<Record<string, string>>({});
+  const [contextConfirmed, setContextConfirmed] = useState(false);
   const demo = active?.isSimulatedDemo ? active.claimResult : undefined;
 
   const run = async () => {
@@ -294,6 +333,8 @@ export const ClaimView: React.FC<{
     try {
       setReviews({});
       setReviewNote("");
+      setQuotes({});
+      setContextConfirmed(false);
       setResult(await verifyClaim(text));
     } catch (e: any) {
       setError(e.message);
@@ -316,7 +357,7 @@ export const ClaimView: React.FC<{
     <div className="space-y-4">
       <PageHeader
         title="Fact-check a claim"
-        subtitle="Paste a WhatsApp forward, social media post or news headline — in English, हिन्दी or తెలుగు — to see whether it is true. We only ever show sources that were actually found; nothing is made up."
+        subtitle="Enter a factual assertion in English, हिन्दी or తెలుగు. Review retrieved evidence and its limits; unavailable sources leave the claim unresolved."
         steps={["Paste or type the claim", "Press “Check this claim”", "Read the result"]}
       />
       <div className="grid gap-4 xl:grid-cols-5">
@@ -415,10 +456,11 @@ export const ClaimView: React.FC<{
                   stance. This creates an attributed human assessment, not an automated truth score.
                 </p>
                 {result.sources.map((s) => (
-                  <label key={s.url} className="mb-2 flex items-center justify-between gap-3">
+                  <div key={s.url} className="mb-3 space-y-2">
                     <span className="truncate">{s.title}</span>
                     <select
                       aria-label={`Stance for ${s.title}`}
+                      disabled={s.provider === "google_fact_check"}
                       value={reviews[s.url] || "neutral"}
                       onChange={(e) => setReviews((v) => ({ ...v, [s.url]: e.target.value }))}
                       className="rounded border border-slate-700 bg-slate-900 p-2"
@@ -427,8 +469,31 @@ export const ClaimView: React.FC<{
                         <option key={v}>{v}</option>
                       ))}
                     </select>
-                  </label>
+                    {s.provider === "google_fact_check" && (
+                      <p>
+                        Only claim-review metadata was retrieved. An authorized underlying evidence
+                        passage is required for a decisive assessment.
+                      </p>
+                    )}
+                    <textarea
+                      aria-label={`Evidence quote for ${s.title}`}
+                      value={quotes[s.url] || ""}
+                      onChange={(e) => setQuotes((v) => ({ ...v, [s.url]: e.target.value }))}
+                      placeholder="Paste an exact passage from the retrieved excerpt for any non-neutral stance (at least 12 characters)"
+                      className="w-full rounded border border-slate-700 bg-slate-950 p-2"
+                      rows={2}
+                    />
+                  </div>
                 ))}
+                <label className="my-2 flex gap-2">
+                  <input
+                    type="checkbox"
+                    checked={contextConfirmed}
+                    onChange={(e) => setContextConfirmed(e.target.checked)}
+                  />
+                  I reviewed the complete factual assertion, entities, dates, locations and negation
+                  against the selected passages. Partial or ambiguous matches remain neutral.
+                </label>
                 <textarea
                   aria-label="Analyst review rationale"
                   value={reviewNote}
@@ -438,7 +503,17 @@ export const ClaimView: React.FC<{
                   rows={3}
                 />
                 <Button
-                  disabled={reviewNote.trim().length < 20}
+                  disabled={
+                    busy ||
+                    reviewNote.trim().length < 20 ||
+                    result.sources.some(
+                      (s) =>
+                        (reviews[s.url] || "neutral") !== "neutral" &&
+                        (!contextConfirmed ||
+                          (quotes[s.url] || "").trim().length < 12 ||
+                          !s.excerpt.includes((quotes[s.url] || "").trim())),
+                    )
+                  }
                   onClick={async () => {
                     try {
                       setBusy(true);
@@ -448,6 +523,8 @@ export const ClaimView: React.FC<{
                           result.sources.map((s) => ({
                             url: s.url,
                             stance: reviews[s.url] || "neutral",
+                            quote: quotes[s.url] || "",
+                            contextConfirmed,
                           })),
                           reviewNote,
                         ),

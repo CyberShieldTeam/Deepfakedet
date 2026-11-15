@@ -1,0 +1,15 @@
+{
+  "python": "3.13.12",
+  "packages": {
+    "torch": "2.15.0",
+    "transformers": "4.57.6",
+    "tokenizers": "0.22.2",
+    "safetensors": "0.8.0",
+    "fastapi": "0.163.0",
+    "psutil": "7.2.2"
+  },
+  "modelId": "intfloat/multilingual-e5-small",
+  "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "license": "MIT",
+  "weightsBytes": 470641600
+}
