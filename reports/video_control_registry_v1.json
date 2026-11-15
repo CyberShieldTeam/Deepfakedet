@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "datasets": {
+    "veritas-controls-v1": {
+      "status": "approved",
+      "approved_cohorts": [
+        "software_control"
+      ],
+      "version": "v1",
+      "license": "Project-generated local software controls",
+      "approval_reference": "User-authorized software-control validation slice, 2026-11-15",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "evidence_path": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "evidence_sha256": "93147819aad30a650a2bf11008fd07aff24282290b06c0ea579f5074ee8de950",
+      "independent_ground_truth": false,
+      "source_identity_reviewed": true
+    }
+  }
+}

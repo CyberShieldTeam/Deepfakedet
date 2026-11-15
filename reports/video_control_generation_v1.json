@@ -1,0 +1,16 @@
+{
+  "scope": "software_controls_only",
+  "python": "3.13.12",
+  "numpy": "2.5.4",
+  "opencv": "4.14.0",
+  "imageio_ffmpeg": "0.8.1",
+  "ffmpeg": "9.0.2-essentials_build-www.gyan.dev",
+  "ffmpeg_binary_sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+  "generator_sha256": "6a03f0ef8367c60bd7007a5144648b62230a4ec4745c0b01af91733117090988",
+  "manifest_sha256": "93e314cc4874579e6ebc47505eecd7dffb4e7d09b62d579426ac390a88539265",
+  "registry_sha256": "df31c8a123fe99069b052b5198d4e67b9e34b9f779ab1bf308e9587e8fe5e3d9",
+  "unique_videos": 20,
+  "camera_recorded_videos": 0,
+  "independently_manipulated_videos": 0,
+  "redistributed_videos": false
+}

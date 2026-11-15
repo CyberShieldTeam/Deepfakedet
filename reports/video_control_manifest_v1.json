@@ -1,0 +1,1098 @@
+{
+  "schema_version": 1,
+  "task": "video_temporal_diagnostics",
+  "evaluation_role": "development",
+  "protocol_sha256": "93147819aad30a650a2bf11008fd07aff24282290b06c0ea579f5074ee8de950",
+  "samples": [
+    {
+      "id": "static_8_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/static_8_320_crf18.mp4",
+      "sha256": "6ec205b56d0286bd8195c0585a1a729259ef51e2626433ab1befc1bb1a28d75a",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "static"
+      ],
+      "metadata": {
+        "fps": 8.0,
+        "width": 320,
+        "height": 192,
+        "frames": 24,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "b0923e647e90d1f97c843ee821ea0af1e1a1fe0733bed2de79dc096059e8b50e"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "camera_translation_8_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/camera_translation_8_320_crf18.mp4",
+      "sha256": "19781ccf090894bbb4c663d11ef8211680a96a6df453dcfabb2642dd689d948e",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "camera_translation"
+      ],
+      "metadata": {
+        "fps": 8.0,
+        "width": 320,
+        "height": 192,
+        "frames": 24,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "587a1089392b721ef07f6f7f1911fd86cdacbf0a2fd14c2143271fd6670efde2"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "subject_motion_8_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/subject_motion_8_320_crf18.mp4",
+      "sha256": "ce4c6dc930f3649bf97e8a085c58a8d329f85189477c3f250ad6dc0c1ae3c13a",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "subject_motion"
+      ],
+      "metadata": {
+        "fps": 8.0,
+        "width": 320,
+        "height": 192,
+        "frames": 24,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "c7a84851723fe2f9ad53caa4f989f300c5ec921457ec5663d1dd7d9166d2ff40"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "scene_cut_8_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/scene_cut_8_320_crf18.mp4",
+      "sha256": "1c69eaa3768f70ea7d11d3a26719c00d3c3d32e58688867da6f8b4412073487e",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "scene_cut"
+      ],
+      "metadata": {
+        "fps": 8.0,
+        "width": 320,
+        "height": 192,
+        "frames": 24,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "dbac78bff8d465e718abcb8128ebc39a0e9ae264d6606388ba69eff64dd0164b"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "illumination_8_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/illumination_8_320_crf18.mp4",
+      "sha256": "8970c8b9191256c265805048ab4f87084b2db64b2de48e5e1dc2cf872e8e7c22",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "illumination"
+      ],
+      "metadata": {
+        "fps": 8.0,
+        "width": 320,
+        "height": 192,
+        "frames": 24,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "9f4eb625f8180119e4c531fffea1f7531b9cef45f40c109dcc9e84218a670460"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "occlusion_8_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/occlusion_8_320_crf18.mp4",
+      "sha256": "acdc423366d26e94324b31bf3181d6beb881fc566b474d42685adab7117f15cb",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "occlusion"
+      ],
+      "metadata": {
+        "fps": 8.0,
+        "width": 320,
+        "height": 192,
+        "frames": 24,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "6bbe128677fef7c83140a8d4cdcd722e7bf06fa60f3a5b849fd0ebac3d3cb8e5"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "local_patch_change_8_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/local_patch_change_8_320_crf18.mp4",
+      "sha256": "876b347e07f44cadd0b356e2b7829a823d6be3cc2f0e4d520218de4fb42af311",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "local_patch_change"
+      ],
+      "metadata": {
+        "fps": 8.0,
+        "width": 320,
+        "height": 192,
+        "frames": 24,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "d7e2853c692258ceef11f7d3e8983f052818278fc4c8d43def83f9ab7f83b420"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": [
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "fast_camera_translation_8_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/fast_camera_translation_8_320_crf18.mp4",
+      "sha256": "a5e5f18d47b3d651e116fd36b25a3cd7519267e20323354228483ff47c7874e9",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "fast_camera_translation"
+      ],
+      "metadata": {
+        "fps": 8.0,
+        "width": 320,
+        "height": 192,
+        "frames": 24,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "a20ee5f97c169925aa3f0d573f490ed0663fbc855f45de649772fc1aeeaf1f2c"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "camera_translation_8_320_crf38",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/camera_translation_8_320_crf38.mp4",
+      "sha256": "c8f2f8bf3fee9e23ade16416ba6bd6c7a7f312a80c369b03c8e3e4a3a113dc74",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": "camera_translation_8_320_crf18",
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "camera_translation"
+      ],
+      "metadata": {
+        "fps": 8.0,
+        "width": 320,
+        "height": 192,
+        "frames": 24,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 38
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "587a1089392b721ef07f6f7f1911fd86cdacbf0a2fd14c2143271fd6670efde2"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "camera_translation_8_640_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/camera_translation_8_640_crf18.mp4",
+      "sha256": "7cbf8fa6cd9a3af6a75cad376578586057557d515837df49b133fd86d2e3533b",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": "camera_translation_8_320_crf18",
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "camera_translation"
+      ],
+      "metadata": {
+        "fps": 8.0,
+        "width": 640,
+        "height": 384,
+        "frames": 24,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "d7847c3a1ae86b40ffcc5ab42733a517bbad6935a48a36a9f0d9001c0c452d9d"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "static_24_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/static_24_320_crf18.mp4",
+      "sha256": "f4fdb7d92951a49e20761e7af2d5c59d1fc8ea01e83bda12c62647b08163647a",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "static"
+      ],
+      "metadata": {
+        "fps": 24.0,
+        "width": 320,
+        "height": 192,
+        "frames": 72,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "05e8223fcdc8b9a3dbd47943376ff5efd7fde8448c81f10ffd2dec12dc903e72"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "camera_translation_24_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/camera_translation_24_320_crf18.mp4",
+      "sha256": "54f0571084033d68c80ea27af9e60404931ecc4d753ceacaac83695def35030c",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "camera_translation"
+      ],
+      "metadata": {
+        "fps": 24.0,
+        "width": 320,
+        "height": 192,
+        "frames": 72,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "185db53acd0540e39091399fc122cfb39c16614db0d6ff143d9086aa722e27f4"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "subject_motion_24_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/subject_motion_24_320_crf18.mp4",
+      "sha256": "301cf862d02ba52394086aa768de78daeef13f28104f554220a445745e060184",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "subject_motion"
+      ],
+      "metadata": {
+        "fps": 24.0,
+        "width": 320,
+        "height": 192,
+        "frames": 72,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "6e5bcb318bf9e65c0a42508bbad0ed8f7ee727677b6fe2acd7a6d04ad4ee19ae"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "scene_cut_24_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/scene_cut_24_320_crf18.mp4",
+      "sha256": "5e47d7147ab319d44cc7cc52e5772cca4fdeab5cc0ed4b1ed9440b7e8fec1fe8",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "scene_cut"
+      ],
+      "metadata": {
+        "fps": 24.0,
+        "width": 320,
+        "height": 192,
+        "frames": 72,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "5e6fb4e92a3a107a04b5ff38a5732d17c58d0d38477de2c2c5b76dcf0d359d01"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "illumination_24_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/illumination_24_320_crf18.mp4",
+      "sha256": "0d92097893fb3fcb4c919c34083046a251aafa7de60ff2cc3054aeaf30003b6e",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "illumination"
+      ],
+      "metadata": {
+        "fps": 24.0,
+        "width": 320,
+        "height": 192,
+        "frames": 72,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "a71505deb1d96d0788016232dfc759201ff6b7628774f2751586d8f42dd62efe"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "occlusion_24_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/occlusion_24_320_crf18.mp4",
+      "sha256": "2cf1017331a7bae69120cb33a41d1ff023a0c00609e6f70df578c1675c6a1114",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "occlusion"
+      ],
+      "metadata": {
+        "fps": 24.0,
+        "width": 320,
+        "height": 192,
+        "frames": 72,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "6f90c792573e8c8ac0a0a230c7350f1a7e378a858671d69d6808554f94be1b8b"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "local_patch_change_24_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/local_patch_change_24_320_crf18.mp4",
+      "sha256": "18dcbcfecb1e87c086b7b4426c6496d19b972c1859cf29b6ee09faa40ed50c37",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "local_patch_change"
+      ],
+      "metadata": {
+        "fps": 24.0,
+        "width": 320,
+        "height": 192,
+        "frames": 72,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "4665400ecb9e862d822a7e2c19d5fee70f6450b64b1cc4a45e2b3b8ba31e44c6"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": [
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "fast_camera_translation_24_320_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/fast_camera_translation_24_320_crf18.mp4",
+      "sha256": "6ea0c5b467d6007eb01d6c659244803a3498f82aa85762540a541d52cfc35c2c",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": null,
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "fast_camera_translation"
+      ],
+      "metadata": {
+        "fps": 24.0,
+        "width": 320,
+        "height": 192,
+        "frames": 72,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "162e62cdb47f3e8a6e38043970fc24ff207cbfbd5d1a87985e98ce79c38ad204"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "camera_translation_24_320_crf38",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/camera_translation_24_320_crf38.mp4",
+      "sha256": "8b99921bb0583cf54f0977fdbf56a2fd56f35d4d2c8015e4094372ac1547ebbe",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": "camera_translation_24_320_crf18",
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "camera_translation"
+      ],
+      "metadata": {
+        "fps": 24.0,
+        "width": 320,
+        "height": 192,
+        "frames": 72,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 38
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "185db53acd0540e39091399fc122cfb39c16614db0d6ff143d9086aa722e27f4"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    },
+    {
+      "id": "camera_translation_24_640_crf18",
+      "task": "video_temporal",
+      "path": ".model-cache/video-controls-v1/camera_translation_24_640_crf18.mp4",
+      "sha256": "2eca27f079dad1e6c3f562f9e635602de77966ae8d72d5a2cd8072ab0f94fb7d",
+      "dataset": "veritas-controls-v1",
+      "dataset_version": "v1",
+      "cohort": "software_control",
+      "ground_truth": "not_applicable",
+      "label_basis": "Known procedural transformation, not camera capture or deepfake ground truth",
+      "label_reference": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "source": "project://procedural-texture/seeds-101-202",
+      "license": "Project-generated local software controls",
+      "license_uri": "docs/TEMPORAL_EVALUATION_PROTOCOL.md",
+      "group": "procedural-texture-101-202",
+      "source_ids": [
+        "texture:101",
+        "texture:202"
+      ],
+      "subject_ids": [],
+      "identity_status": "not_applicable",
+      "split": "development",
+      "parent_id": "camera_translation_24_320_crf18",
+      "contamination_status": "reviewed_no_known_overlap",
+      "manipulation_type": "none_deepfake_label_not_applicable",
+      "conditions": [
+        "camera_translation"
+      ],
+      "metadata": {
+        "fps": 24.0,
+        "width": 640,
+        "height": 384,
+        "frames": 72,
+        "fourcc": 875967080,
+        "frame_rate_mode": "constant_verified"
+      },
+      "encoding": {
+        "container": "mp4",
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "encoder": "libx264",
+        "crf": 18
+      },
+      "generation": {
+        "seed": 101,
+        "secondary_seed": 202,
+        "duration_seconds": 3,
+        "raw_frame_sha256": "85a7e3136cd063a9d1547f13faeabc7a71a21a63755614d30cd593e09f7ebf07"
+      },
+      "annotations": {
+        "status": "software_generated",
+        "intervals": []
+      }
+    }
+  ]
+}

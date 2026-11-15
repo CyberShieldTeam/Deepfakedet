@@ -11,6 +11,7 @@ import sys
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
+from ai_service.evaluation_data import verified_file
 
 TASK_LABELS = {"general_image": {"real", "synthetic"},
                "face_manipulation": {"unaltered", "manipulated"}}
@@ -39,9 +40,8 @@ def load_manifest(path: Path, root: Path):
             raise ValueError("Manifest path escapes the dataset root or has an unsupported format")
         if item in seen_files or not item.is_file():
             raise ValueError("Manifest file is missing or duplicated")
-        digest = hashlib.sha256(item.read_bytes()).hexdigest()
-        if digest != row["sha256"]:
-            raise ValueError(f"SHA-256 mismatch for {row['path']}")
+        verified_file(resolved_root,row['path'],row['sha256'])
+        digest = row['sha256']
         seen_files.add(item)
         key = (row["task"], row["group"])
         groups[key].add(row["split"])

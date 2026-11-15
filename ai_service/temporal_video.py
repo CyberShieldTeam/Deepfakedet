@@ -79,6 +79,8 @@ def analyze_file(path, interval=1.0):
                     classification='INCONCLUSIVE',decisionProbability=None,method='bounded_farneback_v1',
                     requestedIntervalSeconds=interval,effectiveIntervalSeconds=round(step/fps,4),
                     sampledFrames=sampled,processedPairs=len(intervals),sourceFrameCount=count,
+                    sourceFrameRate=fps,sourceWidth=int(width),sourceHeight=int(height),
+                    sourceFourcc=int(cap.get(cv2.CAP_PROP_FOURCC)),
                     durationSeconds=round(duration,4),intervals=intervals,note=NOTE,
                     elapsedSeconds=round(time.monotonic()-started,4),
                     peakWorkingSetBytes=memory['peak_working_set_bytes'] if memory else None)
