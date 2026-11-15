@@ -1,0 +1,7 @@
+[
+  {"path":"genuine/birla_mandir_hussain_sagar_nikon_2015.jpg","task":"general_image","label":"real","group":"birla-mandir-2015","split":"smoke","source":"Wikimedia Commons camera photo","license":"CC BY 3.0","sha256":"0e232b53fc7c4ad10b8b72c1a076c0eb4ee7ee315b34358f54d6145e9143506b"},
+  {"path":"genuine/charminar_nikon_d60_2013.jpg","task":"general_image","label":"real","group":"charminar","split":"smoke","source":"Wikimedia Commons camera photo","license":"CC BY-SA 4.0","sha256":"019079bfe607f59968eabdd3b7c33a1f5e9275fdeca5bc934879d69482f97b5b"},
+  {"path":"genuine/charminar_oneplus_phone_2017.jpg","task":"general_image","label":"real","group":"charminar","split":"smoke","source":"Wikimedia Commons camera photo","license":"CC BY-SA 4.0","sha256":"4af7cf1b489a0f4c5f6252f67b93cfb73f5d1d7294d8bc0c99621d726d3ea2fa"},
+  {"path":"genuine/peruvaripallam_dam_sony_2011.jpg","task":"general_image","label":"real","group":"peruvaripallam-2011","split":"smoke","source":"Wikimedia Commons camera photo","license":"CC BY-SA 3.0","sha256":"749edc99debef2b9a7de7840643b0d7f5af64d766a89c4de335b02d6b1585b82"},
+  {"path":"synthetic/chatgpt_dam_collapse.png","task":"general_image","label":"synthetic","group":"chatgpt-dam-1","split":"smoke","source":"Project-generated ChatGPT image screenshot","license":"Project fixture","sha256":"3807875d7436969653314a109b1afcbdfb3215bc470e645e307bc1e2567df5e2"}
+]
