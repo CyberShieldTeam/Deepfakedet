@@ -1,5 +1,24 @@
 # VERITAS AI implementation progress
 
+## Submission readiness — 2026-11-17 local date
+
+- Started clean/synchronized at `c26f385` on the feature branch. Added a lightweight,
+  locked Python preparation path using the existing router, optional dedicated OCR URL
+  with legacy fallback, actionable port/build errors and a normal production start command.
+- Added permitted portable authored image/corpus/posts and an isolated authenticated demo
+  launcher. Real UI session sign-in, upload/OCR/review/retrieval/network/correlation/report
+  passed from a clean clone in development and production. No default store, personal
+  environment, cached model or fake inference was used. Fictional provenance is disclosed.
+- Added bounded cross-platform CI, docs-link checking, contributor/security guidance,
+  accurate README/architecture/deployment/demo/recording docs and an actual screenshot.
+  Historical broken Compose is marked unsupported; no Docker/public deployment claimed.
+- Local full Python: 97 passed/one optional-weight skip; clean lightweight Python: 23
+  passed. Core Node/engine suites, types/build/startup, OCR API/recovery and generic browser
+  regressions passed. Generic suites retain seven setup skips each. See FINAL_VERIFICATION
+  for exact boundaries and remote CI status; authored demo is not independent accuracy.
+- Existing investigations/reports/model thresholds/OCR defaults/review gates preserved.
+  Engine43 regression output defaults to ignored cache to avoid rewriting historical evidence.
+
 ## Engine 4.3 evaluation readiness and evidence integrity — 2026-11-17
 
 - Starting commit `32f5b85`, clean/synchronized `codex/integrate-figma-upgrade`.

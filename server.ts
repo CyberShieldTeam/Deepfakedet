@@ -296,7 +296,8 @@ const fallbackNote = (kind: string) =>
     : `Gemini unavailable (${gemini.status.replace(/_/g, " ")}: ${gemini.message}) — ${kind}.`;
 
 export const app = express();
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
+if (!Number.isInteger(PORT) || PORT < 1 || PORT > 65535) throw new Error('PORT must be an integer from 1 to 65535');
 app.use(express.json({ limit: "36mb" }));
 installSecurity(app);
 
@@ -693,6 +694,7 @@ function parseJSON(text: string): any | null {
 // ---------------------------------------------------------------- Core APIs
 app.get("/api/health", (_req, res) => {
   res.json({
+    authoredDemonstration: process.env.VERITAS_AUTHORED_DEMO === '1',
     authenticationMode:
       process.env.NODE_ENV === "production" ||
       Object.keys(JSON.parse(process.env.VERITAS_USERS || "{}")).length
@@ -1083,18 +1085,32 @@ app.use(errorHandler);
 
 // ---------------------------------------------------------------- Vite / static
 async function start() {
+  let vite: Awaited<ReturnType<typeof createViteServer>> | undefined;
   if (process.env.NODE_ENV !== "production") {
-    const vite = await createViteServer({ server: { middlewareMode: true }, appType: "spa" });
+    vite = await createViteServer({ server: { middlewareMode: true }, appType: "spa" });
     app.use(vite.middlewares);
   } else {
+    if (!fs.existsSync(path.resolve(process.cwd(), 'dist/index.html'))) throw new Error('Production build missing. Run npm run build before npm start.');
     app.use(express.static(path.resolve(process.cwd(), "dist")));
     app.get("*", (_req, res) => res.sendFile(path.resolve(process.cwd(), "dist", "index.html")));
   }
-  app.listen(PORT, "0.0.0.0", () =>
+  const host = process.env.VERITAS_HOST || (process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1');
+  const listener = app.listen(PORT, host, () =>
     console.log(
       `VERITAS AI running on http://localhost:${PORT} (Gemini: ${ai ? `key found, validating ${GEMINI_MODEL}` : "not configured — fallback engines"})`,
     ),
   );
+  listener.once('error', async (error: NodeJS.ErrnoException) => {
+    console.error(error.code === 'EADDRINUSE' ? `Port ${PORT} is occupied. Choose another PORT; do not stop unrelated services.` : 'Application listener failed: '+error.code);
+    await vite?.close();process.exit(1);
+  });
+  let stopping=false;
+  for(const signal of ['SIGINT','SIGTERM'] as const)process.once(signal,()=>{
+    if(stopping)return;stopping=true;
+    const deadline=setTimeout(()=>process.exit(1),5000);deadline.unref();
+    listener.close(()=>{void vite?.close().finally(()=>process.exit(0));if(!vite)process.exit(0)});
+    listener.closeIdleConnections();
+  });
   validateGemini();
 }
-if (process.env.VERITAS_EMBEDDED !== "true") start();
+if (process.env.VERITAS_EMBEDDED !== "true") start().catch(error=>{console.error('Application startup failed:',error.message);process.exit(1)});

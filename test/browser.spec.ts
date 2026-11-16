@@ -23,7 +23,13 @@ test('Engine43 injected number error stays traceable through browser correction 
 test('Engine4.1 actual OCR requires human review before claim investigation',async({page})=>{
  test.skip(process.env.VERITAS_EXPECT_EXTRACTION!=='1','Requires isolated OCR model, Python preparation service, corpus and store');test.setTimeout(90000);
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
- const profile=process.env.VERITAS_E42_PROFILE||'baseline',fixture=profile==='rotate270'?'.model-cache/extraction-fixtures/rotated.png':'.model-cache/extraction-fixtures/clear.png';
+ const profile=process.env.VERITAS_E42_PROFILE||'baseline',fixture=process.env.VERITAS_DEMO_IMAGE||(profile==='rotate270'?'.model-cache/extraction-fixtures/rotated.png':'.model-cache/extraction-fixtures/clear.png');
+ if(process.env.VERITAS_DEMO_AUTH_UI==='1'){
+  expect((await page.request.get('/api/investigations')).status()).toBe(401);
+  await page.goto('/');await expect(page.getByLabel('Analyst access token')).toBeVisible();await page.getByLabel('Analyst access token').fill(process.env.VERITAS_TEST_TOKEN!);await page.getByRole('button',{name:'Sign in securely',exact:true}).click();
+  await expect(page.getByLabel('Analyst access token')).toHaveCount(0);expect((await page.request.get('/api/investigations')).ok()).toBe(true);expect((await page.context().cookies()).find(c=>c.name==='veritas_session')?.httpOnly).toBe(true);
+  await expect(page.getByRole('note')).toContainText('Authored demonstration');
+ }
  const fresh=(await(await page.request.post('/api/investigations',{data:{title:'Fresh Engine4.1 browser software control'}})).json()).investigation;
  await page.goto('/');await page.getByRole('button',{name:'Live analysis',exact:true}).click();await page.getByRole('button',{name:'Media forensics',exact:true}).first().click();await page.getByLabel('Active investigation').selectOption(fresh.id);
  await page.locator('input[type=file]').setInputFiles(fixture);
@@ -44,12 +50,18 @@ test('Engine4.1 actual OCR requires human review before claim investigation',asy
  const claimResponse=page.waitForResponse(r=>r.url().endsWith('/investigate')&&r.request().method()==='POST');await page.getByRole('button',{name:'Investigate reviewed text',exact:true}).first().click();const investigated=await(await claimResponse).json();expect(investigated.result.verdict).toBe('Insufficient Evidence');expect(investigated.result.sources.some((s:any)=>s.title==='Fictional Engine4 source')).toBe(true);
  // Actual Engine3 public-post controls joined to this same case through the owned API.
  const claim=investigated.result.originalInput;const posts=episodeControls.find(c=>c.name==='multi_episode_pattern')!.rows.map(p=>({...p,content:claim+' https://example.org/engine4-source'}));
- const network=(await(await page.request.post('/api/campaigns/analyze',{data:{posts,coverage:episodeCoverage,datasetName:'Authored OCR public-post controls'}})).json()).result;
- expect((await page.request.post(`/api/investigations/${extracted.investigation.id}/attach`,{data:{kind:'campaign',result:network}})).ok()).toBe(true);
+ if(process.env.VERITAS_SUBMISSION_DEMO==='1'){
+  await page.getByRole('button',{name:'Network intelligence',exact:true}).first().click();await expect(page.getByRole('heading',{name:'Network intelligence',exact:true})).toBeVisible();await page.getByLabel('Upload posts (CSV / JSON)').setInputFiles('fixtures/submission/posts.json');await expect(page.getByText('Observed post relationships',{exact:true})).toBeVisible();await page.getByRole('button',{name:'Save to a case',exact:true}).click();await expect(page.getByRole('button',{name:/Saved to SUR-/})).toBeVisible();await page.getByRole('button',{name:'Investigations',exact:true}).first().click();
+ }else{
+  const network=(await(await page.request.post('/api/campaigns/analyze',{data:{posts,coverage:episodeCoverage,datasetName:'Authored OCR public-post controls'}})).json()).result;
+  expect((await page.request.post(`/api/investigations/${extracted.investigation.id}/attach`,{data:{kind:'campaign',result:network}})).ok()).toBe(true);
+ }
  const region=page.getByRole('region',{name:'Cross-engine evidence correlation'});const correlationResponse=page.waitForResponse(r=>r.url().endsWith('/correlate')&&r.request().method()==='POST');await region.getByRole('button',{name:'Correlate evidence',exact:true}).click();const linked=await(await correlationResponse).json();
  for(const type of ['MEDIA_CONTAINS_TEXT','TEXT_PROPOSES_CLAIM','CLAIM_REVIEWED_FROM_TEXT','CLAIM_INVESTIGATED_BY_ENGINE2','POST_CONTAINS_CLAIM','SHARED_CANONICAL_URL'])expect(linked.result.relationships.some((r:any)=>r.type===type),type).toBe(true);
  const stored=JSON.parse(fs.readFileSync(process.env.VERITAS_E41_TEST_STORE!,'utf8')).find((i:any)=>i.id===extracted.investigation.id);expect(stored.extractions).toEqual(linked.investigation.extractions);
  const reportRecord=(await(await page.request.get(`/api/reports/${extracted.investigation.id}`)).json()).report;expect(reportRecord.investigation.extractions).toEqual(stored.extractions);expect(reportRecord.investigation.correlation).toEqual(linked.result);
+ expect(linked.result.timeline.length).toBeGreaterThan(0);
+ if(process.env.VERITAS_SUBMISSION_DEMO==='1'){await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:'test-results/submission-workflow.png',fullPage:false});}
  await page.getByRole('button',{name:'Report',exact:true}).click();const report=page.frameLocator('iframe[title="report"]');await expect(report.getByRole('heading',{name:'Machine extraction and human review',exact:true})).toBeVisible();await expect(report.getByText(/Original machine text/)).toBeVisible();await expect(report.getByText(/CLAIM_INVESTIGATED_BY_ENGINE2/).first()).toBeVisible();
  await page.screenshot({path:'test-results/engine41-reviewed-ocr.png',fullPage:true});expect(errors).toEqual([]);
  if(process.env.VERITAS_E41_BROWSER_REPORT){expect(fs.existsSync(process.env.VERITAS_E41_BROWSER_REPORT)).toBe(false);fs.writeFileSync(process.env.VERITAS_E41_BROWSER_REPORT,JSON.stringify({scope:'authored browser workflow, NOT independent accuracy',url:process.env.VERITAS_TEST_URL,mediaHash:extracted.result.sourceMediaHash,extraction:linked.investigation.extractions[0],claim:investigated.result,correlation:linked.result,diskApiReportParity:true},null,2));}
@@ -177,7 +189,7 @@ test('Retrieved claim quotes support attributed review and case attachment', asy
 test.beforeEach(async ({ page }) => {
   // Cosmetic external fonts must not gate functional tests in restricted networks.
   await page.route(/^https:\/\/fonts\.(googleapis|gstatic)\.com\//, route => route.abort());
-  if(process.env.VERITAS_TEST_TOKEN) {
+  if(process.env.VERITAS_TEST_TOKEN&&process.env.VERITAS_DEMO_AUTH_UI!=='1') {
     const origin=new URL(process.env.VERITAS_TEST_URL || 'http://127.0.0.1:3000').origin;
     await page.route(`${origin}/api/**`,route=>route.continue({headers:{...route.request().headers(),
       authorization:`Bearer ${process.env.VERITAS_TEST_TOKEN}`}}));

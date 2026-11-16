@@ -1,0 +1,12 @@
+{
+  "scope": "project-authored engineering demonstration; not independent research",
+  "text": "Software fixture: the fictional Amber Museum offers free entry.",
+  "sha256": "b1adb0c6723d371523bfaa300cfc3e44813b2cb46cf0beef31530e0d4fce94b3",
+  "dimensions": [
+    1500,
+    240
+  ],
+  "renderer": "Pillow bundled default font",
+  "pillow": "12.3.0",
+  "rights": "Project-authored text and raster graphic; no font binary redistributed"
+}

@@ -60,7 +60,7 @@ export async function runExtraction(
       "UNAVAILABLE",
     );
   }
-  const endpoint = process.env.VERITAS_AI_SERVICE_URL;
+  const endpoint = process.env.VERITAS_OCR_PREPARATION_URL || process.env.VERITAS_AI_SERVICE_URL;
   if (!endpoint)
     throw new ExtractionError("Image preparation service is not configured.", 503, "UNAVAILABLE");
   active = true;

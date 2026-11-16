@@ -8,4 +8,7 @@ Phase 3 uses cloud-hosted multilingual embeddings and a hosted verification/cont
 
 Current browser ELA, video-frame difference, and audio-spectrum computations use some client CPU. Migrate them to server jobs incrementally, with upload limits, privacy controls, retention rules, and asynchronous progress before claiming a fully cloud-computed workflow. The server-side video decoder, AASIST path, and experimental optical flow already run in the Python service. The browser preview may remain for display, but cryptographic C2PA verification must inspect the original uploaded bytes on the server.
 
-Deployment remains incomplete: authenticated uploads, background jobs, persistent object storage, hosted model packaging, and performance/cost measurements are open. This document describes the target architecture, not a live cloud deployment.
+Operator authentication and owner-scoped bounded uploads are implemented. Durable background
+jobs, persistent object storage, hosted model packaging and cloud cost measurements remain
+open. This document describes a target cloud architecture, not a live deployment. For the
+tested local/server process layout and its limits, see [deployment](docs/DEPLOYMENT.md).

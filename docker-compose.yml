@@ -1,3 +1,5 @@
+# Historical template, not a supported startup path: this checkout has no Dockerfile.
+# Use README.md and docs/DEPLOYMENT.md. Do not deploy this incomplete template as-is.
 version: '3.8'
 
 services:

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "submission-authored-museum-v1",
+  "license": "Project-authored demonstration data; not real factual evidence",
+  "approvalReference": "submission-software-control-only",
+  "approvedBy": "VERITAS fixture author",
+  "approvedAt": "2026-11-16T20:29:27Z",
+  "documents": [{
+    "title": "Fictional Engine4 source",
+    "url": "https://example.org/engine4-source",
+    "excerpt": "Software fixture: the fictional Amber Museum offers free entry.",
+    "retrievedAt": "2026-11-16T20:29:27Z",
+    "provider": "operator_corpus",
+    "license": "Project-authored software control; not a real notice"
+  }]
+}

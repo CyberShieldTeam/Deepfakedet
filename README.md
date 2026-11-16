@@ -1,127 +1,180 @@
 # VERITAS AI — Suraksha Suchan
 
-An evidence-driven investigation workspace combining **media authenticity**, **factual
-accuracy**, and **distribution-pattern analysis**, without an unexplained fake/real score.
-The existing React/TypeScript + Express + Vite architecture is preserved.
+An investigation workspace connecting media measurements, reviewed claims and public-post
+relationships in a source-traceable evidence graph and report.
 
-**This is a production-oriented upgrade, not a claim of production certification or validated
-deepfake accuracy.** Dedicated ML inference and external retrieval require configured services.
-Missing services return explicit unavailable/insufficient-evidence states, never invented results.
+**Engineering demonstration with explicit uncertainty.** Independent deepfake detection,
+screenshot OCR generalization and malicious-campaign accuracy remain unvalidated.
+Missing services return unavailable states, never invented predictions.
 
-## Run outside Figma Make
+## Problem and approach
 
-Node.js 22+ and npm:
+A media anomaly, a disputed claim and a burst of similar posts answer different questions.
+VERITAS keeps their evidence separate, then records how an investigator connects them:
+
+- **Engine 1 — Media forensics:** submitted-byte hashes, browser measurements and optional
+  local image/audio/video evidence. Experimental outputs stay separate from verdicts.
+- **Engine 2 — Claim intelligence:** source retrieval, passages and attributed analyst review.
+  Retrieval alone does not establish factual truth.
+- **Engine 3 — Network intelligence:** post witnesses, shared URLs/text, temporal episodes,
+  recurrence and coverage disclosures. Similarity does not establish malicious intent.
+- **Engine 4 — Correlation:** case-scoped relationships, proofs, timeline, JSON export and
+  HTML reports. OCR candidates require current human review before investigation.
+
+English image OCR includes explicit rotation, experimental scaling/single-line layout,
+original-coordinate boxes, immutable text and correction history. Research tooling supports
+frozen manifests, bounded batches and failure accounting; it does not certify accuracy.
+
+![Actual authored investigation workflow](docs/images/submission-workflow.png)
+
+Actual application processing of fictional software fixtures; not a real fact-check.
+
+## Architecture and workflow
+
+```mermaid
+flowchart LR
+  UI["React investigator workspace"] --> API["Express: authentication and limits"]
+  API --> E1["Engine 1: media evidence"]
+  API --> OCR["Bounded Node OCR runner and worker"]
+  OCR --> PREP["Local Python preparation"]
+  OCR --> REVIEW["Human accepts or corrects text"]
+  REVIEW --> E2["Engine 2: claim investigation"]
+  E2 --> SOURCES["Optional corpus or external retrieval"]
+  API --> E3["Engine 3: posts and episodes"]
+  E1 --> E4["Engine 4: deterministic correlation"]
+  E2 --> E4
+  E3 --> E4
+  E4 --> STORE["Owned JSON persistence and reports"]
+```
+
+The stack is React 19, TypeScript, Vite, Express, Zod, Tesseract.js and optional
+FastAPI/Pillow/ML services. External classifiers, Gemini and embeddings are optional;
+semantic embeddings remain diagnostic-only where documented. There is no graph database
+or automatic truth engine. See [architecture](docs/ARCHITECTURE.md).
+
+## Getting started
+
+Verified host: **Windows, Node 24.19, npm 11.17, CPython 3.13**. Declared Node minimum is
+22.12; use Node 24 for the tested path. Git is required. Linux CI is configured; its
+actual execution status is in [verification](docs/FINAL_VERIFICATION.md).
 
 ```sh
-npm install
-cp .env.example .env
+git clone --branch codex/integrate-figma-upgrade https://github.com/CyberShieldTeam/Deepfakedet.git
+cd Deepfakedet
+npm ci
 npm run dev
 ```
 
-Open http://localhost:3000. No credentials are needed for local, single-analyst development.
-The Figma Make preview uses its existing supervised Vite server with the same Express API
-mounted in middleware; do not start another server in that environment.
+Open [localhost:3000](http://localhost:3000). Development binds loopback by default;
+set `VERITAS_HOST` explicitly if you intend to expose a protected listener. Node-only startup needs no `.env`, Python or
+API keys. It provides cases, measurements, network analysis, correlation and reports;
+unconfigured source retrieval/classifiers/OCR remain unavailable. The initial synthetic
+case view is labelled. Uploaded inputs use the real API.
 
-```sh
-npm test
-npm run lint
-npm run build
-# Optional browser tests, against an already-running app:
-npx playwright install chromium
-npm run test:e2e
+For the **complete OCR demonstration**, install the small preparation environment.
+Windows PowerShell (use the Windows launcher rather than an unrelated MSYS Python):
+
+```powershell
+py -3.13 -m venv .venv-demo
+.\.venv-demo\Scripts\python.exe -m pip install -r ai_service/requirements-demo-lock.txt
+.\.venv-demo\Scripts\python.exe -m ai_service.download_ocr
+npm run demo
 ```
 
-`VERITAS_TEST_URL` overrides the browser-test URL. Browser tests assume a local development
-store and unconfigured external services; they do not measure ML accuracy.
+This explicitly downloads one pinned **4,113,088-byte English OCR file**, verifies
+size/blob/SHA-256 and refuses overwrites. Demo runtime never downloads models. No PyTorch,
+large detector or private key is required. Processing uses local OCR and authored local
+evidence; cosmetic external fonts are not required.
 
-## What works without external services
+The launcher starts preparation and Express on loopback, creates a fresh isolated store
+and prints an ephemeral token. Enter it in the access dialog. Follow
+[the demo steps](docs/DEMO_SETUP.md); existing investigations are never reset.
 
-- Owner-scoped case workflow, history, signed result attachments and exportable HTML/print-PDF reports.
-- Strict Zod request validation; protected fields cannot be PATCHed.
-- Atomic single-process JSON repository, corruption fail-closed behavior, persistence rollback/errors.
-- Browser image ELA, metadata hints, source-file SHA-256, video frames/temporal differences,
-  audio waveform/spectrogram, mono resampling and real WAV segmentation.
-- Sparse multi-signal graph construction and DBSCAN communities, node/post/relationship inspection,
-  configurable windows/thresholds/minimum density, and disclosed candidate-budget limits.
-- Multilingual script screening and claim extraction; BM25 ranking when evidence is retrieved.
-- Four clearly labeled seed demonstrations and an explicit guided fictional scenario.
-- Separate live/demo case lists, metrics and alerts. The initial view is explicitly demonstration mode.
-  Uploaded media and submitted claims switch to live analysis automatically.
+Linux/macOS equivalent Python setup (not executed on this Windows host):
 
-## Optional model and evidence services
+```sh
+python3.13 -m venv .venv-demo
+.venv-demo/bin/python -m pip install -r ai_service/requirements-demo-lock.txt
+.venv-demo/bin/python -m ai_service.download_ocr
+npm run demo
+```
 
-See [the model contract](docs/MODEL_CONTRACT.md) and `.env.example`.
+## Configuration and production-like startup
 
-For original-byte C2PA verification, trust configuration and FFT/noise diagnostics, see
-[image provenance and signals](docs/IMAGE_PROVENANCE_AND_SIGNALS.md). These measurements
-do not enable authenticity verdicts or establish improved classifier accuracy.
+Normal startup loads an optional repository-root `.env`; [`.env.example`](.env.example)
+documents settings. The isolated demo overrides providers/storage and never uses personal
+API keys or the default case store.
 
-| Capability | Configuration / behavior |
+| Setting | Purpose |
 |---|---|
-| Image generation/manipulation classifier | `VERITAS_IMAGE_*`; null probabilities until a suitable trained model responds |
-| Audio spoofing classifier | `VERITAS_AUDIO_*`; must include a trained spoofing head, not bare Wav2Vec2 |
-| Multilingual SBERT | `VERITAS_EMBEDDING_*`; may be locally hosted; lexical fallback is explicit |
-| Fact-check retrieval | `GOOGLE_FACT_CHECK_API_KEY`; real Google Fact Check Tools reviews, source URLs/dates when provided |
-| Explanation and translation | `APP_GEMINI_API_KEY`, optional `GEMINI_MODEL`; never supplies classifier probabilities or factual verdicts |
-| C2PA cryptographic verification | Optional pinned Python SDK, `ai_service/requirements-provenance.txt`; separate signature/binding and signer-trust results; no AI probability |
-| Image signal diagnostics | Python `/v1/image/evidence`; original-byte EXIF and bounded FFT/noise measurements, independent of classifier availability |
+| `PORT`, `VERITAS_HOST` | HTTP listener; demo binds `127.0.0.1` |
+| `VERITAS_USERS` | Random >=32-character tokens mapped to owner IDs; never commit credentials |
+| `VERITAS_PUBLIC_ORIGIN` | Exact public origin for a protected deployment |
+| `VERITAS_STORE` | Protected JSON store; default `data/investigations.json` |
+| `VERITAS_OCR_PREPARATION_URL` | Optional preparation-only URL; falls back to `VERITAS_AI_SERVICE_URL` |
+| `VERITAS_AI_SERVICE_URL` | Optional full Python media service |
+| `VERITAS_CLAIM_CORPUS`, `VERITAS_CLAIM_CORPUS_SHA256` | Approved, hash-verified source corpus |
+| `GOOGLE_FACT_CHECK_API_KEY` | Optional external fact-check-review retrieval |
+| `APP_GEMINI_API_KEY` | Optional explanations/translation; no classifier probabilities or truth verdicts |
+| `VERITAS_IMAGE_*`, `VERITAS_AUDIO_*`, `VERITAS_EMBEDDING_*` | Optional provider adapters |
 
-An existing `GEMINI_API_KEY` in the repository's own `.env` remains compatible. Platform-reserved
-provider environment variables are not consumed as fallback credentials. New deployments should
-use `APP_GEMINI_API_KEY`.
+```sh
+npm run build
+npm run demo -- --production
+```
 
-Retrieval and semantic similarity do not establish entailment or truth. Live claims remain
-**Insufficient Evidence** until an authenticated/local analyst checks retrieved sources and
-records applicability, stance and a rationale. Reviewed verdicts are Supported, Refuted,
-Misleading Context or Insufficient Evidence. Historical demo verdict names remain readable.
-Google review ratings are not automatically converted into VERITAS verdicts.
+For an actual server, configure credentials, TLS and persistent storage, set
+`NODE_ENV=production`, then `npm start`. Keep dev dependencies: runtime currently uses
+`tsx` and imports Vite. Static-only hosting and `npm run preview` cannot serve the API.
+See [deployment limits](docs/DEPLOYMENT.md). No public deployment is claimed. The historical
+Compose template lacks a Dockerfile and is explicitly unsupported.
 
-## Protected production deployment
+## Tests and engineering validation
 
-1. Build with `npm run build`.
-2. Configure `VERITAS_USERS` as a JSON mapping of random, at-least-32-character tokens to stable
-   owner IDs. Provision/rotate these through your secret manager, never through Git.
-3. Set `NODE_ENV=production`, `VERITAS_PUBLIC_ORIGIN` to the exact HTTPS application origin,
-   and `VERITAS_STORE` to a path on a protected persistent volume.
-4. Run `NODE_ENV=production npx tsx server.ts` behind a TLS reverse proxy.
-5. Sign in using Analyst workspace → Manage access. Tokens are exchanged for eight-hour
-   HttpOnly, Secure, SameSite=Strict cookies. API clients may instead use bearer tokens.
+```sh
+npm run lint
+npm run build
+npm run test:startup
+npm test
+npm run test:engine3
+npm run test:engine4
+npm run test:diagnostics
+npm run test:extraction
+npm run test:engine42
+npm run docs:check
+npx playwright install chromium
+npm run demo:check -- --port 3337 --python-port 8417
+npm run demo:check -- --production --port 3338 --python-port 8418
+```
 
-Without production credentials, case APIs are locked (401), not publicly readable.
-Do not deploy using Vite's static preview or a static-only host: Express must serve `/api`.
-Authentication is a minimal operator-provisioned token/session system, not OAuth, MFA or an
-organization/role directory. Sessions are in memory and expire on restart.
+Demo acceptance signs in through the real UI, uploads the image, runs OCR, records review,
+retrieves the fictional source, uploads posts through the UI, correlates and checks
+API/disk/report parity. Each run gets a fresh store. Generic browser setup-gated skips
+are not passes. [Verification](docs/FINAL_VERIFICATION.md) lists Python checks and actual
+results. CI requires no private API keys; full Python checks install dependencies but no
+model weights.
 
-Request logs contain method, route template, status, duration and request ID, not case text or
-tokens. Origin checks, size/signature checks, mutation rate limits and bounded upstream calls
-provide defense in depth; configure gateway rate limits and TLS. The app does not blindly trust
-forwarded client IP headers.
+Source hashes, review revisions, ownership, deterministic graph construction, failure
+retention, report consistency and worker recovery have regression tests. Authored control
+scores are not independent research. Screenshot/native-script accuracy, detection
+calibration and malicious-campaign ground truth remain open. No automatic OCR selector
+is enabled.
 
-## Storage and compatibility
+JSON persistence supports **one application process**, not multiple writers/replicas.
+Original media is not archived. Token authentication is not OAuth/MFA; sessions are lost
+on restart. Broad load tests, deployment-wide quotas and an encrypted evidence archive
+remain work. See [readiness](docs/HACKATHON_READINESS.md) and [security](SECURITY.md).
 
-`data/investigations.json` remains the default, with atomic temporary-file/fsync/rename writes,
-0600 files and rollback of in-memory state on failure. Invalid existing data stops loading;
-it is never silently replaced by demos. Back up the directory.
+## Documentation, attribution and license
 
-The repository is **single-process only**, not a multiwriter database. A managed database,
-encrypted evidence object storage, quotas, immutable audit trail and retention controls remain
-deployment work. Original media bytes are not archived; source hashes, measurements, sampled
-frame thumbnails and analysis records are retained. Browser evidence is client-supplied,
-not independently attested on the server.
+- [Demo setup/recovery](docs/DEMO_SETUP.md) and [recording guide](docs/DEMO_VIDEO_SCRIPT.md)
+- [Architecture](docs/ARCHITECTURE.md), [deployment](docs/DEPLOYMENT.md), [verification](docs/FINAL_VERIFICATION.md)
+- [Implementation history](IMPLEMENTATION_PROGRESS.md), [model card](MODEL_CARD.md),
+  [audio model card](AUDIO_MODEL_CARD.md), [video engine](VIDEO_ENGINE.md)
+- [Engine 4.3 boundaries](docs/ENGINE43_VALIDATION.md) and [contributing](CONTRIBUTING.md)
 
-Existing routes are retained. Security changes deliberately reject protected PATCH fields and
-arbitrary attachment payloads. `/attach` accepts current, same-owner, server-signed analysis
-results only; re-run an unsaved analysis after a server restart. Live/simulated attachment mixing
-is rejected. Legacy cases without ownership are visible only to the local development analyst;
-an administrator must explicitly assign ownership before production use.
-
-Network communities and association strengths are not bot probabilities or proof of malice.
-Repeated multi-signal activity can merit review, but organic viral activity and legitimate
-campaigns remain plausible. The original union-find engine remains available as a comparison
-baseline and in historical demo records.
-
-## Implementation details
-
-See [UPGRADE_REPORT.md](UPGRADE_REPORT.md) for the phase-by-phase implementation, file inventory,
-verification and limitations. ML integration tests use clearly identified protocol mocks;
-no external model accuracy, live API quota or unseen evaluation dataset is claimed.
+Repository: CyberShieldTeam/Deepfakedet. No individual team roster is verified here.
+No repository-wide license file is present; this update does not invent an open-source
+license. Third-party assets/models retain their terms. Authored demo provenance is in
+[the fixture manifest](fixtures/submission/manifest.json). The video guide is a script,
+not a claim that a recording exists.

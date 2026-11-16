@@ -3,8 +3,15 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "engines": { "node": ">=22.12.0" },
   "scripts": {
     "dev": "tsx server.ts",
+    "start": "node --import tsx server.ts",
+    "demo": "node --import tsx scripts/demo.mjs",
+    "demo:test": "node scripts/demo-test.mjs",
+    "demo:check": "node scripts/check-demo.mjs",
+    "test:startup": "tsx test/startup.test.ts",
+    "docs:check": "node scripts/check-docs.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "format": "oxfmt",
@@ -23,7 +30,7 @@
     "smoke:audio:http": "tsx test/smokeAudioHttp.ts",
     "smoke:video:http": "tsx test/smokeVideoHttp.ts",
     "smoke:video:faces:http": "tsx test/smokeVideoFacesHttp.ts",
-    "clean": "rm -rf dist server.js"
+    "clean": "node scripts/clean.mjs"
   },
   "dependencies": {
     "@google/genai": "^3.3.0",

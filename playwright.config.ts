@@ -8,6 +8,6 @@ export default defineConfig({
     viewport: { width: 1440, height: 1100 },
     headless: true,
     // APIRequestContext must use the same test identity as browser fetches.
-    extraHTTPHeaders:process.env.VERITAS_TEST_TOKEN?{Authorization:`Bearer ${process.env.VERITAS_TEST_TOKEN}`}:{},
+    extraHTTPHeaders:process.env.VERITAS_TEST_TOKEN&&process.env.VERITAS_DEMO_AUTH_UI!=='1'?{Authorization:`Bearer ${process.env.VERITAS_TEST_TOKEN}`}:{},
   },
 });

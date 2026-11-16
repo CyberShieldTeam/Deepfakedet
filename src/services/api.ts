@@ -27,6 +27,7 @@ const post = <T>(url: string, body: any) =>
   req<T>(url, { method: "POST", body: JSON.stringify(body) });
 
 export interface Health {
+  authoredDemonstration?: boolean;
   status: string;
   authenticationMode: string;
   engines: { task: string; status: string; modelId: string; version: string }[];

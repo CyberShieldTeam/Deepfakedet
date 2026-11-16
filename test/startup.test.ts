@@ -1,0 +1,9 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import net from 'node:net';import {spawn} from 'node:child_process';import {createRequire} from 'node:module';import {pathToFileURL} from 'node:url';
+const require=createRequire(import.meta.url),root=process.cwd(),temp=fs.mkdtempSync(path.join(os.tmpdir(),'veritas-startup-'));
+const env={...process.env,NODE_ENV:'production',VERITAS_EMBEDDED:'false',VERITAS_STORE:path.join(temp,'cases.json'),APP_GEMINI_API_KEY:'MY_DISABLED',VERITAS_USERS:'{}'};
+async function attempt(values:Record<string,string>,cwd=root){return await new Promise<string>((resolve,reject)=>{let output='';const child=spawn(process.execPath,['--import',pathToFileURL(require.resolve('tsx')).href,path.join(root,'server.ts')],{cwd,env:{...env,...values},windowsHide:true});const deadline=setTimeout(()=>{child.kill();reject(new Error('Startup failure did not terminate'))},20000);child.stdout.on('data',v=>output+=v);child.stderr.on('data',v=>output+=v);child.on('error',reject);child.on('exit',code=>{clearTimeout(deadline);code===1?resolve(output):reject(new Error('Expected fail-closed startup'))});});}
+assert.match(await attempt({PORT:'invalid'}),/PORT must be an integer/);
+assert.match(await attempt({PORT:'3999'},temp),/Production build missing/);
+const listener=net.createServer();await new Promise<void>(r=>listener.listen(0,'127.0.0.1',r));
+try{assert.match(await attempt({PORT:String((listener.address() as net.AddressInfo).port),VERITAS_HOST:'127.0.0.1'}),/is occupied/);}finally{listener.close();}
+assert.equal(fs.existsSync(path.join(temp,'cases.json')),false);console.log('Startup failures are actionable and fail closed: invalid port, missing production build, occupied port; no case data overwritten.');

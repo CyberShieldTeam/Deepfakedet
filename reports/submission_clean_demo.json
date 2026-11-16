@@ -1,0 +1,24 @@
+[
+  {
+    "scope": "Authored fixture workflow; real OCR and APIs, no independent accuracy",
+    "mode": "development",
+    "startupMs": 1953.3083,
+    "browserAndChecksMs": 16623.546000000002,
+    "os": "win32",
+    "node": "v24.19.0",
+    "authentication": "real UI session sign-in; no bearer header bypass",
+    "processing": "existing OCR/review/retrieval/network/correlation/report APIs",
+    "result": "passed"
+  },
+  {
+    "scope": "Authored fixture workflow; real OCR and APIs, no independent accuracy",
+    "mode": "production",
+    "startupMs": 1789.6580000000001,
+    "browserAndChecksMs": 11816.0674,
+    "os": "win32",
+    "node": "v24.19.0",
+    "authentication": "real UI session sign-in; no bearer header bypass",
+    "processing": "existing OCR/review/retrieval/network/correlation/report APIs",
+    "result": "passed"
+  }
+]

@@ -371,6 +371,12 @@ export default function App() {
               Switch to {mode === "demo" ? "live analysis" : "demonstration"}
             </button>
           </div>
+          {health?.authoredDemonstration && (
+            <div role="note" className="mb-5 rounded-lg border border-amber-700 bg-amber-950/30 p-3 text-sm text-amber-100">
+              Authored demonstration: real application processing and OCR on fictional inputs.
+              Sources and public posts are local fixtures. No live fact-check or validated detection accuracy is represented.
+            </div>
+          )}
           {error && (
             <div className="mb-5">
               <ErrorBox message={error} />
