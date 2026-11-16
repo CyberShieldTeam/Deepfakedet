@@ -18,6 +18,10 @@
   for exact boundaries and remote CI status; authored demo is not independent accuracy.
 - Existing investigations/reports/model thresholds/OCR defaults/review gates preserved.
   Engine43 regression output defaults to ignored cache to avoid rewriting historical evidence.
+- Hosted implementation CI run `43953655764` passed all three jobs (Windows/Ubuntu app
+  and full CPU Python); both platforms completed the real-session OCR workflow in dev/prod.
+  Hosted full Python: 95 passed/three optional-asset skips. Exact commit/run evidence is
+  recorded in `reports/submission_ci.json`; this is engineering validation, not model accuracy.
 
 ## Engine 4.3 evaluation readiness and evidence integrity — 2026-11-17
 

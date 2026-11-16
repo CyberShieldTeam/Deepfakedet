@@ -24,8 +24,8 @@ public deployment or TLS proxy recipe**:
   Never expose the unauthenticated Python service publicly. The original full media
   service remains optional and separately configured.
 
-Windows/Node 24/CPython 3.13 is the verified host path. Linux CI is configured; its actual
-status is in FINAL_VERIFICATION.md. Other host combinations are unverified. The full service
+Windows/Node 24/CPython 3.13 is the verified local path. Hosted Windows and Ubuntu CI also
+passed the core/demo workflow; see FINAL_VERIFICATION.md. Other host combinations are unverified. The full service
 uses `ai_service/requirements.txt`; its larger ML dependencies/checkpoints are unnecessary
 for the judged OCR path. Individual model cards describe optional inference limitations.
 

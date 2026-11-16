@@ -55,8 +55,8 @@ or automatic truth engine. See [architecture](docs/ARCHITECTURE.md).
 ## Getting started
 
 Verified host: **Windows, Node 24.19, npm 11.17, CPython 3.13**. Declared Node minimum is
-22.12; use Node 24 for the tested path. Git is required. Linux CI is configured; its
-actual execution status is in [verification](docs/FINAL_VERIFICATION.md).
+22.12; use Node 24 for the tested path. Git is required. Hosted Windows and Ubuntu
+CI also passed with Node 24.22.2; see [verification](docs/FINAL_VERIFICATION.md).
 
 ```sh
 git clone --branch codex/integrate-figma-upgrade https://github.com/CyberShieldTeam/Deepfakedet.git

@@ -31,7 +31,7 @@ these were corrected without weakening timestamp, retrieval or review safeguards
 | Problem relevance | 9 / 10 | Four evidence domains connect to a case/report; real investigator study absent |
 | Architecture | 13 / 15 | Owned APIs, bounded workers, provenance/review gates; single-process persistence |
 | Functional completeness | 14 / 20 | Complete actual OCR-to-report demo; important detector/native-script/independent evaluation gaps |
-| Reproducibility | 12 / 15 | Fresh Windows environment and pinned demo assets/dependencies; other hosts/large-model setup not independently established here |
+| Reproducibility | 12 / 15 | Fresh Windows environment and Windows/Ubuntu hosted core/demo checks; macOS and full optional-weight provisioning unverified |
 | Testing/reliability | 12 / 15 | Engine/API/Python/browser controls and failure checks; remote CI status separate, no broad load/security certification |
 | Originality/differentiation | 6 / 10 | Evidence integration/review/proofs add value; existing models/tools, no validated new detection method |
 | Documentation/presentation | 9 / 10 | Accurate README, screenshot, architecture, demo/recovery/video guide; no recorded video/public deployment |
@@ -46,13 +46,14 @@ these were corrected without weakening timestamp, retrieval or review safeguards
    multiwriter storage, retention/quota system or broad concurrency/load test.
 3. Repository-wide licensing and verified individual team attribution require owner decisions.
    This update cannot choose a license or invent a team roster.
-4. Cross-platform/remote CI execution and optional-model environments need their actual
-   execution evidence; a workflow file is not a passing CI run. See FINAL_VERIFICATION.md.
+4. Optional live-model/provenance browser setups remain outside the self-contained demo.
+   Hosted CI passed but its full Python suite has three explicit absent-asset skips;
+   do not present core workflow success as validation of every optional inference path.
 5. Rehearsal still needs Node/Python/browser provisioning and the small explicit model
    download. A recording has not been made, and live external retrieval is not demonstrated.
 
 Highest-impact final work: record the rehearsed 2–3 minute guide; have maintainers resolve
-licensing/team information and review competition submission rules; confirm a clean CI run
-on the final commit; prepare the demonstrated local environment before judging. Longer-term
+licensing/team information and review competition submission rules; keep the demonstrated
+CI checks green and prepare the local environment before judging. Longer-term
 work should prioritize independent dataset/adjudication and deployment storage/security,
 not adding speculative model outputs or weakening uncertainty gates.

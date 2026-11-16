@@ -142,3 +142,36 @@ above preserves the first successful paired development/production observations.
 The README screenshot is an actual 1440x1100 application viewport from the authored run,
 not generated artwork. Local Markdown targets are checked by `npm run docs:check`;
 remote URL availability and anchor correctness are not implied by that check.
+
+## Hosted CI evidence
+
+Implementation commit `15d0bb7c4a0026d29b1a126db06a9a0dcd2f2e03` passed
+[Verify application run 43953655764](https://github.com/CyberShieldTeam/Deepfakedet/actions/runs/43953655764).
+All three jobs concluded success:
+
+- `application (ubuntu-latest)`: locked Node/Python installation, 23 lightweight Python
+  tests, TypeScript/build/startup, all core Node engines and both actual OCR UI demos passed.
+- `application (windows-latest)`: same checks and both real-session OCR UI demos passed.
+- `python-full`: **98 run, 95 passed, three optional-asset skips**, no downloaded model
+  weights. Absent assets: AASIST weights, YuNet weights and pinned C2PA signed fixtures.
+
+Hosted application Node version was 24.22.2. Ubuntu authored demo startup was 1.49s/1.03s
+for development/production; OCR total 483ms/440ms, same 50 nodes/104 relationships. These
+are additional engineering observations, not cross-platform speed or accuracy claims.
+The documentation follow-up records this completed implementation run; its own CI status
+is visible in the branch's Actions history rather than assumed from this snapshot.
+
+## Changed-file inventory
+
+Added service/setup: `ai_service/ocr_app.py`, `test_ocr_app.py`,
+`create_submission_fixtures.py`, `requirements-demo.txt`, `requirements-demo-lock.txt`.
+Added tooling: `.github/workflows/verify.yml`, `scripts/demo.mjs`, `demo-test.mjs`,
+`check-demo.mjs`, `check-docs.mjs`, `clean.mjs`, `test/startup.test.ts`.
+Added authored assets: `fixtures/submission/{notice.png,manifest.json,corpus.json,posts.json}`.
+Added documentation: `CONTRIBUTING.md`, `SECURITY.md`, the six setup/architecture/readiness/
+verification documents under docs, and `docs/images/submission-workflow.png`.
+Added reports: `reports/submission_clean_demo.json`, `reports/submission_ci.json`.
+Modified: README, environment example, package/lock scripts/metadata, server startup/health,
+OCR preparation URL fallback, App disclosure/Health type, Playwright configuration/browser
+controls, Engine43 report output destination, implementation progress, cloud/Compose notes.
+No old evaluation report, detector, threshold, review/ownership gate or user store changed.

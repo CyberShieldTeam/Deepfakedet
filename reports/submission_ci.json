@@ -1,0 +1,13 @@
+{
+  "scope": "Hosted engineering regression checks, not independent model accuracy",
+  "implementationCommit": "15d0bb7c4a0026d29b1a126db06a9a0dcd2f2e03",
+  "runUrl": "https://github.com/CyberShieldTeam/Deepfakedet/actions/runs/43953655764",
+  "conclusion": "success",
+  "jobs": [
+    {"id": 133602405522, "name": "python-full", "conclusion": "success", "testsRun": 98, "passed": 95, "skipped": 3},
+    {"id": 133602405822, "name": "application (windows-latest)", "conclusion": "success", "actualOcrUiDemoDevelopment": "passed", "actualOcrUiDemoProduction": "passed"},
+    {"id": 133602405919, "name": "application (ubuntu-latest)", "conclusion": "success", "actualOcrUiDemoDevelopment": "passed", "actualOcrUiDemoProduction": "passed"}
+  ],
+  "optionalAssetsNotProvisioned": ["AASIST weights", "YuNet weights", "pinned C2PA signed fixtures"],
+  "limitations": ["No private provider keys or production stores used", "No independent detection/OCR/malicious-campaign accuracy established", "This records the implementation run; follow-up commit status is separate"]
+}
