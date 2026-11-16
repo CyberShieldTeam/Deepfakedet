@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { z } from "zod";
 import type { Investigation } from "../src/types";
 import { owner, validate } from "./security";
-import { runExtraction, ExtractionError } from "./extractionRunner";
+import { runExtraction, ExtractionError, OCR_PROFILES } from "./extractionRunner";
 import { reviewExtraction, reviewedCandidate } from "./extraction";
 import { verifyWithEvidence } from "./evidence";
 const reference = z.string().min(1).max(200);
@@ -23,6 +23,7 @@ const extract = z
     modality: z.enum(["image", "video", "audio"]),
     language: z.enum(["eng", "hin", "tel"]),
     mediaData: z.string().max(14_000_000),
+    profile: z.enum(OCR_PROFILES).default("baseline"),
   })
   .strict();
 export function installExtractionRoutes(
@@ -69,6 +70,7 @@ export function installExtractionRoutes(
         b.language,
         b.modality,
         controller.signal,
+        b.profile,
       );
       const current = find(inv.id);
       if (!current) return void res.status(404).json({ error: "Investigation not found" });

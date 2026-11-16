@@ -88,7 +88,7 @@ export function buildCorrelation(input:CorrelationProjection,contexts:MediaConte
   const ref=`/extractions/${i}`,segments=new Map<string,string|null>();
   for(const [j,s] of record.segments.entries()){
    const node=add('extracted_text',[record.id,s.id],'media',s.text,`${ref}/segments/${j}`,{text:s.text,bbox:s.bbox,words:s.words,geometry:record.geometry,method:record.method,modelRevision:record.modelRevision,modelSha256:record.modelSha256,sourceMediaHash:record.sourceMediaHash,recognitionLanguage:record.recognitionLanguage,detectedLanguage:record.detectedLanguage},evidenceTime('analysis',record.extractedAt),[record.state],record.limitations);segments.set(s.id,node);
-   link(media,node,'MEDIA_CONTAINS_TEXT','bounded local OCR on hash-matching submitted bytes',[ref,`${ref}/segments/${j}`],{method:record.method,bbox:s.bbox},'exact_reference',false,record.limitations);
+   link(media,node,'MEDIA_CONTAINS_TEXT','bounded local OCR on hash-matching submitted bytes',[ref,`${ref}/segments/${j}`],{method:record.method,bbox:s.bbox,processingBbox:s.bbox,sourceBbox:s.sourceBbox??null,displayBbox:s.displayBbox??null,profile:record.geometry.profile??'historical baseline'},'exact_reference',false,record.limitations);
   }
   for(const [j,c] of record.candidates.entries()){
    const cref=`${ref}/candidates/${j}`,candidate=add('claim_candidate',c.id,'media',c.originalText,cref,{originalText:c.originalText,start:c.start,end:c.end,category:c.category,method:c.categoryMethod},[],[c.reviews.at(-1)?.state??'pending'],['Unvalidated candidate category; never a factual verdict.']);

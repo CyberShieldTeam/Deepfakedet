@@ -6,7 +6,9 @@ const corpusEnabled = process.env.VERITAS_EXTRACTION_PREVIEW_CORPUS !== "0";
 const mode =
   (process.env.NODE_ENV === "production" ? "production" : "development") +
   (corpusEnabled ? "" : "-unconfigured");
-process.env.VERITAS_STORE = path.resolve(`.model-cache/engine41-browser-${mode}.json`);
+process.env.VERITAS_STORE = path.resolve(
+  `.model-cache/${process.env.VERITAS_PREVIEW_PREFIX || "engine41"}-browser-${mode}.json`,
+);
 process.env.APP_GEMINI_API_KEY = "MY_DISABLED";
 process.env.GOOGLE_FACT_CHECK_API_KEY = "";
 process.env.VERITAS_EMBEDDING_ENDPOINT = "";

@@ -1,0 +1,252 @@
+{
+  "scope": "small independent Latin-script development probe plus separate authored controls; no heldout/generalization claim",
+  "requestedRecognitionLanguage": "eng",
+  "sourceLanguage": "not independently annotated; Latin ASCII gate includes non-English text",
+  "modelSha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+  "modelRevision": "87416418657359cb625c412a48b6e1d6d41c29bd",
+  "inputs": {
+    "engine42_authored_experiments": {
+      "sha256": "ac023290c8005c986b0cadc36a35b6e7dfe8583f8ea20a1721cbe24d5798625b",
+      "byProfile": {
+        "baseline": {
+          "samples": 7,
+          "transcription": {
+            "samples": 6,
+            "characterErrorRate": 0.27296587926509186,
+            "wordErrorRate": 0.3055555555555556
+          },
+          "exactMatchRate": 0.5,
+          "noTextSamples": 1,
+          "noTextCorrect": 1,
+          "noTextDetectedOnText": 0,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 1.253090885725604,
+          "maxSampledOcrTreeRssBytes": 262328320
+        },
+        "rotate90": {
+          "samples": 7,
+          "transcription": {
+            "samples": 6,
+            "characterErrorRate": 0.926509186351706,
+            "wordErrorRate": 1.0
+          },
+          "exactMatchRate": 0.0,
+          "noTextSamples": 1,
+          "noTextCorrect": 1,
+          "noTextDetectedOnText": 1,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 1.128770399988363,
+          "maxSampledOcrTreeRssBytes": 220688384
+        },
+        "rotate180": {
+          "samples": 7,
+          "transcription": {
+            "samples": 6,
+            "characterErrorRate": 0.8438320209973753,
+            "wordErrorRate": 0.9259259259259259
+          },
+          "exactMatchRate": 0.16666666666666666,
+          "noTextSamples": 1,
+          "noTextCorrect": 1,
+          "noTextDetectedOnText": 0,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 1.1241191428603738,
+          "maxSampledOcrTreeRssBytes": 206082048
+        },
+        "rotate270": {
+          "samples": 7,
+          "transcription": {
+            "samples": 6,
+            "characterErrorRate": 0.3123359580052493,
+            "wordErrorRate": 0.3055555555555556
+          },
+          "exactMatchRate": 0.6666666666666666,
+          "noTextSamples": 1,
+          "noTextCorrect": 1,
+          "noTextDetectedOnText": 1,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 1.1269948999979533,
+          "maxSampledOcrTreeRssBytes": 227545088
+        },
+        "contrast": {
+          "samples": 7,
+          "transcription": {
+            "samples": 6,
+            "characterErrorRate": 0.27296587926509186,
+            "wordErrorRate": 0.3055555555555556
+          },
+          "exactMatchRate": 0.5,
+          "noTextSamples": 1,
+          "noTextCorrect": 1,
+          "noTextDetectedOnText": 0,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 1.1248973285712833,
+          "maxSampledOcrTreeRssBytes": 206589952
+        },
+        "grayscale": {
+          "samples": 7,
+          "transcription": {
+            "samples": 6,
+            "characterErrorRate": 0.27296587926509186,
+            "wordErrorRate": 0.3055555555555556
+          },
+          "exactMatchRate": 0.5,
+          "noTextSamples": 1,
+          "noTextCorrect": 1,
+          "noTextDetectedOnText": 0,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 1.0981356285878323,
+          "maxSampledOcrTreeRssBytes": 204836864
+        },
+        "sharpen": {
+          "samples": 7,
+          "transcription": {
+            "samples": 6,
+            "characterErrorRate": 0.2742782152230971,
+            "wordErrorRate": 0.3148148148148148
+          },
+          "exactMatchRate": 0.3333333333333333,
+          "noTextSamples": 1,
+          "noTextCorrect": 1,
+          "noTextDetectedOnText": 0,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 1.1276268571548695,
+          "maxSampledOcrTreeRssBytes": 210010112
+        },
+        "upscale2": {
+          "samples": 7,
+          "transcription": {
+            "samples": 6,
+            "characterErrorRate": 0.25984251968503935,
+            "wordErrorRate": 0.2777777777777778
+          },
+          "exactMatchRate": 0.5,
+          "noTextSamples": 1,
+          "noTextCorrect": 1,
+          "noTextDetectedOnText": 0,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 1.1253511714416422,
+          "maxSampledOcrTreeRssBytes": 213123072
+        }
+      }
+    },
+    "engine42_independent_development": {
+      "sha256": "8ed58b6d7f2cf73ff8a231c34b9b303039c6007df2f05fb76709abccd3b1631a",
+      "byProfile": {
+        "baseline": {
+          "samples": 9,
+          "transcription": {
+            "samples": 9,
+            "characterErrorRate": 0.5333333333333333,
+            "wordErrorRate": 0.7272727272727273
+          },
+          "exactMatchRate": 0.1111111111111111,
+          "noTextSamples": 0,
+          "noTextCorrect": 0,
+          "noTextDetectedOnText": 4,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 0.9391343222361885,
+          "maxSampledOcrTreeRssBytes": 190541824
+        },
+        "upscale2": {
+          "samples": 9,
+          "transcription": {
+            "samples": 9,
+            "characterErrorRate": 0.31851851851851853,
+            "wordErrorRate": 0.5454545454545454
+          },
+          "exactMatchRate": 0.2222222222222222,
+          "noTextSamples": 0,
+          "noTextCorrect": 0,
+          "noTextDetectedOnText": 2,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 0.9886943111131485,
+          "maxSampledOcrTreeRssBytes": 193060864
+        },
+        "contrast": {
+          "samples": 9,
+          "transcription": {
+            "samples": 9,
+            "characterErrorRate": 0.5481481481481482,
+            "wordErrorRate": 0.7727272727272727
+          },
+          "exactMatchRate": 0.1111111111111111,
+          "noTextSamples": 0,
+          "noTextCorrect": 0,
+          "noTextDetectedOnText": 4,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 0.9373123999879075,
+          "maxSampledOcrTreeRssBytes": 193335296
+        }
+      }
+    },
+    "engine42_layout_probe": {
+      "sha256": "5f34fdade1ac267d4b25677ab14318ad2e9bad79d1417ee99f565d7d1900cfad",
+      "byProfile": {
+        "baseline": {
+          "samples": 9,
+          "transcription": {
+            "samples": 9,
+            "characterErrorRate": 0.5333333333333333,
+            "wordErrorRate": 0.7272727272727273
+          },
+          "exactMatchRate": 0.1111111111111111,
+          "noTextSamples": 0,
+          "noTextCorrect": 0,
+          "noTextDetectedOnText": 4,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 1.022318399989874,
+          "maxSampledOcrTreeRssBytes": 250998784
+        },
+        "singleLine": {
+          "samples": 9,
+          "transcription": {
+            "samples": 9,
+            "characterErrorRate": 0.1111111111111111,
+            "wordErrorRate": 0.36363636363636365
+          },
+          "exactMatchRate": 0.3333333333333333,
+          "noTextSamples": 0,
+          "noTextCorrect": 0,
+          "noTextDetectedOnText": 0,
+          "technicalFailures": 0,
+          "unavailable": 0,
+          "partial": 0,
+          "meanWallSeconds": 1.0509740888826653,
+          "maxSampledOcrTreeRssBytes": 196333568
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Nine derived line crops from six source images; correlated observations.",
+    "Publisher typographic normalization and crop context were not independently re-adjudicated; raw publisher labels retained.",
+    "Unknown model-training overlap. Source language unadjudicated; requested pack is not detected language.",
+    "No independent screenshot/no-text/blur/rotation/Hindi/Telugu strata.",
+    "No automatic selector admitted; default unchanged."
+  ]
+}

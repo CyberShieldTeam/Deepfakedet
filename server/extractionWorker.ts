@@ -8,7 +8,7 @@ for await (const chunk of process.stdin) {
   if (Buffer.byteLength(data) > 12 * 1024 * 1024) throw new Error("Input budget");
 }
 try {
-  const { image_base64, width, height } = JSON.parse(data),
+  const { image_base64, width, height, profile } = JSON.parse(data),
     start = performance.now();
   verifiedOcrModel();
   // Fixed local path, gzip disabled, no cache/CDN selection. v7 byte-language initialization is broken.
@@ -23,7 +23,9 @@ try {
   });
   const modelStartupMs = performance.now() - start;
   try {
-    await worker.setParameters({ tessedit_pageseg_mode: PSM.AUTO });
+    await worker.setParameters({
+      tessedit_pageseg_mode: profile === "singleLine" ? PSM.SINGLE_LINE : PSM.AUTO,
+    });
     const tick = performance.now();
     const result = await worker.recognize(
       Buffer.from(image_base64, "base64"),

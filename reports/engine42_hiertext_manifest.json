@@ -1,0 +1,2204 @@
+{
+  "schemaVersion": 2,
+  "scope": "independent_development",
+  "datasetId": "hiertext-validation-six-source-development-v1",
+  "datasetVersion": "annotation Git blob 45df5394a71b03dc448771f51d7a9830f15b2658",
+  "publisher": "Google Research HierText; Open Images/CVDF image hosting",
+  "officialSource": "https://github.com/google-research-datasets/hiertext",
+  "rights": "HierText annotations CC BY-SA 4.0; admitted image metadata CC BY 2.0; local research only, no media redistribution",
+  "permissionEvidence": "Publisher README license and per-image attribution.csv License/Author/OriginalLandingURL",
+  "annotationProtocol": "Publisher line transcription; first two legible non-handwritten horizontal ASCII lines from first six attributed source IDs in publisher file order; source resize to annotation dimensions, axis-aligned crop plus 2px. No OCR-based selection.",
+  "annotationProvenance": "HierText validation JSON annotation with verified publisher Git blob; original labels, no synthetic labels",
+  "approvedBy": "publisher-license-and-attribution-admission-code",
+  "approvedAt": "2026-11-16",
+  "profiles": [
+    "baseline",
+    "upscale2",
+    "contrast"
+  ],
+  "rows": [
+    {
+      "id": "012bfb1d9f9afc48-0.png",
+      "path": "012bfb1d9f9afc48-0.png",
+      "sha256": "64b527bc538f2edef45621cd15d5ae118ea0f0d2b3f532ad729cdd0e35910dd9",
+      "sourceGroup": "012bfb1d9f9afc48",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "284x41",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "\"Idon't think it",
+      "attribution": {
+        "ImageID": "012bfb1d9f9afc48",
+        "Subset": "validation",
+        "OriginalURL": "https://c1.staticflickr.com/3/2596/3698238653_555ab1aa4f_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/49024304@N00/3698238653",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/49024304@N00/",
+        "Author": "anyjazz65",
+        "Title": "Urailpass",
+        "OriginalSize": "758910",
+        "OriginalMD5": "r6PCT0dZmL4hyREkZmVkyA==",
+        "Thumbnail300KURL": "https://c4.staticflickr.com/3/2596/3698238653_e7a289cb44_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/012bfb1d9f9afc48.jpg",
+      "sourceSha256": "303f8fe652960253c747bf0c6e0d048daac4fb2c887bb51a83ba3cd3c144bf54",
+      "originalDimensions": [
+        753,
+        1024
+      ],
+      "annotationDimensions": [
+        1177,
+        1600
+      ],
+      "cropBox": [
+        696,
+        174,
+        980,
+        215
+      ],
+      "annotationVertices": [
+        [
+          698,
+          179
+        ],
+        [
+          976,
+          176
+        ],
+        [
+          977,
+          210
+        ],
+        [
+          698,
+          212
+        ]
+      ]
+    },
+    {
+      "id": "012bfb1d9f9afc48-1.png",
+      "path": "012bfb1d9f9afc48-1.png",
+      "sha256": "2c43e3d45d8ef160485e6fb3a93d223a1fbf2e697ec04eb6e3b769548d8efe38",
+      "sourceGroup": "012bfb1d9f9afc48",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "282x50",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "he's just trying",
+      "attribution": {
+        "ImageID": "012bfb1d9f9afc48",
+        "Subset": "validation",
+        "OriginalURL": "https://c1.staticflickr.com/3/2596/3698238653_555ab1aa4f_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/49024304@N00/3698238653",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/49024304@N00/",
+        "Author": "anyjazz65",
+        "Title": "Urailpass",
+        "OriginalSize": "758910",
+        "OriginalMD5": "r6PCT0dZmL4hyREkZmVkyA==",
+        "Thumbnail300KURL": "https://c4.staticflickr.com/3/2596/3698238653_e7a289cb44_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/012bfb1d9f9afc48.jpg",
+      "sourceSha256": "303f8fe652960253c747bf0c6e0d048daac4fb2c887bb51a83ba3cd3c144bf54",
+      "originalDimensions": [
+        753,
+        1024
+      ],
+      "annotationDimensions": [
+        1177,
+        1600
+      ],
+      "cropBox": [
+        698,
+        254,
+        980,
+        304
+      ],
+      "annotationVertices": [
+        [
+          700,
+          257
+        ],
+        [
+          976,
+          256
+        ],
+        [
+          977,
+          301
+        ],
+        [
+          700,
+          301
+        ]
+      ]
+    },
+    {
+      "id": "04c69de1d1bf9892-0.png",
+      "path": "04c69de1d1bf9892-0.png",
+      "sha256": "77b53cf747f47acc7b9b680fabc922082cb9853cd8d3683c9ad360faed9d7476",
+      "sourceGroup": "04c69de1d1bf9892",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "84x21",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "David (1 unr...",
+      "attribution": {
+        "ImageID": "04c69de1d1bf9892",
+        "Subset": "validation",
+        "OriginalURL": "https://farm3.staticflickr.com/2491/5729422595_5e8a157bc9_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/glennji/5729422595",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/glennji/",
+        "Author": "Glenn J. Mason",
+        "Title": "Screenshot-7",
+        "OriginalSize": "303112",
+        "OriginalMD5": "bfNp02uZ3nOaJXacgEFHsg==",
+        "Thumbnail300KURL": "https://c1.staticflickr.com/3/2491/5729422595_5892c1acc8_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/04c69de1d1bf9892.jpg",
+      "sourceSha256": "7d321c29587e140c34d990fcfd45d85c0d56610d0944eb7472177574f42859d1",
+      "originalDimensions": [
+        1024,
+        576
+      ],
+      "annotationDimensions": [
+        1600,
+        900
+      ],
+      "cropBox": [
+        889,
+        1,
+        973,
+        22
+      ],
+      "annotationVertices": [
+        [
+          892,
+          3
+        ],
+        [
+          970,
+          7
+        ],
+        [
+          970,
+          19
+        ],
+        [
+          891,
+          14
+        ]
+      ]
+    },
+    {
+      "id": "04c69de1d1bf9892-1.png",
+      "path": "04c69de1d1bf9892-1.png",
+      "sha256": "855394e3e2744f5126600cb05b887ca9ebc156d52bf3d044e707a31009b71475",
+      "sourceGroup": "04c69de1d1bf9892",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "84x19",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "[Inbox Unif...",
+      "attribution": {
+        "ImageID": "04c69de1d1bf9892",
+        "Subset": "validation",
+        "OriginalURL": "https://farm3.staticflickr.com/2491/5729422595_5e8a157bc9_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/glennji/5729422595",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/glennji/",
+        "Author": "Glenn J. Mason",
+        "Title": "Screenshot-7",
+        "OriginalSize": "303112",
+        "OriginalMD5": "bfNp02uZ3nOaJXacgEFHsg==",
+        "Thumbnail300KURL": "https://c1.staticflickr.com/3/2491/5729422595_5892c1acc8_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/04c69de1d1bf9892.jpg",
+      "sourceSha256": "7d321c29587e140c34d990fcfd45d85c0d56610d0944eb7472177574f42859d1",
+      "originalDimensions": [
+        1024,
+        576
+      ],
+      "annotationDimensions": [
+        1600,
+        900
+      ],
+      "cropBox": [
+        454,
+        2,
+        538,
+        21
+      ],
+      "annotationVertices": [
+        [
+          456,
+          6
+        ],
+        [
+          534,
+          4
+        ],
+        [
+          535,
+          17
+        ],
+        [
+          456,
+          18
+        ]
+      ]
+    },
+    {
+      "id": "07f328166c0ebbf7-0.png",
+      "path": "07f328166c0ebbf7-0.png",
+      "sha256": "587e085a2dd8f5c11dbd0ae1d7d0e21c3bfffacab8f9728681e30af4eec40694",
+      "sourceGroup": "07f328166c0ebbf7",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "126x27",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "Mandrin is made from",
+      "attribution": {
+        "ImageID": "07f328166c0ebbf7",
+        "Subset": "validation",
+        "OriginalURL": "https://farm8.staticflickr.com/3139/2923083907_88b3ab52f7_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/blmurch/2923083907/",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/blmurch/",
+        "Author": "Beatrice Murch",
+        "Title": "PowerPuffGirl among the drinks",
+        "OriginalSize": "3203459",
+        "OriginalMD5": "+TwuSLvIbtcTRIrWBFmj+Q==",
+        "Thumbnail300KURL": "https://c8.staticflickr.com/4/3139/2923083907_4f96b0b4d4_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/07f328166c0ebbf7.jpg",
+      "sourceSha256": "b082c51f5162c88a6713e6eae3f09c0bd90119e5651015231311439c816483d4",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "annotationDimensions": [
+        1600,
+        1200
+      ],
+      "cropBox": [
+        993,
+        659,
+        1119,
+        686
+      ],
+      "annotationVertices": [
+        [
+          995,
+          663
+        ],
+        [
+          1115,
+          661
+        ],
+        [
+          1116,
+          682
+        ],
+        [
+          995,
+          683
+        ]
+      ]
+    },
+    {
+      "id": "291e9c3df3a9ffb5-0.png",
+      "path": "291e9c3df3a9ffb5-0.png",
+      "sha256": "ae78d8a3d34f5e33a5b5467360c82fc15728f06aec4d6f3eb9b3e0bf06813f4d",
+      "sourceGroup": "291e9c3df3a9ffb5",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "117x19",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "NURSERY SCALE",
+      "attribution": {
+        "ImageID": "291e9c3df3a9ffb5",
+        "Subset": "validation",
+        "OriginalURL": "https://farm6.staticflickr.com/7320/10426825023_76a2a88846_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/77423179@N02/10426825023",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/77423179@N02/",
+        "Author": "Melissa Hillier",
+        "Title": "Mabry",
+        "OriginalSize": "2247789",
+        "OriginalMD5": "GpCuIyRCuRoeTJ9A0iD3UQ==",
+        "Thumbnail300KURL": "https://c4.staticflickr.com/8/7320/10426825023_0ed5774f0f_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/291e9c3df3a9ffb5.jpg",
+      "sourceSha256": "27bfd8e2ab91136a7ac4ff5b1421003ac21c6c30f2e94789d87393e6c8710062",
+      "originalDimensions": [
+        1024,
+        705
+      ],
+      "annotationDimensions": [
+        1600,
+        1102
+      ],
+      "cropBox": [
+        717,
+        743,
+        834,
+        762
+      ],
+      "annotationVertices": [
+        [
+          719,
+          750
+        ],
+        [
+          830,
+          745
+        ],
+        [
+          831,
+          754
+        ],
+        [
+          719,
+          759
+        ]
+      ]
+    },
+    {
+      "id": "3ea969425b1c88bd-0.png",
+      "path": "3ea969425b1c88bd-0.png",
+      "sha256": "11b308a8af46a904da166ee0ba9c5173b476b4d670ec393f3e9e6d1eaf643d04",
+      "sourceGroup": "3ea969425b1c88bd",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "330x46",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "September 2012",
+      "attribution": {
+        "ImageID": "3ea969425b1c88bd",
+        "Subset": "validation",
+        "OriginalURL": "https://c6.staticflickr.com/9/8039/7905918140_bb42f58a60_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/chunkysalsa/7905918140",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/chunkysalsa/",
+        "Author": "chunkysalsa",
+        "Title": "It's going to be a busy September....",
+        "OriginalSize": "92549",
+        "OriginalMD5": "NbVOxho23lp8BVkNQbuWsA==",
+        "Thumbnail300KURL": "https://c1.staticflickr.com/9/8039/7905918140_ca1e9f10be_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/3ea969425b1c88bd.jpg",
+      "sourceSha256": "58d39ff28cdb6c0d375473608b0bab8c1dfc19c8f0157aa3ca2047e2adc96cea",
+      "originalDimensions": [
+        1024,
+        1024
+      ],
+      "annotationDimensions": [
+        612,
+        612
+      ],
+      "cropBox": [
+        142,
+        22,
+        472,
+        68
+      ],
+      "annotationVertices": [
+        [
+          144,
+          26
+        ],
+        [
+          468,
+          24
+        ],
+        [
+          469,
+          64
+        ],
+        [
+          144,
+          65
+        ]
+      ]
+    },
+    {
+      "id": "41ec68d29b5f5db0-0.png",
+      "path": "41ec68d29b5f5db0-0.png",
+      "sha256": "aea18161d681c5dfbcb6c1d5e90d768cc527c6bbe136cf9caec42d8f25b0bf06",
+      "sourceGroup": "41ec68d29b5f5db0",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "516x88",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "GRAN PELUQUERIA",
+      "attribution": {
+        "ImageID": "41ec68d29b5f5db0",
+        "Subset": "validation",
+        "OriginalURL": "https://farm1.staticflickr.com/8541/8634423467_6341f37635_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/martius/8634423467",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/martius/",
+        "Author": "Manuel",
+        "Title": "cuestión de tamaños; coche mini y gran peluquería",
+        "OriginalSize": "6567697",
+        "OriginalMD5": "9MMwvRaQITrPTSRnJBeYKw==",
+        "Thumbnail300KURL": "https://c3.staticflickr.com/9/8541/8634423467_4eede1e2cb_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/41ec68d29b5f5db0.jpg",
+      "sourceSha256": "b5d7bf7c3c4acd5da1689c69257cf8a47f9e6017eaa8b8ba9e361f42e81d91e4",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "annotationDimensions": [
+        1600,
+        1200
+      ],
+      "cropBox": [
+        578,
+        56,
+        1094,
+        144
+      ],
+      "annotationVertices": [
+        [
+          580,
+          63
+        ],
+        [
+          1090,
+          58
+        ],
+        [
+          1091,
+          137
+        ],
+        [
+          580,
+          141
+        ]
+      ]
+    },
+    {
+      "id": "41ec68d29b5f5db0-1.png",
+      "path": "41ec68d29b5f5db0-1.png",
+      "sha256": "24eb49bf18958420fcca40ca7b2a1a8f541c9d248235843bf9387ab53905f849",
+      "sourceGroup": "41ec68d29b5f5db0",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "124x29",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "ESPECIALITAD",
+      "attribution": {
+        "ImageID": "41ec68d29b5f5db0",
+        "Subset": "validation",
+        "OriginalURL": "https://farm1.staticflickr.com/8541/8634423467_6341f37635_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/martius/8634423467",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/martius/",
+        "Author": "Manuel",
+        "Title": "cuestión de tamaños; coche mini y gran peluquería",
+        "OriginalSize": "6567697",
+        "OriginalMD5": "9MMwvRaQITrPTSRnJBeYKw==",
+        "Thumbnail300KURL": "https://c3.staticflickr.com/9/8541/8634423467_4eede1e2cb_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/41ec68d29b5f5db0.jpg",
+      "sourceSha256": "b5d7bf7c3c4acd5da1689c69257cf8a47f9e6017eaa8b8ba9e361f42e81d91e4",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "annotationDimensions": [
+        1600,
+        1200
+      ],
+      "cropBox": [
+        487,
+        231,
+        611,
+        260
+      ],
+      "annotationVertices": [
+        [
+          489,
+          234
+        ],
+        [
+          607,
+          233
+        ],
+        [
+          608,
+          256
+        ],
+        [
+          489,
+          257
+        ]
+      ]
+    }
+  ],
+  "annotationSha256": "ce7085d8bf24c2f13df852715c34494e6748cafcabb4bfc7a6e2bb320f58d23a",
+  "attributionSha256": "ed93a0e121fe345effdfc7359b848dbc64a1ff6778c8c73563157cb500b33a17",
+  "exclusions": [
+    {
+      "id": "002a72617c3b1335",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0037d7c08eef278e",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "004cc813a5f74eae",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "00b1edd2d4f04296",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "00bb9343208cd7f0",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0112b5587ac77c29",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "013df9c6e5b5aed4",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0144982d3d323b25",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0185186d9d8b04e2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "01afa53c9fa2fbc9",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "02062d203a421358",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0207fda1fd7e1905",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "02851174b26cdd7b",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "028cbc01a0170f5a",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "028f95007af16e94",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "02987cea050eb5a2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "02c8733cf12ebba8",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "02ce4d2311b32eab",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "030830f3b878c879",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "03159b24127c3e38",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "03221b6a82a5a02e",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0346fb78e8f67579",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "038f858c839906a6",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "043728e896c1c506",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "043b7e93293b589f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "043c36874f69f0ae",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "045278cb03219c06",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0458b386faa2a422",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "046e05f524d46d86",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "04f9cd384b8aa388",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "050bf08413b35ab1",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "050ff54146f16c14",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0532d7adab8961c4",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0538af158b769e1e",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0558ce6ed7f4e6d1",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0569d065055bafb6",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "056b01a8262bf4b8",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "05ba0bfd03748680",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "05ee9d2ad48c11c2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "06107f566f0c6a34",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "061613aa1a3a7801",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "061730cf6f66b8e6",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "064c8afa1a51e0bb",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0651786a7821ab22",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "067f8b10014b5255",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "06d6db5dd53d4768",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "076b11dace050bf3",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "078780fdeca93ec0",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "079ad25c351f5dbe",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "07bdf382a526b825",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "07fee9c6a2bc3f31",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "07ff859162043509",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0813d7f52f0e5700",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "082d1434be7ca358",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "08305773da04ad9b",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "086a367c2478e5e3",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "08cc7d6ebd7c4d93",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "08d21add8f62215c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "08e481cfddb5ab42",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "08eda2b20adae4a0",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0983bde18b019dcf",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0a2c4ca4b143b784",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0a3bc2f21ec1a7fc",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0a47456e8390f6c7",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0a735d885f2b36d2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0a85661607f14abf",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0ae116c3ada0d021",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0ae42092c023f2e3",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0aeb6d4cbf6b4cb8",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0b4912b998fea4fb",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0b6bbefb124d174c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0c3605a26cf1db44",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0c7023f269a3270b",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0c9e86c1ec34cd47",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0cd842b5f71407c4",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0cffed1e0f791bf1",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0d3857a0d477f0b3",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0d4b98f6e671ba04",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0d87fa9846489db3",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0db5fd73b501b58b",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0dcbf20dae38a38d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0dcd39f665976746",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0de5b7129e65e61d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0e01b00e2f7d55c9",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0e1b268de6384299",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0e540a946561f68a",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0ec8d7e60c9075ed",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0ef6658f6d52d8f9",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0f425d64be97920d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0f45d5fd725377ad",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0f6dd07d35f2ecee",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0f8db5011a7037cf",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0fac41b078c9e2a8",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0fcff161b5eabd8d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0fd223d18bc18ee5",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "0fd766b5b6e8f7db",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "102f2c6a35f05df6",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1035ccf0cddf0818",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "104e2b7cade268c4",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "10e3c88e3dbe8895",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1177e2fd519784db",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "11863e2d22a0dc6f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "11a4e65f18cbad45",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "11d7bd674a9e5324",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "11fa98c12e693430",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "122bba4b08520b1b",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1244a2a60fe1e3b7",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "126d1eab66618cd1",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1279fc7c3b6dcd71",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "127c6ed78804ca73",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1287bbaf6242f8df",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "12cbe153ac52d659",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "13160f4632e4206e",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1386e00bc3ee8da9",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1393a13e9772b1c0",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1393effbca420944",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "13b15f0c465adc2a",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "13f729a4292e4585",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "141c2ff280973553",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1427a2dd12744f8f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "14607a99324f17e9",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "148ef24c9f60b5bd",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "14c46abe77e30ba4",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "14e6a0a3d2866128",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "14ed30e49bcf9909",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "150b181780ed1fe1",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "15201bcbc27bf045",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1524faee7eb416c7",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1534cb77d8fe77e5",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "154058472bd0c3bf",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "155ca92d954eff0d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1571e58d361c56dc",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "15dcc2cb5c2f72b2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "15fb043025bc007c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1615b0d4232d31ff",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "165841a765529adb",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "16b074011021765f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "16f6022cb7fe6df0",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1710d867de74b5ae",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1768f5c1ffe59276",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "17787a2808b9eb27",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "17ccd3ac7bd661ef",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "17d108f308ec2b65",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "17e0f5be78cff5ba",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1847bbdb325c69bc",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "184a4fa1dbd30187",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1855fe8e4e7ba6e8",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1870a2c219a5f389",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "188031c545c63112",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "18d73870cd85fdbd",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "18fe89db4699eced",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "190dfcc6b9c70686",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1930def7b2032dda",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1956eb2fe8374f57",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "196e718f151d3ac4",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "19cfdab775cf3a3b",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "19ed6c9942bf7791",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "19f35832ded88c36",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1a1f020897bc19e6",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1a94541acb461d78",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1aa7b5ca81352ce2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1aca8755dad9ea20",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1ad92876e643bf3b",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1ae73e01117a801a",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1b28c6b52c4ce879",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1bc1cc94ab9d5b57",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1c223c0d648a6609",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1ca473e1dbc417ca",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1cc17232ecf7f50c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1d4c76d2577ce1f6",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1d6118681cb86db7",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1d662057f7fee00d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1da8e0e996d021fb",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1dc87870b19908c3",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1e419dd031950099",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1e8177726fa21c4c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1e93e94271756210",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1e97eaba490d9fea",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1ee0b97b28893ea9",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1ee13b8c9b06ab11",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1f255548177b105c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1f2f0fdae0c15f1a",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1f98e46bd6fc95c2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "1fa8135edd781716",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "200abe02001a4c74",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "200e91600f19e1af",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "20e0da3a6f5e38e6",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "20ebeb815d147560",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "210f209ae6679692",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "21702a85f487b03d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "21f2adfc9cfa6755",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2220ff78dd6ca0d9",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "225895a0d9bacb23",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "229fa14d948f75f2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "22dc900fbbe49006",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "22e080ad19d6344d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "230b90e2684a3891",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2326a8ed5e328d67",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "232b94a00c332ea4",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "234123d61ee3df9a",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "23463f7bcfc2c611",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "23574ca442d3058a",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2391b7217de32b49",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2442eba4be2be4a6",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "244886fcab9a1d97",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2463c44bc93ca077",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "246b18b2e218a76d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "24d07cd4175a99c1",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "24ddfa1233bae8eb",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "24ed261fba0f5bb8",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "24fc476f3f42cb80",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "251684319eeb8d66",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "25787b4e3774cb9e",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2587ed7ceab6057c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "25d5a0112e9dd001",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2692df868bf5164b",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "26cecb6e5b984c20",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "26d497bc6d25d4b3",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "26e0b3e7386e2036",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "26f277396dad6e00",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "270258fadc348ae4",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "273abf775d57a1db",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "27925e31e2d73200",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "27a334de63a58c5c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "27aac44c5aa2b3f4",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "27dbbff1acd56a80",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2863ca4404db3996",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "28aac5fbfb6a0b6e",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "28acb8605b088289",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "28d2a2525dc078cf",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "28f076fd05fa25ee",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2933a9b34a68f19d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2969202f291fb6cf",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "29804ebb63ddb740",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2993d8238f37ff50",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "299c450d173f2851",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "299f43d706dc5864",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "29a92bcc9eded0bb",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "29ea735aeaf98845",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2a0d8d5d2b0dea95",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2a31c7936f9d0ac6",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2a8b8861dfb1fce0",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2aafcb12b2ce977e",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2ac971b6740c7f23",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2ad2309f1075afc5",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2aedbca5c9db6f50",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2b031a1466bf4b4f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2b73260fcddd14d9",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2b9cf3da80f95216",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2bc1981b58f5aa94",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2bc8e237402a4cb2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2bd7680de67a1c61",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2c31f643264a740d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2c3e413d9bae76d4",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2cdf51503d1104a6",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2d09b67a1420b705",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2d1d93daf2ffdf7a",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2d325f4747dad6e8",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2d3c84244b2604e7",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2d4e53a3d6b53bf5",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2d883a084e974a9a",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2da986b278be877f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2db014ccd11e52b7",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2db9ea63e94e652f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2dc3d17d2830cad9",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2dd360155f8e8c06",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2de493d689f77af3",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2de61622cacc6f70",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2dfbbe4db4d6bedb",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2e6e0c735f5ab39f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2eb28bf0ca39c599",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2f7d3e327ab79870",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2f81daa515fdf739",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2f844c9e460502be",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2fa55fefd94032cc",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2fb9e467b76c0d23",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2fbbb0d6fc4558ca",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2fdbaccffff73b63",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "2fddd74595b213e2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3025b88f005c3de4",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "30a633b332ab5c5a",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "30a7208a7004d7f4",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "30af6b2c756b779d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "30b0b56f36142263",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "30b495fdd52ede50",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "31179bcae9b24764",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "311dcdd4c1674d3f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "31205fe72d27f86d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "31288e756d94714c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "312e159cadc95211",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3161527fb4849521",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "31b08ce40f02e860",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "31cda85e8b8b31cd",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "322f5bc2e50cfdc8",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3257e7b7e5b8c62c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "32706f5ec3994e7e",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3274d8b828ffd6b0",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "32903847bd2eb4c0",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "331343d51edcc293",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "332ced9bdb333c85",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3334b694270e4599",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3351b77e71b4e993",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "337a1339912daa26",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "339d4c060994fc9b",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "339f0faf07e2fcce",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "33dacb4538da8f0d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "342a85a4280db9ef",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3476aa167cec84aa",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "34ad03726e01dcf3",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "34c6013674ead4ed",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "34ee2167a1180f55",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "350c27ab2d990ada",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3522be03ec0a8127",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "352b1a8c45305b85",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "355e362b556d4ff0",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "360d7ca86574da12",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "36221cfeb86f7b10",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3640e3f9bd0dc197",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "364b14b575e99f0f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "36605964721fbed6",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3683e8356005714d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "369ed1b407e15e98",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "36c288ea5b94486c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "37142fa204cb4777",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "371b43cb4a39d5d2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "372e685273b705df",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "378414f89ab1346a",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3795554e0b6dba00",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "37a56ae7e2e60344",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "37e0eb8fecffbbac",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3801593662d796fc",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "381580db18e0be74",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "384581d62afd9319",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "385dbb2bdeb03817",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "386017cde54c454f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "386579ad9f5d9f5f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "38a757a4b1fc4775",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "38b9387bf8718119",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "38de75cff0c08524",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "38ef8a03aab1ee75",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3927742962ea0ff9",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "397f796b88ce6cbf",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "399263e9fd005727",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "39b2aad3aad757e8",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "39be71bb738a5618",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "39c215a4679d3848",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "39fd7d18c550a0f2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3a163496b2c3e4a7",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3a2da4708752effc",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3a4c2ef9596265bd",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3a539030a31cdde1",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3a720977ce826479",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3a7caa6122f867ec",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3ae92b902b0b5329",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3b04412701001d82",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3b4941effbcef564",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3b57c7b5ea8522c2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3b95fb37e8bb7a98",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3bbf37fcce852be7",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3c027cacb77e35cd",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3c05604e78ca0fa9",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3c57bae8f2575f7a",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3c5876032c521546",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3c96f324cc4452b2",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3cba28cdd5f6a9aa",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3ccb5e8c06b65f3c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3cf13a8165a80f00",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3d07029a9acac0aa",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3d1ac2f287ddd1ea",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3d40aa37533f93ee",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3d46f7fec33d4c37",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3d70788b4a4ae5d6",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3d82189982017caa",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3d874195d3c70081",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3d8d769939ad6ecb",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3dc13d73a7736be0",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3df65e15a3af9645",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3e06cfc4e8561d3b",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3e3d6b35dea6b77d",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3e4f6d4cc08b21bf",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3e72ed46e182d9e3",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3e9c2bb1694a2b73",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3eaa95823aac7b57",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3ebed15e17006b35",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3ec01b023cecfdcc",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3ee654e68652c51f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3f2f166c4216a7ce",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3fa0bc6f91a18c3e",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3fe6dc5c645ff630",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "3ff6a40f4278e231",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "4034bac2cb8dfe73",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "404987dd539681db",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "407a00fdca296f0f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "409a18936c552f05",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "40b4e4ca225c2c78",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "40b983d1209839cb",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "40e9423f6b91802c",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "40f3eeb3a12ad86f",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "41092cfb0013b757",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "4133129bbdb5abb9",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "413507eba76320da",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "413b4a29b75c4201",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "418d1c7348b58228",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "41abd84c5d49e9ec",
+      "reason": "per-image attribution/license unavailable"
+    },
+    {
+      "id": "41e8093065b69b33",
+      "reason": "per-image attribution/license unavailable"
+    }
+  ],
+  "downloadedBytes": 29578125
+}

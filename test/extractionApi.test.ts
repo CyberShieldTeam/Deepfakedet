@@ -306,14 +306,124 @@ try {
   }
   await assert.rejects(runExtraction("unsupported", hash, data, "eng", "video"), /unavailable/);
   await assert.rejects(runExtraction("unsupported", hash, data, "eng", "audio"), /unavailable/);
+  const rotatedBytes = fs.readFileSync(".model-cache/extraction-fixtures/rotated.png"),
+    rotatedData = "data:image/png;base64," + rotatedBytes.toString("base64");
+  const rotatedMedia = (
+    await api
+      .post("/api/forensics/analyze-media")
+      .set(a)
+      .send({
+        modality: "image",
+        fileName: "authored-rotated.png",
+        mimeType: "image/png",
+        mediaData: rotatedData,
+        measurements: {},
+      })
+      .expect(200)
+  ).body.result;
+  await api
+    .post(base + "/attach")
+    .set(a)
+    .send({ kind: "media", result: rotatedMedia })
+    .expect(200);
+  const rotatedBody = {
+    mediaHash: rotatedMedia.submittedMedia.sha256,
+    mediaData: rotatedData,
+    modality: "image",
+    language: "eng",
+    profile: "rotate270",
+  };
+  await api
+    .post(base + "/extract")
+    .set(a)
+    .send({ ...rotatedBody, profile: "unbounded-auto-search" })
+    .expect(400);
+  const oriented = (
+    await api
+      .post(base + "/extract")
+      .set(a)
+      .send(rotatedBody)
+      .expect(200)
+  ).body.result;
+  assert.ok(oriented.originalText.includes("Amber Museum"));
+  assert.equal(oriented.geometry.profile, "rotate270");
+  assert.notEqual(oriented.id, first.id);
+  for (const s of oriented.segments) {
+    assert.ok(s.sourceBbox.x >= -1 && s.sourceBbox.y >= -1);
+    assert.ok(s.sourceBbox.x + s.sourceBbox.width <= oriented.geometry.originalWidth + 1);
+    assert.ok(s.sourceBbox.y + s.sourceBbox.height <= oriented.geometry.originalHeight + 1);
+  }
+  const rc = oriented.candidates[0],
+    rr = base + "/extractions/" + encodeURIComponent(oriented.id);
+  const correction = (
+    await api
+      .post(rr + "/review")
+      .set(a)
+      .send({
+        candidateId: rc.id,
+        revision: 0,
+        state: "corrected",
+        reviewedText: "the fictional Amber Museum offers free entry.",
+        reason: "Authored source inspected; shortened exact source wording",
+        sourceConfirmed: true,
+      })
+      .expect(200)
+  ).body.investigation;
+  assert.equal(
+    correction.extractions.find((e: any) => e.id === oriented.id).candidates[0].originalText,
+    rc.originalText,
+  );
+  const rcResult = (
+    await api
+      .post(rr + "/investigate")
+      .set(a)
+      .send({ candidateId: rc.id, revision: 1 })
+      .expect(200)
+  ).body.result;
+  assert.equal(
+    rcResult.extractionOrigin.reviewedText,
+    "the fictional Amber Museum offers free entry.",
+  );
+  assert.equal(rcResult.verdict, "Insufficient Evidence");
+  const rotatedGraph = (
+    await api
+      .post(base + "/correlate")
+      .set(a)
+      .send({})
+      .expect(200)
+  ).body.result;
+  assert.ok(
+    rotatedGraph.relationships.some(
+      (e: any) =>
+        e.type === "MEDIA_CONTAINS_TEXT" &&
+        e.measurements.profile === "rotate270" &&
+        e.measurements.sourceBbox,
+    ),
+  );
+  assert.ok(
+    rotatedGraph.relationships.some((e: any) => e.type === "CLAIM_INVESTIGATED_BY_ENGINE2"),
+  );
+  const sourceEdge = rotatedGraph.relationships.find(
+    (e: any) => e.type === "MEDIA_CONTAINS_TEXT" && e.measurements.profile === "rotate270",
+  );
+  assert.deepEqual(sourceEdge.measurements.bbox, sourceEdge.measurements.processingBbox);
   fs.writeFileSync(
-    "reports/engine41_extraction_controls.json",
+    process.env.VERITAS_EXTRACTION_TEST_REPORT || "reports/engine42_api_controls.json",
     JSON.stringify(
       {
         scope: "authored software controls; NOT independent accuracy",
         clear: { text: first.originalText, timing: first.timing, apiMs },
         correlationMs: linked.elapsedMs,
         quality,
+        rotationControl: {
+          sourceHash: oriented.sourceMediaHash,
+          originalText: oriented.originalText,
+          geometry: oriented.geometry,
+          segments: oriented.segments,
+          reviewedText: rcResult.extractionOrigin.reviewedText,
+          claimVerdict: rcResult.verdict,
+          sourceEdge,
+        },
         independentAccuracy: null,
       },
       null,

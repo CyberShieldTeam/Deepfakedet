@@ -89,6 +89,14 @@ phase closure has occurred.
 
 ## Phase completion rule
 
+Engine 4.2 now adds reproducible local OCR evaluation, a small attributed Latin-script
+development probe, manual rotation/upscaling/layout alternatives and original-coordinate
+review overlays. Default OCR and factual/correlation safeguards are preserved. Next gate:
+larger rights-cleared original screenshots, adjudicated source-language/transcription and
+illegibility labels, source-group splits and a frozen independent holdout. The nine-crop
+probe does not justify an automatic selector or multilingual production claim. See
+`docs/ENGINE42_*.md`; scientific detection phases remain open.
+
 Engine 4.1 now has a tested English still-image OCR → reviewed claim → Engine 2 → Engine 4
 vertical slice. Next extraction gate: rights-cleared independent screenshot annotations,
 blinded reviewers and separate transcription/claim/relationship evaluation, informed by

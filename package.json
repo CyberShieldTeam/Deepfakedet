@@ -15,6 +15,8 @@
     "test:engine4": "tsx test/engine4.test.ts && tsx test/engine4Api.test.ts",
     "test:extraction": "tsx test/extraction.test.ts",
     "test:extraction:api": "tsx test/extractionApi.test.ts",
+    "test:engine42": "tsx test/ocrGeometry.test.ts",
+    "test:engine42:runtime": "tsx test/ocrReliability.test.ts",
     "evaluate:engine3": "tsx test/engine3/evaluate.ts",
     "test:e2e": "playwright test",
     "smoke:image:http": "tsx test/smokeImageHttp.ts",

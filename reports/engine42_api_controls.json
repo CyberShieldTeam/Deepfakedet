@@ -1,0 +1,325 @@
+{
+  "scope": "authored software controls; NOT independent accuracy",
+  "clear": {
+    "text": "Software fixture: the fictional Amber Museum offers free entry.\n",
+    "timing": {
+      "preparationMs": 15.553499999999985,
+      "modelStartupMs": 363.6212,
+      "ocrMs": 159.17970000000003,
+      "candidateMs": 0.4716000000003078,
+      "totalMs": 804.2849999999999
+    },
+    "apiMs": 826.7297999999998
+  },
+  "correlationMs": 1.7254000000002634,
+  "quality": [
+    {
+      "name": "no-text",
+      "state": "NO_TEXT_DETECTED",
+      "text": "",
+      "timing": {
+        "preparationMs": 13.711599999999635,
+        "modelStartupMs": 344.1087,
+        "ocrMs": 41.11750000000001,
+        "candidateMs": 0.011899999999513966,
+        "totalMs": 625.5805
+      },
+      "candidates": 0,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": false
+    },
+    {
+      "name": "blurred",
+      "state": "COMPLETE",
+      "text": "Software future the fictonal Amber Museum offers tree entry\n",
+      "timing": {
+        "preparationMs": 27.215100000000348,
+        "modelStartupMs": 348.67359999999996,
+        "ocrMs": 161.7738999999999,
+        "candidateMs": 0.06199999999989814,
+        "totalMs": 791.9358000000002
+      },
+      "candidates": 1,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": false
+    },
+    {
+      "name": "low-resolution",
+      "state": "COMPLETE",
+      "text": "Software fixture: the fictional Amber Museum offers free entry.\n",
+      "timing": {
+        "preparationMs": 15.922999999999774,
+        "modelStartupMs": 331.2569,
+        "ocrMs": 93.33039999999994,
+        "candidateMs": 0.05779999999958818,
+        "totalMs": 668.1821999999993
+      },
+      "candidates": 1,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": false
+    },
+    {
+      "name": "rotated",
+      "state": "COMPLETE",
+      "text": "“AUS Bad} SJAJJO LUNASNY| Joquiy |eUOIOY BU} :aIN}Xy BIeMYOS\n",
+      "timing": {
+        "preparationMs": 13.618099999999686,
+        "modelStartupMs": 336.5905,
+        "ocrMs": 156.9391,
+        "candidateMs": 0.20830000000023574,
+        "totalMs": 740.5836999999992
+      },
+      "candidates": 1,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": false
+    },
+    {
+      "name": "hindi",
+      "state": "COMPLETE",
+      "text": "Hilal MREIas Gale!\n",
+      "timing": {
+        "preparationMs": 9.789200000000164,
+        "modelStartupMs": 337.0056,
+        "ocrMs": 133.71519999999998,
+        "candidateMs": 0.07400000000052387,
+        "totalMs": 722.8892999999998
+      },
+      "candidates": 1,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": true
+    },
+    {
+      "name": "telugu",
+      "state": "COMPLETE",
+      "text": "SHB Habrsovo 383 eos.\n",
+      "timing": {
+        "preparationMs": 9.763599999998405,
+        "modelStartupMs": 373.2598999999999,
+        "ocrMs": 149.92549999999994,
+        "candidateMs": 0.04169999999976426,
+        "totalMs": 762.8068999999996
+      },
+      "candidates": 1,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": true
+    },
+    {
+      "name": "mixed",
+      "state": "COMPLETE",
+      "text": "Software fixture: PICU GRE B83 od.\n",
+      "timing": {
+        "preparationMs": 30.2541999999994,
+        "modelStartupMs": 340.80100000000004,
+        "ocrMs": 177.74760000000003,
+        "candidateMs": 0.037299999999959255,
+        "totalMs": 774.9454999999998
+      },
+      "candidates": 1,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": true
+    }
+  ],
+  "rotationControl": {
+    "sourceHash": "eb4843d1ef34e3e3981d711c20c68ff2df1be5ccaf80edb076336e3f3035f1f3",
+    "originalText": "Software fixture: the fictional Amber Museum offers free entry.\n",
+    "geometry": {
+      "profile": "rotate270",
+      "displayWidth": 240,
+      "displayHeight": 1500,
+      "processingToDisplay": [
+        0,
+        1,
+        0,
+        -1,
+        0,
+        1500
+      ],
+      "processingToSource": [
+        0,
+        1,
+        0,
+        -1,
+        0,
+        1500
+      ],
+      "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+      "bitmapSha256": "0255616e3dc3b351cff876c626f95241c9849779174ff2fbbdff43191f192bf4",
+      "originalWidth": 240,
+      "originalHeight": 1500,
+      "width": 1500,
+      "height": 240,
+      "transformation": "EXIF 1 applied; RGB; analyst-selected rotate270; <=1600px; no automatic text selection or translation"
+    },
+    "segments": [
+      {
+        "id": "segment:e8457fb13225b93a6bc52da2441d45807050d86e24ae87dfa1577155045bf00a",
+        "text": "Software fixture: the fictional Amber Museum offers free entry.",
+        "bbox": {
+          "x": 27,
+          "y": 88,
+          "width": 1191,
+          "height": 41
+        },
+        "words": [
+          {
+            "text": "Software",
+            "bbox": {
+              "x": 27,
+              "y": 88,
+              "width": 169,
+              "height": 32
+            },
+            "confidence": 96.630447
+          },
+          {
+            "text": "fixture:",
+            "bbox": {
+              "x": 209,
+              "y": 88,
+              "width": 127,
+              "height": 32
+            },
+            "confidence": 96.27845
+          },
+          {
+            "text": "the",
+            "bbox": {
+              "x": 353,
+              "y": 88,
+              "width": 58,
+              "height": 32
+            },
+            "confidence": 96.985695
+          },
+          {
+            "text": "fictional",
+            "bbox": {
+              "x": 424,
+              "y": 88,
+              "width": 145,
+              "height": 32
+            },
+            "confidence": 96.55825
+          },
+          {
+            "text": "Amber",
+            "bbox": {
+              "x": 584,
+              "y": 88,
+              "width": 129,
+              "height": 32
+            },
+            "confidence": 96.831917
+          },
+          {
+            "text": "Museum",
+            "bbox": {
+              "x": 728,
+              "y": 88,
+              "width": 162,
+              "height": 32
+            },
+            "confidence": 95.817192
+          },
+          {
+            "text": "offers",
+            "bbox": {
+              "x": 906,
+              "y": 88,
+              "width": 106,
+              "height": 32
+            },
+            "confidence": 96.606674
+          },
+          {
+            "text": "free",
+            "bbox": {
+              "x": 1026,
+              "y": 88,
+              "width": 74,
+              "height": 32
+            },
+            "confidence": 96.606674
+          },
+          {
+            "text": "entry.",
+            "bbox": {
+              "x": 1115,
+              "y": 90,
+              "width": 103,
+              "height": 39
+            },
+            "confidence": 96.155579
+          }
+        ],
+        "method": "image_ocr",
+        "language": "eng",
+        "languageBasis": "configured_recognition_language",
+        "timestamp": null,
+        "sourceBbox": {
+          "x": 88,
+          "y": 282,
+          "width": 41,
+          "height": 1191
+        },
+        "displayBbox": {
+          "x": 88,
+          "y": 282,
+          "width": 41,
+          "height": 1191
+        }
+      }
+    ],
+    "reviewedText": "the fictional Amber Museum offers free entry.",
+    "claimVerdict": "Insufficient Evidence",
+    "sourceEdge": {
+      "id": "link:b71ae9dc68e7f11c9713b7836237ea48",
+      "source": "media_asset:747d08ba8eef84320fd28b5d86ae29a3",
+      "target": "extracted_text:c25ad426889ab8e8f423e4612ada2559",
+      "type": "MEDIA_CONTAINS_TEXT",
+      "strength": "exact_reference",
+      "crossEngine": false,
+      "method": "bounded local OCR on hash-matching submitted bytes",
+      "support": [
+        "/extractions/1",
+        "/extractions/1/segments/0"
+      ],
+      "measurements": {
+        "method": "tesseract.js@7.0.0",
+        "bbox": {
+          "x": 27,
+          "y": 88,
+          "width": 1191,
+          "height": 41
+        },
+        "processingBbox": {
+          "x": 27,
+          "y": 88,
+          "width": 1191,
+          "height": 41
+        },
+        "sourceBbox": {
+          "x": 88,
+          "y": 282,
+          "width": 41,
+          "height": 1191
+        },
+        "displayBbox": {
+          "x": 88,
+          "y": 282,
+          "width": 41,
+          "height": 1191
+        },
+        "profile": "rotate270"
+      },
+      "explanation": "MEDIA CONTAINS TEXT: bounded local OCR on hash-matching submitted bytes.",
+      "limitations": [
+        "English recognition configured; language was not detected. Other scripts and mixed languages are unsupported.",
+        "OCR confidence describes character recognition, never factual truth.",
+        "Candidate categories are unvalidated text rules; sentences split across lines may be incomplete.",
+        "Review requires original source inspection. Acceptance confirms source representation, not factual truth."
+      ]
+    }
+  },
+  "independentAccuracy": null
+}

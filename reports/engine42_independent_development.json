@@ -1,0 +1,4446 @@
+{
+  "schemaVersion": 2,
+  "scope": "independent_development",
+  "datasetId": "hiertext-validation-six-source-development-v1",
+  "manifestSha256": "c824449f21a0995842e412181c7bf15ed71313397150f85b2a73f98d60aa96a5",
+  "configuration": {
+    "profiles": [
+      "baseline",
+      "upscale2",
+      "contrast"
+    ],
+    "ocr": "tesseract.js@7.0.0",
+    "normalization": "NFC CER/WER; only terminal OCR newline removed; case/punctuation preserved",
+    "nearDuplicateRule": "8x8 average hash Hamming <=4 across splits; screening only, not proof of uniqueness"
+  },
+  "grouped": {
+    "baseline/language/eng": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.5333333333333333,
+        "wordErrorRate": 0.7272727272727273
+      },
+      "exactMatchRate": 0.1111111111111111,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9391343222361885,
+      "maxSampledOcrTreeRssBytes": 190541824
+    },
+    "upscale2/language/eng": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.31851851851851853,
+        "wordErrorRate": 0.5454545454545454
+      },
+      "exactMatchRate": 0.2222222222222222,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9886943111131485,
+      "maxSampledOcrTreeRssBytes": 193060864
+    },
+    "contrast/language/eng": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.5481481481481482,
+        "wordErrorRate": 0.7727272727272727
+      },
+      "exactMatchRate": 0.1111111111111111,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9373123999879075,
+      "maxSampledOcrTreeRssBytes": 193335296
+    },
+    "baseline/quality/publisher_legible": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.5333333333333333,
+        "wordErrorRate": 0.7272727272727273
+      },
+      "exactMatchRate": 0.1111111111111111,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9391343222361885,
+      "maxSampledOcrTreeRssBytes": 190541824
+    },
+    "upscale2/quality/publisher_legible": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.31851851851851853,
+        "wordErrorRate": 0.5454545454545454
+      },
+      "exactMatchRate": 0.2222222222222222,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9886943111131485,
+      "maxSampledOcrTreeRssBytes": 193060864
+    },
+    "contrast/quality/publisher_legible": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.5481481481481482,
+        "wordErrorRate": 0.7727272727272727
+      },
+      "exactMatchRate": 0.1111111111111111,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9373123999879075,
+      "maxSampledOcrTreeRssBytes": 193335296
+    },
+    "baseline/rotation/horizontal_gate": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.5333333333333333,
+        "wordErrorRate": 0.7272727272727273
+      },
+      "exactMatchRate": 0.1111111111111111,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9391343222361885,
+      "maxSampledOcrTreeRssBytes": 190541824
+    },
+    "upscale2/rotation/horizontal_gate": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.31851851851851853,
+        "wordErrorRate": 0.5454545454545454
+      },
+      "exactMatchRate": 0.2222222222222222,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9886943111131485,
+      "maxSampledOcrTreeRssBytes": 193060864
+    },
+    "contrast/rotation/horizontal_gate": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.5481481481481482,
+        "wordErrorRate": 0.7727272727272727
+      },
+      "exactMatchRate": 0.1111111111111111,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9373123999879075,
+      "maxSampledOcrTreeRssBytes": 193335296
+    },
+    "baseline/resolution/117x19": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.07692307692307693,
+        "wordErrorRate": 0.5
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 1.0147412000223994,
+      "maxSampledOcrTreeRssBytes": 185753600
+    },
+    "baseline/resolution/124x29": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.08333333333333333,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9261829000315629,
+      "maxSampledOcrTreeRssBytes": 184700928
+    },
+    "baseline/resolution/126x27": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.3,
+        "wordErrorRate": 0.5
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9145248000277206,
+      "maxSampledOcrTreeRssBytes": 185417728
+    },
+    "baseline/resolution/282x50": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 1.0,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9756817000452429,
+      "maxSampledOcrTreeRssBytes": 184819712
+    },
+    "baseline/resolution/284x41": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 1.0,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.930977400043048,
+      "maxSampledOcrTreeRssBytes": 188493824
+    },
+    "baseline/resolution/330x46": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.0,
+        "wordErrorRate": 0.0
+      },
+      "exactMatchRate": 1.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9278343999758363,
+      "maxSampledOcrTreeRssBytes": 187121664
+    },
+    "baseline/resolution/516x88": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 1.0,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9574756000074558,
+      "maxSampledOcrTreeRssBytes": 190541824
+    },
+    "baseline/resolution/84x19": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.14285714285714285,
+        "wordErrorRate": 0.5
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9241962999803945,
+      "maxSampledOcrTreeRssBytes": 188350464
+    },
+    "baseline/resolution/84x21": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 1.0,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.8805945999920368,
+      "maxSampledOcrTreeRssBytes": 185827328
+    },
+    "upscale2/resolution/117x19": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.07692307692307693,
+        "wordErrorRate": 0.5
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9578541999799199,
+      "maxSampledOcrTreeRssBytes": 187527168
+    },
+    "upscale2/resolution/124x29": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.08333333333333333,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9812460000393912,
+      "maxSampledOcrTreeRssBytes": 190988288
+    },
+    "upscale2/resolution/126x27": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.35,
+        "wordErrorRate": 0.75
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 1.0193050999660045,
+      "maxSampledOcrTreeRssBytes": 193060864
+    },
+    "upscale2/resolution/282x50": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.0625,
+        "wordErrorRate": 0.3333333333333333
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9678689999855123,
+      "maxSampledOcrTreeRssBytes": 187518976
+    },
+    "upscale2/resolution/284x41": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 1.0,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.986977000022307,
+      "maxSampledOcrTreeRssBytes": 188751872
+    },
+    "upscale2/resolution/330x46": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.0,
+        "wordErrorRate": 0.0
+      },
+      "exactMatchRate": 1.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 1.0438340000109747,
+      "maxSampledOcrTreeRssBytes": 189128704
+    },
+    "upscale2/resolution/516x88": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 1.0,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9813483000034466,
+      "maxSampledOcrTreeRssBytes": 191594496
+    },
+    "upscale2/resolution/84x19": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.14285714285714285,
+        "wordErrorRate": 0.5
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9915390000096522,
+      "maxSampledOcrTreeRssBytes": 187506688
+    },
+    "upscale2/resolution/84x21": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.0,
+        "wordErrorRate": 0.0
+      },
+      "exactMatchRate": 1.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.968276200001128,
+      "maxSampledOcrTreeRssBytes": 192364544
+    },
+    "contrast/resolution/117x19": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.07692307692307693,
+        "wordErrorRate": 0.5
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.916504199965857,
+      "maxSampledOcrTreeRssBytes": 189124608
+    },
+    "contrast/resolution/124x29": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.08333333333333333,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9873012999887578,
+      "maxSampledOcrTreeRssBytes": 189890560
+    },
+    "contrast/resolution/126x27": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.4,
+        "wordErrorRate": 0.75
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9784627999761142,
+      "maxSampledOcrTreeRssBytes": 188166144
+    },
+    "contrast/resolution/282x50": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 1.0,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.8864348999923095,
+      "maxSampledOcrTreeRssBytes": 188760064
+    },
+    "contrast/resolution/284x41": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 1.0,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.8858194999629632,
+      "maxSampledOcrTreeRssBytes": 193335296
+    },
+    "contrast/resolution/330x46": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.0,
+        "wordErrorRate": 0.0
+      },
+      "exactMatchRate": 1.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9787502000108361,
+      "maxSampledOcrTreeRssBytes": 187748352
+    },
+    "contrast/resolution/516x88": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 1.0,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9611503000487573,
+      "maxSampledOcrTreeRssBytes": 188096512
+    },
+    "contrast/resolution/84x19": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 0.14285714285714285,
+        "wordErrorRate": 0.5
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9265194999752566,
+      "maxSampledOcrTreeRssBytes": 189087744
+    },
+    "contrast/resolution/84x21": {
+      "samples": 1,
+      "transcription": {
+        "samples": 1,
+        "characterErrorRate": 1.0,
+        "wordErrorRate": 1.0
+      },
+      "exactMatchRate": 0.0,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9148688999703154,
+      "maxSampledOcrTreeRssBytes": 189906944
+    },
+    "baseline/density/single_line": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.5333333333333333,
+        "wordErrorRate": 0.7272727272727273
+      },
+      "exactMatchRate": 0.1111111111111111,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9391343222361885,
+      "maxSampledOcrTreeRssBytes": 190541824
+    },
+    "upscale2/density/single_line": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.31851851851851853,
+        "wordErrorRate": 0.5454545454545454
+      },
+      "exactMatchRate": 0.2222222222222222,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9886943111131485,
+      "maxSampledOcrTreeRssBytes": 193060864
+    },
+    "contrast/density/single_line": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.5481481481481482,
+        "wordErrorRate": 0.7727272727272727
+      },
+      "exactMatchRate": 0.1111111111111111,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9373123999879075,
+      "maxSampledOcrTreeRssBytes": 193335296
+    },
+    "baseline/sourceCategory/independent_scene_text_line_crop": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.5333333333333333,
+        "wordErrorRate": 0.7272727272727273
+      },
+      "exactMatchRate": 0.1111111111111111,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9391343222361885,
+      "maxSampledOcrTreeRssBytes": 190541824
+    },
+    "upscale2/sourceCategory/independent_scene_text_line_crop": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.31851851851851853,
+        "wordErrorRate": 0.5454545454545454
+      },
+      "exactMatchRate": 0.2222222222222222,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9886943111131485,
+      "maxSampledOcrTreeRssBytes": 193060864
+    },
+    "contrast/sourceCategory/independent_scene_text_line_crop": {
+      "samples": 9,
+      "transcription": {
+        "samples": 9,
+        "characterErrorRate": 0.5481481481481482,
+        "wordErrorRate": 0.7727272727272727
+      },
+      "exactMatchRate": 0.1111111111111111,
+      "noTextSamples": 0,
+      "noTextCorrect": 0,
+      "technicalFailures": 0,
+      "unavailable": 0,
+      "partial": 0,
+      "meanWallSeconds": 0.9373123999879075,
+      "maxSampledOcrTreeRssBytes": 193335296
+    }
+  },
+  "rows": [
+    {
+      "id": "012bfb1d9f9afc48-0.png",
+      "sha256": "64b527bc538f2edef45621cd15d5ae118ea0f0d2b3f532ad729cdd0e35910dd9",
+      "sourceGroup": "012bfb1d9f9afc48",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "284x41",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "\"Idon't think it",
+      "attribution": {
+        "ImageID": "012bfb1d9f9afc48",
+        "Subset": "validation",
+        "OriginalURL": "https://c1.staticflickr.com/3/2596/3698238653_555ab1aa4f_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/49024304@N00/3698238653",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/49024304@N00/",
+        "Author": "anyjazz65",
+        "Title": "Urailpass",
+        "OriginalSize": "758910",
+        "OriginalMD5": "r6PCT0dZmL4hyREkZmVkyA==",
+        "Thumbnail300KURL": "https://c4.staticflickr.com/3/2596/3698238653_e7a289cb44_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/012bfb1d9f9afc48.jpg",
+      "sourceSha256": "303f8fe652960253c747bf0c6e0d048daac4fb2c887bb51a83ba3cd3c144bf54",
+      "originalDimensions": [
+        753,
+        1024
+      ],
+      "annotationDimensions": [
+        1177,
+        1600
+      ],
+      "cropBox": [
+        696,
+        174,
+        980,
+        215
+      ],
+      "annotationVertices": [
+        [
+          698,
+          179
+        ],
+        [
+          976,
+          176
+        ],
+        [
+          977,
+          210
+        ],
+        [
+          698,
+          212
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "baseline",
+      "state": "NO_TEXT_DETECTED",
+      "text": "",
+      "segments": [],
+      "geometry": {
+        "profile": "baseline",
+        "displayWidth": 284,
+        "displayHeight": 41,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "64b527bc538f2edef45621cd15d5ae118ea0f0d2b3f532ad729cdd0e35910dd9",
+        "originalWidth": 284,
+        "originalHeight": 41,
+        "width": 284,
+        "height": 41,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected baseline; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 41.61150000000001,
+        "modelStartupMs": 368.07629999999995,
+        "ocrMs": 35.2577,
+        "candidateMs": 0.14830000000006294,
+        "totalMs": 717.0534
+      },
+      "extractionId": "extraction:3e4576fc0ec77a69a6291d138891c3fe330ca94173593c8a8d6c7c33d969f9e1",
+      "candidates": 0,
+      "wallSeconds": 0.930977400043048,
+      "sampledPeakOcrTreeRssBytes": 188493824
+    },
+    {
+      "id": "012bfb1d9f9afc48-1.png",
+      "sha256": "2c43e3d45d8ef160485e6fb3a93d223a1fbf2e697ec04eb6e3b769548d8efe38",
+      "sourceGroup": "012bfb1d9f9afc48",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "282x50",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "he's just trying",
+      "attribution": {
+        "ImageID": "012bfb1d9f9afc48",
+        "Subset": "validation",
+        "OriginalURL": "https://c1.staticflickr.com/3/2596/3698238653_555ab1aa4f_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/49024304@N00/3698238653",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/49024304@N00/",
+        "Author": "anyjazz65",
+        "Title": "Urailpass",
+        "OriginalSize": "758910",
+        "OriginalMD5": "r6PCT0dZmL4hyREkZmVkyA==",
+        "Thumbnail300KURL": "https://c4.staticflickr.com/3/2596/3698238653_e7a289cb44_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/012bfb1d9f9afc48.jpg",
+      "sourceSha256": "303f8fe652960253c747bf0c6e0d048daac4fb2c887bb51a83ba3cd3c144bf54",
+      "originalDimensions": [
+        753,
+        1024
+      ],
+      "annotationDimensions": [
+        1177,
+        1600
+      ],
+      "cropBox": [
+        698,
+        254,
+        980,
+        304
+      ],
+      "annotationVertices": [
+        [
+          700,
+          257
+        ],
+        [
+          976,
+          256
+        ],
+        [
+          977,
+          301
+        ],
+        [
+          700,
+          301
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "baseline",
+      "state": "NO_TEXT_DETECTED",
+      "text": "",
+      "segments": [],
+      "geometry": {
+        "profile": "baseline",
+        "displayWidth": 282,
+        "displayHeight": 50,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "2c43e3d45d8ef160485e6fb3a93d223a1fbf2e697ec04eb6e3b769548d8efe38",
+        "originalWidth": 282,
+        "originalHeight": 50,
+        "width": 282,
+        "height": 50,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected baseline; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 41.0514,
+        "modelStartupMs": 384.8999,
+        "ocrMs": 34.041900000000055,
+        "candidateMs": 0.15629999999998745,
+        "totalMs": 738.5606
+      },
+      "extractionId": "extraction:d6fa06f05f06df7ce7be459be66cf7d8838c1a68c87339fe5eeb41b3320e1e6a",
+      "candidates": 0,
+      "wallSeconds": 0.9756817000452429,
+      "sampledPeakOcrTreeRssBytes": 184819712
+    },
+    {
+      "id": "04c69de1d1bf9892-0.png",
+      "sha256": "77b53cf747f47acc7b9b680fabc922082cb9853cd8d3683c9ad360faed9d7476",
+      "sourceGroup": "04c69de1d1bf9892",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "84x21",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "David (1 unr...",
+      "attribution": {
+        "ImageID": "04c69de1d1bf9892",
+        "Subset": "validation",
+        "OriginalURL": "https://farm3.staticflickr.com/2491/5729422595_5e8a157bc9_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/glennji/5729422595",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/glennji/",
+        "Author": "Glenn J. Mason",
+        "Title": "Screenshot-7",
+        "OriginalSize": "303112",
+        "OriginalMD5": "bfNp02uZ3nOaJXacgEFHsg==",
+        "Thumbnail300KURL": "https://c1.staticflickr.com/3/2491/5729422595_5892c1acc8_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/04c69de1d1bf9892.jpg",
+      "sourceSha256": "7d321c29587e140c34d990fcfd45d85c0d56610d0944eb7472177574f42859d1",
+      "originalDimensions": [
+        1024,
+        576
+      ],
+      "annotationDimensions": [
+        1600,
+        900
+      ],
+      "cropBox": [
+        889,
+        1,
+        973,
+        22
+      ],
+      "annotationVertices": [
+        [
+          892,
+          3
+        ],
+        [
+          970,
+          7
+        ],
+        [
+          970,
+          19
+        ],
+        [
+          891,
+          14
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "baseline",
+      "state": "NO_TEXT_DETECTED",
+      "text": "",
+      "segments": [],
+      "geometry": {
+        "profile": "baseline",
+        "displayWidth": 84,
+        "displayHeight": 21,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "77b53cf747f47acc7b9b680fabc922082cb9853cd8d3683c9ad360faed9d7476",
+        "originalWidth": 84,
+        "originalHeight": 21,
+        "width": 84,
+        "height": 21,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected baseline; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 37.27760000000001,
+        "modelStartupMs": 355.8234,
+        "ocrMs": 41.41949999999997,
+        "candidateMs": 0.157100000000014,
+        "totalMs": 672.616
+      },
+      "extractionId": "extraction:738f6cab6f788c403e6ea89085264d0812b9876d03f38c6dfa00ec7a20ad5a57",
+      "candidates": 0,
+      "wallSeconds": 0.8805945999920368,
+      "sampledPeakOcrTreeRssBytes": 185827328
+    },
+    {
+      "id": "04c69de1d1bf9892-1.png",
+      "sha256": "855394e3e2744f5126600cb05b887ca9ebc156d52bf3d044e707a31009b71475",
+      "sourceGroup": "04c69de1d1bf9892",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "84x19",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "[Inbox Unif...",
+      "attribution": {
+        "ImageID": "04c69de1d1bf9892",
+        "Subset": "validation",
+        "OriginalURL": "https://farm3.staticflickr.com/2491/5729422595_5e8a157bc9_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/glennji/5729422595",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/glennji/",
+        "Author": "Glenn J. Mason",
+        "Title": "Screenshot-7",
+        "OriginalSize": "303112",
+        "OriginalMD5": "bfNp02uZ3nOaJXacgEFHsg==",
+        "Thumbnail300KURL": "https://c1.staticflickr.com/3/2491/5729422595_5892c1acc8_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/04c69de1d1bf9892.jpg",
+      "sourceSha256": "7d321c29587e140c34d990fcfd45d85c0d56610d0944eb7472177574f42859d1",
+      "originalDimensions": [
+        1024,
+        576
+      ],
+      "annotationDimensions": [
+        1600,
+        900
+      ],
+      "cropBox": [
+        454,
+        2,
+        538,
+        21
+      ],
+      "annotationVertices": [
+        [
+          456,
+          6
+        ],
+        [
+          534,
+          4
+        ],
+        [
+          535,
+          17
+        ],
+        [
+          456,
+          18
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "baseline",
+      "state": "COMPLETE",
+      "text": "[Inbox - Unif...\n",
+      "segments": [
+        {
+          "id": "segment:a6cfd2219e17296b93761fe1a5900c84ff618187c99dbb38f34f78b0369cf3fd",
+          "text": "[Inbox - Unif...",
+          "bbox": {
+            "x": 2,
+            "y": 3,
+            "width": 79,
+            "height": 14
+          },
+          "words": [
+            {
+              "text": "[Inbox",
+              "bbox": {
+                "x": 2,
+                "y": 4,
+                "width": 35,
+                "height": 13
+              },
+              "confidence": 87.758461
+            },
+            {
+              "text": "-",
+              "bbox": {
+                "x": 41,
+                "y": 8,
+                "width": 3,
+                "height": 3
+              },
+              "confidence": 77.775017
+            },
+            {
+              "text": "Unif...",
+              "bbox": {
+                "x": 48,
+                "y": 3,
+                "width": 33,
+                "height": 11
+              },
+              "confidence": 77.901253
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 2,
+            "y": 3,
+            "width": 79,
+            "height": 14
+          },
+          "displayBbox": {
+            "x": 2,
+            "y": 3,
+            "width": 79,
+            "height": 14
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "baseline",
+        "displayWidth": 84,
+        "displayHeight": 19,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "855394e3e2744f5126600cb05b887ca9ebc156d52bf3d044e707a31009b71475",
+        "originalWidth": 84,
+        "originalHeight": 19,
+        "width": 84,
+        "height": 19,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected baseline; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 39.181599999999975,
+        "modelStartupMs": 348.57959999999997,
+        "ocrMs": 71.32389999999998,
+        "candidateMs": 0.6345999999999776,
+        "totalMs": 702.862
+      },
+      "extractionId": "extraction:cc1d0ee3703e1c4bfb8b3e7c7264d3f133cc3dbd076a96b2f3f4b7336cfeaffe",
+      "candidates": 1,
+      "wallSeconds": 0.9241962999803945,
+      "sampledPeakOcrTreeRssBytes": 188350464
+    },
+    {
+      "id": "07f328166c0ebbf7-0.png",
+      "sha256": "587e085a2dd8f5c11dbd0ae1d7d0e21c3bfffacab8f9728681e30af4eec40694",
+      "sourceGroup": "07f328166c0ebbf7",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "126x27",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "Mandrin is made from",
+      "attribution": {
+        "ImageID": "07f328166c0ebbf7",
+        "Subset": "validation",
+        "OriginalURL": "https://farm8.staticflickr.com/3139/2923083907_88b3ab52f7_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/blmurch/2923083907/",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/blmurch/",
+        "Author": "Beatrice Murch",
+        "Title": "PowerPuffGirl among the drinks",
+        "OriginalSize": "3203459",
+        "OriginalMD5": "+TwuSLvIbtcTRIrWBFmj+Q==",
+        "Thumbnail300KURL": "https://c8.staticflickr.com/4/3139/2923083907_4f96b0b4d4_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/07f328166c0ebbf7.jpg",
+      "sourceSha256": "b082c51f5162c88a6713e6eae3f09c0bd90119e5651015231311439c816483d4",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "annotationDimensions": [
+        1600,
+        1200
+      ],
+      "cropBox": [
+        993,
+        659,
+        1119,
+        686
+      ],
+      "annotationVertices": [
+        [
+          995,
+          663
+        ],
+        [
+          1115,
+          661
+        ],
+        [
+          1116,
+          682
+        ],
+        [
+          995,
+          683
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "baseline",
+      "state": "COMPLETE",
+      "text": "Wenn ts made from\n",
+      "segments": [
+        {
+          "id": "segment:7479cf6d76391cef48e4f1a4027fcc732e76e4b7601422b7d4cec934246c5c76",
+          "text": "Wenn ts made from",
+          "bbox": {
+            "x": 0,
+            "y": 0,
+            "width": 126,
+            "height": 27
+          },
+          "words": [
+            {
+              "text": "Wenn",
+              "bbox": {
+                "x": 0,
+                "y": 2,
+                "width": 123,
+                "height": 25
+              },
+              "confidence": 47.591675
+            },
+            {
+              "text": "ts",
+              "bbox": {
+                "x": 49,
+                "y": 0,
+                "width": 8,
+                "height": 27
+              },
+              "confidence": 37.260494
+            },
+            {
+              "text": "made",
+              "bbox": {
+                "x": 60,
+                "y": 0,
+                "width": 30,
+                "height": 27
+              },
+              "confidence": 20.569298
+            },
+            {
+              "text": "from",
+              "bbox": {
+                "x": 94,
+                "y": 0,
+                "width": 32,
+                "height": 27
+              },
+              "confidence": 85.481262
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 0,
+            "y": 0,
+            "width": 126,
+            "height": 27
+          },
+          "displayBbox": {
+            "x": 0,
+            "y": 0,
+            "width": 126,
+            "height": 27
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "baseline",
+        "displayWidth": 126,
+        "displayHeight": 27,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "587e085a2dd8f5c11dbd0ae1d7d0e21c3bfffacab8f9728681e30af4eec40694",
+        "originalWidth": 126,
+        "originalHeight": 27,
+        "width": 126,
+        "height": 27,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected baseline; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 37.50369999999998,
+        "modelStartupMs": 350.02049999999997,
+        "ocrMs": 84.58049999999992,
+        "candidateMs": 0.47490000000004784,
+        "totalMs": 716.8592
+      },
+      "extractionId": "extraction:f54998f9b13ccc65e8e6c6ae6c00cf2e0b864a5f5a4f67906e2f86ef5b415086",
+      "candidates": 1,
+      "wallSeconds": 0.9145248000277206,
+      "sampledPeakOcrTreeRssBytes": 185417728
+    },
+    {
+      "id": "291e9c3df3a9ffb5-0.png",
+      "sha256": "ae78d8a3d34f5e33a5b5467360c82fc15728f06aec4d6f3eb9b3e0bf06813f4d",
+      "sourceGroup": "291e9c3df3a9ffb5",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "117x19",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "NURSERY SCALE",
+      "attribution": {
+        "ImageID": "291e9c3df3a9ffb5",
+        "Subset": "validation",
+        "OriginalURL": "https://farm6.staticflickr.com/7320/10426825023_76a2a88846_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/77423179@N02/10426825023",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/77423179@N02/",
+        "Author": "Melissa Hillier",
+        "Title": "Mabry",
+        "OriginalSize": "2247789",
+        "OriginalMD5": "GpCuIyRCuRoeTJ9A0iD3UQ==",
+        "Thumbnail300KURL": "https://c4.staticflickr.com/8/7320/10426825023_0ed5774f0f_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/291e9c3df3a9ffb5.jpg",
+      "sourceSha256": "27bfd8e2ab91136a7ac4ff5b1421003ac21c6c30f2e94789d87393e6c8710062",
+      "originalDimensions": [
+        1024,
+        705
+      ],
+      "annotationDimensions": [
+        1600,
+        1102
+      ],
+      "cropBox": [
+        717,
+        743,
+        834,
+        762
+      ],
+      "annotationVertices": [
+        [
+          719,
+          750
+        ],
+        [
+          830,
+          745
+        ],
+        [
+          831,
+          754
+        ],
+        [
+          719,
+          759
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "baseline",
+      "state": "COMPLETE",
+      "text": "MURSERY SCALE\n",
+      "segments": [
+        {
+          "id": "segment:49bbb07c363b8ae0c378b8f535455719668efec2cf92885bd1753b5709f6f374",
+          "text": "MURSERY SCALE",
+          "bbox": {
+            "x": 2,
+            "y": 3,
+            "width": 112,
+            "height": 14
+          },
+          "words": [
+            {
+              "text": "MURSERY",
+              "bbox": {
+                "x": 2,
+                "y": 5,
+                "width": 63,
+                "height": 12
+              },
+              "confidence": 37.609787
+            },
+            {
+              "text": "SCALE",
+              "bbox": {
+                "x": 74,
+                "y": 3,
+                "width": 40,
+                "height": 10
+              },
+              "confidence": 96.350479
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 2,
+            "y": 3,
+            "width": 112,
+            "height": 14
+          },
+          "displayBbox": {
+            "x": 2,
+            "y": 3,
+            "width": 112,
+            "height": 14
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "baseline",
+        "displayWidth": 117,
+        "displayHeight": 19,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "ae78d8a3d34f5e33a5b5467360c82fc15728f06aec4d6f3eb9b3e0bf06813f4d",
+        "originalWidth": 117,
+        "originalHeight": 19,
+        "width": 117,
+        "height": 19,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected baseline; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 37.93980000000002,
+        "modelStartupMs": 388.8242,
+        "ocrMs": 88.6001,
+        "candidateMs": 0.6798000000000002,
+        "totalMs": 794.6993
+      },
+      "extractionId": "extraction:41d417b152f3205f3e2397dc1f3e6b70a2539619d6f4308eb27fab5c2b226c0b",
+      "candidates": 1,
+      "wallSeconds": 1.0147412000223994,
+      "sampledPeakOcrTreeRssBytes": 185753600
+    },
+    {
+      "id": "3ea969425b1c88bd-0.png",
+      "sha256": "11b308a8af46a904da166ee0ba9c5173b476b4d670ec393f3e9e6d1eaf643d04",
+      "sourceGroup": "3ea969425b1c88bd",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "330x46",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "September 2012",
+      "attribution": {
+        "ImageID": "3ea969425b1c88bd",
+        "Subset": "validation",
+        "OriginalURL": "https://c6.staticflickr.com/9/8039/7905918140_bb42f58a60_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/chunkysalsa/7905918140",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/chunkysalsa/",
+        "Author": "chunkysalsa",
+        "Title": "It's going to be a busy September....",
+        "OriginalSize": "92549",
+        "OriginalMD5": "NbVOxho23lp8BVkNQbuWsA==",
+        "Thumbnail300KURL": "https://c1.staticflickr.com/9/8039/7905918140_ca1e9f10be_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/3ea969425b1c88bd.jpg",
+      "sourceSha256": "58d39ff28cdb6c0d375473608b0bab8c1dfc19c8f0157aa3ca2047e2adc96cea",
+      "originalDimensions": [
+        1024,
+        1024
+      ],
+      "annotationDimensions": [
+        612,
+        612
+      ],
+      "cropBox": [
+        142,
+        22,
+        472,
+        68
+      ],
+      "annotationVertices": [
+        [
+          144,
+          26
+        ],
+        [
+          468,
+          24
+        ],
+        [
+          469,
+          64
+        ],
+        [
+          144,
+          65
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "baseline",
+      "state": "COMPLETE",
+      "text": "September 2012\n",
+      "segments": [
+        {
+          "id": "segment:d43850242a7620a8dbf9b57c105220da4b41106c435eb5488ab5f84decafefe9",
+          "text": "September 2012",
+          "bbox": {
+            "x": 2,
+            "y": 5,
+            "width": 324,
+            "height": 38
+          },
+          "words": [
+            {
+              "text": "September",
+              "bbox": {
+                "x": 2,
+                "y": 5,
+                "width": 219,
+                "height": 38
+              },
+              "confidence": 96.308701
+            },
+            {
+              "text": "2012",
+              "bbox": {
+                "x": 234,
+                "y": 5,
+                "width": 92,
+                "height": 31
+              },
+              "confidence": 96.982697
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 2,
+            "y": 5,
+            "width": 324,
+            "height": 38
+          },
+          "displayBbox": {
+            "x": 2,
+            "y": 5,
+            "width": 324,
+            "height": 38
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "baseline",
+        "displayWidth": 330,
+        "displayHeight": 46,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "11b308a8af46a904da166ee0ba9c5173b476b4d670ec393f3e9e6d1eaf643d04",
+        "originalWidth": 330,
+        "originalHeight": 46,
+        "width": 330,
+        "height": 46,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected baseline; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 47.16890000000001,
+        "modelStartupMs": 348.74359999999996,
+        "ocrMs": 87.17070000000001,
+        "candidateMs": 0.44410000000004857,
+        "totalMs": 721.0462
+      },
+      "extractionId": "extraction:f981722fe8760b346b94b709d428b6c4463235aa2e28eba2475b2b943974c4c6",
+      "candidates": 1,
+      "wallSeconds": 0.9278343999758363,
+      "sampledPeakOcrTreeRssBytes": 187121664
+    },
+    {
+      "id": "41ec68d29b5f5db0-0.png",
+      "sha256": "aea18161d681c5dfbcb6c1d5e90d768cc527c6bbe136cf9caec42d8f25b0bf06",
+      "sourceGroup": "41ec68d29b5f5db0",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "516x88",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "GRAN PELUQUERIA",
+      "attribution": {
+        "ImageID": "41ec68d29b5f5db0",
+        "Subset": "validation",
+        "OriginalURL": "https://farm1.staticflickr.com/8541/8634423467_6341f37635_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/martius/8634423467",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/martius/",
+        "Author": "Manuel",
+        "Title": "cuestión de tamaños; coche mini y gran peluquería",
+        "OriginalSize": "6567697",
+        "OriginalMD5": "9MMwvRaQITrPTSRnJBeYKw==",
+        "Thumbnail300KURL": "https://c3.staticflickr.com/9/8541/8634423467_4eede1e2cb_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/41ec68d29b5f5db0.jpg",
+      "sourceSha256": "b5d7bf7c3c4acd5da1689c69257cf8a47f9e6017eaa8b8ba9e361f42e81d91e4",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "annotationDimensions": [
+        1600,
+        1200
+      ],
+      "cropBox": [
+        578,
+        56,
+        1094,
+        144
+      ],
+      "annotationVertices": [
+        [
+          580,
+          63
+        ],
+        [
+          1090,
+          58
+        ],
+        [
+          1091,
+          137
+        ],
+        [
+          580,
+          141
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "baseline",
+      "state": "NO_TEXT_DETECTED",
+      "text": "",
+      "segments": [],
+      "geometry": {
+        "profile": "baseline",
+        "displayWidth": 516,
+        "displayHeight": 88,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "aea18161d681c5dfbcb6c1d5e90d768cc527c6bbe136cf9caec42d8f25b0bf06",
+        "originalWidth": 516,
+        "originalHeight": 88,
+        "width": 516,
+        "height": 88,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected baseline; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 70.72770000000003,
+        "modelStartupMs": 352.03460000000007,
+        "ocrMs": 55.352100000000064,
+        "candidateMs": 0.10119999999994889,
+        "totalMs": 730.2912000000001
+      },
+      "extractionId": "extraction:5df59a963f6a926b4350c98bf9ab63141dd78dcb17fb8d3764c73f87f938848a",
+      "candidates": 0,
+      "wallSeconds": 0.9574756000074558,
+      "sampledPeakOcrTreeRssBytes": 190541824
+    },
+    {
+      "id": "41ec68d29b5f5db0-1.png",
+      "sha256": "24eb49bf18958420fcca40ca7b2a1a8f541c9d248235843bf9387ab53905f849",
+      "sourceGroup": "41ec68d29b5f5db0",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "124x29",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "ESPECIALITAD",
+      "attribution": {
+        "ImageID": "41ec68d29b5f5db0",
+        "Subset": "validation",
+        "OriginalURL": "https://farm1.staticflickr.com/8541/8634423467_6341f37635_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/martius/8634423467",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/martius/",
+        "Author": "Manuel",
+        "Title": "cuestión de tamaños; coche mini y gran peluquería",
+        "OriginalSize": "6567697",
+        "OriginalMD5": "9MMwvRaQITrPTSRnJBeYKw==",
+        "Thumbnail300KURL": "https://c3.staticflickr.com/9/8541/8634423467_4eede1e2cb_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/41ec68d29b5f5db0.jpg",
+      "sourceSha256": "b5d7bf7c3c4acd5da1689c69257cf8a47f9e6017eaa8b8ba9e361f42e81d91e4",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "annotationDimensions": [
+        1600,
+        1200
+      ],
+      "cropBox": [
+        487,
+        231,
+        611,
+        260
+      ],
+      "annotationVertices": [
+        [
+          489,
+          234
+        ],
+        [
+          607,
+          233
+        ],
+        [
+          608,
+          256
+        ],
+        [
+          489,
+          257
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "baseline",
+      "state": "COMPLETE",
+      "text": "ESPECIALIIAD\n",
+      "segments": [
+        {
+          "id": "segment:ad2fb8035f241ea0fc810776161fb63a9b140389aafd96c7cfe0a939bb212be3",
+          "text": "ESPECIALIIAD",
+          "bbox": {
+            "x": 3,
+            "y": 5,
+            "width": 121,
+            "height": 21
+          },
+          "words": [
+            {
+              "text": "ESPECIALIIAD",
+              "bbox": {
+                "x": 3,
+                "y": 5,
+                "width": 121,
+                "height": 21
+              },
+              "confidence": 38.272675
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 3,
+            "y": 5,
+            "width": 121,
+            "height": 21
+          },
+          "displayBbox": {
+            "x": 3,
+            "y": 5,
+            "width": 121,
+            "height": 21
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "baseline",
+        "displayWidth": 124,
+        "displayHeight": 29,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "24eb49bf18958420fcca40ca7b2a1a8f541c9d248235843bf9387ab53905f849",
+        "originalWidth": 124,
+        "originalHeight": 29,
+        "width": 124,
+        "height": 29,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected baseline; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 37.982399999999984,
+        "modelStartupMs": 353.41859999999997,
+        "ocrMs": 73.48609999999996,
+        "candidateMs": 0.6816000000000031,
+        "totalMs": 706.6809000000001
+      },
+      "extractionId": "extraction:c200d54a7c6a349ec8b6e087f9689328a6cd2732f168f8d389b88f1a93ae2975",
+      "candidates": 1,
+      "wallSeconds": 0.9261829000315629,
+      "sampledPeakOcrTreeRssBytes": 184700928
+    },
+    {
+      "id": "012bfb1d9f9afc48-0.png",
+      "sha256": "64b527bc538f2edef45621cd15d5ae118ea0f0d2b3f532ad729cdd0e35910dd9",
+      "sourceGroup": "012bfb1d9f9afc48",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "284x41",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "\"Idon't think it",
+      "attribution": {
+        "ImageID": "012bfb1d9f9afc48",
+        "Subset": "validation",
+        "OriginalURL": "https://c1.staticflickr.com/3/2596/3698238653_555ab1aa4f_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/49024304@N00/3698238653",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/49024304@N00/",
+        "Author": "anyjazz65",
+        "Title": "Urailpass",
+        "OriginalSize": "758910",
+        "OriginalMD5": "r6PCT0dZmL4hyREkZmVkyA==",
+        "Thumbnail300KURL": "https://c4.staticflickr.com/3/2596/3698238653_e7a289cb44_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/012bfb1d9f9afc48.jpg",
+      "sourceSha256": "303f8fe652960253c747bf0c6e0d048daac4fb2c887bb51a83ba3cd3c144bf54",
+      "originalDimensions": [
+        753,
+        1024
+      ],
+      "annotationDimensions": [
+        1177,
+        1600
+      ],
+      "cropBox": [
+        696,
+        174,
+        980,
+        215
+      ],
+      "annotationVertices": [
+        [
+          698,
+          179
+        ],
+        [
+          976,
+          176
+        ],
+        [
+          977,
+          210
+        ],
+        [
+          698,
+          212
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "upscale2",
+      "state": "NO_TEXT_DETECTED",
+      "text": "",
+      "segments": [],
+      "geometry": {
+        "profile": "upscale2",
+        "displayWidth": 284,
+        "displayHeight": 41,
+        "processingToDisplay": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "processingToSource": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "bd5017fdc55a6ee69e5dd311cf0c9af5caa1f3dc4afb8268fc6ed6b9ffa580eb",
+        "originalWidth": 284,
+        "originalHeight": 41,
+        "width": 568,
+        "height": 82,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected upscale2; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 44.28059999999999,
+        "modelStartupMs": 451.1095,
+        "ocrMs": 43.346900000000005,
+        "candidateMs": 0.2056999999999789,
+        "totalMs": 782.9270999999999
+      },
+      "extractionId": "extraction:03e5750bbfe133f6732f00d931f78289bc6391bb51c4c39b64ab1625b88294fd",
+      "candidates": 0,
+      "wallSeconds": 0.986977000022307,
+      "sampledPeakOcrTreeRssBytes": 188751872
+    },
+    {
+      "id": "012bfb1d9f9afc48-1.png",
+      "sha256": "2c43e3d45d8ef160485e6fb3a93d223a1fbf2e697ec04eb6e3b769548d8efe38",
+      "sourceGroup": "012bfb1d9f9afc48",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "282x50",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "he's just trying",
+      "attribution": {
+        "ImageID": "012bfb1d9f9afc48",
+        "Subset": "validation",
+        "OriginalURL": "https://c1.staticflickr.com/3/2596/3698238653_555ab1aa4f_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/49024304@N00/3698238653",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/49024304@N00/",
+        "Author": "anyjazz65",
+        "Title": "Urailpass",
+        "OriginalSize": "758910",
+        "OriginalMD5": "r6PCT0dZmL4hyREkZmVkyA==",
+        "Thumbnail300KURL": "https://c4.staticflickr.com/3/2596/3698238653_e7a289cb44_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/012bfb1d9f9afc48.jpg",
+      "sourceSha256": "303f8fe652960253c747bf0c6e0d048daac4fb2c887bb51a83ba3cd3c144bf54",
+      "originalDimensions": [
+        753,
+        1024
+      ],
+      "annotationDimensions": [
+        1177,
+        1600
+      ],
+      "cropBox": [
+        698,
+        254,
+        980,
+        304
+      ],
+      "annotationVertices": [
+        [
+          700,
+          257
+        ],
+        [
+          976,
+          256
+        ],
+        [
+          977,
+          301
+        ],
+        [
+          700,
+          301
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "upscale2",
+      "state": "COMPLETE",
+      "text": "he’s just trying\n",
+      "segments": [
+        {
+          "id": "segment:dbe691e918322dca31bceb1bc4060c7f689ed36274a48cea99085688465d1c84",
+          "text": "he’s just trying",
+          "bbox": {
+            "x": 7,
+            "y": 0,
+            "width": 557,
+            "height": 100
+          },
+          "words": [
+            {
+              "text": "he’s",
+              "bbox": {
+                "x": 7,
+                "y": 0,
+                "width": 121,
+                "height": 100
+              },
+              "confidence": 91.507477
+            },
+            {
+              "text": "just",
+              "bbox": {
+                "x": 161,
+                "y": 0,
+                "width": 134,
+                "height": 100
+              },
+              "confidence": 96.889931
+            },
+            {
+              "text": "trying",
+              "bbox": {
+                "x": 319,
+                "y": 0,
+                "width": 245,
+                "height": 100
+              },
+              "confidence": 96.681999
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 3.5,
+            "y": 0,
+            "width": 278.5,
+            "height": 50
+          },
+          "displayBbox": {
+            "x": 3.5,
+            "y": 0,
+            "width": 278.5,
+            "height": 50
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "upscale2",
+        "displayWidth": 282,
+        "displayHeight": 50,
+        "processingToDisplay": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "processingToSource": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "204504779587130aa55e5fd25aff04352e17aa7c6943d784071038e34c828e1f",
+        "originalWidth": 282,
+        "originalHeight": 50,
+        "width": 564,
+        "height": 100,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected upscale2; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 50.44229999999999,
+        "modelStartupMs": 339.3157,
+        "ocrMs": 107.44299999999998,
+        "candidateMs": 0.48709999999994125,
+        "totalMs": 742.1985999999999
+      },
+      "extractionId": "extraction:61b0993250f9d77ea77f2e07ed2d0570dd94dea6c2aeb84a5898d3aa895fc9ab",
+      "candidates": 1,
+      "wallSeconds": 0.9678689999855123,
+      "sampledPeakOcrTreeRssBytes": 187518976
+    },
+    {
+      "id": "04c69de1d1bf9892-0.png",
+      "sha256": "77b53cf747f47acc7b9b680fabc922082cb9853cd8d3683c9ad360faed9d7476",
+      "sourceGroup": "04c69de1d1bf9892",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "84x21",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "David (1 unr...",
+      "attribution": {
+        "ImageID": "04c69de1d1bf9892",
+        "Subset": "validation",
+        "OriginalURL": "https://farm3.staticflickr.com/2491/5729422595_5e8a157bc9_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/glennji/5729422595",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/glennji/",
+        "Author": "Glenn J. Mason",
+        "Title": "Screenshot-7",
+        "OriginalSize": "303112",
+        "OriginalMD5": "bfNp02uZ3nOaJXacgEFHsg==",
+        "Thumbnail300KURL": "https://c1.staticflickr.com/3/2491/5729422595_5892c1acc8_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/04c69de1d1bf9892.jpg",
+      "sourceSha256": "7d321c29587e140c34d990fcfd45d85c0d56610d0944eb7472177574f42859d1",
+      "originalDimensions": [
+        1024,
+        576
+      ],
+      "annotationDimensions": [
+        1600,
+        900
+      ],
+      "cropBox": [
+        889,
+        1,
+        973,
+        22
+      ],
+      "annotationVertices": [
+        [
+          892,
+          3
+        ],
+        [
+          970,
+          7
+        ],
+        [
+          970,
+          19
+        ],
+        [
+          891,
+          14
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "upscale2",
+      "state": "COMPLETE",
+      "text": "David (1 unr...\n",
+      "segments": [
+        {
+          "id": "segment:ae5dff8a815126d108640571ca6147e53a3e7d4a769da31de3cdd4d76e4e72ec",
+          "text": "David (1 unr...",
+          "bbox": {
+            "x": 5,
+            "y": 9,
+            "width": 159,
+            "height": 24
+          },
+          "words": [
+            {
+              "text": "David",
+              "bbox": {
+                "x": 5,
+                "y": 9,
+                "width": 63,
+                "height": 20
+              },
+              "confidence": 95.661118
+            },
+            {
+              "text": "(1",
+              "bbox": {
+                "x": 75,
+                "y": 11,
+                "width": 20,
+                "height": 22
+              },
+              "confidence": 94.994141
+            },
+            {
+              "text": "unr...",
+              "bbox": {
+                "x": 104,
+                "y": 14,
+                "width": 60,
+                "height": 15
+              },
+              "confidence": 95.500275
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 2.5,
+            "y": 4.5,
+            "width": 79.5,
+            "height": 12
+          },
+          "displayBbox": {
+            "x": 2.5,
+            "y": 4.5,
+            "width": 79.5,
+            "height": 12
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "upscale2",
+        "displayWidth": 84,
+        "displayHeight": 21,
+        "processingToDisplay": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "processingToSource": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "dd118f251a096568e270384e09833b48ad67919b321e8c73421fbf2c1ad649af",
+        "originalWidth": 84,
+        "originalHeight": 21,
+        "width": 168,
+        "height": 42,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected upscale2; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 39.303500000000014,
+        "modelStartupMs": 357.0314000000001,
+        "ocrMs": 87.94290000000001,
+        "candidateMs": 0.4513000000000602,
+        "totalMs": 733.0812000000001
+      },
+      "extractionId": "extraction:304e469617fadc94475fd573e7aaa7b69dc1d42f12b316670f1c4344910ad0bd",
+      "candidates": 1,
+      "wallSeconds": 0.968276200001128,
+      "sampledPeakOcrTreeRssBytes": 192364544
+    },
+    {
+      "id": "04c69de1d1bf9892-1.png",
+      "sha256": "855394e3e2744f5126600cb05b887ca9ebc156d52bf3d044e707a31009b71475",
+      "sourceGroup": "04c69de1d1bf9892",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "84x19",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "[Inbox Unif...",
+      "attribution": {
+        "ImageID": "04c69de1d1bf9892",
+        "Subset": "validation",
+        "OriginalURL": "https://farm3.staticflickr.com/2491/5729422595_5e8a157bc9_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/glennji/5729422595",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/glennji/",
+        "Author": "Glenn J. Mason",
+        "Title": "Screenshot-7",
+        "OriginalSize": "303112",
+        "OriginalMD5": "bfNp02uZ3nOaJXacgEFHsg==",
+        "Thumbnail300KURL": "https://c1.staticflickr.com/3/2491/5729422595_5892c1acc8_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/04c69de1d1bf9892.jpg",
+      "sourceSha256": "7d321c29587e140c34d990fcfd45d85c0d56610d0944eb7472177574f42859d1",
+      "originalDimensions": [
+        1024,
+        576
+      ],
+      "annotationDimensions": [
+        1600,
+        900
+      ],
+      "cropBox": [
+        454,
+        2,
+        538,
+        21
+      ],
+      "annotationVertices": [
+        [
+          456,
+          6
+        ],
+        [
+          534,
+          4
+        ],
+        [
+          535,
+          17
+        ],
+        [
+          456,
+          18
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "upscale2",
+      "state": "COMPLETE",
+      "text": "[Inbox - Unif...\n",
+      "segments": [
+        {
+          "id": "segment:6f2d9d94a41655af63ec3ec39528be77d11be82778cabb1d693f582ca6c3854d",
+          "text": "[Inbox - Unif...",
+          "bbox": {
+            "x": 4,
+            "y": 7,
+            "width": 157,
+            "height": 26
+          },
+          "words": [
+            {
+              "text": "[Inbox",
+              "bbox": {
+                "x": 4,
+                "y": 7,
+                "width": 70,
+                "height": 26
+              },
+              "confidence": 87.75515
+            },
+            {
+              "text": "-",
+              "bbox": {
+                "x": 81,
+                "y": 17,
+                "width": 7,
+                "height": 4
+              },
+              "confidence": 89.778366
+            },
+            {
+              "text": "Unif...",
+              "bbox": {
+                "x": 96,
+                "y": 7,
+                "width": 65,
+                "height": 21
+              },
+              "confidence": 69.13974
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 2,
+            "y": 3.5,
+            "width": 78.5,
+            "height": 13
+          },
+          "displayBbox": {
+            "x": 2,
+            "y": 3.5,
+            "width": 78.5,
+            "height": 13
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "upscale2",
+        "displayWidth": 84,
+        "displayHeight": 19,
+        "processingToDisplay": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "processingToSource": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "0996d973bc17619bca4c837c185e9b342a46ba12514412d12246333d0ef48249",
+        "originalWidth": 84,
+        "originalHeight": 19,
+        "width": 168,
+        "height": 38,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected upscale2; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 49.55930000000001,
+        "modelStartupMs": 364.4433,
+        "ocrMs": 76.88389999999993,
+        "candidateMs": 0.641399999999976,
+        "totalMs": 745.3799
+      },
+      "extractionId": "extraction:033f0c2f7721ab7e33d829a7338ef680c406cf27ed25872c0b7eb1e6562f4146",
+      "candidates": 1,
+      "wallSeconds": 0.9915390000096522,
+      "sampledPeakOcrTreeRssBytes": 187506688
+    },
+    {
+      "id": "07f328166c0ebbf7-0.png",
+      "sha256": "587e085a2dd8f5c11dbd0ae1d7d0e21c3bfffacab8f9728681e30af4eec40694",
+      "sourceGroup": "07f328166c0ebbf7",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "126x27",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "Mandrin is made from",
+      "attribution": {
+        "ImageID": "07f328166c0ebbf7",
+        "Subset": "validation",
+        "OriginalURL": "https://farm8.staticflickr.com/3139/2923083907_88b3ab52f7_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/blmurch/2923083907/",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/blmurch/",
+        "Author": "Beatrice Murch",
+        "Title": "PowerPuffGirl among the drinks",
+        "OriginalSize": "3203459",
+        "OriginalMD5": "+TwuSLvIbtcTRIrWBFmj+Q==",
+        "Thumbnail300KURL": "https://c8.staticflickr.com/4/3139/2923083907_4f96b0b4d4_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/07f328166c0ebbf7.jpg",
+      "sourceSha256": "b082c51f5162c88a6713e6eae3f09c0bd90119e5651015231311439c816483d4",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "annotationDimensions": [
+        1600,
+        1200
+      ],
+      "cropBox": [
+        993,
+        659,
+        1119,
+        686
+      ],
+      "annotationVertices": [
+        [
+          995,
+          663
+        ],
+        [
+          1115,
+          661
+        ],
+        [
+          1116,
+          682
+        ],
+        [
+          995,
+          683
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "upscale2",
+      "state": "COMPLETE",
+      "text": "Mentiin Ah made fren\n",
+      "segments": [
+        {
+          "id": "segment:a75b2b415af729bd1d88898396b1151090489019db102379aa0e5a41906e1034",
+          "text": "Mentiin Ah made fren",
+          "bbox": {
+            "x": 0,
+            "y": 0,
+            "width": 248,
+            "height": 54
+          },
+          "words": [
+            {
+              "text": "Mentiin",
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "width": 246,
+                "height": 54
+              },
+              "confidence": 0
+            },
+            {
+              "text": "Ah",
+              "bbox": {
+                "x": 99,
+                "y": 0,
+                "width": 14,
+                "height": 54
+              },
+              "confidence": 28.842178
+            },
+            {
+              "text": "made",
+              "bbox": {
+                "x": 121,
+                "y": 0,
+                "width": 59,
+                "height": 54
+              },
+              "confidence": 38.965683
+            },
+            {
+              "text": "fren",
+              "bbox": {
+                "x": 189,
+                "y": 0,
+                "width": 59,
+                "height": 54
+              },
+              "confidence": 22.189545
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 0,
+            "y": 0,
+            "width": 124,
+            "height": 27
+          },
+          "displayBbox": {
+            "x": 0,
+            "y": 0,
+            "width": 124,
+            "height": 27
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "upscale2",
+        "displayWidth": 126,
+        "displayHeight": 27,
+        "processingToDisplay": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "processingToSource": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "031d27b5bb2a0c3bad995430e9707403946ea2ff68e808028ef3f217c079261c",
+        "originalWidth": 126,
+        "originalHeight": 27,
+        "width": 252,
+        "height": 54,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected upscale2; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 39.7561,
+        "modelStartupMs": 387.21869999999996,
+        "ocrMs": 104.22829999999999,
+        "candidateMs": 0.621599999999944,
+        "totalMs": 801.7031999999999
+      },
+      "extractionId": "extraction:e70c0ab50409699679005f5b25bdc0fe3828352d7d02b0f8d21f48e27ada3479",
+      "candidates": 1,
+      "wallSeconds": 1.0193050999660045,
+      "sampledPeakOcrTreeRssBytes": 193060864
+    },
+    {
+      "id": "291e9c3df3a9ffb5-0.png",
+      "sha256": "ae78d8a3d34f5e33a5b5467360c82fc15728f06aec4d6f3eb9b3e0bf06813f4d",
+      "sourceGroup": "291e9c3df3a9ffb5",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "117x19",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "NURSERY SCALE",
+      "attribution": {
+        "ImageID": "291e9c3df3a9ffb5",
+        "Subset": "validation",
+        "OriginalURL": "https://farm6.staticflickr.com/7320/10426825023_76a2a88846_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/77423179@N02/10426825023",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/77423179@N02/",
+        "Author": "Melissa Hillier",
+        "Title": "Mabry",
+        "OriginalSize": "2247789",
+        "OriginalMD5": "GpCuIyRCuRoeTJ9A0iD3UQ==",
+        "Thumbnail300KURL": "https://c4.staticflickr.com/8/7320/10426825023_0ed5774f0f_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/291e9c3df3a9ffb5.jpg",
+      "sourceSha256": "27bfd8e2ab91136a7ac4ff5b1421003ac21c6c30f2e94789d87393e6c8710062",
+      "originalDimensions": [
+        1024,
+        705
+      ],
+      "annotationDimensions": [
+        1600,
+        1102
+      ],
+      "cropBox": [
+        717,
+        743,
+        834,
+        762
+      ],
+      "annotationVertices": [
+        [
+          719,
+          750
+        ],
+        [
+          830,
+          745
+        ],
+        [
+          831,
+          754
+        ],
+        [
+          719,
+          759
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "upscale2",
+      "state": "COMPLETE",
+      "text": "MURSERY SCALE\n",
+      "segments": [
+        {
+          "id": "segment:a6cd898d7688cd774f5b7f245519182fc701b4a6cfeb6c3e5fa788772a6df17a",
+          "text": "MURSERY SCALE",
+          "bbox": {
+            "x": 3,
+            "y": 5,
+            "width": 225,
+            "height": 29
+          },
+          "words": [
+            {
+              "text": "MURSERY",
+              "bbox": {
+                "x": 3,
+                "y": 10,
+                "width": 128,
+                "height": 24
+              },
+              "confidence": 88.649673
+            },
+            {
+              "text": "SCALE",
+              "bbox": {
+                "x": 147,
+                "y": 5,
+                "width": 81,
+                "height": 22
+              },
+              "confidence": 96.510513
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 1.5,
+            "y": 2.5,
+            "width": 112.5,
+            "height": 14.5
+          },
+          "displayBbox": {
+            "x": 1.5,
+            "y": 2.5,
+            "width": 112.5,
+            "height": 14.5
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "upscale2",
+        "displayWidth": 117,
+        "displayHeight": 19,
+        "processingToDisplay": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "processingToSource": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "8291c11adcdf72bace9d18f645d78436abe3ef1b3e1c26573b0d03bb88a74cae",
+        "originalWidth": 117,
+        "originalHeight": 19,
+        "width": 234,
+        "height": 38,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected upscale2; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 41.4443,
+        "modelStartupMs": 352.5332,
+        "ocrMs": 95.22739999999999,
+        "candidateMs": 0.6779999999999973,
+        "totalMs": 748.9086
+      },
+      "extractionId": "extraction:884fe1a2cc3002a7b010bb611cf51e68ac42fc249e33a162aebacce06025412b",
+      "candidates": 1,
+      "wallSeconds": 0.9578541999799199,
+      "sampledPeakOcrTreeRssBytes": 187527168
+    },
+    {
+      "id": "3ea969425b1c88bd-0.png",
+      "sha256": "11b308a8af46a904da166ee0ba9c5173b476b4d670ec393f3e9e6d1eaf643d04",
+      "sourceGroup": "3ea969425b1c88bd",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "330x46",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "September 2012",
+      "attribution": {
+        "ImageID": "3ea969425b1c88bd",
+        "Subset": "validation",
+        "OriginalURL": "https://c6.staticflickr.com/9/8039/7905918140_bb42f58a60_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/chunkysalsa/7905918140",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/chunkysalsa/",
+        "Author": "chunkysalsa",
+        "Title": "It's going to be a busy September....",
+        "OriginalSize": "92549",
+        "OriginalMD5": "NbVOxho23lp8BVkNQbuWsA==",
+        "Thumbnail300KURL": "https://c1.staticflickr.com/9/8039/7905918140_ca1e9f10be_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/3ea969425b1c88bd.jpg",
+      "sourceSha256": "58d39ff28cdb6c0d375473608b0bab8c1dfc19c8f0157aa3ca2047e2adc96cea",
+      "originalDimensions": [
+        1024,
+        1024
+      ],
+      "annotationDimensions": [
+        612,
+        612
+      ],
+      "cropBox": [
+        142,
+        22,
+        472,
+        68
+      ],
+      "annotationVertices": [
+        [
+          144,
+          26
+        ],
+        [
+          468,
+          24
+        ],
+        [
+          469,
+          64
+        ],
+        [
+          144,
+          65
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "upscale2",
+      "state": "COMPLETE",
+      "text": "September 2012\n",
+      "segments": [
+        {
+          "id": "segment:6adabd068d3f3b4c889489140d11d7877546f90f92b0923376981e6f61ff63df",
+          "text": "September 2012",
+          "bbox": {
+            "x": 5,
+            "y": 9,
+            "width": 648,
+            "height": 77
+          },
+          "words": [
+            {
+              "text": "September",
+              "bbox": {
+                "x": 5,
+                "y": 9,
+                "width": 438,
+                "height": 77
+              },
+              "confidence": 96.375252
+            },
+            {
+              "text": "2012",
+              "bbox": {
+                "x": 467,
+                "y": 10,
+                "width": 186,
+                "height": 62
+              },
+              "confidence": 96.090317
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 2.5,
+            "y": 4.5,
+            "width": 324,
+            "height": 38.5
+          },
+          "displayBbox": {
+            "x": 2.5,
+            "y": 4.5,
+            "width": 324,
+            "height": 38.5
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "upscale2",
+        "displayWidth": 330,
+        "displayHeight": 46,
+        "processingToDisplay": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "processingToSource": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "e32329576dd0b112a57d081ea147fc94172aba958841477a72a575e3ab7a0013",
+        "originalWidth": 330,
+        "originalHeight": 46,
+        "width": 660,
+        "height": 92,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected upscale2; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 54.7988,
+        "modelStartupMs": 376.13790000000006,
+        "ocrMs": 124.47140000000002,
+        "candidateMs": 0.633199999999988,
+        "totalMs": 830.0415
+      },
+      "extractionId": "extraction:37bdb1e45e65a816768c48d5f0d875dbd5d64a5026e86cef49d4eef2c38b857e",
+      "candidates": 1,
+      "wallSeconds": 1.0438340000109747,
+      "sampledPeakOcrTreeRssBytes": 189128704
+    },
+    {
+      "id": "41ec68d29b5f5db0-0.png",
+      "sha256": "aea18161d681c5dfbcb6c1d5e90d768cc527c6bbe136cf9caec42d8f25b0bf06",
+      "sourceGroup": "41ec68d29b5f5db0",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "516x88",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "GRAN PELUQUERIA",
+      "attribution": {
+        "ImageID": "41ec68d29b5f5db0",
+        "Subset": "validation",
+        "OriginalURL": "https://farm1.staticflickr.com/8541/8634423467_6341f37635_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/martius/8634423467",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/martius/",
+        "Author": "Manuel",
+        "Title": "cuestión de tamaños; coche mini y gran peluquería",
+        "OriginalSize": "6567697",
+        "OriginalMD5": "9MMwvRaQITrPTSRnJBeYKw==",
+        "Thumbnail300KURL": "https://c3.staticflickr.com/9/8541/8634423467_4eede1e2cb_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/41ec68d29b5f5db0.jpg",
+      "sourceSha256": "b5d7bf7c3c4acd5da1689c69257cf8a47f9e6017eaa8b8ba9e361f42e81d91e4",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "annotationDimensions": [
+        1600,
+        1200
+      ],
+      "cropBox": [
+        578,
+        56,
+        1094,
+        144
+      ],
+      "annotationVertices": [
+        [
+          580,
+          63
+        ],
+        [
+          1090,
+          58
+        ],
+        [
+          1091,
+          137
+        ],
+        [
+          580,
+          141
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "upscale2",
+      "state": "NO_TEXT_DETECTED",
+      "text": "",
+      "segments": [],
+      "geometry": {
+        "profile": "upscale2",
+        "displayWidth": 516,
+        "displayHeight": 88,
+        "processingToDisplay": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "processingToSource": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "c69a14e7730a3d3b50ec4a6e824ba108f30d99a5e90cea62b3cfca2436772993",
+        "originalWidth": 516,
+        "originalHeight": 88,
+        "width": 1032,
+        "height": 176,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected upscale2; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 75.68130000000002,
+        "modelStartupMs": 346.4427999999999,
+        "ocrMs": 83.60559999999998,
+        "candidateMs": 0.10140000000001237,
+        "totalMs": 754.5079
+      },
+      "extractionId": "extraction:7d8540234bfa4d4f6df1cb82e1f8a318bb4fca0b48bfdebb11ca13fa1146cade",
+      "candidates": 0,
+      "wallSeconds": 0.9813483000034466,
+      "sampledPeakOcrTreeRssBytes": 191594496
+    },
+    {
+      "id": "41ec68d29b5f5db0-1.png",
+      "sha256": "24eb49bf18958420fcca40ca7b2a1a8f541c9d248235843bf9387ab53905f849",
+      "sourceGroup": "41ec68d29b5f5db0",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "124x29",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "ESPECIALITAD",
+      "attribution": {
+        "ImageID": "41ec68d29b5f5db0",
+        "Subset": "validation",
+        "OriginalURL": "https://farm1.staticflickr.com/8541/8634423467_6341f37635_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/martius/8634423467",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/martius/",
+        "Author": "Manuel",
+        "Title": "cuestión de tamaños; coche mini y gran peluquería",
+        "OriginalSize": "6567697",
+        "OriginalMD5": "9MMwvRaQITrPTSRnJBeYKw==",
+        "Thumbnail300KURL": "https://c3.staticflickr.com/9/8541/8634423467_4eede1e2cb_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/41ec68d29b5f5db0.jpg",
+      "sourceSha256": "b5d7bf7c3c4acd5da1689c69257cf8a47f9e6017eaa8b8ba9e361f42e81d91e4",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "annotationDimensions": [
+        1600,
+        1200
+      ],
+      "cropBox": [
+        487,
+        231,
+        611,
+        260
+      ],
+      "annotationVertices": [
+        [
+          489,
+          234
+        ],
+        [
+          607,
+          233
+        ],
+        [
+          608,
+          256
+        ],
+        [
+          489,
+          257
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "upscale2",
+      "state": "COMPLETE",
+      "text": "ESPECIALITIAD\n",
+      "segments": [
+        {
+          "id": "segment:eceb4c594fe1868c5e81c16c4ca6cd8667883e1ab0cffdd40c35fa8689f5185c",
+          "text": "ESPECIALITIAD",
+          "bbox": {
+            "x": 6,
+            "y": 10,
+            "width": 242,
+            "height": 43
+          },
+          "words": [
+            {
+              "text": "ESPECIALITIAD",
+              "bbox": {
+                "x": 6,
+                "y": 10,
+                "width": 242,
+                "height": 43
+              },
+              "confidence": 53.166153
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 3,
+            "y": 5,
+            "width": 121,
+            "height": 21.5
+          },
+          "displayBbox": {
+            "x": 3,
+            "y": 5,
+            "width": 121,
+            "height": 21.5
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "upscale2",
+        "displayWidth": 124,
+        "displayHeight": 29,
+        "processingToDisplay": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "processingToSource": [
+          0.5,
+          0,
+          0,
+          0,
+          0.5,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "842f088ab0920803ba18fd8df26a8e1157f3c02dd81ceae32a4ddd1673366f25",
+        "originalWidth": 124,
+        "originalHeight": 29,
+        "width": 248,
+        "height": 58,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected upscale2; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 38.59129999999999,
+        "modelStartupMs": 391.7354,
+        "ocrMs": 82.03800000000001,
+        "candidateMs": 0.47640000000001237,
+        "totalMs": 761.9105
+      },
+      "extractionId": "extraction:d07c416208bdd81eb1c6775412c37030532e1fa8eb86f7e613b8c2613dc28f29",
+      "candidates": 1,
+      "wallSeconds": 0.9812460000393912,
+      "sampledPeakOcrTreeRssBytes": 190988288
+    },
+    {
+      "id": "012bfb1d9f9afc48-0.png",
+      "sha256": "64b527bc538f2edef45621cd15d5ae118ea0f0d2b3f532ad729cdd0e35910dd9",
+      "sourceGroup": "012bfb1d9f9afc48",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "284x41",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "\"Idon't think it",
+      "attribution": {
+        "ImageID": "012bfb1d9f9afc48",
+        "Subset": "validation",
+        "OriginalURL": "https://c1.staticflickr.com/3/2596/3698238653_555ab1aa4f_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/49024304@N00/3698238653",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/49024304@N00/",
+        "Author": "anyjazz65",
+        "Title": "Urailpass",
+        "OriginalSize": "758910",
+        "OriginalMD5": "r6PCT0dZmL4hyREkZmVkyA==",
+        "Thumbnail300KURL": "https://c4.staticflickr.com/3/2596/3698238653_e7a289cb44_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/012bfb1d9f9afc48.jpg",
+      "sourceSha256": "303f8fe652960253c747bf0c6e0d048daac4fb2c887bb51a83ba3cd3c144bf54",
+      "originalDimensions": [
+        753,
+        1024
+      ],
+      "annotationDimensions": [
+        1177,
+        1600
+      ],
+      "cropBox": [
+        696,
+        174,
+        980,
+        215
+      ],
+      "annotationVertices": [
+        [
+          698,
+          179
+        ],
+        [
+          976,
+          176
+        ],
+        [
+          977,
+          210
+        ],
+        [
+          698,
+          212
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "contrast",
+      "state": "NO_TEXT_DETECTED",
+      "text": "",
+      "segments": [],
+      "geometry": {
+        "profile": "contrast",
+        "displayWidth": 284,
+        "displayHeight": 41,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "f381548e4a4029762b14ef5cd9e0554ee604ef1cd2bcf71304f55ffe9c68c583",
+        "originalWidth": 284,
+        "originalHeight": 41,
+        "width": 284,
+        "height": 41,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected contrast; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 44.1344,
+        "modelStartupMs": 343.54949999999997,
+        "ocrMs": 34.3956,
+        "candidateMs": 0.30499999999995,
+        "totalMs": 661.6746
+      },
+      "extractionId": "extraction:ff209c69560e7c1c843706a1e0966d85573b201404c12cb61225de6f308b1055",
+      "candidates": 0,
+      "wallSeconds": 0.8858194999629632,
+      "sampledPeakOcrTreeRssBytes": 193335296
+    },
+    {
+      "id": "012bfb1d9f9afc48-1.png",
+      "sha256": "2c43e3d45d8ef160485e6fb3a93d223a1fbf2e697ec04eb6e3b769548d8efe38",
+      "sourceGroup": "012bfb1d9f9afc48",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "282x50",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "he's just trying",
+      "attribution": {
+        "ImageID": "012bfb1d9f9afc48",
+        "Subset": "validation",
+        "OriginalURL": "https://c1.staticflickr.com/3/2596/3698238653_555ab1aa4f_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/49024304@N00/3698238653",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/49024304@N00/",
+        "Author": "anyjazz65",
+        "Title": "Urailpass",
+        "OriginalSize": "758910",
+        "OriginalMD5": "r6PCT0dZmL4hyREkZmVkyA==",
+        "Thumbnail300KURL": "https://c4.staticflickr.com/3/2596/3698238653_e7a289cb44_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/012bfb1d9f9afc48.jpg",
+      "sourceSha256": "303f8fe652960253c747bf0c6e0d048daac4fb2c887bb51a83ba3cd3c144bf54",
+      "originalDimensions": [
+        753,
+        1024
+      ],
+      "annotationDimensions": [
+        1177,
+        1600
+      ],
+      "cropBox": [
+        698,
+        254,
+        980,
+        304
+      ],
+      "annotationVertices": [
+        [
+          700,
+          257
+        ],
+        [
+          976,
+          256
+        ],
+        [
+          977,
+          301
+        ],
+        [
+          700,
+          301
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "contrast",
+      "state": "NO_TEXT_DETECTED",
+      "text": "",
+      "segments": [],
+      "geometry": {
+        "profile": "contrast",
+        "displayWidth": 282,
+        "displayHeight": 50,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "e7c639c20b2e51383e48cfc4f1be5fde8ee1e0eb1488d3427560a88c397bae8e",
+        "originalWidth": 282,
+        "originalHeight": 50,
+        "width": 282,
+        "height": 50,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected contrast; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 38.0968,
+        "modelStartupMs": 361.3335,
+        "ocrMs": 32.21709999999996,
+        "candidateMs": 0.15890000000001692,
+        "totalMs": 675.5292
+      },
+      "extractionId": "extraction:925203123d26b48e35037b246ced925dd62e8f7f11fc514084640beb0ce7e0cb",
+      "candidates": 0,
+      "wallSeconds": 0.8864348999923095,
+      "sampledPeakOcrTreeRssBytes": 188760064
+    },
+    {
+      "id": "04c69de1d1bf9892-0.png",
+      "sha256": "77b53cf747f47acc7b9b680fabc922082cb9853cd8d3683c9ad360faed9d7476",
+      "sourceGroup": "04c69de1d1bf9892",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "84x21",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "David (1 unr...",
+      "attribution": {
+        "ImageID": "04c69de1d1bf9892",
+        "Subset": "validation",
+        "OriginalURL": "https://farm3.staticflickr.com/2491/5729422595_5e8a157bc9_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/glennji/5729422595",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/glennji/",
+        "Author": "Glenn J. Mason",
+        "Title": "Screenshot-7",
+        "OriginalSize": "303112",
+        "OriginalMD5": "bfNp02uZ3nOaJXacgEFHsg==",
+        "Thumbnail300KURL": "https://c1.staticflickr.com/3/2491/5729422595_5892c1acc8_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/04c69de1d1bf9892.jpg",
+      "sourceSha256": "7d321c29587e140c34d990fcfd45d85c0d56610d0944eb7472177574f42859d1",
+      "originalDimensions": [
+        1024,
+        576
+      ],
+      "annotationDimensions": [
+        1600,
+        900
+      ],
+      "cropBox": [
+        889,
+        1,
+        973,
+        22
+      ],
+      "annotationVertices": [
+        [
+          892,
+          3
+        ],
+        [
+          970,
+          7
+        ],
+        [
+          970,
+          19
+        ],
+        [
+          891,
+          14
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "contrast",
+      "state": "NO_TEXT_DETECTED",
+      "text": "",
+      "segments": [],
+      "geometry": {
+        "profile": "contrast",
+        "displayWidth": 84,
+        "displayHeight": 21,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "87945030756c9210fc1e56a956b5cdfa2ac44d193cc3347226c564340a3d090e",
+        "originalWidth": 84,
+        "originalHeight": 21,
+        "width": 84,
+        "height": 21,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected contrast; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 35.44889999999998,
+        "modelStartupMs": 354.6286,
+        "ocrMs": 41.4357,
+        "candidateMs": 0.1552000000000362,
+        "totalMs": 712.7808
+      },
+      "extractionId": "extraction:6d8bb4c4c0d7b7815d45337eed042cee8280c2a73c8a100bd3d80f1a03c4eb11",
+      "candidates": 0,
+      "wallSeconds": 0.9148688999703154,
+      "sampledPeakOcrTreeRssBytes": 189906944
+    },
+    {
+      "id": "04c69de1d1bf9892-1.png",
+      "sha256": "855394e3e2744f5126600cb05b887ca9ebc156d52bf3d044e707a31009b71475",
+      "sourceGroup": "04c69de1d1bf9892",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "84x19",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "[Inbox Unif...",
+      "attribution": {
+        "ImageID": "04c69de1d1bf9892",
+        "Subset": "validation",
+        "OriginalURL": "https://farm3.staticflickr.com/2491/5729422595_5e8a157bc9_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/glennji/5729422595",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/glennji/",
+        "Author": "Glenn J. Mason",
+        "Title": "Screenshot-7",
+        "OriginalSize": "303112",
+        "OriginalMD5": "bfNp02uZ3nOaJXacgEFHsg==",
+        "Thumbnail300KURL": "https://c1.staticflickr.com/3/2491/5729422595_5892c1acc8_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/04c69de1d1bf9892.jpg",
+      "sourceSha256": "7d321c29587e140c34d990fcfd45d85c0d56610d0944eb7472177574f42859d1",
+      "originalDimensions": [
+        1024,
+        576
+      ],
+      "annotationDimensions": [
+        1600,
+        900
+      ],
+      "cropBox": [
+        454,
+        2,
+        538,
+        21
+      ],
+      "annotationVertices": [
+        [
+          456,
+          6
+        ],
+        [
+          534,
+          4
+        ],
+        [
+          535,
+          17
+        ],
+        [
+          456,
+          18
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "contrast",
+      "state": "COMPLETE",
+      "text": "[Inbox - Unif...\n",
+      "segments": [
+        {
+          "id": "segment:6e1d2640bd57682db15459730bb3b9ac5a6f8b6b611e1dfe75525d70cd11724d",
+          "text": "[Inbox - Unif...",
+          "bbox": {
+            "x": 2,
+            "y": 3,
+            "width": 79,
+            "height": 14
+          },
+          "words": [
+            {
+              "text": "[Inbox",
+              "bbox": {
+                "x": 2,
+                "y": 4,
+                "width": 35,
+                "height": 13
+              },
+              "confidence": 76.19915
+            },
+            {
+              "text": "-",
+              "bbox": {
+                "x": 41,
+                "y": 8,
+                "width": 3,
+                "height": 3
+              },
+              "confidence": 83.984772
+            },
+            {
+              "text": "Unif...",
+              "bbox": {
+                "x": 48,
+                "y": 3,
+                "width": 33,
+                "height": 11
+              },
+              "confidence": 73.835274
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 2,
+            "y": 3,
+            "width": 79,
+            "height": 14
+          },
+          "displayBbox": {
+            "x": 2,
+            "y": 3,
+            "width": 79,
+            "height": 14
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "contrast",
+        "displayWidth": 84,
+        "displayHeight": 19,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "66334706e17e748cf36251b7634b50ddb57d4f19a84023ea061f681b443986fe",
+        "originalWidth": 84,
+        "originalHeight": 19,
+        "width": 84,
+        "height": 19,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected contrast; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 38.847699999999975,
+        "modelStartupMs": 344.63419999999996,
+        "ocrMs": 77.88980000000004,
+        "candidateMs": 0.84050000000002,
+        "totalMs": 726.0396
+      },
+      "extractionId": "extraction:537cf89722d7777c636876137c2147ab15840269914a86169e8797b064e0be29",
+      "candidates": 1,
+      "wallSeconds": 0.9265194999752566,
+      "sampledPeakOcrTreeRssBytes": 189087744
+    },
+    {
+      "id": "07f328166c0ebbf7-0.png",
+      "sha256": "587e085a2dd8f5c11dbd0ae1d7d0e21c3bfffacab8f9728681e30af4eec40694",
+      "sourceGroup": "07f328166c0ebbf7",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "126x27",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "Mandrin is made from",
+      "attribution": {
+        "ImageID": "07f328166c0ebbf7",
+        "Subset": "validation",
+        "OriginalURL": "https://farm8.staticflickr.com/3139/2923083907_88b3ab52f7_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/blmurch/2923083907/",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/blmurch/",
+        "Author": "Beatrice Murch",
+        "Title": "PowerPuffGirl among the drinks",
+        "OriginalSize": "3203459",
+        "OriginalMD5": "+TwuSLvIbtcTRIrWBFmj+Q==",
+        "Thumbnail300KURL": "https://c8.staticflickr.com/4/3139/2923083907_4f96b0b4d4_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/07f328166c0ebbf7.jpg",
+      "sourceSha256": "b082c51f5162c88a6713e6eae3f09c0bd90119e5651015231311439c816483d4",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "annotationDimensions": [
+        1600,
+        1200
+      ],
+      "cropBox": [
+        993,
+        659,
+        1119,
+        686
+      ],
+      "annotationVertices": [
+        [
+          995,
+          663
+        ],
+        [
+          1115,
+          661
+        ],
+        [
+          1116,
+          682
+        ],
+        [
+          995,
+          683
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "contrast",
+      "state": "COMPLETE",
+      "text": "wMfontine ts ade from\n",
+      "segments": [
+        {
+          "id": "segment:64103088bd85ff1d4f050276df4d84e3d4c3f765121243dd28b56ed3205b311b",
+          "text": "wMfontine ts ade from",
+          "bbox": {
+            "x": 0,
+            "y": 0,
+            "width": 126,
+            "height": 27
+          },
+          "words": [
+            {
+              "text": "wMfontine",
+              "bbox": {
+                "x": 0,
+                "y": 2,
+                "width": 123,
+                "height": 25
+              },
+              "confidence": 0
+            },
+            {
+              "text": "ts",
+              "bbox": {
+                "x": 49,
+                "y": 0,
+                "width": 8,
+                "height": 27
+              },
+              "confidence": 33.182167
+            },
+            {
+              "text": "ade",
+              "bbox": {
+                "x": 65,
+                "y": 0,
+                "width": 23,
+                "height": 27
+              },
+              "confidence": 51.020592
+            },
+            {
+              "text": "from",
+              "bbox": {
+                "x": 94,
+                "y": 0,
+                "width": 32,
+                "height": 27
+              },
+              "confidence": 30.600319
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 0,
+            "y": 0,
+            "width": 126,
+            "height": 27
+          },
+          "displayBbox": {
+            "x": 0,
+            "y": 0,
+            "width": 126,
+            "height": 27
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "contrast",
+        "displayWidth": 126,
+        "displayHeight": 27,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "58de796c083e4c016e8fd9f1b839f30af971bb7b7c7e0eb345ce657e365adb78",
+        "originalWidth": 126,
+        "originalHeight": 27,
+        "width": 126,
+        "height": 27,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected contrast; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 42.739900000000006,
+        "modelStartupMs": 351.67459999999994,
+        "ocrMs": 79.20399999999995,
+        "candidateMs": 0.6077999999999975,
+        "totalMs": 730.3281999999999
+      },
+      "extractionId": "extraction:4100774ec9f2510428ed52ceb90c079b9899e5db9f604ac295d5fcb94cefc92d",
+      "candidates": 1,
+      "wallSeconds": 0.9784627999761142,
+      "sampledPeakOcrTreeRssBytes": 188166144
+    },
+    {
+      "id": "291e9c3df3a9ffb5-0.png",
+      "sha256": "ae78d8a3d34f5e33a5b5467360c82fc15728f06aec4d6f3eb9b3e0bf06813f4d",
+      "sourceGroup": "291e9c3df3a9ffb5",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "117x19",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "NURSERY SCALE",
+      "attribution": {
+        "ImageID": "291e9c3df3a9ffb5",
+        "Subset": "validation",
+        "OriginalURL": "https://farm6.staticflickr.com/7320/10426825023_76a2a88846_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/77423179@N02/10426825023",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/77423179@N02/",
+        "Author": "Melissa Hillier",
+        "Title": "Mabry",
+        "OriginalSize": "2247789",
+        "OriginalMD5": "GpCuIyRCuRoeTJ9A0iD3UQ==",
+        "Thumbnail300KURL": "https://c4.staticflickr.com/8/7320/10426825023_0ed5774f0f_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/291e9c3df3a9ffb5.jpg",
+      "sourceSha256": "27bfd8e2ab91136a7ac4ff5b1421003ac21c6c30f2e94789d87393e6c8710062",
+      "originalDimensions": [
+        1024,
+        705
+      ],
+      "annotationDimensions": [
+        1600,
+        1102
+      ],
+      "cropBox": [
+        717,
+        743,
+        834,
+        762
+      ],
+      "annotationVertices": [
+        [
+          719,
+          750
+        ],
+        [
+          830,
+          745
+        ],
+        [
+          831,
+          754
+        ],
+        [
+          719,
+          759
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "contrast",
+      "state": "COMPLETE",
+      "text": "mURSERY SCALE\n",
+      "segments": [
+        {
+          "id": "segment:7e1708cb76e824d31133f5e995081e587eb43799192cbaf5948ed99e7d8e3af7",
+          "text": "mURSERY SCALE",
+          "bbox": {
+            "x": 2,
+            "y": 3,
+            "width": 112,
+            "height": 13
+          },
+          "words": [
+            {
+              "text": "mURSERY",
+              "bbox": {
+                "x": 2,
+                "y": 5,
+                "width": 63,
+                "height": 11
+              },
+              "confidence": 67.998398
+            },
+            {
+              "text": "SCALE",
+              "bbox": {
+                "x": 74,
+                "y": 3,
+                "width": 40,
+                "height": 10
+              },
+              "confidence": 96.503944
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 2,
+            "y": 3,
+            "width": 112,
+            "height": 13
+          },
+          "displayBbox": {
+            "x": 2,
+            "y": 3,
+            "width": 112,
+            "height": 13
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "contrast",
+        "displayWidth": 117,
+        "displayHeight": 19,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "8db9fababca3c3e894806404d7981e29778f56e67f92f1ad8ebb03349c88e9ff",
+        "originalWidth": 117,
+        "originalHeight": 19,
+        "width": 117,
+        "height": 19,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected contrast; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 39.98940000000002,
+        "modelStartupMs": 347.98850000000004,
+        "ocrMs": 79.53960000000006,
+        "candidateMs": 0.5833000000000084,
+        "totalMs": 710.2787
+      },
+      "extractionId": "extraction:0f5ce68d881a95b88efd01737420eda3acf59d489668b9a7a88c69d9ee8c5481",
+      "candidates": 1,
+      "wallSeconds": 0.916504199965857,
+      "sampledPeakOcrTreeRssBytes": 189124608
+    },
+    {
+      "id": "3ea969425b1c88bd-0.png",
+      "sha256": "11b308a8af46a904da166ee0ba9c5173b476b4d670ec393f3e9e6d1eaf643d04",
+      "sourceGroup": "3ea969425b1c88bd",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "330x46",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "September 2012",
+      "attribution": {
+        "ImageID": "3ea969425b1c88bd",
+        "Subset": "validation",
+        "OriginalURL": "https://c6.staticflickr.com/9/8039/7905918140_bb42f58a60_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/chunkysalsa/7905918140",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/chunkysalsa/",
+        "Author": "chunkysalsa",
+        "Title": "It's going to be a busy September....",
+        "OriginalSize": "92549",
+        "OriginalMD5": "NbVOxho23lp8BVkNQbuWsA==",
+        "Thumbnail300KURL": "https://c1.staticflickr.com/9/8039/7905918140_ca1e9f10be_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/3ea969425b1c88bd.jpg",
+      "sourceSha256": "58d39ff28cdb6c0d375473608b0bab8c1dfc19c8f0157aa3ca2047e2adc96cea",
+      "originalDimensions": [
+        1024,
+        1024
+      ],
+      "annotationDimensions": [
+        612,
+        612
+      ],
+      "cropBox": [
+        142,
+        22,
+        472,
+        68
+      ],
+      "annotationVertices": [
+        [
+          144,
+          26
+        ],
+        [
+          468,
+          24
+        ],
+        [
+          469,
+          64
+        ],
+        [
+          144,
+          65
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "contrast",
+      "state": "COMPLETE",
+      "text": "September 2012\n",
+      "segments": [
+        {
+          "id": "segment:3dc631cb64dfeb68cbf0f3848675583e719f30622b317c8bf95c37bd13a60ea6",
+          "text": "September 2012",
+          "bbox": {
+            "x": 2,
+            "y": 5,
+            "width": 324,
+            "height": 38
+          },
+          "words": [
+            {
+              "text": "September",
+              "bbox": {
+                "x": 2,
+                "y": 5,
+                "width": 219,
+                "height": 38
+              },
+              "confidence": 96.481087
+            },
+            {
+              "text": "2012",
+              "bbox": {
+                "x": 234,
+                "y": 5,
+                "width": 92,
+                "height": 31
+              },
+              "confidence": 96.977737
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 2,
+            "y": 5,
+            "width": 324,
+            "height": 38
+          },
+          "displayBbox": {
+            "x": 2,
+            "y": 5,
+            "width": 324,
+            "height": 38
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "contrast",
+        "displayWidth": 330,
+        "displayHeight": 46,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "d49c40a1a5321b13fcd7409884c9083fe2bdb35a81616936e4c16f35a416742e",
+        "originalWidth": 330,
+        "originalHeight": 46,
+        "width": 330,
+        "height": 46,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected contrast; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 39.814899999999994,
+        "modelStartupMs": 370.7319,
+        "ocrMs": 95.40469999999993,
+        "candidateMs": 0.4435999999999467,
+        "totalMs": 744.7017
+      },
+      "extractionId": "extraction:0ab3a2e6a438a2d723b8be2b862140514c27f8b0bcdc2f17c625cbfb7a22ff44",
+      "candidates": 1,
+      "wallSeconds": 0.9787502000108361,
+      "sampledPeakOcrTreeRssBytes": 187748352
+    },
+    {
+      "id": "41ec68d29b5f5db0-0.png",
+      "sha256": "aea18161d681c5dfbcb6c1d5e90d768cc527c6bbe136cf9caec42d8f25b0bf06",
+      "sourceGroup": "41ec68d29b5f5db0",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "516x88",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "GRAN PELUQUERIA",
+      "attribution": {
+        "ImageID": "41ec68d29b5f5db0",
+        "Subset": "validation",
+        "OriginalURL": "https://farm1.staticflickr.com/8541/8634423467_6341f37635_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/martius/8634423467",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/martius/",
+        "Author": "Manuel",
+        "Title": "cuestión de tamaños; coche mini y gran peluquería",
+        "OriginalSize": "6567697",
+        "OriginalMD5": "9MMwvRaQITrPTSRnJBeYKw==",
+        "Thumbnail300KURL": "https://c3.staticflickr.com/9/8541/8634423467_4eede1e2cb_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/41ec68d29b5f5db0.jpg",
+      "sourceSha256": "b5d7bf7c3c4acd5da1689c69257cf8a47f9e6017eaa8b8ba9e361f42e81d91e4",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "annotationDimensions": [
+        1600,
+        1200
+      ],
+      "cropBox": [
+        578,
+        56,
+        1094,
+        144
+      ],
+      "annotationVertices": [
+        [
+          580,
+          63
+        ],
+        [
+          1090,
+          58
+        ],
+        [
+          1091,
+          137
+        ],
+        [
+          580,
+          141
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "contrast",
+      "state": "NO_TEXT_DETECTED",
+      "text": "",
+      "segments": [],
+      "geometry": {
+        "profile": "contrast",
+        "displayWidth": 516,
+        "displayHeight": 88,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "aea18161d681c5dfbcb6c1d5e90d768cc527c6bbe136cf9caec42d8f25b0bf06",
+        "originalWidth": 516,
+        "originalHeight": 88,
+        "width": 516,
+        "height": 88,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected contrast; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 46.377700000000004,
+        "modelStartupMs": 393.8098,
+        "ocrMs": 58.43299999999999,
+        "candidateMs": 0.17039999999997235,
+        "totalMs": 745.4372000000001
+      },
+      "extractionId": "extraction:54a63b704445123189dfb87a5be8705a00c0061110d635c0c90fd64d6e4276d8",
+      "candidates": 0,
+      "wallSeconds": 0.9611503000487573,
+      "sampledPeakOcrTreeRssBytes": 188096512
+    },
+    {
+      "id": "41ec68d29b5f5db0-1.png",
+      "sha256": "24eb49bf18958420fcca40ca7b2a1a8f541c9d248235843bf9387ab53905f849",
+      "sourceGroup": "41ec68d29b5f5db0",
+      "split": "development",
+      "language": "eng",
+      "quality": "publisher_legible",
+      "rotation": "horizontal_gate",
+      "resolution": "124x29",
+      "density": "single_line",
+      "sourceCategory": "independent_scene_text_line_crop",
+      "reference": "ESPECIALITAD",
+      "attribution": {
+        "ImageID": "41ec68d29b5f5db0",
+        "Subset": "validation",
+        "OriginalURL": "https://farm1.staticflickr.com/8541/8634423467_6341f37635_o.jpg",
+        "OriginalLandingURL": "https://www.flickr.com/photos/martius/8634423467",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/martius/",
+        "Author": "Manuel",
+        "Title": "cuestión de tamaños; coche mini y gran peluquería",
+        "OriginalSize": "6567697",
+        "OriginalMD5": "9MMwvRaQITrPTSRnJBeYKw==",
+        "Thumbnail300KURL": "https://c3.staticflickr.com/9/8541/8634423467_4eede1e2cb_z.jpg",
+        "Rotation": "0.0"
+      },
+      "sourceUrl": "https://open-images-dataset.s3.amazonaws.com/validation/41ec68d29b5f5db0.jpg",
+      "sourceSha256": "b5d7bf7c3c4acd5da1689c69257cf8a47f9e6017eaa8b8ba9e361f42e81d91e4",
+      "originalDimensions": [
+        1024,
+        768
+      ],
+      "annotationDimensions": [
+        1600,
+        1200
+      ],
+      "cropBox": [
+        487,
+        231,
+        611,
+        260
+      ],
+      "annotationVertices": [
+        [
+          489,
+          234
+        ],
+        [
+          607,
+          233
+        ],
+        [
+          608,
+          256
+        ],
+        [
+          489,
+          257
+        ]
+      ],
+      "mime": "image/png",
+      "profile": "contrast",
+      "state": "COMPLETE",
+      "text": "ESPECIALIIAD\n",
+      "segments": [
+        {
+          "id": "segment:489a5cfd651691ceabd4ce0b89393e742baa7e5f1d220ed3db28ec2b37119efe",
+          "text": "ESPECIALIIAD",
+          "bbox": {
+            "x": 3,
+            "y": 5,
+            "width": 121,
+            "height": 21
+          },
+          "words": [
+            {
+              "text": "ESPECIALIIAD",
+              "bbox": {
+                "x": 3,
+                "y": 5,
+                "width": 121,
+                "height": 21
+              },
+              "confidence": 38.272675
+            }
+          ],
+          "method": "image_ocr",
+          "language": "eng",
+          "languageBasis": "configured_recognition_language",
+          "timestamp": null,
+          "sourceBbox": {
+            "x": 3,
+            "y": 5,
+            "width": 121,
+            "height": 21
+          },
+          "displayBbox": {
+            "x": 3,
+            "y": 5,
+            "width": 121,
+            "height": 21
+          }
+        }
+      ],
+      "geometry": {
+        "profile": "contrast",
+        "displayWidth": 124,
+        "displayHeight": 29,
+        "processingToDisplay": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "processingToSource": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coordinateConvention": "continuous pixel edges; source=encoded original; display=EXIF-oriented original",
+        "bitmapSha256": "24eb49bf18958420fcca40ca7b2a1a8f541c9d248235843bf9387ab53905f849",
+        "originalWidth": 124,
+        "originalHeight": 29,
+        "width": 124,
+        "height": 29,
+        "transformation": "EXIF 1 applied; RGB; analyst-selected contrast; <=1600px; no automatic text selection or translation"
+      },
+      "timing": {
+        "preparationMs": 42.58600000000001,
+        "modelStartupMs": 387.2101,
+        "ocrMs": 77.04009999999994,
+        "candidateMs": 0.45460000000002765,
+        "totalMs": 754.6924
+      },
+      "extractionId": "extraction:fcbfb0603ee9ac51b4cf9997a18394d47447ffa067ba64aeccdd4e4e1682b0f9",
+      "candidates": 1,
+      "wallSeconds": 0.9873012999887578,
+      "sampledPeakOcrTreeRssBytes": 189890560
+    }
+  ],
+  "limitations": [
+    "Development only; no automatic selector was trained.",
+    "No independent metrics when scope=authored_controls.",
+    "No-text controls distinct from unavailable/failed processing; failed samples excluded from CER/WER and counted separately.",
+    "RSS 20ms sampled runner+OCR tree; persistent preparation/web services excluded."
+  ]
+}

@@ -1,5 +1,40 @@
 # VERITAS AI implementation progress
 
+## Engine 4.2 OCR robustness and independent development probe — 2026-11-16
+
+- Started clean/synchronized at `00b6d06` on `codex/integrate-figma-upgrade`. Audited the
+  raw OCR → exact-span candidates → human review → Engine 2 → Engine 4 → report path.
+- Baseline pixel hashes match frozen 4.1; default remains unchanged. Added explicit
+  bounded rotation, experimental upscaling and single-line layout choices. No automatic
+  selector, word-count ranking, verdict/model-threshold change or automatic acceptance.
+- Added invertible processing-to-encoded-source/display affine maps, source box overlays,
+  profile/configuration provenance and distinct alternative identities. Old records and
+  original machine/corrected text/review histories are preserved without migration.
+- Researched HierText, WIRIndic, ICDAR and DocVQA publisher rights/ground truth. Admitted
+  nine line crops from six HierText/Open Images sources with exact annotations/hashes,
+  per-image author/CC BY metadata and ~29.6 MB bounded download. Full 577 MB image archive
+  was not downloaded. A safe decompression-cap failure led to bounded streaming parsing.
+- Independent **development-only Latin-script probe**, requested English pack (source
+  languages unannotated): baseline CER/WER 0.5333/0.7273; upscaling 0.3185/0.5455;
+  contrast 0.5481/0.7727. Separate SINGLE_LINE probe 0.1111/0.3636. These small, correlated
+  derived crops have publisher typographic/crop limitations and unknown training overlap;
+  they do not establish held-out English/screenshot accuracy or a validated selector.
+- Seven authored controls × eight profiles are separate from independent observations.
+  Manual rotation recovered the sideways authored text; sharpening/contrast did not fix
+  blur. Harmful/unjustified enhancements are not exposed as routine UI choices.
+- Node engine/API, Engine 3/4, diagnostics and review regressions passed. Added affine,
+  manifest/leakage, streaming, partial/caps, busy/cancellation/recovery and actual rotated
+  API/correction/provenance checks. Python aggregate: 87 tests, one optional AASIST skip.
+  TypeScript/build pass with the existing chunk warning. Browser outcomes are recorded
+  in `docs/ENGINE42_VALIDATION.md` and versioned authored workflow artifacts.
+- Browser exposed a legacy 100-row report cap omitting a manual-caption binding; the
+  dedicated provenance summary now preserves both extracted and analyst-context links.
+  No graph evidence or assertion was weakened to hide the failure.
+- Hindi/Telugu model size/license readiness documented; activation remains deferred
+  pending native-script evaluation/review and resource tests. Video/STT remain deferred.
+  Existing manual claims, source reviews, semantic/recurrence/coverage safeguards and
+  private investigation data remain unchanged. No scientific phase closure claimed.
+
 ## Engine 4.1 image extraction vertical slice — 2026-11-16
 
 - Started clean/synchronized at `c4fe717` on `codex/integrate-figma-upgrade`. Audited

@@ -20,7 +20,8 @@ export function ExtractionView({
     [url, setUrl] = useState(""),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(""),
-    [language, setLanguage] = useState("eng");
+    [language, setLanguage] = useState("eng"),
+    [profile, setProfile] = useState("baseline");
   useEffect(() => {
     if (!file) {
       setUrl("");
@@ -74,7 +75,13 @@ export function ExtractionView({
         reader.onerror = () => reject(new Error("Image read failed"));
         reader.readAsDataURL(file);
       });
-      await run("extract", { mediaHash: hash, modality: selected.modality, language, mediaData });
+      await run("extract", {
+        mediaHash: hash,
+        modality: selected.modality,
+        language,
+        mediaData,
+        profile,
+      });
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -87,7 +94,7 @@ export function ExtractionView({
         <p>
           English image OCR proposes text for investigation. Human acceptance confirms what the
           source says, never whether it is true. Video, speech, Hindi and Telugu extraction are
-          unavailable in this version. OCR runs locally; investigating reviewed text uses your
+          unavailable in this version. OCR processes your image on the application backend; investigating reviewed text uses your
           configured Claim Intelligence retrieval providers.
         </p>
         <label className="block">
@@ -125,6 +132,32 @@ export function ExtractionView({
             <option value="tel">Telugu — unavailable</option>
           </select>
         </label>
+        <label>
+          OCR preparation and layout{" "}
+          <select
+            aria-label="OCR preprocessing profile"
+            value={profile}
+            disabled={busy}
+            onChange={(e) => setProfile(e.target.value)}
+          >
+            {[
+              ["baseline", "Baseline (default)"],
+              ["rotate90", "Rotate text 90° counterclockwise"],
+              ["rotate180", "Rotate text 180°"],
+              ["rotate270", "Rotate text 90° clockwise"],
+              ["upscale2", "Experimental upscaling (up to 2×)"],
+              ["singleLine", "Experimental single-line layout (PSM 7)"],
+            ].map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <p>
+          One OCR pass per request. Alternatives are not automatically ranked or accepted. Compare
+          them against the unchanged original; previous extractions and reviews remain saved.
+        </p>
         <Button disabled={!selected || busy || inv.isSimulatedDemo} onClick={() => void extract()}>
           {busy ? "Processing extraction or review…" : "Extract image text"}
         </Button>
@@ -141,6 +174,93 @@ export function ExtractionView({
               {record.geometry.height} processing pixels
             </p>
             <p className="break-all">Source SHA-256: {record.sourceMediaHash}</p>
+            <p>Preprocessing: {record.geometry.profile ?? "historical baseline"}</p>
+            {url &&
+              hash === record.sourceMediaHash &&
+              record.geometry.displayWidth &&
+              record.geometry.displayHeight && (
+                <svg
+                  role="img"
+                  aria-label="OCR text locations on original image"
+                  viewBox={`0 0 ${record.geometry.displayWidth} ${record.geometry.displayHeight}`}
+                  className="w-full max-h-80"
+                >
+                  <image
+                    href={url}
+                    width={record.geometry.displayWidth}
+                    height={record.geometry.displayHeight}
+                  />
+                  {record.segments
+                    .filter((s) => s.displayBbox)
+                    .map((s, i) => (
+                      <rect
+                        key={s.id}
+                        data-segment-id={s.id}
+                        x={s.displayBbox!.x}
+                        y={s.displayBbox!.y}
+                        width={s.displayBbox!.width}
+                        height={s.displayBbox!.height}
+                        fill="none"
+                        stroke="#ef4444"
+                        strokeWidth={Math.max(record.geometry.displayWidth! / 500, 1)}
+                      >
+                        <title>
+                          OCR segment {i + 1}: {s.text}
+                        </title>
+                      </rect>
+                    ))}
+                </svg>
+              )}
+            {url &&
+              hash === record.sourceMediaHash &&
+              record.geometry.displayWidth &&
+              record.geometry.displayHeight && (
+                <details>
+                  <summary>Inspect original at full resolution</summary>
+                  <p>
+                    Scroll to inspect the original pixels and mapped OCR boxes. This view does not
+                    enhance or replace the source.
+                  </p>
+                  <div className="max-h-96 max-w-full overflow-auto">
+                    <svg
+                      role="img"
+                      aria-label="Full-resolution original with OCR boxes"
+                      width={record.geometry.displayWidth}
+                      height={record.geometry.displayHeight}
+                      viewBox={`0 0 ${record.geometry.displayWidth} ${record.geometry.displayHeight}`}
+                      className="max-w-none"
+                    >
+                      <image
+                        href={url}
+                        width={record.geometry.displayWidth}
+                        height={record.geometry.displayHeight}
+                      />
+                      {record.segments
+                        .filter((s) => s.displayBbox)
+                        .map((s) => (
+                          <rect
+                            key={s.id}
+                            x={s.displayBbox!.x}
+                            y={s.displayBbox!.y}
+                            width={s.displayBbox!.width}
+                            height={s.displayBbox!.height}
+                            fill="none"
+                            stroke="#ef4444"
+                            strokeWidth="2"
+                          >
+                            <title>{s.text}</title>
+                          </rect>
+                        ))}
+                    </svg>
+                  </div>
+                </details>
+              )}
+            {!record.geometry.processingToSource && (
+              <p>
+                Historical extraction: source-coordinate mapping was not recorded; its
+                processing-pixel box is retained without inventing original coordinates.
+              </p>
+            )}
             <p>
               Saved {record.extractedAt}. Processing completion does not establish transcription
               accuracy; compare the text with the original image.
@@ -156,7 +276,9 @@ export function ExtractionView({
               <p>{record.geometry.transformation}</p>
               {record.segments.map((s) => (
                 <p key={s.id}>
-                  {s.text} · box {JSON.stringify(s.bbox)} · word OCR confidence:{" "}
+                  {s.text} · processing box {JSON.stringify(s.bbox)} · encoded-source box{" "}
+                  {s.sourceBbox ? JSON.stringify(s.sourceBbox) : "not recorded"} · word OCR
+                  confidence:{" "}
                   {s.words.map((w) => `${w.text}: ${w.confidence ?? "not provided"}`).join("; ")}{" "}
                   (not factual confidence)
                 </p>

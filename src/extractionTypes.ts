@@ -19,6 +19,8 @@ export interface ExtractedSegment {
   language: string | null;
   languageBasis: "configured_recognition_language";
   timestamp: null;
+  sourceBbox?: { x: number; y: number; width: number; height: number };
+  displayBbox?: { x: number; y: number; width: number; height: number };
 }
 export interface ExtractionReview {
   revision: number;
@@ -60,6 +62,22 @@ export interface ExtractionRecord {
   segments: ExtractedSegment[];
   candidates: ExtractionCandidate[];
   geometry: {
+    profile?:
+      | "baseline"
+      | "rotate90"
+      | "rotate180"
+      | "rotate270"
+      | "contrast"
+      | "grayscale"
+      | "sharpen"
+      | "upscale2"
+      | "singleLine";
+    displayWidth?: number;
+    displayHeight?: number;
+    processingToDisplay?: [number, number, number, number, number, number];
+    processingToSource?: [number, number, number, number, number, number];
+    coordinateConvention?: string;
+    bitmapSha256?: string;
     originalWidth: number;
     originalHeight: number;
     width: number;

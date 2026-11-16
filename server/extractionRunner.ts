@@ -3,6 +3,18 @@ import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import { OCR_MODEL, verifiedOcrModel, extractHash, proposeCandidates } from "./extraction";
 import type { ExtractionRecord, ExtractedSegment } from "../src/extractionTypes";
+import { mappedBox, validAffine, type Affine } from "./ocrGeometry";
+export const OCR_PROFILES = [
+  "baseline",
+  "rotate90",
+  "rotate180",
+  "rotate270",
+  "contrast",
+  "grayscale",
+  "sharpen",
+  "upscale2",
+  "singleLine",
+] as const;
 export class ExtractionError extends Error {
   constructor(
     message: string,
@@ -20,7 +32,10 @@ export async function runExtraction(
   language: string,
   modality: string,
   signal?: AbortSignal,
+  profile: string = "baseline",
 ): Promise<ExtractionRecord> {
+  if (!(OCR_PROFILES as readonly string[]).includes(profile))
+    throw new ExtractionError("Unsupported preprocessing profile.", 400);
   if (modality !== "image" || language !== "eng")
     throw new ExtractionError(
       "Only English image OCR is installed. Video, speech and other recognition languages are unavailable.",
@@ -59,7 +74,7 @@ export async function runExtraction(
     const response = await fetch(new URL("/v1/extraction/image/prepare", endpoint), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ image_base64: encoded }),
+      body: JSON.stringify({ image_base64: encoded, profile }),
       signal: controller.signal,
     });
     if (!response.ok)
@@ -81,6 +96,14 @@ export async function runExtraction(
       raw += Buffer.from(value).toString("utf8");
     }
     const prepared = JSON.parse(raw);
+    if (
+      prepared.profile !== profile ||
+      !validAffine(prepared.processingToDisplay) ||
+      !validAffine(prepared.processingToSource)
+    )
+      throw new ExtractionError(
+        "Preparation coordinate mapping unavailable. Update the Python service.",
+      );
     if (
       prepared.sourceSha256 !== sourceHash ||
       !Number.isInteger(prepared.width) ||
@@ -111,6 +134,7 @@ export async function runExtraction(
         ],
         { env, windowsHide: true, stdio: ["pipe", "pipe", "pipe"] },
       );
+      child.stdout.setEncoding("utf8");
       let out = "",
         done = false;
       const kill = () => {
@@ -157,6 +181,7 @@ export async function runExtraction(
             image_base64: prepared.image_base64,
             width: prepared.width,
             height: prepared.height,
+            profile,
           }),
         );
     });
@@ -169,10 +194,13 @@ export async function runExtraction(
         prepared.bitmapSha256,
         output.originalText,
         output.segments,
+        ...(profile === "baseline" ? [] : [profile]),
       ]);
     const segments: ExtractedSegment[] = output.segments.map((s: ExtractedSegment) => ({
       ...s,
       id: "segment:" + extractHash([id, s.id]),
+      sourceBbox: mappedBox(s.bbox, prepared.processingToSource as Affine),
+      displayBbox: mappedBox(s.bbox, prepared.processingToDisplay as Affine),
     }));
     const tick = performance.now(),
       proposed = proposeCandidates(id, segments),
@@ -193,6 +221,13 @@ export async function runExtraction(
       segments,
       candidates: proposed.candidates,
       geometry: {
+        profile: profile as ExtractionRecord["geometry"]["profile"],
+        displayWidth: prepared.displayWidth,
+        displayHeight: prepared.displayHeight,
+        processingToDisplay: prepared.processingToDisplay,
+        processingToSource: prepared.processingToSource,
+        coordinateConvention: prepared.coordinateConvention,
+        bitmapSha256: prepared.bitmapSha256,
         originalWidth: prepared.originalWidth,
         originalHeight: prepared.originalHeight,
         width: prepared.width,
@@ -220,6 +255,8 @@ export async function runExtraction(
       },
     };
   } catch (error) {
+    if (controller.signal.aborted)
+      throw new ExtractionError("Extraction interrupted or exceeded its deadline.", 504);
     if (error instanceof ExtractionError) throw error;
     throw new ExtractionError(
       "Extraction preparation or execution failed; saved evidence was preserved.",
