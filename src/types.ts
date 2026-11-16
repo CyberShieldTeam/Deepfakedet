@@ -303,6 +303,7 @@ export type ClaimAssessment =
   | "unverified";
 
 export interface ClaimVerificationResult {
+  extractionOrigin?:import('./extractionTypes').ExtractionOrigin;
   analysis?:AnalysisDiagnostics;
   normalizedClaim?: string;
   verificationStatus?:
@@ -488,6 +489,8 @@ export interface LiveEvent {
 }
 
 export interface Investigation {
+  extractions?:import('./extractionTypes').ExtractionRecord[];
+  extractionRun?:import('./extractionTypes').ExtractionRun;
   correlation?:import('./correlationTypes').CorrelationResult;
   correlationRun?:import('./correlationTypes').CorrelationRun;
   correlationContexts?:import('./correlationTypes').MediaContext[];

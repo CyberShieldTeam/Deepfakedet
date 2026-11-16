@@ -1,0 +1,123 @@
+{
+  "scope": "authored software controls; NOT independent accuracy",
+  "clear": {
+    "text": "Software fixture: the fictional Amber Museum offers free entry.\n",
+    "timing": {
+      "preparationMs": 27.70679999999993,
+      "modelStartupMs": 381.54609999999997,
+      "ocrMs": 177.22349999999994,
+      "candidateMs": 0.6134999999999309,
+      "totalMs": 872.8451999999997
+    },
+    "apiMs": 893.2186999999999
+  },
+  "correlationMs": 2.5381999999999607,
+  "quality": [
+    {
+      "name": "no-text",
+      "state": "NO_TEXT_DETECTED",
+      "text": "",
+      "timing": {
+        "preparationMs": 15.011999999999716,
+        "modelStartupMs": 364.7197,
+        "ocrMs": 41.46879999999999,
+        "candidateMs": 0.011400000000321597,
+        "totalMs": 681.8891000000003
+      },
+      "candidates": 0,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": false
+    },
+    {
+      "name": "blurred",
+      "state": "COMPLETE",
+      "text": "Software future the fictonal Amber Museum offers tree entry\n",
+      "timing": {
+        "preparationMs": 23.36869999999999,
+        "modelStartupMs": 378.18620000000004,
+        "ocrMs": 169.84810000000004,
+        "candidateMs": 0.09110000000055152,
+        "totalMs": 850.1895000000004
+      },
+      "candidates": 1,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": false
+    },
+    {
+      "name": "low-resolution",
+      "state": "COMPLETE",
+      "text": "Software fixture: the fictional Amber Museum offers free entry.\n",
+      "timing": {
+        "preparationMs": 18.609199999999873,
+        "modelStartupMs": 359.83809999999994,
+        "ocrMs": 104.66640000000007,
+        "candidateMs": 0.06040000000029977,
+        "totalMs": 725.3699999999999
+      },
+      "candidates": 1,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": false
+    },
+    {
+      "name": "rotated",
+      "state": "COMPLETE",
+      "text": "“AUS Bad} SJAJJO LUNASNY| Joquiy |eUOIOY BU} :aIN}Xy BIeMYOS\n",
+      "timing": {
+        "preparationMs": 18.3066000000008,
+        "modelStartupMs": 364.37190000000004,
+        "ocrMs": 190.5797,
+        "candidateMs": 0.21829999999863503,
+        "totalMs": 852.7943999999998
+      },
+      "candidates": 1,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": false
+    },
+    {
+      "name": "hindi",
+      "state": "COMPLETE",
+      "text": "Hilal MREIas Gale!\n",
+      "timing": {
+        "preparationMs": 11.590799999999945,
+        "modelStartupMs": 337.9865,
+        "ocrMs": 141.46129999999994,
+        "candidateMs": 0.04370000000017171,
+        "totalMs": 743.0892999999996
+      },
+      "candidates": 1,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": true
+    },
+    {
+      "name": "telugu",
+      "state": "COMPLETE",
+      "text": "SHB Habrsovo 383 eos.\n",
+      "timing": {
+        "preparationMs": 12.36659999999938,
+        "modelStartupMs": 352.6096,
+        "ocrMs": 139.26299999999992,
+        "candidateMs": 0.030399999999644933,
+        "totalMs": 734.0072999999993
+      },
+      "candidates": 1,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": true
+    },
+    {
+      "name": "mixed",
+      "state": "COMPLETE",
+      "text": "Software fixture: PICU GRE B83 od.\n",
+      "timing": {
+        "preparationMs": 12.210000000000946,
+        "modelStartupMs": 354.3569,
+        "ocrMs": 155.5276,
+        "candidateMs": 0.3937000000005355,
+        "totalMs": 791.4436000000005
+      },
+      "candidates": 1,
+      "recognitionLanguage": "eng",
+      "unsupportedScriptControl": true
+    }
+  ],
+  "independentAccuracy": null
+}

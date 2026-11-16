@@ -16,6 +16,7 @@ import {
 import { PageHeader } from "./plain";
 import type { Tab } from "../App";
 import {CorrelationView} from './CorrelationView';
+import {ExtractionView} from './ExtractionView';
 
 export const InvestigationsView: React.FC<{
   investigations: Investigation[];
@@ -302,6 +303,7 @@ export const InvestigationsView: React.FC<{
                     <div className="text-slate-500">None yet.</div>
                   )}
                 </div>
+                <ExtractionView key={'extract:'+sel.id} investigation={sel} onChanged={onChanged}/>
                 <CorrelationView key={sel.id} investigation={sel} onChanged={onChanged}/>
                 {sel.timeline?.length ? (
                   <div>

@@ -21,9 +21,10 @@ export function projectInvestigation(inv:Investigation){
  const claims=(inv.claimResults?.length?inv.claimResults:inv.claimResult?[inv.claimResult]:[]);
  const e=inv.campaignResult?.episodeEvidence;
  return {id:inv.id,createdAt:inv.createdAt,isSimulated:!!inv.isSimulatedDemo,
+  extractions:(inv.extractions??[]).slice(0,20),
   totals:{media:media.length,claims:claims.length,posts:e?.posts.length??0,episodes:e?.episodes.length??0,relationships:e?.associations.length??0},
   media:media.slice(0,32).map((m,i)=>({ref:inv.mediaFindings?.length?`/mediaFindings/${i}`:'/forensicResult',key:m.analysis?.id??correlationHash([m.fileName,m.analyzedAt,m.measurements,m.localImage?.revision,m.localImage?.fake_probability,m.localAudio?.segments]),name:m.fileName??m.modality,modality:m.modality,submittedMedia:m.submittedMedia,declaredHash:m.measurements?.sourceSha256,status:m.analysis?.state??m.inference?.status??'legacy_status_not_recorded',time:m.analyzedAt,limitations:m.limitations.slice(0,30),observations:{measurements:Object.fromEntries(Object.entries(m.measurements??{}).filter(([k,v])=>typeof v==='number'||typeof v==='boolean'||['sourceSha256','analysisInput','format'].includes(k)).slice(0,64)),diagnosticCounts:m.analysis?.counts??{},errorCategory:m.analysis?.errorCategory??null,authenticity:m.authenticity,wholeImageModel:m.localImage?.model_status,rawUncalibratedImageScore:m.localImage?.fake_probability,faceModel:m.localImage?.face_manipulation?.status,rawUncalibratedFaceScores:m.localImage?.face_manipulation?.faces,rawUncalibratedAudioSegments:m.localAudio?.segments.slice(0,8),audioSegments:m.localAudio?.segments.length,videoFrames:m.localVideo?.frames.length,frameObservations:m.localVideo?.frames.slice(0,16).map(f=>({timestampSeconds:f.timestampSeconds,modelStatus:f.image.model_status,rawUncalibratedScore:f.image.fake_probability,quality:f.quality,temporal:f.temporal}))}})),
-  claims:claims.slice(0,32).map((c,i)=>({ref:inv.claimResults?.length?`/claimResults/${i}`:'/claimResult',key:c.analysis?.id??correlationHash([c.normalizedClaim??c.targetClaim,c.timestamp,c.sources]),text:c.normalizedClaim??c.targetClaim,time:c.timestamp,status:c.analysis?.state??c.verificationStatus??'legacy_status_not_recorded',verdict:c.verdict,limitations:c.limitations.slice(0,30),missing:c.missingEvidence??[],omitted:c.retrievalDetails?.omittedCount??0,sources:c.sources.slice(0,8)})),
+  claims:claims.slice(0,32).map((c,i)=>({ref:inv.claimResults?.length?`/claimResults/${i}`:'/claimResult',key:c.analysis?.id??correlationHash([c.normalizedClaim??c.targetClaim,c.timestamp,c.sources]),text:c.normalizedClaim??c.targetClaim,time:c.timestamp,status:c.analysis?.state??c.verificationStatus??'legacy_status_not_recorded',verdict:c.verdict,limitations:c.limitations.slice(0,30),missing:c.missingEvidence??[],omitted:c.retrievalDetails?.omittedCount??0,sources:c.sources.slice(0,8),origin:c.extractionOrigin})),
   network:inv.campaignResult?{status:inv.campaignResult.analysis?.state??'legacy_status_not_recorded',truncated:!!inv.campaignResult.truncated,coverage:e?.coverage??null,coverageComplete:e?.coverageComplete??false,warnings:e?.warnings??[],posts:e?.posts.slice(0,3000)??[],episodes:e?.episodes.slice(0,1000)??[],associations:e?.associations.slice(0,1000)??[],hasPostLedger:!!e}:null};
 }
 export type CorrelationProjection=ReturnType<typeof projectInvestigation>;
@@ -49,12 +50,14 @@ export function buildCorrelation(input:CorrelationProjection,contexts:MediaConte
  };
  add('investigation',input.id,'investigation','Investigation',`/id`,{simulated:input.isSimulated},evidenceTime('ingestion',input.createdAt));
  const mediaIds=new Set<string>(),claimTexts=new Map<string,string>(),sourceUrls=new Map<string,{id:string;ref:string}[]>();
+ const mediaHashes=new Map<string,string>(),assessments=new Map<string,string>();
  const stances=new Map<string,{supports:Set<string>;contradicts:Set<string>}>();
  const putUrl=(raw:unknown,engine:EvidenceEngine,ref:string)=>{const url=canonicalUrl(raw);return url?{url,id:add('url',url,engine,url,ref,{canonicalUrl:url},[],[],['URL equality is not proof of document or media byte identity. Query strings are preserved; fragments omitted.'])}:null;};
  for(const m of input.media){
   const digest=m.submittedMedia?.computedBy==='server'&&/^[a-f0-9]{64}$/.test(m.submittedMedia.sha256)?m.submittedMedia:null;
   const asset=add('media_asset',digest?['submitted_bytes',digest.sha256]:['record',m.key],'media',m.name,m.ref,{submittedMedia:digest,clientDeclaredHash:m.declaredHash,identityBasis:digest?'server_received_bytes':'analysis_record_only'},[],[m.status],digest?['Byte equality applies only to bytes actually submitted, not publication provenance or authenticity.']:['No server-computed submitted-byte digest; client declarations/filenames do not establish identity.']);
   if(asset)mediaIds.add(asset);
+  if(asset&&digest)mediaHashes.set(digest.sha256,asset);
   const observation=add('media_observation',m.key,'media',`${m.modality} observations`,m.ref,m.observations,evidenceTime('analysis',m.time),[m.status],m.limitations);
   link(asset,observation,'HAS_OBSERVATION','attached engine result',[m.ref]);
   if(['PARTIAL_ANALYSIS','ANALYSIS_FAILED','ANALYSIS_UNAVAILABLE','partial','failed','unavailable'].includes(m.status)){upstreamPartial=true;missing.add(`Media analysis ${m.key}: ${m.status}; inspect its retained limitations.`);}
@@ -64,6 +67,7 @@ export function buildCorrelation(input:CorrelationProjection,contexts:MediaConte
   if(claim)claimTexts.set(claim,text);
   const assessment=add('claim_assessment',c.key,'claim',c.verdict,c.ref,{verdict:c.verdict},evidenceTime('analysis',c.time),[c.status],c.limitations);
   link(assessment,claim,'ASSESSES_CLAIM','attached claim assessment; not a new verdict',[c.ref]);
+  if(assessment)assessments.set(c.key,assessment);
   for(const reason of c.missing)missing.add(reason);
   const supporting:string[]=[],opposing:string[]=[];
   c.sources.forEach((s,i)=>{
@@ -78,6 +82,26 @@ export function buildCorrelation(input:CorrelationProjection,contexts:MediaConte
   });
   if(claim){const s=stances.get(claim)??{supports:new Set<string>(),contradicts:new Set<string>()};supporting.forEach(id=>s.supports.add(id));opposing.forEach(id=>s.contradicts.add(id));stances.set(claim,s);}
   if(c.omitted||['PARTIAL_ANALYSIS','ANALYSIS_FAILED','ANALYSIS_UNAVAILABLE','UNAVAILABLE'].includes(c.status)){upstreamPartial=true;missing.add(`Claim assessment ${c.key}: ${c.status}; omitted candidates ${c.omitted}.`);}
+ }
+ for(const [i,record] of (input.extractions??[]).entries()){
+  const media=mediaHashes.get(record.sourceMediaHash);if(!media){missing.add('Extraction source is outside the bounded media projection; no source binding fabricated.');continue;}
+  const ref=`/extractions/${i}`,segments=new Map<string,string|null>();
+  for(const [j,s] of record.segments.entries()){
+   const node=add('extracted_text',[record.id,s.id],'media',s.text,`${ref}/segments/${j}`,{text:s.text,bbox:s.bbox,words:s.words,geometry:record.geometry,method:record.method,modelRevision:record.modelRevision,modelSha256:record.modelSha256,sourceMediaHash:record.sourceMediaHash,recognitionLanguage:record.recognitionLanguage,detectedLanguage:record.detectedLanguage},evidenceTime('analysis',record.extractedAt),[record.state],record.limitations);segments.set(s.id,node);
+   link(media,node,'MEDIA_CONTAINS_TEXT','bounded local OCR on hash-matching submitted bytes',[ref,`${ref}/segments/${j}`],{method:record.method,bbox:s.bbox},'exact_reference',false,record.limitations);
+  }
+  for(const [j,c] of record.candidates.entries()){
+   const cref=`${ref}/candidates/${j}`,candidate=add('claim_candidate',c.id,'media',c.originalText,cref,{originalText:c.originalText,start:c.start,end:c.end,category:c.category,method:c.categoryMethod},[],[c.reviews.at(-1)?.state??'pending'],['Unvalidated candidate category; never a factual verdict.']);
+   link(segments.get(c.segmentId)??null,candidate,'TEXT_PROPOSES_CLAIM','exact substring of OCR line',[cref],{start:c.start,end:c.end,reviewState:c.reviews.at(-1)?.state??'pending'});
+   for(const [k,r] of c.reviews.entries()){
+    const rref=`${cref}/reviews/${k}`,review=add('extraction_review',[c.id,r.revision],'analyst',r.reviewedText??r.state,rref,{...r,originalText:c.originalText},evidenceTime('analysis',r.reviewedAt),[r.state],['Review confirms representation of the source, not factual truth.']);
+    link(candidate,review,'CLAIM_REVIEWED_FROM_TEXT','authenticated recorded human review',[cref,rref],{reviewState:r.state,revision:r.revision});
+    if(k!==c.reviews.length-1||!['accepted','corrected'].includes(r.state))continue;
+    for(const assessment of input.claims){const origin=assessment.origin;if(!origin||origin.extractionId!==record.id||origin.candidateId!==c.id||origin.reviewRevision!==r.revision||origin.segmentId!==c.segmentId||origin.mediaHash!==record.sourceMediaHash||origin.reviewedText!==r.reviewedText||canonicalText(assessment.text)!==canonicalText(r.reviewedText??''))continue;
+     link(review,assessments.get(assessment.key)??null,'CLAIM_INVESTIGATED_BY_ENGINE2','current accepted/corrected review explicitly investigated by Engine 2',[rref,assessment.ref],{reviewState:r.state,revision:r.revision},'exact_reference',true,['Extraction review does not validate claim truth; Engine 2 safeguards remain applicable.']);
+    }
+   }
+  }
  }
  const postIds=new Map<string,string>(),accountIds=new Map<string,string>(),postUrls=new Map<string,string[]>();
  if(input.network){
@@ -127,7 +151,7 @@ export function buildCorrelation(input:CorrelationProjection,contexts:MediaConte
  if(input.totals.media>32||input.totals.claims>32||input.totals.episodes>1000||input.totals.relationships>1000){truncated=true;notes.add('Engine adapter caps omitted records; source evidence remains in the investigation.');}
  for(const [claimId,s] of stances)if(s.supports.size&&s.contradicts.size)contradictions.push({claimId,sourceIds:[...s.supports,...s.contradicts].sort()});
  if(!input.media.length)missing.add('No attached media analysis.');if(!input.claims.length)missing.add('No attached claim assessment.');if(!input.network)missing.add('No attached network analysis.');
- if(input.media.length&&input.claims.length&&!contexts.length)missing.add('No documented media/claim binding; no transcript, OCR or caption extraction invented.');
+ if(input.media.length&&input.claims.length&&!contexts.length&&![...edges.values()].some(e=>e.type==='CLAIM_INVESTIGATED_BY_ENGINE2'))missing.add('No documented media/claim binding; no transcript, OCR or caption extraction invented.');
  const orderedNodes=[...nodes.values()].map(n=>({...n,references:[...referenceSets.get(n.id)!].sort()})).sort((a,b)=>a.id.localeCompare(b.id));
  const allTimeline=orderedNodes.flatMap(n=>n.times.filter(t=>t.utc).map(t=>({id:id('time',[n.id,t]),nodeId:n.id,time:t}))).sort((a,b)=>a.time.utc!.localeCompare(b.time.utc!)||a.id.localeCompare(b.id));
  const omittedTimelineEntries=Math.max(0,allTimeline.length-limits.timeline);if(omittedTimelineEntries)truncated=true;

@@ -1,0 +1,19 @@
+{
+  "scope": "authored clear image resource control, not accuracy",
+  "timing": {
+    "preparationMs": 51.11699999999999,
+    "modelStartupMs": 351.4593,
+    "ocrMs": 189.65879999999993,
+    "candidateMs": 0.6405999999999494,
+    "totalMs": 853.2386999999999
+  },
+  "state": "COMPLETE",
+  "sampledPeakOcrTreeRssBytes": 212836352,
+  "wallSeconds": 1.166275100025814,
+  "samplingIntervalSeconds": 0.02,
+  "limitations": [
+    "RSS sampled every 20ms; instantaneous peaks may be missed.",
+    "OCR process tree only; persistent Python preparation service and web server excluded.",
+    "512 MiB V8 old-space per OCR process is not a native/WASM hard memory guarantee."
+  ]
+}

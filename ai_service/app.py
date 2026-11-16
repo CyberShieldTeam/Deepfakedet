@@ -17,6 +17,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from PIL import Image, ImageOps, UnidentifiedImageError
 from ai_service import audio_service, video_service, face_service, image_evidence, provenance_service
+from ai_service.extraction_prepare import router as extraction_router
 
 def _timing(stage, event):
     if os.getenv("VERITAS_TIMING_LOG", "0") == "1":
@@ -104,6 +105,7 @@ async def lifespan(_app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+app.include_router(extraction_router)
 app.include_router(audio_service.router)
 app.include_router(video_service.router)
 app.include_router(image_evidence.router)

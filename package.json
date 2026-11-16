@@ -13,6 +13,8 @@
     "test:engine3": "tsx test/engine3Dataset.test.ts && tsx test/engine3Reliability.test.ts",
     "test:diagnostics": "tsx test/analysisDiagnostics.test.ts",
     "test:engine4": "tsx test/engine4.test.ts && tsx test/engine4Api.test.ts",
+    "test:extraction": "tsx test/extraction.test.ts",
+    "test:extraction:api": "tsx test/extractionApi.test.ts",
     "evaluate:engine3": "tsx test/engine3/evaluate.ts",
     "test:e2e": "playwright test",
     "smoke:image:http": "tsx test/smokeImageHttp.ts",
@@ -30,6 +32,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recharts": "^2.15.4",
+    "tesseract.js": "7.0.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {

@@ -1,8 +1,8 @@
 export type EvidenceEngine='investigation'|'media'|'claim'|'network'|'analyst';
-export type EvidenceType='investigation'|'media_asset'|'media_observation'|'claim'|'claim_assessment'|'source'|'post'|'account'|'url'|'hashtag'|'episode'|'network_relationship';
+export type EvidenceType='investigation'|'media_asset'|'media_observation'|'claim'|'claim_assessment'|'source'|'post'|'account'|'url'|'hashtag'|'episode'|'network_relationship'|'extracted_text'|'claim_candidate'|'extraction_review';
 export interface EvidenceTime {kind:'publication'|'retrieved'|'analysis'|'ingestion'|'episode_start'|'episode_end';original:string;utc:string|null;resolutionMs:number|null}
 export interface EvidenceNode {id:string;investigationId:string;type:EvidenceType;engines:EvidenceEngine[];label:string;references:string[];times:EvidenceTime[];statuses:string[];limitations:string[];metadata:Record<string,unknown>}
-export type RelationshipType='HAS_OBSERVATION'|'ASSESSES_CLAIM'|'SOURCE_RETRIEVED_FOR_CLAIM'|'SOURCE_ADDRESSES_CLAIM'|'POST_CONTAINS_CLAIM'|'SHARED_CANONICAL_URL'|'REFERENCES_URL'|'SHARED_HASHTAG'|'AUTHORED_BY'|'PART_OF_EPISODE'|'NETWORK_ASSOCIATION'|'MEDIA_CONTEXT_CLAIM'|'POST_REFERENCES_MEDIA';
+export type RelationshipType='HAS_OBSERVATION'|'ASSESSES_CLAIM'|'SOURCE_RETRIEVED_FOR_CLAIM'|'SOURCE_ADDRESSES_CLAIM'|'POST_CONTAINS_CLAIM'|'SHARED_CANONICAL_URL'|'REFERENCES_URL'|'SHARED_HASHTAG'|'AUTHORED_BY'|'PART_OF_EPISODE'|'NETWORK_ASSOCIATION'|'MEDIA_CONTEXT_CLAIM'|'POST_REFERENCES_MEDIA'|'MEDIA_CONTAINS_TEXT'|'TEXT_PROPOSES_CLAIM'|'CLAIM_REVIEWED_FROM_TEXT'|'CLAIM_INVESTIGATED_BY_ENGINE2';
 export interface EvidenceRelationship {id:string;source:string;target:string;type:RelationshipType;strength:'exact_reference'|'literal_mention'|'analyst_asserted'|'contextual';crossEngine:boolean;method:string;support:string[];measurements:Record<string,unknown>;explanation:string;limitations:string[]}
 export interface MediaContextInput {mediaId:string;claimId:string;kind:'user_caption'|'user_description';text:string;rationale:string;mediaUrl?:string}
 export interface MediaContext extends MediaContextInput {id:string;providedBy:string;providedAt:string}

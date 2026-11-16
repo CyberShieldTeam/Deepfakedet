@@ -89,4 +89,11 @@ phase closure has occurred.
 
 ## Phase completion rule
 
+Engine 4.1 now has a tested English still-image OCR → reviewed claim → Engine 2 → Engine 4
+vertical slice. Next extraction gate: rights-cleared independent screenshot annotations,
+blinded reviewers and separate transcription/claim/relationship evaluation, informed by
+observed blur, rotation and mixed-script errors. Video OCR, subtitle deduplication, STT
+and Hindi/Telugu OCR are deferred; existing forensics remains available. See the three
+`docs/ENGINE4_EXTRACTION_*.md` documents. This does not close scientific detection phases.
+
 Each completed phase requires implemented code, tests run with recorded results, an integration check, changed-file summary, and an updated `IMPLEMENTATION_PROGRESS.md`. A documented plan or adapter alone is not a completed detection engine.

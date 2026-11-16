@@ -7,6 +7,7 @@ import {
 } from "../types";
 import type {CorrelationResult,MediaContextInput} from '../correlationTypes';
 export const correlateInvestigation=(id:string,contexts?:MediaContextInput[])=>post<{investigation:Investigation;result:CorrelationResult}>(`/api/investigations/${encodeURIComponent(id)}/correlate`,contexts===undefined?{}:{contexts});
+export const extractionRequest=(id:string,action:string,body:unknown)=>post<{investigation:Investigation}>(`/api/investigations/${encodeURIComponent(id)}/${action}`,body);
 
 async function req<T>(url: string, init?: RequestInit): Promise<T> {
   const res = await fetch(url, {

@@ -25,6 +25,7 @@ import { campaignEmbeddings } from "./server/campaignEmbedding";
 import {networkDiagnostics,logAnalysis,failedDiagnostic} from './server/analysisDiagnostics';
 import {canonicalUrl,projectInvestigation,correlationFingerprint,correlationHash} from './server/correlation';
 import {runCorrelation,CorrelationError} from './server/correlationRunner';
+import {installExtractionRoutes} from './server/extractionRoutes';
 import type {MediaContext} from './src/correlationTypes';
 import { createServer as createViteServer } from "vite";
 import path from "path";
@@ -853,6 +854,7 @@ app.post("/api/investigations/:id/attach", validate(attachmentInput), (req, res)
   res.json({ investigation: inv });
 });
 
+installExtractionRoutes(app,id=>investigations.find(i=>i.id===id&&visible(i)),persist);
 app.post('/api/investigations/:id/correlate',validate(correlationInput),async(req,res,next)=>{
   const initial=investigations.find(i=>i.id===req.params.id&&visible(i));
   if(!initial)return void res.status(404).json({error:'Investigation not found'});

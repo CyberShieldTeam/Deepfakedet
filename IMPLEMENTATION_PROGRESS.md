@@ -1,5 +1,42 @@
 # VERITAS AI implementation progress
 
+## Engine 4.1 image extraction vertical slice — 2026-11-16
+
+- Started clean/synchronized at `c4fe717` on `codex/integrate-figma-upgrade`. Audited
+  installed OCR/STT, video/audio preprocessing, claim/review/graph/storage contracts.
+- Added pinned offline English Tesseract.js OCR with bounded Pillow preparation,
+  source/bitmap hashes, processing geometry, real word confidence/boxes and exact-span
+  candidate suggestions. No startup model download; explicit 4.1 MB publisher-verified
+  English model install. Actual byte-object loader failure was diagnosed and corrected.
+- Added owned case extraction/review/investigation APIs, immutable machine text and
+  chronological accepted/corrected/rejected/uncertain review histories; pending default.
+  Only current accepted/corrected text can enter existing Engine 2. Source confirmation
+  concerns representation, not truth. Current revision and identity rechecked after await.
+- Existing case UI supports hash-matching original inspection, OCR status/provenance,
+  candidate decisions/corrections/history, Engine 2 findings and existing Engine 4 graph.
+  New deterministic structural/review/assessment edges carry exact refs; pending or
+  withdrawn reviews cannot bind source media to Engine 2. Historical findings stay saved.
+- Reports preserve original/corrected text, model/hash/geometry, reviews/identities and
+  extraction-origin assessment paths. Browser found that the 100-row graph display cap
+  could omit the new link; added a dedicated extraction relationship summary.
+- Node engine/API, Engine 3, Engine 4, diagnostic, extraction API/unit, TypeScript/build
+  checks passed. Python: 79 tests, 78 passed / one optional AASIST skip. Dev/authenticated
+  production browser profiles: 12 regression passes/four setup skips each, plus both
+  configured Engine 4 workflows passed separately in each profile. See extraction
+  validation document for initial failures, corrections and exact setup-dependent skips.
+- Actual authored clear image → OCR → human accepted review → corpus retrieval → graph
+  → twelve authored public-post observations demonstrated, with API/disk/report parity.
+  Clear extraction ~0.9s; sampled OCR tree peak ~203 MiB, excluding persistent services.
+  Blur/rotation/Indic/mixed controls exposed transcription errors, recorded verbatim.
+- Video OCR/subtitle dedup, STT, Hindi/Telugu recognition and independent quality data
+  remain deferred. Offline rights/annotation-gated future evaluation separates OCR/STT,
+  candidate sets, reviewer agreement and relationship correctness; missing metrics null.
+  No independent accuracy, real-time/SLA or scientific phase closure claimed.
+- No model/threshold, semantic diagnostic restriction, recurrence/coverage gate, manual
+  claim/caption flow or private investigation store changed. See
+  `docs/ENGINE4_EXTRACTION_ARCHITECTURE.md`, `docs/ENGINE4_EXTRACTION_VALIDATION.md`,
+  `docs/ENGINE4_EXTRACTION_LIMITATIONS.md` and `reports/engine41_*` for actual scope.
+
 ## Engine 4 bounded correlation vertical slice — 2026-11-16
 
 - Started clean/synchronized at `2ecf2e4` on `codex/integrate-figma-upgrade`. Audited
