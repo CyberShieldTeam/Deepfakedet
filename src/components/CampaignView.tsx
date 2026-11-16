@@ -27,6 +27,7 @@ import { EDGE_LEGEND, ForceGraph } from "./ForceGraph";
 import { CampaignEvidence } from './CampaignEvidence';
 import { Details, PageHeader, VerdictBanner } from "./plain";
 import type { AttachFn } from "../App";
+import {AnalysisStatus} from './AnalysisStatus';
 
 export const CampaignView: React.FC<{
   attach: AttachFn;
@@ -52,6 +53,7 @@ export const CampaignView: React.FC<{
   }, [active?.id]);
 
   const run = async (p: Parameters<typeof analyzeCampaign>[0]) => {
+    setResult(null);
     if (!p.isSimulated) onLiveAnalysis?.();
     else onDemonstration?.();
     setBusy(true);
@@ -70,6 +72,7 @@ export const CampaignView: React.FC<{
   };
 
   const onFile = async (f: File) => {
+    setResult(null);setSaved('');setError('');
     if (f.size > 2_000_000) return setError("Dataset exceeds the 2 MB upload limit.");
     const text = await f.text();
     if (/\.json$/i.test(f.name) || text.trim().startsWith("[") || text.trim().startsWith("{")) {
@@ -248,13 +251,14 @@ export const CampaignView: React.FC<{
             tone={
               result.classification === "Suspicious coordinated amplification" ? "orange" : "sky"
             }
-            headline={result.classification || "Legacy graph baseline — review required"}
+            headline={result.analysis||result.episodeEvidence?(result.truncated?'Partial network analysis':result.edges.length?'Observed post relationships':'No qualifying post relationships'):result.classification || "Legacy graph baseline — review required"}
             explain={
-              result.methodology ||
+              result.analysis?.summary || (result.episodeEvidence?`${result.edges.length} observed relationships and ${result.episodeEvidence.episodes.length} pair episodes retained. Intent and common control remain unproven. Processing diagnostics were not recorded for this older result.`:undefined) || result.methodology ||
               "Union-find comparison on synthetic demonstration data; not a trained coordination classifier."
             }
             advice="A shared URL, headline or hashtag alone does not imply malicious coordination. Review recurring independent signals and source context."
           />
+          <AnalysisStatus analysis={result.analysis}/>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
             <Stat
               label="Candidate pairs"

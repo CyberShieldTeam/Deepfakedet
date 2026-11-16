@@ -1,0 +1,59 @@
+{
+  "scope": "authored_local_diagnostic_helper_microbenchmark_not_end_to_end_performance",
+  "sourceSha256": "d8c2f5a9415dab999efdd67e0d5ca37a62cd51ea742e710899eb21be5362d499",
+  "results": [
+    {
+      "name": "media_measured",
+      "iterations": 1000,
+      "medianMs": 0.0024999999999977263,
+      "p95Ms": 0.004899999999992133,
+      "diagnosticJsonBytes": 1178
+    },
+    {
+      "name": "claim_retrieved",
+      "iterations": 1000,
+      "medianMs": 0.0018000000000029104,
+      "p95Ms": 0.0053000000000054115,
+      "diagnosticJsonBytes": 947
+    },
+    {
+      "name": "claim_no_match",
+      "iterations": 1000,
+      "medianMs": 0.001599999999996271,
+      "p95Ms": 0.003200000000020964,
+      "diagnosticJsonBytes": 928
+    },
+    {
+      "name": "network_repeated",
+      "iterations": 1000,
+      "medianMs": 0.0020000000000095497,
+      "p95Ms": 0.005899999999996908,
+      "diagnosticJsonBytes": 1422
+    },
+    {
+      "name": "network_no_match",
+      "iterations": 1000,
+      "medianMs": 0.0016999999999995907,
+      "p95Ms": 0.0039000000000157797,
+      "diagnosticJsonBytes": 1413
+    },
+    {
+      "name": "media_service_failure",
+      "iterations": 1000,
+      "medianMs": 0.0023999999999944066,
+      "p95Ms": 0.0028000000000076852,
+      "diagnosticJsonBytes": 1159
+    },
+    {
+      "name": "claim_unconfigured",
+      "iterations": 1000,
+      "medianMs": 0.0014999999999929514,
+      "p95Ms": 0.0018000000000029104,
+      "diagnosticJsonBytes": 904
+    }
+  ],
+  "limitations": [
+    "Local warm-JIT helper timing only; excludes inference, network, serialization, logging and browser rendering.",
+    "Evidence counts are heterogeneous retained observation items, not independent evidence or confidence."
+  ]
+}

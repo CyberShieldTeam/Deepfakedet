@@ -2,6 +2,22 @@ import { test, expect } from "@playwright/test";
 import { encodeWav } from "../src/utils/audioSegments";
 import {episodeControls,coverage as episodeCoverage} from './fixtures/campaign/episodeControls';
 
+test('Failed network rerun cannot leave prior findings displayed as a new result',async({page})=>{
+ await page.goto('/');await page.getByRole('button',{name:'Network intelligence',exact:true}).first().click();
+ const posts=episodeControls.find(c=>c.name==='multi_episode_pattern')!.rows;
+ await page.locator('input[type=file]').setInputFiles({name:'valid-fictional.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({posts,coverage:episodeCoverage}))});
+ await expect(page.getByText('Observed post relationships',{exact:true})).toBeVisible();
+ await page.locator('input[type=file]').setInputFiles({name:'invalid-fictional.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({posts:posts.map((p,i)=>i===0?{...p,timestamp:'missing'}:p)}))});
+ await expect(page.getByRole('alert')).toContainText('ANALYSIS_FAILED');
+ await expect(page.getByRole('region',{name:'Analysis processing status'})).toHaveCount(0);
+ await expect(page.getByRole('button',{name:'Save to a case',exact:true})).toHaveCount(0);
+ await page.locator('input[type=file]').setInputFiles({name:'valid-again.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({posts,coverage:episodeCoverage}))});
+ await expect(page.getByText('Observed post relationships',{exact:true})).toBeVisible();
+ await page.locator('input[type=file]').setInputFiles({name:'malformed.json',mimeType:'application/json',buffer:Buffer.from('{bad json')});
+ await expect(page.getByRole('alert')).toContainText('Invalid JSON file');
+ await expect(page.getByRole('region',{name:'Analysis processing status'})).toHaveCount(0);
+});
+
 test('Episode campaign evidence survives graph inspection and export',async({page})=>{
  await page.goto('/');await page.getByRole('button',{name:'Network intelligence',exact:true}).first().click();
  const control=episodeControls.find(c=>c.name==='multi_episode_pattern')!;
@@ -23,6 +39,8 @@ test('Episode campaign evidence survives graph inspection and export',async({pag
  await page.getByRole('button',{name:'Export report',exact:true}).click();
  const report=page.frameLocator('iframe[title="report"]');
  await expect(report.getByRole('heading',{name:'Campaign episode evidence',exact:true})).toBeVisible();
+ await expect(report.getByRole('heading',{name:'Processing and evidence status',exact:true})).toBeVisible();
+ await expect(report.getByText(new RegExp(result.analysis.id))).toBeVisible();
  await expect(report.getByText(/witness:/).first()).toBeVisible();
  const htmlDownload=page.waitForEvent('download');await page.getByRole('button',{name:'Download',exact:true}).click();expect((await htmlDownload).suggestedFilename()).toMatch(/\.html$/);
 });
@@ -109,7 +127,7 @@ test("Real claim input remains unverified and saves to an owner-scoped live case
     .fill("Live test: a dam near Hyderabad has collapsed. Evacuate now!");
   await page.getByRole("button", { name: "Check this claim", exact: true }).click();
   await expect(page.getByText("LIVE ANALYSIS MODE", { exact: true })).toBeVisible();
-  await expect(page.getByText("We couldn't verify this claim", { exact: true })).toBeVisible();
+  await expect(page.getByText('Claim verification unavailable', { exact: true })).toBeVisible();
   await expect(page.getByText("insufficient", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Save to a case", exact: true }).click();
   await expect(page.getByRole("button", { name: /Saved to SUR-/ })).toBeVisible();
@@ -215,7 +233,7 @@ test("Network sample exposes evidence; mobile navigation fits viewport", async (
   await page.getByRole("button", { name: "Network intelligence", exact: true }).first().click();
   await page.getByRole("button", { name: "Try with sample posts", exact: true }).click();
   await expect(page.getByText("synthetic dataset", { exact: true })).toBeVisible();
-  await expect(page.getByText("Insufficient evidence", { exact: true })).toBeVisible();
+  await expect(page.getByText('Observed post relationships', { exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: /Inspect @/ }).first()).toBeVisible();
   await page
     .getByRole("button", { name: /Inspect @/ })

@@ -148,6 +148,7 @@ const CHECK_SOURCE = "Find the original source before sharing. Do not forward it
 
 /** Everyday-language reading of a media result. */
 export function plainMedia(r: ForensicAnalysisResult): Plain {
+  if(r.analysis&&r.authenticity==='inconclusive')return {tone:'amber',headline:r.analysis.state==='ANALYSIS_FAILED'?'Media analysis failed':r.analysis.state==='ANALYSIS_UNAVAILABLE'?'Media analysis unavailable':'Authenticity remains undetermined',explain:r.analysis.summary,advice:'Review the retained observations and unavailable stages. Measurements do not establish authenticity.'};
   if ((r.localImage || r.localAudio || r.localVideo) && r.authenticity === "inconclusive")
     return { tone: "amber", headline: "Authenticity remains undetermined",
       explain: r.headlineSummary, advice: "Experimental scores need independent validation. Check the source and context before sharing." };
@@ -261,6 +262,10 @@ export function plainClaim(r: ClaimVerificationResult): Plain {
       explain:
         "An identified analyst reviewed the retrieved sources for applicability and stance. This is a human evidence assessment, not an automated truth probability.",
     };
+  if(r.analysis)return {tone:'slate',headline:r.analysis.state==='ANALYSIS_FAILED'?'Claim retrieval failed':r.analysis.state==='ANALYSIS_UNAVAILABLE'?'Claim verification unavailable':r.sources.length?'Evidence retrieved; review required':'No matching evidence retrieved',explain:r.analysis.summary,advice:'Check source applicability and context; an unresolved claim is not a false claim.'};
+  if(r.verificationStatus==='UNAVAILABLE')return {tone:'slate',headline:'Claim verification unavailable',explain:r.verdictRationale,advice:'Unavailable retrieval does not establish whether the claim is true or false.'};
+  if(r.sources.length&&(r.verificationStatus==='INSUFFICIENT_EVIDENCE'||r.verificationMode==='insufficient_external_evidence'))return {tone:'slate',headline:'Evidence retrieved; review required',explain:`${r.sources.length} retained source candidates require applicability and stance review. Processing diagnostics were not recorded for this older result.`};
+  if(!r.sources.length&&r.retrievalDetails?.providers.some(p=>p.status==='available'))return {tone:'slate',headline:'No matching evidence retrieved',explain:'Available retrieval returned no matching passages; the claim remains unresolved. Processing diagnostics were not recorded for this older result.'};
   const noSources =
     "No news or official sources were checked — this is only the AI’s own knowledge.";
   switch (claimAssessment(r)) {

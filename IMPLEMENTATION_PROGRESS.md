@@ -1,5 +1,32 @@
 # VERITAS AI implementation progress
 
+## Critical cross-engine diagnostic investigation — 2026-11-16
+
+- Started clean/synchronized at `71819c1` on `codex/integrate-figma-upgrade`. Before
+  behavior changes, reproduced seven actual frontend scenarios with raw engine, API,
+  on-disk investigation and report comparisons. Exact “Not Enough Evidence” literal is
+  absent from this revision; equivalent inconclusive/unavailable screens were reproduced.
+- No evidence loss in tested persistence paths. Verified root causes: claim plain-language
+  mapping ignored retrieved passages/status; network headline used campaign abstention
+  despite retained relationships; media dependency errors lost structured categories and
+  local replacement dropped common limitations. Corrected these stages, not models.
+- Added backward-compatible processing diagnostics/states, actual evidence counts, safe
+  stage/error logs, developer disclosure and report preservation. Clear failed-rerun/client
+  malformed-upload transient results; preserve saved cases. Legacy records use existing
+  status/evidence fields without invented diagnostics or data migration.
+- Kept every verdict, threshold, model gate, source-context review requirement, semantic
+  diagnostic boundary, recurrence/coverage/truncation safeguard and null uncertainty value.
+  Seven-case before/after assertions preserve substantive observations/verdicts; exact
+  raw/API/disk/report comparisons also run through authenticated production.
+- Existing Node/API suite, new diagnostic states/privacy/report tests, affected API tests,
+  TypeScript/build and Engine 3 regressions passed. Python: 68 passed/one absent-weight
+  skip. Dev/prod browser unavailable-dependency suites each 10 passed/four configuration
+  skips; four configured production workflows passed separately (review/provenance/video/
+  failed rerun). Details, observed test-fixture correction, performance bounds and remaining
+  limitations: `docs/CROSS_ENGINE_DIAGNOSTICS.md` and `reports/cross_engine_*.json`.
+- No scientific phase closure: source/model availability and independent validation remain
+  explicit. No artificial positives, new numerical confidence or threshold relaxation.
+
 ## Engine 3 independent-evaluation preparation and reliability — 2026-11-16
 
 - Started clean and synchronized at `91b2b76e8895f8be5e73e82dac5b486dad002784` on

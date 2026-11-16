@@ -37,6 +37,7 @@ export function reportHtml(r: Report): string {
       ? [inv.claimResult]
       : [];
   const c = inv.campaignResult;
+  const analyses=[...media.map(m=>m.analysis),...claims.map(x=>x.analysis),c?.analysis].filter(Boolean);
   const allLimits = Array.from(
     new Set([...media.flatMap((m) => m.limitations), ...claims.flatMap((x) => x.limitations)]),
   );
@@ -56,7 +57,8 @@ table{border-collapse:collapse;width:100%;font-size:12px}td,th{border:1px solid 
 <div class="meta">Integrity hash (SHA-256 of case record): ${esc(r.integrityHash)}</div>
 ${inv.isSimulatedDemo ? '<div class="sim">SIMULATED DEMONSTRATION — This report describes fictional incident data. It is not a real emergency, and no real government announcement is represented.</div>' : ""}
 <h2>1. Incident summary</h2>
-<div class="box"><b>Executive evidence summary</b><p>Media authenticity: ${media.length} analysis record(s), ${media.filter((m) => m.inference?.status === "available").length} with an available dedicated classifier. Factual accuracy: ${claims.length} claim assessment(s), ${claims.filter((x) => x.verdict === "Insufficient Evidence").length} with insufficient evidence. Distribution: ${esc(c?.classification || (c ? "Legacy baseline; intent undetermined" : "Not assessed"))}.</p><p>These are independent evidence dimensions. AI generation is not itself misinformation, and relationship density does not establish malicious intent. ${inv.isSimulatedDemo ? "All findings in this case are simulated." : "Unavailable inference remains unassessed, not authentic or fake."}</p></div>
+${analyses.length?`<div class="box"><h3>Processing and evidence status</h3>${analyses.map(a=>`<p><b>${esc(a.engine)}: ${esc(a.state)}</b> · ${esc(a.completeness)} · ID ${esc(a.id)}</p><p>${esc(a.summary)}</p><p>${Object.entries(a.counts).map(([k,v])=>`${esc(k)}: ${esc(v)}`).join('; ')}</p><p>${a.stages.map(s=>`${esc(s.stage)}: ${esc(s.status)}${s.errorCategory?` (${esc(s.errorCategory)})`:''}`).join('; ')}</p>`).join('')}<p>Processing state is separate from authenticity, claim truth and malicious intent. Full diagnostics remain in the authenticated report JSON.</p></div>`:''}
+<div class="box"><b>Executive evidence summary</b><p>Media authenticity: ${media.length} analysis record(s), ${media.filter((m) => m.inference?.status === "available").length} with an available dedicated classifier. Factual accuracy: ${claims.length} claim assessment(s), ${claims.filter((x) => x.verdict === "Insufficient Evidence").length} unresolved verdict(s); processing availability is reported separately above. Distribution: ${esc(c?.analysis?.summary || c?.classification || (c ? "Legacy baseline; intent undetermined" : "Not assessed"))}.</p><p>These are independent evidence dimensions. AI generation is not itself misinformation, and relationship density does not establish malicious intent. ${inv.isSimulatedDemo ? "All findings in this case are simulated." : "Unavailable inference remains unassessed, not authentic or fake."}</p></div>
 <table><tr><th>Title</th><td>${esc(inv.title)}</td></tr><tr><th>Subject</th><td>${esc(inv.targetSubject)}</td></tr>
 <tr><th>Risk classification</th><td class="${inv.riskLevel === "Critical" ? "crit" : ""}">${esc(inv.riskLevel)}</td></tr><tr><th>Status</th><td>${esc(inv.status)}</td></tr>
 <tr><th>Opened</th><td>${esc(new Date(inv.createdAt).toLocaleString())}</td></tr><tr><th>Analyst</th><td>${esc(inv.analyst)}</td></tr></table>

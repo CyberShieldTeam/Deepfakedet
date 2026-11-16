@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { performance } from "node:perf_hooks";
+import {claimDiagnostics} from './analysisDiagnostics';
 import { embedDetailed, cosine, modelConfig } from "./inference";
 import { analyzeClaim, claimTokens, normalizeClaim } from "./claimText";
 import {
@@ -158,7 +159,7 @@ export async function verifyWithEvidence(claim: string): Promise<ClaimVerificati
       ? ["Input exceeds eight sentence candidates; review the complete original text."]
       : []),
   ];
-  return {
+  const result:ClaimVerificationResult = {
     originalInput: claim,
     targetClaim: analysis.normalized,
     normalizedClaim: analysis.normalized,
@@ -212,6 +213,8 @@ export async function verifyWithEvidence(claim: string): Promise<ClaimVerificati
       queries: [analysis.normalized],
     },
   };
+  result.analysis=claimDiagnostics(result,performance.now()-started);
+  return result;
 }
 
 export const claimReviewSchema = z
@@ -242,6 +245,7 @@ export function reviewEvidence(
   note: string,
   reviewer: string,
 ) {
+  const started=performance.now();
   if (!result.normalizedClaim || result.normalizedClaim !== normalizeClaim(result.originalInput))
     throw new Error("Re-run claim verification before review");
   const seen = new Set<string>();
@@ -303,7 +307,7 @@ export function reviewEvidence(
       : contradicting.length
         ? "CONTRADICTED"
         : "INSUFFICIENT_EVIDENCE";
-  return {
+  const reviewedResult = {
     ...result,
     sources,
     verificationStatus: status,
@@ -339,4 +343,6 @@ export function reviewEvidence(
     confidenceNote: "Attributed human assessment; no truth probability estimated.",
     timestamp: reviewedAt,
   } as ClaimVerificationResult;
+  reviewedResult.analysis=claimDiagnostics(reviewedResult,performance.now()-started);
+  return reviewedResult;
 }

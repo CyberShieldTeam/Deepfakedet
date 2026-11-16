@@ -1,5 +1,14 @@
 # VERITAS AI implementation plan
 
+## Cross-engine diagnostic prerequisite — 2026-11-16
+
+Investigated user-observed inconclusive screens before further Engine 3 research.
+`docs/CROSS_ENGINE_DIAGNOSTICS.md` records actual frontend/raw/API/storage/report traces,
+verified status-mapping/error-retention faults, additive processing states, regressions and
+preserved uncertainty safeguards. No models/thresholds changed. Source/model availability
+and independent validation remain separate open gates; do not infer scientific completion
+from improved evidence visibility.
+
 ## Current Engine 3 gate — 2026-11-16
 
 Episode implementation and bounded worker reliability are implemented, with independently

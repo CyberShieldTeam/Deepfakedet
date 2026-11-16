@@ -21,6 +21,7 @@ import { verifyWithEvidence } from "./server/evidence";
 import { claimReviewSchema, reviewEvidence } from "./server/claimVerification";
 import { runCampaign, CampaignRunError } from "./server/campaignRunner";
 import { campaignEmbeddings } from "./server/campaignEmbedding";
+import {networkDiagnostics,logAnalysis,failedDiagnostic} from './server/analysisDiagnostics';
 import { createServer as createViteServer } from "vite";
 import path from "path";
 import fs from "fs";
@@ -872,7 +873,8 @@ app.delete("/api/investigations/:id", (req, res) => {
 // ---------------------------------------------------------------- Media analysis
 app.post("/api/forensics/analyze-media", validate(mediaInput), async (req, res, next) => {
   try {
-    res.json({ result: receipt(await analyzeMediaPipeline(req.body)) });
+    const result=await analyzeMediaPipeline(req.body);if(result.analysis)logAnalysis(result.analysis);
+    res.json({ result: receipt(result) });
   } catch (error) {
     next(error);
   }
@@ -882,6 +884,7 @@ app.post("/api/forensics/analyze-media", validate(mediaInput), async (req, res, 
 app.post("/api/claims/verify", validate(claimInput), async (req, res, next) => {
   try {
     const result = await verifyWithEvidence(req.body.claimText);
+    if(result.analysis)logAnalysis(result.analysis);
     res.json({ result: receipt(result) });
   } catch (error) {
     next(error);
@@ -894,6 +897,7 @@ app.post("/api/claims/review", validate(claimReviewSchema), (req, res) => {
     return void res.status(400).json({ error: "A current, live, server-issued claim result is required" });
   try {
     const reviewed = reviewEvidence(result, reviews, note, owner());
+    if(reviewed.analysis)logAnalysis(reviewed.analysis);
     delete (reviewed as any).receipt;
     delete (reviewed as any).receiptOwner;
     delete (reviewed as any).receiptExpires;
@@ -905,17 +909,14 @@ app.post("/api/claims/review", validate(claimReviewSchema), (req, res) => {
 
 // ---------------------------------------------------------------- Campaign analysis
 app.post("/api/campaigns/analyze", validate(campaignInput), async (req, res) => {
+  const started=performance.now();
   try {
     const { datasetName = "Uploaded dataset", posts, csv, isSimulated = false } = req.body || {};
     const rows = typeof csv === "string" ? parseCSV(csv) : posts;
     if (!Array.isArray(rows) || rows.length < 2)
-      return res
-        .status(400)
-        .json({ error: "Provide at least 2 posts as JSON array `posts` or CSV text `csv`." });
+      throw new CampaignRunError('Provide at least 2 posts as JSON array `posts` or CSV text `csv`.',400,'INVALID_CAMPAIGN_INPUT');
     if (rows.length > 3000)
-      return res
-        .status(400)
-        .json({ error: "Dataset too large for the live demo (max 3000 posts)." });
+      throw new CampaignRunError('Dataset too large for the live demo (max 3000 posts).',400,'INVALID_CAMPAIGN_INPUT');
     const controller=new AbortController();
     const interrupt=()=>{if(!res.writableEnded)controller.abort();};
     res.on('close',interrupt);
@@ -943,10 +944,13 @@ app.post("/api/campaigns/analyze", validate(campaignInput), async (req, res) => 
         !!isSimulated,
       );
     }
+    result.analysis=networkDiagnostics(result,rows.length,performance.now()-started);logAnalysis(result.analysis);
     res.json({ result: receipt(result) });
   } catch (err: any) {
     if(res.destroyed)return;
-    res.status(err instanceof CampaignRunError?err.status:400).json({ error: err.message || "Invalid campaign dataset", ...(err instanceof CampaignRunError?{code:err.code,processingComplete:false}: {}) });
+    const status=err instanceof CampaignRunError?err.status:400;
+    const analysis=failedDiagnostic('network',err instanceof CampaignRunError?err.code:'INVALID_CAMPAIGN_INPUT',performance.now()-started,status===400);logAnalysis(analysis);
+    res.status(status).json({ error: err.message || "Invalid campaign dataset",analysis,processingComplete:false,...(err instanceof CampaignRunError?{code:err.code}: {}) });
   }
 });
 

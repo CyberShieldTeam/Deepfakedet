@@ -62,6 +62,11 @@ try {
   assert.equal(result.verificationStatus, "INSUFFICIENT_EVIDENCE");
   assert.equal(result.sources.length, 1);
   assert.equal(result.sources[0].relevance.semanticScore, null);
+  assert.equal(result.analysis.state,'INSUFFICIENT_EVIDENCE');assert.equal(result.analysis.counts.retainedSources,1);
+  const savedHash=process.env.VERITAS_CLAIM_CORPUS_SHA256;process.env.VERITAS_CLAIM_CORPUS_SHA256='0'.repeat(64);
+  const failedRetrieval=(await api.post('/api/claims/verify').set(a).send({claimText:'The fictional Amber Museum has free entry.'}).expect(200)).body.result;
+  assert.equal(failedRetrieval.analysis.state,'ANALYSIS_FAILED');assert.equal(failedRetrieval.verificationStatus,'UNAVAILABLE');assert.equal(failedRetrieval.verdict,'Insufficient Evidence');assert.equal(failedRetrieval.sources.length,0);
+  process.env.VERITAS_CLAIM_CORPUS_SHA256=savedHash;
   const review = {
     url: "https://example.org/museum",
     stance: "supports",

@@ -15,6 +15,7 @@ import {
 } from "./ui";
 import { claimAssessment, Details, PageHeader, plainClaim, Term, VerdictBanner } from "./plain";
 import type { AttachFn } from "../App";
+import {AnalysisStatus} from './AnalysisStatus';
 
 const SAMPLES = [
   {
@@ -95,6 +96,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
         <span className="text-[11px] text-slate-500">checked {fmtDate(r.timestamp)}</span>
       </div>
       <VerdictBanner {...plainClaim(r)} />
+      <AnalysisStatus analysis={r.analysis}/>
       {(r.retrievalDetails?.omittedCount || 0)>0 && <p role="status" className="text-sm text-amber-200">Some ranked evidence was omitted. Narrow the claim or corpus before recording a decisive assessment.</p>}
       {r.verificationStatus && (
         <div className="rounded border border-cyan-900 p-3 text-sm" role="status">
@@ -327,6 +329,7 @@ export const ClaimView: React.FC<{
 
   const run = async () => {
     if (!text.trim()) return;
+    setResult(null);
     onLiveAnalysis?.();
     setBusy(true);
     setError("");

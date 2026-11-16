@@ -1,0 +1,149 @@
+{
+  "scope": "authored_frontend_before_after_preservation_not_accuracy",
+  "results": [
+    {
+      "name": "media_measured",
+      "observationsAndVerdictsPreserved": true,
+      "storedAndReportIdentical": true,
+      "state": "PARTIAL_ANALYSIS",
+      "counts": {
+        "evidenceItems": 9,
+        "clientMeasurements": 6,
+        "imageSignalMeasurements": 3,
+        "sampledFrames": 0,
+        "scoredAudioSegments": 0,
+        "rawClassifierOutputs": 0
+      },
+      "errorCategory": null,
+      "beforeRawCounts": {}
+    },
+    {
+      "name": "claim_retrieved",
+      "observationsAndVerdictsPreserved": true,
+      "storedAndReportIdentical": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "counts": {
+        "evidenceItems": 3,
+        "retrievedCandidates": 3,
+        "relevanceCandidates": 3,
+        "retainedSources": 3,
+        "omittedSources": 0,
+        "duplicatesRemoved": 0,
+        "filteredCandidates": 0,
+        "supporting": 0,
+        "contradicting": 0,
+        "unassessed": 3
+      },
+      "errorCategory": null,
+      "beforeRawCounts": {
+        "sources": 3
+      }
+    },
+    {
+      "name": "claim_no_match",
+      "observationsAndVerdictsPreserved": true,
+      "storedAndReportIdentical": true,
+      "state": "NO_RELEVANT_SIGNALS",
+      "counts": {
+        "evidenceItems": 0,
+        "retrievedCandidates": 3,
+        "relevanceCandidates": 0,
+        "retainedSources": 0,
+        "omittedSources": 0,
+        "duplicatesRemoved": 0,
+        "filteredCandidates": 3,
+        "supporting": 0,
+        "contradicting": 0,
+        "unassessed": 0
+      },
+      "errorCategory": null,
+      "beforeRawCounts": {
+        "sources": 0
+      }
+    },
+    {
+      "name": "network_repeated",
+      "observationsAndVerdictsPreserved": true,
+      "storedAndReportIdentical": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "counts": {
+        "evidenceItems": 6,
+        "importedPosts": 12,
+        "validUniquePosts": 12,
+        "duplicatesRemoved": 0,
+        "candidatePairs": 18,
+        "associations": 6,
+        "episodes": 18,
+        "recurrenceReviewPairs": 6,
+        "omittedWitnesses": 0
+      },
+      "errorCategory": null,
+      "beforeRawCounts": {
+        "associations": 6,
+        "episodes": 18
+      }
+    },
+    {
+      "name": "network_no_match",
+      "observationsAndVerdictsPreserved": true,
+      "storedAndReportIdentical": true,
+      "state": "NO_RELEVANT_SIGNALS",
+      "counts": {
+        "evidenceItems": 0,
+        "importedPosts": 4,
+        "validUniquePosts": 4,
+        "duplicatesRemoved": 0,
+        "candidatePairs": 6,
+        "associations": 0,
+        "episodes": 0,
+        "recurrenceReviewPairs": 0,
+        "omittedWitnesses": 0
+      },
+      "errorCategory": null,
+      "beforeRawCounts": {
+        "associations": 0,
+        "episodes": 0
+      }
+    },
+    {
+      "name": "media_service_failure",
+      "observationsAndVerdictsPreserved": true,
+      "storedAndReportIdentical": true,
+      "state": "PARTIAL_ANALYSIS",
+      "counts": {
+        "evidenceItems": 6,
+        "clientMeasurements": 6,
+        "imageSignalMeasurements": 0,
+        "sampledFrames": 0,
+        "scoredAudioSegments": 0,
+        "rawClassifierOutputs": 0
+      },
+      "errorCategory": "DEPENDENCY_FAILED",
+      "beforeRawCounts": null
+    },
+    {
+      "name": "claim_unconfigured",
+      "observationsAndVerdictsPreserved": true,
+      "storedAndReportIdentical": true,
+      "state": "ANALYSIS_UNAVAILABLE",
+      "counts": {
+        "evidenceItems": 0,
+        "retrievedCandidates": 0,
+        "relevanceCandidates": 0,
+        "retainedSources": 0,
+        "omittedSources": 0,
+        "duplicatesRemoved": 0,
+        "filteredCandidates": 0,
+        "supporting": 0,
+        "contradicting": 0,
+        "unassessed": 0
+      },
+      "errorCategory": null,
+      "beforeRawCounts": null
+    }
+  ],
+  "comparisonExclusions": [
+    "Local response processing_ms wall time; publication and episode timestamps are not excluded."
+  ],
+  "modelThresholdRuleChanges": false
+}

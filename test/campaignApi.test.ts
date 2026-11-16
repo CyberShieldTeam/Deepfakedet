@@ -14,6 +14,13 @@ try{
  await api.post('/api/campaigns/analyze').send(payload).expect(401);
  const result=(await api.post('/api/campaigns/analyze').set(a).send(payload).expect(200)).body.result;
  assert.equal(result.algorithm,'episodes_v1');assert.equal(result.episodeEvidence.associations.filter((x:any)=>x.recurrenceEligible).length,6);assert.equal(result.overallCoordinationIndex,null);
+ assert.equal(result.analysis.state,'INSUFFICIENT_EVIDENCE');assert.equal(result.analysis.counts.associations,6);assert.equal(result.analysis.counts.episodes,18);
+ const malformed=await api.post('/api/campaigns/analyze').set(a).set('Content-Type','application/json').send('{broken').expect(400);
+ assert.equal(malformed.body.analysis.state,'ANALYSIS_FAILED');assert.equal(malformed.body.analysis.errorCategory,'MALFORMED_JSON');assert.equal(malformed.body.analysis.elapsedMs,null);assert.equal(malformed.body.result,undefined);
+ for(const invalid of [{posts:[]},{csv:'account_id,content,timestamp\nonly-one,fictional,2026-01-01T00:00:00Z'}]){
+   const bad=await api.post('/api/campaigns/analyze').set(a).send(invalid).expect(400);
+   assert.equal(bad.body.analysis.state,'ANALYSIS_FAILED');assert.equal(bad.body.analysis.inputValidation,'invalid');assert.equal(bad.body.result,undefined);
+ }
  const baseline=(await api.post('/api/campaigns/analyze').set(a).send({...payload,config:{algorithm:'density_baseline_v1'}}).expect(200)).body.result;
  assert.equal(baseline.algorithm,'density_baseline_v1');assert.ok(!baseline.episodeEvidence);
  await api.post('/api/campaigns/analyze').set(a).send({...payload,coverage:{...coverage,start:'invalid'}}).expect(400);

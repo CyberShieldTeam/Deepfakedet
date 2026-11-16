@@ -1,6 +1,9 @@
 import { classify, modelConfig } from "./inference";
 import { callImageEvidence } from "./imageEvidence";
 import type { DetectionAssessment, ForensicAnalysisResult } from "../src/types";
+import type {AnalysisStage} from '../src/types';
+import {mediaDiagnostics,diagnosticError} from './analysisDiagnostics';
+import {performance} from 'node:perf_hooks';
 import { callLocalImage, localImageResult, type LocalImageResponse } from "./localImage";
 import { callLocalAudio, localAudioResult, type LocalAudioResponse } from "./localAudio";
 import {
@@ -41,6 +44,7 @@ export async function analyzeMediaPipeline(input: {
   audioSegments?: { start: number; end: number; data: string }[];
 }): Promise<ForensicAnalysisResult> {
   const { modality, fileName, measurements: m, mediaData, keyframes = [], frameTimes = [] } = input;
+  const started=performance.now(),stages:AnalysisStage[]=[];
   const findings: string[] = [];
   const limitations = [
     "AI generation, manipulation, misleading context and factual accuracy are different questions.",
@@ -84,6 +88,9 @@ export async function analyzeMediaPipeline(input: {
     );
   }
   const available = inference.filter((r) => r.status === "available");
+  stages.push({stage:'client_measurements_received',status:'available',count:Object.values(m).filter(v=>typeof v==='number'&&Number.isFinite(v)).length});
+  if(!inference.length)stages.push({stage:'dedicated_classifier',status:'unconfigured'});
+  inference.forEach((r,i)=>stages.push({stage:`dedicated_classifier_sample_${i}`,status:!config.endpoint?'unconfigured':r.status,...(r.status==='failed'?{errorCategory:'CLASSIFIER_FAILED_OR_INVALID_RESPONSE'}:{})}));
   const probabilities = available
     .map((r) => r.aiGeneratedProbability)
     .filter((p): p is number => p !== null);
@@ -222,7 +229,12 @@ export async function analyzeMediaPipeline(input: {
   // Preserve the existing, pinned Python engines as separate experimental evidence.
   // They never upgrade an uncalibrated raw score into a verdict.
   const localEndpoint = process.env.VERITAS_AI_SERVICE_URL?.trim();
-  if (!localEndpoint) return result;
+  const finish=()=>{
+    result.limitations=[...new Set([...limitations,...result.limitations])];
+    result.analysis=mediaDiagnostics(result,stages,performance.now()-started);
+    return result;
+  };
+  if (!localEndpoint) {stages.push({stage:'local_evidence_service',status:'unconfigured'});return finish();}
   let localImage: LocalImageResponse | undefined;
   let localAudio: LocalAudioResponse | undefined;
   let localVideo: LocalVideoEvidence | undefined;
@@ -236,7 +248,7 @@ export async function analyzeMediaPipeline(input: {
         try {
           localVideo = await callLocalVideo(mediaData, localEndpoint, fetch, input.temporalIntervalSeconds ?? 1);
         } catch (error) {
-          console.warn(`[local-video-decode] ${String((error as Error)?.message || error).slice(0, 160)}`);
+          stages.push({stage:'original_video_decode',status:'failed',errorCategory:diagnosticError(error)});
         }
       }
       if (!localVideo && keyframes.length) {
@@ -250,16 +262,21 @@ export async function analyzeMediaPipeline(input: {
       }
     }
   } catch (error) {
-    console.warn(`[local-${modality}] ${String((error as Error)?.message || error).slice(0, 160)}`);
+    stages.push({stage:`local_${modality}_service`,status:'failed',errorCategory:diagnosticError(error)});
   }
 
   if (localImage) {
+    stages.push({stage:'local_image_service',status:'available'},{stage:'experimental_image_model',status:localImage.model_status==='ready'?'available':localImage.model_status==='skipped'?'skipped':'unavailable'});
     if (available.length === 0) result = localImageResult(localImage, fileName, m, findings);
     else result.localImage = localImage;
   } else if (localAudio) {
+    stages.push({stage:'local_audio_service',status:'available',count:localAudio.segments.length});
     if (available.length === 0) result = localAudioResult(localAudio, fileName, m, findings);
     else result.localAudio = localAudio;
   } else if (localVideo) {
+    stages.push({stage:'local_video_service',status:'available',count:localVideo.frames.length});
+    if(localVideo.temporalDiagnostics&&['partial','timed_out','failed'].includes(localVideo.temporalDiagnostics.status))stages.push({stage:'temporal_analysis',status:'failed',errorCategory:'INCOMPLETE_TEMPORAL_ANALYSIS'});
+    if(localVideo.audioTrack&&['model_unavailable','extraction_failed'].includes(localVideo.audioTrack.status))stages.push({stage:'video_audio_analysis',status:localVideo.audioTrack.status==='model_unavailable'?'unavailable':'failed',...(localVideo.audioTrack.status==='extraction_failed'?{errorCategory:'AUDIO_EXTRACTION_FAILED'}:{})});
     if (available.length === 0) result = localVideoResult(localVideo, fileName, m, findings);
     else result.localVideo = localVideo;
   }
@@ -270,18 +287,21 @@ export async function analyzeMediaPipeline(input: {
       try {
         result.imageDiagnostics = await callImageEvidence(evidenceData, localEndpoint);
         const d = result.imageDiagnostics;
+        stages.push({stage:'image_signals',status:d.signals.status==='measured'?'available':'skipped'},{stage:'credential_validation',status:d.c2pa.status==='failed'?'failed':d.c2pa.status==='unavailable'?'unavailable':'available',...(d.c2pa.status==='failed'?{errorCategory:'CREDENTIAL_VERIFICATION_FAILED'}:{})});
         result.originalImageProvenance = {
           status: d.c2pa.status === 'valid_trusted' ? 'trusted' : d.c2pa.status === 'valid_untrusted' ? 'valid' :
             d.c2pa.status === 'failed' ? 'unavailable' : d.c2pa.status,
           aiDeclaration: d.c2pa.ai_disclosure === 'declared', note: d.c2pa.note,
           exif: { present: d.metadata.exif_present, software: d.metadata.fields.software || null }
         };
-      } catch {
+      } catch(error) {
+        stages.push({stage:'image_provenance_and_signals',status:'failed',errorCategory:diagnosticError(error)});
         result.limitations.push("Server provenance and image diagnostics unavailable; no metadata or signal verdict inferred.");
       }
     } else {
+      stages.push({stage:'original_image_provenance',status:'unavailable'});
       result.limitations.push("Original image was not supplied within evidence limits; provenance was not checked on the resized classifier input.");
     }
   }
-  return result;
+  return finish();
 }

@@ -14,7 +14,10 @@ async function req<T>(url: string, init?: RequestInit): Promise<T> {
   });
   const data = await res.json().catch(() => ({}));
   if (res.status === 401) window.dispatchEvent(new Event("veritas:auth-required"));
-  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+  if (!res.ok) {
+    const error=new Error(data.analysis?`${data.analysis.state}: ${data.error || 'Analysis failed'}. ${data.analysis.summary}`:data.error || `Request failed (${res.status})`);
+    Object.assign(error,{analysis:data.analysis,status:res.status});throw error;
+  }
   return data as T;
 }
 const post = <T>(url: string, body: any) =>

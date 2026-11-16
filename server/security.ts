@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import { AsyncLocalStorage } from "node:async_hooks";
 import type { Express, RequestHandler, ErrorRequestHandler } from "express";
 import { z } from "zod";
+import {engineForPath,failedDiagnostic,logAnalysis} from './analysisDiagnostics';
 
 export const context = new AsyncLocalStorage<{ ownerId: string }>();
 export const owner = () => context.getStore()?.ownerId || "local-analyst";
@@ -188,14 +189,20 @@ export const attachmentInput = z
 export const validate =
   (schema: z.ZodType): RequestHandler =>
   (req, res, next) => {
+    const started=performance.now();
     const parsed = schema.safeParse(req.body);
-    if (!parsed.success)
+    if (!parsed.success) {
+      const engine=engineForPath(req.originalUrl.split('?')[0]);
+      const analysis=engine?failedDiagnostic(engine,'INVALID_INPUT',performance.now()-started,true):undefined;
+      if(analysis)logAnalysis(analysis);
       return void res
         .status(400)
         .json({
           error: "Invalid request",
+          ...(analysis?{analysis,processingComplete:false}:{}),
           issues: parsed.error.issues.map((i) => ({ path: i.path.join("."), message: i.message })),
         });
+    }
     req.body = parsed.data;
     next();
   };
@@ -299,7 +306,7 @@ export function installSecurity(app: Express) {
   });
 }
 
-export const errorHandler: ErrorRequestHandler = (error, _req, res, _next) => {
+export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
   console.error(
     JSON.stringify({
       level: "error",
@@ -309,9 +316,13 @@ export const errorHandler: ErrorRequestHandler = (error, _req, res, _next) => {
   );
   if (res.headersSent) return;
   const status = error.type === "entity.too.large" ? 413 : error instanceof SyntaxError ? 400 : 500;
+  const engine=engineForPath(req.originalUrl.split('?')[0]);
+  const analysis=engine?failedDiagnostic(engine,status===400?'MALFORMED_JSON':status===413?'INPUT_LIMIT':'EXECUTION_FAILED',null,status<500):undefined;
+  if(analysis)logAnalysis(analysis);
   res
     .status(status)
     .json({
+      ...(analysis?{analysis,processingComplete:false}:{}),
       error:
         status === 413
           ? "Request exceeds upload limit"

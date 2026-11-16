@@ -34,6 +34,7 @@ import {
 } from "./ui";
 import { Details, PageHeader, plainMedia, Term, VerdictBanner } from "./plain";
 import type { AttachFn } from "../App";
+import {AnalysisStatus} from './AnalysisStatus';
 
 const ACCEPT = ".jpg,.jpeg,.png,.webp,.mp4,.mov,.webm,.mp3,.wav,.m4a";
 const modalityOf = (f: File): "image" | "video" | "audio" | null => {
@@ -60,6 +61,7 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (second
         )}
       </div>
       <VerdictBanner {...plainMedia(r)} />
+      <AnalysisStatus analysis={r.analysis}/>
       {r.provenance?.declaresAIGenerated && (
         <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-2.5 text-sm text-amber-200">
           Unverified metadata hints at AI generation. This is not cryptographically verified C2PA

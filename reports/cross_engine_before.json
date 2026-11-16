@@ -1,0 +1,2421 @@
+{
+  "scope": "authored_frontend_raw_api_storage_report_trace_not_accuracy",
+  "cases": [
+    {
+      "name": "media_measured",
+      "kind": "media",
+      "httpStatus": 200,
+      "raw": {
+        "classification": "INCONCLUSIVE",
+        "fake_probability": null,
+        "model_confidence": null,
+        "model_status": "unavailable",
+        "model": "dima806/ai_vs_real_image_detection",
+        "revision": "9d17b51b9367d6b5720ac81dc339455c45d50ae3",
+        "scope": "general_ai_generated_image",
+        "face_analysis": "none_found",
+        "face_boxes": [],
+        "face_manipulation": {
+          "status": "unavailable",
+          "model": "sakshamkr1/deitfake-v2",
+          "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+          "classification": "INCONCLUSIVE",
+          "faces": [],
+          "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+        },
+        "face_model": {
+          "status": "unavailable",
+          "model": "sakshamkr1/deitfake-v2",
+          "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+          "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated.",
+          "faces": []
+        },
+        "signals": [],
+        "explanation": "Classifier unavailable; face candidates are unverified regions, not manipulation analysis.",
+        "processing_ms": 2
+      },
+      "api": {
+        "modality": "image",
+        "fileName": "authored-diagnostic.png",
+        "engine": "local_image_screening",
+        "engineNote": "Whole-image classifier unavailable; 0 unverified face candidate(s). Face classifier: unavailable.",
+        "authenticity": "inconclusive",
+        "confidenceScore": 0,
+        "aiGeneratedProbability": null,
+        "aiGeneration": {
+          "verdict": "inconclusive",
+          "probability": null,
+          "confidence": 0,
+          "indicators": [],
+          "counterIndicators": [],
+          "rationale": "Classifier unavailable; face candidates are unverified regions, not manipulation analysis."
+        },
+        "headlineSummary": "Image authenticity could not be determined.",
+        "detailedFindings": [
+          "[Browser signal] ELA 16×16 block residual ratio: 0; recompression/editing indicator only.",
+          "[Browser signal] EXIF marker absent; neither proves authenticity."
+        ],
+        "limitations": [
+          "Whole-image classifier did not run.",
+          "Face candidates do not establish manipulation or authenticity.",
+          "A real-looking result is not proof of authenticity."
+        ],
+        "alternativeHypotheses": [
+          "Compression, resizing, and newer generators can change classifier output."
+        ],
+        "compressionArtifacts": {
+          "elaScore": 0,
+          "doubleCompressionFound": false,
+          "noiseInconsistencyMapAvailable": true,
+          "notes": "ELA is a separate browser signal, not evidence for this model score."
+        },
+        "modelsUsed": [
+          {
+            "name": "YuNet face detector",
+            "version": "2023mar",
+            "provider": "OpenCV Zoo"
+          }
+        ],
+        "measurements": {
+          "analysisInput": "original file bytes",
+          "width": 64,
+          "height": 64,
+          "format": "image/png",
+          "fileSizeKB": 0,
+          "elaMean": 0,
+          "elaScore": 0,
+          "elaBlockRatio": 0,
+          "hasExif": false,
+          "c2paManifest": false,
+          "provenanceAI": false,
+          "sourceSha256": "ebee394e41386893e365bab36916668522c516e325de348f1a7a593998e75687"
+        },
+        "analyzedAt": "2026-11-16T10:09:02.738Z",
+        "localImage": {
+          "classification": "INCONCLUSIVE",
+          "fake_probability": null,
+          "model_confidence": null,
+          "model_status": "unavailable",
+          "model": "dima806/ai_vs_real_image_detection",
+          "revision": "9d17b51b9367d6b5720ac81dc339455c45d50ae3",
+          "scope": "general_ai_generated_image",
+          "face_analysis": "none_found",
+          "face_boxes": [],
+          "face_manipulation": {
+            "status": "unavailable",
+            "model": "sakshamkr1/deitfake-v2",
+            "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+            "classification": "INCONCLUSIVE",
+            "faces": [],
+            "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated."
+          },
+          "face_model": {
+            "status": "unavailable",
+            "model": "sakshamkr1/deitfake-v2",
+            "revision": "f70338d328ba268d2b9d5c6af11044cf0b0e1400",
+            "note": "Experimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated.",
+            "faces": []
+          },
+          "signals": [],
+          "explanation": "Classifier unavailable; face candidates are unverified regions, not manipulation analysis.",
+          "processing_ms": 32
+        },
+        "imageDiagnostics": {
+          "scope": "image_provenance_and_signals",
+          "classification": "INCONCLUSIVE",
+          "decision_probability": null,
+          "metadata": {
+            "width": 64,
+            "height": 64,
+            "format": "PNG",
+            "exif_present": false,
+            "fields": {},
+            "fields_verified": false,
+            "note": "Editable metadata; absent camera fields are not evidence of AI generation."
+          },
+          "c2pa": {
+            "status": "absent",
+            "sdk": "c2pa-python@0.39.0",
+            "trust_policy": "none",
+            "validation_state": null,
+            "validation_codes": [],
+            "source_types": [],
+            "ai_disclosure": "not_assessed",
+            "signer": null,
+            "note": "Embedded credentials only; remote manifest and OCSP fetching disabled. No authenticity verdict."
+          },
+          "signals": {
+            "status": "measured",
+            "analysis_width": 64,
+            "analysis_height": 64,
+            "high_frequency_energy_fraction": 0,
+            "noise_residual_std": 0,
+            "laplacian_variance": 0,
+            "note": "Descriptive FFT/high-pass measurements after max512 resize. Not PRNU extraction, an AI score or a calibrated detector."
+          },
+          "note": "Metadata and signal measurements do not establish authenticity. Missing credentials prove nothing."
+        },
+        "originalImageProvenance": {
+          "status": "absent",
+          "aiDeclaration": false,
+          "note": "Embedded credentials only; remote manifest and OCSP fetching disabled. No authenticity verdict.",
+          "exif": {
+            "present": false,
+            "software": null
+          }
+        },
+        "receiptOwner": "local-analyst",
+        "receiptExpires": 1794910143368,
+        "receipt": "e49b9bc87c50f244582db2004749111f26548691d2781d5b7384591476c19609"
+      },
+      "storedIdentical": true,
+      "reportIdentical": true,
+      "displayedText": "LIVE ANALYSIS MODE\n/\nActual inputs only. Unavailable models never produce artificial scores.\nSwitch to demonstration\nActive investigation\nCreate on save\nSUR-2026-6930 · Media analysis: authored-diagnostic\nCheck a photo, video or audio\n\nFind out whether a picture, video or voice message was made by AI or edited. Your file is examined in your browser and, when available, by Google’s Gemini AI.\n\n1\nChoose a file\n2\nPress “Check this file”\n3\nRead the result on the right\n1 · CHOOSE A FILE\nauthored-diagnostic.png\nimage · 0.00 MB — click to choose a different file\nCheck this file\nLOOK CLOSER (OPTIONAL)\nOriginal\nEdit heatmap\nCompare\n\nThe edit heatmap shows how each part of the picture reacts to being re-saved. A bright, isolated patch can mean that area was pasted in or edited; an even texture is normal. It cannot tell whether an image was made by AI.\n\nELA = |original − JPEG(q=0.90) re-encode| × 15\n\n2 · RESULT\nSaved to SUR-2026-6930\nSIGNALS / EVIDENCE PIPELINE\nAuthenticity remains undetermined\n\nImage authenticity could not be determined.\n\nWhat to do: Experimental scores need independent validation. Check the source and context before sharing.\n\nIMAGE PROVENANCE AND MEASURED SIGNALS\n\nContent Credentials: No embedded credentials found\n\nAI-use disclosure in active credentials: not assessed. A declaration is not independent proof.\n\nCamera metadata: absent; absence proves nothing.\n\nHigh-frequency energy fraction: 0.0000 · noise residual standard deviation: 0.000. These measurements are not an AI score or a camera fingerprint.\n\nMetadata and signal measurements do not establish authenticity. Missing credentials prove nothing.\n\nEmbedded credentials only; remote manifest and OCSP fetching disabled. No authenticity verdict.\n\nEXPERIMENTAL LOCAL IMAGE SCREENING\n\nWhole-image classifier unavailable\n\n0 unverified YuNet face candidate(s).\n\nFace classifier: unavailable\n\nExperimental face-crop output; no calibrated manipulation verdict. Crop policy is unvalidated.\n\nRaw output is uncalibrated and was not used as a verdict.\n\nWas it made by AI?\nCan't tell\nChance: n/a\nConfidence: not validated\nClassifier unavailable; face candidates are unverified regions, not manipulation analysis.\nCould there be an innocent explanation?\nCompression, resizing, and newer generators can change classifier output.\nTechnical details (for experts)\nVERITAS AI / Digital trust. Evidence first.\nDecision support only · Human review required"
+    },
+    {
+      "name": "claim_retrieved",
+      "kind": "claim",
+      "httpStatus": 200,
+      "raw": {
+        "ranked": 3,
+        "candidates": 3,
+        "providers": [
+          {
+            "provider": "operator_corpus",
+            "status": "available",
+            "retrieved": 3,
+            "detail": "Operator corpus cross-engine-fictional-only; SHA-256 1d1c03a7a8ad492ff0ddf8434009686114662794e3a94ae8ebfcace5250cfeed; rights approval is operator attestation, not automated certification"
+          },
+          {
+            "provider": "google_fact_check",
+            "status": "unconfigured",
+            "retrieved": 0,
+            "detail": "Google Fact Check Tools key not configured; no live retrieval attempted"
+          }
+        ]
+      },
+      "api": {
+        "originalInput": "The fictional Amber Museum has free entry.",
+        "targetClaim": "The fictional Amber Museum has free entry.",
+        "normalizedClaim": "The fictional Amber Museum has free entry.",
+        "extractedClaims": [
+          "The fictional Amber Museum has free entry."
+        ],
+        "detectedLanguage": "English",
+        "claimAnalysis": {
+          "normalized": "The fictional Amber Museum has free entry.",
+          "language": "English",
+          "languages": [
+            "English"
+          ],
+          "assertions": [
+            "The fictional Amber Museum has free entry."
+          ],
+          "extraction": "Sentence boundaries only; imperatives, questions and compound assertions require analyst selection.",
+          "truncated": false,
+          "entityCandidates": [
+            "The",
+            "Amber Museum"
+          ],
+          "entityMethod": "Capitalized Latin spans and four-digit numbers only; Hindi/Telugu NER unavailable.",
+          "negationMarkers": [],
+          "ambiguities": [
+            "Dates, time zones, locations, entity identity and negation scope require source-context review.",
+            "Devanagari is not uniquely Hindi; Latin script may be romanized Hindi/Telugu. Script identification is approximate."
+          ]
+        },
+        "verificationStatus": "INSUFFICIENT_EVIDENCE",
+        "verdict": "Insufficient Evidence",
+        "confidenceScore": null,
+        "verdictRationale": "Retrieved passages are relevance candidates. No stance or factual conclusion has been inferred from similarity or publisher ratings.",
+        "sources": [
+          {
+            "id": "E1",
+            "title": "Fictional museum notice",
+            "url": "https://example.org/museum",
+            "domain": "example.org",
+            "excerpt": "Software fixture: the fictional Amber Museum has free entry.",
+            "retrievedAt": "2026-01-01T00:00:00Z",
+            "stance": "neutral",
+            "credibilityRating": "Unverified Source",
+            "provider": "operator_corpus",
+            "relevance": {
+              "lexicalScore": 5.1658086977943,
+              "semanticScore": null,
+              "rank": 1
+            },
+            "license": "Authored fixture"
+          },
+          {
+            "id": "E2",
+            "title": "Fictional museum visitor information",
+            "url": "https://example.org/visitor",
+            "domain": "example.org",
+            "excerpt": "Software fixture: Amber Museum visitors may enter without admission fees.",
+            "retrievedAt": "2026-01-01T00:00:00Z",
+            "stance": "neutral",
+            "credibilityRating": "Unverified Source",
+            "provider": "operator_corpus",
+            "relevance": {
+              "lexicalScore": 1.1697285600030558,
+              "semanticScore": null,
+              "rank": 0.22643667786275307
+            },
+            "license": "Authored fixture"
+          },
+          {
+            "id": "E3",
+            "title": "Unrelated fictional railway timetable",
+            "url": "https://example.org/rail",
+            "domain": "example.org",
+            "excerpt": "Railway service schedule platform twenty.",
+            "retrievedAt": "2026-01-01T00:00:00Z",
+            "stance": "neutral",
+            "credibilityRating": "Unverified Source",
+            "provider": "operator_corpus",
+            "relevance": {
+              "lexicalScore": 0.1473054044711782,
+              "semanticScore": null,
+              "rank": 0.02851545868008522
+            },
+            "license": "Authored fixture"
+          }
+        ],
+        "supportingCount": 0,
+        "contradictingCount": 0,
+        "neutralCount": 3,
+        "supportingEvidence": [],
+        "contradictingEvidence": [],
+        "missingEvidence": [
+          "Retrieved passages require exact assertion, date, location, negation and source-context review."
+        ],
+        "limitations": [
+          "Operator corpus cross-engine-fictional-only; SHA-256 1d1c03a7a8ad492ff0ddf8434009686114662794e3a94ae8ebfcace5250cfeed; rights approval is operator attestation, not automated certification; Google Fact Check Tools key not configured; no live retrieval attempted",
+          "Semantic retrieval: unavailable; BM25 lexical fallback",
+          "Dates, time zones, locations, entity identity and negation scope require source-context review.",
+          "Devanagari is not uniquely Hindi; Latin script may be romanized Hindi/Telugu. Script identification is approximate.",
+          "Sentence boundaries only; imperatives, questions and compound assertions require analyst selection.",
+          "Capitalized Latin spans and four-digit numbers only; Hindi/Telugu NER unavailable.",
+          "Relevance is not source credibility or entailment. No numerical truth probability is estimated.",
+          "No automatic translation or trained entailment/NER model ran. Google passages are claim-review metadata, not fetched article bodies."
+        ],
+        "timestamp": "2026-11-16T10:09:05.508Z",
+        "engine": "heuristic",
+        "verificationMode": "insufficient_external_evidence",
+        "assessment": "unverified",
+        "isSimulated": false,
+        "evidenceSufficiency": "requires_review",
+        "retrieval": {
+          "lexical": "BM25",
+          "semantic": "unavailable; BM25 lexical fallback",
+          "source": "Operator corpus cross-engine-fictional-only; SHA-256 1d1c03a7a8ad492ff0ddf8434009686114662794e3a94ae8ebfcace5250cfeed; rights approval is operator attestation, not automated certification; Google Fact Check Tools key not configured; no live retrieval attempted"
+        },
+        "retrievalDetails": {
+          "candidateCount": 3,
+          "omittedCount": 0,
+          "embeddingDiagnostics": null,
+          "providers": [
+            {
+              "provider": "operator_corpus",
+              "status": "available",
+              "retrieved": 3,
+              "detail": "Operator corpus cross-engine-fictional-only; SHA-256 1d1c03a7a8ad492ff0ddf8434009686114662794e3a94ae8ebfcace5250cfeed; rights approval is operator attestation, not automated certification"
+            },
+            {
+              "provider": "google_fact_check",
+              "status": "unconfigured",
+              "retrieved": 0,
+              "detail": "Google Fact Check Tools key not configured; no live retrieval attempted"
+            }
+          ],
+          "duplicatesRemoved": 0,
+          "semanticMeasured": false,
+          "elapsedMs": 10.742299999998068,
+          "processRssBytes": 263692288,
+          "queries": [
+            "The fictional Amber Museum has free entry."
+          ]
+        },
+        "receiptOwner": "local-analyst",
+        "receiptExpires": 1794910145508,
+        "receipt": "ce284460e0f9c88a494a70a0eee942dfe653a2545b6f88bfb49e144960bb5379"
+      },
+      "storedIdentical": true,
+      "reportIdentical": true,
+      "displayedText": "LIVE ANALYSIS MODE\n/\nActual inputs only. Unavailable models never produce artificial scores.\nSwitch to demonstration\nActive investigation\nCreate on save\nSUR-2026-6930 · Media analysis: authored-diagnostic\nFact-check a claim\n\nEnter a factual assertion in English, हिन्दी or తెలుగు. Review retrieved evidence and its limits; unavailable sources leave the claim unresolved.\n\n1\nPaste or type the claim\n2\nPress “Check this claim”\n3\nRead the result\n1 · WHAT DO YOU WANT TO CHECK?\n42 characters\nCheck this claim\nNO CLAIM HANDY? TRY ONE OF THESE\nEnglishBREAKING: The dam near Hyderabad has collapsed. Evacuate immediately and share this with everyone!Hindiहैदराबाद के पास बांध टूट गया है, तुरंत घर खाली करें और सबको भेजेंTeluguహైదరాబాద్ దగ్గర డ్యామ్ కూలిపోయింది, వెంటనే ఖాళీ చేయండిEnglishThe Charminar in Hyderabad was built in 1591.\n2 · RESULT\nSaved to SUR-2026-6930\nRETRIEVED EVIDENCE NEEDS REVIEW\nSIGNALS / EVIDENCE PIPELINE\nchecked Nov 16, 2026, 3:39 PM\nWe couldn't verify this claim\n\nOnly basic warning-sign screening was done, so the claim could not be confirmed either way.\n\nWhat to do: Check a trusted news or official source.\n\nClaim status: INSUFFICIENT_EVIDENCE\n\nThis claim assessment is separate from media provenance, manipulation observations and dissemination indicators.\n\nNormalized claim: The fictional Amber Museum has free entry.\n\nMissing evidence / review needs\nRetrieved passages require exact assertion, date, location, negation and source-context review.\nEvidence sufficiency: requires review\n\nRetrieval: BM25 · Semantic: unavailable; BM25 lexical fallback\n\nWhy\n\nRetrieved passages are relevance candidates. No stance or factual conclusion has been inferred from similarity or publisher ratings.\n\nSources (3)\nFictional museum notice\n[E1] example.org · published: date not provided · found Jan 1, 2026, 5:30 AM\nSoftware fixture: the fictional Amber Museum has free entry.\n\nRelevance: BM25 5.166 · semantic unavailable · source credibility: Unverified Source\n\nFictional museum visitor information\n[E2] example.org · published: date not provided · found Jan 1, 2026, 5:30 AM\nSoftware fixture: Amber Museum visitors may enter without admission fees.\n\nRelevance: BM25 1.170 · semantic unavailable · source credibility: Unverified Source\n\nUnrelated fictional railway timetable\n[E3] example.org · published: date not provided · found Jan 1, 2026, 5:30 AM\nRailway service schedule platform twenty.\n\nRelevance: BM25 0.147 · semantic unavailable · source credibility: Unverified Source\n\nEvidence that supports it\nNone found\nEvidence against it\nNone found\nTechnical details (for experts)\nAnalyst review · assess source applicability\nVERITAS AI / Digital trust. Evidence first.\nDecision support only · Human review required"
+    },
+    {
+      "name": "claim_no_match",
+      "kind": "claim",
+      "httpStatus": 200,
+      "raw": {
+        "ranked": 0,
+        "candidates": 0,
+        "providers": [
+          {
+            "provider": "operator_corpus",
+            "status": "available",
+            "retrieved": 3,
+            "detail": "Operator corpus cross-engine-fictional-only; SHA-256 1d1c03a7a8ad492ff0ddf8434009686114662794e3a94ae8ebfcace5250cfeed; rights approval is operator attestation, not automated certification"
+          },
+          {
+            "provider": "google_fact_check",
+            "status": "unconfigured",
+            "retrieved": 0,
+            "detail": "Google Fact Check Tools key not configured; no live retrieval attempted"
+          }
+        ]
+      },
+      "api": {
+        "originalInput": "Zyxwv quasar zebra observatory.",
+        "targetClaim": "Zyxwv quasar zebra observatory.",
+        "normalizedClaim": "Zyxwv quasar zebra observatory.",
+        "extractedClaims": [
+          "Zyxwv quasar zebra observatory."
+        ],
+        "detectedLanguage": "English",
+        "claimAnalysis": {
+          "normalized": "Zyxwv quasar zebra observatory.",
+          "language": "English",
+          "languages": [
+            "English"
+          ],
+          "assertions": [
+            "Zyxwv quasar zebra observatory."
+          ],
+          "extraction": "Sentence boundaries only; imperatives, questions and compound assertions require analyst selection.",
+          "truncated": false,
+          "entityCandidates": [
+            "Zyxwv"
+          ],
+          "entityMethod": "Capitalized Latin spans and four-digit numbers only; Hindi/Telugu NER unavailable.",
+          "negationMarkers": [],
+          "ambiguities": [
+            "Dates, time zones, locations, entity identity and negation scope require source-context review.",
+            "Devanagari is not uniquely Hindi; Latin script may be romanized Hindi/Telugu. Script identification is approximate."
+          ]
+        },
+        "verificationStatus": "INSUFFICIENT_EVIDENCE",
+        "verdict": "Insufficient Evidence",
+        "confidenceScore": null,
+        "verdictRationale": "Available providers returned no relevant evidence. The claim remains unresolved.",
+        "sources": [],
+        "supportingCount": 0,
+        "contradictingCount": 0,
+        "neutralCount": 0,
+        "supportingEvidence": [],
+        "contradictingEvidence": [],
+        "missingEvidence": [
+          "No claim-specific evidence passages retrieved."
+        ],
+        "limitations": [
+          "Operator corpus cross-engine-fictional-only; SHA-256 1d1c03a7a8ad492ff0ddf8434009686114662794e3a94ae8ebfcace5250cfeed; rights approval is operator attestation, not automated certification; Google Fact Check Tools key not configured; no live retrieval attempted",
+          "Semantic retrieval: unavailable; BM25 lexical fallback",
+          "Dates, time zones, locations, entity identity and negation scope require source-context review.",
+          "Devanagari is not uniquely Hindi; Latin script may be romanized Hindi/Telugu. Script identification is approximate.",
+          "Sentence boundaries only; imperatives, questions and compound assertions require analyst selection.",
+          "Capitalized Latin spans and four-digit numbers only; Hindi/Telugu NER unavailable.",
+          "Relevance is not source credibility or entailment. No numerical truth probability is estimated.",
+          "No automatic translation or trained entailment/NER model ran. Google passages are claim-review metadata, not fetched article bodies."
+        ],
+        "timestamp": "2026-11-16T10:09:07.606Z",
+        "engine": "heuristic",
+        "verificationMode": "rule_based",
+        "assessment": "unverified",
+        "isSimulated": false,
+        "evidenceSufficiency": "insufficient",
+        "retrieval": {
+          "lexical": "BM25",
+          "semantic": "unavailable; BM25 lexical fallback",
+          "source": "Operator corpus cross-engine-fictional-only; SHA-256 1d1c03a7a8ad492ff0ddf8434009686114662794e3a94ae8ebfcace5250cfeed; rights approval is operator attestation, not automated certification; Google Fact Check Tools key not configured; no live retrieval attempted"
+        },
+        "retrievalDetails": {
+          "candidateCount": 0,
+          "omittedCount": 0,
+          "embeddingDiagnostics": null,
+          "providers": [
+            {
+              "provider": "operator_corpus",
+              "status": "available",
+              "retrieved": 3,
+              "detail": "Operator corpus cross-engine-fictional-only; SHA-256 1d1c03a7a8ad492ff0ddf8434009686114662794e3a94ae8ebfcace5250cfeed; rights approval is operator attestation, not automated certification"
+            },
+            {
+              "provider": "google_fact_check",
+              "status": "unconfigured",
+              "retrieved": 0,
+              "detail": "Google Fact Check Tools key not configured; no live retrieval attempted"
+            }
+          ],
+          "duplicatesRemoved": 0,
+          "semanticMeasured": false,
+          "elapsedMs": 7.8708000000005995,
+          "processRssBytes": 261480448,
+          "queries": [
+            "Zyxwv quasar zebra observatory."
+          ]
+        },
+        "receiptOwner": "local-analyst",
+        "receiptExpires": 1794910147606,
+        "receipt": "89a628947e0eeafceca7d1e8c7733e938482eaa29d7d3f4832c0901dde57b227"
+      },
+      "storedIdentical": true,
+      "reportIdentical": true,
+      "displayedText": "LIVE ANALYSIS MODE\n/\nActual inputs only. Unavailable models never produce artificial scores.\nSwitch to demonstration\nActive investigation\nCreate on save\nSUR-2026-6930 · Media analysis: authored-diagnostic\nFact-check a claim\n\nEnter a factual assertion in English, हिन्दी or తెలుగు. Review retrieved evidence and its limits; unavailable sources leave the claim unresolved.\n\n1\nPaste or type the claim\n2\nPress “Check this claim”\n3\nRead the result\n1 · WHAT DO YOU WANT TO CHECK?\n31 characters\nCheck this claim\nNO CLAIM HANDY? TRY ONE OF THESE\nEnglishBREAKING: The dam near Hyderabad has collapsed. Evacuate immediately and share this with everyone!Hindiहैदराबाद के पास बांध टूट गया है, तुरंत घर खाली करें और सबको भेजेंTeluguహైదరాబాద్ దగ్గర డ్యామ్ కూలిపోయింది, వెంటనే ఖాళీ చేయండిEnglishThe Charminar in Hyderabad was built in 1591.\n2 · RESULT\nSaved to SUR-2026-6930\nBASIC SCREENING ONLY\nSIGNALS / EVIDENCE PIPELINE\nchecked Nov 16, 2026, 3:39 PM\nWe couldn't verify this claim\n\nOnly basic warning-sign screening was done, so the claim could not be confirmed either way.\n\nWhat to do: Check a trusted news or official source.\n\nClaim status: INSUFFICIENT_EVIDENCE\n\nThis claim assessment is separate from media provenance, manipulation observations and dissemination indicators.\n\nNormalized claim: Zyxwv quasar zebra observatory.\n\nMissing evidence / review needs\nNo claim-specific evidence passages retrieved.\nEvidence sufficiency: insufficient\n\nRetrieval: BM25 · Semantic: unavailable; BM25 lexical fallback\n\nWhy\n\nAvailable providers returned no relevant evidence. The claim remains unresolved.\n\nSources (0)\nNo news or official sources were checked for this result.\nEvidence that supports it\nNone found\nEvidence against it\nNone found\nTechnical details (for experts)\nVERITAS AI / Digital trust. Evidence first.\nDecision support only · Human review required"
+    },
+    {
+      "name": "network_repeated",
+      "kind": "campaign",
+      "httpStatus": 200,
+      "raw": {
+        "associations": 6,
+        "episodes": 18,
+        "eligible": 6
+      },
+      "api": {
+        "datasetName": "authored-diagnostic.json",
+        "totalPosts": 12,
+        "totalAccounts": 4,
+        "overallCoordinationIndex": null,
+        "classification": "Insufficient evidence",
+        "methodology": "Episode policy episodes_v1; same lexical association and DBSCAN thresholds as baseline. Observable patterns only; no maliciousness or factual verdict.",
+        "candidatePairs": 18,
+        "truncated": false,
+        "clusters": [
+          {
+            "id": 1,
+            "name": "Community 1",
+            "color": "#20c5df",
+            "postCount": 12,
+            "accountCount": 4,
+            "primaryNarrative": "Fictional repeated posting pattern for an authored software control.",
+            "burstDurationMinutes": 133.38333333333333,
+            "coordinationScore": 88,
+            "topSharedDomains": [
+              "example.org"
+            ],
+            "topHashtags": [],
+            "identifiedTactics": [
+              "Observed associations only; no maliciousness inference"
+            ]
+          }
+        ],
+        "nodes": [
+          {
+            "id": "a",
+            "accountHandle": "@a",
+            "displayName": "a",
+            "avatarSeed": "a",
+            "accountAgeDays": -1,
+            "followerCount": -1,
+            "timestamp": "2026-01-01T00:00:00.000Z",
+            "content": "Fictional repeated posting pattern for an authored software control.",
+            "urls": [
+              "https://example.org/public-bulletin"
+            ],
+            "hashtags": [],
+            "clusterId": 1,
+            "botLikelihoodScore": null,
+            "amplificationWeight": 9,
+            "language": "English",
+            "suspicious": false,
+            "posts": [
+              {
+                "id": "a-0",
+                "timestamp": "2026-01-01T00:00:00.000Z",
+                "content": "Fictional repeated posting pattern for an authored software control."
+              },
+              {
+                "id": "a-1",
+                "timestamp": "2026-01-01T01:06:40.000Z",
+                "content": "Fictional repeated posting pattern for an authored software control."
+              },
+              {
+                "id": "a-2",
+                "timestamp": "2026-01-01T02:13:20.000Z",
+                "content": "Fictional repeated posting pattern for an authored software control."
+              }
+            ],
+            "postingStats": {
+              "totalPosts": 3,
+              "peakPostsPerMinute": 1,
+              "countZScore": 0
+            }
+          },
+          {
+            "id": "b",
+            "accountHandle": "@b",
+            "displayName": "b",
+            "avatarSeed": "b",
+            "accountAgeDays": -1,
+            "followerCount": -1,
+            "timestamp": "2026-01-01T00:00:01.000Z",
+            "content": "Fictional repeated posting pattern for an authored software control.",
+            "urls": [
+              "https://example.org/public-bulletin"
+            ],
+            "hashtags": [],
+            "clusterId": 1,
+            "botLikelihoodScore": null,
+            "amplificationWeight": 9,
+            "language": "English",
+            "suspicious": false,
+            "posts": [
+              {
+                "id": "b-0",
+                "timestamp": "2026-01-01T00:00:01.000Z",
+                "content": "Fictional repeated posting pattern for an authored software control."
+              },
+              {
+                "id": "b-1",
+                "timestamp": "2026-01-01T01:06:41.000Z",
+                "content": "Fictional repeated posting pattern for an authored software control."
+              },
+              {
+                "id": "b-2",
+                "timestamp": "2026-01-01T02:13:21.000Z",
+                "content": "Fictional repeated posting pattern for an authored software control."
+              }
+            ],
+            "postingStats": {
+              "totalPosts": 3,
+              "peakPostsPerMinute": 1,
+              "countZScore": 0
+            }
+          },
+          {
+            "id": "c",
+            "accountHandle": "@c",
+            "displayName": "c",
+            "avatarSeed": "c",
+            "accountAgeDays": -1,
+            "followerCount": -1,
+            "timestamp": "2026-01-01T00:00:02.000Z",
+            "content": "Fictional repeated posting pattern for an authored software control.",
+            "urls": [
+              "https://example.org/public-bulletin"
+            ],
+            "hashtags": [],
+            "clusterId": 1,
+            "botLikelihoodScore": null,
+            "amplificationWeight": 9,
+            "language": "English",
+            "suspicious": false,
+            "posts": [
+              {
+                "id": "c-0",
+                "timestamp": "2026-01-01T00:00:02.000Z",
+                "content": "Fictional repeated posting pattern for an authored software control."
+              },
+              {
+                "id": "c-1",
+                "timestamp": "2026-01-01T01:06:42.000Z",
+                "content": "Fictional repeated posting pattern for an authored software control."
+              },
+              {
+                "id": "c-2",
+                "timestamp": "2026-01-01T02:13:22.000Z",
+                "content": "Fictional repeated posting pattern for an authored software control."
+              }
+            ],
+            "postingStats": {
+              "totalPosts": 3,
+              "peakPostsPerMinute": 1,
+              "countZScore": 0
+            }
+          },
+          {
+            "id": "d",
+            "accountHandle": "@d",
+            "displayName": "d",
+            "avatarSeed": "d",
+            "accountAgeDays": -1,
+            "followerCount": -1,
+            "timestamp": "2026-01-01T00:00:03.000Z",
+            "content": "Fictional repeated posting pattern for an authored software control.",
+            "urls": [
+              "https://example.org/public-bulletin"
+            ],
+            "hashtags": [],
+            "clusterId": 1,
+            "botLikelihoodScore": null,
+            "amplificationWeight": 9,
+            "language": "English",
+            "suspicious": false,
+            "posts": [
+              {
+                "id": "d-0",
+                "timestamp": "2026-01-01T00:00:03.000Z",
+                "content": "Fictional repeated posting pattern for an authored software control."
+              },
+              {
+                "id": "d-1",
+                "timestamp": "2026-01-01T01:06:43.000Z",
+                "content": "Fictional repeated posting pattern for an authored software control."
+              },
+              {
+                "id": "d-2",
+                "timestamp": "2026-01-01T02:13:23.000Z",
+                "content": "Fictional repeated posting pattern for an authored software control."
+              }
+            ],
+            "postingStats": {
+              "totalPosts": 3,
+              "peakPostsPerMinute": 1,
+              "countZScore": 0
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "association:0473ef2dc0d324ab659d3580",
+            "source": "a",
+            "target": "b",
+            "weight": 0.881,
+            "coordinationType": "semantic_copy",
+            "description": "Observed content/URL/hashtag/time association; 3 bounded episodes, 3 precisely timed separated episodes. Weight cites witness:22a28bb5bb3baad530700bd1. Intent and account control unverified."
+          },
+          {
+            "id": "association:87494a1b580146b76dc4a0a3",
+            "source": "a",
+            "target": "c",
+            "weight": 0.88,
+            "coordinationType": "semantic_copy",
+            "description": "Observed content/URL/hashtag/time association; 3 bounded episodes, 3 precisely timed separated episodes. Weight cites witness:ed4dd4b0147e363077a03e42. Intent and account control unverified."
+          },
+          {
+            "id": "association:2e42d67888ff96b92b614e3b",
+            "source": "b",
+            "target": "c",
+            "weight": 0.881,
+            "coordinationType": "semantic_copy",
+            "description": "Observed content/URL/hashtag/time association; 3 bounded episodes, 3 precisely timed separated episodes. Weight cites witness:ff74b6c558b7659b6e8e01ff. Intent and account control unverified."
+          },
+          {
+            "id": "association:a741ad8cccb5a6f6f1b9b57e",
+            "source": "a",
+            "target": "d",
+            "weight": 0.879,
+            "coordinationType": "semantic_copy",
+            "description": "Observed content/URL/hashtag/time association; 3 bounded episodes, 3 precisely timed separated episodes. Weight cites witness:163c305f191eb6abad8e9644. Intent and account control unverified."
+          },
+          {
+            "id": "association:acce901f108e9390eb53c0b8",
+            "source": "b",
+            "target": "d",
+            "weight": 0.88,
+            "coordinationType": "semantic_copy",
+            "description": "Observed content/URL/hashtag/time association; 3 bounded episodes, 3 precisely timed separated episodes. Weight cites witness:ad95e5768aeb63403c4515e3. Intent and account control unverified."
+          },
+          {
+            "id": "association:2433aab21a992126ff93e173",
+            "source": "c",
+            "target": "d",
+            "weight": 0.881,
+            "coordinationType": "semantic_copy",
+            "description": "Observed content/URL/hashtag/time association; 3 bounded episodes, 3 precisely timed separated episodes. Weight cites witness:1cab418cea7a40cc2b0240f9. Intent and account control unverified."
+          }
+        ],
+        "burstTimestamps": [
+          {
+            "time": "2026-01-01T00:00:00.000Z",
+            "count": 4,
+            "clusterId": 0
+          },
+          {
+            "time": "2026-01-01T01:05:00.000Z",
+            "count": 4,
+            "clusterId": 0
+          },
+          {
+            "time": "2026-01-01T02:10:00.000Z",
+            "count": 4,
+            "clusterId": 0
+          }
+        ],
+        "tacticalSummary": [
+          "6 traceable associations; 18 episodes; 6 pairs eligible for recurrence review.",
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "alternativeExplanations": [
+          "Organic viral breaking news",
+          "Legitimate coordinated public-information or advocacy campaign",
+          "Shared URL, hashtag or ordinary headline alone never establishes suspicious coordination",
+          "Repeated official schedules, news syndication and organizational announcements"
+        ],
+        "timestamp": "2026-11-16T10:09:09.154Z",
+        "suspiciousPostCount": 0,
+        "languageBreakdown": [
+          {
+            "language": "English",
+            "count": 12
+          }
+        ],
+        "engine": "graph_heuristics",
+        "isSimulated": false,
+        "algorithm": "episodes_v1",
+        "episodeEvidence": {
+          "baselineTelemetry": {
+            "candidateGenerationMs": 0.31260000000003174,
+            "similarityComparisonMs": 0.272199999999998,
+            "clusterConstructionMs": 0.11129999999997153,
+            "evaluatedPairs": 18,
+            "candidatePairs": 18
+          },
+          "policy": {
+            "id": "episodes_v1",
+            "spanSeconds": 300,
+            "separationSeconds": 1800,
+            "minSeparatedEpisodes": 3,
+            "maxPairs": 5000,
+            "maxWitnesses": 20000,
+            "maxFamiliesPerPair": 8
+          },
+          "observation": "SEPARATED_EPISODE_ASSOCIATION",
+          "posts": [
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "a-0",
+                  "originalTimestamp": "2026-01-01T00:00:00.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:164be6d8fe7bf46b5ba79b50",
+              "accountId": "a",
+              "postId": "a-0",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T00:00:00.000Z",
+              "originalTimestamp": "2026-01-01T00:00:00.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T00:00:00.000Z",
+              "content": "Fictional repeated posting pattern for an authored software control.",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                0
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "b-0",
+                  "originalTimestamp": "2026-01-01T00:00:01.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:ae337d430ed8910f4b197c01",
+              "accountId": "b",
+              "postId": "b-0",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T00:00:01.000Z",
+              "originalTimestamp": "2026-01-01T00:00:01.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T00:00:01.000Z",
+              "content": "Fictional repeated posting pattern for an authored software control.",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                3
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "c-0",
+                  "originalTimestamp": "2026-01-01T00:00:02.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:08188e75dc91e9db548a8da2",
+              "accountId": "c",
+              "postId": "c-0",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T00:00:02.000Z",
+              "originalTimestamp": "2026-01-01T00:00:02.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T00:00:02.000Z",
+              "content": "Fictional repeated posting pattern for an authored software control.",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                6
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "d-0",
+                  "originalTimestamp": "2026-01-01T00:00:03.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:a515e6e9d6ce232de0352151",
+              "accountId": "d",
+              "postId": "d-0",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T00:00:03.000Z",
+              "originalTimestamp": "2026-01-01T00:00:03.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T00:00:03.000Z",
+              "content": "Fictional repeated posting pattern for an authored software control.",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                9
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "a-1",
+                  "originalTimestamp": "2026-01-01T01:06:40.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:28263e844f5a42036099bd80",
+              "accountId": "a",
+              "postId": "a-1",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T01:06:40.000Z",
+              "originalTimestamp": "2026-01-01T01:06:40.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T01:06:40.000Z",
+              "content": "Fictional repeated posting pattern for an authored software control.",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                1
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "b-1",
+                  "originalTimestamp": "2026-01-01T01:06:41.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:ad88e7d9438e8f00db455c62",
+              "accountId": "b",
+              "postId": "b-1",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T01:06:41.000Z",
+              "originalTimestamp": "2026-01-01T01:06:41.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T01:06:41.000Z",
+              "content": "Fictional repeated posting pattern for an authored software control.",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                4
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "c-1",
+                  "originalTimestamp": "2026-01-01T01:06:42.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:987709d1f0658dcbd0bba683",
+              "accountId": "c",
+              "postId": "c-1",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T01:06:42.000Z",
+              "originalTimestamp": "2026-01-01T01:06:42.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T01:06:42.000Z",
+              "content": "Fictional repeated posting pattern for an authored software control.",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                7
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "d-1",
+                  "originalTimestamp": "2026-01-01T01:06:43.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:3c08023766ce96432ad97b48",
+              "accountId": "d",
+              "postId": "d-1",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T01:06:43.000Z",
+              "originalTimestamp": "2026-01-01T01:06:43.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T01:06:43.000Z",
+              "content": "Fictional repeated posting pattern for an authored software control.",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                10
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "a-2",
+                  "originalTimestamp": "2026-01-01T02:13:20.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:9c661bc24f5186467102b46e",
+              "accountId": "a",
+              "postId": "a-2",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T02:13:20.000Z",
+              "originalTimestamp": "2026-01-01T02:13:20.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T02:13:20.000Z",
+              "content": "Fictional repeated posting pattern for an authored software control.",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                2
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "b-2",
+                  "originalTimestamp": "2026-01-01T02:13:21.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:4ebd458dc6992f14a699a6a8",
+              "accountId": "b",
+              "postId": "b-2",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T02:13:21.000Z",
+              "originalTimestamp": "2026-01-01T02:13:21.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T02:13:21.000Z",
+              "content": "Fictional repeated posting pattern for an authored software control.",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                5
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "c-2",
+                  "originalTimestamp": "2026-01-01T02:13:22.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:26c4f7c87ef976888e33d453",
+              "accountId": "c",
+              "postId": "c-2",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T02:13:22.000Z",
+              "originalTimestamp": "2026-01-01T02:13:22.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T02:13:22.000Z",
+              "content": "Fictional repeated posting pattern for an authored software control.",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                8
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "d-2",
+                  "originalTimestamp": "2026-01-01T02:13:23.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:31345bb52cffc5da31cea66b",
+              "accountId": "d",
+              "postId": "d-2",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T02:13:23.000Z",
+              "originalTimestamp": "2026-01-01T02:13:23.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T02:13:23.000Z",
+              "content": "Fictional repeated posting pattern for an authored software control.",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                11
+              ]
+            }
+          ],
+          "witnesses": [
+            {
+              "left": 0,
+              "right": 1,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 1,
+              "score": 0.8811274509803922,
+              "id": "witness:22a28bb5bb3baad530700bd1",
+              "source": "a",
+              "target": "b",
+              "sourcePost": "input:164be6d8fe7bf46b5ba79b50",
+              "targetPost": "input:ae337d430ed8910f4b197c01",
+              "sourceTimestamp": "2026-01-01T00:00:00.000Z",
+              "targetTimestamp": "2026-01-01T00:00:01.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:55708b69b671282674479f7b"
+            },
+            {
+              "left": 4,
+              "right": 5,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 1,
+              "score": 0.8811274509803922,
+              "id": "witness:678df87e8e818af9e1711ee8",
+              "source": "a",
+              "target": "b",
+              "sourcePost": "input:28263e844f5a42036099bd80",
+              "targetPost": "input:ad88e7d9438e8f00db455c62",
+              "sourceTimestamp": "2026-01-01T01:06:40.000Z",
+              "targetTimestamp": "2026-01-01T01:06:41.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:f903ad8f0c4f408be0e68d49"
+            },
+            {
+              "left": 8,
+              "right": 9,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 1,
+              "score": 0.8811274509803922,
+              "id": "witness:d642d2f550d4db089341b931",
+              "source": "a",
+              "target": "b",
+              "sourcePost": "input:9c661bc24f5186467102b46e",
+              "targetPost": "input:4ebd458dc6992f14a699a6a8",
+              "sourceTimestamp": "2026-01-01T02:13:20.000Z",
+              "targetTimestamp": "2026-01-01T02:13:21.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:6cf5143596170741fb789336"
+            },
+            {
+              "left": 0,
+              "right": 2,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 2,
+              "score": 0.8799019607843137,
+              "id": "witness:ed4dd4b0147e363077a03e42",
+              "source": "a",
+              "target": "c",
+              "sourcePost": "input:164be6d8fe7bf46b5ba79b50",
+              "targetPost": "input:08188e75dc91e9db548a8da2",
+              "sourceTimestamp": "2026-01-01T00:00:00.000Z",
+              "targetTimestamp": "2026-01-01T00:00:02.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:a07fb8ffdb3bce2040fe4168"
+            },
+            {
+              "left": 4,
+              "right": 6,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 2,
+              "score": 0.8799019607843137,
+              "id": "witness:f909a53671ad32efbc311b39",
+              "source": "a",
+              "target": "c",
+              "sourcePost": "input:28263e844f5a42036099bd80",
+              "targetPost": "input:987709d1f0658dcbd0bba683",
+              "sourceTimestamp": "2026-01-01T01:06:40.000Z",
+              "targetTimestamp": "2026-01-01T01:06:42.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:573c875458a0b0081f4e5715"
+            },
+            {
+              "left": 8,
+              "right": 10,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 2,
+              "score": 0.8799019607843137,
+              "id": "witness:d03da983cabed87fc00dc0d8",
+              "source": "a",
+              "target": "c",
+              "sourcePost": "input:9c661bc24f5186467102b46e",
+              "targetPost": "input:26c4f7c87ef976888e33d453",
+              "sourceTimestamp": "2026-01-01T02:13:20.000Z",
+              "targetTimestamp": "2026-01-01T02:13:22.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:ca74c2b0fa6ca2cc55184b76"
+            },
+            {
+              "left": 1,
+              "right": 2,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 1,
+              "score": 0.8811274509803922,
+              "id": "witness:ff74b6c558b7659b6e8e01ff",
+              "source": "b",
+              "target": "c",
+              "sourcePost": "input:ae337d430ed8910f4b197c01",
+              "targetPost": "input:08188e75dc91e9db548a8da2",
+              "sourceTimestamp": "2026-01-01T00:00:01.000Z",
+              "targetTimestamp": "2026-01-01T00:00:02.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:cc35b8d6fc0e9a00d966883e"
+            },
+            {
+              "left": 5,
+              "right": 6,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 1,
+              "score": 0.8811274509803922,
+              "id": "witness:0d6d669b84121b5bf073ed31",
+              "source": "b",
+              "target": "c",
+              "sourcePost": "input:ad88e7d9438e8f00db455c62",
+              "targetPost": "input:987709d1f0658dcbd0bba683",
+              "sourceTimestamp": "2026-01-01T01:06:41.000Z",
+              "targetTimestamp": "2026-01-01T01:06:42.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:202ed74eda1aaa4669011afd"
+            },
+            {
+              "left": 9,
+              "right": 10,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 1,
+              "score": 0.8811274509803922,
+              "id": "witness:424efa7370d0e798e2f467b6",
+              "source": "b",
+              "target": "c",
+              "sourcePost": "input:4ebd458dc6992f14a699a6a8",
+              "targetPost": "input:26c4f7c87ef976888e33d453",
+              "sourceTimestamp": "2026-01-01T02:13:21.000Z",
+              "targetTimestamp": "2026-01-01T02:13:22.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:56fb56db24d0c29eecf0b701"
+            },
+            {
+              "left": 0,
+              "right": 3,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 3,
+              "score": 0.8786764705882353,
+              "id": "witness:163c305f191eb6abad8e9644",
+              "source": "a",
+              "target": "d",
+              "sourcePost": "input:164be6d8fe7bf46b5ba79b50",
+              "targetPost": "input:a515e6e9d6ce232de0352151",
+              "sourceTimestamp": "2026-01-01T00:00:00.000Z",
+              "targetTimestamp": "2026-01-01T00:00:03.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:ae7fe27314fc62681db09118"
+            },
+            {
+              "left": 4,
+              "right": 7,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 3,
+              "score": 0.8786764705882353,
+              "id": "witness:cc979df6ad81d2987aa2ab7e",
+              "source": "a",
+              "target": "d",
+              "sourcePost": "input:28263e844f5a42036099bd80",
+              "targetPost": "input:3c08023766ce96432ad97b48",
+              "sourceTimestamp": "2026-01-01T01:06:40.000Z",
+              "targetTimestamp": "2026-01-01T01:06:43.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:dc66809b651dd34b11bf11e5"
+            },
+            {
+              "left": 8,
+              "right": 11,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 3,
+              "score": 0.8786764705882353,
+              "id": "witness:c3724b2c845971f4374e68f4",
+              "source": "a",
+              "target": "d",
+              "sourcePost": "input:9c661bc24f5186467102b46e",
+              "targetPost": "input:31345bb52cffc5da31cea66b",
+              "sourceTimestamp": "2026-01-01T02:13:20.000Z",
+              "targetTimestamp": "2026-01-01T02:13:23.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:1ece0c918b8210de0b66f37c"
+            },
+            {
+              "left": 1,
+              "right": 3,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 2,
+              "score": 0.8799019607843137,
+              "id": "witness:ad95e5768aeb63403c4515e3",
+              "source": "b",
+              "target": "d",
+              "sourcePost": "input:ae337d430ed8910f4b197c01",
+              "targetPost": "input:a515e6e9d6ce232de0352151",
+              "sourceTimestamp": "2026-01-01T00:00:01.000Z",
+              "targetTimestamp": "2026-01-01T00:00:03.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:31aca69ac6d2224d2d1da89f"
+            },
+            {
+              "left": 5,
+              "right": 7,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 2,
+              "score": 0.8799019607843137,
+              "id": "witness:7110fe3db5096c64be451e42",
+              "source": "b",
+              "target": "d",
+              "sourcePost": "input:ad88e7d9438e8f00db455c62",
+              "targetPost": "input:3c08023766ce96432ad97b48",
+              "sourceTimestamp": "2026-01-01T01:06:41.000Z",
+              "targetTimestamp": "2026-01-01T01:06:43.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:9a5c79dafffc032ef463bcac"
+            },
+            {
+              "left": 9,
+              "right": 11,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 2,
+              "score": 0.8799019607843137,
+              "id": "witness:d3bd96cbf2b69487ab271f24",
+              "source": "b",
+              "target": "d",
+              "sourcePost": "input:4ebd458dc6992f14a699a6a8",
+              "targetPost": "input:31345bb52cffc5da31cea66b",
+              "sourceTimestamp": "2026-01-01T02:13:21.000Z",
+              "targetTimestamp": "2026-01-01T02:13:23.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:f957fc3c55ec37c0688dbe53"
+            },
+            {
+              "left": 2,
+              "right": 3,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 1,
+              "score": 0.8811274509803922,
+              "id": "witness:1cab418cea7a40cc2b0240f9",
+              "source": "c",
+              "target": "d",
+              "sourcePost": "input:08188e75dc91e9db548a8da2",
+              "targetPost": "input:a515e6e9d6ce232de0352151",
+              "sourceTimestamp": "2026-01-01T00:00:02.000Z",
+              "targetTimestamp": "2026-01-01T00:00:03.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:6cf95c2d42ec1b721dfd107e"
+            },
+            {
+              "left": 6,
+              "right": 7,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 1,
+              "score": 0.8811274509803922,
+              "id": "witness:e4aaf7d24e1d61bcaec00f47",
+              "source": "c",
+              "target": "d",
+              "sourcePost": "input:987709d1f0658dcbd0bba683",
+              "targetPost": "input:3c08023766ce96432ad97b48",
+              "sourceTimestamp": "2026-01-01T01:06:42.000Z",
+              "targetTimestamp": "2026-01-01T01:06:43.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:68f5334a5516c3214f925c5a"
+            },
+            {
+              "left": 10,
+              "right": 11,
+              "text": 1,
+              "url": 1,
+              "tag": 0,
+              "dt": 1,
+              "score": 0.8811274509803922,
+              "id": "witness:682bd8d917e2da77769df655",
+              "source": "c",
+              "target": "d",
+              "sourcePost": "input:26c4f7c87ef976888e33d453",
+              "targetPost": "input:31345bb52cffc5da31cea66b",
+              "sourceTimestamp": "2026-01-01T02:13:22.000Z",
+              "targetTimestamp": "2026-01-01T02:13:23.000Z",
+              "sharedUrls": [
+                "https://example.org/public-bulletin"
+              ],
+              "sharedHashtags": [],
+              "semanticCosine": null,
+              "episodeId": "episode:e01a9d7e200ad390188bbde3"
+            }
+          ],
+          "episodes": [
+            {
+              "id": "episode:55708b69b671282674479f7b",
+              "source": "a",
+              "target": "b",
+              "familyId": "family:fac784da9ed9e25b4deb40a2",
+              "start": "2026-01-01T00:00:00.000Z",
+              "end": "2026-01-01T00:00:01.000Z",
+              "latestPossibleEnd": "2026-01-01T00:00:01.000Z",
+              "witnessIds": [
+                "witness:22a28bb5bb3baad530700bd1"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:f903ad8f0c4f408be0e68d49",
+              "source": "a",
+              "target": "b",
+              "familyId": "family:fac784da9ed9e25b4deb40a2",
+              "start": "2026-01-01T01:06:40.000Z",
+              "end": "2026-01-01T01:06:41.000Z",
+              "latestPossibleEnd": "2026-01-01T01:06:41.000Z",
+              "witnessIds": [
+                "witness:678df87e8e818af9e1711ee8"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:6cf5143596170741fb789336",
+              "source": "a",
+              "target": "b",
+              "familyId": "family:fac784da9ed9e25b4deb40a2",
+              "start": "2026-01-01T02:13:20.000Z",
+              "end": "2026-01-01T02:13:21.000Z",
+              "latestPossibleEnd": "2026-01-01T02:13:21.000Z",
+              "witnessIds": [
+                "witness:d642d2f550d4db089341b931"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:a07fb8ffdb3bce2040fe4168",
+              "source": "a",
+              "target": "c",
+              "familyId": "family:cfb3b578173719e8a5799217",
+              "start": "2026-01-01T00:00:00.000Z",
+              "end": "2026-01-01T00:00:02.000Z",
+              "latestPossibleEnd": "2026-01-01T00:00:02.000Z",
+              "witnessIds": [
+                "witness:ed4dd4b0147e363077a03e42"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:573c875458a0b0081f4e5715",
+              "source": "a",
+              "target": "c",
+              "familyId": "family:cfb3b578173719e8a5799217",
+              "start": "2026-01-01T01:06:40.000Z",
+              "end": "2026-01-01T01:06:42.000Z",
+              "latestPossibleEnd": "2026-01-01T01:06:42.000Z",
+              "witnessIds": [
+                "witness:f909a53671ad32efbc311b39"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:ca74c2b0fa6ca2cc55184b76",
+              "source": "a",
+              "target": "c",
+              "familyId": "family:cfb3b578173719e8a5799217",
+              "start": "2026-01-01T02:13:20.000Z",
+              "end": "2026-01-01T02:13:22.000Z",
+              "latestPossibleEnd": "2026-01-01T02:13:22.000Z",
+              "witnessIds": [
+                "witness:d03da983cabed87fc00dc0d8"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:cc35b8d6fc0e9a00d966883e",
+              "source": "b",
+              "target": "c",
+              "familyId": "family:45d3757e7099079eac0ee080",
+              "start": "2026-01-01T00:00:01.000Z",
+              "end": "2026-01-01T00:00:02.000Z",
+              "latestPossibleEnd": "2026-01-01T00:00:02.000Z",
+              "witnessIds": [
+                "witness:ff74b6c558b7659b6e8e01ff"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:202ed74eda1aaa4669011afd",
+              "source": "b",
+              "target": "c",
+              "familyId": "family:45d3757e7099079eac0ee080",
+              "start": "2026-01-01T01:06:41.000Z",
+              "end": "2026-01-01T01:06:42.000Z",
+              "latestPossibleEnd": "2026-01-01T01:06:42.000Z",
+              "witnessIds": [
+                "witness:0d6d669b84121b5bf073ed31"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:56fb56db24d0c29eecf0b701",
+              "source": "b",
+              "target": "c",
+              "familyId": "family:45d3757e7099079eac0ee080",
+              "start": "2026-01-01T02:13:21.000Z",
+              "end": "2026-01-01T02:13:22.000Z",
+              "latestPossibleEnd": "2026-01-01T02:13:22.000Z",
+              "witnessIds": [
+                "witness:424efa7370d0e798e2f467b6"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:ae7fe27314fc62681db09118",
+              "source": "a",
+              "target": "d",
+              "familyId": "family:c47421d7b8e7f07a9ce63d16",
+              "start": "2026-01-01T00:00:00.000Z",
+              "end": "2026-01-01T00:00:03.000Z",
+              "latestPossibleEnd": "2026-01-01T00:00:03.000Z",
+              "witnessIds": [
+                "witness:163c305f191eb6abad8e9644"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:dc66809b651dd34b11bf11e5",
+              "source": "a",
+              "target": "d",
+              "familyId": "family:c47421d7b8e7f07a9ce63d16",
+              "start": "2026-01-01T01:06:40.000Z",
+              "end": "2026-01-01T01:06:43.000Z",
+              "latestPossibleEnd": "2026-01-01T01:06:43.000Z",
+              "witnessIds": [
+                "witness:cc979df6ad81d2987aa2ab7e"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:1ece0c918b8210de0b66f37c",
+              "source": "a",
+              "target": "d",
+              "familyId": "family:c47421d7b8e7f07a9ce63d16",
+              "start": "2026-01-01T02:13:20.000Z",
+              "end": "2026-01-01T02:13:23.000Z",
+              "latestPossibleEnd": "2026-01-01T02:13:23.000Z",
+              "witnessIds": [
+                "witness:c3724b2c845971f4374e68f4"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:31aca69ac6d2224d2d1da89f",
+              "source": "b",
+              "target": "d",
+              "familyId": "family:d8f908fddf9846e21b564aec",
+              "start": "2026-01-01T00:00:01.000Z",
+              "end": "2026-01-01T00:00:03.000Z",
+              "latestPossibleEnd": "2026-01-01T00:00:03.000Z",
+              "witnessIds": [
+                "witness:ad95e5768aeb63403c4515e3"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:9a5c79dafffc032ef463bcac",
+              "source": "b",
+              "target": "d",
+              "familyId": "family:d8f908fddf9846e21b564aec",
+              "start": "2026-01-01T01:06:41.000Z",
+              "end": "2026-01-01T01:06:43.000Z",
+              "latestPossibleEnd": "2026-01-01T01:06:43.000Z",
+              "witnessIds": [
+                "witness:7110fe3db5096c64be451e42"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:f957fc3c55ec37c0688dbe53",
+              "source": "b",
+              "target": "d",
+              "familyId": "family:d8f908fddf9846e21b564aec",
+              "start": "2026-01-01T02:13:21.000Z",
+              "end": "2026-01-01T02:13:23.000Z",
+              "latestPossibleEnd": "2026-01-01T02:13:23.000Z",
+              "witnessIds": [
+                "witness:d3bd96cbf2b69487ab271f24"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:6cf95c2d42ec1b721dfd107e",
+              "source": "c",
+              "target": "d",
+              "familyId": "family:ad32e42430cec674cdd0b7fd",
+              "start": "2026-01-01T00:00:02.000Z",
+              "end": "2026-01-01T00:00:03.000Z",
+              "latestPossibleEnd": "2026-01-01T00:00:03.000Z",
+              "witnessIds": [
+                "witness:1cab418cea7a40cc2b0240f9"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:68f5334a5516c3214f925c5a",
+              "source": "c",
+              "target": "d",
+              "familyId": "family:ad32e42430cec674cdd0b7fd",
+              "start": "2026-01-01T01:06:42.000Z",
+              "end": "2026-01-01T01:06:43.000Z",
+              "latestPossibleEnd": "2026-01-01T01:06:43.000Z",
+              "witnessIds": [
+                "witness:e4aaf7d24e1d61bcaec00f47"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            },
+            {
+              "id": "episode:e01a9d7e200ad390188bbde3",
+              "source": "c",
+              "target": "d",
+              "familyId": "family:ad32e42430cec674cdd0b7fd",
+              "start": "2026-01-01T02:13:22.000Z",
+              "end": "2026-01-01T02:13:23.000Z",
+              "latestPossibleEnd": "2026-01-01T02:13:23.000Z",
+              "witnessIds": [
+                "witness:682bd8d917e2da77769df655"
+              ],
+              "separatedFromPrevious": true,
+              "preciseProvidedIds": true
+            }
+          ],
+          "associations": [
+            {
+              "edgeId": "association:0473ef2dc0d324ab659d3580",
+              "source": "a",
+              "target": "b",
+              "witnessIds": [
+                "witness:22a28bb5bb3baad530700bd1",
+                "witness:678df87e8e818af9e1711ee8",
+                "witness:d642d2f550d4db089341b931"
+              ],
+              "episodeIds": [
+                "episode:55708b69b671282674479f7b",
+                "episode:f903ad8f0c4f408be0e68d49",
+                "episode:6cf5143596170741fb789336"
+              ],
+              "separatedEpisodeCount": 3,
+              "recurrenceEligible": true
+            },
+            {
+              "edgeId": "association:87494a1b580146b76dc4a0a3",
+              "source": "a",
+              "target": "c",
+              "witnessIds": [
+                "witness:ed4dd4b0147e363077a03e42",
+                "witness:f909a53671ad32efbc311b39",
+                "witness:d03da983cabed87fc00dc0d8"
+              ],
+              "episodeIds": [
+                "episode:a07fb8ffdb3bce2040fe4168",
+                "episode:573c875458a0b0081f4e5715",
+                "episode:ca74c2b0fa6ca2cc55184b76"
+              ],
+              "separatedEpisodeCount": 3,
+              "recurrenceEligible": true
+            },
+            {
+              "edgeId": "association:2e42d67888ff96b92b614e3b",
+              "source": "b",
+              "target": "c",
+              "witnessIds": [
+                "witness:ff74b6c558b7659b6e8e01ff",
+                "witness:0d6d669b84121b5bf073ed31",
+                "witness:424efa7370d0e798e2f467b6"
+              ],
+              "episodeIds": [
+                "episode:cc35b8d6fc0e9a00d966883e",
+                "episode:202ed74eda1aaa4669011afd",
+                "episode:56fb56db24d0c29eecf0b701"
+              ],
+              "separatedEpisodeCount": 3,
+              "recurrenceEligible": true
+            },
+            {
+              "edgeId": "association:a741ad8cccb5a6f6f1b9b57e",
+              "source": "a",
+              "target": "d",
+              "witnessIds": [
+                "witness:163c305f191eb6abad8e9644",
+                "witness:cc979df6ad81d2987aa2ab7e",
+                "witness:c3724b2c845971f4374e68f4"
+              ],
+              "episodeIds": [
+                "episode:ae7fe27314fc62681db09118",
+                "episode:dc66809b651dd34b11bf11e5",
+                "episode:1ece0c918b8210de0b66f37c"
+              ],
+              "separatedEpisodeCount": 3,
+              "recurrenceEligible": true
+            },
+            {
+              "edgeId": "association:acce901f108e9390eb53c0b8",
+              "source": "b",
+              "target": "d",
+              "witnessIds": [
+                "witness:ad95e5768aeb63403c4515e3",
+                "witness:7110fe3db5096c64be451e42",
+                "witness:d3bd96cbf2b69487ab271f24"
+              ],
+              "episodeIds": [
+                "episode:31aca69ac6d2224d2d1da89f",
+                "episode:9a5c79dafffc032ef463bcac",
+                "episode:f957fc3c55ec37c0688dbe53"
+              ],
+              "separatedEpisodeCount": 3,
+              "recurrenceEligible": true
+            },
+            {
+              "edgeId": "association:2433aab21a992126ff93e173",
+              "source": "c",
+              "target": "d",
+              "witnessIds": [
+                "witness:1cab418cea7a40cc2b0240f9",
+                "witness:e4aaf7d24e1d61bcaec00f47",
+                "witness:682bd8d917e2da77769df655"
+              ],
+              "episodeIds": [
+                "episode:6cf95c2d42ec1b721dfd107e",
+                "episode:68f5334a5516c3214f925c5a",
+                "episode:e01a9d7e200ad390188bbde3"
+              ],
+              "separatedEpisodeCount": 3,
+              "recurrenceEligible": true
+            }
+          ],
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true,
+          "duplicatesRemoved": 0,
+          "omittedWitnesses": 0,
+          "omittedAssociations": 0,
+          "warnings": [
+            "Coverage completeness is an operator declaration, not independently verified.",
+            "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+            "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+          ],
+          "timing": {
+            "preparationMs": 14.409199999999998,
+            "baselineMs": 3.957300000000032,
+            "episodesMs": 0.6879000000000133,
+            "graphMs": 0.27710000000001855,
+            "totalMs": 19.5548
+          },
+          "memory": {
+            "rssBeforeBytes": 70651904,
+            "rssAfterBytes": 70705152
+          }
+        },
+        "embeddingCompatibility": {
+          "status": "unavailable",
+          "format": "generic",
+          "modelId": "Not selected",
+          "version": "Unspecified",
+          "usedForAdmissions": false,
+          "detail": "Embedding evidence unavailable; lexical/Jaccard candidate admission remains active."
+        },
+        "receiptOwner": "local-analyst",
+        "receiptExpires": 1794910149169,
+        "receipt": "57eca6794a9d6094db3d6c3f34a021b206c7623b1bb2f84458dcc404dbe005b4"
+      },
+      "storedIdentical": true,
+      "reportIdentical": true,
+      "displayedText": "LIVE ANALYSIS MODE\n/\nActual inputs only. Unavailable models never produce artificial scores.\nSwitch to demonstration\nActive investigation\nCreate on save\nSUR-2026-6930 · Media analysis: authored-diagnostic\nNetwork intelligence\n\nMap evidence-based relationships across actual posts. Multi-signal density clustering identifies associations, not malicious intent. Organic news sharing and legitimate coordination remain alternative explanations.\n\n1\nUpload a CSV or JSON file of posts — or try our sample\n2\nSee the groups on the map\n3\nClick any account for details\nYour file needs columns like: account_id, username, content, timestamp, shared_url, hashtags, language.\nUpload posts (CSV / JSON)\nTry with sample posts\nDownload sample file\nSaved to SUR-2026-6930\nClustering configuration\nauthored-diagnostic.json\nPATTERN ANALYSIS (COMPUTED)\nInsufficient evidence\n\nEpisode policy episodes_v1; same lexical association and DBSCAN thresholds as baseline. Observable patterns only; no maliciousness or factual verdict.\n\nWhat to do: A shared URL, headline or hashtag alone does not imply malicious coordination. Review recurring independent signals and source context.\n\nCANDIDATE PAIRS\n18\nIndexed multi-signal candidates\nACCOUNTS\n4\nPOSTS\n12\nRECURRENCE REVIEW PAIRS\n6\nGROUPS FOUND\n1\nCampaign episodes and post evidence\nDownload campaign evidence JSON\n\nSEPARATED_EPISODE_ASSOCIATION · 18 bounded pair episodes · 6 pairs eligible for recurrence review.\n\nDissemination observations do not determine media authenticity, claim truth, malicious intent or common account control.\n\nCoverage completeness is an operator declaration, not independently verified.\nSeparated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.\nSemantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family.\n\nDuplicates removed: 0 · omitted witnesses: 0 · omitted associations: 0. Coverage: Explicit authored software control observation window; declared complete.\n\nSemantic evidence: unavailable · generic. Embedding evidence unavailable; lexical/Jaccard candidate admission remains active.\n\nInspect association\na ↔ b · 3 separated episodes\na ↔ c · 3 separated episodes\nb ↔ c · 3 separated episodes\na ↔ d · 3 separated episodes\nb ↔ d · 3 separated episodes\nc ↔ d · 3 separated episodes\n\nRepeated separated observations eligible for analyst review; legitimate schedules remain possible.\n\nepisode:55708b69b671282674479f7b · 2026-01-01T00:00:00.000Z — 2026-01-01T00:00:01.000Z\n\nFirst or conservatively separated bin: true · provided precise IDs/times: true\n\nwitness:22a28bb5bb3baad530700bd1\n\na · a-0 (provided)\n\nUTC 2026-01-01T00:00:00.000Z; original 2026-01-01T00:00:00.000Z; resolution 1 ms\n\nFictional repeated posting pattern for an authored software control.\n\nb · b-0 (provided)\n\nUTC 2026-01-01T00:00:01.000Z; original 2026-01-01T00:00:01.000Z; resolution 1 ms\n\nFictional repeated posting pattern for an authored software control.\n\nContent Jaccard 1.000 · URL overlap 1.000 · hashtag overlap 0.000 · gap 1.000 s · semantic unavailable (diagnostic only)\n\nShared URLs: https://example.org/public-bulletin · hashtags: none\n\nepisode:f903ad8f0c4f408be0e68d49 · 2026-01-01T01:06:40.000Z — 2026-01-01T01:06:41.000Z\nepisode:6cf5143596170741fb789336 · 2026-01-01T02:13:20.000Z — 2026-01-01T02:13:21.000Z\nACCOUNT RELATIONSHIPS · EDGES SHOW MEASURED ASSOCIATIONS\nobserved post association\n@a\n@b\n@c\n@d\nAll\nCommunity 1\nDrag nodes · click to inspect · grey = unlinked accounts\n\nGraph view: 4 of 4 accounts, 6 of 6 relationships. Rendering is capped at 300 nodes / 2,000 edges; analysis records remain intact.\n\nInspect any account\nChoose account\n@a · a\n@b · b\n@c · c\n@d · d\nDETECTED COMMUNITIES\nCommunity 1\n88% association\n4 accounts · 12 posts · 133.38333333333333 min span\n\"Fictional repeated posting pattern for an authored software control.\"\nObserved associations only; no maliciousness inference\nexample.org\nHow groups are scored\nHOW FAST IT SPREAD (POSTS EVERY 5 MINUTES)\n2026-01-01T00:00:00.000Z\n2026-01-01T01:05:00.000Z\n2026-01-01T02:10:00.000Z\n0\n1\n2\n3\n4\nWHAT WE FOUND — AND INNOCENT EXPLANATIONS\n6 traceable associations; 18 episodes; 6 pairs eligible for recurrence review.\nCoverage completeness is an operator declaration, not independently verified.\nSeparated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.\nSemantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family.\nOrganic viral breaking news\nLegitimate coordinated public-information or advocacy campaign\nShared URL, hashtag or ordinary headline alone never establishes suspicious coordination\nRepeated official schedules, news syndication and organizational announcements\nVERITAS AI / Digital trust. Evidence first.\nDecision support only · Human review required"
+    },
+    {
+      "name": "network_no_match",
+      "kind": "campaign",
+      "httpStatus": 200,
+      "raw": {
+        "associations": 0,
+        "episodes": 0,
+        "eligible": 0
+      },
+      "api": {
+        "datasetName": "authored-diagnostic.json",
+        "totalPosts": 4,
+        "totalAccounts": 4,
+        "overallCoordinationIndex": null,
+        "classification": "Insufficient evidence",
+        "methodology": "Episode policy episodes_v1; same lexical association and DBSCAN thresholds as baseline. Observable patterns only; no maliciousness or factual verdict.",
+        "candidatePairs": 6,
+        "truncated": false,
+        "clusters": [],
+        "nodes": [
+          {
+            "id": "a",
+            "accountHandle": "@a",
+            "displayName": "a",
+            "avatarSeed": "a",
+            "accountAgeDays": -1,
+            "followerCount": -1,
+            "timestamp": "2026-01-01T00:00:00.000Z",
+            "content": "Fictional rainfall forecast",
+            "urls": [
+              "https://example.org/public-bulletin"
+            ],
+            "hashtags": [],
+            "clusterId": 0,
+            "botLikelihoodScore": null,
+            "amplificationWeight": 6,
+            "language": "English",
+            "suspicious": false,
+            "posts": [
+              {
+                "id": "a",
+                "timestamp": "2026-01-01T00:00:00.000Z",
+                "content": "Fictional rainfall forecast"
+              }
+            ],
+            "postingStats": {
+              "totalPosts": 1,
+              "peakPostsPerMinute": 1,
+              "countZScore": 0
+            }
+          },
+          {
+            "id": "b",
+            "accountHandle": "@b",
+            "displayName": "b",
+            "avatarSeed": "b",
+            "accountAgeDays": -1,
+            "followerCount": -1,
+            "timestamp": "2026-01-01T00:00:01.000Z",
+            "content": "Fictional chess tournament",
+            "urls": [
+              "https://example.org/public-bulletin"
+            ],
+            "hashtags": [],
+            "clusterId": 0,
+            "botLikelihoodScore": null,
+            "amplificationWeight": 6,
+            "language": "English",
+            "suspicious": false,
+            "posts": [
+              {
+                "id": "b",
+                "timestamp": "2026-01-01T00:00:01.000Z",
+                "content": "Fictional chess tournament"
+              }
+            ],
+            "postingStats": {
+              "totalPosts": 1,
+              "peakPostsPerMinute": 1,
+              "countZScore": 0
+            }
+          },
+          {
+            "id": "c",
+            "accountHandle": "@c",
+            "displayName": "c",
+            "avatarSeed": "c",
+            "accountAgeDays": -1,
+            "followerCount": -1,
+            "timestamp": "2026-01-01T00:00:02.000Z",
+            "content": "Fictional school calendar",
+            "urls": [
+              "https://example.org/public-bulletin"
+            ],
+            "hashtags": [],
+            "clusterId": 0,
+            "botLikelihoodScore": null,
+            "amplificationWeight": 6,
+            "language": "English",
+            "suspicious": false,
+            "posts": [
+              {
+                "id": "c",
+                "timestamp": "2026-01-01T00:00:02.000Z",
+                "content": "Fictional school calendar"
+              }
+            ],
+            "postingStats": {
+              "totalPosts": 1,
+              "peakPostsPerMinute": 1,
+              "countZScore": 0
+            }
+          },
+          {
+            "id": "d",
+            "accountHandle": "@d",
+            "displayName": "d",
+            "avatarSeed": "d",
+            "accountAgeDays": -1,
+            "followerCount": -1,
+            "timestamp": "2026-01-01T00:00:03.000Z",
+            "content": "Fictional art exhibition",
+            "urls": [
+              "https://example.org/public-bulletin"
+            ],
+            "hashtags": [],
+            "clusterId": 0,
+            "botLikelihoodScore": null,
+            "amplificationWeight": 6,
+            "language": "English",
+            "suspicious": false,
+            "posts": [
+              {
+                "id": "d",
+                "timestamp": "2026-01-01T00:00:03.000Z",
+                "content": "Fictional art exhibition"
+              }
+            ],
+            "postingStats": {
+              "totalPosts": 1,
+              "peakPostsPerMinute": 1,
+              "countZScore": 0
+            }
+          }
+        ],
+        "edges": [],
+        "burstTimestamps": [
+          {
+            "time": "2026-01-01T00:00:00.000Z",
+            "count": 4,
+            "clusterId": 0
+          }
+        ],
+        "tacticalSummary": [
+          "0 traceable associations; 0 episodes; 0 pairs eligible for recurrence review.",
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "alternativeExplanations": [
+          "Organic viral breaking news",
+          "Legitimate coordinated public-information or advocacy campaign",
+          "Shared URL, hashtag or ordinary headline alone never establishes suspicious coordination",
+          "Repeated official schedules, news syndication and organizational announcements"
+        ],
+        "timestamp": "2026-11-16T10:09:10.834Z",
+        "suspiciousPostCount": 0,
+        "languageBreakdown": [
+          {
+            "language": "English",
+            "count": 4
+          }
+        ],
+        "engine": "graph_heuristics",
+        "isSimulated": false,
+        "algorithm": "episodes_v1",
+        "episodeEvidence": {
+          "baselineTelemetry": {
+            "candidateGenerationMs": 0.08859999999998536,
+            "similarityComparisonMs": 0.14119999999996935,
+            "clusterConstructionMs": 0.12669999999997117,
+            "evaluatedPairs": 6,
+            "candidatePairs": 6
+          },
+          "policy": {
+            "id": "episodes_v1",
+            "spanSeconds": 300,
+            "separationSeconds": 1800,
+            "minSeparatedEpisodes": 3,
+            "maxPairs": 5000,
+            "maxWitnesses": 20000,
+            "maxFamiliesPerPair": 8
+          },
+          "observation": "NO_ASSOCIATION",
+          "posts": [
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "a",
+                  "originalTimestamp": "2026-01-01T00:00:00.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:d01c7a7a242b05707d0cb4bc",
+              "accountId": "a",
+              "postId": "a",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T00:00:00.000Z",
+              "originalTimestamp": "2026-01-01T00:00:00.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T00:00:00.000Z",
+              "content": "Fictional rainfall forecast",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                0
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "b",
+                  "originalTimestamp": "2026-01-01T00:00:01.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:da22f8a4a08bf9e75af7e364",
+              "accountId": "b",
+              "postId": "b",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T00:00:01.000Z",
+              "originalTimestamp": "2026-01-01T00:00:01.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T00:00:01.000Z",
+              "content": "Fictional chess tournament",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                1
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "c",
+                  "originalTimestamp": "2026-01-01T00:00:02.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:bfade857e6f1691733ebeff3",
+              "accountId": "c",
+              "postId": "c",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T00:00:02.000Z",
+              "originalTimestamp": "2026-01-01T00:00:02.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T00:00:02.000Z",
+              "content": "Fictional school calendar",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                2
+              ]
+            },
+            {
+              "sourceMetadata": [
+                {
+                  "postId": "d",
+                  "originalTimestamp": "2026-01-01T00:00:03.000Z",
+                  "declaredTimestampPrecision": null
+                }
+              ],
+              "reference": "input:ab020600d01bd7ea24d7d17c",
+              "accountId": "d",
+              "postId": "d",
+              "idKind": "provided",
+              "timestamp": "2026-01-01T00:00:03.000Z",
+              "originalTimestamp": "2026-01-01T00:00:03.000Z",
+              "resolutionMs": 1,
+              "latestPossibleTimestamp": "2026-01-01T00:00:03.000Z",
+              "content": "Fictional art exhibition",
+              "urls": [
+                "https://example.org/public-bulletin"
+              ],
+              "hashtags": [],
+              "inputRows": [
+                3
+              ]
+            }
+          ],
+          "witnesses": [],
+          "episodes": [],
+          "associations": [],
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true,
+          "duplicatesRemoved": 0,
+          "omittedWitnesses": 0,
+          "omittedAssociations": 0,
+          "warnings": [
+            "Coverage completeness is an operator declaration, not independently verified.",
+            "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+            "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+          ],
+          "timing": {
+            "preparationMs": 12.472000000000037,
+            "baselineMs": 3.6090000000000373,
+            "episodesMs": 0.0027000000000043656,
+            "graphMs": 0.060100000000034015,
+            "totalMs": 16.33000000000004
+          },
+          "memory": {
+            "rssBeforeBytes": 71520256,
+            "rssAfterBytes": 71536640
+          }
+        },
+        "embeddingCompatibility": {
+          "status": "unavailable",
+          "format": "generic",
+          "modelId": "Not selected",
+          "version": "Unspecified",
+          "usedForAdmissions": false,
+          "detail": "Embedding evidence unavailable; lexical/Jaccard candidate admission remains active."
+        },
+        "receiptOwner": "local-analyst",
+        "receiptExpires": 1794910150847,
+        "receipt": "44c94c5e200355550c05ea4c393a4ccf3b3096f21b3c6b72300b054364689627"
+      },
+      "storedIdentical": true,
+      "reportIdentical": true,
+      "displayedText": "LIVE ANALYSIS MODE\n/\nActual inputs only. Unavailable models never produce artificial scores.\nSwitch to demonstration\nActive investigation\nCreate on save\nSUR-2026-6930 · Media analysis: authored-diagnostic\nNetwork intelligence\n\nMap evidence-based relationships across actual posts. Multi-signal density clustering identifies associations, not malicious intent. Organic news sharing and legitimate coordination remain alternative explanations.\n\n1\nUpload a CSV or JSON file of posts — or try our sample\n2\nSee the groups on the map\n3\nClick any account for details\nYour file needs columns like: account_id, username, content, timestamp, shared_url, hashtags, language.\nUpload posts (CSV / JSON)\nTry with sample posts\nDownload sample file\nSaved to SUR-2026-6930\nClustering configuration\nauthored-diagnostic.json\nPATTERN ANALYSIS (COMPUTED)\nInsufficient evidence\n\nEpisode policy episodes_v1; same lexical association and DBSCAN thresholds as baseline. Observable patterns only; no maliciousness or factual verdict.\n\nWhat to do: A shared URL, headline or hashtag alone does not imply malicious coordination. Review recurring independent signals and source context.\n\nCANDIDATE PAIRS\n6\nIndexed multi-signal candidates\nACCOUNTS\n4\nPOSTS\n4\nRECURRENCE REVIEW PAIRS\n0\nGROUPS FOUND\n0\nCampaign episodes and post evidence\nDownload campaign evidence JSON\n\nNO_ASSOCIATION · 0 bounded pair episodes · 0 pairs eligible for recurrence review.\n\nDissemination observations do not determine media authenticity, claim truth, malicious intent or common account control.\n\nCoverage completeness is an operator declaration, not independently verified.\nSeparated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.\nSemantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family.\n\nDuplicates removed: 0 · omitted witnesses: 0 · omitted associations: 0. Coverage: Explicit authored software control observation window; declared complete.\n\nSemantic evidence: unavailable · generic. Embedding evidence unavailable; lexical/Jaccard candidate admission remains active.\n\nInspect association\nNo observed associations\nACCOUNT RELATIONSHIPS · EDGES SHOW MEASURED ASSOCIATIONS\nobserved post association\n@a\n@b\n@c\n@d\nAll\nDrag nodes · click to inspect · grey = unlinked accounts\n\nGraph view: 4 of 4 accounts, 0 of 0 relationships. Rendering is capped at 300 nodes / 2,000 edges; analysis records remain intact.\n\nInspect any account\nChoose account\n@a · a\n@b · b\n@c · c\n@d · d\nDETECTED COMMUNITIES\nNo clusters met the thresholds.\nHOW FAST IT SPREAD (POSTS EVERY 5 MINUTES)\n2026-01-01T00:00:00.000Z\n0\n1\n2\n3\n4\nWHAT WE FOUND — AND INNOCENT EXPLANATIONS\n0 traceable associations; 0 episodes; 0 pairs eligible for recurrence review.\nCoverage completeness is an operator declaration, not independently verified.\nSeparated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.\nSemantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family.\nOrganic viral breaking news\nLegitimate coordinated public-information or advocacy campaign\nShared URL, hashtag or ordinary headline alone never establishes suspicious coordination\nRepeated official schedules, news syndication and organizational announcements\nVERITAS AI / Digital trust. Evidence first.\nDecision support only · Human review required"
+    },
+    {
+      "name": "media_service_failure",
+      "kind": "media",
+      "httpStatus": 200,
+      "api": {
+        "modality": "image",
+        "fileName": "authored-diagnostic.png",
+        "authenticity": "inconclusive",
+        "confidenceScore": null,
+        "aiGeneratedProbability": null,
+        "headlineSummary": "Classifier unavailable — measured signals only",
+        "detailedFindings": [
+          "ELA 16×16 block residual ratio: 0; recompression/editing indicator only.",
+          "EXIF marker absent; neither proves authenticity."
+        ],
+        "engine": "heuristic",
+        "engineNote": "Dedicated image classifier unavailable. No replacement probability or Gemini guess was generated.",
+        "riskLevel": "Informational",
+        "measurements": {
+          "analysisInput": "original file bytes",
+          "width": 64,
+          "height": 64,
+          "format": "image/png",
+          "fileSizeKB": 0,
+          "elaMean": 0,
+          "elaScore": 0,
+          "elaBlockRatio": 0,
+          "hasExif": false,
+          "c2paManifest": false,
+          "provenanceAI": false,
+          "sourceSha256": "ebee394e41386893e365bab36916668522c516e325de348f1a7a593998e75687"
+        },
+        "aiGeneration": {
+          "verdict": "inconclusive",
+          "probability": null,
+          "confidence": null,
+          "indicators": [],
+          "counterIndicators": [],
+          "rationale": "Dedicated image classifier unavailable. No replacement probability or Gemini guess was generated."
+        },
+        "manipulation": {
+          "verdict": "inconclusive",
+          "probability": null,
+          "confidence": null,
+          "indicators": [],
+          "counterIndicators": [],
+          "rationale": "Only a trained manipulation classifier can populate this probability."
+        },
+        "misleadingContext": {
+          "status": "not_assessed",
+          "reason": "Requires source, date and claim verification; image appearance alone is insufficient."
+        },
+        "inference": {
+          "status": "unavailable",
+          "modelId": "Not selected",
+          "version": "Unspecified",
+          "calibration": "Not applicable",
+          "trainingData": "Not documented by deployment",
+          "license": "Deployment must verify model license",
+          "limitations": "No deployed model; cross-domain accuracy is unverified"
+        },
+        "audioSegments": [],
+        "provenance": {
+          "c2paManifest": false,
+          "declaresAIGenerated": false,
+          "generatorHints": [],
+          "verified": false
+        },
+        "compressionArtifacts": {
+          "elaScore": 0,
+          "doubleCompressionFound": false,
+          "noiseInconsistencyMapAvailable": true,
+          "notes": "Client-computed ELA; not a detector probability."
+        },
+        "modelsUsed": [],
+        "limitations": [
+          "AI generation, manipulation, misleading context and factual accuracy are different questions.",
+          "Browser measurements are client-supplied screening evidence, not trusted server forensic attestation.",
+          "ELA, ordinary scene differences, codec bandwidth and missing metadata do not prove deepfaking.",
+          "Browser C2PA byte-pattern hints are unverified; consult the separate server provenance result when available.",
+          "No deployed model; cross-domain accuracy is unverified",
+          "Dedicated image classifier unavailable. No replacement probability or Gemini guess was generated.",
+          "Server provenance and image diagnostics unavailable; no metadata or signal verdict inferred."
+        ],
+        "alternativeHypotheses": [
+          "Legitimate editing or scene changes",
+          "Platform recompression or recording artifacts"
+        ],
+        "analyzedAt": "2026-11-16T10:09:12.799Z",
+        "isSimulated": false,
+        "receiptOwner": "local-analyst",
+        "receiptExpires": 1794910152829,
+        "receipt": "63fc9f83d899ad35149d4e1910ed4e1d8f5064c9c72ffd5f0b55c49c138cfbc5"
+      },
+      "storedIdentical": true,
+      "reportIdentical": true,
+      "displayedText": "LIVE ANALYSIS MODE\n/\nActual inputs only. Unavailable models never produce artificial scores.\nSwitch to demonstration\nActive investigation\nCreate on save\nSUR-2026-7054 · Media analysis: authored-diagnostic\nCheck a photo, video or audio\n\nFind out whether a picture, video or voice message was made by AI or edited. Your file is examined in your browser and, when available, by Google’s Gemini AI.\n\n1\nChoose a file\n2\nPress “Check this file”\n3\nRead the result on the right\n1 · CHOOSE A FILE\nauthored-diagnostic.png\nimage · 0.00 MB — click to choose a different file\nCheck this file\nLOOK CLOSER (OPTIONAL)\nOriginal\nEdit heatmap\nCompare\n\nThe edit heatmap shows how each part of the picture reacts to being re-saved. A bright, isolated patch can mean that area was pasted in or edited; an even texture is normal. It cannot tell whether an image was made by AI.\n\nELA = |original − JPEG(q=0.90) re-encode| × 15\n\n2 · RESULT\nSaved to SUR-2026-7054\nSIGNALS / EVIDENCE PIPELINE\nRisk\nINFORMATIONAL\nAuthenticity remains undetermined\n\nClassifier unavailable — measured signals only\n\nWhat to do: AI-generated media is not necessarily misinformation. Investigate the claim and distribution separately.\n\nDedicated classifier\nUNAVAILABLE\n\nNot selected · Unspecified\n\nNot applicable\n\nTraining data: Not documented by deployment · License: Deployment must verify model license\n\nMisleading context: not assessed. Requires source, date and claim verification; image appearance alone is insufficient.\nWas it made by AI?\nCan't tell\nChance: n/a\nConfidence: not validated\nDedicated image classifier unavailable. No replacement probability or Gemini guess was generated.\nEvidence of digital manipulation?\nCan't tell\nChance: n/a\nConfidence: not validated\nOnly a trained manipulation classifier can populate this probability.\nCould there be an innocent explanation?\nLegitimate editing or scene changes\nPlatform recompression or recording artifacts\nTechnical details (for experts)\nVERITAS AI / Digital trust. Evidence first.\nDecision support only · Human review required"
+    },
+    {
+      "name": "claim_unconfigured",
+      "kind": "claim",
+      "httpStatus": 200,
+      "api": {
+        "originalInput": "The fictional Amber Museum has free entry.",
+        "targetClaim": "The fictional Amber Museum has free entry.",
+        "normalizedClaim": "The fictional Amber Museum has free entry.",
+        "extractedClaims": [
+          "The fictional Amber Museum has free entry."
+        ],
+        "detectedLanguage": "English",
+        "claimAnalysis": {
+          "normalized": "The fictional Amber Museum has free entry.",
+          "language": "English",
+          "languages": [
+            "English"
+          ],
+          "assertions": [
+            "The fictional Amber Museum has free entry."
+          ],
+          "extraction": "Sentence boundaries only; imperatives, questions and compound assertions require analyst selection.",
+          "truncated": false,
+          "entityCandidates": [
+            "The",
+            "Amber Museum"
+          ],
+          "entityMethod": "Capitalized Latin spans and four-digit numbers only; Hindi/Telugu NER unavailable.",
+          "negationMarkers": [],
+          "ambiguities": [
+            "Dates, time zones, locations, entity identity and negation scope require source-context review.",
+            "Devanagari is not uniquely Hindi; Latin script may be romanized Hindi/Telugu. Script identification is approximate."
+          ]
+        },
+        "verificationStatus": "UNAVAILABLE",
+        "verdict": "Insufficient Evidence",
+        "confidenceScore": null,
+        "verdictRationale": "Evidence retrieval is unavailable or unconfigured. The claim remains unresolved.",
+        "sources": [],
+        "supportingCount": 0,
+        "contradictingCount": 0,
+        "neutralCount": 0,
+        "supportingEvidence": [],
+        "contradictingEvidence": [],
+        "missingEvidence": [
+          "No claim-specific evidence passages retrieved."
+        ],
+        "limitations": [
+          "No operator-approved corpus configured; Google Fact Check Tools key not configured; no live retrieval attempted",
+          "Semantic retrieval: unavailable; BM25 lexical fallback",
+          "Dates, time zones, locations, entity identity and negation scope require source-context review.",
+          "Devanagari is not uniquely Hindi; Latin script may be romanized Hindi/Telugu. Script identification is approximate.",
+          "Sentence boundaries only; imperatives, questions and compound assertions require analyst selection.",
+          "Capitalized Latin spans and four-digit numbers only; Hindi/Telugu NER unavailable.",
+          "Relevance is not source credibility or entailment. No numerical truth probability is estimated.",
+          "No automatic translation or trained entailment/NER model ran. Google passages are claim-review metadata, not fetched article bodies."
+        ],
+        "timestamp": "2026-11-16T10:09:14.971Z",
+        "engine": "heuristic",
+        "verificationMode": "rule_based",
+        "assessment": "unverified",
+        "isSimulated": false,
+        "evidenceSufficiency": "insufficient",
+        "retrieval": {
+          "lexical": "BM25",
+          "semantic": "unavailable; BM25 lexical fallback",
+          "source": "No operator-approved corpus configured; Google Fact Check Tools key not configured; no live retrieval attempted"
+        },
+        "retrievalDetails": {
+          "candidateCount": 0,
+          "omittedCount": 0,
+          "embeddingDiagnostics": null,
+          "providers": [
+            {
+              "provider": "operator_corpus",
+              "status": "unconfigured",
+              "retrieved": 0,
+              "detail": "No operator-approved corpus configured"
+            },
+            {
+              "provider": "google_fact_check",
+              "status": "unconfigured",
+              "retrieved": 0,
+              "detail": "Google Fact Check Tools key not configured; no live retrieval attempted"
+            }
+          ],
+          "duplicatesRemoved": 0,
+          "semanticMeasured": false,
+          "elapsedMs": 3.0125999999945634,
+          "processRssBytes": 260440064,
+          "queries": [
+            "The fictional Amber Museum has free entry."
+          ]
+        },
+        "receiptOwner": "local-analyst",
+        "receiptExpires": 1794910154971,
+        "receipt": "61dcddbbaba7aca6c5ab6b46cadaadbe6f972e44cb452a48fd179814282854ee"
+      },
+      "storedIdentical": true,
+      "reportIdentical": true,
+      "displayedText": "LIVE ANALYSIS MODE\n/\nActual inputs only. Unavailable models never produce artificial scores.\nSwitch to demonstration\nActive investigation\nCreate on save\nSUR-2026-7054 · Media analysis: authored-diagnostic\nFact-check a claim\n\nEnter a factual assertion in English, हिन्दी or తెలుగు. Review retrieved evidence and its limits; unavailable sources leave the claim unresolved.\n\n1\nPaste or type the claim\n2\nPress “Check this claim”\n3\nRead the result\n1 · WHAT DO YOU WANT TO CHECK?\n42 characters\nCheck this claim\nNO CLAIM HANDY? TRY ONE OF THESE\nEnglishBREAKING: The dam near Hyderabad has collapsed. Evacuate immediately and share this with everyone!Hindiहैदराबाद के पास बांध टूट गया है, तुरंत घर खाली करें और सबको भेजेंTeluguహైదరాబాద్ దగ్గర డ్యామ్ కూలిపోయింది, వెంటనే ఖాళీ చేయండిEnglishThe Charminar in Hyderabad was built in 1591.\n2 · RESULT\nSaved to SUR-2026-7054\nBASIC SCREENING ONLY\nSIGNALS / EVIDENCE PIPELINE\nchecked Nov 16, 2026, 3:39 PM\nWe couldn't verify this claim\n\nOnly basic warning-sign screening was done, so the claim could not be confirmed either way.\n\nWhat to do: Check a trusted news or official source.\n\nClaim status: UNAVAILABLE\n\nThis claim assessment is separate from media provenance, manipulation observations and dissemination indicators.\n\nNormalized claim: The fictional Amber Museum has free entry.\n\nMissing evidence / review needs\nNo claim-specific evidence passages retrieved.\nEvidence sufficiency: insufficient\n\nRetrieval: BM25 · Semantic: unavailable; BM25 lexical fallback\n\nWhy\n\nEvidence retrieval is unavailable or unconfigured. The claim remains unresolved.\n\nSources (0)\nNo news or official sources were checked for this result.\nEvidence that supports it\nNone found\nEvidence against it\nNone found\nTechnical details (for experts)\nVERITAS AI / Digital trust. Evidence first.\nDecision support only · Human review required"
+    }
+  ]
+}

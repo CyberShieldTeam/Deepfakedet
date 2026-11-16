@@ -5,6 +5,18 @@
 
 export type ModalityType = "image" | "video" | "audio" | "text_claim" | "social_dataset";
 
+/** Processing/evidence state, independent of authenticity, truth or maliciousness verdicts. */
+export type AnalysisState='SUFFICIENT_EVIDENCE'|'INSUFFICIENT_EVIDENCE'|'NO_RELEVANT_SIGNALS'|'ANALYSIS_UNAVAILABLE'|'ANALYSIS_FAILED'|'PARTIAL_ANALYSIS';
+export interface AnalysisStage {
+  stage:string;status:'available'|'unconfigured'|'unavailable'|'failed'|'skipped';count?:number;errorCategory?:string;
+}
+export interface AnalysisDiagnostics {
+  id:string;engine:'media'|'claim'|'network';state:AnalysisState;
+  inputValidation:'valid'|'invalid';completeness:'complete'|'partial'|'not_performed'|'failed';
+  evidenceCount:number;counts:Record<string,number>;stages:AnalysisStage[];
+  filteringReasons:string[];errorCategory:string|null;elapsedMs:number|null;summary:string;
+}
+
 export type RiskLevel = "Critical" | "High" | "Medium" | "Low" | "Informational";
 
 export type VerificationVerdict =
@@ -52,6 +64,7 @@ export interface AudioSpectralAnalysis {
 }
 
 export interface ForensicAnalysisResult {
+  analysis?:AnalysisDiagnostics;
   modality: "image" | "video" | "audio";
   authenticity: MediaAuthenticity;
   confidenceScore: number | null; // null when not independently estimated
@@ -289,6 +302,7 @@ export type ClaimAssessment =
   | "unverified";
 
 export interface ClaimVerificationResult {
+  analysis?:AnalysisDiagnostics;
   normalizedClaim?: string;
   verificationStatus?:
     | "SUPPORTED"
@@ -408,6 +422,7 @@ export interface CampaignCluster {
 }
 
 export interface CampaignAnalysisResult {
+  analysis?:AnalysisDiagnostics;
   algorithm?:'density_baseline_v1'|'episodes_v1';
   episodeEvidence?:import('../server/campaignEpisodes').CampaignEpisodeEvidence;
   embeddingCompatibility?:{status:'available'|'unavailable';format:string;modelId:string;version:string;usedForAdmissions:false;detail:string};

@@ -146,7 +146,7 @@ export const Empty: React.FC<{
 );
 
 export const ErrorBox: React.FC<{ message: string }> = ({ message }) => (
-  <div className="flex items-start gap-2 rounded-lg border border-rose-500/40 bg-rose-500/10 p-3 text-xs text-rose-200">
+  <div role="alert" className="flex items-start gap-2 rounded-lg border border-rose-500/40 bg-rose-500/10 p-3 text-xs text-rose-200">
     <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
     {message}
   </div>
