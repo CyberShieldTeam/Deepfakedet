@@ -1,0 +1,33 @@
+{
+  "scope": "authored_resource_control_not_accuracy",
+  "name": "scheduled",
+  "count": 1000,
+  "algorithm": "episodes",
+  "inputHash": "3351eb9d84ae353e0ed97cb6c20395218913dfd0e9313201afcc981934953056",
+  "status": "completed",
+  "wallMs": 712.7523000000001,
+  "stages": {
+    "preparationMs": 31.607399999999984,
+    "baselineMs": 498.5158,
+    "episodesMs": 172.86329999999998,
+    "graphMs": 4.916500000000042,
+    "totalMs": 711.1773999999998
+  },
+  "baselineTelemetry": {
+    "candidateGenerationMs": 96.47220000000004,
+    "similarityComparisonMs": 244.46040000000005,
+    "clusterConstructionMs": 19.78239999999994,
+    "evaluatedPairs": 70280,
+    "candidatePairs": 70280
+  },
+  "candidatePairs": 70280,
+  "truncated": true,
+  "truncatedPairCount": null,
+  "truncatedPairCountReason": "Posting-list eviction and candidate caps prevent enumeration of all omitted raw pairs.",
+  "omittedWitnesses": 61167,
+  "omittedAssociations": 39903,
+  "episodes": 9113,
+  "associations": 5000,
+  "stabilityCheck": "reversed_input",
+  "stable": true
+}

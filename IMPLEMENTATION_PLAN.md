@@ -1,5 +1,15 @@
 # VERITAS AI implementation plan
 
+## Current Engine 3 gate — 2026-11-16
+
+Episode implementation and bounded worker reliability are implemented, with independently
+gated evaluation tooling and authored controls. Scientific validation remains open: no
+admitted independent campaign corpus or maliciousness metrics. Next task is authorized,
+task-matched IO/control or documentary coordination data and blind, separate association/
+episode/coordination/intent annotations. Freeze grouped splits and sampling/CI protocol
+before evaluation or threshold proposals. See `docs/ENGINE3_DECISION_RECORD.md` and
+`docs/ENGINE3_EVALUATION.md`; historical audit below is retained as history.
+
 Audit date: 2026-11-14. Baseline: `main` at `fa888241d838de9ce835d2277183add633f28d29`. Work branch: `codex/phase1-audit`.
 
 ## Current system

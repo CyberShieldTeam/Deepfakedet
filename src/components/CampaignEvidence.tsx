@@ -139,6 +139,7 @@ export function CampaignEvidence({ result }: { result: CampaignAnalysisResult })
                             {p.resolutionMs} ms
                           </p>
                           <p>{p.content}</p>
+                          {(p.sourceMetadata?.length || 0)>1 && <p className="text-amber-200">Multiple source declarations retained; widest uncertainty used. Inspect sourceMetadata in the evidence JSON.</p>}
                         </div>
                       ))}
                       <p>

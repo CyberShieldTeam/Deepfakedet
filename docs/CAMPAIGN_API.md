@@ -81,3 +81,23 @@ attach it, and modified results are rejected. `GET /api/reports/:id` preserves t
 retained ledger in authenticated JSON. HTML rendering and the evidence panel have explicit
 display caps; the campaign JSON download contains complete retained records. Analysis
 caps and source missingness are separate and never hidden by display limits.
+
+## Reliability update (2026-11-16)
+
+Both campaign algorithms now run in a private CPU subprocess, one active job per Express
+process, with no queue and a 20-second worker deadline. Concurrent requests return 429
+`CAMPAIGN_BUSY`; timeout returns 504; unavailable/failed/protocol-limited workers return
+503. These errors have `processingComplete:false` and no result/receipt. Client disconnect
+cancels the owned worker. Input validation remains 400; the private protocol also has a
+32 MiB request cap (413) and 64 MiB result cap. Worker heap is bounded at 768 MiB; this is
+not an OS RSS reservation. Optional semantic dispatch has separate existing budgets and
+is outside the CPU deadline. No thresholds/input-count limits changed.
+
+Post records optionally include `sourceMetadata`: all unique supplied post-ID/original-time/
+declared-precision variants retained during deduplication. `resolutionMs` and
+`latestPossibleTimestamp` use the widest uncertainty, independent of import order.
+Representative legacy fields remain for compatibility; inspect the full metadata array
+when declarations conflict. Evidence optionally adds `baselineTelemetry` with candidate,
+similarity and DBSCAN milliseconds plus visited candidate-loop counts. These fields are
+diagnostics, not additional detection signals. See `ENGINE3_AUDIT.md` and
+`ENGINE3_EVALUATION.md` for admission/validation limits.

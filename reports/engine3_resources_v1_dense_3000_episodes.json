@@ -1,0 +1,33 @@
+{
+  "scope": "authored_resource_control_not_accuracy",
+  "name": "dense",
+  "count": 3000,
+  "algorithm": "episodes",
+  "inputHash": "473bd44495c6859c3a32ef945d62cc4bef7b413c27f283eea6e9d5eb7b23231f",
+  "status": "completed",
+  "wallMs": 1738.8583999999998,
+  "stages": {
+    "preparationMs": 78.37189999999998,
+    "baselineMs": 1569.3554000000001,
+    "episodesMs": 74.53980000000001,
+    "graphMs": 7.505700000000161,
+    "totalMs": 1737.6042000000002
+  },
+  "baselineTelemetry": {
+    "candidateGenerationMs": 238.48450000000003,
+    "similarityComparisonMs": 786.5048,
+    "clusterConstructionMs": 52.52240000000006,
+    "evaluatedPairs": 200000,
+    "candidatePairs": 200000
+  },
+  "candidatePairs": 200000,
+  "truncated": true,
+  "truncatedPairCount": null,
+  "truncatedPairCountReason": "Posting-list eviction and candidate caps prevent enumeration of all omitted raw pairs.",
+  "omittedWitnesses": 195000,
+  "omittedAssociations": 195000,
+  "episodes": 5000,
+  "associations": 5000,
+  "stabilityCheck": "reversed_input",
+  "stable": true
+}

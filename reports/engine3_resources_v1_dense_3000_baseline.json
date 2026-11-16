@@ -1,0 +1,27 @@
+{
+  "scope": "authored_resource_control_not_accuracy",
+  "name": "dense",
+  "count": 3000,
+  "algorithm": "baseline",
+  "inputHash": "473bd44495c6859c3a32ef945d62cc4bef7b413c27f283eea6e9d5eb7b23231f",
+  "status": "completed",
+  "wallMs": 1358.3453,
+  "stages": null,
+  "baselineTelemetry": {
+    "candidateGenerationMs": 250.86159999999995,
+    "similarityComparisonMs": 573.6465999999999,
+    "clusterConstructionMs": 63.316899999999805,
+    "evaluatedPairs": 200000,
+    "candidatePairs": 200000
+  },
+  "candidatePairs": 200000,
+  "truncated": true,
+  "truncatedPairCount": null,
+  "truncatedPairCountReason": "Posting-list eviction and candidate caps prevent enumeration of all omitted raw pairs.",
+  "omittedWitnesses": null,
+  "omittedAssociations": null,
+  "episodes": null,
+  "associations": 200000,
+  "stabilityCheck": "same_input_repeat",
+  "stable": true
+}

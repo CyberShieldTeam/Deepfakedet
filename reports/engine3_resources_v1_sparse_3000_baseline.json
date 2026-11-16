@@ -1,0 +1,27 @@
+{
+  "scope": "authored_resource_control_not_accuracy",
+  "name": "sparse",
+  "count": 3000,
+  "algorithm": "baseline",
+  "inputHash": "a40cd61a02b20b89ddcd21933a4366735f2dc072c74f40febf957bb1433b0328",
+  "status": "completed",
+  "wallMs": 86.78949999999998,
+  "stages": null,
+  "baselineTelemetry": {
+    "candidateGenerationMs": 28.376800000000003,
+    "similarityComparisonMs": 0.011200000000030741,
+    "clusterConstructionMs": 3.279899999999998,
+    "evaluatedPairs": 0,
+    "candidatePairs": 0
+  },
+  "candidatePairs": 0,
+  "truncated": false,
+  "truncatedPairCount": null,
+  "truncatedPairCountReason": "Posting-list eviction and candidate caps prevent enumeration of all omitted raw pairs.",
+  "omittedWitnesses": null,
+  "omittedAssociations": null,
+  "episodes": null,
+  "associations": 0,
+  "stabilityCheck": "same_input_repeat",
+  "stable": true
+}

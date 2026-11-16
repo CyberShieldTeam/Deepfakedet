@@ -1,0 +1,115 @@
+{
+  "scope": "authored_diagnostic_pairs_not_ground_truth",
+  "hybridFormula": "0.5 * lexicalJaccard + 0.5 * semanticCosine; descriptive only, no admission threshold",
+  "pairs": [
+    {
+      "category": "English paraphrase",
+      "left": "Fictional museum offers free admission today.",
+      "right": "There is no entry charge at the fictional museum today.",
+      "lexicalJaccard": 0.3,
+      "semanticCosine": 0.9290764672012665,
+      "hybridDiagnostic": 0.6145382336006332
+    },
+    {
+      "category": "Hindi paraphrase",
+      "left": "काल्पनिक संग्रहालय में आज प्रवेश निःशुल्क है।",
+      "right": "आज काल्पनिक संग्रहालय देखने का कोई शुल्क नहीं है।",
+      "lexicalJaccard": 0.2222222222222222,
+      "semanticCosine": 0.9428640945441261,
+      "hybridDiagnostic": 0.5825431583831742
+    },
+    {
+      "category": "Telugu paraphrase",
+      "left": "కల్పిత సంగ్రహాలయంలో ఈరోజు ప్రవేశం ఉచితం.",
+      "right": "ఈ రోజు కల్పిత సంగ్రహాలయాన్ని చూడటానికి రుసుము లేదు.",
+      "lexicalJaccard": 0.1,
+      "semanticCosine": 0.9223129760680238,
+      "hybridDiagnostic": 0.5111564880340119
+    },
+    {
+      "category": "English Hindi translation",
+      "left": "Fictional museum entry is free today.",
+      "right": "काल्पनिक संग्रहालय में आज प्रवेश निःशुल्क है।",
+      "lexicalJaccard": 0,
+      "semanticCosine": 0.9021604052480924,
+      "hybridDiagnostic": 0.4510802026240462
+    },
+    {
+      "category": "English Telugu translation",
+      "left": "Fictional museum entry is free today.",
+      "right": "కల్పిత సంగ్రహాలయంలో ఈరోజు ప్రవేశం ఉచితం.",
+      "lexicalJaccard": 0,
+      "semanticCosine": 0.8684729270960708,
+      "hybridDiagnostic": 0.4342364635480354
+    },
+    {
+      "category": "Legitimate emergency sharing",
+      "left": "Fictional flood warning: follow official evacuation routes.",
+      "right": "Fictional flood warning: follow official evacuation routes.",
+      "lexicalJaccard": 1,
+      "semanticCosine": 1.0000001817827384,
+      "hybridDiagnostic": 1.000000090891369
+    },
+    {
+      "category": "Repeated scheduled announcement",
+      "left": "Fictional official bulletin: clinic opens at nine.",
+      "right": "Fictional official bulletin: clinic opens at nine.",
+      "lexicalJaccard": 1,
+      "semanticCosine": 0.9999999257361795,
+      "hybridDiagnostic": 0.9999999628680898
+    },
+    {
+      "category": "Contradictory English context",
+      "left": "The fictional museum is open today.",
+      "right": "The fictional museum is not open today.",
+      "lexicalJaccard": 0.8333333333333334,
+      "semanticCosine": 0.9696723647542373,
+      "hybridDiagnostic": 0.9015028490437853
+    },
+    {
+      "category": "Contradictory Hindi context",
+      "left": "काल्पनिक संग्रहालय आज खुला है।",
+      "right": "काल्पनिक संग्रहालय आज खुला नहीं है।",
+      "lexicalJaccard": 0.75,
+      "semanticCosine": 0.9654541150885297,
+      "hybridDiagnostic": 0.8577270575442648
+    },
+    {
+      "category": "Contradictory Telugu context",
+      "left": "కల్పిత సంగ్రహాలయం ఈరోజు తెరిచి ఉంది.",
+      "right": "కల్పిత సంగ్రహాలయం ఈరోజు తెరిచి లేదు.",
+      "lexicalJaccard": 0.6666666666666666,
+      "semanticCosine": 0.9589202685641224,
+      "hybridDiagnostic": 0.8127934676153945
+    },
+    {
+      "category": "Unrelated same language",
+      "left": "Fictional museum entry is free today.",
+      "right": "Fictional railway maintenance begins next week.",
+      "lexicalJaccard": 0.1,
+      "semanticCosine": 0.8403263109842339,
+      "hybridDiagnostic": 0.47016315549211696
+    }
+  ],
+  "modelId": "intfloat/multilingual-e5-small",
+  "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "format": "query/query",
+  "startupSeconds": 65.21286770002916,
+  "startupStages": {
+    "resource_preflight": 0.00022879999596625566,
+    "snapshot_verification": 0.5332465000101365,
+    "torch_import": 12.565133999974933,
+    "transformers_import": 42.02481769997394,
+    "thread_setup": 0.001814599963836372,
+    "tokenizer_initialization": 2.1120272999978624,
+    "checkpoint_and_model_initialization": 6.333714800013695
+  },
+  "batchInferenceSeconds": 0.8902670999523252,
+  "dimensions": 384,
+  "precision": null,
+  "recall": null,
+  "f1": null,
+  "falsePositiveRate": null,
+  "independentCampaigns": 0,
+  "usedForAdmissions": false
+}

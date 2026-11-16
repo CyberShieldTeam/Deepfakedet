@@ -1,0 +1,10 @@
+{
+  "scope": "authored_resource_control_not_accuracy",
+  "name": "dense",
+  "count": 5000,
+  "algorithm": "episodes",
+  "inputHash": "b88cd4c3cdce68be63fc1d6a1be029b39adcd6557dc22f9204ae144c9dfbd4df",
+  "status": "rejected_input_cap",
+  "error": "Expected 2..3000 observed posts",
+  "wallMs": 0.05180000000001428
+}

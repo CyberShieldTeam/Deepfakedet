@@ -1,5 +1,6 @@
 import { normalizePosts, tokenize, jaccard, type RawPost } from "./campaign";
 import { cosine } from "./inference";
+import {performance} from 'node:perf_hooks';
 import type {
   CampaignAnalysisResult,
   CampaignCluster,
@@ -77,6 +78,7 @@ function validateRows(rows: any[]) {
 }
 const colors = ["#20c5df", "#7481f9", "#e7b451", "#d084f3", "#56c5ab"];
 export interface PairObservation {left:number;right:number;text:number;url:number;tag:number;dt:number;score:number}
+export interface CampaignTelemetry {candidateGenerationMs:number;similarityComparisonMs:number;clusterConstructionMs:number;evaluatedPairs:number;candidatePairs:number}
 export function analyzeDensityCampaign(
   datasetName: string,
   rows: any[],
@@ -84,6 +86,7 @@ export function analyzeDensityCampaign(
   config: CoordinationConfig = {},
   vectors: number[][] | null = null,
   observe?: (pair:PairObservation)=>void,
+  telemetry?: (measurement:CampaignTelemetry)=>void,
 ): CampaignAnalysisResult {
   validateRows(rows);
   const normalized = normalizePosts(rows);
@@ -125,6 +128,7 @@ export function analyzeDensityCampaign(
   const index = new Map<string, number[]>(),
     candidates = new Set<string>();
   let truncated = false;
+  const candidateStarted=performance.now();
   for (let i = 0; i < posts.length; i++) {
     const p = posts[i],
       bucket = Math.floor(Date.parse(p.timestamp) / (window * 1000));
@@ -151,6 +155,7 @@ export function analyzeDensityCampaign(
       index.set(k, list);
     }
   }
+  const candidateGenerationMs=performance.now()-candidateStarted,comparisonStarted=performance.now();
   type Relationship = {
     source: string;
     target: string;
@@ -205,6 +210,7 @@ export function analyzeDensityCampaign(
       repeated: false,
     });
   }
+  const similarityComparisonMs=performance.now()-comparisonStarted;
   const edges: NetworkEdge[] = [...relations.values()].map((r, i) => {
     // Require recurrence on BOTH accounts at multiple distinct timestamps, not one viral headline.
     const timed = (id: string) => new Set(byAccount.get(id)!.map((j) => posts[j].timestamp)).size;
@@ -218,8 +224,10 @@ export function analyzeDensityCampaign(
       description: `Token similarity ${(r.text * 100).toFixed(0)}%; URL overlap ${r.url}; hashtag Jaccard ${r.tag.toFixed(2)}; time gap ${r.dt.toFixed(0)}s; ${vectors ? `SBERT cosine ${r.semantic.toFixed(2)}` : "SBERT unavailable"}; ${r.observations} matching post pairs. ${r.repeated ? "Repeated multi-signal activity merits review." : "Single-event association; not evidence of malicious intent."}`,
     };
   });
+  const clusterStarted=performance.now();
   const ids = [...byAccount.keys()],
     labels = densityClusters(ids, edges, minSamples);
+  const clusterConstructionMs=performance.now()-clusterStarted;
   const groups = new Map<number, string[]>();
   labels.forEach((cl, id) => groups.set(cl, [...(groups.get(cl) || []), id]));
   const suspiciousAccounts = new Set<string>();
@@ -321,6 +329,7 @@ export function analyzeDensityCampaign(
   });
   const languages = new Map<string, number>();
   posts.forEach((p) => languages.set(p.language, (languages.get(p.language) || 0) + 1));
+  telemetry?.({candidateGenerationMs,similarityComparisonMs,clusterConstructionMs,evaluatedPairs:candidates.size,candidatePairs:candidates.size});
   return {
     datasetName,
     totalPosts: posts.length,

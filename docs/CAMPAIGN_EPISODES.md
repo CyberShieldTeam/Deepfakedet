@@ -1,5 +1,12 @@
 # Engine 3: traceable campaign episodes
 
+2026-11-16 update: duplicate source declarations are retained and maximum timestamp
+uncertainty is applied independent of row order. Both HTTP algorithms now execute in a
+bounded CPU subprocess; optional semantics remain diagnostic-only. No policy constants
+or association thresholds changed. Independent validation is still unavailable. See
+`ENGINE3_AUDIT.md`, `ENGINE3_EVALUATION.md` and `ENGINE3_PERFORMANCE.md` for the audit,
+rights-gated importer, authored controls, measured costs and remaining limitations.
+
 Implementation starts at `aa28502`. The previous sparse-DBSCAN method is retained as
 `analyzeDensityCampaignBaseline`; its defaults and legacy tests remain. A bounded observer
 hook exposes qualifying post pairs without changing baseline results. No model or dependency

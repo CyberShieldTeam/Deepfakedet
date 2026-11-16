@@ -6,6 +6,7 @@ import {
   densityClusters,
   type CoordinationConfig,
   type PairObservation,
+  type CampaignTelemetry,
 } from "./densityCampaign";
 import { cosine } from "./inference";
 import type { CampaignAnalysisResult, CampaignCluster, NetworkEdge } from "../src/types";
@@ -26,6 +27,8 @@ export interface CampaignCoverage {
   source: string;
 }
 export interface CampaignPostRecord {
+  /** All imported declarations survive deduplication, including contradictory precision. */
+  sourceMetadata?: {postId: string | null; originalTimestamp: string; declaredTimestampPrecision: string | null}[];
   declaredTimestampPrecision?: string;
   reference: string;
   accountId: string;
@@ -98,6 +101,7 @@ export interface CampaignEpisodeEvidence {
     totalMs: number;
   };
   memory: { rssBeforeBytes: number; rssAfterBytes: number };
+  baselineTelemetry?: CampaignTelemetry;
 }
 const digest = (text: string) => createHash("sha256").update(text).digest("hex").slice(0, 24);
 const pairKey = (a: string, b: string) => JSON.stringify([a, b].sort());
@@ -219,6 +223,7 @@ export function prepareCampaignPosts(rows: any[]) {
       }
       const reference = "input:" + digest(JSON.stringify([accountId, postId, fingerprint]));
       const record: CampaignPostRecord = {
+        sourceMetadata: [{postId, originalTimestamp: time.originalTimestamp, declaredTimestampPrecision: declared ?? null}],
         ...(declared != null ? { declaredTimestampPrecision: declared as string } : {}),
         reference,
         accountId,
@@ -255,7 +260,20 @@ export function prepareCampaignPosts(rows: any[]) {
   const unique = new Map<string, (typeof items)[number]>();
   for (const item of items) {
     const previous = unique.get(item.fingerprint);
-    if (previous) previous.record.inputRows.push(...item.record.inputRows);
+    if (previous) {
+      const record = previous.record;
+      record.inputRows.push(...item.record.inputRows);
+      record.resolutionMs = Math.max(record.resolutionMs, item.record.resolutionMs);
+      record.latestPossibleTimestamp = new Date(Date.parse(record.timestamp) + record.resolutionMs - 1).toISOString();
+      const variants = [...record.sourceMetadata!, ...item.record.sourceMetadata!];
+      record.sourceMetadata = [...new Map(variants.map(v => [JSON.stringify(v), v])).entries()]
+        .sort(([a], [b]) => a.localeCompare(b)).map(([,v]) => v);
+      // Stable representative fields; recurrence always uses the widest uncertainty.
+      record.originalTimestamp = record.sourceMetadata[0].originalTimestamp;
+      const declarations = record.sourceMetadata.map(v => v.declaredTimestampPrecision).filter((v): v is string => v !== null).sort();
+      if (declarations.length) record.declaredTimestampPrecision = declarations[0];
+      record.urls.sort(); record.hashtags.sort();
+    }
     else unique.set(item.fingerprint, item);
   }
   return {
@@ -316,6 +334,7 @@ export function analyzePreparedEpisodeCampaign(
     omittedPairs = new Set<string>();
   let omittedWitnesses = 0;
   const tick = performance.now();
+  let baselineTelemetry: CampaignTelemetry;
   // Lexical baseline admissions stay fixed. Optional embeddings are evidence-only, never an E5 verdict gate.
   const base = analyzeDensityCampaignBaseline(
     datasetName,
@@ -337,6 +356,7 @@ export function analyzePreparedEpisodeCampaign(
       pairs.add(key);
       kept.push(pair);
     },
+    measurement=>{baselineTelemetry=measurement;},
   );
   const baselineMs = performance.now() - tick,
     episodeStarted = performance.now();
@@ -555,6 +575,7 @@ export function analyzePreparedEpisodeCampaign(
   });
   const graphMs = performance.now() - graphStarted;
   const warnings = [
+    ...(records.some(p => (p.sourceMetadata?.length ?? 0)>1) ? ['Duplicate source declarations were retained; the widest timestamp uncertainty governs recurrence. Inspect sourceMetadata in the evidence export.'] : []),
     ...(!coverageComplete
       ? [
           "Observation coverage is missing, incomplete or does not span all timestamp uncertainty; gaps never prove silence.",
@@ -577,6 +598,7 @@ export function analyzePreparedEpisodeCampaign(
     "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family.",
   ];
   const evidence: CampaignEpisodeEvidence = {
+    baselineTelemetry,
     policy: EPISODE_POLICY,
     observation: truncated
       ? "INCOMPLETE_OBSERVATION"

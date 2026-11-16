@@ -1,5 +1,15 @@
 # Image and video evaluation dataset readiness
 
+## Engine 3 independent-data gate — 2026-11-16
+
+Five candidate sources reviewed; zero admitted. No download/access-rights or independent
+coordination labels are inferred from public paper availability, IO membership, rumour
+labels, or authored controls. Full candidate/rights decisions and annotation protocol:
+`docs/ENGINE3_EVALUATION.md`. The real registry `test/engine3/sources.json` is empty.
+Executable local importer/evaluator rejects unreviewed sources, hash/path/split violations
+and final holdout access. `reports/engine3_independent_verified.json` records unavailable
+metrics, separately from 14 authored controls and bounded resource/semantic experiments.
+
 ## Engine 3 episode controls — 2026-11-15
 
 Ten project-authored scenarios in `test/fixtures/campaign/episodeControls.ts` cover public

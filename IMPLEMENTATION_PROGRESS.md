@@ -1,5 +1,44 @@
 # VERITAS AI implementation progress
 
+## Engine 3 independent-evaluation preparation and reliability — 2026-11-16
+
+- Started clean and synchronized at `91b2b76e8895f8be5e73e82dac5b486dad002784` on
+  `codex/integrate-figma-upgrade`. Read the full milestone and audited ingestion through
+  case/report output. Findings and before-fix reproductions: `docs/ENGINE3_AUDIT.md`.
+- Fixed order-dependent duplicate timestamp uncertainty: every distinct source declaration
+  survives, and the widest precision governs recurrence. Before: 1 second vs 1 day on
+  reversal; after: 1 day in both orders. UI/export disclose contradictory metadata.
+- Moved both campaign HTTP algorithms into a single-slot bounded CPU worker. Preserved
+  lexical algorithms/thresholds and diagnostic-only embeddings. Hard worker deadline,
+  memory/protocol budgets, explicit busy/timeout/interruption/error states, no false complete
+  receipts, no investigation access in worker. Parent heartbeat and real HTTP health/busy
+  tests pass; short requests incur subprocess startup cost.
+- Reviewed five original-publisher dataset candidates. No dataset admitted: access/rights,
+  evidence fields or independent pair/episode/intent labels remain insufficient. Added
+  rights-gated local importer, hashed/versioned manifests, split/leak/holdout guards,
+  conditional reviewed-pair confusion math, independently annotated episode matching and
+  explicit campaign abstention. The real registry stays empty; final report
+  `reports/engine3_independent_verified.json` has zero independent campaigns and null quality
+  metrics/intervals. No external research dataset or model was downloaded.
+- Fourteen authored controls pass. Added organic repetition, incomplete observation,
+  precision-conflict and 1,000-share controls without promoting synthetic tests to accuracy.
+  A bounded 24-case resource matrix covers ten structures at 1k/3k, two legacy comparisons
+  and 5k/10k rejection. Direct production-guard rejection checks also retained. Dense 3k
+  first analysis ~1.74 s; sampled tree peak ~531 MiB includes startup and a stability repeat,
+  unlike historical single-run ~445 MiB. No scaling claim above the 3k cap.
+- Actual cached E5 diagnostics on 11 authored pairs: English/Hindi/Telugu paraphrase,
+  translation, legitimate repetition and contradictions. Startup 65.21 s, batch 0.89 s,
+  tree peak ~716 MiB. Contradictions also score highly; semantic admission stays disabled.
+- Existing full Node/API suite passed; expanded importer/reliability and HTTP responsiveness
+  suites passed. Python: 69 tests, 68 passed/one absent-AASIST-weight skip. TypeScript/build
+  passed after fixing two new-tool type errors; existing chunk-size warning remains.
+  Browser results and resolved test-setup/assertion issues are recorded in
+  `docs/ENGINE3_VERIFICATION.md`. Existing user stores/previews were not used for tests.
+- Required research/engineering records: `docs/ENGINE3_EVALUATION.md`,
+  `ENGINE3_FALSE_POSITIVES.md`, `ENGINE3_PERFORMANCE.md`, `ENGINE3_DECISION_RECORD.md`.
+  Independent campaign accuracy, calibrated semantic admission and production-scale
+  concurrency remain open. This is not scientific closure of Engine 3 or all 14 phases.
+
 Updated: 2026-11-15. Published integration branch: `codex/integrate-figma-upgrade`, tracking the same branch on origin. Reconciled local `ee28104` with fetched `codex/phase1-audit` at `6cadda8` in merge `855b414`, successfully pushed. Earlier read-only-access observations below are historical; Git push is now working. Baseline commit: `fa888241d838de9ce835d2277183add633f28d29`.
 
 ## Engine 3 structured episodes and attribution — 2026-11-15

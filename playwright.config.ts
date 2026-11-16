@@ -7,5 +7,7 @@ export default defineConfig({
     baseURL: process.env.VERITAS_TEST_URL || "http://127.0.0.1:3000",
     viewport: { width: 1440, height: 1100 },
     headless: true,
+    // APIRequestContext must use the same test identity as browser fetches.
+    extraHTTPHeaders:process.env.VERITAS_TEST_TOKEN?{Authorization:`Bearer ${process.env.VERITAS_TEST_TOKEN}`}:{},
   },
 });

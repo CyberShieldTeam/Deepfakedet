@@ -1,0 +1,20 @@
+{
+  "scope": "authored_semantic_diagnostics_not_accuracy",
+  "status": "completed",
+  "exitCode": 0,
+  "scoreReport": "reports\\engine3_semantic_v1_scores.json",
+  "wallSeconds": 68.15089330001501,
+  "sampledPeakTreeRssBytes": 750764032,
+  "sampledTreeCpuSeconds": 24.609375,
+  "caps": {
+    "wallSeconds": 180,
+    "treeRssMiB": 2048,
+    "samplingMs": 20
+  },
+  "networkDownloads": false,
+  "limitations": [
+    "Authored language examples, not independent association/coordination labels.",
+    "Diagnostic hybrid coefficients are not calibrated for campaign decisions.",
+    "Sampled process-tree memory can miss short peaks."
+  ]
+}

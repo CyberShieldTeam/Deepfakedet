@@ -16,11 +16,10 @@ import {
   validate,
 } from "./server/security";
 import { analyzeMediaPipeline } from "./server/mediaPipeline";
-import { inferenceRegistry, embed } from "./server/inference";
+import { inferenceRegistry, embed, cosine } from "./server/inference";
 import { verifyWithEvidence } from "./server/evidence";
 import { claimReviewSchema, reviewEvidence } from "./server/claimVerification";
-import { analyzeDensityCampaign } from "./server/densityCampaign";
-import { prepareCampaignPosts, analyzePreparedEpisodeCampaign } from "./server/campaignEpisodes";
+import { runCampaign, CampaignRunError } from "./server/campaignRunner";
 import { campaignEmbeddings } from "./server/campaignEmbedding";
 import { createServer as createViteServer } from "vite";
 import path from "path";
@@ -917,15 +916,23 @@ app.post("/api/campaigns/analyze", validate(campaignInput), async (req, res) => 
       return res
         .status(400)
         .json({ error: "Dataset too large for the live demo (max 3000 posts)." });
+    const controller=new AbortController();
+    const interrupt=()=>{if(!res.writableEnded)controller.abort();};
+    res.on('close',interrupt);
     let result: CampaignAnalysisResult;
-    if(req.body.config?.algorithm === 'density_baseline_v1') {
-      result={...analyzeDensityCampaign(datasetName,rows,!!isSimulated,req.body.config),algorithm:'density_baseline_v1'};
-    } else {
-      const prepared=prepareCampaignPosts(rows);
-      const embedding=await campaignEmbeddings(prepared.items.map(i=>i.record.content));
-      result=analyzePreparedEpisodeCampaign(datasetName,prepared,!!isSimulated,req.body.config,embedding.vectors,req.body.coverage);
-      result.embeddingCompatibility=embedding.metadata;
-    }
+    try {
+      result=await runCampaign({datasetName,rows,isSimulated:!!isSimulated,config:req.body.config,coverage:req.body.coverage},controller.signal);
+      if(result.episodeEvidence) {
+        const evidence=result.episodeEvidence;
+        const embedding=await campaignEmbeddings(evidence.posts.map(p=>p.content));
+        result.embeddingCompatibility=embedding.metadata;
+        if(embedding.vectors){
+          const vectors=new Map(evidence.posts.map((p,i)=>[p.reference,embedding.vectors![i]]));
+          for(const witness of evidence.witnesses) witness.semanticCosine=cosine(vectors.get(witness.sourcePost)!,vectors.get(witness.targetPost)!);
+        }
+      }
+    } finally {res.off('close',interrupt);}
+    if(controller.signal.aborted)return;
     if (result.classification === "Suspicious coordinated amplification") {
       const top = result.clusters[0];
       raiseAlert(
@@ -938,7 +945,8 @@ app.post("/api/campaigns/analyze", validate(campaignInput), async (req, res) => 
     }
     res.json({ result: receipt(result) });
   } catch (err: any) {
-    res.status(400).json({ error: err.message || "Invalid campaign dataset" });
+    if(res.destroyed)return;
+    res.status(err instanceof CampaignRunError?err.status:400).json({ error: err.message || "Invalid campaign dataset", ...(err instanceof CampaignRunError?{code:err.code,processingComplete:false}: {}) });
   }
 });
 

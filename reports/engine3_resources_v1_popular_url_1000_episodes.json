@@ -1,0 +1,33 @@
+{
+  "scope": "authored_resource_control_not_accuracy",
+  "name": "popular_url",
+  "count": 1000,
+  "algorithm": "episodes",
+  "inputHash": "1cb895919f5a5e2b981b4e91dfa9fd6932aeb904605f13c129abb464fd2f907d",
+  "status": "completed",
+  "wallMs": 225.06240000000003,
+  "stages": {
+    "preparationMs": 34.3211,
+    "baselineMs": 185.93049999999994,
+    "episodesMs": 0.0036999999999807187,
+    "graphMs": 1.0918000000000347,
+    "totalMs": 224.08489999999995
+  },
+  "baselineTelemetry": {
+    "candidateGenerationMs": 48.53680000000003,
+    "similarityComparisonMs": 120.36009999999999,
+    "clusterConstructionMs": 0.6337999999999511,
+    "evaluatedPairs": 76760,
+    "candidatePairs": 76760
+  },
+  "candidatePairs": 76760,
+  "truncated": true,
+  "truncatedPairCount": null,
+  "truncatedPairCountReason": "Posting-list eviction and candidate caps prevent enumeration of all omitted raw pairs.",
+  "omittedWitnesses": 0,
+  "omittedAssociations": 0,
+  "episodes": 0,
+  "associations": 0,
+  "stabilityCheck": "reversed_input",
+  "stable": true
+}

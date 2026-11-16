@@ -137,11 +137,28 @@ test("Image measurements are processed without fabricating classifier output", a
       mimeType: "image/png",
       buffer: Buffer.from(image, "base64"),
     });
+  const response=page.waitForResponse(r=>r.url().includes('/api/forensics/analyze-media')&&r.request().method()==='POST');
   await page.getByRole("button", { name: /Check this file/ }).click();
+  const {result}=await(await response).json();
+  expect(result.aiGeneratedProbability).toBeNull();
   await expect(page.getByText("Authenticity remains undetermined", { exact: true })).toBeVisible();
-  if (!process.env.VERITAS_EXPECT_FACE_READY)
-    await expect(page.getByText("UNAVAILABLE", { exact: true })).toBeVisible();
+  if(result.localImage&&result.localImage.model_status!=='ready')
+    await expect(page.getByText('Whole-image classifier unavailable',{exact:true})).toBeVisible();
+  else if(!result.localImage) await expect(page.getByText('UNAVAILABLE',{exact:true})).toBeVisible();
   await expect(page.getByText("LIVE ANALYSIS MODE", { exact: true })).toBeVisible();
+});
+
+test('Contradictory duplicate precision remains visible and blocks recurrence',async({page})=>{
+ await page.goto('/');await page.getByRole('button',{name:'Network intelligence',exact:true}).first().click();
+ const original=episodeControls.find(c=>c.name==='multi_episode_pattern')!;
+ const posts=original.rows.flatMap(r=>[r,{...r,timestamp_precision:'unknown'}]);
+ const response=page.waitForResponse(r=>r.url().includes('/api/campaigns/analyze')&&r.request().method()==='POST');
+ await page.locator('input[type=file]').setInputFiles({name:'fictional-precision-conflict.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({posts,coverage:episodeCoverage}))});
+ const {result}=await(await response).json();
+ expect(result.episodeEvidence.associations.every((a:any)=>!a.recurrenceEligible)).toBe(true);
+ expect(result.episodeEvidence.posts.every((p:any)=>p.resolutionMs===86400000&&p.sourceMetadata.length===2)).toBe(true);
+ await expect(page.getByRole('region',{name:'Campaign episode evidence'}).getByText(/Duplicate source declarations were retained/)).toBeVisible();
+ await expect(page.getByText(/Multiple source declarations retained; widest uncertainty used/).first()).toBeVisible();
 });
 
 test("Signed image provenance survives browser upload without a classifier verdict", async ({ page }) => {

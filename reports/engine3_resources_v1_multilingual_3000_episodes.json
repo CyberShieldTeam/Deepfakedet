@@ -1,0 +1,33 @@
+{
+  "scope": "authored_resource_control_not_accuracy",
+  "name": "multilingual",
+  "count": 3000,
+  "algorithm": "episodes",
+  "inputHash": "fc63faee2b3a3c9139bdb9241b0e95d639ba106e5f9f4cb948d83f33306a840f",
+  "status": "completed",
+  "wallMs": 1281.0061999999998,
+  "stages": {
+    "preparationMs": 108.3435,
+    "baselineMs": 1044.8103,
+    "episodesMs": 109.38829999999984,
+    "graphMs": 8.414600000000064,
+    "totalMs": 1279.2359999999999
+  },
+  "baselineTelemetry": {
+    "candidateGenerationMs": 151.03610000000003,
+    "similarityComparisonMs": 561.7671,
+    "clusterConstructionMs": 30.10699999999997,
+    "evaluatedPairs": 200000,
+    "candidatePairs": 200000
+  },
+  "candidatePairs": 200000,
+  "truncated": true,
+  "truncatedPairCount": null,
+  "truncatedPairCountReason": "Posting-list eviction and candidate caps prevent enumeration of all omitted raw pairs.",
+  "omittedWitnesses": 112320,
+  "omittedAssociations": 112320,
+  "episodes": 5000,
+  "associations": 5000,
+  "stabilityCheck": "reversed_input",
+  "stable": true
+}

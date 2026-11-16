@@ -1,0 +1,10 @@
+{
+  "scope": "authored_resource_control_not_accuracy",
+  "name": "missing_timestamps",
+  "count": 1000,
+  "algorithm": "episodes",
+  "inputHash": "1bb373560d17309568076eb9fd57b9354d83de60f3fa0089b875b7fbb64484fc",
+  "status": "invalid_input",
+  "error": "Timestamp requires an ISO date or explicit UTC offset",
+  "wallMs": 0.5248000000000275
+}

@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {prepareCampaignPosts} from '../server/campaignEpisodes';
+const row={account_id:'fictional-a',post_id:'p1',timestamp:'2026-01-01T00:00:00Z',content:'Fictional emergency bulletin'};
+const other={...row,account_id:'fictional-b',post_id:'p2'};
+const coarse={...row,timestamp_precision:'unknown'};
+const resolution=(rows:any[])=>prepareCampaignPosts(rows).items.find(x=>x.record.postId==='p1')!.record.resolutionMs;
+const forward=resolution([row,coarse,other]),reverse=resolution([coarse,row,other]);
+const output=process.argv[2];
+assert.ok(output,'New report path required');
+fs.writeFileSync(output,JSON.stringify({scope:'software_audit_not_detection_accuracy',sourceSha256:createHash('sha256').update(fs.readFileSync('server/campaignEpisodes.ts')).digest('hex'),forwardResolutionMs:forward,reverseResolutionMs:reverse,orderDependent:forward!==reverse,requiredConservativeResolutionMs:86400000},null,2),{flag:'wx'});
+console.log({forward,reverse,orderDependent:forward!==reverse});

@@ -1,0 +1,47 @@
+{
+  "scope": "independent_development_evaluation_only",
+  "provenance": null,
+  "independentCampaigns": 0,
+  "results": [],
+  "aggregate": {
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "falsePositiveRate": null,
+    "falseNegativeRate": null,
+    "confidenceIntervals": null
+  },
+  "aggregateReason": "No admitted independent corpus. All detection metrics unavailable.",
+  "campaign": {
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "falsePositiveRate": null,
+    "falseNegativeRate": null,
+    "confidenceIntervals": null,
+    "abstentions": 0,
+    "coverage": null,
+    "reason": "Engine emits observations, not calibrated coordination or maliciousness verdicts."
+  },
+  "confidenceIntervalReason": "No admitted independent sampling frame or prespecified group-bootstrap protocol. Pair-level binomial intervals would ignore correlated accounts/campaigns.",
+  "config": {
+    "algorithm": "episodes_v1",
+    "windowSeconds": 120,
+    "minSamples": 3,
+    "threshold": 0.65,
+    "seed": 0,
+    "semanticAdmission": false
+  },
+  "codeSha256": {
+    "server/campaignEpisodes.ts": "f2f79e7d0b9b901290dc8168f81122bc6c40197285770b512f806f961085733c",
+    "server/densityCampaign.ts": "f2537fb9c993e96eb5b3aa170ef10b4211ba8ab8c39a02b2fa1ec33d38f3d3da",
+    "test/engine3/dataset.ts": "7344f9fb4edc15ec11edfa213450ba44ac750eef2d3888ae42c42ba7c9c8bc3b",
+    "test/engine3/evaluate.ts": "08022b3aff45454f39b4830e04eb222b242b00f367b7dafae64cdf3eb0f28b3b"
+  },
+  "limitations": [
+    "Authored controls are never loaded by this command.",
+    "Conditional metrics apply only to explicitly reviewed pairs; unlabelled pairs are not negatives.",
+    "Final test files are locked. Train files are validated for leakage but not used to fit thresholds.",
+    "Episode boundaries require independent prespecified tolerance annotations."
+  ]
+}

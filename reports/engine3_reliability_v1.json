@@ -1,0 +1,9 @@
+{
+  "suite": "Engine3 reliability",
+  "scope": "software_controls_not_independent_accuracy",
+  "precisionOrderIndependent": true,
+  "workerHeartbeatTicks": 139,
+  "denseWallMsIncludingRecovery": 3200.7507,
+  "timeoutAbortBusyRecovery": true,
+  "simulatedEmbeddingFailureAndTimeoutFallback": true
+}

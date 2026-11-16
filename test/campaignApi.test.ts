@@ -27,5 +27,13 @@ try{
  assert.ok(!attached.claimResult);assert.ok(!attached.forensicResult);
  const report=(await api.get(`/api/reports/${created.id}`).set(a).expect(200)).body.report;
  assert.deepEqual(report.investigation.campaignResult.episodeEvidence,result.episodeEvidence);
+ const dense=Array.from({length:3000},(_,i)=>({...control.rows[0],account_id:`fictional-${i}`,post_id:`p${i}`}));
+ const pending=api.post('/api/campaigns/analyze').set(a).send({...payload,posts:dense}).then(r=>r);
+ await new Promise(resolve=>setTimeout(resolve,100));
+ const healthStart=performance.now();await api.get('/api/health').expect(200);
+ assert.ok(performance.now()-healthStart<1000,'Health endpoint must remain responsive during CPU analysis');
+ const busy=await api.post('/api/campaigns/analyze').set(a).send(payload).expect(429);
+ assert.equal(busy.body.processingComplete,false);assert.equal(busy.body.code,'CAMPAIGN_BUSY');assert.equal(busy.body.result,undefined);
+ assert.equal((await pending).status,200);
  console.log('Campaign API passed: episode/default and named baseline, validation, attribution persistence, receipt tamper protection, ownership and modality isolation.');
 }finally{fs.rmSync(root,{recursive:true,force:true});}

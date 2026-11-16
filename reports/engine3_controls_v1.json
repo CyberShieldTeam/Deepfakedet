@@ -1,0 +1,278 @@
+{
+  "scope": "authored_software_controls_not_independent_accuracy",
+  "results": [
+    {
+      "name": "public_health",
+      "inputHash": "623105853cd7666bb581bd53f973b693866c87f3234ddbd1b5ea4d6c50cc248a",
+      "posts": 4,
+      "expected": {
+        "episodesPerPair": 1,
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 0,
+      "episodes": 6,
+      "coverageComplete": true,
+      "truncated": false,
+      "wallMs": 3.48720000000003
+    },
+    {
+      "name": "emergency_alert",
+      "inputHash": "466927e23c2519f36be2c425cb6d829f79006fe3bb57cf8ffe7bf607d02da914",
+      "posts": 4,
+      "expected": {
+        "episodesPerPair": 1,
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 0,
+      "episodes": 6,
+      "coverageComplete": true,
+      "truncated": false,
+      "wallMs": 0.8706999999999994
+    },
+    {
+      "name": "breaking_news",
+      "inputHash": "f4ca197afd08220e94d9ad48d00ac6e76fac23816c760956937f87834d2f4b86",
+      "posts": 4,
+      "expected": {
+        "episodesPerPair": 1,
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 0,
+      "episodes": 6,
+      "coverageComplete": true,
+      "truncated": false,
+      "wallMs": 0.7515999999999963
+    },
+    {
+      "name": "sports",
+      "inputHash": "e8f137b763db1f791e037a278c4e0f3ad903384d8f0d5a0554424379c3f566ac",
+      "posts": 4,
+      "expected": {
+        "episodesPerPair": 1,
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 0,
+      "episodes": 6,
+      "coverageComplete": true,
+      "truncated": false,
+      "wallMs": 0.49029999999999063
+    },
+    {
+      "name": "news_syndication",
+      "inputHash": "074c006b8501a230830dae881df4a1071c3b0fb27925d3421d88273fbd67b007",
+      "posts": 4,
+      "expected": {
+        "episodesPerPair": 1,
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 0,
+      "episodes": 6,
+      "coverageComplete": true,
+      "truncated": false,
+      "wallMs": 0.4845999999999435
+    },
+    {
+      "name": "independent_users",
+      "inputHash": "28ac0439430db2640ed8157282428f2802bb6c4ebe3412b3d09896e64d124210",
+      "posts": 4,
+      "expected": {
+        "episodesPerPair": 1,
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 0,
+      "episodes": 6,
+      "coverageComplete": true,
+      "truncated": false,
+      "wallMs": 0.4734999999999445
+    },
+    {
+      "name": "repeated_official_bulletins",
+      "inputHash": "32183c8b753385fe36e3bd1be90909023e4f95699b7f80b67a77ee64f79f23da",
+      "posts": 12,
+      "expected": {
+        "episodesPerPair": 1,
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 4,
+      "episodes": 6,
+      "coverageComplete": true,
+      "truncated": false,
+      "wallMs": 1.688799999999901
+    },
+    {
+      "name": "shared_popular_url",
+      "inputHash": "2bb66709ec7594472fcf154f3b2b5733c0a50f4764d74f5ea2203e434845d536",
+      "posts": 4,
+      "expected": {
+        "episodesPerPair": 0,
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 0,
+      "episodes": 0,
+      "coverageComplete": true,
+      "truncated": false,
+      "wallMs": 0.24859999999989668
+    },
+    {
+      "name": "scheduled_organizational_announcements",
+      "inputHash": "d2b2dec0c89de14333f51a483446e5ffedd99dad850bee647aba13f70194d14f",
+      "posts": 12,
+      "expected": {
+        "episodesPerPair": 3,
+        "recurrenceEligiblePairs": 6,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 6,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 4,
+      "episodes": 18,
+      "coverageComplete": true,
+      "truncated": false,
+      "wallMs": 1.0965999999999667
+    },
+    {
+      "name": "multi_episode_pattern",
+      "inputHash": "07905ff362cdbf0f96fbcf0d659db669b76ee0c677e49f97a87a8c622229add9",
+      "posts": 12,
+      "expected": {
+        "episodesPerPair": 3,
+        "recurrenceEligiblePairs": 6,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 6,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 4,
+      "episodes": 18,
+      "coverageComplete": true,
+      "truncated": false,
+      "wallMs": 1.0493000000000166
+    },
+    {
+      "name": "organic_repeated_discussion",
+      "inputHash": "07905ff362cdbf0f96fbcf0d659db669b76ee0c677e49f97a87a8c622229add9",
+      "posts": 12,
+      "expected": {
+        "recurrenceEligiblePairs": 6,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 6,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 4,
+      "episodes": 18,
+      "coverageComplete": true,
+      "truncated": false,
+      "wallMs": 2.3752999999999247
+    },
+    {
+      "name": "incomplete_observation",
+      "inputHash": "07905ff362cdbf0f96fbcf0d659db669b76ee0c677e49f97a87a8c622229add9",
+      "posts": 12,
+      "expected": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 4,
+      "episodes": 18,
+      "coverageComplete": false,
+      "truncated": false,
+      "wallMs": 1.074799999999982
+    },
+    {
+      "name": "conflicting_duplicate_precision",
+      "inputHash": "25f64fcd19cc1fa643203ead9a7a08db01872ce3b11333510ba15906048a4f0e",
+      "posts": 24,
+      "expected": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 4,
+      "episodes": 18,
+      "coverageComplete": false,
+      "truncated": false,
+      "wallMs": 1.8816000000000486
+    },
+    {
+      "name": "emergency_1000_shares",
+      "inputHash": "b616e82605fea67730a3bd1705ee40b7683fa13b258068af0e8420838619cda5",
+      "posts": 1000,
+      "expected": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "actual": {
+        "recurrenceEligiblePairs": 0,
+        "maliciousAccounts": 0
+      },
+      "legacyFlaggedAccounts": 0,
+      "episodes": 5000,
+      "coverageComplete": true,
+      "truncated": true,
+      "wallMs": 727.3299
+    }
+  ],
+  "independentCampaigns": 0,
+  "precision": null,
+  "recall": null,
+  "f1": null,
+  "falsePositiveRate": null,
+  "config": {
+    "threshold": 0.65,
+    "windowSeconds": 120,
+    "minSamples": 3,
+    "semanticAdmission": false
+  }
+}

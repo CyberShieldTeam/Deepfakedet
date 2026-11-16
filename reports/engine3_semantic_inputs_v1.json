@@ -1,0 +1,72 @@
+{
+  "scope": "authored_diagnostic_pairs_not_ground_truth",
+  "hybridFormula": "0.5 * lexicalJaccard + 0.5 * semanticCosine; descriptive only, no admission threshold",
+  "pairs": [
+    {
+      "category": "English paraphrase",
+      "left": "Fictional museum offers free admission today.",
+      "right": "There is no entry charge at the fictional museum today.",
+      "lexicalJaccard": 0.3
+    },
+    {
+      "category": "Hindi paraphrase",
+      "left": "काल्पनिक संग्रहालय में आज प्रवेश निःशुल्क है।",
+      "right": "आज काल्पनिक संग्रहालय देखने का कोई शुल्क नहीं है।",
+      "lexicalJaccard": 0.2222222222222222
+    },
+    {
+      "category": "Telugu paraphrase",
+      "left": "కల్పిత సంగ్రహాలయంలో ఈరోజు ప్రవేశం ఉచితం.",
+      "right": "ఈ రోజు కల్పిత సంగ్రహాలయాన్ని చూడటానికి రుసుము లేదు.",
+      "lexicalJaccard": 0.1
+    },
+    {
+      "category": "English Hindi translation",
+      "left": "Fictional museum entry is free today.",
+      "right": "काल्पनिक संग्रहालय में आज प्रवेश निःशुल्क है।",
+      "lexicalJaccard": 0
+    },
+    {
+      "category": "English Telugu translation",
+      "left": "Fictional museum entry is free today.",
+      "right": "కల్పిత సంగ్రహాలయంలో ఈరోజు ప్రవేశం ఉచితం.",
+      "lexicalJaccard": 0
+    },
+    {
+      "category": "Legitimate emergency sharing",
+      "left": "Fictional flood warning: follow official evacuation routes.",
+      "right": "Fictional flood warning: follow official evacuation routes.",
+      "lexicalJaccard": 1
+    },
+    {
+      "category": "Repeated scheduled announcement",
+      "left": "Fictional official bulletin: clinic opens at nine.",
+      "right": "Fictional official bulletin: clinic opens at nine.",
+      "lexicalJaccard": 1
+    },
+    {
+      "category": "Contradictory English context",
+      "left": "The fictional museum is open today.",
+      "right": "The fictional museum is not open today.",
+      "lexicalJaccard": 0.8333333333333334
+    },
+    {
+      "category": "Contradictory Hindi context",
+      "left": "काल्पनिक संग्रहालय आज खुला है।",
+      "right": "काल्पनिक संग्रहालय आज खुला नहीं है।",
+      "lexicalJaccard": 0.75
+    },
+    {
+      "category": "Contradictory Telugu context",
+      "left": "కల్పిత సంగ్రహాలయం ఈరోజు తెరిచి ఉంది.",
+      "right": "కల్పిత సంగ్రహాలయం ఈరోజు తెరిచి లేదు.",
+      "lexicalJaccard": 0.6666666666666666
+    },
+    {
+      "category": "Unrelated same language",
+      "left": "Fictional museum entry is free today.",
+      "right": "Fictional railway maintenance begins next week.",
+      "lexicalJaccard": 0.1
+    }
+  ]
+}

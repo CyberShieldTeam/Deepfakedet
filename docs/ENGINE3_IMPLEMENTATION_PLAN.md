@@ -1,5 +1,14 @@
 # Engine 3 readiness: preserve the existing campaign engine
 
+## Independent validation and reliability slice — 2026-11-16
+
+Implemented conservative duplicate-source precision merge, bounded CPU worker isolation,
+rights-gated local evaluation tools, expanded authored controls and resource/semantic
+diagnostics. No independently annotated corpus was admitted; all real-world detection
+metrics remain unavailable. `ENGINE3_EVALUATION.md` defines the next admission/annotation
+gate. Existing episode policy and thresholds remain fixed; no production/scientific
+phase closure is claimed. Verification and limitations: `ENGINE3_VERIFICATION.md`.
+
 ## Implemented episode slice — 2026-11-15
 
 The bounded plan below is now implemented from `aa28502`, with exact initial application/

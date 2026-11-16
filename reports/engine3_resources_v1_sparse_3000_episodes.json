@@ -1,0 +1,33 @@
+{
+  "scope": "authored_resource_control_not_accuracy",
+  "name": "sparse",
+  "count": 3000,
+  "algorithm": "episodes",
+  "inputHash": "a40cd61a02b20b89ddcd21933a4366735f2dc072c74f40febf957bb1433b0328",
+  "status": "completed",
+  "wallMs": 136.87229999999994,
+  "stages": {
+    "preparationMs": 70.33600000000001,
+    "baselineMs": 62.07910000000004,
+    "episodesMs": 0.005199999999945248,
+    "graphMs": 2.4282000000000608,
+    "totalMs": 135.69420000000002
+  },
+  "baselineTelemetry": {
+    "candidateGenerationMs": 23.37360000000001,
+    "similarityComparisonMs": 0.012000000000057298,
+    "clusterConstructionMs": 1.741800000000012,
+    "evaluatedPairs": 0,
+    "candidatePairs": 0
+  },
+  "candidatePairs": 0,
+  "truncated": false,
+  "truncatedPairCount": null,
+  "truncatedPairCountReason": "Posting-list eviction and candidate caps prevent enumeration of all omitted raw pairs.",
+  "omittedWitnesses": 0,
+  "omittedAssociations": 0,
+  "episodes": 0,
+  "associations": 0,
+  "stabilityCheck": "reversed_input",
+  "stable": true
+}

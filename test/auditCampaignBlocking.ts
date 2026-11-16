@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import {performance} from 'node:perf_hooks';
+import {analyzeEpisodeCampaign} from '../server/campaignEpisodes';
+const rows=Array.from({length:3000},(_,i)=>({account_id:`fictional-${i}`,post_id:`p${i}`,timestamp:'2026-01-01T00:00:00Z',content:'Identical fictional public bulletin for bounded resource testing.',url:'https://example.org/public'}));
+const start=performance.now();
+const heartbeat=new Promise<number>(resolve=>setTimeout(()=>resolve(performance.now()-start),1));
+analyzeEpisodeCampaign('Fictional blocking audit',rows,true);
+const blockedMs=await heartbeat;
+fs.writeFileSync(process.argv[2],JSON.stringify({scope:'software_event_loop_audit_not_accuracy',inputPosts:3000,timerRequestedMs:1,timerObservedMs:blockedMs,reason:'Current Express handler calls this synchronous function on its event loop.'},null,2),{flag:'wx'});
+console.log({blockedMs});

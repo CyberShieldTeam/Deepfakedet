@@ -1,0 +1,7 @@
+{
+  "scope": "software_event_loop_audit_not_accuracy",
+  "inputPosts": 3000,
+  "timerRequestedMs": 1,
+  "timerObservedMs": 1869.211,
+  "reason": "Current Express handler calls this synchronous function on its event loop."
+}

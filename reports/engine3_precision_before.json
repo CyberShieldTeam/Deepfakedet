@@ -1,0 +1,8 @@
+{
+  "scope": "software_audit_not_detection_accuracy",
+  "sourceSha256": "759e8a09846c7cb26d8db4c41d9881aa39cdb50f9e4643553ce234dd8e5f5860",
+  "forwardResolutionMs": 1000,
+  "reverseResolutionMs": 86400000,
+  "orderDependent": true,
+  "requiredConservativeResolutionMs": 86400000
+}
