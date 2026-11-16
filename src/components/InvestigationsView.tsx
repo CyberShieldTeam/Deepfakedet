@@ -15,6 +15,7 @@ import {
 } from "./ui";
 import { PageHeader } from "./plain";
 import type { Tab } from "../App";
+import {CorrelationView} from './CorrelationView';
 
 export const InvestigationsView: React.FC<{
   investigations: Investigation[];
@@ -301,6 +302,7 @@ export const InvestigationsView: React.FC<{
                     <div className="text-slate-500">None yet.</div>
                   )}
                 </div>
+                <CorrelationView key={sel.id} investigation={sel} onChanged={onChanged}/>
                 {sel.timeline?.length ? (
                   <div>
                     <div className="mb-1 text-[10px] font-mono uppercase tracking-widest text-slate-500">

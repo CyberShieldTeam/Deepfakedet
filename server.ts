@@ -5,6 +5,7 @@ import { AtomicRepository } from "./server/repository";
 import {
   attachmentInput,
   campaignInput,
+  correlationInput,
   caseCreate,
   casePatch,
   claimInput,
@@ -22,6 +23,9 @@ import { claimReviewSchema, reviewEvidence } from "./server/claimVerification";
 import { runCampaign, CampaignRunError } from "./server/campaignRunner";
 import { campaignEmbeddings } from "./server/campaignEmbedding";
 import {networkDiagnostics,logAnalysis,failedDiagnostic} from './server/analysisDiagnostics';
+import {canonicalUrl,projectInvestigation,correlationFingerprint,correlationHash} from './server/correlation';
+import {runCorrelation,CorrelationError} from './server/correlationRunner';
+import type {MediaContext} from './src/correlationTypes';
 import { createServer as createViteServer } from "vite";
 import path from "path";
 import fs from "fs";
@@ -844,8 +848,39 @@ app.post("/api/investigations/:id/attach", validate(attachmentInput), (req, res)
   if (inv.riskLevel === "Critical") inv.status = "Critical Flag";
   else if (inv.riskLevel === "High") inv.status = "Suspicious";
   inv.updatedAt = now;
+  if(inv.correlation)inv.correlationRun={status:'stale',at:now};
   persist();
   res.json({ investigation: inv });
+});
+
+app.post('/api/investigations/:id/correlate',validate(correlationInput),async(req,res,next)=>{
+  const initial=investigations.find(i=>i.id===req.params.id&&visible(i));
+  if(!initial)return void res.status(404).json({error:'Investigation not found'});
+  const controller=new AbortController();const interrupted=()=>{if(!res.writableEnded)controller.abort();};res.on('close',interrupted);
+  try{
+    const input=projectInvestigation(initial),oldContexts=initial.correlationContexts??[];
+    const baseline=correlationFingerprint(input,oldContexts);
+    const now=new Date().toISOString();
+    const contexts:MediaContext[]=req.body.contexts===undefined?oldContexts:req.body.contexts.map((c:any)=>{
+      if(c.mediaUrl&&!canonicalUrl(c.mediaUrl))throw new CorrelationError('Media URL must be a credential-free HTTP(S) address.',400,'CORRELATION_INVALID_CONTEXT');
+      const id='context:'+correlationHash([initial.id,c]);
+      const previous=oldContexts.find(p=>p.id===id);
+      return {...c,id,providedBy:previous?.providedBy??owner(),providedAt:previous?.providedAt??now};
+    });
+    const result=await runCorrelation(input,contexts,controller.signal);
+    const current=investigations.find(i=>i.id===initial.id&&visible(i));
+    if(!current)return void res.status(404).json({error:'Investigation not found'});
+    if(correlationFingerprint(projectInvestigation(current),current.correlationContexts??[])!==baseline)throw new CorrelationError('Evidence changed during correlation; rerun on the current investigation.',409,'CORRELATION_STALE_INPUT');
+    if(controller.signal.aborted)return;
+    current.correlation=result;current.correlationContexts=contexts;current.correlationRun={status:'current',at:new Date().toISOString()};current.updatedAt=current.correlationRun.at;
+    persist();res.json({investigation:current,result});
+  }catch(error){
+    if(controller.signal.aborted||res.destroyed)return;
+    const current=investigations.find(i=>i.id===initial.id&&visible(i));
+    const category=error instanceof CorrelationError?error.code:'CORRELATION_STORAGE_OR_EXECUTION_FAILED';
+    if(current){current.correlationRun={status:'failed',at:new Date().toISOString(),errorCategory:category};try{persist();}catch(storageError){return next(storageError);}}
+    res.status(error instanceof CorrelationError?error.status:500).json({error:error instanceof CorrelationError?error.message:'Correlation failed; no new graph was acknowledged.',code:category,processingComplete:false});
+  }finally{res.off('close',interrupted);}
 });
 
 app.patch("/api/investigations/:id", validate(casePatch), (req, res) => {

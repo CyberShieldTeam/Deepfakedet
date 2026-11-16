@@ -1,0 +1,13 @@
+# Engine 4 architecture audit and integration
+
+Audit baseline: `2ecf2e4`, clean `codex/integrate-figma-upgrade`, fetched remote 0/0.
+
+Existing flow: React analysis screens submit to Express; Engine 1 retains submitted measurements/local experimental results, Engine 2 retains source candidates and attributed quote reviews, Engine 3 retains post/witness/episode records. Signed, owner-bound results attach to `Investigation.mediaFindings`, `claimResults` and `campaignResult`; singular legacy fields remain fallback. `AtomicRepository` validates and atomically replaces the case store, restoring committed in-memory state on failure. HTML/JSON reports read the same owned case. Cross-engine processing diagnostics already survive attachment.
+
+No existing schema proves that a user-entered claim was extracted from uploaded media. `measurements.sourceSha256` is client-supplied and cannot alone establish verified byte identity. Network post IDs are scoped to accounts/input datasets, not globally verified platform identities. Retrieved source `stance:neutral` means unassessed unless an attributed review exists. Case timeline ingestion labels do not identify individual evidence objects reliably.
+
+First-version design: adapters project existing case records into a bounded, deterministic graph. No graph database, LLM, semantic activation or model/threshold change. Stable node/edge IDs include investigation ID; snapshot references resolve into the source projection. URL hubs avoid popular-URL cliques. Exact literal mentions are distinguished from stance/equivalence; normalized URL equality is distinguished from document identity. Optional analyst caption/description bindings are explicitly attributed assertions, never manufactured OCR/transcription. A server-computed digest of bytes actually submitted can establish submitted-byte equality, not publication provenance or authenticity.
+
+Integration points: new owned case correlation route, a private bounded worker, additive case graph/run/annotation fields, existing attach route marking a previous graph stale, existing case-detail view, and existing report renderer. Input fingerprint/revision checks prevent saving a worker result based on changed evidence. Failed reruns retain the prior saved graph but mark the run failed; the UI does not show that graph as a new/current result. No destructive migration or changes to Engines 1–3 inference, review, recurrence, coverage or diagnostic rules.
+
+Evidence model, rules, resource limits and implemented/planned boundaries are recorded in `ENGINE4_EVIDENCE_MODEL.md`; measured verification in `ENGINE4_VALIDATION.md`; scientific limits in `ENGINE4_LIMITATIONS.md`. This is an engineering correlation slice, not a misinformation verdict engine.

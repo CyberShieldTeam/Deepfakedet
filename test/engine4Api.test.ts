@@ -1,0 +1,45 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import {createHash} from 'node:crypto';
+import request from 'supertest';
+import {episodeControls,coverage} from './fixtures/campaign/episodeControls';
+const root=fs.mkdtempSync(path.join(os.tmpdir(),'engine4-api-')),store=path.join(root,'cases.json');
+process.env.VERITAS_EMBEDDED='true';process.env.NODE_ENV='production';process.env.APP_GEMINI_API_KEY='MY_DISABLED';process.env.VERITAS_STORE=store;
+const token='engine4-api-test-owner-not-secret-00000',other='engine4-api-test-other-not-secret-00000';process.env.VERITAS_USERS=JSON.stringify({[token]:'owner',[other]:'other'});
+delete process.env.VERITAS_AI_SERVICE_URL;delete process.env.VERITAS_CLAIM_CORPUS;delete process.env.GOOGLE_FACT_CHECK_API_KEY;delete process.env.VERITAS_EMBEDDING_ENDPOINT;
+try{
+ const {app}=await import('../server'),api=request(app),a={Authorization:`Bearer ${token}`},b={Authorization:`Bearer ${other}`};
+ const inv=(await api.post('/api/investigations').set(a).send({title:'Engine4 authored API fixture'}).expect(201)).body.investigation;
+ await api.post(`/api/investigations/${inv.id}/correlate`).send({}).expect(401);await api.post(`/api/investigations/${inv.id}/correlate`).set(b).send({}).expect(404);
+ await api.patch(`/api/investigations/${inv.id}`).set(a).send({correlation:{state:'fake'}}).expect(400);
+ const bytes=fs.readFileSync('test/fixtures/face/headshot_cc0.jpg');
+ const media=(await api.post('/api/forensics/analyze-media').set(a).send({modality:'image',fileName:'CC0 software fixture.jpg',mimeType:'image/jpeg',mediaData:'data:image/jpeg;base64,'+bytes.toString('base64'),measurements:{elaScore:0}}).expect(200)).body.result;
+ assert.equal(media.submittedMedia.sha256,createHash('sha256').update(bytes).digest('hex'));assert.equal(media.submittedMedia.computedBy,'server');assert.equal(media.aiGeneratedProbability,null);
+ const text='Software fixture: the fictional museum opens at nine.';
+ const claim=(await api.post('/api/claims/verify').set(a).send({claimText:text}).expect(200)).body.result;
+ const posts=episodeControls.find(c=>c.name==='multi_episode_pattern')!.rows.map(r=>({...r,content:text}));
+ const campaign=(await api.post('/api/campaigns/analyze').set(a).send({posts,coverage,datasetName:'Engine4 authored network'}).expect(200)).body.result;
+ for(const [kind,result] of [['media',media],['claim',claim],['campaign',campaign]])await api.post(`/api/investigations/${inv.id}/attach`).set(a).send({kind,result}).expect(200);
+ const initial=(await api.post(`/api/investigations/${inv.id}/correlate`).set(a).send({}).expect(200)).body.result;
+ const context={mediaId:initial.nodes.find((n:any)=>n.type==='media_asset').id,claimId:initial.nodes.find((n:any)=>n.type==='claim').id,kind:'user_description',text,rationale:'Authored description, not an extracted transcript.'};
+ await api.post(`/api/investigations/${inv.id}/correlate`).set(a).send({contexts:[{...context,providedBy:'forged-reviewer'}]}).expect(400);
+ const linked=(await api.post(`/api/investigations/${inv.id}/correlate`).set(a).send({contexts:[context]}).expect(200)).body;
+ assert.ok(linked.result.relationships.some((e:any)=>e.type==='MEDIA_CONTEXT_CLAIM'));assert.ok(linked.result.relationships.some((e:any)=>e.type==='POST_CONTAINS_CLAIM'));
+ const raw=JSON.parse(fs.readFileSync(store,'utf8')).find((i:any)=>i.id===inv.id);assert.deepEqual(raw.correlation,linked.result);assert.deepEqual(raw.forensicResult,media);assert.deepEqual(raw.claimResult,claim);assert.deepEqual(raw.campaignResult,campaign);
+ const report=(await api.get(`/api/reports/${inv.id}`).set(a).expect(200)).body.report;assert.deepEqual(report.investigation.correlation,linked.result);
+ const repeat=(await api.post(`/api/investigations/${inv.id}/correlate`).set(a).send({}).expect(200)).body.result;assert.deepEqual(repeat.nodes,linked.result.nodes);assert.deepEqual(repeat.relationships,linked.result.relationships);assert.equal(repeat.inputFingerprint,linked.result.inputFingerprint);
+ const failed=await api.post(`/api/investigations/${inv.id}/correlate`).set(a).send({contexts:[{...context,mediaId:'other-case-node'}]}).expect(400);assert.equal(failed.body.processingComplete,false);
+ const preserved=(await api.get(`/api/investigations/${inv.id}`).set(a).expect(200)).body.investigation;assert.equal(preserved.correlationRun.status,'failed');assert.deepEqual(preserved.correlation.nodes,linked.result.nodes);assert.deepEqual(preserved.correlationContexts,linked.investigation.correlationContexts);
+ await api.post(`/api/investigations/${inv.id}/correlate`).set(a).send({}).expect(200);
+ await api.post(`/api/investigations/${inv.id}/attach`).set(a).send({kind:'claim',result:claim}).expect(200);
+ const stale=(await api.get(`/api/investigations/${inv.id}`).set(a).expect(200)).body.investigation;assert.equal(stale.correlationRun.status,'stale');assert.ok(stale.correlation);
+ const running=api.post(`/api/investigations/${inv.id}/correlate`).set(a).send({}).then(r=>r);
+ await new Promise(resolve=>setTimeout(resolve,50));await api.post(`/api/investigations/${inv.id}/attach`).set(a).send({kind:'claim',result:claim}).expect(200);
+ assert.equal((await running).status,409);
+ await api.post(`/api/investigations/${inv.id}/attach`).set(a).send({kind:'claim',result:claim}).expect(200);
+ // Atomic write failure cannot acknowledge a new graph or overwrite the previous saved bytes.
+ const backup=store+'.backup';fs.renameSync(store,backup);fs.mkdirSync(store);
+ await api.post(`/api/investigations/${inv.id}/correlate`).set(a).send({contexts:[]}).expect(500);
+ fs.rmdirSync(store);fs.renameSync(backup,store);
+ const rolledBack=(await api.get(`/api/investigations/${inv.id}`).set(a).expect(200)).body.investigation;assert.equal(rolledBack.correlationRun.status,'stale');assert.deepEqual(rolledBack.correlation,stale.correlation);
+ console.log('Engine4 API passed: actual signed engines, server byte hash, owned correlation, three-engine path, determinism, disk/report preservation, stale/failure retention, schema isolation and atomic rollback.');
+}finally{fs.rmSync(root,{recursive:true,force:true});}

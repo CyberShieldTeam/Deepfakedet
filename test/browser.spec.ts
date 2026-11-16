@@ -1,6 +1,48 @@
 import { test, expect } from "@playwright/test";
 import { encodeWav } from "../src/utils/audioSegments";
 import {episodeControls,coverage as episodeCoverage} from './fixtures/campaign/episodeControls';
+import fs from 'node:fs';
+
+test('Engine4 connects actual saved media, reviewed claim and public posts',async({page})=>{
+ test.skip(process.env.VERITAS_EXPECT_ENGINE4!=='1','Requires explicitly isolated Engine4 corpus/store setup');test.setTimeout(60000);
+ const claim='Software fixture: the fictional Amber Museum offers free entry.';
+ await page.goto('/');await page.getByRole('button',{name:'Media forensics',exact:true}).first().click();
+ const bytes=await page.evaluate(()=>{const c=document.createElement('canvas');c.width=64;c.height=64;c.getContext('2d')!.fillRect(0,0,64,64);return c.toDataURL().split(',')[1];});
+ await page.locator('input[type=file]').setInputFiles({name:'engine4-authored.png',mimeType:'image/png',buffer:Buffer.from(bytes,'base64')});
+ const mediaResponse=page.waitForResponse(r=>r.url().includes('/api/forensics/analyze-media')&&r.request().method()==='POST');await page.getByRole('button',{name:/Check this file/}).click();
+ const media=(await(await mediaResponse).json()).result;expect(media.aiGeneratedProbability).toBeNull();expect(media.submittedMedia.computedBy).toBe('server');
+ await page.getByRole('button',{name:'Save to a case',exact:true}).click();await expect(page.getByRole('button',{name:/Saved to SUR-/})).toBeVisible();
+ await page.getByRole('button',{name:'Claim intelligence',exact:true}).first().click();await page.locator('textarea').first().fill(claim);await page.getByRole('button',{name:'Check this claim',exact:true}).click();
+ await expect(page.getByRole('link',{name:'Fictional Engine4 source'})).toBeVisible();
+ await page.getByText('Analyst review · assess source applicability',{exact:true}).click();await page.getByLabel('Stance for Fictional Engine4 source').selectOption('supports');await page.getByLabel('Evidence quote for Fictional Engine4 source').fill(claim);await page.getByLabel('Analyst review rationale').fill('Authored software fixture: complete assertion and source context reviewed; not a real factual assessment.');await page.getByRole('checkbox').check();
+ const reviewedResponse=page.waitForResponse(r=>r.url().includes('/api/claims/review')&&r.request().method()==='POST');await page.getByRole('button',{name:'Record evidence assessment'}).click();const reviewed=(await(await reviewedResponse).json()).result;
+ await page.getByRole('button',{name:'Save to a case',exact:true}).click();await expect(page.getByRole('button',{name:/Saved to SUR-/})).toBeVisible();
+ await page.getByRole('button',{name:'Network intelligence',exact:true}).first().click();
+ const posts=episodeControls.find(c=>c.name==='multi_episode_pattern')!.rows.map(p=>({...p,content:claim+' https://example.org/engine4-source',url:'https://example.org/engine4-source'}));
+ await page.locator('input[type=file]').setInputFiles({name:'engine4-authored-posts.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({posts,coverage:episodeCoverage}))});await expect(page.getByText('Observed post relationships',{exact:true})).toBeVisible();
+ await page.getByRole('button',{name:'Save to a case',exact:true}).click();await expect(page.getByRole('button',{name:/Saved to SUR-/})).toBeVisible();
+ await page.getByRole('button',{name:'Investigations',exact:true}).first().click();const region=page.getByRole('region',{name:'Cross-engine evidence correlation'});
+ await region.getByRole('button',{name:'Correlate evidence',exact:true}).click();await expect(region.getByText(/Correlation status:/)).toBeVisible();
+ await region.getByText('Document a media caption or description',{exact:true}).click();await region.getByLabel('Supplied context text').fill(claim);await region.getByLabel('Context attribution rationale').fill('This caption is analyst supplied for the software fixture; no OCR or transcription ran.');
+ const correlationResponse=page.waitForResponse(r=>r.url().endsWith('/correlate')&&r.request().method()==='POST');const renderStart=performance.now();await region.getByRole('button',{name:'Save supplied context and correlate'}).click();
+ const linked=await(await correlationResponse).json();await expect(region.getByText(/Correlation status:/)).toBeVisible();const uiReadyMs=performance.now()-renderStart;
+ expect(linked.result.relationships.some((e:any)=>e.type==='MEDIA_CONTEXT_CLAIM'&&e.strength==='analyst_asserted')).toBe(true);expect(linked.result.relationships.some((e:any)=>e.type==='POST_CONTAINS_CLAIM')).toBe(true);expect(linked.result.relationships.some((e:any)=>e.type==='SOURCE_ADDRESSES_CLAIM')).toBe(true);expect(linked.result.relationships.some((e:any)=>e.type==='SHARED_CANONICAL_URL')).toBe(true);
+ expect(linked.investigation.forensicResult).toEqual(media);expect(linked.investigation.claimResult).toEqual(reviewed);expect(linked.investigation.campaignResult.overallCoordinationIndex).toBeNull();
+ expect(await region.getByRole('list',{name:'Evidence relationships'}).locator('button').count()).toBeLessThanOrEqual(100);
+ await region.getByLabel('Filter relationship type').selectOption('MEDIA_CONTEXT_CLAIM');await region.getByLabel('Filter match basis').selectOption('analyst_asserted');await expect(region.getByLabel('Selected correlation relationship')).toContainText('not extraction');
+ const download=page.waitForEvent('download');await region.getByRole('button',{name:'Download correlation JSON'}).click();expect((await download).suggestedFilename()).toBe('veritas-correlation.json');
+ const report=(await page.request.get(`/api/reports/${linked.investigation.id}`).then(r=>r.json())).report;expect(report.investigation.correlation).toEqual(linked.result);
+ expect(JSON.parse(fs.readFileSync(process.env.VERITAS_E4_TEST_STORE!,'utf8')).find((i:any)=>i.id===linked.investigation.id).correlation).toEqual(linked.result);
+ await page.getByRole('button',{name:'Report',exact:true}).click();await expect(page.frameLocator('iframe[title="report"]').getByRole('heading',{name:'CROSS-ENGINE EVIDENCE CORRELATION',exact:true})).toBeVisible();await expect(page.frameLocator('iframe[title="report"]').getByText(/MEDIA_CONTEXT_CLAIM/).first()).toBeVisible();
+ console.log(JSON.stringify({scope:'authored_engine4_browser_workflow_not_accuracy',uiReadyMsIncludingApi:uiReadyMs,correlationMs:linked.result.elapsedMs,counts:linked.result.counts}));
+ await page.screenshot({path:'test-results/engine4-correlated-workflow.png',fullPage:true});
+ await page.keyboard.press('Escape');
+ if(!await region.getByLabel('Supplied context text').isVisible())await region.getByText('Document a media caption or description',{exact:true}).click();
+ await region.getByLabel('Supplied context text').fill('Unrelated authored text without the investigated claim.');await region.getByRole('button',{name:'Save supplied context and correlate'}).click();
+ await expect(region.getByRole('alert')).toBeVisible();await expect(region.getByText(/Previous graph retained/)).toBeVisible();await expect(region.getByRole('list',{name:'Evidence relationships'})).toHaveCount(0);
+ const preserved=(await page.request.get(`/api/investigations/${linked.investigation.id}`).then(r=>r.json())).investigation;expect(preserved.correlation).toEqual(linked.result);expect(preserved.correlationRun.status).toBe('failed');
+ await region.getByRole('button',{name:'Correlate evidence',exact:true}).click();await expect(region.getByText(/Correlation status:/)).toBeVisible();
+});
 
 test('Failed network rerun cannot leave prior findings displayed as a new result',async({page})=>{
  await page.goto('/');await page.getByRole('button',{name:'Network intelligence',exact:true}).first().click();

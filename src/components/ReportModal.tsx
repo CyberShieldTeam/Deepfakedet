@@ -24,6 +24,18 @@ const engineLabel = (e?: string) =>
           : "Measured signals only";
 const safeUrl = (value: string) => (/^https?:\/\//i.test(value) ? esc(value) : "#");
 
+function correlationHtml(inv:Report['investigation']){
+ const c=inv.correlation;if(!c)return '<h2>CROSS-ENGINE EVIDENCE CORRELATION</h2><p>No saved correlation graph. No cross-engine inference was performed for this report.</p>';
+ const nodes=new Map(c.nodes.map(n=>[n.id,n]));
+ return `<h2>CROSS-ENGINE EVIDENCE CORRELATION</h2><p>Investigation ${esc(inv.id)} · policy ${esc(c.policy)} · input fingerprint ${esc(c.inputFingerprint)}. Last run: ${esc(inv.correlationRun?.status??'unknown')}; saved graph state: ${esc(c.state)}.</p>
+ ${inv.correlationRun?.status!=='current'?'<p class="crit">This is a retained previous graph, not a new/current result. Regenerate on current evidence.</p>':''}
+ <p>${esc(c.counts.nodes)} nodes; ${esc(c.counts.relationships)} relationships; ${esc(c.counts.crossEngineLinks)} cross-engine links. ${c.truncated?'Processing truncated; omitted evidence remains in source engine records.':'No correlation cap reached.'}</p>
+ <p>Evidence relationships indicate observed associations and do not independently establish misinformation, manipulation, or malicious coordination. Exact URL equality is not media identity. Analyst-supplied captions are not extraction.</p>
+ <table><tr><th>Source → target</th><th>Relationship / basis</th><th>Supporting references and method</th></tr>${c.relationships.slice(0,100).map(e=>`<tr><td>${esc(nodes.get(e.source)?.label)} → ${esc(nodes.get(e.target)?.label)}<br>${esc(nodes.get(e.source)?.engines.join(', '))} → ${esc(nodes.get(e.target)?.engines.join(', '))}</td><td>${esc(e.type)} · ${esc(e.strength)}<br>${esc(e.limitations.join(' '))}</td><td>${esc(e.method)}<br>${esc(e.support.join('; '))}<br>${esc(JSON.stringify(e.measurements))}</td></tr>`).join('')}</table><p>HTML limited to 100 relationships; authenticated JSON contains all retained nodes, references, statuses and relationships.</p>
+ <h3>Contradictory reviewed sources</h3>${c.contradictions.length?c.contradictions.map(x=>`<p>${esc(nodes.get(x.claimId)?.label)}: ${x.sourceIds.map(id=>`${esc(nodes.get(id)?.label)} (${esc(nodes.get(id)?.metadata.stance)})`).join('; ')}</p>`).join(''):'<p>No conflicting attributed stances recorded in retained evidence; this is not proof of consensus.</p>'}
+ <h3>Evidence timeline</h3><p>Event/analysis/retrieval/ingestion times are distinct; ordering implies no causation. Missing times are not invented.</p><ul>${c.timeline.slice(0,200).map(t=>`<li>${esc(t.time.kind)} · ${esc(t.time.utc)} · original ${esc(t.time.original)} · resolution ${esc(t.time.resolutionMs)} ms · ${esc(nodes.get(t.nodeId)?.label)}</li>`).join('')}</ul><p>HTML limited to 200 retained timeline entries.</p><h3>Missing evidence</h3>${list(c.missingEvidence)}<h3>Correlation limitations</h3>${list(c.limitations)}`;
+}
+
 export function reportHtml(r: Report): string {
   const inv = r.investigation;
   const media = inv.mediaFindings?.length
@@ -57,6 +69,7 @@ table{border-collapse:collapse;width:100%;font-size:12px}td,th{border:1px solid 
 <div class="meta">Integrity hash (SHA-256 of case record): ${esc(r.integrityHash)}</div>
 ${inv.isSimulatedDemo ? '<div class="sim">SIMULATED DEMONSTRATION — This report describes fictional incident data. It is not a real emergency, and no real government announcement is represented.</div>' : ""}
 <h2>1. Incident summary</h2>
+${correlationHtml(inv)}
 ${analyses.length?`<div class="box"><h3>Processing and evidence status</h3>${analyses.map(a=>`<p><b>${esc(a.engine)}: ${esc(a.state)}</b> · ${esc(a.completeness)} · ID ${esc(a.id)}</p><p>${esc(a.summary)}</p><p>${Object.entries(a.counts).map(([k,v])=>`${esc(k)}: ${esc(v)}`).join('; ')}</p><p>${a.stages.map(s=>`${esc(s.stage)}: ${esc(s.status)}${s.errorCategory?` (${esc(s.errorCategory)})`:''}`).join('; ')}</p>`).join('')}<p>Processing state is separate from authenticity, claim truth and malicious intent. Full diagnostics remain in the authenticated report JSON.</p></div>`:''}
 <div class="box"><b>Executive evidence summary</b><p>Media authenticity: ${media.length} analysis record(s), ${media.filter((m) => m.inference?.status === "available").length} with an available dedicated classifier. Factual accuracy: ${claims.length} claim assessment(s), ${claims.filter((x) => x.verdict === "Insufficient Evidence").length} unresolved verdict(s); processing availability is reported separately above. Distribution: ${esc(c?.analysis?.summary || c?.classification || (c ? "Legacy baseline; intent undetermined" : "Not assessed"))}.</p><p>These are independent evidence dimensions. AI generation is not itself misinformation, and relationship density does not establish malicious intent. ${inv.isSimulatedDemo ? "All findings in this case are simulated." : "Unavailable inference remains unassessed, not authentic or fake."}</p></div>
 <table><tr><th>Title</th><td>${esc(inv.title)}</td></tr><tr><th>Subject</th><td>${esc(inv.targetSubject)}</td></tr>

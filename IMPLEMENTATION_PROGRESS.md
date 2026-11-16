@@ -1,5 +1,34 @@
 # VERITAS AI implementation progress
 
+## Engine 4 bounded correlation vertical slice — 2026-11-16
+
+- Started clean/synchronized at `2ecf2e4` on `codex/integrate-figma-upgrade`. Audited
+  existing cases, schemas, receipts, diagnostics, storage and reports before implementation.
+- Implemented deterministic case-scoped evidence adapters, URL hubs/literal mentions,
+  attributed source-review links, explicit analyst caption/description bindings, server
+  submitted-byte hashes, contradiction preservation and precision-aware timeline. No
+  OCR/transcription, semantic admission, model/threshold change or global verdict invented.
+- Added owned case correlation API and additive graph/context/run fields; source attachment
+  marks stale, concurrent evidence mutation rejects 409, failed reruns preserve the prior
+  graph/assertions, and atomic write failure cannot acknowledge new evidence. UI in case
+  details supports bounded proof lists, filters, details, timeline, JSON and existing HTML
+  report section. Legacy cases need no migration.
+- Actual generated-image → reviewed authored claim/source → twelve public-post workflow
+  passed in dev and authenticated production, with API/disk/report equality and failed
+  rerun recovery. Verified production artifact: `reports/engine4_workflow_verified.json`.
+  No private store or external corpus was modified; all examples are authored controls.
+- Unit/API scenario, identity, negation, uncertainty, caps, output budget, timeout/abort,
+  isolation, stale/failure/rollback tests passed. Existing Node/API, cross-engine diagnostic
+  and Engine 3 suites passed; Python 68 passed/one absent-AASIST skip; TypeScript/build
+  passed. Production browser regressions 12 passed/three setup skips; configured Engine 4
+  workflow passed separately. Dev HMR collision was resolved without suppressing assertions;
+  remaining test/setup detail is in `docs/ENGINE4_VALIDATION.md`.
+- Authored 3k-post resource control: ~198 ms correlation, ~707 ms including worker startup,
+  sampled process-tree peak ~222 MiB including preview/repeat; node cap hit and disclosed.
+  No >3k processing, real-world accuracy or production scalability claim.
+- Architecture, evidence/API, validation and limitations documents describe the implemented
+  first slice and explicitly deferred scientific/extraction/approximate-matching work.
+
 ## Critical cross-engine diagnostic investigation — 2026-11-16
 
 - Started clean/synchronized at `71819c1` on `codex/integrate-figma-upgrade`. Before

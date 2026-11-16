@@ -8,6 +8,7 @@ export const context = new AsyncLocalStorage<{ ownerId: string }>();
 export const owner = () => context.getStore()?.ownerId || "local-analyst";
 const text = (max = 500) => z.string().trim().min(1).max(max);
 const risk = z.enum(["Informational", "Low", "Medium", "High", "Critical"]);
+export const correlationInput=z.object({contexts:z.array(z.object({mediaId:text(200),claimId:text(200),kind:z.enum(['user_caption','user_description']),text:text(10000),rationale:text(2000),mediaUrl:z.string().url().max(3000).optional()}).strict()).max(32).optional()}).strict();
 export const caseCreate = z
   .object({
     title: text(200),

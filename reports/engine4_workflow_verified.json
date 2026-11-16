@@ -1,0 +1,4881 @@
+{
+  "scope": "authored_actual_frontend_engine4_workflow_not_accuracy",
+  "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+  "apiDiskReportIdentical": true,
+  "sourceFingerprintCurrent": true,
+  "engineStates": {
+    "media": "PARTIAL_ANALYSIS",
+    "claim": "SUFFICIENT_EVIDENCE",
+    "network": "INSUFFICIENT_EVIDENCE"
+  },
+  "invariants": {
+    "mediaAuthenticity": "inconclusive",
+    "mediaDecisionProbability": null,
+    "networkProbability": null
+  },
+  "supportedPath": [
+    {
+      "id": "link:07147244184152d232cc26d518fe2439",
+      "source": "post:9a22960eae51418f8baa04882db32dac",
+      "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "type": "SHARED_CANONICAL_URL",
+      "strength": "exact_reference",
+      "crossEngine": true,
+      "method": "equal normalized HTTP(S) URLs",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/10",
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "url": "https://example.org/engine4-source"
+      },
+      "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+      "limitations": [
+        "Equal address, not verified content identity, stance or causal influence."
+      ]
+    },
+    {
+      "id": "link:10f4e9c307919ec6eddc36d230684d67",
+      "source": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "SOURCE_ADDRESSES_CLAIM",
+      "strength": "exact_reference",
+      "crossEngine": false,
+      "method": "existing attributed exact-quote/context review",
+      "support": [
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "stance": "supports",
+        "reviewed": true,
+        "sourceId": "E1"
+      },
+      "explanation": "SOURCE ADDRESSES CLAIM: existing attributed exact-quote/context review.",
+      "limitations": [
+        "No source credibility or new factual verdict inferred."
+      ]
+    },
+    {
+      "id": "link:164c95158e2e6e6c204d15085660e86d",
+      "source": "post:415fd34100a77a31f595105982a6ab2e",
+      "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "type": "SHARED_CANONICAL_URL",
+      "strength": "exact_reference",
+      "crossEngine": true,
+      "method": "equal normalized HTTP(S) URLs",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/9",
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "url": "https://example.org/engine4-source"
+      },
+      "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+      "limitations": [
+        "Equal address, not verified content identity, stance or causal influence."
+      ]
+    },
+    {
+      "id": "link:1d54fcc44eb8a3d6753c00cf9a8b5183",
+      "source": "post:d1b4454411ea3dfde92d545b4be15508",
+      "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "type": "SHARED_CANONICAL_URL",
+      "strength": "exact_reference",
+      "crossEngine": true,
+      "method": "equal normalized HTTP(S) URLs",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/3",
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "url": "https://example.org/engine4-source"
+      },
+      "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+      "limitations": [
+        "Equal address, not verified content identity, stance or causal influence."
+      ]
+    },
+    {
+      "id": "link:29c935082faacddefca31369abb0002e",
+      "source": "post:a2879ea95bd87f7bc189a16c2f9324e5",
+      "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "type": "SHARED_CANONICAL_URL",
+      "strength": "exact_reference",
+      "crossEngine": true,
+      "method": "equal normalized HTTP(S) URLs",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/1",
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "url": "https://example.org/engine4-source"
+      },
+      "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+      "limitations": [
+        "Equal address, not verified content identity, stance or causal influence."
+      ]
+    },
+    {
+      "id": "link:2bc30188947c21e67006e1e35e6b84aa",
+      "source": "post:f1a2dfe490269a82aaeb3f57a4895e3d",
+      "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "type": "SHARED_CANONICAL_URL",
+      "strength": "exact_reference",
+      "crossEngine": true,
+      "method": "equal normalized HTTP(S) URLs",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/6",
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "url": "https://example.org/engine4-source"
+      },
+      "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+      "limitations": [
+        "Equal address, not verified content identity, stance or causal influence."
+      ]
+    },
+    {
+      "id": "link:2e40d5d0f822522316df9f846f1d6d1b",
+      "source": "post:298bf7c8b9b5ac7eb7830a9df35e4eae",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "POST_CONTAINS_CLAIM",
+      "strength": "literal_mention",
+      "crossEngine": true,
+      "method": "literal NFC/whitespace-normalized span with word boundaries",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/11",
+        "/claimResults/0"
+      ],
+      "measurements": {
+        "spanStart": 0,
+        "spanEnd": 63,
+        "scope": "normalized_text"
+      },
+      "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+      "limitations": [
+        "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+      ]
+    },
+    {
+      "id": "link:3512904001744d401e84b5f9e2bb2c0b",
+      "source": "post:367331de52e5535ef0792e69ab2aee20",
+      "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "type": "SHARED_CANONICAL_URL",
+      "strength": "exact_reference",
+      "crossEngine": true,
+      "method": "equal normalized HTTP(S) URLs",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/8",
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "url": "https://example.org/engine4-source"
+      },
+      "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+      "limitations": [
+        "Equal address, not verified content identity, stance or causal influence."
+      ]
+    },
+    {
+      "id": "link:3c0b29e35bbf8a29884ab9fd19f8c083",
+      "source": "post:298bf7c8b9b5ac7eb7830a9df35e4eae",
+      "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "type": "SHARED_CANONICAL_URL",
+      "strength": "exact_reference",
+      "crossEngine": true,
+      "method": "equal normalized HTTP(S) URLs",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/11",
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "url": "https://example.org/engine4-source"
+      },
+      "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+      "limitations": [
+        "Equal address, not verified content identity, stance or causal influence."
+      ]
+    },
+    {
+      "id": "link:4c11331401b59f29955ac03f6bd452c9",
+      "source": "post:f657672a2a39ff864609ba9cfa8de2a6",
+      "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "type": "SHARED_CANONICAL_URL",
+      "strength": "exact_reference",
+      "crossEngine": true,
+      "method": "equal normalized HTTP(S) URLs",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/0",
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "url": "https://example.org/engine4-source"
+      },
+      "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+      "limitations": [
+        "Equal address, not verified content identity, stance or causal influence."
+      ]
+    },
+    {
+      "id": "link:643b26ea92948ec455b159724b55753b",
+      "source": "post:367331de52e5535ef0792e69ab2aee20",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "POST_CONTAINS_CLAIM",
+      "strength": "literal_mention",
+      "crossEngine": true,
+      "method": "literal NFC/whitespace-normalized span with word boundaries",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/8",
+        "/claimResults/0"
+      ],
+      "measurements": {
+        "spanStart": 0,
+        "spanEnd": 63,
+        "scope": "normalized_text"
+      },
+      "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+      "limitations": [
+        "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+      ]
+    },
+    {
+      "id": "link:6fa638fb2b209ed95fa1dbfe64a78d63",
+      "source": "post:f1a2dfe490269a82aaeb3f57a4895e3d",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "POST_CONTAINS_CLAIM",
+      "strength": "literal_mention",
+      "crossEngine": true,
+      "method": "literal NFC/whitespace-normalized span with word boundaries",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/6",
+        "/claimResults/0"
+      ],
+      "measurements": {
+        "spanStart": 0,
+        "spanEnd": 63,
+        "scope": "normalized_text"
+      },
+      "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+      "limitations": [
+        "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+      ]
+    },
+    {
+      "id": "link:78b3574d325b62283f173f5aa71b7541",
+      "source": "post:9a22960eae51418f8baa04882db32dac",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "POST_CONTAINS_CLAIM",
+      "strength": "literal_mention",
+      "crossEngine": true,
+      "method": "literal NFC/whitespace-normalized span with word boundaries",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/10",
+        "/claimResults/0"
+      ],
+      "measurements": {
+        "spanStart": 0,
+        "spanEnd": 63,
+        "scope": "normalized_text"
+      },
+      "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+      "limitations": [
+        "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+      ]
+    },
+    {
+      "id": "link:84aaf9dff55d13b264ff189ad6665022",
+      "source": "post:b9f1591e8f8851b4d30eb58ee201a99a",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "POST_CONTAINS_CLAIM",
+      "strength": "literal_mention",
+      "crossEngine": true,
+      "method": "literal NFC/whitespace-normalized span with word boundaries",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/7",
+        "/claimResults/0"
+      ],
+      "measurements": {
+        "spanStart": 0,
+        "spanEnd": 63,
+        "scope": "normalized_text"
+      },
+      "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+      "limitations": [
+        "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+      ]
+    },
+    {
+      "id": "link:8b6636cf4f795dd66983687204be6eca",
+      "source": "post:5b69b12ae25fa1581104d755b2aa150c",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "POST_CONTAINS_CLAIM",
+      "strength": "literal_mention",
+      "crossEngine": true,
+      "method": "literal NFC/whitespace-normalized span with word boundaries",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/5",
+        "/claimResults/0"
+      ],
+      "measurements": {
+        "spanStart": 0,
+        "spanEnd": 63,
+        "scope": "normalized_text"
+      },
+      "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+      "limitations": [
+        "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+      ]
+    },
+    {
+      "id": "link:8f3c861b2298e3eca9b34cddebe73dd6",
+      "source": "media_asset:0539fdbd90334f9e5304f54d314b39f6",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "MEDIA_CONTEXT_CLAIM",
+      "strength": "analyst_asserted",
+      "crossEngine": true,
+      "method": "authenticated analyst-supplied context; not extraction",
+      "support": [
+        "/correlationContexts/context:7ecd0338b19ac90a5f6efc56454b93004df9e3a0555a7429e036188419d2eeab"
+      ],
+      "measurements": {
+        "kind": "user_caption",
+        "text": "Software fixture: the fictional Amber Museum offers free entry.",
+        "rationale": "This caption is analyst supplied for the software fixture; no OCR or transcription ran.",
+        "providedBy": "local-analyst",
+        "providedAt": "2026-11-16T11:15:15.424Z"
+      },
+      "explanation": "MEDIA CONTEXT CLAIM: authenticated analyst-supplied context; not extraction.",
+      "limitations": [
+        "Not independently extracted from media; does not verify the caption, claim or media authenticity."
+      ]
+    },
+    {
+      "id": "link:a6589778a80ddddb6c884ff642c30cd1",
+      "source": "post:415fd34100a77a31f595105982a6ab2e",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "POST_CONTAINS_CLAIM",
+      "strength": "literal_mention",
+      "crossEngine": true,
+      "method": "literal NFC/whitespace-normalized span with word boundaries",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/9",
+        "/claimResults/0"
+      ],
+      "measurements": {
+        "spanStart": 0,
+        "spanEnd": 63,
+        "scope": "normalized_text"
+      },
+      "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+      "limitations": [
+        "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+      ]
+    },
+    {
+      "id": "link:b24377fc00a2f7a9fe51fe61a4ae464c",
+      "source": "post:d1b4454411ea3dfde92d545b4be15508",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "POST_CONTAINS_CLAIM",
+      "strength": "literal_mention",
+      "crossEngine": true,
+      "method": "literal NFC/whitespace-normalized span with word boundaries",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/3",
+        "/claimResults/0"
+      ],
+      "measurements": {
+        "spanStart": 0,
+        "spanEnd": 63,
+        "scope": "normalized_text"
+      },
+      "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+      "limitations": [
+        "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+      ]
+    },
+    {
+      "id": "link:b6bd70904b69c028cdad1f73f724885c",
+      "source": "post:b76bc18fbc2e881e46c37ebde83e6e3d",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "POST_CONTAINS_CLAIM",
+      "strength": "literal_mention",
+      "crossEngine": true,
+      "method": "literal NFC/whitespace-normalized span with word boundaries",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/4",
+        "/claimResults/0"
+      ],
+      "measurements": {
+        "spanStart": 0,
+        "spanEnd": 63,
+        "scope": "normalized_text"
+      },
+      "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+      "limitations": [
+        "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+      ]
+    },
+    {
+      "id": "link:c5d0c68df3e782c9f0d8cc06b36898e9",
+      "source": "post:a2879ea95bd87f7bc189a16c2f9324e5",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "POST_CONTAINS_CLAIM",
+      "strength": "literal_mention",
+      "crossEngine": true,
+      "method": "literal NFC/whitespace-normalized span with word boundaries",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/1",
+        "/claimResults/0"
+      ],
+      "measurements": {
+        "spanStart": 0,
+        "spanEnd": 63,
+        "scope": "normalized_text"
+      },
+      "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+      "limitations": [
+        "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+      ]
+    },
+    {
+      "id": "link:ce30078d8ac6442e6e0779a991cc23c2",
+      "source": "post:736cff0ddd657867d7e595b5b09ad257",
+      "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "type": "SHARED_CANONICAL_URL",
+      "strength": "exact_reference",
+      "crossEngine": true,
+      "method": "equal normalized HTTP(S) URLs",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/2",
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "url": "https://example.org/engine4-source"
+      },
+      "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+      "limitations": [
+        "Equal address, not verified content identity, stance or causal influence."
+      ]
+    },
+    {
+      "id": "link:d0711035ecb5d42767d324367244fcc6",
+      "source": "post:5b69b12ae25fa1581104d755b2aa150c",
+      "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "type": "SHARED_CANONICAL_URL",
+      "strength": "exact_reference",
+      "crossEngine": true,
+      "method": "equal normalized HTTP(S) URLs",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/5",
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "url": "https://example.org/engine4-source"
+      },
+      "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+      "limitations": [
+        "Equal address, not verified content identity, stance or causal influence."
+      ]
+    },
+    {
+      "id": "link:d85fa93d5e05637f6e4802444410c5ec",
+      "source": "post:f657672a2a39ff864609ba9cfa8de2a6",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "POST_CONTAINS_CLAIM",
+      "strength": "literal_mention",
+      "crossEngine": true,
+      "method": "literal NFC/whitespace-normalized span with word boundaries",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/0",
+        "/claimResults/0"
+      ],
+      "measurements": {
+        "spanStart": 0,
+        "spanEnd": 63,
+        "scope": "normalized_text"
+      },
+      "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+      "limitations": [
+        "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+      ]
+    },
+    {
+      "id": "link:e96ab00695e0b6a5762a6d5255cc60d3",
+      "source": "post:b9f1591e8f8851b4d30eb58ee201a99a",
+      "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "type": "SHARED_CANONICAL_URL",
+      "strength": "exact_reference",
+      "crossEngine": true,
+      "method": "equal normalized HTTP(S) URLs",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/7",
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "url": "https://example.org/engine4-source"
+      },
+      "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+      "limitations": [
+        "Equal address, not verified content identity, stance or causal influence."
+      ]
+    },
+    {
+      "id": "link:eb27648f79873c70865cd07b1577304c",
+      "source": "post:b76bc18fbc2e881e46c37ebde83e6e3d",
+      "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+      "type": "SHARED_CANONICAL_URL",
+      "strength": "exact_reference",
+      "crossEngine": true,
+      "method": "equal normalized HTTP(S) URLs",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/4",
+        "/claimResults/0/sources/0"
+      ],
+      "measurements": {
+        "url": "https://example.org/engine4-source"
+      },
+      "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+      "limitations": [
+        "Equal address, not verified content identity, stance or causal influence."
+      ]
+    },
+    {
+      "id": "link:f7fbd9d96b02034def2efafe13325380",
+      "source": "post:736cff0ddd657867d7e595b5b09ad257",
+      "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+      "type": "POST_CONTAINS_CLAIM",
+      "strength": "literal_mention",
+      "crossEngine": true,
+      "method": "literal NFC/whitespace-normalized span with word boundaries",
+      "support": [
+        "/campaignResult/episodeEvidence/posts/2",
+        "/claimResults/0"
+      ],
+      "measurements": {
+        "spanStart": 0,
+        "spanEnd": 63,
+        "scope": "normalized_text"
+      },
+      "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+      "limitations": [
+        "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+      ]
+    }
+  ],
+  "correlation": {
+    "schemaVersion": 1,
+    "policy": "correlation_v1",
+    "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+    "inputFingerprint": "0a9bfd060c1949c26796391396c9bd58cb7e819012190c21f1768996950b75e3",
+    "state": "PARTIAL_CORRELATION",
+    "nodes": [
+      {
+        "id": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "account",
+        "engines": [
+          "network"
+        ],
+        "label": "c",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/10",
+          "/campaignResult/episodeEvidence/posts/2",
+          "/campaignResult/episodeEvidence/posts/6"
+        ],
+        "times": [],
+        "statuses": [],
+        "limitations": [
+          "Account identifiers are dataset-scoped and not independently verified identities."
+        ],
+        "metadata": {
+          "accountId": "c"
+        }
+      },
+      {
+        "id": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "account",
+        "engines": [
+          "network"
+        ],
+        "label": "d",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/11",
+          "/campaignResult/episodeEvidence/posts/3",
+          "/campaignResult/episodeEvidence/posts/7"
+        ],
+        "times": [],
+        "statuses": [],
+        "limitations": [
+          "Account identifiers are dataset-scoped and not independently verified identities."
+        ],
+        "metadata": {
+          "accountId": "d"
+        }
+      },
+      {
+        "id": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "account",
+        "engines": [
+          "network"
+        ],
+        "label": "b",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/1",
+          "/campaignResult/episodeEvidence/posts/5",
+          "/campaignResult/episodeEvidence/posts/9"
+        ],
+        "times": [],
+        "statuses": [],
+        "limitations": [
+          "Account identifiers are dataset-scoped and not independently verified identities."
+        ],
+        "metadata": {
+          "accountId": "b"
+        }
+      },
+      {
+        "id": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "account",
+        "engines": [
+          "network"
+        ],
+        "label": "a",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/0",
+          "/campaignResult/episodeEvidence/posts/4",
+          "/campaignResult/episodeEvidence/posts/8"
+        ],
+        "times": [],
+        "statuses": [],
+        "limitations": [
+          "Account identifiers are dataset-scoped and not independently verified identities."
+        ],
+        "metadata": {
+          "accountId": "a"
+        }
+      },
+      {
+        "id": "claim_assessment:33aef494728baca4ec32154840066c97",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "claim_assessment",
+        "engines": [
+          "claim"
+        ],
+        "label": "Supported",
+        "references": [
+          "/claimResults/0"
+        ],
+        "times": [
+          {
+            "kind": "analysis",
+            "original": "2026-11-16T11:15:11.559Z",
+            "utc": "2026-11-16T11:15:11.559Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "SUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Operator corpus engine4-software-corpus; SHA-256 55d792f65e2db23275d1960ebc30e2aed9516da75c1d2e9a18b444c210a19b9a; rights approval is operator attestation, not automated certification; Google Fact Check Tools key not configured; no live retrieval attempted",
+          "Semantic retrieval: unavailable; BM25 lexical fallback",
+          "Dates, time zones, locations, entity identity and negation scope require source-context review.",
+          "Devanagari is not uniquely Hindi; Latin script may be romanized Hindi/Telugu. Script identification is approximate.",
+          "Sentence boundaries only; imperatives, questions and compound assertions require analyst selection.",
+          "Capitalized Latin spans and four-digit numbers only; Hindi/Telugu NER unavailable.",
+          "Relevance is not source credibility or entailment. No numerical truth probability is estimated.",
+          "No automatic translation or trained entailment/NER model ran. Google passages are claim-review metadata, not fetched article bodies."
+        ],
+        "metadata": {
+          "verdict": "Supported"
+        }
+      },
+      {
+        "id": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "claim",
+        "engines": [
+          "claim"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry.",
+        "references": [
+          "/claimResults/0"
+        ],
+        "times": [],
+        "statuses": [
+          "SUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Operator corpus engine4-software-corpus; SHA-256 55d792f65e2db23275d1960ebc30e2aed9516da75c1d2e9a18b444c210a19b9a; rights approval is operator attestation, not automated certification; Google Fact Check Tools key not configured; no live retrieval attempted",
+          "Semantic retrieval: unavailable; BM25 lexical fallback",
+          "Dates, time zones, locations, entity identity and negation scope require source-context review.",
+          "Devanagari is not uniquely Hindi; Latin script may be romanized Hindi/Telugu. Script identification is approximate.",
+          "Sentence boundaries only; imperatives, questions and compound assertions require analyst selection.",
+          "Capitalized Latin spans and four-digit numbers only; Hindi/Telugu NER unavailable.",
+          "Relevance is not source credibility or entailment. No numerical truth probability is estimated.",
+          "No automatic translation or trained entailment/NER model ran. Google passages are claim-review metadata, not fetched article bodies."
+        ],
+        "metadata": {
+          "text": "Software fixture: the fictional Amber Museum offers free entry."
+        }
+      },
+      {
+        "id": "episode:0a6760cf87e741bfb2a75adbf47e2040",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "b ↔ d",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/14"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T02:13:21.000Z",
+            "utc": "2026-01-01T02:13:21.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T02:13:23.000Z",
+            "utc": "2026-01-01T02:13:23.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:88a65055fe1569980ffde807",
+          "source": "b",
+          "target": "d",
+          "familyId": "family:af771a0f6c4c3877227aacdf",
+          "start": "2026-01-01T02:13:21.000Z",
+          "end": "2026-01-01T02:13:23.000Z",
+          "latestPossibleEnd": "2026-01-01T02:13:23.000Z",
+          "witnessIds": [
+            "witness:f5dc4cddce68116e0b70860c"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:1119a5fb18c8691d3f6b46fce02038a4",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "c ↔ d",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/16"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T01:06:42.000Z",
+            "utc": "2026-01-01T01:06:42.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T01:06:43.000Z",
+            "utc": "2026-01-01T01:06:43.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:556a5a0ee53fca2b41f5a986",
+          "source": "c",
+          "target": "d",
+          "familyId": "family:5aab837bb7ccbbb57ee0a6f7",
+          "start": "2026-01-01T01:06:42.000Z",
+          "end": "2026-01-01T01:06:43.000Z",
+          "latestPossibleEnd": "2026-01-01T01:06:43.000Z",
+          "witnessIds": [
+            "witness:288448c72c3c8e552add0060"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:13ce7c7edd3f63369fe0fb5714cce5cf",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "a ↔ c",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/4"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T01:06:40.000Z",
+            "utc": "2026-01-01T01:06:40.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T01:06:42.000Z",
+            "utc": "2026-01-01T01:06:42.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:0173d03f65978e4dd69bd204",
+          "source": "a",
+          "target": "c",
+          "familyId": "family:ed2d3f1b3d474bdd727ddee6",
+          "start": "2026-01-01T01:06:40.000Z",
+          "end": "2026-01-01T01:06:42.000Z",
+          "latestPossibleEnd": "2026-01-01T01:06:42.000Z",
+          "witnessIds": [
+            "witness:13790c08a899a3b7c6c78460"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:16c46407a4aca1685a8ece7508d0376d",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "a ↔ d",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/9"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T00:00:00.000Z",
+            "utc": "2026-01-01T00:00:00.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T00:00:03.000Z",
+            "utc": "2026-01-01T00:00:03.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:56316225e5f633ac1dacc235",
+          "source": "a",
+          "target": "d",
+          "familyId": "family:d60c42f1a470406601e9cead",
+          "start": "2026-01-01T00:00:00.000Z",
+          "end": "2026-01-01T00:00:03.000Z",
+          "latestPossibleEnd": "2026-01-01T00:00:03.000Z",
+          "witnessIds": [
+            "witness:b1643272d0483e77c760abf2"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:5390ebcfca68b83c2237c5ce478376c5",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "c ↔ d",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/15"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T00:00:02.000Z",
+            "utc": "2026-01-01T00:00:02.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T00:00:03.000Z",
+            "utc": "2026-01-01T00:00:03.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:4d92639f9dbdade8c9e864ed",
+          "source": "c",
+          "target": "d",
+          "familyId": "family:5aab837bb7ccbbb57ee0a6f7",
+          "start": "2026-01-01T00:00:02.000Z",
+          "end": "2026-01-01T00:00:03.000Z",
+          "latestPossibleEnd": "2026-01-01T00:00:03.000Z",
+          "witnessIds": [
+            "witness:df576996fac0f4a6acb5fde4"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:5ae36f62192b048c0b94bbda8bedabf4",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "b ↔ c",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/6"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T00:00:01.000Z",
+            "utc": "2026-01-01T00:00:01.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T00:00:02.000Z",
+            "utc": "2026-01-01T00:00:02.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:773a2e34debe8485035cf68d",
+          "source": "b",
+          "target": "c",
+          "familyId": "family:618e4efe4868d4f6a1858119",
+          "start": "2026-01-01T00:00:01.000Z",
+          "end": "2026-01-01T00:00:02.000Z",
+          "latestPossibleEnd": "2026-01-01T00:00:02.000Z",
+          "witnessIds": [
+            "witness:b12feeff82bffcf8628cea90"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:65e31219a5e6d561fa404548bd19221b",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "a ↔ c",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/5"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T02:13:20.000Z",
+            "utc": "2026-01-01T02:13:20.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T02:13:22.000Z",
+            "utc": "2026-01-01T02:13:22.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:a81d68836681bc4096169a5a",
+          "source": "a",
+          "target": "c",
+          "familyId": "family:ed2d3f1b3d474bdd727ddee6",
+          "start": "2026-01-01T02:13:20.000Z",
+          "end": "2026-01-01T02:13:22.000Z",
+          "latestPossibleEnd": "2026-01-01T02:13:22.000Z",
+          "witnessIds": [
+            "witness:0f8c0c4f398d4a64ce5fee61"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:6705392649b4bb0ba9072c1832073e1b",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "b ↔ c",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/7"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T01:06:41.000Z",
+            "utc": "2026-01-01T01:06:41.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T01:06:42.000Z",
+            "utc": "2026-01-01T01:06:42.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:6e5c387beb68cd5a700c7dbf",
+          "source": "b",
+          "target": "c",
+          "familyId": "family:618e4efe4868d4f6a1858119",
+          "start": "2026-01-01T01:06:41.000Z",
+          "end": "2026-01-01T01:06:42.000Z",
+          "latestPossibleEnd": "2026-01-01T01:06:42.000Z",
+          "witnessIds": [
+            "witness:ffecc0fc58b12aaee1360974"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:67a729b8c5e48535c78b190132241ba5",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "a ↔ c",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/3"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T00:00:00.000Z",
+            "utc": "2026-01-01T00:00:00.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T00:00:02.000Z",
+            "utc": "2026-01-01T00:00:02.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:ad18c3b21f8259e7a360a16a",
+          "source": "a",
+          "target": "c",
+          "familyId": "family:ed2d3f1b3d474bdd727ddee6",
+          "start": "2026-01-01T00:00:00.000Z",
+          "end": "2026-01-01T00:00:02.000Z",
+          "latestPossibleEnd": "2026-01-01T00:00:02.000Z",
+          "witnessIds": [
+            "witness:908a993ef6f32381a4ff3845"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:6d68d59cb109e184927323ccf1698158",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "b ↔ d",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/12"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T00:00:01.000Z",
+            "utc": "2026-01-01T00:00:01.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T00:00:03.000Z",
+            "utc": "2026-01-01T00:00:03.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:14e8bc571b35c7d5e1af8b78",
+          "source": "b",
+          "target": "d",
+          "familyId": "family:af771a0f6c4c3877227aacdf",
+          "start": "2026-01-01T00:00:01.000Z",
+          "end": "2026-01-01T00:00:03.000Z",
+          "latestPossibleEnd": "2026-01-01T00:00:03.000Z",
+          "witnessIds": [
+            "witness:e380acea8f0e510384bd6fb1"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:7c9b114cbffe44e63df01a37d8a351dd",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "a ↔ b",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/2"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T02:13:20.000Z",
+            "utc": "2026-01-01T02:13:20.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T02:13:21.000Z",
+            "utc": "2026-01-01T02:13:21.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:0b6b0746aba53129b227f5bc",
+          "source": "a",
+          "target": "b",
+          "familyId": "family:d3712c1ea6f6126e4a605fcd",
+          "start": "2026-01-01T02:13:20.000Z",
+          "end": "2026-01-01T02:13:21.000Z",
+          "latestPossibleEnd": "2026-01-01T02:13:21.000Z",
+          "witnessIds": [
+            "witness:bc7f2e4476ad3268e9f913ff"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:8139bc6ac84d8f2f7bacbe2fcf6e904b",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "a ↔ b",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/0"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T00:00:00.000Z",
+            "utc": "2026-01-01T00:00:00.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T00:00:01.000Z",
+            "utc": "2026-01-01T00:00:01.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:c011f88b891a2640d4b88545",
+          "source": "a",
+          "target": "b",
+          "familyId": "family:d3712c1ea6f6126e4a605fcd",
+          "start": "2026-01-01T00:00:00.000Z",
+          "end": "2026-01-01T00:00:01.000Z",
+          "latestPossibleEnd": "2026-01-01T00:00:01.000Z",
+          "witnessIds": [
+            "witness:d708f336872b6ab96c87b461"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:9993686e27ebdc6d49f459a0e762af6a",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "b ↔ d",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/13"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T01:06:41.000Z",
+            "utc": "2026-01-01T01:06:41.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T01:06:43.000Z",
+            "utc": "2026-01-01T01:06:43.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:cf985b44728503f2250a9633",
+          "source": "b",
+          "target": "d",
+          "familyId": "family:af771a0f6c4c3877227aacdf",
+          "start": "2026-01-01T01:06:41.000Z",
+          "end": "2026-01-01T01:06:43.000Z",
+          "latestPossibleEnd": "2026-01-01T01:06:43.000Z",
+          "witnessIds": [
+            "witness:1aca428f2d2eccf4fc6773ca"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:bf512904be235c5818894a26ecf8bb7a",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "a ↔ d",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/11"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T02:13:20.000Z",
+            "utc": "2026-01-01T02:13:20.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T02:13:23.000Z",
+            "utc": "2026-01-01T02:13:23.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:0d63fe9d8f184130981bb85b",
+          "source": "a",
+          "target": "d",
+          "familyId": "family:d60c42f1a470406601e9cead",
+          "start": "2026-01-01T02:13:20.000Z",
+          "end": "2026-01-01T02:13:23.000Z",
+          "latestPossibleEnd": "2026-01-01T02:13:23.000Z",
+          "witnessIds": [
+            "witness:7421ea14d1b4f62472b47a4a"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:c921db88a500cb8189ec46292e8b92d5",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "b ↔ c",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/8"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T02:13:21.000Z",
+            "utc": "2026-01-01T02:13:21.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T02:13:22.000Z",
+            "utc": "2026-01-01T02:13:22.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:53b29c9d41297507a0ee3992",
+          "source": "b",
+          "target": "c",
+          "familyId": "family:618e4efe4868d4f6a1858119",
+          "start": "2026-01-01T02:13:21.000Z",
+          "end": "2026-01-01T02:13:22.000Z",
+          "latestPossibleEnd": "2026-01-01T02:13:22.000Z",
+          "witnessIds": [
+            "witness:ee26c3982d5bc3a45a09c83d"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:cf4b59f56b3a0624d722ac90ef6864d1",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "a ↔ d",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/10"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T01:06:40.000Z",
+            "utc": "2026-01-01T01:06:40.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T01:06:43.000Z",
+            "utc": "2026-01-01T01:06:43.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:2479b688383fd87ddd55d8e4",
+          "source": "a",
+          "target": "d",
+          "familyId": "family:d60c42f1a470406601e9cead",
+          "start": "2026-01-01T01:06:40.000Z",
+          "end": "2026-01-01T01:06:43.000Z",
+          "latestPossibleEnd": "2026-01-01T01:06:43.000Z",
+          "witnessIds": [
+            "witness:c7bc56303f97dd11b195a388"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:e36aaadbcf67a5b02619948520147ade",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "a ↔ b",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/1"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T01:06:40.000Z",
+            "utc": "2026-01-01T01:06:40.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T01:06:41.000Z",
+            "utc": "2026-01-01T01:06:41.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:cc065f544e2d20bd4aa14e90",
+          "source": "a",
+          "target": "b",
+          "familyId": "family:d3712c1ea6f6126e4a605fcd",
+          "start": "2026-01-01T01:06:40.000Z",
+          "end": "2026-01-01T01:06:41.000Z",
+          "latestPossibleEnd": "2026-01-01T01:06:41.000Z",
+          "witnessIds": [
+            "witness:773bba064a15d44084e9151d"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "episode:ee8c3b6829eb05bbc6941905c789e30b",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "episode",
+        "engines": [
+          "network"
+        ],
+        "label": "c ↔ d",
+        "references": [
+          "/campaignResult/episodeEvidence/episodes/17"
+        ],
+        "times": [
+          {
+            "kind": "episode_start",
+            "original": "2026-01-01T02:13:22.000Z",
+            "utc": "2026-01-01T02:13:22.000Z",
+            "resolutionMs": 1
+          },
+          {
+            "kind": "episode_end",
+            "original": "2026-01-01T02:13:23.000Z",
+            "utc": "2026-01-01T02:13:23.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "id": "episode:1ce12ce6be0377928c977dfd",
+          "source": "c",
+          "target": "d",
+          "familyId": "family:5aab837bb7ccbbb57ee0a6f7",
+          "start": "2026-01-01T02:13:22.000Z",
+          "end": "2026-01-01T02:13:23.000Z",
+          "latestPossibleEnd": "2026-01-01T02:13:23.000Z",
+          "witnessIds": [
+            "witness:8a147e23f0dd965719470bc7"
+          ],
+          "separatedFromPrevious": true,
+          "preciseProvidedIds": true,
+          "coverage": {
+            "start": "2025-12-31T23:59:00.000Z",
+            "end": "2026-01-01T05:33:20.000Z",
+            "complete": true,
+            "source": "Explicit authored software control observation window"
+          },
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "investigation:cf58e7242dc779dfd2c0af0e3f99ef99",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "investigation",
+        "engines": [
+          "investigation"
+        ],
+        "label": "Investigation",
+        "references": [
+          "/id"
+        ],
+        "times": [
+          {
+            "kind": "ingestion",
+            "original": "2026-11-16T11:15:10.186Z",
+            "utc": "2026-11-16T11:15:10.186Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [],
+        "limitations": [],
+        "metadata": {
+          "simulated": false
+        }
+      },
+      {
+        "id": "media_asset:0539fdbd90334f9e5304f54d314b39f6",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "media_asset",
+        "engines": [
+          "media"
+        ],
+        "label": "engine4-authored.png",
+        "references": [
+          "/mediaFindings/0"
+        ],
+        "times": [],
+        "statuses": [
+          "PARTIAL_ANALYSIS"
+        ],
+        "limitations": [
+          "Byte equality applies only to bytes actually submitted, not publication provenance or authenticity."
+        ],
+        "metadata": {
+          "submittedMedia": {
+            "sha256": "ebee394e41386893e365bab36916668522c516e325de348f1a7a593998e75687",
+            "byteLength": 287,
+            "scope": "submitted_analysis_bytes",
+            "computedBy": "server"
+          },
+          "clientDeclaredHash": "ebee394e41386893e365bab36916668522c516e325de348f1a7a593998e75687",
+          "identityBasis": "server_received_bytes"
+        }
+      },
+      {
+        "id": "media_observation:aa2599b0e3b6aa1e6bb5b7819cb40968",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "media_observation",
+        "engines": [
+          "media"
+        ],
+        "label": "image observations",
+        "references": [
+          "/mediaFindings/0"
+        ],
+        "times": [
+          {
+            "kind": "analysis",
+            "original": "2026-11-16T11:15:10.102Z",
+            "utc": "2026-11-16T11:15:10.102Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "PARTIAL_ANALYSIS"
+        ],
+        "limitations": [
+          "AI generation, manipulation, misleading context and factual accuracy are different questions.",
+          "Browser measurements are client-supplied screening evidence, not trusted server forensic attestation.",
+          "ELA, ordinary scene differences, codec bandwidth and missing metadata do not prove deepfaking.",
+          "Browser C2PA byte-pattern hints are unverified; consult the separate server provenance result when available.",
+          "Whole-image classifier did not run.",
+          "Face candidates do not establish manipulation or authenticity.",
+          "A real-looking result is not proof of authenticity."
+        ],
+        "metadata": {
+          "measurements": {
+            "analysisInput": "original file bytes",
+            "width": 64,
+            "height": 64,
+            "format": "image/png",
+            "fileSizeKB": 0,
+            "elaMean": 0,
+            "elaScore": 0,
+            "elaBlockRatio": 0,
+            "hasExif": false,
+            "c2paManifest": false,
+            "provenanceAI": false,
+            "sourceSha256": "ebee394e41386893e365bab36916668522c516e325de348f1a7a593998e75687"
+          },
+          "diagnosticCounts": {
+            "evidenceItems": 9,
+            "clientMeasurements": 6,
+            "imageSignalMeasurements": 3,
+            "sampledFrames": 0,
+            "scoredAudioSegments": 0,
+            "rawClassifierOutputs": 0
+          },
+          "errorCategory": null,
+          "authenticity": "inconclusive",
+          "wholeImageModel": "unavailable",
+          "rawUncalibratedImageScore": null,
+          "faceModel": "unavailable",
+          "rawUncalibratedFaceScores": []
+        }
+      },
+      {
+        "id": "network_relationship:2e3ebed9ffc96a2cb0fb41da97834f98",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "network_relationship",
+        "engines": [
+          "network"
+        ],
+        "label": "a ↔ c",
+        "references": [
+          "/campaignResult/episodeEvidence/associations/1"
+        ],
+        "times": [],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "edgeId": "association:87494a1b580146b76dc4a0a3",
+          "source": "a",
+          "target": "c",
+          "witnessIds": [
+            "witness:908a993ef6f32381a4ff3845",
+            "witness:13790c08a899a3b7c6c78460",
+            "witness:0f8c0c4f398d4a64ce5fee61"
+          ],
+          "episodeIds": [
+            "episode:ad18c3b21f8259e7a360a16a",
+            "episode:0173d03f65978e4dd69bd204",
+            "episode:a81d68836681bc4096169a5a"
+          ],
+          "separatedEpisodeCount": 3,
+          "recurrenceEligible": true,
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "network_relationship:37cd88ec067ebd8f17c14e5031e07731",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "network_relationship",
+        "engines": [
+          "network"
+        ],
+        "label": "b ↔ d",
+        "references": [
+          "/campaignResult/episodeEvidence/associations/4"
+        ],
+        "times": [],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "edgeId": "association:acce901f108e9390eb53c0b8",
+          "source": "b",
+          "target": "d",
+          "witnessIds": [
+            "witness:e380acea8f0e510384bd6fb1",
+            "witness:1aca428f2d2eccf4fc6773ca",
+            "witness:f5dc4cddce68116e0b70860c"
+          ],
+          "episodeIds": [
+            "episode:14e8bc571b35c7d5e1af8b78",
+            "episode:cf985b44728503f2250a9633",
+            "episode:88a65055fe1569980ffde807"
+          ],
+          "separatedEpisodeCount": 3,
+          "recurrenceEligible": true,
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "network_relationship:801358b220d7dca4c608a773ec4af11f",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "network_relationship",
+        "engines": [
+          "network"
+        ],
+        "label": "b ↔ c",
+        "references": [
+          "/campaignResult/episodeEvidence/associations/2"
+        ],
+        "times": [],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "edgeId": "association:2e42d67888ff96b92b614e3b",
+          "source": "b",
+          "target": "c",
+          "witnessIds": [
+            "witness:b12feeff82bffcf8628cea90",
+            "witness:ffecc0fc58b12aaee1360974",
+            "witness:ee26c3982d5bc3a45a09c83d"
+          ],
+          "episodeIds": [
+            "episode:773a2e34debe8485035cf68d",
+            "episode:6e5c387beb68cd5a700c7dbf",
+            "episode:53b29c9d41297507a0ee3992"
+          ],
+          "separatedEpisodeCount": 3,
+          "recurrenceEligible": true,
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "network_relationship:bc0e491ccf825dd1a8662d751b538b45",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "network_relationship",
+        "engines": [
+          "network"
+        ],
+        "label": "a ↔ d",
+        "references": [
+          "/campaignResult/episodeEvidence/associations/3"
+        ],
+        "times": [],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "edgeId": "association:a741ad8cccb5a6f6f1b9b57e",
+          "source": "a",
+          "target": "d",
+          "witnessIds": [
+            "witness:b1643272d0483e77c760abf2",
+            "witness:c7bc56303f97dd11b195a388",
+            "witness:7421ea14d1b4f62472b47a4a"
+          ],
+          "episodeIds": [
+            "episode:56316225e5f633ac1dacc235",
+            "episode:2479b688383fd87ddd55d8e4",
+            "episode:0d63fe9d8f184130981bb85b"
+          ],
+          "separatedEpisodeCount": 3,
+          "recurrenceEligible": true,
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "network_relationship:c563be0c4fd8534b5b83fec176fdcbc0",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "network_relationship",
+        "engines": [
+          "network"
+        ],
+        "label": "c ↔ d",
+        "references": [
+          "/campaignResult/episodeEvidence/associations/5"
+        ],
+        "times": [],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "edgeId": "association:2433aab21a992126ff93e173",
+          "source": "c",
+          "target": "d",
+          "witnessIds": [
+            "witness:df576996fac0f4a6acb5fde4",
+            "witness:288448c72c3c8e552add0060",
+            "witness:8a147e23f0dd965719470bc7"
+          ],
+          "episodeIds": [
+            "episode:4d92639f9dbdade8c9e864ed",
+            "episode:556a5a0ee53fca2b41f5a986",
+            "episode:1ce12ce6be0377928c977dfd"
+          ],
+          "separatedEpisodeCount": 3,
+          "recurrenceEligible": true,
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "network_relationship:d93bf7ea82aa88442544c37b004f456b",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "network_relationship",
+        "engines": [
+          "network"
+        ],
+        "label": "a ↔ b",
+        "references": [
+          "/campaignResult/episodeEvidence/associations/0"
+        ],
+        "times": [],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Coverage completeness is an operator declaration, not independently verified.",
+          "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur.",
+          "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family."
+        ],
+        "metadata": {
+          "edgeId": "association:0473ef2dc0d324ab659d3580",
+          "source": "a",
+          "target": "b",
+          "witnessIds": [
+            "witness:d708f336872b6ab96c87b461",
+            "witness:773bba064a15d44084e9151d",
+            "witness:bc7f2e4476ad3268e9f913ff"
+          ],
+          "episodeIds": [
+            "episode:c011f88b891a2640d4b88545",
+            "episode:cc065f544e2d20bd4aa14e90",
+            "episode:0b6b0746aba53129b227f5bc"
+          ],
+          "separatedEpisodeCount": 3,
+          "recurrenceEligible": true,
+          "coverageComplete": true
+        }
+      },
+      {
+        "id": "post:298bf7c8b9b5ac7eb7830a9df35e4eae",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "post",
+        "engines": [
+          "network"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/11"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01T02:13:23.000Z",
+            "utc": "2026-01-01T02:13:23.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Source timestamp precision/coverage limitations remain applicable."
+        ],
+        "metadata": {
+          "postId": "d-2",
+          "accountId": "d",
+          "inputReference": "input:b52a3b65362a7f69eff2da08",
+          "text": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+          "resolutionMs": 1,
+          "latestPossibleTimestamp": "2026-01-01T02:13:23.000Z",
+          "sourceMetadata": [
+            {
+              "postId": "d-2",
+              "originalTimestamp": "2026-01-01T02:13:23.000Z",
+              "declaredTimestampPrecision": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "post:367331de52e5535ef0792e69ab2aee20",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "post",
+        "engines": [
+          "network"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/8"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01T02:13:20.000Z",
+            "utc": "2026-01-01T02:13:20.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Source timestamp precision/coverage limitations remain applicable."
+        ],
+        "metadata": {
+          "postId": "a-2",
+          "accountId": "a",
+          "inputReference": "input:a1110a904a0e0d87bd419b63",
+          "text": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+          "resolutionMs": 1,
+          "latestPossibleTimestamp": "2026-01-01T02:13:20.000Z",
+          "sourceMetadata": [
+            {
+              "postId": "a-2",
+              "originalTimestamp": "2026-01-01T02:13:20.000Z",
+              "declaredTimestampPrecision": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "post:415fd34100a77a31f595105982a6ab2e",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "post",
+        "engines": [
+          "network"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/9"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01T02:13:21.000Z",
+            "utc": "2026-01-01T02:13:21.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Source timestamp precision/coverage limitations remain applicable."
+        ],
+        "metadata": {
+          "postId": "b-2",
+          "accountId": "b",
+          "inputReference": "input:4221e25c33823a509788721a",
+          "text": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+          "resolutionMs": 1,
+          "latestPossibleTimestamp": "2026-01-01T02:13:21.000Z",
+          "sourceMetadata": [
+            {
+              "postId": "b-2",
+              "originalTimestamp": "2026-01-01T02:13:21.000Z",
+              "declaredTimestampPrecision": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "post:5b69b12ae25fa1581104d755b2aa150c",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "post",
+        "engines": [
+          "network"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/5"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01T01:06:41.000Z",
+            "utc": "2026-01-01T01:06:41.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Source timestamp precision/coverage limitations remain applicable."
+        ],
+        "metadata": {
+          "postId": "b-1",
+          "accountId": "b",
+          "inputReference": "input:3f89817da3895976a62d7026",
+          "text": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+          "resolutionMs": 1,
+          "latestPossibleTimestamp": "2026-01-01T01:06:41.000Z",
+          "sourceMetadata": [
+            {
+              "postId": "b-1",
+              "originalTimestamp": "2026-01-01T01:06:41.000Z",
+              "declaredTimestampPrecision": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "post:736cff0ddd657867d7e595b5b09ad257",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "post",
+        "engines": [
+          "network"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/2"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01T00:00:02.000Z",
+            "utc": "2026-01-01T00:00:02.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Source timestamp precision/coverage limitations remain applicable."
+        ],
+        "metadata": {
+          "postId": "c-0",
+          "accountId": "c",
+          "inputReference": "input:8e9b2dbdaa4ac3cfa79b15b8",
+          "text": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+          "resolutionMs": 1,
+          "latestPossibleTimestamp": "2026-01-01T00:00:02.000Z",
+          "sourceMetadata": [
+            {
+              "postId": "c-0",
+              "originalTimestamp": "2026-01-01T00:00:02.000Z",
+              "declaredTimestampPrecision": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "post:9a22960eae51418f8baa04882db32dac",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "post",
+        "engines": [
+          "network"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/10"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01T02:13:22.000Z",
+            "utc": "2026-01-01T02:13:22.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Source timestamp precision/coverage limitations remain applicable."
+        ],
+        "metadata": {
+          "postId": "c-2",
+          "accountId": "c",
+          "inputReference": "input:92667ed165742e8064d9d02c",
+          "text": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+          "resolutionMs": 1,
+          "latestPossibleTimestamp": "2026-01-01T02:13:22.000Z",
+          "sourceMetadata": [
+            {
+              "postId": "c-2",
+              "originalTimestamp": "2026-01-01T02:13:22.000Z",
+              "declaredTimestampPrecision": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "post:a2879ea95bd87f7bc189a16c2f9324e5",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "post",
+        "engines": [
+          "network"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/1"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01T00:00:01.000Z",
+            "utc": "2026-01-01T00:00:01.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Source timestamp precision/coverage limitations remain applicable."
+        ],
+        "metadata": {
+          "postId": "b-0",
+          "accountId": "b",
+          "inputReference": "input:415ffdc3b96e7795388d1b4a",
+          "text": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+          "resolutionMs": 1,
+          "latestPossibleTimestamp": "2026-01-01T00:00:01.000Z",
+          "sourceMetadata": [
+            {
+              "postId": "b-0",
+              "originalTimestamp": "2026-01-01T00:00:01.000Z",
+              "declaredTimestampPrecision": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "post:b76bc18fbc2e881e46c37ebde83e6e3d",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "post",
+        "engines": [
+          "network"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/4"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01T01:06:40.000Z",
+            "utc": "2026-01-01T01:06:40.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Source timestamp precision/coverage limitations remain applicable."
+        ],
+        "metadata": {
+          "postId": "a-1",
+          "accountId": "a",
+          "inputReference": "input:ec066e9621c2d9cdd3922035",
+          "text": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+          "resolutionMs": 1,
+          "latestPossibleTimestamp": "2026-01-01T01:06:40.000Z",
+          "sourceMetadata": [
+            {
+              "postId": "a-1",
+              "originalTimestamp": "2026-01-01T01:06:40.000Z",
+              "declaredTimestampPrecision": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "post:b9f1591e8f8851b4d30eb58ee201a99a",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "post",
+        "engines": [
+          "network"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/7"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01T01:06:43.000Z",
+            "utc": "2026-01-01T01:06:43.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Source timestamp precision/coverage limitations remain applicable."
+        ],
+        "metadata": {
+          "postId": "d-1",
+          "accountId": "d",
+          "inputReference": "input:2c3b7df9122ce867adfefb70",
+          "text": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+          "resolutionMs": 1,
+          "latestPossibleTimestamp": "2026-01-01T01:06:43.000Z",
+          "sourceMetadata": [
+            {
+              "postId": "d-1",
+              "originalTimestamp": "2026-01-01T01:06:43.000Z",
+              "declaredTimestampPrecision": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "post:d1b4454411ea3dfde92d545b4be15508",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "post",
+        "engines": [
+          "network"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/3"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01T00:00:03.000Z",
+            "utc": "2026-01-01T00:00:03.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Source timestamp precision/coverage limitations remain applicable."
+        ],
+        "metadata": {
+          "postId": "d-0",
+          "accountId": "d",
+          "inputReference": "input:1f14efe1172669686b9b82be",
+          "text": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+          "resolutionMs": 1,
+          "latestPossibleTimestamp": "2026-01-01T00:00:03.000Z",
+          "sourceMetadata": [
+            {
+              "postId": "d-0",
+              "originalTimestamp": "2026-01-01T00:00:03.000Z",
+              "declaredTimestampPrecision": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "post:f1a2dfe490269a82aaeb3f57a4895e3d",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "post",
+        "engines": [
+          "network"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/6"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01T01:06:42.000Z",
+            "utc": "2026-01-01T01:06:42.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Source timestamp precision/coverage limitations remain applicable."
+        ],
+        "metadata": {
+          "postId": "c-1",
+          "accountId": "c",
+          "inputReference": "input:cbdc0110b131f09096dbaf23",
+          "text": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+          "resolutionMs": 1,
+          "latestPossibleTimestamp": "2026-01-01T01:06:42.000Z",
+          "sourceMetadata": [
+            {
+              "postId": "c-1",
+              "originalTimestamp": "2026-01-01T01:06:42.000Z",
+              "declaredTimestampPrecision": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "post:f657672a2a39ff864609ba9cfa8de2a6",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "post",
+        "engines": [
+          "network"
+        ],
+        "label": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/0"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01T00:00:00.000Z",
+            "utc": "2026-01-01T00:00:00.000Z",
+            "resolutionMs": 1
+          }
+        ],
+        "statuses": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "limitations": [
+          "Source timestamp precision/coverage limitations remain applicable."
+        ],
+        "metadata": {
+          "postId": "a-0",
+          "accountId": "a",
+          "inputReference": "input:9f3fe8506d412a85f17665d0",
+          "text": "Software fixture: the fictional Amber Museum offers free entry. https://example.org/engine4-source",
+          "resolutionMs": 1,
+          "latestPossibleTimestamp": "2026-01-01T00:00:00.000Z",
+          "sourceMetadata": [
+            {
+              "postId": "a-0",
+              "originalTimestamp": "2026-01-01T00:00:00.000Z",
+              "declaredTimestampPrecision": null
+            }
+          ]
+        }
+      },
+      {
+        "id": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "source",
+        "engines": [
+          "claim"
+        ],
+        "label": "Fictional Engine4 source",
+        "references": [
+          "/claimResults/0/sources/0"
+        ],
+        "times": [
+          {
+            "kind": "publication",
+            "original": "2026-01-01",
+            "utc": "2026-01-01T00:00:00.000Z",
+            "resolutionMs": 86400000
+          },
+          {
+            "kind": "retrieved",
+            "original": "2026-01-01T00:00:00Z",
+            "utc": "2026-01-01T00:00:00.000Z",
+            "resolutionMs": 1000
+          }
+        ],
+        "statuses": [],
+        "limitations": [
+          "Retrieval/relevance is not independent source credibility or entailment."
+        ],
+        "metadata": {
+          "url": "https://example.org/engine4-source",
+          "sourceId": "E1",
+          "excerpt": "Software fixture: the fictional Amber Museum offers free entry.",
+          "stance": "supports",
+          "review": {
+            "quote": "Software fixture: the fictional Amber Museum offers free entry.",
+            "contextConfirmed": true,
+            "reviewedBy": "local-analyst",
+            "reviewedAt": "2026-11-16T11:15:11.559Z",
+            "claim": "Software fixture: the fictional Amber Museum offers free entry.",
+            "note": "Authored software fixture: complete assertion and source context reviewed; not a real factual assessment."
+          },
+          "provider": "operator_corpus"
+        }
+      },
+      {
+        "id": "url:da24b40a204972b0faca216a6ff70e54",
+        "investigationId": "fa28eb87-ed80-4c73-a606-04a2981798e0",
+        "type": "url",
+        "engines": [
+          "claim",
+          "network"
+        ],
+        "label": "https://example.org/engine4-source",
+        "references": [
+          "/campaignResult/episodeEvidence/posts/0",
+          "/campaignResult/episodeEvidence/posts/1",
+          "/campaignResult/episodeEvidence/posts/10",
+          "/campaignResult/episodeEvidence/posts/11",
+          "/campaignResult/episodeEvidence/posts/2",
+          "/campaignResult/episodeEvidence/posts/3",
+          "/campaignResult/episodeEvidence/posts/4",
+          "/campaignResult/episodeEvidence/posts/5",
+          "/campaignResult/episodeEvidence/posts/6",
+          "/campaignResult/episodeEvidence/posts/7",
+          "/campaignResult/episodeEvidence/posts/8",
+          "/campaignResult/episodeEvidence/posts/9",
+          "/claimResults/0/sources/0"
+        ],
+        "times": [],
+        "statuses": [],
+        "limitations": [
+          "URL equality is not proof of document or media byte identity. Query strings are preserved; fragments omitted."
+        ],
+        "metadata": {
+          "canonicalUrl": "https://example.org/engine4-source"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "id": "link:07147244184152d232cc26d518fe2439",
+        "source": "post:9a22960eae51418f8baa04882db32dac",
+        "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "type": "SHARED_CANONICAL_URL",
+        "strength": "exact_reference",
+        "crossEngine": true,
+        "method": "equal normalized HTTP(S) URLs",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/10",
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "url": "https://example.org/engine4-source"
+        },
+        "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+        "limitations": [
+          "Equal address, not verified content identity, stance or causal influence."
+        ]
+      },
+      {
+        "id": "link:10f4e9c307919ec6eddc36d230684d67",
+        "source": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "SOURCE_ADDRESSES_CLAIM",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "existing attributed exact-quote/context review",
+        "support": [
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "stance": "supports",
+          "reviewed": true,
+          "sourceId": "E1"
+        },
+        "explanation": "SOURCE ADDRESSES CLAIM: existing attributed exact-quote/context review.",
+        "limitations": [
+          "No source credibility or new factual verdict inferred."
+        ]
+      },
+      {
+        "id": "link:1159271b8703b670adf82e023466e591",
+        "source": "post:9a22960eae51418f8baa04882db32dac",
+        "target": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "type": "AUTHORED_BY",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "account identifier in imported post",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/10"
+        ],
+        "measurements": {},
+        "explanation": "AUTHORED BY: account identifier in imported post.",
+        "limitations": []
+      },
+      {
+        "id": "link:164c95158e2e6e6c204d15085660e86d",
+        "source": "post:415fd34100a77a31f595105982a6ab2e",
+        "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "type": "SHARED_CANONICAL_URL",
+        "strength": "exact_reference",
+        "crossEngine": true,
+        "method": "equal normalized HTTP(S) URLs",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/9",
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "url": "https://example.org/engine4-source"
+        },
+        "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+        "limitations": [
+          "Equal address, not verified content identity, stance or causal influence."
+        ]
+      },
+      {
+        "id": "link:16e8e89d341177165bda309369629217",
+        "source": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "target": "episode:13ce7c7edd3f63369fe0fb5714cce5cf",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/4"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:1b73820daf08e42dd1f2b7269b151088",
+        "source": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "target": "episode:1119a5fb18c8691d3f6b46fce02038a4",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/16"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:1d0fa8e004ad9421a84f9ba97ab454a3",
+        "source": "post:5b69b12ae25fa1581104d755b2aa150c",
+        "target": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "type": "AUTHORED_BY",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "account identifier in imported post",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/5"
+        ],
+        "measurements": {},
+        "explanation": "AUTHORED BY: account identifier in imported post.",
+        "limitations": []
+      },
+      {
+        "id": "link:1d54fcc44eb8a3d6753c00cf9a8b5183",
+        "source": "post:d1b4454411ea3dfde92d545b4be15508",
+        "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "type": "SHARED_CANONICAL_URL",
+        "strength": "exact_reference",
+        "crossEngine": true,
+        "method": "equal normalized HTTP(S) URLs",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/3",
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "url": "https://example.org/engine4-source"
+        },
+        "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+        "limitations": [
+          "Equal address, not verified content identity, stance or causal influence."
+        ]
+      },
+      {
+        "id": "link:2130ecff6019b43971e3fc9951fb57f7",
+        "source": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "target": "episode:c921db88a500cb8189ec46292e8b92d5",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/8"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:29c935082faacddefca31369abb0002e",
+        "source": "post:a2879ea95bd87f7bc189a16c2f9324e5",
+        "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "type": "SHARED_CANONICAL_URL",
+        "strength": "exact_reference",
+        "crossEngine": true,
+        "method": "equal normalized HTTP(S) URLs",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/1",
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "url": "https://example.org/engine4-source"
+        },
+        "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+        "limitations": [
+          "Equal address, not verified content identity, stance or causal influence."
+        ]
+      },
+      {
+        "id": "link:2bbbeea58f9230ea4a4a56a62240d638",
+        "source": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "target": "episode:67a729b8c5e48535c78b190132241ba5",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/3"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:2bc30188947c21e67006e1e35e6b84aa",
+        "source": "post:f1a2dfe490269a82aaeb3f57a4895e3d",
+        "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "type": "SHARED_CANONICAL_URL",
+        "strength": "exact_reference",
+        "crossEngine": true,
+        "method": "equal normalized HTTP(S) URLs",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/6",
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "url": "https://example.org/engine4-source"
+        },
+        "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+        "limitations": [
+          "Equal address, not verified content identity, stance or causal influence."
+        ]
+      },
+      {
+        "id": "link:2e40d5d0f822522316df9f846f1d6d1b",
+        "source": "post:298bf7c8b9b5ac7eb7830a9df35e4eae",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "POST_CONTAINS_CLAIM",
+        "strength": "literal_mention",
+        "crossEngine": true,
+        "method": "literal NFC/whitespace-normalized span with word boundaries",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/11",
+          "/claimResults/0"
+        ],
+        "measurements": {
+          "spanStart": 0,
+          "spanEnd": 63,
+          "scope": "normalized_text"
+        },
+        "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+        "limitations": [
+          "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+        ]
+      },
+      {
+        "id": "link:2fc07b5cc3b53755871446e3c4e620da",
+        "source": "post:b76bc18fbc2e881e46c37ebde83e6e3d",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/4"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:3512904001744d401e84b5f9e2bb2c0b",
+        "source": "post:367331de52e5535ef0792e69ab2aee20",
+        "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "type": "SHARED_CANONICAL_URL",
+        "strength": "exact_reference",
+        "crossEngine": true,
+        "method": "equal normalized HTTP(S) URLs",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/8",
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "url": "https://example.org/engine4-source"
+        },
+        "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+        "limitations": [
+          "Equal address, not verified content identity, stance or causal influence."
+        ]
+      },
+      {
+        "id": "link:3583c3ec412990ea2a3858499530ddf5",
+        "source": "post:b9f1591e8f8851b4d30eb58ee201a99a",
+        "target": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "type": "AUTHORED_BY",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "account identifier in imported post",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/7"
+        ],
+        "measurements": {},
+        "explanation": "AUTHORED BY: account identifier in imported post.",
+        "limitations": []
+      },
+      {
+        "id": "link:3b9085552d8e4360fffbdec252820bba",
+        "source": "post:367331de52e5535ef0792e69ab2aee20",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/8"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:3c0b29e35bbf8a29884ab9fd19f8c083",
+        "source": "post:298bf7c8b9b5ac7eb7830a9df35e4eae",
+        "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "type": "SHARED_CANONICAL_URL",
+        "strength": "exact_reference",
+        "crossEngine": true,
+        "method": "equal normalized HTTP(S) URLs",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/11",
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "url": "https://example.org/engine4-source"
+        },
+        "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+        "limitations": [
+          "Equal address, not verified content identity, stance or causal influence."
+        ]
+      },
+      {
+        "id": "link:3d6f5cd2c11ef34563283c111e6d8dfb",
+        "source": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "target": "episode:bf512904be235c5818894a26ecf8bb7a",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/11"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:43e8c5847951ab8f1741e57e6e7febf1",
+        "source": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "target": "episode:e36aaadbcf67a5b02619948520147ade",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/1"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:45e4875298649db5f5077d3f5a7f6f9c",
+        "source": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "target": "episode:1119a5fb18c8691d3f6b46fce02038a4",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/16"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:45f054a289136db958122d3d993013a3",
+        "source": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "target": "episode:cf4b59f56b3a0624d722ac90ef6864d1",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/10"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:47ad04d7d20c3b941f3b3ae0c436d45b",
+        "source": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "target": "network_relationship:801358b220d7dca4c608a773ec4af11f",
+        "type": "NETWORK_ASSOCIATION",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 observed association",
+        "support": [
+          "/campaignResult/episodeEvidence/associations/2"
+        ],
+        "measurements": {},
+        "explanation": "NETWORK ASSOCIATION: existing Engine 3 observed association.",
+        "limitations": []
+      },
+      {
+        "id": "link:484d46ab292de15de8630c6b5950910b",
+        "source": "post:9a22960eae51418f8baa04882db32dac",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/10"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:4c11331401b59f29955ac03f6bd452c9",
+        "source": "post:f657672a2a39ff864609ba9cfa8de2a6",
+        "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "type": "SHARED_CANONICAL_URL",
+        "strength": "exact_reference",
+        "crossEngine": true,
+        "method": "equal normalized HTTP(S) URLs",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/0",
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "url": "https://example.org/engine4-source"
+        },
+        "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+        "limitations": [
+          "Equal address, not verified content identity, stance or causal influence."
+        ]
+      },
+      {
+        "id": "link:4cb3c870e8f929f8ea74532da5e878e6",
+        "source": "post:367331de52e5535ef0792e69ab2aee20",
+        "target": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "type": "AUTHORED_BY",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "account identifier in imported post",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/8"
+        ],
+        "measurements": {},
+        "explanation": "AUTHORED BY: account identifier in imported post.",
+        "limitations": []
+      },
+      {
+        "id": "link:4d0004f749e66f6685d64de5bc000577",
+        "source": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "target": "episode:cf4b59f56b3a0624d722ac90ef6864d1",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/10"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:52e3836187f2bc3fffa6ab446bc3efee",
+        "source": "post:f1a2dfe490269a82aaeb3f57a4895e3d",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/6"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:531eedd7846033c4491347c2a743d08e",
+        "source": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "target": "episode:5ae36f62192b048c0b94bbda8bedabf4",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/6"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:56eac8771d42e93891e3e56235b517a5",
+        "source": "post:415fd34100a77a31f595105982a6ab2e",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/9"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:5970a1efb0c874e154e57c0f1a6b3a6f",
+        "source": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "target": "network_relationship:37cd88ec067ebd8f17c14e5031e07731",
+        "type": "NETWORK_ASSOCIATION",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 observed association",
+        "support": [
+          "/campaignResult/episodeEvidence/associations/4"
+        ],
+        "measurements": {},
+        "explanation": "NETWORK ASSOCIATION: existing Engine 3 observed association.",
+        "limitations": []
+      },
+      {
+        "id": "link:5ed1164605e65c59613ab0e0ae507e13",
+        "source": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "target": "episode:5390ebcfca68b83c2237c5ce478376c5",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/15"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:5ee99bfef90397cf4603018bf6f78d7d",
+        "source": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "target": "network_relationship:c563be0c4fd8534b5b83fec176fdcbc0",
+        "type": "NETWORK_ASSOCIATION",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 observed association",
+        "support": [
+          "/campaignResult/episodeEvidence/associations/5"
+        ],
+        "measurements": {},
+        "explanation": "NETWORK ASSOCIATION: existing Engine 3 observed association.",
+        "limitations": []
+      },
+      {
+        "id": "link:61266322e35904faba0246e9624834a1",
+        "source": "post:736cff0ddd657867d7e595b5b09ad257",
+        "target": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "type": "AUTHORED_BY",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "account identifier in imported post",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/2"
+        ],
+        "measurements": {},
+        "explanation": "AUTHORED BY: account identifier in imported post.",
+        "limitations": []
+      },
+      {
+        "id": "link:643b26ea92948ec455b159724b55753b",
+        "source": "post:367331de52e5535ef0792e69ab2aee20",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "POST_CONTAINS_CLAIM",
+        "strength": "literal_mention",
+        "crossEngine": true,
+        "method": "literal NFC/whitespace-normalized span with word boundaries",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/8",
+          "/claimResults/0"
+        ],
+        "measurements": {
+          "spanStart": 0,
+          "spanEnd": 63,
+          "scope": "normalized_text"
+        },
+        "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+        "limitations": [
+          "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+        ]
+      },
+      {
+        "id": "link:659095eb6c0c1885fa6100853ee21d2f",
+        "source": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "target": "network_relationship:d93bf7ea82aa88442544c37b004f456b",
+        "type": "NETWORK_ASSOCIATION",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 observed association",
+        "support": [
+          "/campaignResult/episodeEvidence/associations/0"
+        ],
+        "measurements": {},
+        "explanation": "NETWORK ASSOCIATION: existing Engine 3 observed association.",
+        "limitations": []
+      },
+      {
+        "id": "link:68db834b51d8e94bd11ca87a9fd8b020",
+        "source": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "target": "episode:6705392649b4bb0ba9072c1832073e1b",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/7"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:691683abe047c2315e741a9165c3d81f",
+        "source": "post:a2879ea95bd87f7bc189a16c2f9324e5",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/1"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:69229e35224b988a3576a9a9c646e100",
+        "source": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "target": "episode:e36aaadbcf67a5b02619948520147ade",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/1"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:6eadf474a9cd4cfcb34df7212dc6ff56",
+        "source": "post:d1b4454411ea3dfde92d545b4be15508",
+        "target": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "type": "AUTHORED_BY",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "account identifier in imported post",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/3"
+        ],
+        "measurements": {},
+        "explanation": "AUTHORED BY: account identifier in imported post.",
+        "limitations": []
+      },
+      {
+        "id": "link:6fa638fb2b209ed95fa1dbfe64a78d63",
+        "source": "post:f1a2dfe490269a82aaeb3f57a4895e3d",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "POST_CONTAINS_CLAIM",
+        "strength": "literal_mention",
+        "crossEngine": true,
+        "method": "literal NFC/whitespace-normalized span with word boundaries",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/6",
+          "/claimResults/0"
+        ],
+        "measurements": {
+          "spanStart": 0,
+          "spanEnd": 63,
+          "scope": "normalized_text"
+        },
+        "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+        "limitations": [
+          "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+        ]
+      },
+      {
+        "id": "link:70b66d904fd224edd8b1d4cc5fd10481",
+        "source": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "target": "episode:bf512904be235c5818894a26ecf8bb7a",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/11"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:7249b25c8bf29e3a4b58a39c505bf408",
+        "source": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "target": "episode:9993686e27ebdc6d49f459a0e762af6a",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/13"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:739dfcb5d76bd68e45257c6c9b6aebf3",
+        "source": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "target": "episode:9993686e27ebdc6d49f459a0e762af6a",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/13"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:78b3574d325b62283f173f5aa71b7541",
+        "source": "post:9a22960eae51418f8baa04882db32dac",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "POST_CONTAINS_CLAIM",
+        "strength": "literal_mention",
+        "crossEngine": true,
+        "method": "literal NFC/whitespace-normalized span with word boundaries",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/10",
+          "/claimResults/0"
+        ],
+        "measurements": {
+          "spanStart": 0,
+          "spanEnd": 63,
+          "scope": "normalized_text"
+        },
+        "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+        "limitations": [
+          "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+        ]
+      },
+      {
+        "id": "link:7a189da9b86ba0d15689b771742a3a76",
+        "source": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "target": "episode:7c9b114cbffe44e63df01a37d8a351dd",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/2"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:82cfb617246dc6ee5bef657c8ab825ef",
+        "source": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "target": "episode:65e31219a5e6d561fa404548bd19221b",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/5"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:8360365c56f69bc4e32c437265dc206f",
+        "source": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "target": "episode:8139bc6ac84d8f2f7bacbe2fcf6e904b",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/0"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:839e8113e162ebf031e8364763e4aec0",
+        "source": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "target": "episode:6705392649b4bb0ba9072c1832073e1b",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/7"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:84aaf9dff55d13b264ff189ad6665022",
+        "source": "post:b9f1591e8f8851b4d30eb58ee201a99a",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "POST_CONTAINS_CLAIM",
+        "strength": "literal_mention",
+        "crossEngine": true,
+        "method": "literal NFC/whitespace-normalized span with word boundaries",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/7",
+          "/claimResults/0"
+        ],
+        "measurements": {
+          "spanStart": 0,
+          "spanEnd": 63,
+          "scope": "normalized_text"
+        },
+        "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+        "limitations": [
+          "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+        ]
+      },
+      {
+        "id": "link:87760fc9ecfa81214ae75ac35bda369f",
+        "source": "network_relationship:37cd88ec067ebd8f17c14e5031e07731",
+        "target": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "type": "NETWORK_ASSOCIATION",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 observed association",
+        "support": [
+          "/campaignResult/episodeEvidence/associations/4"
+        ],
+        "measurements": {},
+        "explanation": "NETWORK ASSOCIATION: existing Engine 3 observed association.",
+        "limitations": []
+      },
+      {
+        "id": "link:8aa18077ccf124d51bcb90342b8396f4",
+        "source": "post:d1b4454411ea3dfde92d545b4be15508",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/3"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:8b6636cf4f795dd66983687204be6eca",
+        "source": "post:5b69b12ae25fa1581104d755b2aa150c",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "POST_CONTAINS_CLAIM",
+        "strength": "literal_mention",
+        "crossEngine": true,
+        "method": "literal NFC/whitespace-normalized span with word boundaries",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/5",
+          "/claimResults/0"
+        ],
+        "measurements": {
+          "spanStart": 0,
+          "spanEnd": 63,
+          "scope": "normalized_text"
+        },
+        "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+        "limitations": [
+          "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+        ]
+      },
+      {
+        "id": "link:8d720b725de826b567d5edf4b67fd6a0",
+        "source": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "target": "episode:ee8c3b6829eb05bbc6941905c789e30b",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/17"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:8f3c861b2298e3eca9b34cddebe73dd6",
+        "source": "media_asset:0539fdbd90334f9e5304f54d314b39f6",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "MEDIA_CONTEXT_CLAIM",
+        "strength": "analyst_asserted",
+        "crossEngine": true,
+        "method": "authenticated analyst-supplied context; not extraction",
+        "support": [
+          "/correlationContexts/context:7ecd0338b19ac90a5f6efc56454b93004df9e3a0555a7429e036188419d2eeab"
+        ],
+        "measurements": {
+          "kind": "user_caption",
+          "text": "Software fixture: the fictional Amber Museum offers free entry.",
+          "rationale": "This caption is analyst supplied for the software fixture; no OCR or transcription ran.",
+          "providedBy": "local-analyst",
+          "providedAt": "2026-11-16T11:15:15.424Z"
+        },
+        "explanation": "MEDIA CONTEXT CLAIM: authenticated analyst-supplied context; not extraction.",
+        "limitations": [
+          "Not independently extracted from media; does not verify the caption, claim or media authenticity."
+        ]
+      },
+      {
+        "id": "link:8f48c3f6bbb170e9682b1f8b943f9e82",
+        "source": "network_relationship:bc0e491ccf825dd1a8662d751b538b45",
+        "target": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "type": "NETWORK_ASSOCIATION",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 observed association",
+        "support": [
+          "/campaignResult/episodeEvidence/associations/3"
+        ],
+        "measurements": {},
+        "explanation": "NETWORK ASSOCIATION: existing Engine 3 observed association.",
+        "limitations": []
+      },
+      {
+        "id": "link:931ffa9d5b07109bb7681d921501bd2e",
+        "source": "post:b76bc18fbc2e881e46c37ebde83e6e3d",
+        "target": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "type": "AUTHORED_BY",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "account identifier in imported post",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/4"
+        ],
+        "measurements": {},
+        "explanation": "AUTHORED BY: account identifier in imported post.",
+        "limitations": []
+      },
+      {
+        "id": "link:9362e5225eb96dd4accafb6e5e6d3a40",
+        "source": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "target": "episode:0a6760cf87e741bfb2a75adbf47e2040",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/14"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:951976a883bebd123f8b46d100ca19ca",
+        "source": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "target": "episode:ee8c3b6829eb05bbc6941905c789e30b",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/17"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:96e35fd425ec7505b784919ecc483683",
+        "source": "post:b9f1591e8f8851b4d30eb58ee201a99a",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/7"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:99212530e86840af4e47c3a4b3f89c46",
+        "source": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "target": "episode:5ae36f62192b048c0b94bbda8bedabf4",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/6"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:9d6646bcb15d06c329e9b68575dfc565",
+        "source": "network_relationship:c563be0c4fd8534b5b83fec176fdcbc0",
+        "target": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "type": "NETWORK_ASSOCIATION",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 observed association",
+        "support": [
+          "/campaignResult/episodeEvidence/associations/5"
+        ],
+        "measurements": {},
+        "explanation": "NETWORK ASSOCIATION: existing Engine 3 observed association.",
+        "limitations": []
+      },
+      {
+        "id": "link:a2af9cdfcdbdf9e36720aee74d0d033b",
+        "source": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "target": "episode:16c46407a4aca1685a8ece7508d0376d",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/9"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:a5698619a0ff90503547f7d366614160",
+        "source": "claim_assessment:33aef494728baca4ec32154840066c97",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "ASSESSES_CLAIM",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "attached claim assessment; not a new verdict",
+        "support": [
+          "/claimResults/0"
+        ],
+        "measurements": {},
+        "explanation": "ASSESSES CLAIM: attached claim assessment; not a new verdict.",
+        "limitations": []
+      },
+      {
+        "id": "link:a5a342edd5581252ef26e718071edb97",
+        "source": "network_relationship:801358b220d7dca4c608a773ec4af11f",
+        "target": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "type": "NETWORK_ASSOCIATION",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 observed association",
+        "support": [
+          "/campaignResult/episodeEvidence/associations/2"
+        ],
+        "measurements": {},
+        "explanation": "NETWORK ASSOCIATION: existing Engine 3 observed association.",
+        "limitations": []
+      },
+      {
+        "id": "link:a6589778a80ddddb6c884ff642c30cd1",
+        "source": "post:415fd34100a77a31f595105982a6ab2e",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "POST_CONTAINS_CLAIM",
+        "strength": "literal_mention",
+        "crossEngine": true,
+        "method": "literal NFC/whitespace-normalized span with word boundaries",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/9",
+          "/claimResults/0"
+        ],
+        "measurements": {
+          "spanStart": 0,
+          "spanEnd": 63,
+          "scope": "normalized_text"
+        },
+        "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+        "limitations": [
+          "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+        ]
+      },
+      {
+        "id": "link:b24377fc00a2f7a9fe51fe61a4ae464c",
+        "source": "post:d1b4454411ea3dfde92d545b4be15508",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "POST_CONTAINS_CLAIM",
+        "strength": "literal_mention",
+        "crossEngine": true,
+        "method": "literal NFC/whitespace-normalized span with word boundaries",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/3",
+          "/claimResults/0"
+        ],
+        "measurements": {
+          "spanStart": 0,
+          "spanEnd": 63,
+          "scope": "normalized_text"
+        },
+        "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+        "limitations": [
+          "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+        ]
+      },
+      {
+        "id": "link:b5b991708af543996b8d73f4f0462077",
+        "source": "post:298bf7c8b9b5ac7eb7830a9df35e4eae",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/11"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:b633cecd5597377c54766e386c0d9e0b",
+        "source": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "target": "episode:67a729b8c5e48535c78b190132241ba5",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/3"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:b6bd70904b69c028cdad1f73f724885c",
+        "source": "post:b76bc18fbc2e881e46c37ebde83e6e3d",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "POST_CONTAINS_CLAIM",
+        "strength": "literal_mention",
+        "crossEngine": true,
+        "method": "literal NFC/whitespace-normalized span with word boundaries",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/4",
+          "/claimResults/0"
+        ],
+        "measurements": {
+          "spanStart": 0,
+          "spanEnd": 63,
+          "scope": "normalized_text"
+        },
+        "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+        "limitations": [
+          "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+        ]
+      },
+      {
+        "id": "link:b7a50db9ffa700eafd9e4742166f19f0",
+        "source": "post:298bf7c8b9b5ac7eb7830a9df35e4eae",
+        "target": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "type": "AUTHORED_BY",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "account identifier in imported post",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/11"
+        ],
+        "measurements": {},
+        "explanation": "AUTHORED BY: account identifier in imported post.",
+        "limitations": []
+      },
+      {
+        "id": "link:b7d24ab20157fc287d29d1f4449176f5",
+        "source": "post:5b69b12ae25fa1581104d755b2aa150c",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/5"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:bcda19d4b4991a15c7d5d7ef54b3fa34",
+        "source": "media_asset:0539fdbd90334f9e5304f54d314b39f6",
+        "target": "media_observation:aa2599b0e3b6aa1e6bb5b7819cb40968",
+        "type": "HAS_OBSERVATION",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "attached engine result",
+        "support": [
+          "/mediaFindings/0"
+        ],
+        "measurements": {},
+        "explanation": "HAS OBSERVATION: attached engine result.",
+        "limitations": []
+      },
+      {
+        "id": "link:c28d4be882205aa4fdd243c8ec613548",
+        "source": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "target": "episode:7c9b114cbffe44e63df01a37d8a351dd",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/2"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:c59482dab0db72e6bb8dcf7dd993c0bb",
+        "source": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "target": "episode:6d68d59cb109e184927323ccf1698158",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/12"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:c5d0c68df3e782c9f0d8cc06b36898e9",
+        "source": "post:a2879ea95bd87f7bc189a16c2f9324e5",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "POST_CONTAINS_CLAIM",
+        "strength": "literal_mention",
+        "crossEngine": true,
+        "method": "literal NFC/whitespace-normalized span with word boundaries",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/1",
+          "/claimResults/0"
+        ],
+        "measurements": {
+          "spanStart": 0,
+          "spanEnd": 63,
+          "scope": "normalized_text"
+        },
+        "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+        "limitations": [
+          "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+        ]
+      },
+      {
+        "id": "link:c64b7f0342fd5370a284064632504eff",
+        "source": "network_relationship:d93bf7ea82aa88442544c37b004f456b",
+        "target": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "type": "NETWORK_ASSOCIATION",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 observed association",
+        "support": [
+          "/campaignResult/episodeEvidence/associations/0"
+        ],
+        "measurements": {},
+        "explanation": "NETWORK ASSOCIATION: existing Engine 3 observed association.",
+        "limitations": []
+      },
+      {
+        "id": "link:c9c4eb9bfe3353104d5ecb204e8aaa0f",
+        "source": "post:f657672a2a39ff864609ba9cfa8de2a6",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/0"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:ce30078d8ac6442e6e0779a991cc23c2",
+        "source": "post:736cff0ddd657867d7e595b5b09ad257",
+        "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "type": "SHARED_CANONICAL_URL",
+        "strength": "exact_reference",
+        "crossEngine": true,
+        "method": "equal normalized HTTP(S) URLs",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/2",
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "url": "https://example.org/engine4-source"
+        },
+        "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+        "limitations": [
+          "Equal address, not verified content identity, stance or causal influence."
+        ]
+      },
+      {
+        "id": "link:d0711035ecb5d42767d324367244fcc6",
+        "source": "post:5b69b12ae25fa1581104d755b2aa150c",
+        "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "type": "SHARED_CANONICAL_URL",
+        "strength": "exact_reference",
+        "crossEngine": true,
+        "method": "equal normalized HTTP(S) URLs",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/5",
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "url": "https://example.org/engine4-source"
+        },
+        "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+        "limitations": [
+          "Equal address, not verified content identity, stance or causal influence."
+        ]
+      },
+      {
+        "id": "link:d2b6b87289eb137f9109fd41c1727178",
+        "source": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "target": "network_relationship:2e3ebed9ffc96a2cb0fb41da97834f98",
+        "type": "NETWORK_ASSOCIATION",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 observed association",
+        "support": [
+          "/campaignResult/episodeEvidence/associations/1"
+        ],
+        "measurements": {},
+        "explanation": "NETWORK ASSOCIATION: existing Engine 3 observed association.",
+        "limitations": []
+      },
+      {
+        "id": "link:d3b573235092af8bc902a487a9a9bdf1",
+        "source": "network_relationship:2e3ebed9ffc96a2cb0fb41da97834f98",
+        "target": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "type": "NETWORK_ASSOCIATION",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 observed association",
+        "support": [
+          "/campaignResult/episodeEvidence/associations/1"
+        ],
+        "measurements": {},
+        "explanation": "NETWORK ASSOCIATION: existing Engine 3 observed association.",
+        "limitations": []
+      },
+      {
+        "id": "link:d85fa93d5e05637f6e4802444410c5ec",
+        "source": "post:f657672a2a39ff864609ba9cfa8de2a6",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "POST_CONTAINS_CLAIM",
+        "strength": "literal_mention",
+        "crossEngine": true,
+        "method": "literal NFC/whitespace-normalized span with word boundaries",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/0",
+          "/claimResults/0"
+        ],
+        "measurements": {
+          "spanStart": 0,
+          "spanEnd": 63,
+          "scope": "normalized_text"
+        },
+        "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+        "limitations": [
+          "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+        ]
+      },
+      {
+        "id": "link:deb11cc1958e2144b3d57f3f5169a5a0",
+        "source": "post:736cff0ddd657867d7e595b5b09ad257",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/2"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:e02977745c5143498fdfed4e4c3911dc",
+        "source": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "target": "url:da24b40a204972b0faca216a6ff70e54",
+        "type": "REFERENCES_URL",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "conservative URL normalization",
+        "support": [
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {},
+        "explanation": "REFERENCES URL: conservative URL normalization.",
+        "limitations": []
+      },
+      {
+        "id": "link:e068568e99316a187a6c0cd240054644",
+        "source": "post:f657672a2a39ff864609ba9cfa8de2a6",
+        "target": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "type": "AUTHORED_BY",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "account identifier in imported post",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/0"
+        ],
+        "measurements": {},
+        "explanation": "AUTHORED BY: account identifier in imported post.",
+        "limitations": []
+      },
+      {
+        "id": "link:e96ab00695e0b6a5762a6d5255cc60d3",
+        "source": "post:b9f1591e8f8851b4d30eb58ee201a99a",
+        "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "type": "SHARED_CANONICAL_URL",
+        "strength": "exact_reference",
+        "crossEngine": true,
+        "method": "equal normalized HTTP(S) URLs",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/7",
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "url": "https://example.org/engine4-source"
+        },
+        "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+        "limitations": [
+          "Equal address, not verified content identity, stance or causal influence."
+        ]
+      },
+      {
+        "id": "link:eb27648f79873c70865cd07b1577304c",
+        "source": "post:b76bc18fbc2e881e46c37ebde83e6e3d",
+        "target": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "type": "SHARED_CANONICAL_URL",
+        "strength": "exact_reference",
+        "crossEngine": true,
+        "method": "equal normalized HTTP(S) URLs",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/4",
+          "/claimResults/0/sources/0"
+        ],
+        "measurements": {
+          "url": "https://example.org/engine4-source"
+        },
+        "explanation": "SHARED CANONICAL URL: equal normalized HTTP(S) URLs.",
+        "limitations": [
+          "Equal address, not verified content identity, stance or causal influence."
+        ]
+      },
+      {
+        "id": "link:ee50a880efdb257b1c38bb8c565cd7c0",
+        "source": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "target": "episode:65e31219a5e6d561fa404548bd19221b",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/5"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:efdf653f54376f27df789c675f5a8d96",
+        "source": "post:415fd34100a77a31f595105982a6ab2e",
+        "target": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "type": "AUTHORED_BY",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "account identifier in imported post",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/9"
+        ],
+        "measurements": {},
+        "explanation": "AUTHORED BY: account identifier in imported post.",
+        "limitations": []
+      },
+      {
+        "id": "link:f0714ee466cf73b9703e56b1c416172b",
+        "source": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "target": "episode:13ce7c7edd3f63369fe0fb5714cce5cf",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/4"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:f28ecb773dc834da2c7d78012d72bfc9",
+        "source": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "target": "episode:8139bc6ac84d8f2f7bacbe2fcf6e904b",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/0"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:f3f697047c11d6418d2bbe9cc554ddf9",
+        "source": "post:a2879ea95bd87f7bc189a16c2f9324e5",
+        "target": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "type": "AUTHORED_BY",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "account identifier in imported post",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/1"
+        ],
+        "measurements": {},
+        "explanation": "AUTHORED BY: account identifier in imported post.",
+        "limitations": []
+      },
+      {
+        "id": "link:f556799463262003f1c5310f5432dac5",
+        "source": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "target": "episode:c921db88a500cb8189ec46292e8b92d5",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/8"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:f72c135ece25fad0bf6ed30ade2f530e",
+        "source": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "target": "episode:0a6760cf87e741bfb2a75adbf47e2040",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/14"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:f7fbd9d96b02034def2efafe13325380",
+        "source": "post:736cff0ddd657867d7e595b5b09ad257",
+        "target": "claim:6a5528a5a45510f14d1a1f97fe286ec7",
+        "type": "POST_CONTAINS_CLAIM",
+        "strength": "literal_mention",
+        "crossEngine": true,
+        "method": "literal NFC/whitespace-normalized span with word boundaries",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/2",
+          "/claimResults/0"
+        ],
+        "measurements": {
+          "spanStart": 0,
+          "spanEnd": 63,
+          "scope": "normalized_text"
+        },
+        "explanation": "POST CONTAINS CLAIM: literal NFC/whitespace-normalized span with word boundaries.",
+        "limitations": [
+          "A literal mention may quote or deny a claim; no endorsement, equivalence or truth inferred."
+        ]
+      },
+      {
+        "id": "link:f8cb04ae0150b68aa27585bb8b652198",
+        "source": "account:b1ebfe8146c47a9d4af17349b7fe0067",
+        "target": "episode:6d68d59cb109e184927323ccf1698158",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/12"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:fd1b78646338211364b32b894c824a2a",
+        "source": "account:e1fdfd0f3cd06a74ae9b023454b6e9f4",
+        "target": "network_relationship:bc0e491ccf825dd1a8662d751b538b45",
+        "type": "NETWORK_ASSOCIATION",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 observed association",
+        "support": [
+          "/campaignResult/episodeEvidence/associations/3"
+        ],
+        "measurements": {},
+        "explanation": "NETWORK ASSOCIATION: existing Engine 3 observed association.",
+        "limitations": []
+      },
+      {
+        "id": "link:fe7eff2bc2fc26fa6b99c11a3b4b6b01",
+        "source": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "target": "episode:5390ebcfca68b83c2237c5ce478376c5",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/15"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:ff395077595608d7cfe8770a7c1bd16b",
+        "source": "account:6d4546c26aeb423f296a2689f4244ca1",
+        "target": "episode:16c46407a4aca1685a8ece7508d0376d",
+        "type": "PART_OF_EPISODE",
+        "strength": "contextual",
+        "crossEngine": false,
+        "method": "existing Engine 3 pair episode membership",
+        "support": [
+          "/campaignResult/episodeEvidence/episodes/9"
+        ],
+        "measurements": {},
+        "explanation": "PART OF EPISODE: existing Engine 3 pair episode membership.",
+        "limitations": []
+      },
+      {
+        "id": "link:ff5d65b03fb04b1f70eab8af136d73b6",
+        "source": "post:f1a2dfe490269a82aaeb3f57a4895e3d",
+        "target": "account:1e8f758ef77bbeb8d4a1ba4d9599430d",
+        "type": "AUTHORED_BY",
+        "strength": "exact_reference",
+        "crossEngine": false,
+        "method": "account identifier in imported post",
+        "support": [
+          "/campaignResult/episodeEvidence/posts/6"
+        ],
+        "measurements": {},
+        "explanation": "AUTHORED BY: account identifier in imported post.",
+        "limitations": []
+      }
+    ],
+    "timeline": [
+      {
+        "id": "time:0775335cf7e27fd842555fc3003f8cf0",
+        "nodeId": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "time": {
+          "kind": "retrieved",
+          "original": "2026-01-01T00:00:00Z",
+          "utc": "2026-01-01T00:00:00.000Z",
+          "resolutionMs": 1000
+        }
+      },
+      {
+        "id": "time:1a8a7960f90800c00925bd63099f2ec3",
+        "nodeId": "episode:67a729b8c5e48535c78b190132241ba5",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T00:00:00.000Z",
+          "utc": "2026-01-01T00:00:00.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:5ac3071e2f508b697291bdef56cbf201",
+        "nodeId": "post:f657672a2a39ff864609ba9cfa8de2a6",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01T00:00:00.000Z",
+          "utc": "2026-01-01T00:00:00.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:8a93bb3fd905c694916490dfbbf6afa4",
+        "nodeId": "episode:16c46407a4aca1685a8ece7508d0376d",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T00:00:00.000Z",
+          "utc": "2026-01-01T00:00:00.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:e0bafc23bfbaeccdfaf34decdb5c9826",
+        "nodeId": "episode:8139bc6ac84d8f2f7bacbe2fcf6e904b",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T00:00:00.000Z",
+          "utc": "2026-01-01T00:00:00.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:fb5497d60ec69429c7a2b70643d708a2",
+        "nodeId": "source:774b2b5f8f87323f1d09cf4d5ddebf97",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01",
+          "utc": "2026-01-01T00:00:00.000Z",
+          "resolutionMs": 86400000
+        }
+      },
+      {
+        "id": "time:59b91358a9e1d81782970252ac661508",
+        "nodeId": "episode:5ae36f62192b048c0b94bbda8bedabf4",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T00:00:01.000Z",
+          "utc": "2026-01-01T00:00:01.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:85062b6b42d3232918c7683b5308eaad",
+        "nodeId": "episode:8139bc6ac84d8f2f7bacbe2fcf6e904b",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T00:00:01.000Z",
+          "utc": "2026-01-01T00:00:01.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:ab7dc90e91b1c2476a27f6bc3c413608",
+        "nodeId": "post:a2879ea95bd87f7bc189a16c2f9324e5",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01T00:00:01.000Z",
+          "utc": "2026-01-01T00:00:01.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:eec7c443590096bb6acc58540ab39fea",
+        "nodeId": "episode:6d68d59cb109e184927323ccf1698158",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T00:00:01.000Z",
+          "utc": "2026-01-01T00:00:01.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:647d0242f1cdd876cb8e528c32e4cca9",
+        "nodeId": "episode:5ae36f62192b048c0b94bbda8bedabf4",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T00:00:02.000Z",
+          "utc": "2026-01-01T00:00:02.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:6ca423de303eb1c161f2d34902122599",
+        "nodeId": "episode:67a729b8c5e48535c78b190132241ba5",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T00:00:02.000Z",
+          "utc": "2026-01-01T00:00:02.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:9c4d132262f25aef9557bb5d2429fe93",
+        "nodeId": "post:736cff0ddd657867d7e595b5b09ad257",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01T00:00:02.000Z",
+          "utc": "2026-01-01T00:00:02.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:f5436b83fe37de37dac366e44d646d9d",
+        "nodeId": "episode:5390ebcfca68b83c2237c5ce478376c5",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T00:00:02.000Z",
+          "utc": "2026-01-01T00:00:02.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:0ec0440adc2308f0313b27d959e69233",
+        "nodeId": "episode:5390ebcfca68b83c2237c5ce478376c5",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T00:00:03.000Z",
+          "utc": "2026-01-01T00:00:03.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:5637452d04eb836a0e929903a5b08adf",
+        "nodeId": "episode:16c46407a4aca1685a8ece7508d0376d",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T00:00:03.000Z",
+          "utc": "2026-01-01T00:00:03.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:5e38a9f2f4f9e8714a8ad68573c3e8e5",
+        "nodeId": "episode:6d68d59cb109e184927323ccf1698158",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T00:00:03.000Z",
+          "utc": "2026-01-01T00:00:03.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:64163baf1d9f225c829e5daf6b4069fb",
+        "nodeId": "post:d1b4454411ea3dfde92d545b4be15508",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01T00:00:03.000Z",
+          "utc": "2026-01-01T00:00:03.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:0f175a6f7fd9666f192dd660ef6f08fe",
+        "nodeId": "post:b76bc18fbc2e881e46c37ebde83e6e3d",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01T01:06:40.000Z",
+          "utc": "2026-01-01T01:06:40.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:1f36ed69072c3d6174fffe68279d6464",
+        "nodeId": "episode:13ce7c7edd3f63369fe0fb5714cce5cf",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T01:06:40.000Z",
+          "utc": "2026-01-01T01:06:40.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:9619c7b00a29b3b66e3055242c949580",
+        "nodeId": "episode:e36aaadbcf67a5b02619948520147ade",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T01:06:40.000Z",
+          "utc": "2026-01-01T01:06:40.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:e5e27d658c4aba4d26406ce03a6d99f3",
+        "nodeId": "episode:cf4b59f56b3a0624d722ac90ef6864d1",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T01:06:40.000Z",
+          "utc": "2026-01-01T01:06:40.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:679112a7dbabf959db7219e283d75e86",
+        "nodeId": "episode:6705392649b4bb0ba9072c1832073e1b",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T01:06:41.000Z",
+          "utc": "2026-01-01T01:06:41.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:9673b2f3fe7b623b2100f6991169ff01",
+        "nodeId": "episode:9993686e27ebdc6d49f459a0e762af6a",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T01:06:41.000Z",
+          "utc": "2026-01-01T01:06:41.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:c80874891f86c7c6376f874ed54f94df",
+        "nodeId": "episode:e36aaadbcf67a5b02619948520147ade",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T01:06:41.000Z",
+          "utc": "2026-01-01T01:06:41.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:dfaaaa00b36b1b6fd1d31311f8653569",
+        "nodeId": "post:5b69b12ae25fa1581104d755b2aa150c",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01T01:06:41.000Z",
+          "utc": "2026-01-01T01:06:41.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:05065302160514b6ac970fb5dba39835",
+        "nodeId": "post:f1a2dfe490269a82aaeb3f57a4895e3d",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01T01:06:42.000Z",
+          "utc": "2026-01-01T01:06:42.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:681fef3a4575b8da1373b3f370311afe",
+        "nodeId": "episode:13ce7c7edd3f63369fe0fb5714cce5cf",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T01:06:42.000Z",
+          "utc": "2026-01-01T01:06:42.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:97116cdb50362031f579ce2923e8e06c",
+        "nodeId": "episode:6705392649b4bb0ba9072c1832073e1b",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T01:06:42.000Z",
+          "utc": "2026-01-01T01:06:42.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:b7b034115c7e44705b451650057eaec6",
+        "nodeId": "episode:1119a5fb18c8691d3f6b46fce02038a4",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T01:06:42.000Z",
+          "utc": "2026-01-01T01:06:42.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:033d37f0155d6294871749019079784a",
+        "nodeId": "episode:9993686e27ebdc6d49f459a0e762af6a",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T01:06:43.000Z",
+          "utc": "2026-01-01T01:06:43.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:037339bc922285bb00bb7c7871cd48bc",
+        "nodeId": "episode:cf4b59f56b3a0624d722ac90ef6864d1",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T01:06:43.000Z",
+          "utc": "2026-01-01T01:06:43.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:16bc3056691a14ddb9fc5e51523dd1ba",
+        "nodeId": "post:b9f1591e8f8851b4d30eb58ee201a99a",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01T01:06:43.000Z",
+          "utc": "2026-01-01T01:06:43.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:b80ae5ae4cdd60c7504fbb25449cb683",
+        "nodeId": "episode:1119a5fb18c8691d3f6b46fce02038a4",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T01:06:43.000Z",
+          "utc": "2026-01-01T01:06:43.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:0324c2d52c1c969f14a9438adda241d8",
+        "nodeId": "post:367331de52e5535ef0792e69ab2aee20",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01T02:13:20.000Z",
+          "utc": "2026-01-01T02:13:20.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:12d25e9cf2c3b6bf2575eea8d5aa91f0",
+        "nodeId": "episode:bf512904be235c5818894a26ecf8bb7a",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T02:13:20.000Z",
+          "utc": "2026-01-01T02:13:20.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:201062491c09035398deeadb4cbaaa96",
+        "nodeId": "episode:65e31219a5e6d561fa404548bd19221b",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T02:13:20.000Z",
+          "utc": "2026-01-01T02:13:20.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:f3a25fc7d9dd4b0f779d5924d6417f72",
+        "nodeId": "episode:7c9b114cbffe44e63df01a37d8a351dd",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T02:13:20.000Z",
+          "utc": "2026-01-01T02:13:20.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:3d04f84751ad924906845cf22e2387a3",
+        "nodeId": "episode:7c9b114cbffe44e63df01a37d8a351dd",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T02:13:21.000Z",
+          "utc": "2026-01-01T02:13:21.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:52ff098ecb693776f4aad1b81ceb2544",
+        "nodeId": "episode:0a6760cf87e741bfb2a75adbf47e2040",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T02:13:21.000Z",
+          "utc": "2026-01-01T02:13:21.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:77db0a5db74b1192fac667d69745c749",
+        "nodeId": "episode:c921db88a500cb8189ec46292e8b92d5",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T02:13:21.000Z",
+          "utc": "2026-01-01T02:13:21.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:fc79025909bd67bde54854281b4fd1ba",
+        "nodeId": "post:415fd34100a77a31f595105982a6ab2e",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01T02:13:21.000Z",
+          "utc": "2026-01-01T02:13:21.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:02524f342c7fefa22512387f5e196727",
+        "nodeId": "episode:65e31219a5e6d561fa404548bd19221b",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T02:13:22.000Z",
+          "utc": "2026-01-01T02:13:22.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:26de1d6a84a1a0e285309121099c85a5",
+        "nodeId": "episode:c921db88a500cb8189ec46292e8b92d5",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T02:13:22.000Z",
+          "utc": "2026-01-01T02:13:22.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:2d44124310f6e8b01686206c162184d4",
+        "nodeId": "post:9a22960eae51418f8baa04882db32dac",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01T02:13:22.000Z",
+          "utc": "2026-01-01T02:13:22.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:87963c0d390060ea817e165389e55023",
+        "nodeId": "episode:ee8c3b6829eb05bbc6941905c789e30b",
+        "time": {
+          "kind": "episode_start",
+          "original": "2026-01-01T02:13:22.000Z",
+          "utc": "2026-01-01T02:13:22.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:30503aa52d89b9811ac0c2d5fe34e30f",
+        "nodeId": "episode:0a6760cf87e741bfb2a75adbf47e2040",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T02:13:23.000Z",
+          "utc": "2026-01-01T02:13:23.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:5a74736dfd686f8fb8c6f5776a33b7a6",
+        "nodeId": "post:298bf7c8b9b5ac7eb7830a9df35e4eae",
+        "time": {
+          "kind": "publication",
+          "original": "2026-01-01T02:13:23.000Z",
+          "utc": "2026-01-01T02:13:23.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:8183dc922a862d3d7b7df57948758e3d",
+        "nodeId": "episode:ee8c3b6829eb05bbc6941905c789e30b",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T02:13:23.000Z",
+          "utc": "2026-01-01T02:13:23.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:8d1f648e418c0ded548b68e2658ed8a3",
+        "nodeId": "episode:bf512904be235c5818894a26ecf8bb7a",
+        "time": {
+          "kind": "episode_end",
+          "original": "2026-01-01T02:13:23.000Z",
+          "utc": "2026-01-01T02:13:23.000Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:bf8c28f4f8ba8294a4dc53b82d80bed9",
+        "nodeId": "media_observation:aa2599b0e3b6aa1e6bb5b7819cb40968",
+        "time": {
+          "kind": "analysis",
+          "original": "2026-11-16T11:15:10.102Z",
+          "utc": "2026-11-16T11:15:10.102Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:a19133e30bc33785af0fc9ae76cd5eeb",
+        "nodeId": "investigation:cf58e7242dc779dfd2c0af0e3f99ef99",
+        "time": {
+          "kind": "ingestion",
+          "original": "2026-11-16T11:15:10.186Z",
+          "utc": "2026-11-16T11:15:10.186Z",
+          "resolutionMs": 1
+        }
+      },
+      {
+        "id": "time:1c2d522962750a2208fd8da5f5931062",
+        "nodeId": "claim_assessment:33aef494728baca4ec32154840066c97",
+        "time": {
+          "kind": "analysis",
+          "original": "2026-11-16T11:15:11.559Z",
+          "utc": "2026-11-16T11:15:11.559Z",
+          "resolutionMs": 1
+        }
+      }
+    ],
+    "limitations": [
+      "Coverage completeness is an operator declaration, not independently verified.",
+      "Evidence relationships indicate observed associations and do not independently establish misinformation, manipulation, or malicious coordination.",
+      "Literal mentions do not establish agreement, quotation context, truth or endorsement.",
+      "No calibrated correlation probability or global verdict is computed.",
+      "Semantic values, when available, are diagnostic-only; lexical and semantic similarity are one dependent family.",
+      "Separated temporal episodes are not independently established real-world events. Legitimate scheduled bulletins can recur."
+    ],
+    "missingEvidence": [
+      "Independent source credibility and factual validation remain outside this human review.",
+      "Media analysis 33334a11-8c85-47a3-9990-54dbe9c40124: PARTIAL_ANALYSIS; inspect its retained limitations."
+    ],
+    "contradictions": [],
+    "truncated": false,
+    "limits": {
+      "nodes": 5000,
+      "relationships": 10000,
+      "comparisons": 20000,
+      "timeline": 1000
+    },
+    "counts": {
+      "nodes": 47,
+      "relationships": 101,
+      "crossEngineLinks": 25,
+      "candidateComparisons": 24,
+      "omittedNodes": 0,
+      "omittedRelationships": 0,
+      "omittedTimelineEntries": 0
+    },
+    "generatedAt": "2026-11-16T11:15:21.784Z",
+    "elapsedMs": 15.51390000001993
+  },
+  "limitations": [
+    "Authored example.org corpus and posts, generated image and test-analyst source review.",
+    "Caption/description is explicitly analyst supplied; no OCR/transcription was performed.",
+    "No independent detection accuracy or maliciousness conclusion."
+  ]
+}

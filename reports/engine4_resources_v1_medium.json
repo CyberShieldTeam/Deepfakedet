@@ -1,0 +1,20 @@
+{
+  "scope": "authored_engine4_resource_control_not_accuracy",
+  "scenario": "medium",
+  "inputPosts": 500,
+  "inputHash": "b2732286c3cf0b3be925ed2fe78e34f537571a4b408b1d89100dead1e5de39da",
+  "workerWallMs": 514.4010999999999,
+  "correlationMs": 39.86409999999978,
+  "counts": {
+    "nodes": 529,
+    "relationships": 2007,
+    "crossEngineLinks": 1001,
+    "candidateComparisons": 1000,
+    "omittedNodes": 0,
+    "omittedRelationships": 0,
+    "omittedTimelineEntries": 0
+  },
+  "state": "CORRELATED_EVIDENCE_AVAILABLE",
+  "truncated": false,
+  "stable": true
+}

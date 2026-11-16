@@ -1,0 +1,20 @@
+{
+  "scope": "authored_engine4_resource_control_not_accuracy",
+  "scenario": "partial",
+  "inputPosts": 500,
+  "inputHash": "27bef1173cfdc0f493783ee60527beb6cddd67e45d8ef7c5ef13bbfc49353f6b",
+  "workerWallMs": 526.1087,
+  "correlationMs": 43.422399999999925,
+  "counts": {
+    "nodes": 529,
+    "relationships": 2007,
+    "crossEngineLinks": 1001,
+    "candidateComparisons": 1000,
+    "omittedNodes": 0,
+    "omittedRelationships": 0,
+    "omittedTimelineEntries": 0
+  },
+  "state": "PARTIAL_CORRELATION",
+  "truncated": false,
+  "stable": true
+}

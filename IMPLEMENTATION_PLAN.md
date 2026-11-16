@@ -1,5 +1,14 @@
 # VERITAS AI implementation plan
 
+## Engine 4 first vertical slice — 2026-11-16
+
+Case-level correlation is implemented across backend, owned persistence, case UI, timeline,
+reports and regression tests. See `docs/ENGINE4_ARCHITECTURE.md`, `ENGINE4_EVIDENCE_MODEL.md`,
+`ENGINE4_VALIDATION.md`, `ENGINE4_LIMITATIONS.md`. It links evidence through documented
+references and explicit supplied context, not a new misinformation verdict. Next gate is
+rights-approved independent relationship annotations plus adversarial/concurrent load
+testing; automatic extraction and approximate semantic/media matching remain unimplemented.
+
 ## Cross-engine diagnostic prerequisite — 2026-11-16
 
 Investigated user-observed inconclusive screens before further Engine 3 research.

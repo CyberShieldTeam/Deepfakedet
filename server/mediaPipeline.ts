@@ -4,6 +4,7 @@ import type { DetectionAssessment, ForensicAnalysisResult } from "../src/types";
 import type {AnalysisStage} from '../src/types';
 import {mediaDiagnostics,diagnosticError} from './analysisDiagnostics';
 import {performance} from 'node:perf_hooks';
+import {createHash} from 'node:crypto';
 import { callLocalImage, localImageResult, type LocalImageResponse } from "./localImage";
 import { callLocalAudio, localAudioResult, type LocalAudioResponse } from "./localAudio";
 import {
@@ -230,6 +231,10 @@ export async function analyzeMediaPipeline(input: {
   // They never upgrade an uncalibrated raw score into a verdict.
   const localEndpoint = process.env.VERITAS_AI_SERVICE_URL?.trim();
   const finish=()=>{
+    const original=modality==='image'?input.originalImageData:undefined;
+    const submitted=original||mediaData;
+    const encoded=submitted?.match(/^data:[^;,]+;base64,([A-Za-z0-9+/=]+)$/);
+    if(encoded&&encoded[1].length<=32*1024*1024){const bytes=Buffer.from(encoded[1],'base64');result.submittedMedia={sha256:createHash('sha256').update(bytes).digest('hex'),byteLength:bytes.length,scope:original?'submitted_original_image_bytes':'submitted_analysis_bytes',computedBy:'server'};}
     result.limitations=[...new Set([...limitations,...result.limitations])];
     result.analysis=mediaDiagnostics(result,stages,performance.now()-started);
     return result;

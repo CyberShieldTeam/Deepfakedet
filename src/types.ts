@@ -64,6 +64,7 @@ export interface AudioSpectralAnalysis {
 }
 
 export interface ForensicAnalysisResult {
+  submittedMedia?:{sha256:string;byteLength:number;scope:'submitted_original_image_bytes'|'submitted_analysis_bytes';computedBy:'server'};
   analysis?:AnalysisDiagnostics;
   modality: "image" | "video" | "audio";
   authenticity: MediaAuthenticity;
@@ -487,6 +488,9 @@ export interface LiveEvent {
 }
 
 export interface Investigation {
+  correlation?:import('./correlationTypes').CorrelationResult;
+  correlationRun?:import('./correlationTypes').CorrelationRun;
+  correlationContexts?:import('./correlationTypes').MediaContext[];
   ownerId?: string;
   id: string;
   title: string;
