@@ -33,7 +33,17 @@ export const sourceSchema = z
     retrievedAt: z.string().datetime(),
     publisher: z.string().max(300).optional(),
     language: z.string().max(80).optional(),
-    provider: z.enum(["operator_corpus", "google_fact_check", "software_test"]),
+    provider: z.enum(["operator_corpus", "google_fact_check", "wikipedia", "software_test"]),
+    originalUrl: z.string().max(3000).refine(v=>{try{sourceUrl(v);return true}catch{return false}}).optional(),
+    sourceType: z.enum(['encyclopedia_excerpt','fact_check_metadata','imported_passage']).optional(),
+    retrievalMethod: z.string().max(500).optional(),
+    locator: z.string().max(500).optional(),
+    revisionId: z.number().int().positive().optional(),
+    revisionUrl: z.string().max(3000).transform(sourceUrl).optional(),
+    modifiedAt: date.optional(),
+    passageSha256: z.string().regex(/^[a-f0-9]{64}$/).optional(),
+    licenseUrl: z.string().max(3000).transform(sourceUrl).optional(),
+    sourceLimitations: z.array(z.string().max(1000)).max(8).optional(),
     license: z.string().min(1).max(1000).optional(),
     publisherRating: z.string().max(300).optional(),
   })
@@ -44,6 +54,9 @@ export type ProviderState = {
   status: "unconfigured" | "available" | "unavailable";
   retrieved: number;
   detail: string;
+  query?: string;
+  hasMoreResults?: boolean;
+  errorCategory?: string;
 };
 const hash = (value: string | Buffer) => createHash("sha256").update(value).digest("hex");
 
@@ -130,8 +143,8 @@ export async function googleEvidence(
     url.searchParams.set("pageSize", "10");
     const signal = AbortSignal.timeout(10000);
     const response = await fetcher(url, { signal, redirect: "error" });
-    if (!response.ok || Number(response.headers.get("content-length")) > 1024 * 1024)
-      throw new Error("Provider failure");
+    if (!response.ok) return {items:[],state:{...state,status:'unavailable',detail:response.status===429?'Google Fact Check Tools rate/quota limit; no automatic retry':response.status===401||response.status===403?'Google Fact Check Tools rejected access; check key, enabled API, restrictions and quota':'Google Fact Check Tools upstream HTTP failure',errorCategory:response.status===429?'RATE_OR_QUOTA_LIMIT':response.status===401||response.status===403?'AUTH_OR_SERVICE_CONFIGURATION':'UPSTREAM_HTTP_ERROR'}};
+    if (Number(response.headers.get("content-length")) > 1024 * 1024) throw new Error("Provider byte limit");
     // Bound streamed bytes, including providers omitting Content-Length.
     const reader = response.body?.getReader();
     if (!reader) throw new Error("Missing body");
@@ -150,6 +163,7 @@ export async function googleEvidence(
     }
     const payload = z
       .object({
+        nextPageToken: z.string().max(2000).optional(),
         claims: z
           .array(
             z
@@ -198,6 +212,11 @@ export async function googleEvidence(
             publisherRating: review.textualRating,
             language: review.languageCode,
             provider: "google_fact_check",
+            originalUrl: review.url,
+            sourceType: 'fact_check_metadata',
+            retrievalMethod: 'Google Fact Check Tools claims.search',
+            locator: 'Reviewed claim text from API metadata; not an article passage',
+            sourceLimitations: ['Publisher review metadata only; article body not fetched. Ratings are not VERITAS verdicts.'],
           });
           if (parsed.success) items.push(parsed.data);
         } catch {
@@ -210,8 +229,9 @@ export async function googleEvidence(
         ...state,
         status: "available",
         retrieved: items.length,
+        hasMoreResults: !!payload.nextPageToken,
         detail:
-          "Publisher review metadata retrieved; article bodies not fetched; publisher ratings are not VERITAS verdicts",
+          "Publisher review metadata retrieved; article bodies not fetched; publisher ratings are not VERITAS verdicts"+(payload.nextPageToken?'; additional pages exist but were not fetched within the one-page quota budget':''),
       },
     };
   } catch {

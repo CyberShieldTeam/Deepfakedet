@@ -60,9 +60,9 @@ const MODE: Record<string, [string, string, React.ElementType]> = {
   ],
 };
 const ASSESS: Record<string, [string, string]> = {
-  verified_true: ["Verified: supported by cited sources", "text-emerald-300"],
-  verified_false: ["Verified false: contradicted by sources", "text-rose-300"],
-  verified_mixed: ["Verified: sources disagree", "text-amber-300"],
+  verified_true: ["Analyst assessment: supported by cited passages", "text-emerald-300"],
+  verified_false: ["Analyst assessment: contradicted by cited passages", "text-rose-300"],
+  verified_mixed: ["Analyst assessment: cited sources disagree", "text-amber-300"],
   plausible: ["Plausible per AI knowledge (unverified)", "text-sky-300"],
   implausible: ["Likely false per AI knowledge (unverified)", "text-orange-300"],
   unverified: ["Unverified", "text-slate-300"],
@@ -160,7 +160,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
         {r.sources.length === 0 ? (
           <div className="rounded-lg border border-dashed border-slate-700 p-3 text-sm text-slate-400">
             {r.verificationMode === "insufficient_external_evidence"
-              ? "We searched the web but found no useful sources for this claim."
+              ? "No relevant passages were returned by the configured providers. Check retrieval details for scope and failures."
               : "No news or official sources were checked for this result."}
           </div>
         ) : (
@@ -191,6 +191,19 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
                     : ` · ${s.provider==='google_fact_check' ? 'review date' : 'published'}: ${s.publishDate || "date not provided"}${s.retrievedAt ? ` · found ${fmtDate(s.retrievedAt)}` : ""}`}
                 </div>
                 <div className="mt-1 text-slate-400">{s.excerpt}</div>
+                {s.sourceType && <p className="mt-2 text-amber-200">{s.sourceType === 'encyclopedia_excerpt' ? 'Encyclopedia lead excerpt; not an independent fact check.' : s.sourceType === 'fact_check_metadata' ? 'Fact-check database metadata; article body was not retrieved.' : 'Imported source passage.'}</p>}
+                <details className="mt-2 text-slate-400">
+                  <summary className="cursor-pointer">Source provenance and limitations</summary>
+                  {s.originalUrl && <p><a className="text-cyan-300 underline" href={s.originalUrl} target="_blank" rel="noreferrer">Open original source</a></p>}
+                  {s.revisionUrl && <p><a className="text-cyan-300 underline" href={s.revisionUrl} target="_blank" rel="noreferrer">Reported article revision {s.revisionId}</a></p>}
+                  {s.modifiedAt && <p>Revision modified: {fmtDate(s.modifiedAt)} (not first publication)</p>}
+                  {s.language && <p>Source language: {s.language}</p>}
+                  {s.retrievalMethod && <p>Retrieved with: {s.retrievalMethod}</p>}
+                  {s.locator && <p>Passage location: {s.locator}</p>}
+                  {s.passageSha256 && <p className="break-all">Passage SHA-256: {s.passageSha256}</p>}
+                  {s.license && <p>License: {s.licenseUrl ? <a href={s.licenseUrl} target="_blank" rel="noreferrer" className="text-cyan-300 underline">{s.license}</a> : s.license}</p>}
+                  {s.sourceLimitations?.map(x=><p key={x}>{x}</p>)}
+                </details>
                 {s.publisherRating && (
                   <p className="mt-1 text-amber-200">
                     Publisher rating: {s.publisherRating} (not a VERITAS verdict)
@@ -243,6 +256,11 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
       </div>
 
       <Details title="Technical details (for experts)">
+        {r.retrievalDetails?.providers && <div>
+          <p>Configured retrieval providers (availability is separate from factual accuracy):</p>
+          {r.retrievalDetails.providers.map(p=><p key={p.provider}>{p.provider}: {p.status} · {p.retrieved} passages · {p.detail}{p.query ? ` · Query: ${p.query}` : ''}{p.errorCategory ? ` · ${p.errorCategory}` : ''}</p>)}
+          <p>Retrieval: {r.retrievalDetails.elapsedMs?.toFixed(0)} ms; process RSS {r.retrievalDetails.processRssBytes == null ? 'not measured' : (r.retrievalDetails.processRssBytes / 1048576).toFixed(1)+' MiB'} (snapshot, not peak).</p>
+        </div>}
         <div className="flex flex-wrap items-center gap-4">
           <div>
             <div className="mb-1 text-[10px] font-mono uppercase tracking-widest text-slate-500">

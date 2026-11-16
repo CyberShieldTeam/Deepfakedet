@@ -1,5 +1,15 @@
 # AASIST audio engine record
 
+## Local availability supplement — 2026-11-17
+
+The previously missing official pinned checkpoint was obtained with the existing bounded
+hash-verified downloader (1,281,532 bytes), strict-loaded and executed through the actual
+browser/Express/Python chain. Local port 8001 now enables experimental audio inference.
+Three timestamped audio segments and a separate video-audio segment were retained with
+inconclusive authenticity and null decision probability. All six audio software tests
+passed. This restores technical availability, not independent detection accuracy; see
+[current evaluation](docs/AUDIO_MODEL_EVALUATION.md). No calibration/threshold changed.
+
 Source: [NAVER Clova AI's official AASIST implementation](https://github.com/clovaai/aasist), MIT license. The network definition in `ai_service/vendor/aasist_model.py` is copied from commit `a04c9863f63d44471dde8a6abcb3b082b07cd1d1`; its license is in `ai_service/vendor/LICENSE.AASIST`. The official `models/weights/AASIST.pth` checkpoint from that commit has SHA-256 `51d2d9cf0738172f61e2a384ec50a54a55363240f67c971ed55a92435bc1a1c0`. It is downloaded into ignored `ai_service/models/` and loaded with PyTorch `weights_only=True` plus strict state-dictionary matching. No weights are committed.
 
 Task: speech anti-spoofing, trained with ASVspoof 2019 Logical Access speech. The upstream evaluation uses the class-1 bona-fide logit; class 0 is spoof. This is not a general detector for music, ambient audio, or every voice-cloning technique. The [original paper](https://arxiv.org/abs/2110.01200) reports in-domain results. A [separate benchmark of the official checkpoint](https://huggingface.co/SpeechAntiSpoofingBenchmarks/AASIST) reports much weaker results on InTheWild speech. Neither source is a VERITAS accuracy measurement.

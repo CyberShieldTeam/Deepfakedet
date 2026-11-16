@@ -251,6 +251,16 @@ export type AnalysisEngine =
   | "local_video_frames";
 
 export interface GroundedSource {
+  originalUrl?:string;
+  sourceType?:'encyclopedia_excerpt'|'fact_check_metadata'|'imported_passage';
+  retrievalMethod?:string;
+  locator?:string;
+  revisionId?:number;
+  revisionUrl?:string;
+  modifiedAt?:string;
+  passageSha256?:string;
+  licenseUrl?:string;
+  sourceLimitations?:string[];
   id?: string;
   provider?: string;
   publisher?: string;
@@ -334,6 +344,9 @@ export interface ClaimVerificationResult {
       status: "unconfigured" | "available" | "unavailable";
       retrieved: number;
       detail: string;
+      query?:string;
+      hasMoreResults?:boolean;
+      errorCategory?:string;
     }[];
     duplicatesRemoved: number;
     semanticMeasured: boolean;

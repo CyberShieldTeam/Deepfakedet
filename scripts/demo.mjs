@@ -22,6 +22,7 @@ const env={...process.env};for(const key of Object.keys(env))if(/^VERITAS_(IMAGE
 Object.assign(env,{NODE_ENV:production?'production':'development',VERITAS_EMBEDDED:'false',PORT:String(port),VERITAS_HOST:'127.0.0.1',DISABLE_HMR:'true',APP_GEMINI_API_KEY:'MY_DISABLED',GOOGLE_FACT_CHECK_API_KEY:'',VERITAS_EMBEDDING_ENDPOINT:'',VERITAS_USERS:JSON.stringify({[token]:'local-analyst'}),VERITAS_STORE:store,VERITAS_PUBLIC_ORIGIN:url,VERITAS_DEMO_FEED:'false',VERITAS_AI_SERVICE_URL:`http://127.0.0.1:${pythonPort}`,VERITAS_CLAIM_CORPUS:path.resolve('fixtures/submission/corpus.json'),VERITAS_CLAIM_CORPUS_SHA256:crypto.createHash('sha256').update(fs.readFileSync('fixtures/submission/corpus.json')).digest('hex')});
 const children=[];let stopping=false;
 env.VERITAS_AUTHORED_DEMO='1';
+env.VERITAS_WIKIPEDIA_ENABLED='0';
 env.VERITAS_OCR_PREPARATION_URL=env.VERITAS_AI_SERVICE_URL;env.VERITAS_AI_SERVICE_URL='';
 function stop(code){if(stopping)return;stopping=true;for(const child of children)if(child.exitCode===null)child.kill('SIGTERM');const force=setTimeout(()=>process.exit(code),4000);force.unref();Promise.all(children.map(child=>child.exitCode!==null?Promise.resolve():new Promise(resolve=>child.once('exit',resolve)))).then(()=>process.exit(code));}
 for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>stop(0));

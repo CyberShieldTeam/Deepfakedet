@@ -147,7 +147,13 @@ ${c?.episodeEvidence ? (()=>{
 ${(() => {
   const src = claims.flatMap((x) => x.sources);
   return src.length
-    ? `<ol>${src.map((s) => `<li>${s.id ? esc("[" + s.id + "] ") : ""}${s.url ? `<a href="${safeUrl(s.url)}">${esc(s.title)}</a>` : esc(s.title)} — ${esc(s.domain)}${s.isSimulated ? ' <span class="tag">FICTIONAL</span>' : ` · ${s.provider === "google_fact_check" ? "review date" : "published"}: ${esc(s.publishDate || "not provided")}${s.retrievedAt ? ` · retrieved ${esc(new Date(s.retrievedAt).toLocaleString())}` : ""}`}${s.excerpt ? `<blockquote>${esc(s.excerpt)}</blockquote>` : ""}${s.review ? `<p>Reviewed by ${esc(s.review.reviewedBy)} at ${esc(s.review.reviewedAt)}; quote: ${esc(s.review.quote)}</p>` : ""}${s.citedFor ? `<br><span class="muted">Cited for: ${esc(s.citedFor.slice(0, 200))}</span>` : ""}</li>`).join("")}</ol>`
+    ? `<ol>${src.map((s) => `<li>${s.id ? esc("[" + s.id + "] ") : ""}${s.url ? `<a href="${safeUrl(s.url)}">${esc(s.title)}</a>` : esc(s.title)} — ${esc(s.publisher || s.domain)}${s.isSimulated ? ' <span class="tag">FICTIONAL</span>' : ` · ${s.provider === "google_fact_check" ? "review date" : "published"}: ${esc(s.publishDate || "not provided")}${s.retrievedAt ? ` · retrieved ${esc(s.retrievedAt)}` : ""}`}${s.excerpt ? `<blockquote>${esc(s.excerpt)}</blockquote>` : ""}
+      ${s.originalUrl ? `<p><a href="${safeUrl(s.originalUrl)}">Original source</a></p>` : ''}
+      ${s.revisionUrl ? `<p><a href="${safeUrl(s.revisionUrl)}">Reported article revision ${esc(s.revisionId)}</a>; modified ${esc(s.modifiedAt || 'not provided')} (not first publication)</p>` : ''}
+      ${s.sourceType ? `<p>Source type: ${esc(s.sourceType)}; language: ${esc(s.language || 'not provided')}; method: ${esc(s.retrievalMethod || 'not provided')}</p>` : ''}
+      ${s.locator ? `<p>Passage location: ${esc(s.locator)}</p>` : ''}${s.passageSha256 ? `<p>Passage SHA-256: ${esc(s.passageSha256)}</p>` : ''}
+      ${s.license ? `<p>License: ${s.licenseUrl ? `<a href="${safeUrl(s.licenseUrl)}">${esc(s.license)}</a>` : esc(s.license)}</p>` : ''}
+      ${list(s.sourceLimitations || [])}${s.review ? `<p>Reviewed by ${esc(s.review.reviewedBy)} at ${esc(s.review.reviewedAt)}; quote: ${esc(s.review.quote)}</p>` : ""}${s.citedFor ? `<br><span class="muted">Cited for: ${esc(s.citedFor.slice(0, 200))}</span>` : ""}</li>`).join("")}</ol>`
     : '<p class="muted">No external sources were checked.</p>';
 })()}
 ${media.length ? `<p class="muted">Media files: ${media.map((m) => esc(m.fileName || m.modality)).join(", ")}</p>` : ""}

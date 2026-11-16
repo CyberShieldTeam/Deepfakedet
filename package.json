@@ -11,6 +11,7 @@
     "demo:test": "node scripts/demo-test.mjs",
     "demo:check": "node scripts/check-demo.mjs",
     "test:startup": "tsx test/startup.test.ts",
+    "test:claim-provider": "tsx test/wikipediaEvidence.test.ts",
     "docs:check": "node scripts/check-docs.mjs",
     "build": "vite build",
     "preview": "vite preview",

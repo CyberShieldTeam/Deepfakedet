@@ -135,12 +135,15 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (second
       {r.localAudio && (
         <Card title="Experimental AASIST evidence">
           <div className="space-y-1 text-xs text-slate-400">
+            <p>Model executed: {r.localAudio.model} · revision {r.localAudio.revision}</p>
+            <a className="text-cyan-300 underline" href="https://github.com/clovaai/aasist" target="_blank" rel="noreferrer">Official AASIST documentation</a>
             {r.localAudio.segments.slice(0, 8).map((segment, index) => (
               <div key={index} className="font-mono">
                 {segment.start_seconds.toFixed(1)}–{segment.end_seconds.toFixed(1)} s · raw spoof output {segment.raw_spoof_softmax.toFixed(3)}
               </div>
             ))}
             <p className="text-amber-300">Scores are uncalibrated; silence filtering did not verify speech presence.</p>
+            <p>Trained for ASVspoof 2019 LA speech; independent VERITAS detection accuracy is not established. Model documentation is not evidence that this file is synthetic.</p>
           </div>
         </Card>
       )}
@@ -243,9 +246,9 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (second
               <Term k="confidence">How sure we are</Term>
             </div>
             <div className="mb-1 font-mono text-slate-200">
-              {r.confidenceScore == null ? "Not estimated" : `${r.confidenceScore}%`}
+              {r.confidenceScore == null || (r.confidenceScore === 0 && r.aiGeneratedProbability == null) ? "Assessment unavailable" : `${r.confidenceScore}%`}
             </div>
-            {r.confidenceScore != null && <Meter value={r.confidenceScore} color="#22d3ee" />}
+            {r.confidenceScore != null && !(r.confidenceScore === 0 && r.aiGeneratedProbability == null) && <Meter value={r.confidenceScore} color="#22d3ee" />}
           </div>
           <div>
             <div className="mb-1 text-slate-400">Chance it is AI-made</div>
@@ -282,7 +285,7 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (second
         {r.aiGeneration && (
           <div className="text-[11px] text-slate-400">
             Overall <Term k="confidence">confidence</Term>:{" "}
-            {r.confidenceScore == null ? "not estimated" : `${r.confidenceScore}%`}
+            {r.confidenceScore == null || (r.confidenceScore === 0 && r.aiGeneratedProbability == null) ? "not estimated" : `${r.confidenceScore}%`}
           </div>
         )}
         {r.provenance && (

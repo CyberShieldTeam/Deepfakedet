@@ -1,0 +1,358 @@
+{
+  "startingCommit": "caf4a022a9ccba54eb63dcb735cc15e8375f6470",
+  "branch": "codex/integrate-figma-upgrade",
+  "observedAt": "2026-11-16T22:37:11.292Z",
+  "scope": "Live retrieval and authored software review actions, not independent factual accuracy evaluation",
+  "result": "passed",
+  "checks": [
+    {
+      "kind": "live-media-processing",
+      "modality": "image",
+      "scope": "Transport/inference control only; independent genuine/spoof labels not established",
+      "sourceFile": "fixtures/submission/notice.png",
+      "analysisState": "PARTIAL_ANALYSIS",
+      "analysisMs": 64.60679999999957,
+      "authenticity": "inconclusive",
+      "decisionProbability": null,
+      "serverImageMeasurements": 3
+    },
+    {
+      "kind": "live-media-processing",
+      "modality": "audio",
+      "scope": "Transport/inference control only; independent genuine/spoof labels not established",
+      "sourceFile": "test/fixtures/sample_voice.wav",
+      "analysisState": "INSUFFICIENT_EVIDENCE",
+      "analysisMs": 1805.0910000000003,
+      "authenticity": "inconclusive",
+      "decisionProbability": null,
+      "serverImageMeasurements": 0,
+      "audio": {
+        "model": "clovaai/aasist",
+        "revision": "a04c9863f63d44471dde8a6abcb3b082b07cd1d1",
+        "processingMs": 1770,
+        "segments": [
+          {
+            "start_seconds": 0,
+            "end_seconds": 4.037,
+            "raw_bonafide_logit": -7.224765,
+            "raw_spoof_softmax": 0.999999
+          },
+          {
+            "start_seconds": 4.037,
+            "end_seconds": 8.075,
+            "raw_bonafide_logit": -6.808384,
+            "raw_spoof_softmax": 0.999998
+          },
+          {
+            "start_seconds": 8.075,
+            "end_seconds": 10,
+            "raw_bonafide_logit": -7.492316,
+            "raw_spoof_softmax": 1
+          }
+        ]
+      }
+    },
+    {
+      "kind": "live-media-processing",
+      "modality": "video",
+      "scope": "Transport/inference control only; independent genuine/spoof labels not established",
+      "sourceFile": "test/fixtures/video/test_pattern_with_tone_3s.mp4",
+      "analysisState": "INSUFFICIENT_EVIDENCE",
+      "analysisMs": 2374.3369000000002,
+      "authenticity": "inconclusive",
+      "decisionProbability": null,
+      "serverImageMeasurements": 0,
+      "video": {
+        "frames": 6,
+        "audioStatus": "analyzed",
+        "audioSegments": [
+          {
+            "start_seconds": 0,
+            "end_seconds": 3,
+            "raw_bonafide_logit": -2.236146,
+            "raw_spoof_softmax": 0.975825
+          }
+        ],
+        "scope": "server_decoded_frames"
+      }
+    },
+    {
+      "kind": "network-preservation",
+      "analysisState": "INSUFFICIENT_EVIDENCE",
+      "analysisMs": 524.2985999999983,
+      "network": {
+        "maliciousnessProbability": null,
+        "episodes": 18,
+        "witnesses": 18
+      }
+    },
+    {
+      "kind": "browser-api-store-correlation-report",
+      "sourceMetadataParity": true,
+      "graphCounts": {
+        "nodes": 62,
+        "relationships": 88,
+        "crossEngineLinks": 0,
+        "candidateComparisons": 12,
+        "omittedNodes": 0,
+        "omittedRelationships": 0,
+        "omittedTimelineEntries": 0
+      },
+      "rawStatus": "INSUFFICIENT_EVIDENCE",
+      "reviewedStatus": "SUPPORTED",
+      "confidence": null,
+      "sources": [
+        {
+          "id": "E1",
+          "title": "Muhammad Quli Qutb Shah",
+          "url": "https://en.wikipedia.org/wiki/Muhammad_Quli_Qutb_Shah",
+          "originalUrl": "https://en.wikipedia.org/wiki/Muhammad_Quli_Qutb_Shah",
+          "publisher": "Wikipedia contributors",
+          "provider": "wikipedia",
+          "retrievedAt": "2026-11-16T22:37:15.586Z",
+          "revisionId": 1373146972,
+          "revisionUrl": "https://en.wikipedia.org/w/index.php?oldid=1373146972",
+          "modifiedAt": "2026-09-04T07:44:55Z",
+          "passageSha256": "c30159e18158323d2e28f2d865030ba72248ed8fd579b80c8e4d27f8472a9cae",
+          "license": "Creative Commons Attribution-Share Alike 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+        },
+        {
+          "id": "E2",
+          "title": "Old City (Hyderabad, India)",
+          "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+          "originalUrl": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+          "publisher": "Wikipedia contributors",
+          "provider": "wikipedia",
+          "retrievedAt": "2026-11-16T22:37:15.586Z",
+          "revisionId": 1376954526,
+          "revisionUrl": "https://en.wikipedia.org/w/index.php?oldid=1376954526",
+          "modifiedAt": "2026-09-27T03:31:16Z",
+          "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+          "license": "Creative Commons Attribution-Share Alike 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+        },
+        {
+          "id": "E3",
+          "title": "History of Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/History_of_Hyderabad",
+          "originalUrl": "https://en.wikipedia.org/wiki/History_of_Hyderabad",
+          "publisher": "Wikipedia contributors",
+          "provider": "wikipedia",
+          "retrievedAt": "2026-11-16T22:37:15.586Z",
+          "revisionId": 1376916956,
+          "revisionUrl": "https://en.wikipedia.org/w/index.php?oldid=1376916956",
+          "modifiedAt": "2026-09-27T00:07:11Z",
+          "passageSha256": "d9bee103e90d3a7a55236167d58e94ea87570de791109af862c1e813870ea441",
+          "license": "Creative Commons Attribution-Share Alike 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+        },
+        {
+          "id": "E4",
+          "title": "Charminar",
+          "url": "https://en.wikipedia.org/wiki/Charminar",
+          "originalUrl": "https://en.wikipedia.org/wiki/Charminar",
+          "publisher": "Wikipedia contributors",
+          "provider": "wikipedia",
+          "retrievedAt": "2026-11-16T22:37:15.586Z",
+          "revisionId": 1376727486,
+          "revisionUrl": "https://en.wikipedia.org/w/index.php?oldid=1376727486",
+          "modifiedAt": "2026-09-25T22:33:21Z",
+          "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+          "license": "Creative Commons Attribution-Share Alike 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+        },
+        {
+          "id": "E5",
+          "title": "Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/Hyderabad",
+          "originalUrl": "https://en.wikipedia.org/wiki/Hyderabad",
+          "publisher": "Wikipedia contributors",
+          "provider": "wikipedia",
+          "retrievedAt": "2026-11-16T22:37:15.586Z",
+          "revisionId": 1383921087,
+          "revisionUrl": "https://en.wikipedia.org/w/index.php?oldid=1383921087",
+          "modifiedAt": "2026-11-05T16:24:44Z",
+          "passageSha256": "8c2758a33b01f98ee71e59fc6af44eb8e4aae52a67a019c375fc6937c81c4f46",
+          "license": "Creative Commons Attribution-Share Alike 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+        },
+        {
+          "id": "E6",
+          "title": "Architecture of Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+          "originalUrl": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+          "publisher": "Wikipedia contributors",
+          "provider": "wikipedia",
+          "retrievedAt": "2026-11-16T22:37:15.586Z",
+          "revisionId": 1378920915,
+          "revisionUrl": "https://en.wikipedia.org/w/index.php?oldid=1378920915",
+          "modifiedAt": "2026-10-06T22:52:58Z",
+          "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+          "license": "Creative Commons Attribution-Share Alike 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+        }
+      ]
+    },
+    {
+      "kind": "live-query-unassessed",
+      "query": "The Earth has two moons.",
+      "wallMs": 740.2720999999983,
+      "analysisState": "INSUFFICIENT_EVIDENCE",
+      "analysisMs": 729.8300999999992,
+      "processRssBytes": 216211456,
+      "sources": 6
+    },
+    {
+      "kind": "live-query-unassessed",
+      "query": "The Charminar was built in 1891.",
+      "wallMs": 719.0018999999993,
+      "analysisState": "INSUFFICIENT_EVIDENCE",
+      "analysisMs": 708.2640999999967,
+      "processRssBytes": 216436736,
+      "sources": 6
+    },
+    {
+      "kind": "live-query-unassessed",
+      "query": "The Charminar in Delhi was built in 1591.",
+      "wallMs": 611.3483000000015,
+      "analysisState": "INSUFFICIENT_EVIDENCE",
+      "analysisMs": 602.3917999999976,
+      "processRssBytes": 216006656,
+      "sources": 6
+    },
+    {
+      "kind": "live-query-unassessed",
+      "query": "veritaszzunknownzzqwpj2026",
+      "wallMs": 368.3690999999999,
+      "analysisState": "NO_RELEVANT_SIGNALS",
+      "analysisMs": 361.04529999999795,
+      "processRssBytes": 216420352,
+      "sources": 0
+    }
+  ],
+  "imageOffline": {
+    "model": "dima806/ai_vs_real_image_detection",
+    "revision": "9d17b51b9367d6b5720ac81dc339455c45d50ae3",
+    "scope": "Authored notice functional inference only; no accuracy evaluation or promotion",
+    "offline": true,
+    "elapsedSeconds": 21.493,
+    "peakObservedRssMiB": 652.633,
+    "memoryScope": "sum of sampled worker process-tree RSS; shared pages may be counted more than once",
+    "events": [
+      {
+        "event": "stage_start",
+        "monotonicSeconds": 383989.271916,
+        "stage": "import_torch",
+        "rssMb": 18.906
+      },
+      {
+        "event": "stage_end",
+        "monotonicSeconds": 383993.107155,
+        "stage": "import_torch",
+        "rssMb": 197.758,
+        "version": "2.15.0+cpu",
+        "threads": 4,
+        "interopThreads": 14,
+        "cudaAvailable": false
+      },
+      {
+        "event": "stage_start",
+        "monotonicSeconds": 383993.107391,
+        "stage": "import_transformers",
+        "rssMb": 197.781
+      },
+      {
+        "event": "stage_end",
+        "monotonicSeconds": 384007.585118,
+        "stage": "import_transformers",
+        "rssMb": 337.203
+      },
+      {
+        "event": "stage_start",
+        "monotonicSeconds": 384007.585294,
+        "stage": "load_processor",
+        "rssMb": 337.203
+      },
+      {
+        "event": "stage_end",
+        "monotonicSeconds": 384007.806529,
+        "stage": "load_processor",
+        "rssMb": 337.789
+      },
+      {
+        "event": "stage_start",
+        "monotonicSeconds": 384007.80662,
+        "stage": "load_model",
+        "rssMb": 337.789
+      },
+      {
+        "event": "stage_end",
+        "monotonicSeconds": 384008.079557,
+        "stage": "load_model",
+        "rssMb": 343.078
+      },
+      {
+        "event": "stage_start",
+        "monotonicSeconds": 384008.079681,
+        "stage": "decode_preprocess",
+        "rssMb": 343.078
+      },
+      {
+        "event": "stage_end",
+        "monotonicSeconds": 384008.119212,
+        "stage": "decode_preprocess",
+        "rssMb": 348.078,
+        "inputShapes": {
+          "pixel_values": [
+            1,
+            3,
+            224,
+            224
+          ]
+        }
+      },
+      {
+        "event": "stage_start",
+        "monotonicSeconds": 384008.119308,
+        "stage": "model_forward",
+        "rssMb": 348.078
+      },
+      {
+        "event": "stage_end",
+        "monotonicSeconds": 384008.649272,
+        "stage": "model_forward",
+        "rssMb": 691.016,
+        "rawFakeSoftmax": 0.230166
+      }
+    ]
+  },
+  "pythonServiceMemory": {
+    "scope": "Windows process after mixed OCR/image/audio/video use; not model-only memory or controlled benchmark",
+    "rssMiB": 344.91,
+    "peakWorkingSetMiB": 564.91
+  },
+  "tests": {
+    "providerControls": 24,
+    "pythonPassed": 98,
+    "pythonSkipped": 0,
+    "nodeRegression": "passed",
+    "engine3": "passed",
+    "engine4": "passed",
+    "diagnostics": "passed",
+    "extraction": "passed",
+    "ocrGeometry": "passed",
+    "ocrApi": "passed",
+    "ocrRuntime": "passed",
+    "startup": "passed",
+    "typescript": "passed",
+    "build": "passed with existing large main chunk warning",
+    "hostedCurrentCommit": "pending until pushed"
+  },
+  "limitations": [
+    "Authored software controls and live source observations are not independent detection or factual accuracy validation.",
+    "Google live credentials, approved primary-source corpus and labelled independent stance/media evaluation remain unavailable.",
+    "No model promoted, threshold changed or reserved image dataset opened.",
+    "No private credentials, case store, raw source passage corpus or model weights included."
+  ]
+}

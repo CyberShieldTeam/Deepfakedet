@@ -113,7 +113,14 @@ def supervise(image_path: Path, output: Path, timeout_seconds: float, sample_sec
             _terminate_tree(process)
             break
         try:
-            rss = observed.memory_info().rss / 1_048_576
+            # Windows venv python.exe can be a small launcher with the actual
+            # interpreter in a child. Sampling only the launcher undercounts ML RSS.
+            rss = 0.0
+            for member in [observed, *observed.children(recursive=True)]:
+                try:
+                    rss += member.memory_info().rss / 1_048_576
+                except psutil.Error:
+                    pass
             peak_rss = max(peak_rss, rss)
             samples.append({"elapsedSeconds": round(elapsed, 3), "rssMb": round(rss, 3)})
         except psutil.Error:
@@ -140,6 +147,7 @@ def supervise(image_path: Path, output: Path, timeout_seconds: float, sample_sec
         "exitCode": process.returncode,
         "elapsedSeconds": round(time.monotonic() - started, 3),
         "peakObservedRssMb": round(peak_rss, 3),
+        "memoryScope": "sum of sampled worker process-tree RSS; shared pages may be counted more than once",
         "memorySamples": samples,
         "events": events,
         "nonJsonOutput": non_json,

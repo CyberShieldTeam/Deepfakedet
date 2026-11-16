@@ -3,6 +3,7 @@ import { performance } from "node:perf_hooks";
 import {claimDiagnostics} from './analysisDiagnostics';
 import { embedDetailed, cosine, modelConfig } from "./inference";
 import { analyzeClaim, claimTokens, normalizeClaim } from "./claimText";
+import {wikipediaEvidence} from './wikipediaEvidence';
 import {
   corpusEvidence,
   googleEvidence,
@@ -106,7 +107,7 @@ export async function rankEvidence(
 }
 
 export async function retrieveEvidence(claim: string, local: Evidence[] = []) {
-  const [corpus, google] = await Promise.all([corpusEvidence(), googleEvidence(claim)]);
+  const [corpus, google, wikipedia] = await Promise.all([corpusEvidence(), googleEvidence(claim), wikipediaEvidence(claim)]);
   const controls: RetrievedEvidence[] = local.map((e) => ({
     title: e.title,
     url: e.url,
@@ -115,11 +116,11 @@ export async function retrieveEvidence(claim: string, local: Evidence[] = []) {
     retrievedAt: new Date().toISOString(),
     provider: "software_test",
   }));
-  const ranking = await rankEvidence(claim, [...corpus.items, ...google.items, ...controls]);
+  const ranking = await rankEvidence(claim, [...corpus.items, ...google.items, ...wikipedia.items, ...controls]);
   return {
     ...ranking,
-    providers: [corpus.state, google.state],
-    retrievalStatus: [corpus.state.detail, google.state.detail].join("; "),
+    providers: [corpus.state, google.state, wikipedia.state],
+    retrievalStatus: [corpus.state.detail, google.state.detail, wikipedia.state.detail].join("; "),
   };
 }
 
@@ -143,6 +144,9 @@ export async function verifyWithEvidence(claim: string): Promise<ClaimVerificati
     language: e.language,
     relevance: { lexicalScore: e.lexicalScore, semanticScore: e.semanticScore, rank: e.rank },
     license: e.license,
+    originalUrl:e.originalUrl,sourceType:e.sourceType,retrievalMethod:e.retrievalMethod,locator:e.locator,
+    revisionId:e.revisionId,revisionUrl:e.revisionUrl,modifiedAt:e.modifiedAt,passageSha256:e.passageSha256,
+    licenseUrl:e.licenseUrl,sourceLimitations:e.sourceLimitations,
   }));
   const unavailable = !sources.length && !retrieval.providers.some((p) => p.status === "available");
   const missingEvidence = [
@@ -210,7 +214,7 @@ export async function verifyWithEvidence(claim: string): Promise<ClaimVerificati
       semanticMeasured: retrieval.semanticMeasured,
       elapsedMs: performance.now() - started,
       processRssBytes: process.memoryUsage().rss,
-      queries: [analysis.normalized],
+      queries: [analysis.normalized,...retrieval.providers.flatMap(p=>p.query?[p.query]:[])],
     },
   };
   result.analysis=claimDiagnostics(result,performance.now()-started);

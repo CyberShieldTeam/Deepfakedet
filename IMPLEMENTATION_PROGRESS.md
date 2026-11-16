@@ -1,5 +1,31 @@
 # VERITAS AI implementation progress
 
+## Real claim sources and feasible media inference — 2026-11-17 local date
+
+- Started clean/synchronized at `caf4a02`, same feature branch. Added opt-in fixed-host
+  MediaWiki retrieval with real lead extracts, bounded requests/cache/concurrency, safe
+  errors and no fictional fallback. Google metadata/rate/quota/pagination disclosure
+  improved; live Google remains blocked by absent legitimate credentials.
+- Original/canonical/revision links, publisher/license/language/locator/retrieval times
+  and exact passage hashes survive signed API, analyst review, persistence, correlation
+  and clickable HTML report. No automatic entailment/truth score or threshold change.
+- Actual Chromium session retrieved real Charminar sources, reviewed an exact quote,
+  saved/correlated/exported it; wrong year/location and no-result queries stayed unresolved.
+  Combined actual image/audio/video/network processing passed with isolated case stores.
+- Official 1,281,532-byte MIT AASIST checkpoint hash/strict loading verified; full local
+  Python now executes experimental audio and video-audio segment inference. Accuracy,
+  calibration, independent speech data and reliable speech applicability remain open.
+- Cached Dima executed offline on an authored notice only. Prior negative image findings
+  and sealed holdout preserved. Fixed Windows venv-launcher RSS undercount in bounded
+  diagnostic tooling; corrected tree measurement 652.633 MiB, 21.493 s total run.
+- Added 24 deterministic provider/citation controls and hosted CI coverage. Full local
+  Python 98/98 passed with installed AASIST; core Node/engine/OCR/startup checks passed.
+  Research/scientific blockers and exact scope are in the seven CORE/CLAIM/IMAGE/AUDIO/
+  VIDEO capability documents; this does not close every requested development phase.
+- Existing manual store/token/owner preserved through local service restarts; root `.env`
+  has nonsecret online-provider flags only and remains ignored. No model weights, keys,
+  private investigations or source fixtures are committed.
+
 ## Submission readiness — 2026-11-17 local date
 
 - Started clean/synchronized at `c26f385` on the feature branch. Added a lightweight,

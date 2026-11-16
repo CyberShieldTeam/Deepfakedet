@@ -7,6 +7,11 @@ relationships in a source-traceable evidence graph and report.
 screenshot OCR generalization and malicious-campaign accuracy remain unvalidated.
 Missing services return unavailable states, never invented predictions.
 
+Real keyless claim retrieval is now available through an opt-in Wikipedia API provider,
+with clickable original/revision citations and attributed passage review. It is an
+encyclopedia source, not automatic fact checking. See [source setup](docs/CLAIM_SOURCE_CITATIONS.md)
+and [current capability verification](docs/CORE_CAPABILITY_VERIFICATION.md).
+
 ## Problem and approach
 
 A media anomaly, a disputed claim and a burst of similar posts answer different questions.
