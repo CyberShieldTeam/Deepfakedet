@@ -1,5 +1,27 @@
 # VERITAS AI implementation progress
 
+## Engine 4.3 evaluation readiness and evidence integrity — 2026-11-17
+
+- Starting commit `32f5b85`, clean/synchronized `codex/integrate-figma-upgrade`.
+  Added frozen bounded release planning, source/family/lineage isolation, locked holdout,
+  per-observation journals/resume, duplicate detection and explicit missing/failure
+  denominators. Legacy evaluator fields remain compatible; production defaults unchanged.
+- Researched ScreenQA, Screen Annotation, Screen2Words, RICO and ScreenParse. No new
+  independent screenshot dataset admitted: rights/original access and exhaustive blind
+  transcription remain unresolved. Added blinded annotation packets and adjudication
+  validation; no real human participants, accuracy intervals or holdout results invented.
+- Ten real OCR passes on five authored controls (one family, development only): baseline
+  and upscale each CER 6.36%, WER 4.76%, exact 4/5, zero operational failures. English
+  controls exact; mixed-script output wrong under both profiles. These are software
+  controls, not independent screenshot/native-language accuracy. Selector stays off.
+- Five separately labelled injected-error controls verify number/location/negation/date/
+  mixed uncertainty through actual review/Engine 2/4/report/storage APIs. Actual browser
+  number correction passed in development and authenticated production; raw originals
+  remain traceable. Scientific candidate/relationship and human-review quality remain open.
+- See `docs/ENGINE43_DATASET_ADMISSION.md`, `ENGINE43_EVALUATION.md`,
+  `ENGINE43_OCR_COMPARISON.md`, `ENGINE43_ERROR_PROPAGATION.md` and
+  `ENGINE43_VALIDATION.md` for current evidence, limits and final verification ledger.
+
 ## Engine 4.2 OCR robustness and independent development probe — 2026-11-16
 
 - Started clean/synchronized at `00b6d06` on `codex/integrate-figma-upgrade`. Audited the

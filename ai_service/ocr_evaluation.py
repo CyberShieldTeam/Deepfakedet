@@ -6,6 +6,7 @@ from PIL import Image,ImageOps
 from ai_service.evaluate_extraction import text_metrics
 from ai_service.extraction_prepare import prepare,PROFILES
 from ai_service.profile_campaign_resources import terminate_tree
+from ai_service.ocr_scoring import score_observations
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def required(row,key):
     if not isinstance(row.get(key),str) or not row[key].strip():raise ValueError('Missing provenance: '+key)
@@ -68,7 +69,7 @@ def measure(row,profile):
     return {**{k:v for k,v in row.items() if k not in ['absolutePath','path']},'profile':profile,**result,'wallSeconds':time.perf_counter()-start,'sampledPeakOcrTreeRssBytes':peak}
 def summarize(rows):
     valid=[r for r in rows if r['text'] is not None];texts=[r for r in valid if r['reference']];empty=[r for r in valid if not r['reference']]
-    return dict(samples=len(rows),transcription=text_metrics([dict(reference=r['reference'],prediction=r['text'].rstrip('\n')) for r in texts]),exactMatchRate=sum(unicodedata.normalize('NFC',r['reference'])==unicodedata.normalize('NFC',r['text'].rstrip('\n')) for r in texts)/len(texts) if texts else None,noTextSamples=len(empty),noTextCorrect=sum(not r['text'].strip() for r in empty),noTextDetectedOnText=sum(not r['text'].strip() for r in texts),technicalFailures=sum(r['state']=='FAILED' for r in rows),unavailable=sum(r['state']=='UNAVAILABLE' for r in rows),partial=sum(r['state']=='PARTIAL' for r in rows),meanWallSeconds=sum(r['wallSeconds'] for r in rows)/len(rows),maxSampledOcrTreeRssBytes=max(r['sampledPeakOcrTreeRssBytes'] for r in rows))
+    return dict(samples=len(rows),failureAccounting=score_observations(rows),legacyTranscriptionPolicy='transcription/exactMatchRate are conditional on non-null outputs; report failureAccounting coverage and failureAsEmpty alongside them',transcription=text_metrics([dict(reference=r['reference'],prediction=r['text'].rstrip('\n')) for r in texts]),exactMatchRate=sum(unicodedata.normalize('NFC',r['reference'])==unicodedata.normalize('NFC',r['text'].rstrip('\n')) for r in texts)/len(texts) if texts else None,noTextSamples=len(empty),noTextCorrect=sum(not r['text'].strip() for r in empty),noTextDetectedOnText=sum(not r['text'].strip() for r in texts),technicalFailures=sum(r['state']=='FAILED' for r in rows),unavailable=sum(r['state']=='UNAVAILABLE' for r in rows),partial=sum(r['state']=='PARTIAL' for r in rows),meanWallSeconds=sum(r['wallSeconds'] for r in rows)/len(rows) if rows else None,maxSampledOcrTreeRssBytes=max((r['sampledPeakOcrTreeRssBytes'] for r in rows),default=0))
 def run(manifest,output):
     target=Path(output)
     if target.exists():raise ValueError('Refusing existing report')
@@ -84,7 +85,7 @@ def run(manifest,output):
             for value in sorted({r[key] for r in results}):
                 group=[r for r in results if r['profile']==profile and r[key]==value]
                 groups[f'{profile}/{key}/{value}']=summarize(group)
-    report=dict(schemaVersion=2,scope=m['scope'],datasetId=m['datasetId'],manifestSha256=digest,configuration=dict(profiles=m['profiles'],ocr='tesseract.js@7.0.0',normalization='NFC CER/WER; only terminal OCR newline removed; case/punctuation preserved',nearDuplicateRule='8x8 average hash Hamming <=4 across splits; screening only, not proof of uniqueness'),grouped=groups,rows=results,limitations=['Development only; no automatic selector was trained.','No independent metrics when scope=authored_controls.','No-text controls distinct from unavailable/failed processing; failed samples excluded from CER/WER and counted separately.','RSS 20ms sampled runner+OCR tree; persistent preparation/web services excluded.'])
+    report=dict(schemaVersion=2,scope=m['scope'],datasetId=m['datasetId'],manifestSha256=digest,configuration=dict(profiles=m['profiles'],ocr='tesseract.js@7.0.0',normalization='NFC CER/WER; only terminal OCR newline removed; case/punctuation preserved',nearDuplicateRule='8x8 average hash Hamming <=4 across splits; screening only, not proof of uniqueness'),grouped=groups,rows=results,limitations=['Development only; no automatic selector was trained.','No independent metrics when scope=authored_controls.','Legacy transcription fields exclude null outputs; failureAccounting includes expected operational failures as empty and reports coverage. Neither conditional scores nor failure-as-empty alone describe deployment quality.','RSS 20ms sampled runner+OCR tree; persistent preparation/web services excluded.'])
     with target.open('x',encoding='utf-8') as f:json.dump(report,f,ensure_ascii=False,indent=2)
     print(json.dumps(dict(scope=m['scope'],passes=len(results),output=str(target))))
 def main():

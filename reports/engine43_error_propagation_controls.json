@@ -1,0 +1,251 @@
+{
+  "scope": "AUTHORED INJECTED TRANSCRIPT SOFTWARE CONTROLS; not OCR accuracy, analytical relationship accuracy or human usability",
+  "observations": [
+    {
+      "case": "number",
+      "rawInjectedText": "Software control: 15 people visited the fictional Amber Museum.",
+      "correctedText": "Software control: 75 people visited the fictional Amber Museum.",
+      "verdict": "Insufficient Evidence",
+      "sourceCount": 0,
+      "correctPostMentions": 3,
+      "graphCounts": {
+        "nodes": 17,
+        "relationships": 15,
+        "crossEngineLinks": 4,
+        "candidateComparisons": 6,
+        "omittedNodes": 0,
+        "omittedRelationships": 0,
+        "omittedTimelineEntries": 0
+      },
+      "sourceHash": "b41a9d91a39568c35bcb1ea463817b219daf3c66eb64a05018075d6ede550615",
+      "provenanceEdges": [
+        {
+          "id": "link:0636ea7815f726eb15f6f28fe84b5bbe",
+          "source": "extraction_review:43546137e2aa9a762e0def722f3a05ba",
+          "target": "claim_assessment:33e2d1bc8b483f877b37f50b950997e4",
+          "type": "CLAIM_INVESTIGATED_BY_ENGINE2",
+          "strength": "exact_reference",
+          "crossEngine": true,
+          "method": "current accepted/corrected review explicitly investigated by Engine 2",
+          "support": [
+            "/claimResults/0",
+            "/extractions/0/candidates/0/reviews/0"
+          ],
+          "measurements": {
+            "reviewState": "corrected",
+            "revision": 1
+          },
+          "explanation": "CLAIM INVESTIGATED BY ENGINE2: current accepted/corrected review explicitly investigated by Engine 2.",
+          "limitations": [
+            "Extraction review does not validate claim truth; Engine 2 safeguards remain applicable."
+          ]
+        },
+        {
+          "id": "link:1313813cdf6c3b39cff94ebcc82d6db0",
+          "source": "claim_candidate:77c5df2664dcd886177134cf610e9f1b",
+          "target": "extraction_review:43546137e2aa9a762e0def722f3a05ba",
+          "type": "CLAIM_REVIEWED_FROM_TEXT",
+          "strength": "exact_reference",
+          "crossEngine": false,
+          "method": "authenticated recorded human review",
+          "support": [
+            "/extractions/0/candidates/0",
+            "/extractions/0/candidates/0/reviews/0"
+          ],
+          "measurements": {
+            "reviewState": "corrected",
+            "revision": 1
+          },
+          "explanation": "CLAIM REVIEWED FROM TEXT: authenticated recorded human review.",
+          "limitations": []
+        }
+      ]
+    },
+    {
+      "case": "location",
+      "rawInjectedText": "Software control: The fictional Amber event is in Hyderbad.",
+      "correctedText": "Software control: The fictional Amber event is in Hyderabad.",
+      "verdict": "Insufficient Evidence",
+      "sourceCount": 0,
+      "correctPostMentions": 3,
+      "graphCounts": {
+        "nodes": 17,
+        "relationships": 15,
+        "crossEngineLinks": 4,
+        "candidateComparisons": 6,
+        "omittedNodes": 0,
+        "omittedRelationships": 0,
+        "omittedTimelineEntries": 0
+      },
+      "sourceHash": "82892429209e96d5d3755cc3d9a5f62cc61a7e88437b4e48b62cb69686baf2a5",
+      "provenanceEdges": [
+        {
+          "id": "link:06127535fe0d538760df9d9af1fb36f8",
+          "source": "claim_candidate:bbb7591c70c1ba9d778b6956a30cdd2f",
+          "target": "extraction_review:128e4c5cc93d1d8cf355911a812ceed6",
+          "type": "CLAIM_REVIEWED_FROM_TEXT",
+          "strength": "exact_reference",
+          "crossEngine": false,
+          "method": "authenticated recorded human review",
+          "support": [
+            "/extractions/0/candidates/0",
+            "/extractions/0/candidates/0/reviews/0"
+          ],
+          "measurements": {
+            "reviewState": "corrected",
+            "revision": 1
+          },
+          "explanation": "CLAIM REVIEWED FROM TEXT: authenticated recorded human review.",
+          "limitations": []
+        },
+        {
+          "id": "link:63172a647d13969f5e9667d7fa63ceed",
+          "source": "extraction_review:128e4c5cc93d1d8cf355911a812ceed6",
+          "target": "claim_assessment:c2c481d6ec288a4505971968a0d56006",
+          "type": "CLAIM_INVESTIGATED_BY_ENGINE2",
+          "strength": "exact_reference",
+          "crossEngine": true,
+          "method": "current accepted/corrected review explicitly investigated by Engine 2",
+          "support": [
+            "/claimResults/0",
+            "/extractions/0/candidates/0/reviews/0"
+          ],
+          "measurements": {
+            "reviewState": "corrected",
+            "revision": 1
+          },
+          "explanation": "CLAIM INVESTIGATED BY ENGINE2: current accepted/corrected review explicitly investigated by Engine 2.",
+          "limitations": [
+            "Extraction review does not validate claim truth; Engine 2 safeguards remain applicable."
+          ]
+        }
+      ]
+    },
+    {
+      "case": "negation",
+      "rawInjectedText": "Software control: The fictional Amber Museum will open.",
+      "correctedText": "Software control: The fictional Amber Museum will not open.",
+      "verdict": "Insufficient Evidence",
+      "sourceCount": 0,
+      "correctPostMentions": 3,
+      "graphCounts": {
+        "nodes": 17,
+        "relationships": 15,
+        "crossEngineLinks": 4,
+        "candidateComparisons": 6,
+        "omittedNodes": 0,
+        "omittedRelationships": 0,
+        "omittedTimelineEntries": 0
+      },
+      "sourceHash": "30243b6d3160377226fc299017d00428eee8a0fbb277e45c3cf732f30c355828",
+      "provenanceEdges": [
+        {
+          "id": "link:23978fc637e64b5cea596305cf16d241",
+          "source": "claim_candidate:8104f0057d2caf4f9ddd351c385db10a",
+          "target": "extraction_review:938b200287bbe2938014b118654d0b8e",
+          "type": "CLAIM_REVIEWED_FROM_TEXT",
+          "strength": "exact_reference",
+          "crossEngine": false,
+          "method": "authenticated recorded human review",
+          "support": [
+            "/extractions/0/candidates/0",
+            "/extractions/0/candidates/0/reviews/0"
+          ],
+          "measurements": {
+            "reviewState": "corrected",
+            "revision": 1
+          },
+          "explanation": "CLAIM REVIEWED FROM TEXT: authenticated recorded human review.",
+          "limitations": []
+        },
+        {
+          "id": "link:560a70971931d381965ec784f6f11399",
+          "source": "extraction_review:938b200287bbe2938014b118654d0b8e",
+          "target": "claim_assessment:877f1847ee49a8494fb55ac646b36607",
+          "type": "CLAIM_INVESTIGATED_BY_ENGINE2",
+          "strength": "exact_reference",
+          "crossEngine": true,
+          "method": "current accepted/corrected review explicitly investigated by Engine 2",
+          "support": [
+            "/claimResults/0",
+            "/extractions/0/candidates/0/reviews/0"
+          ],
+          "measurements": {
+            "reviewState": "corrected",
+            "revision": 1
+          },
+          "explanation": "CLAIM INVESTIGATED BY ENGINE2: current accepted/corrected review explicitly investigated by Engine 2.",
+          "limitations": [
+            "Extraction review does not validate claim truth; Engine 2 safeguards remain applicable."
+          ]
+        }
+      ]
+    },
+    {
+      "case": "date",
+      "rawInjectedText": "Software control: The fictional Amber event is on June.",
+      "correctedText": "Software control: The fictional Amber event is on June 17, 2031.",
+      "verdict": "Insufficient Evidence",
+      "sourceCount": 0,
+      "correctPostMentions": 3,
+      "graphCounts": {
+        "nodes": 17,
+        "relationships": 15,
+        "crossEngineLinks": 4,
+        "candidateComparisons": 6,
+        "omittedNodes": 0,
+        "omittedRelationships": 0,
+        "omittedTimelineEntries": 0
+      },
+      "sourceHash": "d08abb61cac216baa914cbf7ed145febb1cfbd0b57f4470a2afa4c2470f5b5f0",
+      "provenanceEdges": [
+        {
+          "id": "link:63137e079d5cc77110d0d225e3c78234",
+          "source": "claim_candidate:5f3902d46a3bbca4a86fccd00ddc0628",
+          "target": "extraction_review:90487aef5aaed91f7b34210d48d4fd11",
+          "type": "CLAIM_REVIEWED_FROM_TEXT",
+          "strength": "exact_reference",
+          "crossEngine": false,
+          "method": "authenticated recorded human review",
+          "support": [
+            "/extractions/0/candidates/0",
+            "/extractions/0/candidates/0/reviews/0"
+          ],
+          "measurements": {
+            "reviewState": "corrected",
+            "revision": 1
+          },
+          "explanation": "CLAIM REVIEWED FROM TEXT: authenticated recorded human review.",
+          "limitations": []
+        },
+        {
+          "id": "link:6de214f4aa8280ea02c7a67a2e4b33a1",
+          "source": "extraction_review:90487aef5aaed91f7b34210d48d4fd11",
+          "target": "claim_assessment:408e5c43c375a19a3ef1e3966475d476",
+          "type": "CLAIM_INVESTIGATED_BY_ENGINE2",
+          "strength": "exact_reference",
+          "crossEngine": true,
+          "method": "current accepted/corrected review explicitly investigated by Engine 2",
+          "support": [
+            "/claimResults/0",
+            "/extractions/0/candidates/0/reviews/0"
+          ],
+          "measurements": {
+            "reviewState": "corrected",
+            "revision": 1
+          },
+          "explanation": "CLAIM INVESTIGATED BY ENGINE2: current accepted/corrected review explicitly investigated by Engine 2.",
+          "limitations": [
+            "Extraction review does not validate claim truth; Engine 2 safeguards remain applicable."
+          ]
+        }
+      ]
+    },
+    {
+      "case": "mixed",
+      "state": "uncertain",
+      "finalBinding": false,
+      "reason": "Unsupported mixed-script uncertainty retained; no translation invented"
+    }
+  ]
+}

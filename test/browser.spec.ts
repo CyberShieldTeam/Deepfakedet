@@ -3,6 +3,23 @@ import { encodeWav } from "../src/utils/audioSegments";
 import {episodeControls,coverage as episodeCoverage} from './fixtures/campaign/episodeControls';
 import fs from 'node:fs';
 
+test('Engine43 injected number error stays traceable through browser correction and report',async({page})=>{
+ test.skip(process.env.VERITAS_EXPECT_ENGINE43!=='1','Requires fresh isolated authored injected-error store');test.setTimeout(60000);
+ const rows=JSON.parse(fs.readFileSync('.model-cache/engine43-controls/cases.json','utf8')),row=rows.find((r:any)=>r.id==='number');const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('/');await page.getByRole('button',{name:'Live analysis',exact:true}).click();await page.getByRole('button',{name:'Media forensics',exact:true}).first().click();await page.getByLabel('Active investigation').selectOption('engine43-number');await page.getByRole('button',{name:'Investigations',exact:true}).first().click();
+ await expect(page.getByText('AUTHORED_INJECTED_TRANSCRIPT_NOT_OCR',{exact:false}).first()).toBeVisible();
+ await page.getByLabel('Original image for extraction').setInputFiles('.model-cache/engine43-controls/number.png');await expect(page.getByAltText('Original evidence for OCR review')).toBeVisible();await expect(page.getByRole('img',{name:'OCR text locations on original image',exact:true})).toBeVisible();
+ await expect(page.getByRole('button',{name:'Investigate reviewed text',exact:true})).toBeDisabled();
+ await page.getByLabel('Extraction review decision').selectOption('corrected');await page.getByLabel('Corrected extraction text').fill(row.source);await page.getByLabel('Extraction review note').fill('Authored software browser control: inspected source 75 versus injected 15; not human usability.');await page.getByLabel('I inspected the displayed original and confirm this text represents it. This does not confirm factual truth.').check();
+ const review=page.waitForResponse(r=>r.url().endsWith('/review')&&r.request().method()==='POST');await page.getByRole('button',{name:'Save extraction review',exact:true}).click();const reviewed=await(await review).json();expect(reviewed.investigation.extractions[0].originalText).toBe(row.injected);expect(reviewed.investigation.extractions[0].candidates[0].reviews[0].reviewedText).toBe(row.source);
+ const investigate=page.waitForResponse(r=>r.url().endsWith('/investigate')&&r.request().method()==='POST');await page.getByRole('button',{name:'Investigate reviewed text',exact:true}).click();const claim=(await(await investigate).json()).result;expect(claim.originalInput).toBe(row.source);expect(claim.verdict).toBe('Insufficient Evidence');
+ const region=page.getByRole('region',{name:'Cross-engine evidence correlation'}),correlate=page.waitForResponse(r=>r.url().endsWith('/correlate')&&r.request().method()==='POST');await region.getByRole('button',{name:'Correlate evidence',exact:true}).click();const linked=await(await correlate).json();expect(linked.result.relationships.filter((r:any)=>r.type==='POST_CONTAINS_CLAIM')).toHaveLength(3);
+ const persisted=JSON.parse(fs.readFileSync(process.env.VERITAS_E41_TEST_STORE!,'utf8')).find((r:any)=>r.id==='engine43-number');expect(persisted.extractions).toEqual(linked.investigation.extractions);
+ const record=(await(await page.request.get('/api/reports/engine43-number')).json()).report;expect(record.investigation.extractions).toEqual(persisted.extractions);expect(record.investigation.correlation).toEqual(linked.result);
+ await page.getByRole('button',{name:'Report',exact:true}).click();const report=page.frameLocator('iframe[title="report"]');await expect(report.getByText(row.injected,{exact:false}).first()).toBeVisible();await expect(report.getByText(row.source,{exact:false}).first()).toBeVisible();await expect(report.getByText(/CLAIM_INVESTIGATED_BY_ENGINE2/).first()).toBeVisible();expect(errors).toEqual([]);
+ console.log(JSON.stringify({scope:'authored injected error browser control, NOT OCR/human accuracy',mode:process.env.VERITAS_TEST_URL,raw:row.injected,reviewed:row.source,correlationMs:linked.result.elapsedMs,diskApiDisplayReportParity:true}));
+});
+
 test('Engine4.1 actual OCR requires human review before claim investigation',async({page})=>{
  test.skip(process.env.VERITAS_EXPECT_EXTRACTION!=='1','Requires isolated OCR model, Python preparation service, corpus and store');test.setTimeout(90000);
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
