@@ -16,6 +16,8 @@ class BenchmarkTests(unittest.TestCase):
         self.assertEqual(result['precision'],.5)
         self.assertEqual(result['f1'],.5)
         self.assertEqual(result['false_negative_rate'],.5)
+        self.assertEqual(result['specificity'],.5)
+        self.assertEqual(result['balanced_accuracy'],.5)
         self.assertEqual(result['confusion_matrix'],dict(actual_genuine=[1,1],actual_synthetic=[1,1]))
         self.assertGreater(wilson(0,31)[1],0.1)
         self.assertIsNone(wilson(0,0))
@@ -31,6 +33,9 @@ class BenchmarkTests(unittest.TestCase):
         self.assertEqual(result['failed_or_skipped'],1)
         self.assertEqual(result['auroc'],1)
         self.assertEqual(result['auroc_ci95_group_bootstrap'],[1.,1.])
+        self.assertEqual(result['ci95_source_group_bootstrap']['unit'],'source_group')
+        self.assertEqual(result['ci95_source_group_bootstrap']['replicates'],1000)
+        self.assertEqual(result['ci95_source_group_bootstrap']['intervals']['balanced_accuracy'],[1.,1.])
 
     def test_overlap_guards_for_hash_pixels_perception_and_source(self):
         record=dict(sha256='exact',decoded='pixels',phash=0,source_group='source')

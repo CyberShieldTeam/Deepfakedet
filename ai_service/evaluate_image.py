@@ -64,11 +64,16 @@ def metrics(rows, threshold):
             rank_sum += sum(label for _, label in ordered[i:j]) * (i + 1 + j) / 2
             i = j
         auc = (rank_sum - len(positive) * (len(positive) + 1) / 2) / (len(positive) * len(negative))
+    tn = len(negative) - fp
+    specificity = tn / len(negative) if negative else None
+    recall = tp / len(positive) if positive else None
+    balanced_accuracy = (specificity + recall) / 2 if specificity is not None and recall is not None else None
     return {"total": len(rows), "scored": len(scored), "failed_or_skipped": len(rows) - len(scored),
             "genuine": len(negative), "synthetic": len(positive), "tp": tp, "fp": fp,
-            "tn": len(negative) - fp, "fn": len(positive) - tp,
+            "tn": tn, "fn": len(positive) - tp,
             "false_positive_rate": fp / len(negative) if negative else None,
-            "recall": tp / len(positive) if positive else None, "auroc": auc}
+            "specificity": specificity, "recall": recall,
+            "balanced_accuracy": balanced_accuracy, "auroc": auc}
 
 
 def evaluate(prepared, endpoint, threshold, fetch):
