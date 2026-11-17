@@ -1,5 +1,42 @@
 # VERITAS AI implementation progress
 
+## Engine 1 dataset-admission and image-evaluation reproducibility — 2026-11-17
+
+- Started from local clean branch `codex/integrate-figma-upgrade` at
+  `2ef99bbee20c13ab183dd9cc83f768f98bf175a1`. The final fetch confirmed the remote
+  branch still points to the same commit. No reset, commit or push.
+- Reviewed official candidate dataset provenance and terms. GenImage, CIFAKE,
+  Synthbuster/RAISE and FaceForensics++ were not newly acquired. Upstream rights,
+  project-use scope, source/identity grouping or task fit remain incomplete for each;
+  the decisions are recorded in [the dataset admission audit](docs/ENGINE1_DATASET_ADMISSION.md).
+- Added strict schema-v2 validation before model lookup: dataset/revision/license/protocol
+  and admission-policy identities, required row provenance, class and generator semantics,
+  partition quotas, source/prompt uniqueness, exact/decoded/perceptual duplicate checks,
+  safe paths, byte/resolution bounds, and submitted-byte/decoded RGB/pHash verification.
+  Perceptual distance, hash algorithm, and size limits are pinned in the manifest.
+- The image freezer now records an explicit publisher-label basis and a 63-bit perceptual
+  fingerprint. The evaluator adds sample-level original/derived pixel and encoded hashes,
+  transform/model-preprocessor config hashes, model/checkpoint identity, raw output,
+  diagnostic class, inference timestamp, protocol version and runtime details.
+- Metric output adds specificity, balanced accuracy and deterministic source-group
+  bootstrap intervals for all defined threshold and ranking metrics; the prior AUROC
+  interval field remains for compatibility. Sparse/unknown source grouping and absent
+  semantic-category annotations remain explicit limitations.
+- No dataset was downloaded, no external image manifest was created, and no model ran:
+  this checkout has no private shard cache, checkpoint cache, PyTorch, Transformers,
+  timm, or safetensors. No model was promoted; service `INCONCLUSIVE` safeguards are unchanged.
+- Targeted Python validation passed 20 tests across manifest admission, image metrics,
+  media traces, and checkpoint-pin/missing-cache handling. Python compilation passed for
+  all changed evaluation modules. `npm run lint`, `npm run build`, `npm test`,
+  `npm run test:startup`, `npm run test:media-trace`, `npm run test:diagnostics`,
+  `npm run test:engine4`, `npm run docs:check` (119 local Markdown targets), and
+  `git diff --check` passed. Build retains the existing >500 kB main-chunk warning.
+- Runtime observed: Python 3.13.14, 12 logical CPUs, 14,330,462,208 total and
+  3,267,981,312 available RAM bytes. `torch`, `transformers`, `timm`, `cv2`,
+  `soundfile`, and `safetensors` are absent; no `nvidia-smi` executable is present and
+  Windows CIM hardware queries are blocked. The Python full-suite/model-inference path
+  remains dependency- and data-blocked; no GPU capability is claimed.
+
 ## Engine 1 multimodal evaluation and evidence continuity — 2026-11-17
 
 Starting clean/synchronized0a8fb07 on codex/integrate-figma-upgrade. User-approved bounded

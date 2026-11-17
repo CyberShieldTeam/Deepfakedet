@@ -34,15 +34,22 @@ def summarize(rows):
     result = metrics(rows, .5)
     tp, fp, tn, fn = (result[k] for k in ("tp", "fp", "tn", "fn"))
     n = tp+fp+tn+fn
+    recall=tp/(tp+fn) if tp+fn else None
+    specificity=tn/(tn+fp) if tn+fp else None
     result.update(accuracy=(tp+tn)/n if n else None,
                   precision=tp/(tp+fp) if tp+fp else None,
+                  recall=recall,
+                  specificity=specificity,
+                  balanced_accuracy=(recall+specificity)/2 if recall is not None and specificity is not None else None,
                   f1=2*tp/(2*tp+fp+fn) if 2*tp+fp+fn else None,
                   false_negative_rate=fn/(tp+fn) if tp+fn else None,
                   confusion_matrix={"actual_genuine": [tn, fp], "actual_synthetic": [fn, tp]},
                   ci95_wilson={"accuracy": wilson(tp+tn, n), "recall": wilson(tp,tp+fn),
+                               "specificity": wilson(tn,tn+fp),
                                "precision": wilson(tp,tp+fp), "false_positive_rate": wilson(fp,fp+tn),
                                "false_negative_rate": wilson(fn,fn+tp)})
-    # Resample source groups, not derived image variants, for exploratory AUROC intervals.
+    # Resample source groups, not derived image variants, for exploratory interval estimates.
+    # This remains conditional on the completeness of the supplied source grouping.
     import numpy as np
     groups = {}
     for row in rows:
@@ -50,13 +57,30 @@ def summarize(rows):
             groups.setdefault(row.get("group", row["id"]), []).append(row)
     keys = sorted(groups)
     rng = np.random.default_rng(20261115)
-    aucs = []
+    values={name:[] for name in ("accuracy","precision","recall","specificity","balanced_accuracy","f1","false_positive_rate","false_negative_rate","auroc")}
     for _ in range(300 if len(keys) > 1 else 0):
         sample = [row for index in rng.integers(0,len(keys),len(keys)) for row in groups[keys[index]]]
-        auc = metrics(sample,.5)["auroc"]
-        if auc is not None:
-            aucs.append(auc)
-    result["auroc_ci95_group_bootstrap"] = np.quantile(aucs,[.025,.975]).tolist() if aucs else None
+        counts=metrics(sample,.5)
+        tp,fp,tn,fn=(counts[k] for k in ("tp","fp","tn","fn"))
+        total=tp+fp+tn+fn;recall=tp/(tp+fn) if tp+fn else None;specificity=tn/(tn+fp) if tn+fp else None
+        sampled={
+            "accuracy":(tp+tn)/total if total else None,
+            "precision":tp/(tp+fp) if tp+fp else None,
+            "recall":recall,
+            "specificity":specificity,
+            "balanced_accuracy":(recall+specificity)/2 if recall is not None and specificity is not None else None,
+            "f1":2*tp/(2*tp+fp+fn) if 2*tp+fp+fn else None,
+            "false_positive_rate":fp/(fp+tn) if fp+tn else None,
+            "false_negative_rate":fn/(fn+tp) if fn+tp else None,
+            "auroc":counts["auroc"],
+        }
+        for name,value in sampled.items():
+            if value is not None:values[name].append(value)
+    intervals={name:(np.quantile(samples,[.025,.975]).tolist() if samples else None) for name,samples in values.items()}
+    result["ci95_group_bootstrap"]={"replicates":300 if len(keys)>1 else 0,"seed":20261115,
+                                    "validReplicates":{name:len(samples) for name,samples in values.items()},
+                                    "metrics":intervals}
+    result["auroc_ci95_group_bootstrap"]=intervals["auroc"]
     latency = sorted(r["seconds"] for r in rows if r.get("score") is not None and "seconds" in r)
     result["latency_seconds"] = {"count":len(latency), "mean":statistics.mean(latency) if latency else None,
                                   "p50":statistics.median(latency) if latency else None,

@@ -8,6 +8,8 @@ from pathlib import Path
 import re
 from PIL import Image, ImageOps
 from ai_service.prepare_media_image_evaluation import DATASET,REVISION,LICENSE
+from ai_service.image_benchmark import fingerprints
+from ai_service.media_image_manifest import ADMISSION_POLICY,admission_policy_sha256,expected_label_basis,PHASH_MAX_DISTANCE
 
 PROTOCOL=Path('test/fixtures/engine1_image_protocol.json')
 digest=lambda b:hashlib.sha256(b).hexdigest()
@@ -32,7 +34,7 @@ def freeze(inventory,shards,output):
         for generator in sorted(by_generator):
             if by_generator[generator]:mixed.append(by_generator[generator].pop(0))
     candidates['synthetic']=mixed
-    encoded,pixels,groups,prompts=set(),set(),set(),set();selected=[];cache={}
+    encoded,pixels,groups,prompts=set(),set(),set(),set();perceptual=[];selected=[];cache={}
     root=output.parent/'images';root.mkdir(parents=True,exist_ok=True)
     excluded=defaultdict(int)
     for role,quotas in protocol['roles'].items():
@@ -57,17 +59,22 @@ def freeze(inventory,shards,output):
                     geometry=dict(format=source.format,width=source.width,height=source.height,orientedSize=list(oriented.size),mode=source.mode)
                 sha=digest(raw)
                 if sha in encoded or pixel_hash in pixels:excluded['duplicate']+=1;continue
+                phash=f"{fingerprints(oriented):016x}"
+                if any((int(phash,16)^int(previous,16)).bit_count()<=PHASH_MAX_DISTANCE for previous,_ in perceptual):
+                    excluded['perceptual_duplicate']+=1;continue
                 key=digest(identity.encode())[:24];target=root/(key+'.'+geometry['format'].lower().replace('jpeg','jpg'))
                 with target.open('xb') as file:file.write(raw)
-                selected.append(dict(id=key,path=str(target.relative_to(output.parent)),sha256=sha,decodedSha256=pixel_hash,label=label,role=role,group=digest(source_group.encode()),promptGroup=digest(prompt.encode()) if prompt else None,generator=row['model_name'] if label=='synthetic' else 'camera_publisher_label',sourceDataset=row['real_source'],source=f'https://huggingface.co/datasets/{DATASET}/tree/{REVISION}',publisherImageName=row['image_name'],shard=row['shard'],index=row['index'],license=LICENSE,geometry=geometry))
+                generator=row['model_name'] if label=='synthetic' else 'publisher_labelled_real'
+                selected.append(dict(id=key,path=target.relative_to(output.parent).as_posix(),sha256=sha,decodedSha256=pixel_hash,perceptualHash=phash,label=label,role=role,group=digest(source_group.encode()),promptGroup=digest(prompt.encode()) if prompt else None,generator=generator,sourceDataset=row['real_source'],source=f'https://huggingface.co/datasets/{DATASET}/tree/{REVISION}',publisherImageName=row['image_name'],shard=row['shard'],index=row['index'],license=LICENSE,labelBasis=expected_label_basis(label,generator,row['real_source']),geometry=geometry))
                 encoded.add(sha);pixels.add(pixel_hash);groups.add(source_group)
+                perceptual.append((phash,key))
                 if prompt:prompts.add(prompt)
                 count+=1
                 if count==quota:break
             if count!=quota:raise ValueError('INSUFFICIENT_ELIGIBLE_ROWS_NO_FABRICATED_REPLACEMENT')
         # Release binary shard buffers between roles; source files remain immutable.
         cache.clear()
-    result=dict(dataset=DATASET,revision=REVISION,license=LICENSE,protocolSha256=digest(PROTOCOL.read_bytes()),inventorySha256=digest(inventory.read_bytes()),exclusions=dict(excluded),rows=selected,scope='Frozen external research comparison; incomplete original/identity/training lineage, no authoritative validation')
+    result=dict(schemaVersion=2,dataset=DATASET,revision=REVISION,license=LICENSE,protocolSha256=digest(PROTOCOL.read_bytes()),admissionPolicy=ADMISSION_POLICY,admissionPolicySha256=admission_policy_sha256(),inventorySha256=digest(inventory.read_bytes()),exclusions=dict(excluded),rows=selected,scope='Frozen external research comparison; incomplete original/identity/training lineage, no authoritative validation')
     with output.open('x',encoding='utf8') as file:json.dump(result,file,ensure_ascii=False,indent=2)
     print(json.dumps({'samples':len(selected),'protocolSha256':result['protocolSha256'],'exclusions':dict(excluded),'syntheticGenerators':sorted({r['generator'] for r in selected if r['label']=='synthetic'})}))
 

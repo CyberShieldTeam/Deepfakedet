@@ -30,3 +30,28 @@ Community original confusion: TP18/FP0/TN20/FN2; matched TP15/FP0/TN20/FN5. Zero
 Reproduce only with separately authorized private data and installed dependencies; output paths must be new. `python -m ai_service.prepare_media_image_evaluation plan --plan <new-plan>`; `download --plan <plan> --root <shards>`; `inventory --plan <plan> --root <shards> --output <inventory>`. Then `python -m ai_service.freeze_media_images --inventory <inventory> --shards <shards> --output <manifest>`; `python -m ai_service.evaluate_media_images --model community --manifest <manifest> --output <new-report>` (check CLI help for model argument). Never substitute reserved Mirage data.
 
 Next scientific step: a rights-cleared, source/identity-disjoint multi-generator evaluation with camera-origin acquisition history, matched transformations, a separately fixed calibration set and substantially more genuine images. No further held-out tuning.
+
+## Phase 2 reproducibility hardening — 2026-11-17
+
+The separate [dataset admission audit](ENGINE1_DATASET_ADMISSION.md) reviews GenImage,
+CIFAKE, Synthbuster/RAISE and FaceForensics++. None was newly admitted or downloaded:
+rights, project-use scope, source grouping or task suitability remain incomplete.
+
+The image evaluator now accepts only frozen manifest schema v2 and validates the dataset,
+revision, license, protocol, partition quotas, row provenance, label/generator semantics,
+source/prompt groups, exact/decoded/perceptual duplicates (63-bit pHash distance >6), safe
+paths, image limits and source-byte hashes before loading a checkpoint. The freezer adds
+label-basis text and perceptual hashes. This checks manifest consistency; it does not prove
+that publisher labels are correct or that source identities are independent.
+
+New reports identify each sample and preserve original, decoded, transformed-pixel and
+derived-encoding hashes; the preprocessing and model-processor configurations are recorded
+and hashed alongside model/checkpoint pins, raw scores, diagnostic output, timestamps and
+protocol version. Aggregate metrics now include specificity and balanced accuracy, plus
+deterministic source-group bootstrap intervals for defined metrics. The existing protocol,
+diagnostic threshold, historical reports, and `INCONCLUSIVE` deployment policy are unchanged.
+
+This phase did not download images or run inference: the private evaluation shards/checkpoints
+and Python ML stack are absent from this checkout. No independent accuracy result or model
+promotion is claimed. Source-group bootstrap uncertainty remains conditional on complete
+lineage; category metrics remain undefined because the admitted data has no category labels.

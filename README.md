@@ -189,6 +189,8 @@ remain work. See [readiness](docs/HACKATHON_READINESS.md) and [security](SECURIT
 - [Architecture](docs/ARCHITECTURE.md), [deployment](docs/DEPLOYMENT.md), [verification](docs/FINAL_VERIFICATION.md)
 - [Implementation history](IMPLEMENTATION_PROGRESS.md), [model card](MODEL_CARD.md),
   [audio model card](AUDIO_MODEL_CARD.md), [video engine](VIDEO_ENGINE.md)
+- [Engine 1 image evaluation](docs/ENGINE1_IMAGE_EVALUATION.md) and
+  [dataset admission audit](docs/ENGINE1_DATASET_ADMISSION.md)
 - [Engine 4.3 boundaries](docs/ENGINE43_VALIDATION.md) and [contributing](CONTRIBUTING.md)
 
 Repository: CyberShieldTeam/Deepfakedet. No individual team roster is verified here.
