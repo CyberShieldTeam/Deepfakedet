@@ -2,6 +2,7 @@
 import { createHash } from "node:crypto";
 import { sourceSchema, type RetrievedEvidence, type ProviderState } from "./claimSources";
 import { claimTokens } from "./claimText";
+import {owner} from './security';
 
 export const WIKI_LIMITS = {
   bytes: 1024 * 1024,
@@ -33,6 +34,13 @@ export function wikipediaQuery(claim: string) {
 export function clearWikipediaCache() {
   cache.clear();
 }
+export function wikipediaSearchQuery(claim:string){
+  const full=wikipediaQuery(claim),tokens=full.split(' '),relaxed=tokens.filter(t=>!/^\p{N}+$/u.test(t)&&!['not','no','never','नहीं','కాదు','లేదు'].includes(t));
+  // Counter-evidence can lack the asserted number/polarity. One bounded server-built
+  // OR query broadens retrieval only; the exact claim passed to NLI/review is unchanged.
+  const alternate=relaxed.join(' '),combined=`(${full}) OR (${alternate})`;
+  return relaxed.length>=2&&alternate!==full&&combined.length<=500?combined:full;
+}
 export async function wikipediaEvidence(
   claim: string,
   fetcher: typeof fetch = fetch,
@@ -45,7 +53,7 @@ export async function wikipediaEvidence(
   };
   if (process.env.VERITAS_WIKIPEDIA_ENABLED !== "1") return { items: [], state };
   const language = process.env.VERITAS_WIKIPEDIA_LANGUAGE || "en",
-    query = wikipediaQuery(claim);
+    query = wikipediaSearchQuery(claim);
   if (!["en", "hi", "te"].includes(language))
     return {
       items: [],
@@ -66,7 +74,7 @@ export async function wikipediaEvidence(
         query,
       },
     };
-  const key = JSON.stringify([language, query]),
+  const key = JSON.stringify([owner(),language, query]),
     now = Date.now(),
     old = cache.get(key);
   if (old && old.until > now)

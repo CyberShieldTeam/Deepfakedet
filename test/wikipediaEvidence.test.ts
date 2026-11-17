@@ -5,13 +5,18 @@ import {
   clearWikipediaCache,
   WIKI_LIMITS,
   wikipediaQuery,
+  wikipediaSearchQuery,
 } from "../server/wikipediaEvidence";
 import { googleEvidence } from "../server/claimSources";
 import { verifyWithEvidence } from "../server/claimVerification";
 import { reportHtml } from "../src/components/ReportModal";
 import { buildDemoInvestigation } from "../server/demoScenario";
+import {context} from '../server/security';
 const env = { ...process.env },
   originalFetch = globalThis.fetch;
+assert.equal(wikipediaSearchQuery('The bridge opened in 1891.'),'(bridge opened 1891) OR (bridge opened)');
+assert.equal(wikipediaSearchQuery('The dam has not collapsed.'),'(dam not collapsed) OR (dam collapsed)');
+assert.ok(wikipediaSearchQuery('x'.repeat(1000)+' not collapsed').length<=500);
 const page = {
   pageid: 19331,
   title: "Moon",
@@ -87,6 +92,7 @@ try {
     assert.equal(r.state.status, "available");
     assert.equal(r.items.length, 0);
   });
+  await test('query cache is owner scoped',async()=>{let calls=0;const fetcher:typeof fetch=async()=>{calls++;return response(payload())};await context.run({ownerId:'software-owner-a'},()=>wikipediaEvidence('same private query',fetcher));await context.run({ownerId:'software-owner-a'},()=>wikipediaEvidence('same private query',fetcher));assert.equal(calls,1);await context.run({ownerId:'software-owner-b'},()=>wikipediaEvidence('same private query',fetcher));assert.equal(calls,2)});
   await test("zero results may omit pages with batchcomplete", async () => {
     const r = await wikipediaEvidence(
       "unfindable",

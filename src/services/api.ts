@@ -82,8 +82,9 @@ export const analyzeMedia = (p: {
   audioSegments?: { start: number; end: number; data: string }[];
 }) =>
   post<{ result: ForensicAnalysisResult }>("/api/forensics/analyze-media", p).then((d) => d.result);
-export const verifyClaim = (claimText: string) =>
-  post<{ result: ClaimVerificationResult }>("/api/claims/verify", { claimText }).then(
+export const extractClaims=(claimText:string)=>post<{originalInput:string;candidates:import('../claimTypes').ClaimCandidate[];method:string;limitations:string[]}>('/api/claims/extract',{claimText});
+export const verifyClaim = (claimText: string,selection?:import('../claimTypes').ClaimSelection) =>
+  post<{ result: ClaimVerificationResult }>("/api/claims/verify", { claimText,selection }).then(
     (d) => d.result,
   );
 export const reviewClaim = (

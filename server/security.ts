@@ -32,7 +32,8 @@ export const casePatch = caseCreate
   })
   .strict()
   .refine((v) => Object.keys(v).length > 0, "At least one editable field is required");
-export const claimInput = z.object({ claimText: text(10000).refine(v=>/[\p{L}\p{N}]/u.test(v), 'A textual assertion is required') }).strict();
+export const claimExtractionInput=z.object({claimText:text(10000).refine(v=>/[\p{L}\p{N}]/u.test(v),'Text is required')}).strict();
+export const claimInput = claimExtractionInput.extend({selection:z.object({candidateId:text(80).optional(),text:text(1000).refine(v=>/[\p{L}\p{N}]/u.test(v),'A textual assertion is required'),language:z.enum(['en','hi','te','unknown']),contextConfirmed:z.literal(true),note:text(2000).min(20)}).strict().optional()}).strict();
 const dataUrl = z
   .string()
   .max(16 * 1024 * 1024)

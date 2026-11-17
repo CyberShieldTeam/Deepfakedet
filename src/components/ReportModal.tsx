@@ -24,6 +24,19 @@ const engineLabel = (e?: string) =>
           : "Measured signals only";
 const safeUrl = (value: string) => (/^https?:\/\//i.test(value) ? esc(value) : "#");
 
+function nliReport(claim:NonNullable<Report['investigation']['claimResults']>[number]){
+ const nli=claim.nli;if(!nli)return '';
+ if(nli.status==='unconfigured')return '<p>Experimental NLI not configured; no model inference ran.</p>';
+ const warning=nli.evaluationStatus==='experimental_failed_validation'?'Model failed held-out NLI validation; suggestions are not reliable automated assessments or reviewed verdicts.':'Experimental model outputs are not validated factual assessments.';
+ return `<h4>Experimental model relationships</h4><p>${esc(nli.summary)}</p><p>${esc(warning)}</p><ul>${nli.relationships.map(n=>{
+  const source=claim.sources.find(s=>s.id===n.sourceId);
+  return `<li>[${esc(n.sourceId)}] ${source?.url?`<a href="${safeUrl(source.url)}">${esc(source.title)}</a>`:''} · model suggestion: ${esc(n.suggestion??'unavailable')} (${esc(n.status)}); human review: ${esc(n.humanReviewState)}${n.humanStance?` / ${esc(n.humanStance)} / ${esc(n.reviewedBy)} / ${esc(n.reviewedAt)}`:''}.
+   <a href="https://huggingface.co/cross-encoder/nli-MiniLM2-L6-H768">${esc(n.modelId)}</a> @ ${esc(n.version)}; ${esc(n.evaluationStatus)}.
+   <blockquote>${esc(n.passage)}</blockquote><p>Exact model-input window offsets ${n.span.start}–${n.span.end}; passage SHA-256 ${esc(n.passageSha256)}; source SHA-256 ${esc(n.sourcePassageSha256)}. ${esc(n.reason)}</p>
+   ${n.scores?`<p>Raw softmax (not truth probabilities): entailment ${esc(n.scores.entailment)}, contradiction ${esc(n.scores.contradiction)}, neutral ${esc(n.scores.neutral)}.</p>`:''}</li>`;
+ }).join('')}</ul>`;
+}
+
 function correlationHtml(inv:Report['investigation']){
  const c=inv.correlation;if(!c)return '<h2>CROSS-ENGINE EVIDENCE CORRELATION</h2><p>No saved correlation graph. No cross-engine inference was performed for this report.</p>';
  const nodes=new Map(c.nodes.map(n=>[n.id,n]));
@@ -116,6 +129,8 @@ ${
             i,
           ) => `<div class="box"><h3>3.${i + 1} ${esc(x.verdict)} <span class="tag">${esc(engineLabel(x.engine))}</span></h3>
 <p><b>Claim:</b> ${esc(x.targetClaim)}</p>${x.translatedText ? `<p><b>Original (${esc(x.detectedLanguage)}):</b> ${esc(x.originalInput)}<br><b>Translation:</b> ${esc(x.translatedText)}</p>` : ""}
+${x.selectionReview ? `<p><b>Original input:</b> ${esc(x.originalInput)}</p><p>Claim wording/language selected by ${esc(x.selectionReview.reviewedBy)} at ${esc(x.selectionReview.reviewedAt)}; declared language ${esc(x.selectionReview.language)}; edited ${esc(x.selectionReview.edited)}. This is not factual endorsement.</p><p>${esc(x.selectionReview.note)}</p>` : ''}
+${nliReport(x)}
 <p><b>Verification mode:</b> ${esc((x.verificationMode || "rule_based").replace(/_/g, " "))} · <b>Assessment:</b> ${esc((x.assessment || "unverified").replace(/_/g, " "))}</p>
 ${x.verificationStatus ? `<p><b>Claim status:</b> ${esc(x.verificationStatus)} · distinct from media and dissemination observations.</p>` : ""}
 ${x.normalizedClaim ? `<p><b>Normalized claim:</b> ${esc(x.normalizedClaim)}</p>` : ""}
@@ -153,7 +168,7 @@ ${(() => {
       ${s.sourceType ? `<p>Source type: ${esc(s.sourceType)}; language: ${esc(s.language || 'not provided')}; method: ${esc(s.retrievalMethod || 'not provided')}</p>` : ''}
       ${s.locator ? `<p>Passage location: ${esc(s.locator)}</p>` : ''}${s.passageSha256 ? `<p>Passage SHA-256: ${esc(s.passageSha256)}</p>` : ''}
       ${s.license ? `<p>License: ${s.licenseUrl ? `<a href="${safeUrl(s.licenseUrl)}">${esc(s.license)}</a>` : esc(s.license)}</p>` : ''}
-      ${list(s.sourceLimitations || [])}${s.review ? `<p>Reviewed by ${esc(s.review.reviewedBy)} at ${esc(s.review.reviewedAt)}; quote: ${esc(s.review.quote)}</p>` : ""}${s.citedFor ? `<br><span class="muted">Cited for: ${esc(s.citedFor.slice(0, 200))}</span>` : ""}</li>`).join("")}</ol>`
+      ${list(s.sourceLimitations || [])}${s.reviewHistory?.length?`<p>Prior review events:</p><ul>${s.reviewHistory.map(h=>`<li>${esc(h.stance)} / ${esc(h.reviewedBy)} / ${esc(h.reviewedAt)}: ${esc(h.quote)} · ${esc(h.note)}</li>`).join('')}</ul>`:''}${s.review ? `<p>Reviewed by ${esc(s.review.reviewedBy)} at ${esc(s.review.reviewedAt)}; quote: ${esc(s.review.quote)}</p>` : ""}${s.citedFor ? `<br><span class="muted">Cited for: ${esc(s.citedFor.slice(0, 200))}</span>` : ""}</li>`).join("")}</ol>`
     : '<p class="muted">No external sources were checked.</p>';
 })()}
 ${media.length ? `<p class="muted">Media files: ${media.map((m) => esc(m.fileName || m.modality)).join(", ")}</p>` : ""}

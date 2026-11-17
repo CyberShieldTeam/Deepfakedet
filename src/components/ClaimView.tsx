@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Brain, CheckCircle2, ExternalLink, Globe, Loader2, Search, SearchX } from "lucide-react";
 import { ClaimVerificationResult, Investigation } from "../types";
-import { verifyClaim, reviewClaim } from "../services/api";
+import { verifyClaim, reviewClaim,extractClaims } from "../services/api";
+import type {ClaimCandidate,ClaimSelection} from '../claimTypes';
+import {SourceRelationship} from './ClaimRelationships';
 import {
   Button,
   Card,
@@ -96,6 +98,10 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
         <span className="text-[11px] text-slate-500">checked {fmtDate(r.timestamp)}</span>
       </div>
       <VerdictBanner {...plainClaim(r)} />
+      {r.selectionReview && <div className="rounded border border-slate-700 p-3 text-sm">
+        <p><b>Selected claim:</b> {r.targetClaim}</p><details><summary className="cursor-pointer">Original input and selection approval</summary><p>{r.originalInput}</p><p>Selected by {r.selectionReview.reviewedBy} · {fmtDate(r.selectionReview.reviewedAt)} · declared language {r.selectionReview.language}. This approval selects wording, not factual truth.</p><p>{r.selectionReview.note}</p></details>
+      </div>}
+      {r.nli && r.nli.status!=='unconfigured' && <div role="status" className="rounded border border-amber-700/50 p-3 text-sm"><b>Experimental evidence relationships</b><p>{r.nli.summary}</p><p>This model failed the held-out NLI evaluation. Its suggestions are research observations, not reliable automated assessments. Human review remains required.</p></div>}
       <AnalysisStatus analysis={r.analysis}/>
       {(r.retrievalDetails?.omittedCount || 0)>0 && <p role="status" className="text-sm text-amber-200">Some ranked evidence was omitted. Narrow the claim or corpus before recording a decisive assessment.</p>}
       {r.verificationStatus && (
@@ -191,6 +197,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
                     : ` · ${s.provider==='google_fact_check' ? 'review date' : 'published'}: ${s.publishDate || "date not provided"}${s.retrievedAt ? ` · found ${fmtDate(s.retrievedAt)}` : ""}`}
                 </div>
                 <div className="mt-1 text-slate-400">{s.excerpt}</div>
+                <SourceRelationship relation={r.nli?.relationships.find(x=>x.sourceId===s.id)} />
                 {s.sourceType && <p className="mt-2 text-amber-200">{s.sourceType === 'encyclopedia_excerpt' ? 'Encyclopedia lead excerpt; not an independent fact check.' : s.sourceType === 'fact_check_metadata' ? 'Fact-check database metadata; article body was not retrieved.' : 'Imported source passage.'}</p>}
                 <details className="mt-2 text-slate-400">
                   <summary className="cursor-pointer">Source provenance and limitations</summary>
@@ -203,17 +210,12 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
                   {s.passageSha256 && <p className="break-all">Passage SHA-256: {s.passageSha256}</p>}
                   {s.license && <p>License: {s.licenseUrl ? <a href={s.licenseUrl} target="_blank" rel="noreferrer" className="text-cyan-300 underline">{s.license}</a> : s.license}</p>}
                   {s.sourceLimitations?.map(x=><p key={x}>{x}</p>)}
+                  {s.reviewHistory?.map((review,i)=><p key={i}>Review history: {review.stance} · {review.reviewedBy} · {review.reviewedAt} · {review.note}</p>)}
+                  {s.relevance && <p>Relevance: BM25 {s.relevance.lexicalScore.toFixed(3)} · semantic {s.relevance.semanticScore?.toFixed(3) ?? 'unavailable'} · source credibility: {s.credibilityRating}. Similarity is not agreement.</p>}
                 </details>
                 {s.publisherRating && (
                   <p className="mt-1 text-amber-200">
                     Publisher rating: {s.publisherRating} (not a VERITAS verdict)
-                  </p>
-                )}
-                {s.relevance && (
-                  <p className="mt-1 text-slate-500">
-                    Relevance: BM25 {s.relevance.lexicalScore.toFixed(3)} · semantic{" "}
-                    {s.relevance.semanticScore?.toFixed(3) ?? "unavailable"} · source credibility:{" "}
-                    {s.credibilityRating}
                   </p>
                 )}
                 {s.review && (
@@ -238,7 +240,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
               ))}
             </ul>
           ) : (
-            <div className="text-xs text-slate-500">None found</div>
+            <div className="text-xs text-slate-500">No human-reviewed support yet.</div>
           )}
         </div>
         <div className="rounded-lg border border-rose-500/20 bg-rose-500/5 p-3">
@@ -250,7 +252,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
               ))}
             </ul>
           ) : (
-            <div className="text-xs text-slate-500">None found</div>
+            <div className="text-xs text-slate-500">No human-reviewed contradiction yet.</div>
           )}
         </div>
       </div>
@@ -343,6 +345,14 @@ export const ClaimView: React.FC<{
   const [reviewNote, setReviewNote] = useState("");
   const [quotes, setQuotes] = useState<Record<string, string>>({});
   const [contextConfirmed, setContextConfirmed] = useState(false);
+  const [candidates,setCandidates]=useState<ClaimCandidate[]|null>(null);
+  const [candidateId,setCandidateId]=useState<string|undefined>();
+  const [selectedText,setSelectedText]=useState('');
+  const [selectionLanguage,setSelectionLanguage]=useState<ClaimSelection['language']>('unknown');
+  const [selectionNote,setSelectionNote]=useState('');
+  const [selectionConfirmed,setSelectionConfirmed]=useState(false);
+  const originalChanged=(value:string)=>{setText(value);setCandidates(null);setCandidateId(undefined);setSelectedText('');setSelectionConfirmed(false);setSelectionNote('')};
+  const choose=(c:ClaimCandidate)=>{setCandidateId(c.id);setSelectedText(c.text);setSelectionConfirmed(false)};
   const demo = active?.isSimulatedDemo ? active.claimResult : undefined;
 
   const run = async () => {
@@ -357,7 +367,7 @@ export const ClaimView: React.FC<{
       setReviewNote("");
       setQuotes({});
       setContextConfirmed(false);
-      setResult(await verifyClaim(text));
+      setResult(await verifyClaim(text,candidates?{candidateId,text:selectedText,language:selectionLanguage,contextConfirmed:true,note:selectionNote}:undefined));
     } catch (e: any) {
       setError(e.message);
     } finally {
@@ -380,14 +390,14 @@ export const ClaimView: React.FC<{
       <PageHeader
         title="Fact-check a claim"
         subtitle="Enter a factual assertion in English, हिन्दी or తెలుగు. Review retrieved evidence and its limits; unavailable sources leave the claim unresolved."
-        steps={["Paste or type the claim", "Press “Check this claim”", "Read the result"]}
+        steps={["Enter text; extract and approve an assertion", "Check retrieved sources and relationships", "Review evidence before deciding"]}
       />
       <div className="grid gap-4 xl:grid-cols-5">
         <div className="space-y-4 xl:col-span-2">
           <Card title="1 · What do you want to check?">
             <textarea
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => originalChanged(e.target.value)}
               rows={6}
               placeholder="e.g. “The dam near Hyderabad has collapsed, evacuate now!”"
               className="w-full resize-none rounded-lg border border-slate-700 bg-slate-950 p-3 text-sm text-slate-100 outline-none focus:border-cyan-500"
@@ -397,13 +407,24 @@ export const ClaimView: React.FC<{
               <Button
                 onClick={run}
                 loading={busy}
-                disabled={!text.trim()}
+                disabled={!text.trim()||!!candidates&&(!selectionConfirmed||selectionNote.trim().length<20||!selectedText.trim()||selectedText.length>1000)}
                 className="!px-4 !py-2 !text-sm"
               >
                 <Search className="h-4 w-4" />
                 Check this claim
               </Button>
             </div>
+            <Button variant="ghost" disabled={busy||!text.trim()} onClick={async()=>{setError('');setBusy(true);try{const extraction=await extractClaims(text);setCandidates(extraction.candidates);const first=extraction.candidates.find(c=>c.category==='assertion_candidate')||extraction.candidates[0];if(first)choose(first);setSelectionNote('');setSelectionLanguage('unknown')}catch(e){setError(e instanceof Error?e.message:'Extraction failed')}finally{setBusy(false)}}}>Extract candidate claims</Button>
+            {candidates && <fieldset className="mt-3 space-y-3 rounded border border-slate-700 p-3 text-xs text-slate-300">
+              <legend>Select and approve a factual assertion</legend>
+              <p>Categories are heuristic suggestions. Questions, instructions, quotations and compound claims need context review; no multilingual extraction accuracy is claimed.</p>
+              {candidates.map(c=><label key={c.id} className="flex gap-2"><input type="radio" name="claim-candidate" checked={candidateId===c.id} onChange={()=>choose(c)}/><span>{c.category.replaceAll('_',' ')}: {c.text}</span></label>)}
+              <label className="block">Selected claim text<textarea aria-label="Selected claim text" className="mt-1 w-full rounded border border-slate-700 bg-slate-950 p-2" value={selectedText} maxLength={1000} onChange={e=>{setSelectedText(e.target.value);setSelectionConfirmed(false)}}/></label>
+              <label className="block">Claim language<select aria-label="Selected claim language" value={selectionLanguage} className="ml-2 rounded bg-slate-900 p-2" onChange={e=>{setSelectionLanguage(e.target.value as ClaimSelection['language']);setSelectionConfirmed(false)}}><option value="unknown">Unknown / mixed / romanized</option><option value="en">English</option><option value="hi">Hindi</option><option value="te">Telugu</option></select></label>
+              <p>Only approved English assertions and English-tagged evidence can receive experimental NLI suggestions. No translation is substituted.</p>
+              <textarea aria-label="Claim selection rationale" className="w-full rounded border border-slate-700 bg-slate-950 p-2" value={selectionNote} onChange={e=>setSelectionNote(e.target.value)} placeholder="Explain selection/context or edits (at least 20 characters)"/>
+              <label className="flex gap-2"><input type="checkbox" checked={selectionConfirmed} onChange={e=>setSelectionConfirmed(e.target.checked)}/>I approve this claim wording and language against the original context. This does not confirm its truth.</label>
+            </fieldset>}
             {error && (
               <div className="mt-2">
                 <ErrorBox message={error} />
@@ -415,7 +436,7 @@ export const ClaimView: React.FC<{
               {SAMPLES.map((s, i) => (
                 <button
                   key={i}
-                  onClick={() => setText(s.text)}
+                  onClick={() => originalChanged(s.text)}
                   className="w-full rounded-lg border border-slate-800 p-2.5 text-left text-sm text-slate-300 hover:border-cyan-500/50"
                 >
                   <span className="mr-1.5 rounded bg-cyan-500/10 px-1.5 py-0.5 text-[10px] text-cyan-300">
@@ -480,6 +501,7 @@ export const ClaimView: React.FC<{
                 {result.sources.map((s) => (
                   <div key={s.id || s.url} className="mb-3 space-y-2">
                     <span className="truncate">{s.id ? `[${s.id}] ` : ''}{s.title}</span>
+                    {(()=>{const nli=result.nli?.relationships.find(r=>r.sourceId===s.id);return nli&&['supports','contradicts','neutral'].includes(nli.suggestion||'')?<Button variant="ghost" onClick={()=>{setReviews(v=>({...v,[s.id||s.url]:nli.suggestion!}));setQuotes(v=>({...v,[s.id||s.url]:nli.passage}));setContextConfirmed(false)}}>Use model suggestion for review [{s.id}]</Button>:null})()}
                     <select
                       aria-label={`Stance for ${s.title}${s.id ? ` [${s.id}]` : ''}`}
                       disabled={s.provider === "google_fact_check"}

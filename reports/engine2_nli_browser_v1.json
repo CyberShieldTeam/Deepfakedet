@@ -1,0 +1,351 @@
+{
+  "startingCommit": "6430738d7447d6b900f0e733f45adb017a29fe67",
+  "branch": "codex/integrate-figma-upgrade",
+  "observedAt": "2026-11-17T00:15:57.941Z",
+  "scope": "Actual real-source/model browser software verification. Diagnostic examples, authored reviews and conflict controls are not independent accuracy evidence.",
+  "softwareVerification": "passed",
+  "modelDiagnosticOutcome": "All five Charminar article relationships abstained at unchanged predeclared gates; the expected E/C distinctions were not resolved.",
+  "warmup": {
+    "scope": "Authored transport warmup, not independent accuracy; model ready before browser launch",
+    "startupMs": 5868.763400008902,
+    "memory": {
+      "rssBytes": 546168832,
+      "peakWorkingSetBytes": 546168832
+    }
+  },
+  "diagnostics": [
+    {
+      "id": "A",
+      "claim": "Charminar was constructed in Hyderabad in 1591.",
+      "expectedDiagnostic": "supports",
+      "actualSuggestion": "abstained",
+      "diagnosticMatch": false,
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "confidence": null,
+      "totalAnalysisMs": 1149.3747999999996,
+      "nliMs": 562.603000000001,
+      "sourceCount": 6,
+      "source": {
+        "id": "E4",
+        "title": "Charminar",
+        "url": "https://en.wikipedia.org/wiki/Charminar",
+        "originalUrl": "https://en.wikipedia.org/wiki/Charminar",
+        "revisionUrl": "https://en.wikipedia.org/w/index.php?oldid=1376727486",
+        "revisionId": 1376727486,
+        "retrievedAt": "2026-11-17T00:16:07.533Z",
+        "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "license": "Creative Commons Attribution-Share Alike 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+      },
+      "relationship": {
+        "id": "NLI-0062445a6935c756b99ec0ef",
+        "claimId": "CL-8dc918e65d38b0aa369bf208ca187dbb84f3dc1b4240184ca39d129cc21813e5",
+        "sourceId": "E4",
+        "passageId": "P-c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "sourcePassageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "span": {
+          "start": 0,
+          "end": 1208
+        },
+        "modelId": "cross-encoder/nli-MiniLM2-L6-H768",
+        "version": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+        "status": "executed",
+        "evaluationStatus": "experimental_failed_validation",
+        "suggestion": "abstained",
+        "argmax": "neutral",
+        "scores": {
+          "contradiction": 0.12411530315876007,
+          "entailment": 0.0031592154409736395,
+          "neutral": 0.8727255463600159
+        },
+        "tokens": 293,
+        "elapsedMs": 119.28540002554655,
+        "humanReviewState": "pending"
+      }
+    },
+    {
+      "id": "B",
+      "claim": "Charminar was constructed in Hyderabad in 1891.",
+      "expectedDiagnostic": "contradicts",
+      "actualSuggestion": "abstained",
+      "diagnosticMatch": false,
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "confidence": null,
+      "totalAnalysisMs": 965.5357999999997,
+      "nliMs": 542.0887000000002,
+      "sourceCount": 6,
+      "source": {
+        "id": "E4",
+        "title": "Charminar",
+        "url": "https://en.wikipedia.org/wiki/Charminar",
+        "originalUrl": "https://en.wikipedia.org/wiki/Charminar",
+        "revisionUrl": "https://en.wikipedia.org/w/index.php?oldid=1376727486",
+        "revisionId": 1376727486,
+        "retrievedAt": "2026-11-17T00:16:09.427Z",
+        "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "license": "Creative Commons Attribution-Share Alike 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+      },
+      "relationship": {
+        "id": "NLI-199ef0739162a327f686860c",
+        "claimId": "CL-2de38694a1c8ebb38db9b19302d08df139497d59aee9e78405cea0f507fe152d",
+        "sourceId": "E4",
+        "passageId": "P-c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "sourcePassageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "span": {
+          "start": 0,
+          "end": 1208
+        },
+        "modelId": "cross-encoder/nli-MiniLM2-L6-H768",
+        "version": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+        "status": "executed",
+        "evaluationStatus": "experimental_failed_validation",
+        "suggestion": "abstained",
+        "argmax": "neutral",
+        "scores": {
+          "contradiction": 0.14527633786201477,
+          "entailment": 0.003140095854178071,
+          "neutral": 0.8515835404396057
+        },
+        "tokens": 293,
+        "elapsedMs": 128.17270000232384,
+        "humanReviewState": "pending"
+      }
+    },
+    {
+      "id": "C",
+      "claim": "Charminar is located in Delhi.",
+      "expectedDiagnostic": "contradicts",
+      "actualSuggestion": "abstained",
+      "diagnosticMatch": false,
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "confidence": null,
+      "totalAnalysisMs": 1042.2437999999984,
+      "nliMs": 558.0959000000003,
+      "sourceCount": 6,
+      "source": {
+        "id": "E1",
+        "title": "Charminar",
+        "url": "https://en.wikipedia.org/wiki/Charminar",
+        "originalUrl": "https://en.wikipedia.org/wiki/Charminar",
+        "revisionUrl": "https://en.wikipedia.org/w/index.php?oldid=1376727486",
+        "revisionId": 1376727486,
+        "retrievedAt": "2026-11-17T00:16:10.706Z",
+        "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "license": "Creative Commons Attribution-Share Alike 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+      },
+      "relationship": {
+        "id": "NLI-cf35ac61aae4af6311500fdc",
+        "claimId": "CL-44a8d5deb3ab536e85553c5d21834b857590a54fc0873aa9562e5177e2e775d8",
+        "sourceId": "E1",
+        "passageId": "P-c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "sourcePassageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "span": {
+          "start": 0,
+          "end": 1208
+        },
+        "modelId": "cross-encoder/nli-MiniLM2-L6-H768",
+        "version": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+        "status": "executed",
+        "evaluationStatus": "experimental_failed_validation",
+        "suggestion": "abstained",
+        "argmax": "contradiction",
+        "scores": {
+          "contradiction": 0.6273989081382751,
+          "entailment": 0.0021751001477241516,
+          "neutral": 0.3704259395599365
+        },
+        "tokens": 289,
+        "elapsedMs": 113.74699999578297,
+        "humanReviewState": "pending"
+      }
+    },
+    {
+      "id": "D",
+      "claim": "Charminar was not constructed in 1591.",
+      "expectedDiagnostic": "contradicts",
+      "actualSuggestion": "abstained",
+      "diagnosticMatch": false,
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "confidence": null,
+      "totalAnalysisMs": 984.9583000000002,
+      "nliMs": 615.2309999999998,
+      "sourceCount": 6,
+      "source": {
+        "id": "E1",
+        "title": "Charminar",
+        "url": "https://en.wikipedia.org/wiki/Charminar",
+        "originalUrl": "https://en.wikipedia.org/wiki/Charminar",
+        "revisionUrl": "https://en.wikipedia.org/w/index.php?oldid=1376727486",
+        "revisionId": 1376727486,
+        "retrievedAt": "2026-11-17T00:16:11.957Z",
+        "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "license": "Creative Commons Attribution-Share Alike 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+      },
+      "relationship": {
+        "id": "NLI-6e02b357cc6e8c50b01d7864",
+        "claimId": "CL-1f4b3e3cff3e064f1850d0c39d6d8f1d4ceac5374136248cbcf70151f358ebf1",
+        "sourceId": "E1",
+        "passageId": "P-c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "sourcePassageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "span": {
+          "start": 0,
+          "end": 1208
+        },
+        "modelId": "cross-encoder/nli-MiniLM2-L6-H768",
+        "version": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+        "status": "executed",
+        "evaluationStatus": "experimental_failed_validation",
+        "suggestion": "abstained",
+        "argmax": "neutral",
+        "scores": {
+          "contradiction": 0.4124450385570526,
+          "entailment": 0.006498207803815603,
+          "neutral": 0.5810567140579224
+        },
+        "tokens": 291,
+        "elapsedMs": 126.07669999124482,
+        "humanReviewState": "pending"
+      }
+    },
+    {
+      "id": "E",
+      "claim": "Charminar was constructed in Hyderabad.",
+      "expectedDiagnostic": "supports",
+      "actualSuggestion": "abstained",
+      "diagnosticMatch": false,
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "confidence": null,
+      "totalAnalysisMs": 1174.0445,
+      "nliMs": 535.0864000000001,
+      "sourceCount": 6,
+      "source": {
+        "id": "E2",
+        "title": "Charminar",
+        "url": "https://en.wikipedia.org/wiki/Charminar",
+        "originalUrl": "https://en.wikipedia.org/wiki/Charminar",
+        "revisionUrl": "https://en.wikipedia.org/w/index.php?oldid=1376727486",
+        "revisionId": 1376727486,
+        "retrievedAt": "2026-11-17T00:16:13.522Z",
+        "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "license": "Creative Commons Attribution-Share Alike 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+      },
+      "relationship": {
+        "id": "NLI-ff08ce753b7aacc75024e4e7",
+        "claimId": "CL-ae9f0253b80c8ce4d56954218c15066a2b6585d5b5fbafdd945b005fe5c67df3",
+        "sourceId": "E2",
+        "passageId": "P-c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "sourcePassageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "span": {
+          "start": 0,
+          "end": 1208
+        },
+        "modelId": "cross-encoder/nli-MiniLM2-L6-H768",
+        "version": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+        "status": "executed",
+        "evaluationStatus": "experimental_failed_validation",
+        "suggestion": "abstained",
+        "argmax": "neutral",
+        "scores": {
+          "contradiction": 0.11136428266763687,
+          "entailment": 0.003484206972643733,
+          "neutral": 0.8851515650749207
+        },
+        "tokens": 290,
+        "elapsedMs": 118.00059996312484,
+        "humanReviewState": "pending"
+      }
+    }
+  ],
+  "journeys": [
+    {
+      "id": "A-human-review",
+      "scope": "Authored software action, not independent adjudication",
+      "claimStatus": "SUPPORTED",
+      "sourceCount": 6
+    },
+    {
+      "id": "no-evidence",
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 0,
+      "originalRetained": true,
+      "candidateCategories": [
+        "assertion_candidate"
+      ]
+    },
+    {
+      "id": "compound-selection",
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "targetClaim": "Charminar was constructed in Hyderabad in 1591.",
+      "sourceCount": 6,
+      "originalRetained": true,
+      "candidateCategories": [
+        "assertion_candidate",
+        "instruction"
+      ]
+    },
+    {
+      "id": "persistence-correlation-report",
+      "exactApiDiskReportParity": true,
+      "graphCounts": {
+        "nodes": 71,
+        "relationships": 91,
+        "crossEngineLinks": 0,
+        "candidateComparisons": 0,
+        "omittedNodes": 0,
+        "omittedRelationships": 0,
+        "omittedTimelineEntries": 0
+      }
+    },
+    {
+      "id": "authored-conflict",
+      "scope": "Authored passages and review actions; not independent accuracy evidence",
+      "claimStatus": "CONFLICTING_EVIDENCE",
+      "sourceCount": 2
+    }
+  ],
+  "manualWorkspace": {
+    "url": "http://localhost:3000",
+    "at": "2026-11-17T09:00:09.227Z",
+    "softwareVerification": "passed",
+    "caseStoreUnchanged": true,
+    "sourceCount": 6,
+    "executedRelationships": 6,
+    "evaluationStatus": "experimental_failed_validation",
+    "claimStatus": "INSUFFICIENT_EVIDENCE"
+  },
+  "tests": {
+    "python": {
+      "passed": 107,
+      "skipped": 0
+    },
+    "newNodeSuites": 4,
+    "providerControls": 25,
+    "typescript": "passed",
+    "build": "passed with existing main-chunk warning",
+    "existingNodeApi": "passed",
+    "engine3": "passed",
+    "engine4": "passed",
+    "diagnostics": "passed",
+    "extraction": "passed",
+    "ocrGeometry": "passed",
+    "ocrApi": "passed",
+    "ocrRuntime": "passed",
+    "startup": "passed",
+    "authoredDemoProduction": "passed"
+  },
+  "limitations": [
+    "No authoritative automatic stance promotion. Human review remains decisive.",
+    "ANLI external evaluation failed; independent target-domain and multilingual validation remain incomplete.",
+    "No tokens, receipts, private investigations, paths, model weights or source passage text included in this public summary.",
+    "Browser software pass is distinct from the negative model diagnostic outcome."
+  ]
+}

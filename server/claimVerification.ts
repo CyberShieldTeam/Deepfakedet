@@ -4,6 +4,10 @@ import {claimDiagnostics} from './analysisDiagnostics';
 import { embedDetailed, cosine, modelConfig } from "./inference";
 import { analyzeClaim, claimTokens, normalizeClaim } from "./claimText";
 import {wikipediaEvidence} from './wikipediaEvidence';
+import {approveClaimSelection,textHash} from './claimExtraction';
+import {assessClaimRelationships} from './claimStance';
+import {owner} from './security';
+import type {ClaimSelection} from '../src/claimTypes';
 import {
   corpusEvidence,
   googleEvidence,
@@ -124,9 +128,11 @@ export async function retrieveEvidence(claim: string, local: Evidence[] = []) {
   };
 }
 
-export async function verifyWithEvidence(claim: string): Promise<ClaimVerificationResult> {
+export async function verifyWithEvidence(claim: string,selection?:ClaimSelection): Promise<ClaimVerificationResult> {
   const started = performance.now(),
-    analysis = analyzeClaim(claim);
+    selectionReview=selection?approveClaimSelection(claim,selection,owner()):undefined,
+    checkedClaim=selectionReview?.text??claim,
+    analysis = analyzeClaim(checkedClaim);
   const retrieval = await retrieveEvidence(analysis.normalized);
   const sources: GroundedSource[] = retrieval.ranked.map((e, i) => ({
     id: `E${i + 1}`,
@@ -165,9 +171,10 @@ export async function verifyWithEvidence(claim: string): Promise<ClaimVerificati
   ];
   const result:ClaimVerificationResult = {
     originalInput: claim,
-    targetClaim: analysis.normalized,
+    targetClaim: selectionReview?.text??analysis.normalized,
+    selectionReview,
     normalizedClaim: analysis.normalized,
-    extractedClaims: analysis.assertions,
+    extractedClaims: analysis.candidates.filter(c=>['assertion_candidate','compound'].includes(c.category)).map(c=>c.text),
     detectedLanguage: analysis.language,
     claimAnalysis: analysis,
     verificationStatus: unavailable ? "UNAVAILABLE" : "INSUFFICIENT_EVIDENCE",
@@ -192,7 +199,7 @@ export async function verifyWithEvidence(claim: string): Promise<ClaimVerificati
       analysis.extraction,
       analysis.entityMethod,
       "Relevance is not source credibility or entailment. No numerical truth probability is estimated.",
-      "No automatic translation or trained entailment/NER model ran. Google passages are claim-review metadata, not fetched article bodies.",
+      "No automatic translation or trained NER ran. Optional experimental NLI only suggests textual relationships; Google passages are metadata, not fetched article bodies.",
     ],
     timestamp: new Date().toISOString(),
     engine: "heuristic",
@@ -217,6 +224,11 @@ export async function verifyWithEvidence(claim: string): Promise<ClaimVerificati
       queries: [analysis.normalized,...retrieval.providers.flatMap(p=>p.query?[p.query]:[])],
     },
   };
+  result.nli=await assessClaimRelationships(result);
+  if(result.nli.relationships.some(r=>r.status==='executed')){
+    result.verdictRationale=result.nli.summary+' The model failed external validation; no human-reviewed stance or factual conclusion follows automatically.';
+    result.limitations.push('Experimental English NLI failed held-out validation. Its raw softmax and suggested relationships are not calibrated truth probabilities.');
+  }
   result.analysis=claimDiagnostics(result,performance.now()-started);
   return result;
 }
@@ -250,7 +262,8 @@ export function reviewEvidence(
   reviewer: string,
 ) {
   const started=performance.now();
-  if (!result.normalizedClaim || result.normalizedClaim !== normalizeClaim(result.originalInput))
+  if (!result.normalizedClaim || result.normalizedClaim !== normalizeClaim(result.selectionReview?.text??result.originalInput)||
+      (result.selectionReview&&result.selectionReview.originalInputSha256!==textHash(result.originalInput)))
     throw new Error("Re-run claim verification before review");
   const seen = new Set<string>();
   for (const review of reviews) {
@@ -284,8 +297,13 @@ export function reviewEvidence(
   const reviewedAt = new Date().toISOString();
   const sources = result.sources.map((s) => {
     const review = reviews.find((r) => r.url === s.url && (!r.sourceId || r.sourceId === s.id));
+    if(!review)return s;
+    const history=[...(s.reviewHistory||[]),...(s.review?[{...s.review,stance:s.stance}]:[])];
+    if(history.length>=32)throw new Error('Review-history capacity reached; preserve/export this result and create a new analysis before further review');
+    if(review.stance==='neutral')history.push({stance:'neutral',quote:review.quote,contextConfirmed:review.contextConfirmed,reviewedBy:reviewer,reviewedAt,claim:result.normalizedClaim!,note});
     return {
       ...s,
+      reviewHistory:history,
       stance: review?.stance || ("neutral" as const),
       review:
         review && review.stance !== "neutral"
@@ -347,6 +365,7 @@ export function reviewEvidence(
     confidenceNote: "Attributed human assessment; no truth probability estimated.",
     timestamp: reviewedAt,
   } as ClaimVerificationResult;
+  if(reviewedResult.nli)reviewedResult.nli={...reviewedResult.nli,relationships:reviewedResult.nli.relationships.map(r=>{const s=sources.find(s=>s.id===r.sourceId),current=s?.review?{...s.review,stance:s.stance}:s?.reviewHistory?.at(-1);return {...r,humanReviewState:current?'reviewed':'pending',humanStance:current?.stance,reviewedBy:current?.reviewedBy,reviewedAt:current?.reviewedAt}})};
   reviewedResult.analysis=claimDiagnostics(reviewedResult,performance.now()-started);
   return reviewedResult;
 }

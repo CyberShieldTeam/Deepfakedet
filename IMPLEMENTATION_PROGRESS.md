@@ -1,5 +1,36 @@
 # VERITAS AI implementation progress
 
+## Engine 2 assertion selection and NLI research — 2026-11-17 local date
+
+- Started clean/synchronized at `6430738`, same feature branch. Added authenticated
+  exact-span candidate extraction and explicit wording/language/context approval while
+  retaining immutable original input and legacy verify requests. Category rules and
+  Hindi/Telugu/romanized controls are not independent multilingual accuracy validation.
+- User approved the bounded MiniLM2 NLI download; all seven files (331,111,701 bytes)
+  verified against pinned publisher hashes. Offline CPU worker has bounded inputs,
+  concurrency, startup/inference deadlines, process-tree cleanup/restart budget and no
+  cross-owner text cache. Existing retrieval, media, network and review gates preserved.
+- Predeclared ANLI research protocol: 120 development/300 held-out, balanced classes,
+  exact premise/pair/ID separation. All 420 executed. Held-out accuracy 32.33%, macro-F1
+  .3184; accepted accuracy 27.27% at 44% coverage. Model **failed validation**; no threshold
+  fitting, calibrated truth probability or authoritative stance promotion.
+- Model suggestion/human stance/aggregate status remain separate through signed APIs,
+  case storage, correlation metadata and clickable reports. Human corrections/rejections
+  retain prior history; partial reviews preserve unmentioned sources. Exact source and
+  model-window hashes/offsets identify actual input. No generated evidence quotations.
+- Wrong-year browser retrieval exposed an overly strict numeric query; added generic
+  bounded counter-evidence query expansion without changing the claim/model thresholds.
+  Wikipedia query cache is now owner scoped. Existing provider caps remain unchanged.
+- Actual browser journeys and configured localhost:3000 passed software checks, including
+  exact disk/API/report parity and unchanged manual investigation store. All five Charminar
+  article relationships abstained: this negative model outcome remains explicit.
+- Final local Python 107 passed/zero skipped; four new NLI Node suites, 25 provider
+  controls, existing Node/engine/OCR/startup regressions, production demo isolation,
+  TypeScript and build passed. Six ENGINE2 documents and raw negative/sanitized browser
+  reports record methodology, failures and remaining independent target-domain work.
+- Model weights, ANLI source text, private case/access data and local research config stay
+  outside Git. Research NLI remains opt-in/default-off and explicitly failed-validation.
+
 ## Real claim sources and feasible media inference — 2026-11-17 local date
 
 - Started clean/synchronized at `caf4a02`, same feature branch. Added opt-in fixed-host

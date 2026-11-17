@@ -251,6 +251,7 @@ export type AnalysisEngine =
   | "local_video_frames";
 
 export interface GroundedSource {
+  reviewHistory?:{stance:'supports'|'contradicts'|'mixed'|'neutral';quote:string;contextConfirmed:boolean;reviewedBy:string;reviewedAt:string;claim:string;note:string}[];
   originalUrl?:string;
   sourceType?:'encyclopedia_excerpt'|'fact_check_metadata'|'imported_passage';
   retrievalMethod?:string;
@@ -313,6 +314,8 @@ export type ClaimAssessment =
   | "unverified";
 
 export interface ClaimVerificationResult {
+  selectionReview?:import('./claimTypes').ClaimSelectionReview;
+  nli?:import('./claimTypes').NliAnalysis;
   extractionOrigin?:import('./extractionTypes').ExtractionOrigin;
   analysis?:AnalysisDiagnostics;
   normalizedClaim?: string;
@@ -334,6 +337,7 @@ export interface ClaimVerificationResult {
     entityMethod: string;
     negationMarkers: string[];
     ambiguities: string[];
+    candidates?:import('./claimTypes').ClaimCandidate[];
   };
   retrievalDetails?: {
     candidateCount?:number;

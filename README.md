@@ -12,6 +12,12 @@ with clickable original/revision citations and attributed passage review. It is 
 encyclopedia source, not automatic fact checking. See [source setup](docs/CLAIM_SOURCE_CITATIONS.md)
 and [current capability verification](docs/CORE_CAPABILITY_VERIFICATION.md).
 
+Engine 2 also supports original-bound assertion selection and an opt-in offline English
+NLI research worker. The evaluated checkpoint **failed validation**; suggestions stay
+separate from human-reviewed evidence and never create automatic factual verdicts.
+See [Engine 2 workflow and setup](docs/ENGINE2_USER_WORKFLOW.md) and
+[measured evaluation](docs/ENGINE2_NLI_EVALUATION.md).
+
 ## Problem and approach
 
 A media anomaly, a disputed claim and a burst of similar posts answer different questions.

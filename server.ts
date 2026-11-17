@@ -9,6 +9,7 @@ import {
   caseCreate,
   casePatch,
   claimInput,
+  claimExtractionInput,
   context,
   errorHandler,
   installSecurity,
@@ -20,6 +21,8 @@ import { analyzeMediaPipeline } from "./server/mediaPipeline";
 import { inferenceRegistry, embed, cosine } from "./server/inference";
 import { verifyWithEvidence } from "./server/evidence";
 import { claimReviewSchema, reviewEvidence } from "./server/claimVerification";
+import {extractClaimCandidates,approveClaimSelection} from './server/claimExtraction';
+import {shutdownNli} from './server/nliWorker';
 import { runCampaign, CampaignRunError } from "./server/campaignRunner";
 import { campaignEmbeddings } from "./server/campaignEmbedding";
 import {networkDiagnostics,logAnalysis,failedDiagnostic} from './server/analysisDiagnostics';
@@ -920,9 +923,13 @@ app.post("/api/forensics/analyze-media", validate(mediaInput), async (req, res, 
 });
 
 // ---------------------------------------------------------------- Claim verification
+app.post('/api/claims/extract',validate(claimExtractionInput),(req,res)=>{
+ res.json({originalInput:req.body.claimText,candidates:extractClaimCandidates(req.body.claimText),method:'conservative_rules_unvalidated',limitations:['Categories are suggestions, not verified factual assertions. Review full original context before selection.','Hindi/Telugu and romanized category quality is unvalidated; ambiguous/compound candidates remain intact.']});
+});
 app.post("/api/claims/verify", validate(claimInput), async (req, res, next) => {
   try {
-    const result = await verifyWithEvidence(req.body.claimText);
+    if(req.body.selection){try{approveClaimSelection(req.body.claimText,req.body.selection,owner())}catch{return void res.status(400).json({error:'Select a current candidate and explicitly approve its wording, language and original context.'})}}
+    const result = await verifyWithEvidence(req.body.claimText,req.body.selection);
     if(result.analysis)logAnalysis(result.analysis);
     res.json({ result: receipt(result) });
   } catch (error) {
@@ -1106,7 +1113,7 @@ async function start() {
   });
   let stopping=false;
   for(const signal of ['SIGINT','SIGTERM'] as const)process.once(signal,()=>{
-    if(stopping)return;stopping=true;
+    if(stopping)return;stopping=true;shutdownNli();
     const deadline=setTimeout(()=>process.exit(1),5000);deadline.unref();
     listener.close(()=>{void vite?.close().finally(()=>process.exit(0));if(!vite)process.exit(0)});
     listener.closeIdleConnections();

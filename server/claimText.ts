@@ -1,4 +1,5 @@
 /** Deterministic text diagnostics, not a language/NER/entailment model. */
+import {extractClaimCandidates} from './claimExtraction';
 export const normalizeClaim = (text: string) =>
   text
     .normalize("NFC")
@@ -35,8 +36,9 @@ export function analyzeClaim(text: string) {
     language,
     languages,
     assertions: assertions.slice(0, 8),
+    candidates:extractClaimCandidates(text),
     extraction:
-      "Sentence boundaries only; imperatives, questions and compound assertions require analyst selection.",
+      "Conservative sentence/category rules, not a validated multilingual assertion model; analyst selection preserves original offsets and context.",
     truncated: assertions.length > 8,
     // Exact spans only. No inferred entity type or translated spelling.
     entityCandidates: Array.from(
