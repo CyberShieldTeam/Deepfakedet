@@ -1,5 +1,16 @@
 # Image engine model record
 
+## Engine 1 external evaluation supplement — 2026-11-17
+
+User-authorized bounded evaluation executed Community, Dima and SDXL on a new80-source
+frozen external research sample. Community held-out accuracy95% becomes87.5% with
+matched format; zero false positives among20 genuine inputs has a95% upper bound16.11%.
+Source/identity/training independence remains unresolved. **No promotion**, threshold
+fitting or reserved-data access. Default classifiers remain disabled. Exact pinned
+loading, transformed-input identities, actual UI/disk/graph/report verification and
+negative findings: [evaluation](docs/ENGINE1_IMAGE_EVALUATION.md) and
+[verification](docs/ENGINE1_FINAL_VERIFICATION.md). Historical findings below are retained.
+
 ## Reconciliation and diagnostic validation — 2026-11-15
 
 Merged both feature histories in `855b414`, preserving all earlier model/parity reports

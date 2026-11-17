@@ -245,7 +245,7 @@ export const InvestigationsView: React.FC<{
                           </span>
                         </span>
                         <span className="font-mono">
-                          {m.confidenceScore == null
+                          {m.confidenceScore == null || (m.confidenceScore===0&&m.aiGeneratedProbability==null)
                             ? "Confidence not estimated"
                             : `${m.confidenceScore}%`}
                         </span>

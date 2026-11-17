@@ -18,6 +18,8 @@ from pydantic import BaseModel
 from PIL import Image, ImageOps, UnidentifiedImageError
 from ai_service import audio_service, video_service, face_service, image_evidence, provenance_service
 from ai_service.extraction_prepare import router as extraction_router
+from ai_service.media_model_registry import cached_snapshot,tensor_fingerprint
+from ai_service.media_input_trace import image_trace,require_headroom
 
 def _timing(stage, event):
     if os.getenv("VERITAS_TIMING_LOG", "0") == "1":
@@ -39,12 +41,14 @@ torch_module = None
 load_error = "Model not loaded"
 face_detector = None
 face_lock = Lock()
+image_lock = Lock()
 FACE_MODEL = Path(__file__).resolve().parent / "models" / "face_detection_yunet_2023mar.onnx"
 FACE_MODEL_SHA256 = "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
 
 
 def load_face_detector():
     global face_detector
+    face_detector=None
     if FACE_MODEL.is_file():
         try:
             import cv2
@@ -58,6 +62,7 @@ def load_face_detector():
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     global model, processor, torch_module, load_error, face_detector
+    model=processor=torch_module=None
     _timing("face_detector", "start")
     load_face_detector()
     _timing("face_detector", "end")
@@ -65,16 +70,17 @@ async def lifespan(_app: FastAPI):
     face_service.load_model()
     if os.getenv("VERITAS_IMAGE_MODEL_ENABLED", "0") == "1":
         try:
+            require_headroom(5 if MODEL_KIND=='smaug' else 2)
             import torch
             if MODEL_KIND == "community":
                 from ai_service.community_model import load
                 model, processor = load()
             elif MODEL_KIND == "dima":
                 from transformers import AutoImageProcessor, AutoModelForImageClassification
-                source, revision = MODEL_PATH or MODEL_ID, None if MODEL_PATH else MODEL_REVISION
-                processor = AutoImageProcessor.from_pretrained(source, revision=revision)
+                source = cached_snapshot('dima',MODEL_PATH)
+                processor = AutoImageProcessor.from_pretrained(source,local_files_only=True,trust_remote_code=False)
                 model = AutoModelForImageClassification.from_pretrained(
-                    source, revision=revision, use_safetensors=True
+                    source, use_safetensors=True,local_files_only=True,trust_remote_code=False
                 ).eval()
                 if model.config.id2label.get(0) != "REAL" or model.config.id2label.get(1) != "FAKE":
                     raise ValueError("Unexpected checkpoint labels")
@@ -83,7 +89,7 @@ async def lifespan(_app: FastAPI):
             elif MODEL_KIND == "smaug":
                 from huggingface_hub import snapshot_download
                 from sentence_transformers import SentenceTransformer
-                checkpoint = snapshot_download(MODEL_ID, revision=MODEL_REVISION)
+                checkpoint = snapshot_download(MODEL_ID, revision=MODEL_REVISION,local_files_only=True)
                 device = "cuda" if torch.cuda.is_available() else "cpu"
                 model = SentenceTransformer(
                     checkpoint, device=device, config_kwargs={"audio_config": None},
@@ -146,6 +152,12 @@ def health():
 
 @app.post("/v1/image/analyze")
 def analyze_image(request: ImageRequest):
+    if not image_lock.acquire(blocking=False):raise HTTPException(429,'Image inference busy; no prediction produced')
+    try:return _analyze_image(request)
+    finally:image_lock.release()
+
+
+def _analyze_image(request: ImageRequest):
     model_ready = model is not None and processor is not None and torch_module is not None
     if not model_ready and face_detector is None:
         raise HTTPException(503, "Image model unavailable")
@@ -166,6 +178,7 @@ def analyze_image(request: ImageRequest):
                 return _inconclusive("Image is too small for this classifier", start)
             # Match browser display orientation so candidate boxes map to visible pixels.
             image = ImageOps.exif_transpose(source).convert("RGB")
+            input_trace=image_trace(raw,source,image)
     except (UnidentifiedImageError, OSError, Image.DecompressionBombError):
         raise HTTPException(400, "Corrupt or unsupported image")
     face_status, faces = detect_faces(image)
@@ -176,24 +189,36 @@ def analyze_image(request: ImageRequest):
                 "revision": MODEL_REVISION, "scope": "general_ai_generated_image",
                 "face_analysis": face_status, "face_boxes": faces, "face_manipulation": face_evidence,
                 "face_model": face_service.legacy_projection(face_evidence), "signals": [],
+                "inputTrace":input_trace,
                 "explanation": "Classifier unavailable; face candidates are unverified regions, not manipulation analysis.",
                 "processing_ms": round((time.monotonic() - start) * 1000)}
-    if MODEL_KIND == "community":
-        from ai_service.community_model import score
-        fake_probability = score(model, processor, image)
-    elif MODEL_KIND == "smaug":
-        fake_probability = smaug_probability(image)
-    else:
-        inputs = processor(images=image, return_tensors="pt")
-        device = next(model.parameters()).device
-        with torch_module.inference_mode():
-            logits = model(**{key: value.to(device) for key, value in inputs.items()}).logits[0]
-            fake_probability = torch_module.softmax(logits, dim=-1)[1].item()
+    try:
+        if MODEL_KIND == "community":
+            pixels=processor(image).unsqueeze(0)
+            input_trace['tensor']=tensor_fingerprint(pixels)
+            with torch_module.inference_mode():fake_probability=torch_module.sigmoid(model(pixels)).item()
+        elif MODEL_KIND == "smaug":
+            fake_probability = smaug_probability(image)
+        else:
+            inputs = processor(images=image, return_tensors="pt")
+            input_trace['tensor']=tensor_fingerprint(inputs['pixel_values'])
+            device = next(model.parameters()).device
+            with torch_module.inference_mode():
+                logits = model(**{key: value.to(device) for key, value in inputs.items()}).logits[0]
+                fake_probability = torch_module.softmax(logits, dim=-1)[1].item()
+        if not math.isfinite(fake_probability) or not 0<=fake_probability<=1:raise ValueError('NONFINITE_OUTPUT')
+    except Exception:
+        return {'classification':'INCONCLUSIVE','fake_probability':None,'model_confidence':None,'model_status':'unavailable',
+                'model':MODEL_ID,'revision':MODEL_REVISION,'scope':'general_ai_generated_image','face_analysis':face_status,
+                'face_boxes':faces,'face_manipulation':face_evidence,'face_model':face_service.legacy_projection(face_evidence),
+                'signals':[],'inputTrace':input_trace,'explanation':'Classifier inference failed; source identity and face evidence retained, no prediction invented.',
+                'processing_ms':round((time.monotonic()-start)*1000)}
     # The checkpoint failed the initial out-of-domain fixture smoke test. Do not promote
     # its softmax score to a real/fake decision before independent validation/calibration.
     return {"classification": "INCONCLUSIVE", "fake_probability": round(fake_probability, 6),
             "model_confidence": None, "model_status": "ready", "model": MODEL_ID, "revision": MODEL_REVISION,
             "scope": "general_ai_generated_image", "face_analysis": face_status, "face_boxes": faces, "face_manipulation": face_evidence,
+            "inputTrace":input_trace,
             "face_model": face_service.legacy_projection(face_evidence),
             "signals": [], "explanation": "Experimental whole-image classifier score only; face boxes are unverified candidates, not manipulation analysis.",
             "processing_ms": round((time.monotonic() - start) * 1000)}

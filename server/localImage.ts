@@ -1,6 +1,9 @@
 import type { ForensicAnalysisResult } from '../src/types';
+import {createHash} from 'node:crypto';
+import {imageTraceSchema} from './mediaTrace';
 
 export interface LocalImageResponse {
+  inputTrace?:import('../src/mediaTraceTypes').ImageInputTrace;
   face_model?: import('../src/types').LocalImageEvidence['face_model'];
   face_manipulation?: import('../src/types').LocalImageEvidence['face_manipulation'];
   classification: 'REAL' | 'MANIPULATED' | 'INCONCLUSIVE';
@@ -26,6 +29,7 @@ export async function callLocalImage(mediaData: string, endpoint: string, fetche
   });
   if (!response.ok) throw new Error(`Local image service returned HTTP ${response.status}`);
   const value = await response.json() as LocalImageResponse;
+  if(value.inputTrace&&(!imageTraceSchema.safeParse(value.inputTrace).success||value.inputTrace.sourceBytes!==Buffer.from(match[1],'base64').length||value.inputTrace.sourceSha256!==createHash('sha256').update(Buffer.from(match[1],'base64')).digest('hex')))throw new Error('Invalid or mismatched image input identity');
   const legacyFace = value.face_model;
   if (legacyFace && (!['ready','unavailable','not_applicable'].includes(legacyFace.status) ||
       !legacyFace.model || !legacyFace.revision || typeof legacyFace.note !== 'string' ||

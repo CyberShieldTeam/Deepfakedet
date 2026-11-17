@@ -1,5 +1,16 @@
 # AASIST audio engine record
 
+## External evaluation supplement — 2026-11-17
+
+Actual frozen LJSpeech/WaveFake single-voice English comparison completed: held-out
+original recording diagnostic accuracy50%, FPR100% (12/12genuine), AUROC.673611;
+MP3 FPR91.67%. No threshold changed, calibration or recording verdict introduced.
+Segment/recording research metrics, licensing, source-dependence limits and negative
+findings: [audio evaluation](docs/ENGINE1_AUDIO_EVALUATION.md). New traces distinguish
+decoded/resampled/padded inputs, skipped windows and unverified speech presence;
+single-request lock rejects busy work and recovers after failure. All outputs remain
+experimental and INCONCLUSIVE. Existing results below remain history.
+
 ## Local availability supplement — 2026-11-17
 
 The previously missing official pinned checkpoint was obtained with the existing bounded

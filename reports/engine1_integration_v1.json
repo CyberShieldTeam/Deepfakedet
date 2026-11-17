@@ -1,0 +1,186 @@
+{
+  "scope": "Actual authenticated application and real cached inference. Labelled research samples have source/domain limitations; procedural controls are software tests only.",
+  "isolated": {
+    "result": "passed",
+    "checks": [
+      {
+        "id": "publisher-genuine-image",
+        "status": "INSUFFICIENT_EVIDENCE",
+        "modelStatus": "ready",
+        "sourceSha256": "f1a612003e41e4f8bbf008f6d05f4ba3ed07318f68ec315db1620a410111becc",
+        "processingMs": 106,
+        "pass": true
+      },
+      {
+        "id": "publisher-synthetic-image",
+        "status": "INSUFFICIENT_EVIDENCE",
+        "modelStatus": "ready",
+        "sourceSha256": "9c937c1e32d65e489d0f0f7bab34072dfa965caeef8da46bd3b1f254973c96b3",
+        "processingMs": 102,
+        "pass": true
+      },
+      {
+        "id": "genuine-speech",
+        "status": "INSUFFICIENT_EVIDENCE",
+        "segments": 1,
+        "sourceSha256": "311378e98371cfb4cf0c2c2a986a5b4f066bd06481eca4b9258b2b55d74aedeb",
+        "processingMs": 218,
+        "pass": true
+      },
+      {
+        "id": "synthetic-speech",
+        "status": "INSUFFICIENT_EVIDENCE",
+        "segments": 1,
+        "sourceSha256": "d84b570859cd855aae9b553efad01ac5be154293265e84ee3d515e8583067c92",
+        "processingMs": 193,
+        "pass": true
+      },
+      {
+        "id": "recompressed-genuine",
+        "status": "INSUFFICIENT_EVIDENCE",
+        "modelStatus": "ready",
+        "sourceSha256": "fcca455b7a93de03b36db38cf5fb4adb3848b28d9188ca4bf630c2e7dc9dbfb7",
+        "processingMs": 117,
+        "pass": true
+      },
+      {
+        "id": "resized-synthetic",
+        "status": "INSUFFICIENT_EVIDENCE",
+        "modelStatus": "ready",
+        "sourceSha256": "e8dd91c9b69c4fd7eff7840b6540168c56bbe8e1ef0e015abb46bf2ed94fb0ce",
+        "processingMs": 103,
+        "pass": true
+      },
+      {
+        "id": "cc0-face-region-control",
+        "status": "INSUFFICIENT_EVIDENCE",
+        "modelStatus": "ready",
+        "sourceSha256": "59f7dcf646d35702378b27b078d85eed4e68f1072e5cbeca8d270ce6efa59fb0",
+        "processingMs": 116,
+        "pass": true
+      },
+      {
+        "id": "no-face-procedural",
+        "status": "INSUFFICIENT_EVIDENCE",
+        "modelStatus": "ready",
+        "sourceSha256": "215223d2354a7d8affca80722344242d591c5975708d2ccf51c11b201d7ae662",
+        "processingMs": 100,
+        "pass": true
+      },
+      {
+        "id": "silent-audio-control",
+        "status": "PARTIAL_ANALYSIS",
+        "segments": 0,
+        "sourceSha256": "20eaebffe1816e0ffa6f7f854f5ef4ea80d5349faaf0ce1fec1b713e7fde58fa",
+        "processingMs": 1,
+        "pass": true
+      },
+      {
+        "id": "short-audio-control",
+        "status": "PARTIAL_ANALYSIS",
+        "segments": 0,
+        "sourceSha256": "358c6dcef4442790decb0a5c03fb320154f9d1dd5b4618e301f9e6661a413cb5",
+        "processingMs": 0,
+        "pass": true
+      },
+      {
+        "id": "video-no-audio-procedural",
+        "status": "PARTIAL_ANALYSIS",
+        "frames": 6,
+        "sourceSha256": "e35c20be48c3bb5c613dad7b2df1bb1c5f5695795f161f0c3d9f2a2f805cc200",
+        "pass": true
+      },
+      {
+        "id": "video-tone-procedural",
+        "status": "INSUFFICIENT_EVIDENCE",
+        "frames": 6,
+        "sourceSha256": "1ebb3f1e0d01641b1a3118328e509da72d1e1dfd5c710ee557a0ac4af5f4b679",
+        "pass": true
+      },
+      {
+        "id": "scene-cut-procedural",
+        "status": "PARTIAL_ANALYSIS",
+        "frames": 6,
+        "sourceSha256": "1c69eaa3768f70ea7d11d3a26719c00d3c3d32e58688867da6f8b4412073487e",
+        "pass": true
+      },
+      {
+        "id": "short-genuine-speech-derived-control",
+        "status": "PARTIAL_ANALYSIS",
+        "segments": 0,
+        "sourceSha256": "c14ddeaaea80f61596118fafc6ba193362d26d9cacb2c1bab556ab056385beb2",
+        "processingMs": 1,
+        "pass": true
+      },
+      {
+        "id": "video-with-speech-procedural",
+        "status": "INSUFFICIENT_EVIDENCE",
+        "frames": 6,
+        "sourceSha256": "aeec40e24c9f1129ea22ba49122cc3bec4f2ac5eb83694417505b143cedcb4e7",
+        "pass": true
+      },
+      {
+        "id": "audio-model-disabled-real-service",
+        "pass": true,
+        "status": "PARTIAL_ANALYSIS"
+      },
+      {
+        "id": "unsupported-ui-control",
+        "pass": true
+      },
+      {
+        "id": "corrupt-image-ui-control",
+        "pass": true
+      }
+    ],
+    "pageErrors": [],
+    "persistenceApiGraphReportParity": true
+  },
+  "normalWorkspace": {
+    "result": "passed",
+    "checks": [
+      {
+        "id": "publisher-genuine-image",
+        "status": "PARTIAL_ANALYSIS",
+        "modelStatus": "unavailable",
+        "sourceSha256": "f1a612003e41e4f8bbf008f6d05f4ba3ed07318f68ec315db1620a410111becc",
+        "processingMs": 18,
+        "pass": true
+      },
+      {
+        "id": "publisher-synthetic-image",
+        "status": "PARTIAL_ANALYSIS",
+        "modelStatus": "unavailable",
+        "sourceSha256": "9c937c1e32d65e489d0f0f7bab34072dfa965caeef8da46bd3b1f254973c96b3",
+        "processingMs": 6,
+        "pass": true
+      },
+      {
+        "id": "genuine-speech",
+        "status": "INSUFFICIENT_EVIDENCE",
+        "segments": 1,
+        "sourceSha256": "311378e98371cfb4cf0c2c2a986a5b4f066bd06481eca4b9258b2b55d74aedeb",
+        "processingMs": 208,
+        "pass": true
+      },
+      {
+        "id": "synthetic-speech",
+        "status": "INSUFFICIENT_EVIDENCE",
+        "segments": 1,
+        "sourceSha256": "d84b570859cd855aae9b553efad01ac5be154293265e84ee3d515e8583067c92",
+        "processingMs": 207,
+        "pass": true
+      }
+    ],
+    "pageErrors": [],
+    "operatorStoreUnchanged": true
+  },
+  "python": {
+    "tests": 118,
+    "skips": 0,
+    "result": "passed"
+  },
+  "validatedMediaDetectorPromoted": false,
+  "videoAccuracyMetrics": null,
+  "browserInputs": "Publisher-labelled research images/speech plus explicitly procedural software controls; no independent video accuracy test"
+}

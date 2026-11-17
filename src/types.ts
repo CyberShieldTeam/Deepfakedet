@@ -153,6 +153,7 @@ export interface ImageDiagnostics {
 }
 
 export interface LocalImageEvidence {
+  inputTrace?:import('./mediaTraceTypes').ImageInputTrace;
   face_model?: { status: 'ready' | 'unavailable' | 'not_applicable'; model: string; revision: string; faces: { boxIndex: number; rawFakeSoftmax: number }[]; note: string };
   face_manipulation?: {
     status: "unavailable" | "analyzed" | "no_faces" | "no_usable_faces" | "failed";
@@ -177,6 +178,7 @@ export interface LocalImageEvidence {
 }
 
 export interface LocalAudioEvidence {
+  inputTrace?:import('./mediaTraceTypes').AudioInputTrace;
   classification: "INCONCLUSIVE";
   model: string;
   revision: string;
@@ -184,12 +186,13 @@ export interface LocalAudioEvidence {
   sample_rate_input: number;
   sample_rate_model: 16000;
   duration_seconds: number;
-  segments: { start_seconds: number; end_seconds: number; raw_bonafide_logit: number; raw_spoof_softmax: number }[];
+  segments: { start_seconds: number; end_seconds: number; raw_bonafide_logit: number; raw_spoof_softmax: number;model_input_sha256?:string;padded_samples?:number }[];
   processing_ms: number;
   explanation: string;
 }
 
 export interface LocalVideoEvidence {
+  sourceSha256?:string;
   temporalDiagnostics?: import('../server/localVideo').TemporalDiagnostics;
   scope: "sampled_video_frames" | "server_decoded_frames";
   frames: {

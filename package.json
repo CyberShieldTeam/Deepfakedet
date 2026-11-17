@@ -11,6 +11,7 @@
     "demo:test": "node scripts/demo-test.mjs",
     "demo:check": "node scripts/check-demo.mjs",
     "test:startup": "tsx test/startup.test.ts",
+    "test:media-trace": "tsx test/mediaTrace.test.ts",
     "test:claim-provider": "tsx test/wikipediaEvidence.test.ts",
     "test:nli": "tsx test/claimExtraction.test.ts && tsx test/nliWorker.test.ts && tsx test/claimStance.test.ts && tsx test/engine2Api.test.ts",
     "test:advanced-claims": "tsx test/advancedClaim.test.ts && tsx test/claimReranking.test.ts",

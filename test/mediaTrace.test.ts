@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {callLocalImage} from '../server/localImage';
+import {callLocalAudio} from '../server/localAudio';
+const hash=createHash('sha256').update('hello').digest('hex');
+const image={classification:'INCONCLUSIVE',fake_probability:null,model_confidence:null,model_status:'unavailable',model:'dima806/ai_vs_real_image_detection',revision:'test',scope:'general_ai_generated_image',face_analysis:'none_found',face_boxes:[],signals:[],explanation:'unavailable',processing_ms:1,inputTrace:{sourceSha256:hash,sourceBytes:5,format:'PNG',originalSize:[100,100],orientedSize:[100,100],sourceMode:'RGB',exifOrientationApplied:false,decodedRgbSha256:hash,conversion:'Authored contract control',tensor:null}};
+const fetcher=(v:unknown)=>(async()=>new Response(JSON.stringify(v))) as typeof fetch;
+const uri='data:image/png;base64,aGVsbG8=';
+assert.deepEqual((await callLocalImage(uri,'http://localhost',fetcher(image))).inputTrace,image.inputTrace);
+for(const trace of [{...image.inputTrace,sourceSha256:'0'.repeat(64)},{...image.inputTrace,sourceBytes:6},{...image.inputTrace,originalSize:[24000000,24000000]},{...image.inputTrace,tensor:{sha256:hash,shape:[1,3,999999,999999],dtype:'torch.float32'}}])await assert.rejects(callLocalImage(uri,'http://localhost',fetcher({...image,inputTrace:trace})));
+const audio={classification:'INCONCLUSIVE',model:'clovaai/aasist',revision:'test',scope:'speech_anti_spoofing',sample_rate_input:16000,sample_rate_model:16000,duration_seconds:1,segments:[],processing_ms:1,explanation:'No usable windows',inputTrace:{sourceSha256:hash,decoded:true,resampledFloat32Sha256:hash,modelSamples:16000,windowSamples:64600,skippedWindows:[{start_seconds:0,end_seconds:1,reason:'below_rms_silence_gate'}],speechPresence:'not_verified',status:'no_usable_windows',conversion:'Authored contract control'}};
+assert.equal((await callLocalAudio('data:audio/wav;base64,aGVsbG8=','http://localhost',fetcher(audio))).segments.length,0);
+await assert.rejects(callLocalAudio('data:audio/wav;base64,aGVsbG8=','http://localhost',fetcher({...audio,inputTrace:{...audio.inputTrace,status:'segments_available'}})));
+await assert.rejects(callLocalAudio('data:audio/wav;base64,aGVsbG8=','http://localhost',fetcher({...audio,inputTrace:undefined,segments:[{start_seconds:0,end_seconds:1,raw_bonafide_logit:1,raw_spoof_softmax:.1,padded_samples:64600}]})));
+console.log('Media input identity and legacy-compatible rejection contracts passed');

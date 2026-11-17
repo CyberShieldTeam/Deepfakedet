@@ -1,0 +1,261 @@
+{
+  "scope": "Authored procedural software controls with actual cached Community inference; no genuine/synthetic labels or accuracy measurement",
+  "model": "OwensLab/commfor-model-384",
+  "revision": "6076002bf0d9dd37537f965ee2f06f826c333b61",
+  "startupMs": 4610.990400018636,
+  "memory": {
+    "rssBytes": 499404800,
+    "peakWorkingSetBytes": 538263552
+  },
+  "checks": {
+    "losslessRgbTensorEquality": true,
+    "exifOrientationEquality": true,
+    "opaqueAlphaEquality": true,
+    "transparentHiddenRgbPreserved": true,
+    "corruptStatus": 400,
+    "unsupportedStatus": 415,
+    "tinyStatus": "skipped"
+  },
+  "limitation": "Publisher RGB conversion discards alpha; hidden RGB can influence a classifier even when transparent. No display-composite or authenticity claim follows.",
+  "rows": [
+    {
+      "id": "png_rgb",
+      "sourceSha256": "5b9a8a0a8e39ebee15efed0890c6f8fa8fd2f3b1a8be5ea5b64c05fef3bb5e1b",
+      "inputTrace": {
+        "sourceSha256": "5b9a8a0a8e39ebee15efed0890c6f8fa8fd2f3b1a8be5ea5b64c05fef3bb5e1b",
+        "sourceBytes": 784,
+        "format": "PNG",
+        "originalSize": [
+          320,
+          240
+        ],
+        "orientedSize": [
+          320,
+          240
+        ],
+        "sourceMode": "RGB",
+        "exifOrientationApplied": false,
+        "decodedRgbSha256": "c8977c48f26a225b0c604468ea3ee668bd8c856109b7bb087794434bf22643ac",
+        "conversion": "Pillow EXIF transpose then RGB; alpha is discarded, not a display-background composite",
+        "tensor": {
+          "sha256": "d25afc1618a7e37fac5c2a7d5dca8a95dc84a3fa5762344059cfcc9b91798e62",
+          "shape": [
+            1,
+            3,
+            384,
+            384
+          ],
+          "dtype": "torch.float32"
+        }
+      },
+      "rawUncalibratedScore": 0.005229,
+      "classification": "INCONCLUSIVE",
+      "processingMs": 141
+    },
+    {
+      "id": "webp_lossless",
+      "sourceSha256": "7e4f8aeb85a698663d564916565c21b04911edb4929eaaaedd07023b6fe41356",
+      "inputTrace": {
+        "sourceSha256": "7e4f8aeb85a698663d564916565c21b04911edb4929eaaaedd07023b6fe41356",
+        "sourceBytes": 82,
+        "format": "WEBP",
+        "originalSize": [
+          320,
+          240
+        ],
+        "orientedSize": [
+          320,
+          240
+        ],
+        "sourceMode": "RGB",
+        "exifOrientationApplied": false,
+        "decodedRgbSha256": "c8977c48f26a225b0c604468ea3ee668bd8c856109b7bb087794434bf22643ac",
+        "conversion": "Pillow EXIF transpose then RGB; alpha is discarded, not a display-background composite",
+        "tensor": {
+          "sha256": "d25afc1618a7e37fac5c2a7d5dca8a95dc84a3fa5762344059cfcc9b91798e62",
+          "shape": [
+            1,
+            3,
+            384,
+            384
+          ],
+          "dtype": "torch.float32"
+        }
+      },
+      "rawUncalibratedScore": 0.005229,
+      "classification": "INCONCLUSIVE",
+      "processingMs": 110
+    },
+    {
+      "id": "jpeg95",
+      "sourceSha256": "8f564ecec0a7ee43af1ad9d210b48908aa0c3a2879dc5496026384faa95fc27a",
+      "inputTrace": {
+        "sourceSha256": "8f564ecec0a7ee43af1ad9d210b48908aa0c3a2879dc5496026384faa95fc27a",
+        "sourceBytes": 7757,
+        "format": "JPEG",
+        "originalSize": [
+          320,
+          240
+        ],
+        "orientedSize": [
+          320,
+          240
+        ],
+        "sourceMode": "RGB",
+        "exifOrientationApplied": false,
+        "decodedRgbSha256": "89c1164d5a4fb5b6ad4d2d0c76cd1d72db797064af4b85995aa9eecfb7041c4c",
+        "conversion": "Pillow EXIF transpose then RGB; alpha is discarded, not a display-background composite",
+        "tensor": {
+          "sha256": "d70c3520e5acebf66705873ac8afed9a8fa52e85f263e69381d7797a289e8da1",
+          "shape": [
+            1,
+            3,
+            384,
+            384
+          ],
+          "dtype": "torch.float32"
+        }
+      },
+      "rawUncalibratedScore": 0.419417,
+      "classification": "INCONCLUSIVE",
+      "processingMs": 87
+    },
+    {
+      "id": "exif_png",
+      "sourceSha256": "49386e790bed73de3610ab3f1b7b9e8a1d932ffb44f50b50afdc9cbf2921f3ac",
+      "inputTrace": {
+        "sourceSha256": "49386e790bed73de3610ab3f1b7b9e8a1d932ffb44f50b50afdc9cbf2921f3ac",
+        "sourceBytes": 971,
+        "format": "PNG",
+        "originalSize": [
+          240,
+          320
+        ],
+        "orientedSize": [
+          320,
+          240
+        ],
+        "sourceMode": "RGB",
+        "exifOrientationApplied": true,
+        "decodedRgbSha256": "c8977c48f26a225b0c604468ea3ee668bd8c856109b7bb087794434bf22643ac",
+        "conversion": "Pillow EXIF transpose then RGB; alpha is discarded, not a display-background composite",
+        "tensor": {
+          "sha256": "d25afc1618a7e37fac5c2a7d5dca8a95dc84a3fa5762344059cfcc9b91798e62",
+          "shape": [
+            1,
+            3,
+            384,
+            384
+          ],
+          "dtype": "torch.float32"
+        }
+      },
+      "rawUncalibratedScore": 0.005229,
+      "classification": "INCONCLUSIVE",
+      "processingMs": 87
+    },
+    {
+      "id": "rgba_opaque",
+      "sourceSha256": "f1691068e4f5408df29eb1195509ebdcdec6f9b61786be0c709365036471a005",
+      "inputTrace": {
+        "sourceSha256": "f1691068e4f5408df29eb1195509ebdcdec6f9b61786be0c709365036471a005",
+        "sourceBytes": 878,
+        "format": "PNG",
+        "originalSize": [
+          320,
+          240
+        ],
+        "orientedSize": [
+          320,
+          240
+        ],
+        "sourceMode": "RGBA",
+        "exifOrientationApplied": false,
+        "decodedRgbSha256": "c8977c48f26a225b0c604468ea3ee668bd8c856109b7bb087794434bf22643ac",
+        "conversion": "Pillow EXIF transpose then RGB; alpha is discarded, not a display-background composite",
+        "tensor": {
+          "sha256": "d25afc1618a7e37fac5c2a7d5dca8a95dc84a3fa5762344059cfcc9b91798e62",
+          "shape": [
+            1,
+            3,
+            384,
+            384
+          ],
+          "dtype": "torch.float32"
+        }
+      },
+      "rawUncalibratedScore": 0.005229,
+      "classification": "INCONCLUSIVE",
+      "processingMs": 87
+    },
+    {
+      "id": "rgba_transparent",
+      "sourceSha256": "04da182f4a9289eb74c8f2e239aef719aad3f038ff8c1b768bcf61222e23effd",
+      "inputTrace": {
+        "sourceSha256": "04da182f4a9289eb74c8f2e239aef719aad3f038ff8c1b768bcf61222e23effd",
+        "sourceBytes": 876,
+        "format": "PNG",
+        "originalSize": [
+          320,
+          240
+        ],
+        "orientedSize": [
+          320,
+          240
+        ],
+        "sourceMode": "RGBA",
+        "exifOrientationApplied": false,
+        "decodedRgbSha256": "c8977c48f26a225b0c604468ea3ee668bd8c856109b7bb087794434bf22643ac",
+        "conversion": "Pillow EXIF transpose then RGB; alpha is discarded, not a display-background composite",
+        "tensor": {
+          "sha256": "d25afc1618a7e37fac5c2a7d5dca8a95dc84a3fa5762344059cfcc9b91798e62",
+          "shape": [
+            1,
+            3,
+            384,
+            384
+          ],
+          "dtype": "torch.float32"
+        }
+      },
+      "rawUncalibratedScore": 0.005229,
+      "classification": "INCONCLUSIVE",
+      "processingMs": 87
+    },
+    {
+      "id": "resized",
+      "sourceSha256": "1bc00490e39125618d590a5daf4fe84b68791828c974513a41e902a9865747ab",
+      "inputTrace": {
+        "sourceSha256": "1bc00490e39125618d590a5daf4fe84b68791828c974513a41e902a9865747ab",
+        "sourceBytes": 2042,
+        "format": "PNG",
+        "originalSize": [
+          640,
+          480
+        ],
+        "orientedSize": [
+          640,
+          480
+        ],
+        "sourceMode": "RGB",
+        "exifOrientationApplied": false,
+        "decodedRgbSha256": "abf777950d934bb30354e5941b474b3d1e64362e2335f6fd3a8dc985a0d593eb",
+        "conversion": "Pillow EXIF transpose then RGB; alpha is discarded, not a display-background composite",
+        "tensor": {
+          "sha256": "a5a2ef677a3f7aa6821c933c2c681102bc3ef11a62d62051edf7c2613159238b",
+          "shape": [
+            1,
+            3,
+            384,
+            384
+          ],
+          "dtype": "torch.float32"
+        }
+      },
+      "rawUncalibratedScore": 0.005005,
+      "classification": "INCONCLUSIVE",
+      "processingMs": 104
+    }
+  ],
+  "result": "passed"
+}

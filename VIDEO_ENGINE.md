@@ -1,5 +1,15 @@
 # Experimental video frame screening
 
+## Engine 1 supplement — 2026-11-17
+
+Original video→decoded JPEG frame→extracted WAV→AASIST input identities now remain
+traceable through authenticated API, stored evidence, Engine4 and rendered reports.
+Actual browser procedural checks include speech-bearing video, no audio, tone and
+scene transitions; they are not genuine/manipulated accuracy tests. No trained video
+model or score fusion promoted. [Video research and blockers](docs/ENGINE1_VIDEO_EVALUATION.md)
+records SBI/FTCN licensing/runtime/data limitations; independent video accuracy remains
+unavailable. Existing thresholds, bounds, temporal sampling and historical results retained.
+
 Status: Phase 2c partial implementation. This path supplies timestamped local image evidence for a video timeline. It does not produce a local video authenticity verdict.
 
 ## Processing path

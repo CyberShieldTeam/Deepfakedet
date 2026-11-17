@@ -1,3 +1,5 @@
 # Frozen evaluation byte identities must survive Windows/Linux checkouts.
 test/fixtures/claims/*.json text eol=lf
 reports/engine2_*.json text eol=lf
+test/fixtures/engine1_*.json text eol=lf
+reports/engine1_*.json text eol=lf

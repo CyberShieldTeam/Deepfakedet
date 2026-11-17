@@ -1,0 +1,19 @@
+{
+  "version": "engine1-image-external-v1",
+  "dataset": "OwensLab/CommunityForensics-Eval",
+  "revision": "7d4a74a88d2cac93b513c0853bf92c260eaceea0",
+  "seed": "veritas-engine1-image-v1",
+  "roles": {"development": {"genuine": 20, "synthetic": 20}, "held_out": {"genuine": 20, "synthetic": 20}},
+  "eligibility": "Pinned downloaded shard pool only; test split; explicit NSFW False; genuine only real_source=coco, excluding known LAION training-distribution overlap; synthetic from available declared generators; exact prompt, source filename, encoded and decoded image duplicates excluded across selected examples.",
+  "selection": "Hash order, per-generator round robin for synthetic, choose before any inference. Source lineage/identity and backbone overlap remain incomplete; no assertion of full source independence.",
+  "variants": ["original", "matched_square256_jpeg95"],
+  "matchedVariant": "EXIF transpose/RGB; centered largest square; Lanczos to 256x256; JPEG quality95 subsampling2. Named offline sensitivity experiment, not production preprocessing; original bytes retained. Does not remove prior compression/acquisition history.",
+  "models": ["community", "dima", "sdxl"],
+  "diagnosticThreshold": 0.5,
+  "noFitting": true,
+  "authoritativePromotion": false,
+  "reason": "Source/identity/training independence unresolved; small size-limited shard sample and inherited encoding confounds; previous rejection/quarantine preserved even if this sample performs well.",
+  "limits": {"sourceBytes": 10485760, "sourcePixels": 24000000, "minimumFreeGiB": 2, "modelBatch": 1, "cpuThreads": 4, "processDeadlineSeconds": 600},
+  "metrics": ["accuracy", "precision", "recall", "f1", "auroc", "false_positive_rate", "false_negative_rate", "confusion_matrix", "per_generator", "per_source", "latency", "peak_memory"],
+  "missingAnnotations": "Semantic category and face/manipulation truth labels not supplied; do not invent them. Multiple derivations of one source are paired observations, not independent samples."
+}

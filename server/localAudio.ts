@@ -1,6 +1,9 @@
 import type { ForensicAnalysisResult } from '../src/types';
+import {createHash} from 'node:crypto';
+import {audioTraceSchema} from './mediaTrace';
 
 export interface LocalAudioResponse {
+  inputTrace?:import('../src/mediaTraceTypes').AudioInputTrace;
   classification: 'INCONCLUSIVE';
   model: string;
   revision: string;
@@ -8,7 +11,7 @@ export interface LocalAudioResponse {
   sample_rate_input: number;
   sample_rate_model: 16000;
   duration_seconds: number;
-  segments: { start_seconds: number; end_seconds: number; raw_bonafide_logit: number; raw_spoof_softmax: number }[];
+  segments: { start_seconds: number; end_seconds: number; raw_bonafide_logit: number; raw_spoof_softmax: number;model_input_sha256?:string;padded_samples?:number }[];
   processing_ms: number;
   explanation: string;
 }
@@ -22,6 +25,7 @@ export async function callLocalAudio(mediaData: string, endpoint: string, fetche
   });
   if (!response.ok) throw new Error(`Local audio service returned HTTP ${response.status}`);
   const value = await response.json() as LocalAudioResponse;
+  if(value.inputTrace&&(!audioTraceSchema.safeParse(value.inputTrace).success||value.inputTrace.sourceSha256!==createHash('sha256').update(Buffer.from(match[1],'base64')).digest('hex')||(value.inputTrace.status==='segments_available')!==(value.segments?.length>0)))throw new Error('Invalid or mismatched audio input identity');
   if (value.classification !== 'INCONCLUSIVE' || value.scope !== 'speech_anti_spoofing' ||
       value.model !== 'clovaai/aasist' || !value.revision || value.sample_rate_model !== 16000 ||
       !Number.isFinite(value.sample_rate_input) || value.sample_rate_input < 8000 ||
@@ -30,7 +34,9 @@ export async function callLocalAudio(mediaData: string, endpoint: string, fetche
       value.segments.length > 15 || value.segments.some(s => !Number.isFinite(s.start_seconds) ||
         !Number.isFinite(s.end_seconds) || s.start_seconds < 0 || s.end_seconds <= s.start_seconds ||
         s.end_seconds > value.duration_seconds + 0.01 || !Number.isFinite(s.raw_bonafide_logit) ||
-        !Number.isFinite(s.raw_spoof_softmax) || s.raw_spoof_softmax < 0 || s.raw_spoof_softmax > 1)) {
+        !Number.isFinite(s.raw_spoof_softmax) || s.raw_spoof_softmax < 0 || s.raw_spoof_softmax > 1 ||
+        (s.model_input_sha256!==undefined&&!/^[a-f0-9]{64}$/.test(s.model_input_sha256)) ||
+        (s.padded_samples!==undefined&&(!Number.isInteger(s.padded_samples)||s.padded_samples<0||s.padded_samples>48600)))) {
     throw new Error('Invalid local audio model response');
   }
   return value;
@@ -41,7 +47,7 @@ export function localAudioResult(raw: LocalAudioResponse, fileName: string, meas
     modality: 'audio', fileName, engine: 'local_aasist',
     engineNote: `${raw.model}@${raw.revision.slice(0, 12)}; speech anti-spoofing only. Raw per-segment scores are uncalibrated and do not determine authenticity.`,
     authenticity: 'inconclusive', confidenceScore: 0, aiGeneratedProbability: null,
-    headlineSummary: 'AASIST segment scores are available, but audio authenticity is undetermined.',
+    headlineSummary: raw.segments.length?'AASIST segment scores are available, but audio authenticity is undetermined.':'No usable AASIST windows; audio authenticity is undetermined.',
     detailedFindings: [`AASIST scored ${raw.segments.length} audio segment(s).`, ...signalFindings.map(s => `[Browser signal] ${s}`)],
     limitations: ['AASIST was trained for speech anti-spoofing; it does not detect arbitrary synthetic sounds.',
       'Raw segment softmax values are not calibrated probabilities or a verdict.',

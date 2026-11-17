@@ -1,4 +1,6 @@
 import type { ForensicAnalysisResult } from '../src/types';
+import {createHash} from 'node:crypto';
+import {imageTraceSchema,audioTraceSchema} from './mediaTrace';
 import { callLocalImage, type LocalImageResponse } from './localImage';
 import type { LocalAudioResponse } from './localAudio';
 import { computeFaceContinuity, type FaceContinuity } from './videoFaces';
@@ -20,6 +22,7 @@ export interface TemporalMeasurement {
   validPixelFraction?: number;
 }
 export interface VideoAudioTrack {
+  sourceVideoSha256?:string;extractedAudioSha256?:string;
   status: 'analyzed' | 'no_audio' | 'model_unavailable' | 'extraction_failed';
   note: string;
   truncated: boolean;
@@ -65,6 +68,7 @@ export function validateTemporalDiagnostics(d:TemporalDiagnostics):boolean {
       b.width>0 && b.height>0 && b.x+b.width<=r.analysisWidth && b.y+b.height<=r.analysisHeight && b.residual<=255));
 }
 export interface LocalVideoEvidence {
+  sourceSha256?:string;
   scope: 'sampled_video_frames' | 'server_decoded_frames';
   frames: { timestampSeconds: number; image: LocalImageResponse; quality?: FrameQuality; temporal?: TemporalMeasurement }[];
   samplingNote: string;
@@ -84,6 +88,10 @@ export async function callLocalVideo(mediaData: string, endpoint: string, fetche
   });
   if (!response.ok) throw new Error(`Local video service returned HTTP ${response.status}`);
   const value = await response.json() as LocalVideoEvidence;
+  if(value.sourceSha256&&value.sourceSha256!==createHash('sha256').update(Buffer.from(match[1],'base64')).digest('hex'))throw new Error('Mismatched original-video identity');
+  if(value.audioTrack?.sourceVideoSha256&&value.audioTrack.sourceVideoSha256!==createHash('sha256').update(Buffer.from(match[1],'base64')).digest('hex'))throw new Error('Mismatched audio-track parent identity');
+  if(value.frames?.some(f=>f.image?.inputTrace&&!imageTraceSchema.safeParse(f.image.inputTrace).success))throw new Error('Invalid decoded-frame input identity');
+  if(value.audioTrack?.evidence?.inputTrace&&(!audioTraceSchema.safeParse(value.audioTrack.evidence.inputTrace).success||value.audioTrack.extractedAudioSha256!==value.audioTrack.evidence.inputTrace.sourceSha256))throw new Error('Invalid extracted-audio identity');
   if(value.temporalDiagnostics && !validateTemporalDiagnostics(value.temporalDiagnostics))
     throw new Error('Invalid bounded temporal diagnostics');
   if (value.scope !== 'server_decoded_frames' || !Array.isArray(value.frames) ||

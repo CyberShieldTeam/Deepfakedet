@@ -1,0 +1,16 @@
+{
+  "version": "engine1-aasist-external-v1",
+  "sources": ["LJSpeech 1.1 official partial stream", "WaveFake Zenodo 5642694 official ZIP member range requests"],
+  "selection": "Hash-order first 48 matched streamed genuine utterances; choose 12 development and 12 held-out utterances, no shared utterance IDs. Pair development genuine with MelGAN, held-out genuine with WaveGlow. Selection frozen before AASIST scoring.",
+  "seed": "veritas-aasist-external-v1",
+  "roles": {"development": {"genuine": 12, "synthetic": 12}, "held_out": {"genuine": 12, "synthetic": 12}},
+  "generatorByRole": {"development": "ljspeech_melgan", "held_out": "ljspeech_waveglow"},
+  "variants": ["original", "mp3_64k_16khz"],
+  "diagnosticThreshold": 0.5,
+  "score": "Raw class-0 spoof softmax, uncalibrated; class1 bona-fide logit also retained. Fixed diagnostic argmax boundary only, no deployment threshold.",
+  "recordingResearchPolicy": "Duration-weighted mean of scored non-overlapping segment softmax, using unpadded duration. If no usable segments, retain explicit abstention; never a production recording verdict.",
+  "eer": "Descriptive ROC equal-error crossing with linear interpolation on each scored sample; not a deployable held-out-derived operating threshold.",
+  "authoritativePromotion": false,
+  "limitations": ["One public-domain English voice, shared speaker/book/original source recordings across roles; not speaker/source-independent population validation.", "Utterance and sampled generator-disjoint roles do not prove absence from AASIST training or independence of synthesis architectures.", "Matched MP3 is a paired robustness transformation, not an additional independent recording.", "No voice-conversion, Hindi/Telugu, music, environmental-audio or reliable speech-activity validation."],
+  "bounds": {"recordings": 48, "sourceBytesEach": 2097152, "sampleRate": 16000, "windowSamples": 64600, "minimumFreeGiB": 1, "cpuThreads": 4, "processDeadlineSeconds": 600}
+}

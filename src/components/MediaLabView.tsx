@@ -35,6 +35,7 @@ import {
 import { Details, PageHeader, plainMedia, Term, VerdictBanner } from "./plain";
 import type { AttachFn } from "../App";
 import {AnalysisStatus} from './AnalysisStatus';
+import {mediaModelDetails} from '../mediaModelDetails';
 
 const ACCEPT = ".jpg,.jpeg,.png,.webp,.mp4,.mov,.webm,.mp3,.wav,.m4a";
 const modalityOf = (f: File): "image" | "video" | "audio" | null => {
@@ -62,6 +63,14 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (second
       </div>
       <VerdictBanner {...plainMedia(r)} />
       <AnalysisStatus analysis={r.analysis}/>
+      {(r.localImage||r.localAudio||r.localVideo) && <Details title="Research model and input details">
+        <p>AI generation, manipulation, provenance and factual accuracy are separate questions. No validated media authenticity conclusion is available.</p>
+        {[r.localImage,r.localImage?.face_manipulation,r.localAudio,...(r.localVideo?.frames.flatMap(f=>[f.image,f.image.face_manipulation])??[]),r.localVideo?.audioTrack?.evidence].filter(Boolean).filter((m,i,a)=>a.findIndex(x=>x?.model===m?.model)===i).map(m=>{const d=mediaModelDetails[m!.model];return <div key={m!.model} className="mt-2 break-all"><p>{m!.model} · {m!.revision}</p>{d&&<><p>{d.license} · {d.score}</p><p>{d.status}</p><a href={d.url} target="_blank" rel="noreferrer" className="text-cyan-300 underline">Official model documentation</a></>}</div>;})}
+        {r.localImage?.inputTrace&&<><p className="break-all">Received image SHA-256: {r.localImage.inputTrace.sourceSha256}</p><p className="break-all">Model tensor SHA-256: {r.localImage.inputTrace.tensor?.sha256??'No model tensor produced'}</p><p>{r.localImage.inputTrace.conversion}</p></>}
+        {r.localAudio?.inputTrace&&<><p>Audio decoded successfully; {r.localAudio.inputTrace.status.replaceAll('_',' ')}. Speech presence: not verified.</p><p className="break-all">Received audio SHA-256: {r.localAudio.inputTrace.sourceSha256}</p><p>{r.localAudio.inputTrace.skippedWindows.length} window(s) skipped by existing duration/silence rules.</p></>}
+        {r.localVideo?.sourceSha256&&<p className="break-all">Original video SHA-256: {r.localVideo.sourceSha256}</p>}
+        <p>Documentation links identify the model; they are not evidence about this upload. Alpha is discarded during publisher RGB conversion; hidden RGB may affect scores.</p>
+      </Details>}
       {r.provenance?.declaresAIGenerated && (
         <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-2.5 text-sm text-amber-200">
           Unverified metadata hints at AI generation. This is not cryptographically verified C2PA
@@ -121,6 +130,7 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (second
                 : "Whole-image classifier unavailable"}
             </p>
             <p>{r.localImage.face_boxes.length} unverified YuNet face candidate(s).</p>
+            <a className="text-cyan-300 underline" href="https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet" target="_blank" rel="noreferrer">YuNet 2023mar documentation · MIT · face-region detection only</a>
             {r.localImage.face_manipulation && <div>
               <p>Face classifier: {r.localImage.face_manipulation.status.replaceAll("_", " ")}</p>
               {r.localImage.face_manipulation.faces.map(face => <p key={face.face_index}>
@@ -135,9 +145,9 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (second
       {r.localAudio && (
         <Card title="Experimental AASIST evidence">
           <div className="space-y-1 text-xs text-slate-400">
-            <p>Model executed: {r.localAudio.model} · revision {r.localAudio.revision}</p>
+            <p>Model loaded: {r.localAudio.model} · revision {r.localAudio.revision}. {r.localAudio.segments.length?'Segment inference executed.':'No usable windows; no segment inference executed.'}</p>
             <a className="text-cyan-300 underline" href="https://github.com/clovaai/aasist" target="_blank" rel="noreferrer">Official AASIST documentation</a>
-            {r.localAudio.segments.slice(0, 8).map((segment, index) => (
+            {r.localAudio.segments.map((segment, index) => (
               <div key={index} className="font-mono">
                 {segment.start_seconds.toFixed(1)}–{segment.end_seconds.toFixed(1)} s · raw spoof output {segment.raw_spoof_softmax.toFixed(3)}
               </div>
@@ -159,6 +169,7 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (second
               </div>
             ))}
             {r.localVideo.audioTrack && <p>Video audio: {r.localVideo.audioTrack.status.replaceAll("_", " ")}. {r.localVideo.audioTrack.note}</p>}
+            {r.localVideo.audioTrack?.evidence?.segments.map((s,i)=><p key={i}>Audio {s.start_seconds.toFixed(2)}–{s.end_seconds.toFixed(2)} s · raw uncalibrated spoof output {s.raw_spoof_softmax.toFixed(3)}. Speech presence not verified.</p>)}
             <p className="text-amber-300">Frame and audio outputs remain separate and do not form a video verdict.</p>
           </div>
         </Card>

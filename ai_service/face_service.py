@@ -16,12 +16,16 @@ def load_model():
         return
     try:
         import torch
+        from ai_service.media_model_registry import cached_snapshot
+        from ai_service.media_input_trace import require_headroom
+        require_headroom(2)
+        source=cached_snapshot('face',MODEL_PATH)
         from transformers import AutoImageProcessor, AutoModelForImageClassification
         loaded = AutoModelForImageClassification.from_pretrained(
-            MODEL_PATH or MODEL_ID, revision=None if MODEL_PATH else REVISION, use_safetensors=True, trust_remote_code=False).eval()
+            source,local_files_only=True,use_safetensors=True, trust_remote_code=False).eval()
         if loaded.config.id2label != {0: "Fake", 1: "Real"}:
             raise ValueError("Unexpected face checkpoint class mapping")
-        processor = AutoImageProcessor.from_pretrained(MODEL_PATH or MODEL_ID, revision=None if MODEL_PATH else REVISION, trust_remote_code=False, use_fast=False)
+        processor = AutoImageProcessor.from_pretrained(source,local_files_only=True,trust_remote_code=False,use_fast=False)
         torch.set_num_threads(min(torch.get_num_threads(), 4))
         model, torch_module, reason = loaded, torch, ""
     except Exception as error:

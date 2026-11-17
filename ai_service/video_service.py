@@ -2,6 +2,7 @@
 import base64
 import binascii
 import math
+import hashlib
 import subprocess
 import tempfile
 from pathlib import Path
@@ -152,6 +153,12 @@ def extract_audio_track(raw: bytes, video_duration: float):
 
 
 def screen_video_audio(raw: bytes, video_duration: float):
+    result=_screen_video_audio(raw,video_duration)
+    result['sourceVideoSha256']=hashlib.sha256(raw).hexdigest()
+    return result
+
+
+def _screen_video_audio(raw: bytes, video_duration: float):
     try:
         wav, status, note = extract_audio_track(raw, video_duration)
     except Exception:
@@ -162,14 +169,17 @@ def screen_video_audio(raw: bytes, video_duration: float):
     from ai_service import audio_service
     if audio_service.model is None or audio_service.torch_module is None:
         return {"status": "model_unavailable", "note": "Audio was extracted, but AASIST is unavailable.",
+                "extractedAudioSha256":hashlib.sha256(wav).hexdigest(),
                 "truncated": video_duration > MAX_AUDIO_SECONDS}
     try:
         evidence = audio_service.analyze_audio(audio_service.AudioRequest(
             audio_base64=base64.b64encode(wav).decode("ascii")))
     except Exception:
         return {"status": "extraction_failed", "note": "Extracted audio could not be screened by AASIST.",
+                "extractedAudioSha256":hashlib.sha256(wav).hexdigest(),
                 "truncated": video_duration > MAX_AUDIO_SECONDS}
     return {"status": "analyzed", "note": note + " AASIST scores are raw and uncalibrated; speech presence was not verified.",
+            "extractedAudioSha256":hashlib.sha256(wav).hexdigest(),
             "truncated": video_duration > MAX_AUDIO_SECONDS, "evidence": evidence}
 
 
@@ -190,7 +200,7 @@ def analyze_video(request: VideoRequest):
     frames = [{"timestampSeconds": timestamp, "quality": quality, "temporal": temporal,
                "image": image_app.analyze_image(image_app.ImageRequest(image_base64=jpg))}
               for timestamp, jpg, quality, temporal in samples]
-    return {"scope": "server_decoded_frames", "frames": frames, "temporalDiagnostics": temporal_diagnostics,
+    return {"scope": "server_decoded_frames", "sourceSha256":hashlib.sha256(raw).hexdigest(),"frames": frames, "temporalDiagnostics": temporal_diagnostics,
             "samplingNote": "Up to six JPEG frames chosen from nearby original-video positions; adjacent originals provide experimental Farneback motion measurements, not a manipulation verdict.",
             "videoMetadata": {"durationSeconds": round(duration, 3), "width": width, "height": height},
             "audioTrack": screen_video_audio(raw, duration)}

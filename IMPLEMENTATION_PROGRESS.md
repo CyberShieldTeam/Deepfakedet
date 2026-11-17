@@ -1,5 +1,29 @@
 # VERITAS AI implementation progress
 
+## Engine 1 multimodal evaluation and evidence continuity — 2026-11-17
+
+Starting clean/synchronized0a8fb07 on codex/integrate-figma-upgrade. User-approved bounded
+external image/audio acquisition completed outside Git; no model weights or reserved
+Mirage data downloaded/opened. Three cached image models actually compared on80sources
+with a frozen40-source held-out split and paired matched-format experiment. Community
+95% original/87.5% matched accuracy does not meet defensible validation; Dima/SDXL high
+false positives/poor domain transfer retained. AASIST held-out12/12genuine flagged at
+the unchanged diagnostic threshold; no promotion, recording verdict or threshold tuning.
+
+Implemented exact input/tensor/audio/video-derived hashes, pinned offline cache loading,
+memory admission, busy rejection/recovery, preserved face evidence on failed image
+inference, explicit zero-window audio status and model-source/evaluation details in UI
+and reports. Engine4 retains source-linked raw observations without new verdict fusion.
+Normal localhost actual-input image/audio checks passed without changing operator cases;
+isolated authenticated actual-input browser matrix, persistence, graph and rendered
+report parity passed. Trained video evaluation remains blocked on suitable licensed data,
+verified checkpoint and compatible separate runtime; procedural clips are software tests.
+
+Full measurements and remaining limits: [Engine1 verification](docs/ENGINE1_FINAL_VERIFICATION.md),
+[image](docs/ENGINE1_IMAGE_EVALUATION.md), [audio](docs/ENGINE1_AUDIO_EVALUATION.md),
+[video](docs/ENGINE1_VIDEO_EVALUATION.md), [model/resource comparison](docs/ENGINE1_MODEL_COMPARISON.md).
+Earlier implementation and evaluation history below is preserved.
+
 ## Engine 2 advanced relevance and source-grounded assessment — 2026-11-17
 
 - Started clean at synchronized `4dd8349`, same feature branch. Preserved existing

@@ -35,6 +35,7 @@ jobs:
       - run: npm run build
       - run: npm run test:startup
       - run: npm test
+      - run: npm run test:media-trace
       - run: npm run test:claim-provider
       - run: npm run test:nli
       - run: npm run test:advanced-claims

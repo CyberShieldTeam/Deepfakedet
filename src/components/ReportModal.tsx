@@ -3,6 +3,7 @@ import { Download, Printer, X } from "lucide-react";
 import { fetchReport, Report } from "../services/api";
 import { Button, ErrorBox } from "./ui";
 import {evidenceSummary} from '../evidenceSummary';
+import {mediaModelDetails} from '../mediaModelDetails';
 
 const esc = (s: any) =>
   String(s ?? "").replace(
@@ -117,7 +118,7 @@ ${
             m,
             i,
           ) => `<div class="box"><h3>2.${i + 1} ${esc(m.fileName || m.modality)} <span class="tag">${esc(m.modality)}</span><span class="tag">${esc(engineLabel(m.engine))}</span></h3>
-<p><b>Verdict:</b> ${esc(m.authenticity.replace(/_/g, " "))} · <b>Confidence:</b> ${m.confidenceScore == null ? "not estimated" : esc(m.confidenceScore) + "%"} · <b>Risk:</b> ${esc(m.riskLevel || "—")} · <b>AI-generated probability:</b> ${m.aiGeneratedProbability != null ? m.aiGeneratedProbability + "%" : "not available"}</p>
+<p><b>Verdict:</b> ${esc(m.authenticity.replace(/_/g, " "))} · <b>Confidence:</b> ${m.confidenceScore == null || (m.confidenceScore===0&&m.aiGeneratedProbability==null) ? "not estimated" : esc(m.confidenceScore) + "%"} · <b>Risk:</b> ${esc(m.riskLevel || "—")} · <b>AI-generated probability:</b> ${m.aiGeneratedProbability != null ? m.aiGeneratedProbability + "%" : "not available"}</p>
 <p>${esc(m.headlineSummary)}</p>${m.inference ? `<p><b>Model:</b> ${esc(m.inference.modelId)} @ ${esc(m.inference.version)} · ${esc(m.inference.status)}<br><b>Calibration:</b> ${esc(m.inference.calibration)}<br><b>Training / license:</b> ${esc(m.inference.trainingData)} / ${esc(m.inference.license)}</p>` : ""}<b>Findings</b>${list(m.detailedFindings)}<b>Alternative explanations</b>${list(m.alternativeHypotheses)}${m.sampledFrames?.length ? `<p>Frame evidence: ${m.sampledFrames.map((f) => `${esc(f.timestamp === null ? "time unavailable" : f.timestamp.toFixed(1) + "s")}: ${esc(f.probability === null ? f.status : Math.round(f.probability * 100) + "% model output")}`).join("; ")}</p>` : ""}${m.audioSegments?.length ? `<p>Audio segments: ${m.audioSegments.map((s) => `${esc(s.start)}–${esc(s.end)}s: ${esc(Math.round(s.probability * 100))}% model output`).join("; ")}</p>` : ""}</div>`,
         )
         .join("")
@@ -127,6 +128,7 @@ ${media.filter(m => m.imageDiagnostics).map(m => {
   const d = m.imageDiagnostics!;
   return `<div class="box"><h3>Image provenance: ${esc(m.fileName || "image")}</h3><p>Content Credentials: ${esc(d.c2pa.status)}; SDK validation: ${esc(d.c2pa.validation_state || "not assessed")}; trust policy: ${esc(d.c2pa.trust_policy)}; signer declaration: ${esc(d.c2pa.signer || "not provided")}; AI-use disclosure: ${esc(d.c2pa.ai_disclosure)}.</p><p>${esc(d.c2pa.note)}</p><p>EXIF ${d.metadata.exif_present ? "present (editable)" : "absent"}; high-frequency energy fraction: ${esc(d.signals.high_frequency_energy_fraction ?? "not measured")}; noise residual standard deviation: ${esc(d.signals.noise_residual_std ?? "not measured")}.</p><p>${esc(d.note)}</p></div>`;
 }).join("")}
+${media.filter(m=>m.localImage||m.localAudio||m.localVideo).map(m=>`<div class="box"><h3>Experimental media model evidence: ${esc(m.fileName)}</h3><p>AI generation, manipulation, provenance and factual accuracy are separate questions. No validated media authenticity verdict or fused multimodal confidence.</p>${[m.localImage,m.localAudio,...(m.localVideo?.frames.map(f=>f.image)??[]),m.localVideo?.audioTrack?.evidence].filter(Boolean).filter((x,i,a)=>a.findIndex(y=>y?.model===x?.model)===i).map(x=>{const d=mediaModelDetails[x!.model];return `<p>${esc(x!.model)} @ ${esc(x!.revision)}${d?` · ${esc(d.license)} · ${esc(d.score)}<br>${esc(d.status)}<br><a href="${esc(d.url)}">Official model documentation</a>`:''}</p>`;}).join('')}<p>Received and transformed input identities and raw observations (documentation describes tools, not this file):</p><pre>${esc(JSON.stringify({image:m.localImage,audio:m.localAudio,video:m.localVideo},null,2))}</pre></div>`).join('')}
 ${media.filter(m=>m.localVideo?.temporalDiagnostics).map(m=>{
   const d=m.localVideo!.temporalDiagnostics!;
   return `<div class="box"><h3>Temporal observations: ${esc(m.fileName)}</h3><p>${esc(d.status)}; ${esc(d.processedPairs)} sparse comparisons. ${esc(d.note)}</p><ul>${d.intervals.map(i=>`<li>${esc(i.startSeconds)}–${esc(i.endSeconds)} seconds: ${esc(i.observation)}; ${esc(i.regions.length)} localized region(s).</li>`).join('')}</ul><p>Classification: INCONCLUSIVE. No authenticity probability.</p></div>`;

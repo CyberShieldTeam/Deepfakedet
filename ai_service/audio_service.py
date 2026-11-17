@@ -7,6 +7,7 @@ import math
 import os
 import time
 from pathlib import Path
+from threading import Lock
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
@@ -32,6 +33,7 @@ MODEL_CONFIG = {
 model = None
 torch_module = None
 load_error = "Set VERITAS_AUDIO_MODEL_ENABLED=1 to load AASIST"
+inference_lock=Lock()
 
 
 def load_model():
@@ -42,6 +44,8 @@ def load_model():
         load_error = "Set VERITAS_AUDIO_MODEL_ENABLED=1 to load AASIST"
         return
     try:
+        from ai_service.media_input_trace import require_headroom
+        require_headroom(1)
         if not WEIGHTS.is_file() or hashlib.sha256(WEIGHTS.read_bytes()).hexdigest() != WEIGHTS_SHA256:
             raise ValueError("AASIST checkpoint missing or checksum mismatch")
         import torch
@@ -95,27 +99,40 @@ def prepare_audio(raw: bytes):
     return mono, sample_rate, duration
 
 
-def make_windows(samples):
+def window_plan(samples):
     """Non-overlapping 4.0375 s windows; repeat-pad the final usable partial window."""
     import numpy as np
     windows = []
+    skipped=[]
     for start in range(0, len(samples), WINDOW_SAMPLES):
         segment = samples[start:start + WINDOW_SAMPLES]
         duration = len(segment) / SAMPLE_RATE
         if duration < MIN_SEGMENT_SECONDS:
+            skipped.append(dict(start_seconds=start/SAMPLE_RATE,end_seconds=(start+len(segment))/SAMPLE_RATE,reason='short_tail'))
             continue
         rms = float(np.sqrt(np.mean(np.square(segment, dtype="float64"))))
         if rms < MIN_RMS:
+            skipped.append(dict(start_seconds=start/SAMPLE_RATE,end_seconds=(start+len(segment))/SAMPLE_RATE,reason='below_rms_silence_gate'))
             continue
         padded = np.tile(segment, math.ceil(WINDOW_SAMPLES / len(segment)))[:WINDOW_SAMPLES]
         windows.append((start / SAMPLE_RATE, (start + len(segment)) / SAMPLE_RATE, padded))
-    return windows
+    return windows,skipped
+
+
+def make_windows(samples):
+    return window_plan(samples)[0]
 
 
 @router.post("/v1/audio/analyze")
 def analyze_audio(request: AudioRequest):
     if model is None or torch_module is None:
         raise HTTPException(503, "AASIST model unavailable")
+    if not inference_lock.acquire(blocking=False):raise HTTPException(429,'Audio inference busy; no prediction produced')
+    try:return _analyze_audio(request)
+    finally:inference_lock.release()
+
+
+def _analyze_audio(request):
     started = time.monotonic()
     try:
         raw = base64.b64decode(request.audio_base64, validate=True)
@@ -124,18 +141,26 @@ def analyze_audio(request: AudioRequest):
     if not raw or len(raw) > MAX_BYTES:
         raise HTTPException(413, "Audio exceeds 12 MB or is empty")
     samples, source_rate, duration = prepare_audio(raw)
-    windows = make_windows(samples)
+    windows,skipped = window_plan(samples)
     segments = []
     for start, end, waveform in windows:
         x = torch_module.from_numpy(waveform.copy()).unsqueeze(0)
         with torch_module.inference_mode():
             logits = model(x)[1][0]
             raw_spoof_softmax = torch_module.softmax(logits, dim=-1)[0].item()
+        if not math.isfinite(raw_spoof_softmax) or not math.isfinite(logits[1].item()):raise HTTPException(502,'Nonfinite AASIST output; no prediction produced')
         segments.append({"start_seconds": round(start, 3), "end_seconds": round(end, 3),
                          "raw_bonafide_logit": round(logits[1].item(), 6),
-                         "raw_spoof_softmax": round(raw_spoof_softmax, 6)})
+                         "raw_spoof_softmax": round(raw_spoof_softmax, 6),
+                         "model_input_sha256":hashlib.sha256(waveform.astype('<f4',copy=False).tobytes()).hexdigest(),
+                         "padded_samples":max(0,WINDOW_SAMPLES-round((end-start)*SAMPLE_RATE))})
     return {"classification": "INCONCLUSIVE", "model": MODEL_ID, "revision": MODEL_REVISION,
             "scope": "speech_anti_spoofing", "sample_rate_input": source_rate,
             "sample_rate_model": SAMPLE_RATE, "duration_seconds": round(duration, 3),
             "segments": segments, "processing_ms": round((time.monotonic() - started) * 1000),
+            "inputTrace":{"sourceSha256":hashlib.sha256(raw).hexdigest(),"decoded":True,
+                          "resampledFloat32Sha256":hashlib.sha256(samples.astype('<f4',copy=False).tobytes()).hexdigest(),
+                          "modelSamples":len(samples),"windowSamples":WINDOW_SAMPLES,"skippedWindows":skipped,
+                          "speechPresence":"not_verified","status":"segments_available" if segments else "no_usable_windows",
+                          "conversion":"libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"},
             "explanation": "Experimental AASIST speech anti-spoof scores; no calibrated verdict. Silence was skipped, but speech presence was not verified."}

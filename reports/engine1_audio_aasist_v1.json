@@ -1,0 +1,4552 @@
+{
+  "scope": "Frozen single-voice English research evaluation; not independent speaker/source population validation, calibrated confidence or production recording verdict",
+  "model": "clovaai/aasist",
+  "revision": "a04c9863f63d44471dde8a6abcb3b082b07cd1d1",
+  "weightsSha256": "51d2d9cf0738172f61e2a384ec50a54a55363240f67c971ed55a92435bc1a1c0",
+  "license": "AASIST MIT; LJSpeech public domain; WaveFake CC BY-SA 4.0 with publisher attribution",
+  "protocol": {
+    "version": "engine1-aasist-external-v1",
+    "sources": [
+      "LJSpeech 1.1 official partial stream",
+      "WaveFake Zenodo 5642694 official ZIP member range requests"
+    ],
+    "selection": "Hash-order first 48 matched streamed genuine utterances; choose 12 development and 12 held-out utterances, no shared utterance IDs. Pair development genuine with MelGAN, held-out genuine with WaveGlow. Selection frozen before AASIST scoring.",
+    "seed": "veritas-aasist-external-v1",
+    "roles": {
+      "development": {
+        "genuine": 12,
+        "synthetic": 12
+      },
+      "held_out": {
+        "genuine": 12,
+        "synthetic": 12
+      }
+    },
+    "generatorByRole": {
+      "development": "ljspeech_melgan",
+      "held_out": "ljspeech_waveglow"
+    },
+    "variants": [
+      "original",
+      "mp3_64k_16khz"
+    ],
+    "diagnosticThreshold": 0.5,
+    "score": "Raw class-0 spoof softmax, uncalibrated; class1 bona-fide logit also retained. Fixed diagnostic argmax boundary only, no deployment threshold.",
+    "recordingResearchPolicy": "Duration-weighted mean of scored non-overlapping segment softmax, using unpadded duration. If no usable segments, retain explicit abstention; never a production recording verdict.",
+    "eer": "Descriptive ROC equal-error crossing with linear interpolation on each scored sample; not a deployable held-out-derived operating threshold.",
+    "authoritativePromotion": false,
+    "limitations": [
+      "One public-domain English voice, shared speaker/book/original source recordings across roles; not speaker/source-independent population validation.",
+      "Utterance and sampled generator-disjoint roles do not prove absence from AASIST training or independence of synthesis architectures.",
+      "Matched MP3 is a paired robustness transformation, not an additional independent recording.",
+      "No voice-conversion, Hindi/Telugu, music, environmental-audio or reliable speech-activity validation."
+    ],
+    "bounds": {
+      "recordings": 48,
+      "sourceBytesEach": 2097152,
+      "sampleRate": 16000,
+      "windowSamples": 64600,
+      "minimumFreeGiB": 1,
+      "cpuThreads": 4,
+      "processDeadlineSeconds": 600
+    }
+  },
+  "manifestSha256": "7a93eb0b845a5c5ce32f0ffbf117324b05635f9a104d2972ab39014f032a1e82",
+  "protocolSha256": "71075b81fdda0c7eb75ff6a28a26c465582a7ef0b66147946c4977a18e426813",
+  "startupMs": 1777.888999960851,
+  "elapsedMs": 32721.166000002995,
+  "memory": {
+    "rssBytes": 557711360,
+    "peakWorkingSetBytes": 558174208
+  },
+  "splits": {
+    "development": {
+      "original": {
+        "recordingResearchPolicy": {
+          "total": 24,
+          "scored": 24,
+          "failed_or_skipped": 0,
+          "genuine": 12,
+          "synthetic": 12,
+          "tp": 12,
+          "fp": 12,
+          "tn": 0,
+          "fn": 0,
+          "false_positive_rate": 1.0,
+          "recall": 1.0,
+          "auroc": 0.4375,
+          "accuracy": 0.5,
+          "precision": 0.5,
+          "f1": 0.6666666666666666,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "actual_genuine": [
+              0,
+              12
+            ],
+            "actual_synthetic": [
+              0,
+              12
+            ]
+          },
+          "ci95_wilson": {
+            "accuracy": [
+              0.3142742581957335,
+              0.6857257418042665
+            ],
+            "recall": [
+              0.7575059933447592,
+              1.0
+            ],
+            "precision": [
+              0.3142742581957335,
+              0.6857257418042665
+            ],
+            "false_positive_rate": [
+              0.7575059933447592,
+              1.0
+            ],
+            "false_negative_rate": [
+              2.7755575615628914e-17,
+              0.24249400665524085
+            ]
+          },
+          "auroc_ci95_group_bootstrap": [
+            0.26024305555555555,
+            0.5972222222222222
+          ],
+          "latency_seconds": {
+            "count": 24,
+            "mean": 0.31825618749523227,
+            "p50": 0.19806669998797588,
+            "p95": 0.5452374999877065
+          },
+          "eerDescriptive": 0.5833333333333334
+        },
+        "segments": {
+          "total": 36,
+          "scored": 36,
+          "failed_or_skipped": 0,
+          "genuine": 18,
+          "synthetic": 18,
+          "tp": 17,
+          "fp": 16,
+          "tn": 2,
+          "fn": 1,
+          "false_positive_rate": 0.8888888888888888,
+          "recall": 0.9444444444444444,
+          "auroc": 0.4691358024691358,
+          "accuracy": 0.5277777777777778,
+          "precision": 0.5151515151515151,
+          "f1": 0.6666666666666666,
+          "false_negative_rate": 0.05555555555555555,
+          "confusion_matrix": {
+            "actual_genuine": [
+              2,
+              16
+            ],
+            "actual_synthetic": [
+              1,
+              17
+            ]
+          },
+          "ci95_wilson": {
+            "accuracy": [
+              0.37005938022987594,
+              0.6801395848482095
+            ],
+            "recall": [
+              0.7424269921812741,
+              0.990124809021697
+            ],
+            "precision": [
+              0.3521837544891414,
+              0.674959578918663
+            ],
+            "false_positive_rate": [
+              0.672002348698212,
+              0.9689804773543876
+            ],
+            "false_negative_rate": [
+              0.009875190978303097,
+              0.25757300781872594
+            ]
+          },
+          "auroc_ci95_group_bootstrap": [
+            0.3129008073817762,
+            0.586556379305818
+          ],
+          "latency_seconds": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null
+          },
+          "eerDescriptive": 0.5555555555555556
+        }
+      },
+      "mp3_64k_16khz": {
+        "recordingResearchPolicy": {
+          "total": 24,
+          "scored": 24,
+          "failed_or_skipped": 0,
+          "genuine": 12,
+          "synthetic": 12,
+          "tp": 12,
+          "fp": 11,
+          "tn": 1,
+          "fn": 0,
+          "false_positive_rate": 0.9166666666666666,
+          "recall": 1.0,
+          "auroc": 0.5069444444444444,
+          "accuracy": 0.5416666666666666,
+          "precision": 0.5217391304347826,
+          "f1": 0.6857142857142857,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "actual_genuine": [
+              1,
+              11
+            ],
+            "actual_synthetic": [
+              0,
+              12
+            ]
+          },
+          "ci95_wilson": {
+            "accuracy": [
+              0.3507486535891948,
+              0.72108666268789
+            ],
+            "recall": [
+              0.7575059933447592,
+              1.0
+            ],
+            "precision": [
+              0.32962737336427406,
+              0.7076284258335335
+            ],
+            "false_positive_rate": [
+              0.646120088858883,
+              0.9851349055950829
+            ],
+            "false_negative_rate": [
+              2.7755575615628914e-17,
+              0.24249400665524085
+            ]
+          },
+          "auroc_ci95_group_bootstrap": [
+            0.3888888888888889,
+            0.6388888888888888
+          ],
+          "latency_seconds": {
+            "count": 24,
+            "mean": 0.28557938749387785,
+            "p50": 0.2693951499823015,
+            "p95": 0.5415752999833785
+          },
+          "eerDescriptive": 0.5
+        },
+        "segments": {
+          "total": 38,
+          "scored": 38,
+          "failed_or_skipped": 0,
+          "genuine": 19,
+          "synthetic": 19,
+          "tp": 17,
+          "fp": 16,
+          "tn": 3,
+          "fn": 2,
+          "false_positive_rate": 0.8421052631578947,
+          "recall": 0.8947368421052632,
+          "auroc": 0.5069252077562327,
+          "accuracy": 0.5263157894736842,
+          "precision": 0.5151515151515151,
+          "f1": 0.6538461538461539,
+          "false_negative_rate": 0.10526315789473684,
+          "confusion_matrix": {
+            "actual_genuine": [
+              3,
+              16
+            ],
+            "actual_synthetic": [
+              2,
+              17
+            ]
+          },
+          "ci95_wilson": {
+            "accuracy": [
+              0.3725897138449667,
+              0.6752097667747392
+            ],
+            "recall": [
+              0.6860591728889099,
+              0.9706414397011299
+            ],
+            "precision": [
+              0.3521837544891414,
+              0.674959578918663
+            ],
+            "false_positive_rate": [
+              0.6243452472967093,
+              0.9447952836146585
+            ],
+            "false_negative_rate": [
+              0.02935856029887013,
+              0.31394082711109006
+            ]
+          },
+          "auroc_ci95_group_bootstrap": [
+            0.41117295706371193,
+            0.6054739583333333
+          ],
+          "latency_seconds": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null
+          },
+          "eerDescriptive": 0.5789473684210527
+        }
+      }
+    },
+    "held_out": {
+      "original": {
+        "recordingResearchPolicy": {
+          "total": 24,
+          "scored": 24,
+          "failed_or_skipped": 0,
+          "genuine": 12,
+          "synthetic": 12,
+          "tp": 12,
+          "fp": 12,
+          "tn": 0,
+          "fn": 0,
+          "false_positive_rate": 1.0,
+          "recall": 1.0,
+          "auroc": 0.6736111111111112,
+          "accuracy": 0.5,
+          "precision": 0.5,
+          "f1": 0.6666666666666666,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "actual_genuine": [
+              0,
+              12
+            ],
+            "actual_synthetic": [
+              0,
+              12
+            ]
+          },
+          "ci95_wilson": {
+            "accuracy": [
+              0.3142742581957335,
+              0.6857257418042665
+            ],
+            "recall": [
+              0.7575059933447592,
+              1.0
+            ],
+            "precision": [
+              0.3142742581957335,
+              0.6857257418042665
+            ],
+            "false_positive_rate": [
+              0.7575059933447592,
+              1.0
+            ],
+            "false_negative_rate": [
+              2.7755575615628914e-17,
+              0.24249400665524085
+            ]
+          },
+          "auroc_ci95_group_bootstrap": [
+            0.5588541666666667,
+            0.8230902777777775
+          ],
+          "latency_seconds": {
+            "count": 24,
+            "mean": 0.3006275750061225,
+            "p50": 0.275847650016658,
+            "p95": 0.5456559999729507
+          },
+          "eerDescriptive": 0.3333333333333333
+        },
+        "segments": {
+          "total": 38,
+          "scored": 38,
+          "failed_or_skipped": 0,
+          "genuine": 19,
+          "synthetic": 19,
+          "tp": 19,
+          "fp": 19,
+          "tn": 0,
+          "fn": 0,
+          "false_positive_rate": 1.0,
+          "recall": 1.0,
+          "auroc": 0.6177285318559557,
+          "accuracy": 0.5,
+          "precision": 0.5,
+          "f1": 0.6666666666666666,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "actual_genuine": [
+              0,
+              19
+            ],
+            "actual_synthetic": [
+              0,
+              19
+            ]
+          },
+          "ci95_wilson": {
+            "accuracy": [
+              0.34849928364395105,
+              0.6515007163560489
+            ],
+            "recall": [
+              0.8318207759473837,
+              1.0
+            ],
+            "precision": [
+              0.34849928364395105,
+              0.6515007163560489
+            ],
+            "false_positive_rate": [
+              0.8318207759473837,
+              1.0
+            ],
+            "false_negative_rate": [
+              0.0,
+              0.16817922405261626
+            ]
+          },
+          "auroc_ci95_group_bootstrap": [
+            0.5229407709775087,
+            0.7242991477636805
+          ],
+          "latency_seconds": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null
+          },
+          "eerDescriptive": 0.3684210526315789
+        }
+      },
+      "mp3_64k_16khz": {
+        "recordingResearchPolicy": {
+          "total": 24,
+          "scored": 24,
+          "failed_or_skipped": 0,
+          "genuine": 12,
+          "synthetic": 12,
+          "tp": 12,
+          "fp": 11,
+          "tn": 1,
+          "fn": 0,
+          "false_positive_rate": 0.9166666666666666,
+          "recall": 1.0,
+          "auroc": 0.5833333333333334,
+          "accuracy": 0.5416666666666666,
+          "precision": 0.5217391304347826,
+          "f1": 0.6857142857142857,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "actual_genuine": [
+              1,
+              11
+            ],
+            "actual_synthetic": [
+              0,
+              12
+            ]
+          },
+          "ci95_wilson": {
+            "accuracy": [
+              0.3507486535891948,
+              0.72108666268789
+            ],
+            "recall": [
+              0.7575059933447592,
+              1.0
+            ],
+            "precision": [
+              0.32962737336427406,
+              0.7076284258335335
+            ],
+            "false_positive_rate": [
+              0.646120088858883,
+              0.9851349055950829
+            ],
+            "false_negative_rate": [
+              2.7755575615628914e-17,
+              0.24249400665524085
+            ]
+          },
+          "auroc_ci95_group_bootstrap": [
+            0.47552083333333334,
+            0.7258680555555553
+          ],
+          "latency_seconds": {
+            "count": 24,
+            "mean": 0.2935961250065399,
+            "p50": 0.2752599499945063,
+            "p95": 0.5329448999837041
+          },
+          "eerDescriptive": 0.4166666666666667
+        },
+        "segments": {
+          "total": 38,
+          "scored": 38,
+          "failed_or_skipped": 0,
+          "genuine": 19,
+          "synthetic": 19,
+          "tp": 18,
+          "fp": 17,
+          "tn": 2,
+          "fn": 1,
+          "false_positive_rate": 0.8947368421052632,
+          "recall": 0.9473684210526315,
+          "auroc": 0.5706371191135734,
+          "accuracy": 0.5263157894736842,
+          "precision": 0.5142857142857142,
+          "f1": 0.6666666666666666,
+          "false_negative_rate": 0.05263157894736842,
+          "confusion_matrix": {
+            "actual_genuine": [
+              2,
+              17
+            ],
+            "actual_synthetic": [
+              1,
+              18
+            ]
+          },
+          "ci95_wilson": {
+            "accuracy": [
+              0.3725897138449667,
+              0.6752097667747392
+            ],
+            "recall": [
+              0.753612688331012,
+              0.9906480059376995
+            ],
+            "precision": [
+              0.35568804595868564,
+              0.6700576399749026
+            ],
+            "false_positive_rate": [
+              0.6860591728889099,
+              0.9706414397011299
+            ],
+            "false_negative_rate": [
+              0.009351994062300362,
+              0.24638731166898786
+            ]
+          },
+          "auroc_ci95_group_bootstrap": [
+            0.4622288580847508,
+            0.6646874999999999
+          ],
+          "latency_seconds": {
+            "count": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null
+          },
+          "eerDescriptive": 0.47368421052631576
+        }
+      }
+    }
+  },
+  "authoritativePromotion": false,
+  "recordingPolicyDeployed": false,
+  "rows": [
+    {
+      "id": "47fc7787ef4d581473b281f7",
+      "group": "b011a5b773be361d8bf75d27176d1ed6a02efcef4d52850db6b4e19fe2569e38",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "311378e98371cfb4cf0c2c2a986a5b4f066bd06481eca4b9258b2b55d74aedeb",
+      "variant": "original",
+      "derivedSha256": "311378e98371cfb4cf0c2c2a986a5b4f066bd06481eca4b9258b2b55d74aedeb",
+      "score": 0.9971689999999999,
+      "seconds": 1.2411987999803387,
+      "scoredDurationSeconds": 4.024,
+      "totalDurationSeconds": 4.024,
+      "inputTrace": {
+        "sourceSha256": "311378e98371cfb4cf0c2c2a986a5b4f066bd06481eca4b9258b2b55d74aedeb",
+        "decoded": true,
+        "resampledFloat32Sha256": "7ff5276846f84987114ebd26c0dd199843670ab3d3d042f598dc79cbf19804a9",
+        "modelSamples": 64387,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.024,
+          "raw_bonafide_logit": -3.002855,
+          "raw_spoof_softmax": 0.997169,
+          "model_input_sha256": "05a0d8aef9fc683a8cf4704eb52ba22452838738489df3595128add74f9a0253",
+          "padded_samples": 213
+        }
+      ]
+    },
+    {
+      "id": "47fc7787ef4d581473b281f7",
+      "group": "b011a5b773be361d8bf75d27176d1ed6a02efcef4d52850db6b4e19fe2569e38",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "311378e98371cfb4cf0c2c2a986a5b4f066bd06481eca4b9258b2b55d74aedeb",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "6c6cbdaa48c78807d941fd69f951225b8c382ffe6e4bc31e21e0d0b15b969470",
+      "score": 0.9933019999999999,
+      "seconds": 0.18784129997948185,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.104,
+      "inputTrace": {
+        "sourceSha256": "6c6cbdaa48c78807d941fd69f951225b8c382ffe6e4bc31e21e0d0b15b969470",
+        "decoded": true,
+        "resampledFloat32Sha256": "7a8455eaf96e0695193e8dced092f9b3a999a8f9d660d3e135322496d8fda4bb",
+        "modelSamples": 65664,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.104,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.564165,
+          "raw_spoof_softmax": 0.993302,
+          "model_input_sha256": "1a8bd7d3579b4686ac56d70ae768c396bc554ffa117777fad86efbf7667aa241",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "fde95a13c3903bed28a7d39c",
+      "group": "b011a5b773be361d8bf75d27176d1ed6a02efcef4d52850db6b4e19fe2569e38",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "d84b570859cd855aae9b553efad01ac5be154293265e84ee3d515e8583067c92",
+      "variant": "original",
+      "derivedSha256": "d84b570859cd855aae9b553efad01ac5be154293265e84ee3d515e8583067c92",
+      "score": 0.9984919999999999,
+      "seconds": 0.19663439999567345,
+      "scoredDurationSeconds": 4.029,
+      "totalDurationSeconds": 4.029,
+      "inputTrace": {
+        "sourceSha256": "d84b570859cd855aae9b553efad01ac5be154293265e84ee3d515e8583067c92",
+        "decoded": true,
+        "resampledFloat32Sha256": "9155f7aa48e2144ca5aefd55c68435080dde2114913bb98da6fd04336a9b9872",
+        "modelSamples": 64459,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.029,
+          "raw_bonafide_logit": -3.329382,
+          "raw_spoof_softmax": 0.998492,
+          "model_input_sha256": "5ebb6b82fce917b0c8d63d64359b3e6b684f4c45a6eea3dce2fdc5ddd363ae78",
+          "padded_samples": 141
+        }
+      ]
+    },
+    {
+      "id": "fde95a13c3903bed28a7d39c",
+      "group": "b011a5b773be361d8bf75d27176d1ed6a02efcef4d52850db6b4e19fe2569e38",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "d84b570859cd855aae9b553efad01ac5be154293265e84ee3d515e8583067c92",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "76f12b95be7dbd154da8e9f7d3f6d5972384ec52f6c79d5621192b8c05a73412",
+      "score": 0.998362,
+      "seconds": 0.1851555000175722,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.104,
+      "inputTrace": {
+        "sourceSha256": "76f12b95be7dbd154da8e9f7d3f6d5972384ec52f6c79d5621192b8c05a73412",
+        "decoded": true,
+        "resampledFloat32Sha256": "67b0b4cf63e3f57f0ff285ac1e875a85b00c2ad850cbb52b3108e45d6416c2a3",
+        "modelSamples": 65664,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.104,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.2856,
+          "raw_spoof_softmax": 0.998362,
+          "model_input_sha256": "5392b138ad781997422b1cc01c1f6a1024b43c5933f3524e2f4153f5cf357b41",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "2113b61607b2b9af7dd64c38",
+      "group": "ef40bfdc12c2edc9ed35bee7fb8747b97e153f27fd3f8d2bada888cfc11902a0",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "4dfff534f12b62a70716cd4782280f385c360087182840df75f4247df08546c6",
+      "variant": "original",
+      "derivedSha256": "4dfff534f12b62a70716cd4782280f385c360087182840df75f4247df08546c6",
+      "score": 0.941767,
+      "seconds": 0.18916120001813397,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.372,
+      "inputTrace": {
+        "sourceSha256": "4dfff534f12b62a70716cd4782280f385c360087182840df75f4247df08546c6",
+        "decoded": true,
+        "resampledFloat32Sha256": "fe281f416293808e0a07ba8df85ab0a2c90a2919934ced3786e12baac353ef39",
+        "modelSamples": 69960,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.3725,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.655078,
+          "raw_spoof_softmax": 0.941767,
+          "model_input_sha256": "6316c1ad40c74b4331da8c343218f12645d57356968c849e51d6b2531e7212d7",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "2113b61607b2b9af7dd64c38",
+      "group": "ef40bfdc12c2edc9ed35bee7fb8747b97e153f27fd3f8d2bada888cfc11902a0",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "4dfff534f12b62a70716cd4782280f385c360087182840df75f4247df08546c6",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "147660bb35fff1032267ed1309064a93ce75c170fbb800a22cc44b76e925bc7a",
+      "score": 0.952196,
+      "seconds": 0.20235669997055084,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.464,
+      "inputTrace": {
+        "sourceSha256": "147660bb35fff1032267ed1309064a93ce75c170fbb800a22cc44b76e925bc7a",
+        "decoded": true,
+        "resampledFloat32Sha256": "6889fa8771e38aa134491037e8cf7c3ff805fb4cf541bb289617fc9960ec9b0e",
+        "modelSamples": 71424,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.464,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.75415,
+          "raw_spoof_softmax": 0.952196,
+          "model_input_sha256": "84b16318ef07000b67c269a18e05b96b37ad45c3040a09c3189f225d4df8c848",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "e5c4d2fb52972a5e23784dd2",
+      "group": "ef40bfdc12c2edc9ed35bee7fb8747b97e153f27fd3f8d2bada888cfc11902a0",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "8a1371c80a4e4e14e53997a353c83a744ba95f56729a5b9a27fc7b9561ffea7c",
+      "variant": "original",
+      "derivedSha256": "8a1371c80a4e4e14e53997a353c83a744ba95f56729a5b9a27fc7b9561ffea7c",
+      "score": 0.9929050000000001,
+      "seconds": 0.1994989999802783,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.377,
+      "inputTrace": {
+        "sourceSha256": "8a1371c80a4e4e14e53997a353c83a744ba95f56729a5b9a27fc7b9561ffea7c",
+        "decoded": true,
+        "resampledFloat32Sha256": "e43503649408e5ef669dacd218b727e96c103445d99a2537cd4c7cd40bd1e407",
+        "modelSamples": 70032,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.377,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.622691,
+          "raw_spoof_softmax": 0.992905,
+          "model_input_sha256": "fcb7440912de2b2a4df2e254b83a8ebc6ab65b644a2682aabc0068ce6a808783",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "e5c4d2fb52972a5e23784dd2",
+      "group": "ef40bfdc12c2edc9ed35bee7fb8747b97e153f27fd3f8d2bada888cfc11902a0",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "8a1371c80a4e4e14e53997a353c83a744ba95f56729a5b9a27fc7b9561ffea7c",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "e58c24772ef6d06472f376b665f40594b0dd7611417542afac86507af17630bb",
+      "score": 0.901521,
+      "seconds": 0.17835020000347868,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.464,
+      "inputTrace": {
+        "sourceSha256": "e58c24772ef6d06472f376b665f40594b0dd7611417542afac86507af17630bb",
+        "decoded": true,
+        "resampledFloat32Sha256": "eff3bb5ba5cc15173eccbe67d5b43a5280acfcd3f513355fdd4e76eebffbff73",
+        "modelSamples": 71424,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.464,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.412132,
+          "raw_spoof_softmax": 0.901521,
+          "model_input_sha256": "e75ce85c839eb4bfbdc2aaf42972ff40affe83d9fc25101bce4df7cd00e9eb05",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "8db34f3e8d358eeefc212bca",
+      "group": "8651fd234872febc3d8666d4f5ba9c1a3d1effba1ebfddedc3bc14a6097f06b8",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "a0a3787d6338afd58ac00c1cad77715cebd964fa732f37dadbf3756a75faf237",
+      "variant": "original",
+      "derivedSha256": "a0a3787d6338afd58ac00c1cad77715cebd964fa732f37dadbf3756a75faf237",
+      "score": 0.9992121449487555,
+      "seconds": 0.3522480999818072,
+      "scoredDurationSeconds": 5.464,
+      "totalDurationSeconds": 5.464,
+      "inputTrace": {
+        "sourceSha256": "a0a3787d6338afd58ac00c1cad77715cebd964fa732f37dadbf3756a75faf237",
+        "decoded": true,
+        "resampledFloat32Sha256": "c9e91d4b69bbfb9ac83cd3c6d39b9c7cab46ad52cd12faa380448a9cd8b62696",
+        "modelSamples": 87421,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.523819,
+          "raw_spoof_softmax": 0.999045,
+          "model_input_sha256": "2e8a4c652963f0ad21226babd85320dc739d8d443c7f6ffd7fffb2c625b5a642",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 5.464,
+          "raw_bonafide_logit": -4.164255,
+          "raw_spoof_softmax": 0.999685,
+          "model_input_sha256": "938d0c507066c0d47a488ff69195115e703062789eb0339edd235006e8933965",
+          "padded_samples": 41779
+        }
+      ]
+    },
+    {
+      "id": "8db34f3e8d358eeefc212bca",
+      "group": "8651fd234872febc3d8666d4f5ba9c1a3d1effba1ebfddedc3bc14a6097f06b8",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "a0a3787d6338afd58ac00c1cad77715cebd964fa732f37dadbf3756a75faf237",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "1594bb374f925a38ee1e0da0eb323bf1864cc10714b3b633c4848ef2be89c67a",
+      "score": 0.99658698015873,
+      "seconds": 0.35916950000682846,
+      "scoredDurationSeconds": 5.544,
+      "totalDurationSeconds": 5.544,
+      "inputTrace": {
+        "sourceSha256": "1594bb374f925a38ee1e0da0eb323bf1864cc10714b3b633c4848ef2be89c67a",
+        "decoded": true,
+        "resampledFloat32Sha256": "0d643f30307a7acb328cae1bc1d682bd49fc43ffe2bc5feda7a9d9512cf82101",
+        "modelSamples": 88704,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.822258,
+          "raw_spoof_softmax": 0.995348,
+          "model_input_sha256": "f05c7aa9f96ea277857a15b406389a0fb7066c4b3dc5f28a47b2f6b60e386d4a",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 5.544,
+          "raw_bonafide_logit": -4.729456,
+          "raw_spoof_softmax": 0.999906,
+          "model_input_sha256": "cb5409fcebcd5fb8ab5ac30440a786bd6998a0243806ceab213c5ebfd6809b32",
+          "padded_samples": 40496
+        }
+      ]
+    },
+    {
+      "id": "60bb1609caf2183674a44fc9",
+      "group": "8651fd234872febc3d8666d4f5ba9c1a3d1effba1ebfddedc3bc14a6097f06b8",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "820ce850d144c20cb801415685ad7b02e3ffcf97c57ca11cb1945535572652ee",
+      "variant": "original",
+      "derivedSha256": "820ce850d144c20cb801415685ad7b02e3ffcf97c57ca11cb1945535572652ee",
+      "score": 0.9950020813825895,
+      "seconds": 0.35041630000341684,
+      "scoredDurationSeconds": 5.468,
+      "totalDurationSeconds": 5.468,
+      "inputTrace": {
+        "sourceSha256": "820ce850d144c20cb801415685ad7b02e3ffcf97c57ca11cb1945535572652ee",
+        "decoded": true,
+        "resampledFloat32Sha256": "4aded40bb17e2f2ff527919c258bf7c395d113a3569e7b79a484a3a710b4d72a",
+        "modelSamples": 87493,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.698911,
+          "raw_spoof_softmax": 0.993273,
+          "model_input_sha256": "066f77d4c2918305759581facc380d29fd892a74d6db9e66d9d6f503f2b2dc39",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 5.468,
+          "raw_bonafide_logit": -4.602998,
+          "raw_spoof_softmax": 0.99988,
+          "model_input_sha256": "1eee073fb8138c50dc0d460b6f7209fc0bece75d4200a56b24a88b4634c1288d",
+          "padded_samples": 41707
+        }
+      ]
+    },
+    {
+      "id": "60bb1609caf2183674a44fc9",
+      "group": "8651fd234872febc3d8666d4f5ba9c1a3d1effba1ebfddedc3bc14a6097f06b8",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "820ce850d144c20cb801415685ad7b02e3ffcf97c57ca11cb1945535572652ee",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "75008c07f3e47ae46346fd26ed3bb74e7fa51bcd8b9bc7a6bf1ccda483863ca6",
+      "score": 0.9963460992063492,
+      "seconds": 0.37764309998601675,
+      "scoredDurationSeconds": 5.544,
+      "totalDurationSeconds": 5.544,
+      "inputTrace": {
+        "sourceSha256": "75008c07f3e47ae46346fd26ed3bb74e7fa51bcd8b9bc7a6bf1ccda483863ca6",
+        "decoded": true,
+        "resampledFloat32Sha256": "548d8a5f9cc42b60986b626a17af576202e0d757982460eb3a008a51ce31d613",
+        "modelSamples": 88704,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.799187,
+          "raw_spoof_softmax": 0.995006,
+          "model_input_sha256": "907d9485436406cb90854d4dcf6f7330ebb4fe43f77563e19deb42b19f7c9d36",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 5.544,
+          "raw_bonafide_logit": -4.91989,
+          "raw_spoof_softmax": 0.999936,
+          "model_input_sha256": "b10d91afd1b8be9a5b20e559d9e61fc518808d357f2d7b1b9736eea43e2fd91c",
+          "padded_samples": 40496
+        }
+      ]
+    },
+    {
+      "id": "0d8427ce62f6e42032a5f201",
+      "group": "73e04e6339b22233b6a70f2214055fef1d27b0d89f5be42365643b305d086c1e",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "c0c9b3e991dd25906eff78c5a735b651271128abcd89e8d1fd10766f2e4389ba",
+      "variant": "original",
+      "derivedSha256": "c0c9b3e991dd25906eff78c5a735b651271128abcd89e8d1fd10766f2e4389ba",
+      "score": 0.7224514855619724,
+      "seconds": 0.3668750000069849,
+      "scoredDurationSeconds": 6.753,
+      "totalDurationSeconds": 6.753,
+      "inputTrace": {
+        "sourceSha256": "c0c9b3e991dd25906eff78c5a735b651271128abcd89e8d1fd10766f2e4389ba",
+        "decoded": true,
+        "resampledFloat32Sha256": "b56422da1a070097564b01825f0dffc0850969ad6ab3863874d52d5d6338f613",
+        "modelSamples": 108041,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -0.497691,
+          "raw_spoof_softmax": 0.539326,
+          "model_input_sha256": "e39cdb809db9917b34821b3f283a7bd753511a07bcb8454f3f67a8ecd8de3fcc",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.753,
+          "raw_bonafide_logit": -2.712742,
+          "raw_spoof_softmax": 0.994645,
+          "model_input_sha256": "57f16082fdee5a5a110930eeff4b84ef13469e9fa95fef98ccaef3cddb44b3d9",
+          "padded_samples": 21159
+        }
+      ]
+    },
+    {
+      "id": "0d8427ce62f6e42032a5f201",
+      "group": "73e04e6339b22233b6a70f2214055fef1d27b0d89f5be42365643b305d086c1e",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "c0c9b3e991dd25906eff78c5a735b651271128abcd89e8d1fd10766f2e4389ba",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "7fc110319dda48045c35180b6e8f9ef3e8fe8a2201d9eb34a9da6608310a6b07",
+      "score": 0.41156629269005846,
+      "seconds": 0.3556957999826409,
+      "scoredDurationSeconds": 6.84,
+      "totalDurationSeconds": 6.84,
+      "inputTrace": {
+        "sourceSha256": "7fc110319dda48045c35180b6e8f9ef3e8fe8a2201d9eb34a9da6608310a6b07",
+        "decoded": true,
+        "resampledFloat32Sha256": "12e43c9dd50f079db710c88a40e8fbad6a51ad099958e30024a7be65471f34ac",
+        "modelSamples": 109440,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": 1.884912,
+          "raw_spoof_softmax": 0.005437,
+          "model_input_sha256": "4480d32552bc1bb82258cff25b6be1a00dbfddc85da056bbe2902c6d06c28303",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.84,
+          "raw_bonafide_logit": -2.990101,
+          "raw_spoof_softmax": 0.996491,
+          "model_input_sha256": "1f85201d81f409c588dc8cbaf7a09807425d468d0ad4a8707543bea62991b832",
+          "padded_samples": 19760
+        }
+      ]
+    },
+    {
+      "id": "75b9d3ff8e1b416d271fef04",
+      "group": "73e04e6339b22233b6a70f2214055fef1d27b0d89f5be42365643b305d086c1e",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "68effb4a6559af02a4f4d809565f95baef6f6094ffd35ee79ceb628ad39ca480",
+      "variant": "original",
+      "derivedSha256": "68effb4a6559af02a4f4d809565f95baef6f6094ffd35ee79ceb628ad39ca480",
+      "score": 0.9749591799615214,
+      "seconds": 0.3646089999820106,
+      "scoredDurationSeconds": 6.757,
+      "totalDurationSeconds": 6.757,
+      "inputTrace": {
+        "sourceSha256": "68effb4a6559af02a4f4d809565f95baef6f6094ffd35ee79ceb628ad39ca480",
+        "decoded": true,
+        "resampledFloat32Sha256": "2bcffadf7e2ae99b30b39ac28146c73743cdb9d0cfe0f1d9ae3e63fb938cdfea",
+        "modelSamples": 108113,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.945515,
+          "raw_spoof_softmax": 0.969807,
+          "model_input_sha256": "a18215f9fe0554dec48df56be1780aea474b7dca0637d83cc3a42a45057b1278",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.757,
+          "raw_bonafide_logit": -2.129319,
+          "raw_spoof_softmax": 0.982606,
+          "model_input_sha256": "00ed2e130c8b7e0285ac2a4b63753125297272984e6d068f8ba4464612cd211c",
+          "padded_samples": 21087
+        }
+      ]
+    },
+    {
+      "id": "75b9d3ff8e1b416d271fef04",
+      "group": "73e04e6339b22233b6a70f2214055fef1d27b0d89f5be42365643b305d086c1e",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "68effb4a6559af02a4f4d809565f95baef6f6094ffd35ee79ceb628ad39ca480",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "07f02ab028dde706b32d71fd9b33b11c0c583f2a2700200f3e814d63dda8218a",
+      "score": 0.6592024288011695,
+      "seconds": 0.34698980004759505,
+      "scoredDurationSeconds": 6.84,
+      "totalDurationSeconds": 6.84,
+      "inputTrace": {
+        "sourceSha256": "07f02ab028dde706b32d71fd9b33b11c0c583f2a2700200f3e814d63dda8218a",
+        "decoded": true,
+        "resampledFloat32Sha256": "003bafb504318dd4ffec1b3d523342375cdc052b76453006d695790390e91ef7",
+        "modelSamples": 109440,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -0.223659,
+          "raw_spoof_softmax": 0.422787,
+          "model_input_sha256": "61bd9b944cda4abd388736d75036120dba2f12396d17eb37c7cc03f98163ccf4",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.84,
+          "raw_bonafide_logit": -4.110476,
+          "raw_spoof_softmax": 0.999698,
+          "model_input_sha256": "2429f6ff16c9ff4ef1a01951c456cf226e2ddfd93d3c1a2a80c467c8e66a0b70",
+          "padded_samples": 19760
+        }
+      ]
+    },
+    {
+      "id": "e6274e7037743c7cffc3082b",
+      "group": "72fd6a405814ffd4a3af5097ab791ea909f335483c308322d717aafa6f6fd762",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "b6101c93629f33647fa9e8bd9ab4e759257f2f541ef4f7f654b9f313140419cc",
+      "variant": "original",
+      "derivedSha256": "b6101c93629f33647fa9e8bd9ab4e759257f2f541ef4f7f654b9f313140419cc",
+      "score": 0.6470143458730159,
+      "seconds": 0.37616619997425005,
+      "scoredDurationSeconds": 6.3,
+      "totalDurationSeconds": 6.3,
+      "inputTrace": {
+        "sourceSha256": "b6101c93629f33647fa9e8bd9ab4e759257f2f541ef4f7f654b9f313140419cc",
+        "decoded": true,
+        "resampledFloat32Sha256": "007b2a7c9672ec49e7491f56f52f32c2e54fc0a958bd2062a5d7fff78b538797",
+        "modelSamples": 100796,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.872586,
+          "raw_spoof_softmax": 0.965403,
+          "model_input_sha256": "bf7297144ce8bba5c96b001a7a836fc668c137823d6ab1a11e4d0c735e8534b0",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.3,
+          "raw_bonafide_logit": 0.739796,
+          "raw_spoof_softmax": 0.079036,
+          "model_input_sha256": "1350cbf15a8f052d0cfe0ca455b473623b2727c77d29b786c2ca868d93227c30",
+          "padded_samples": 28404
+        }
+      ]
+    },
+    {
+      "id": "e6274e7037743c7cffc3082b",
+      "group": "72fd6a405814ffd4a3af5097ab791ea909f335483c308322d717aafa6f6fd762",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "b6101c93629f33647fa9e8bd9ab4e759257f2f541ef4f7f654b9f313140419cc",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "84d13f4886cfcb06e8919d9c4511ea0514c4cda55bbc228d985d7db5cd8d1ae6",
+      "score": 0.6580096570935342,
+      "seconds": 0.350777699961327,
+      "scoredDurationSeconds": 6.372,
+      "totalDurationSeconds": 6.372,
+      "inputTrace": {
+        "sourceSha256": "84d13f4886cfcb06e8919d9c4511ea0514c4cda55bbc228d985d7db5cd8d1ae6",
+        "decoded": true,
+        "resampledFloat32Sha256": "649c4cfcc01cba79add7230ebdf55604b5ff67d994e35d59916a8b53861da413",
+        "modelSamples": 101952,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.67486,
+          "raw_spoof_softmax": 0.946255,
+          "model_input_sha256": "9121a83f061f4c5f3c16cc3eb7b8f5410e44b89f52ba4340a12d01262c3a342d",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.372,
+          "raw_bonafide_logit": 0.316814,
+          "raw_spoof_softmax": 0.15966,
+          "model_input_sha256": "bebd16fd2cb70dce394ad6ba18ca591ef477050c25d2b1c35cb536595b891f48",
+          "padded_samples": 27248
+        }
+      ]
+    },
+    {
+      "id": "6b77139fa4d3251cb818594e",
+      "group": "72fd6a405814ffd4a3af5097ab791ea909f335483c308322d717aafa6f6fd762",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "b31b2323bce31ef8e6ce9fbd42490ad8325399c189ab41dea4738502cfc745ee",
+      "variant": "original",
+      "derivedSha256": "b31b2323bce31ef8e6ce9fbd42490ad8325399c189ab41dea4738502cfc745ee",
+      "score": 0.6859164665291878,
+      "seconds": 0.3722688000416383,
+      "scoredDurationSeconds": 6.304,
+      "totalDurationSeconds": 6.304,
+      "inputTrace": {
+        "sourceSha256": "b31b2323bce31ef8e6ce9fbd42490ad8325399c189ab41dea4738502cfc745ee",
+        "decoded": true,
+        "resampledFloat32Sha256": "6f7bb1592e54c1fd32dad3ad3ab832038b573ac84feb81dd34215895ba00e84d",
+        "modelSamples": 100868,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.428128,
+          "raw_spoof_softmax": 0.989013,
+          "model_input_sha256": "8fedf15e08d45f6aac109f42cd0b0d3a76c779e3776e8e0f1b6da3f86a98ce41",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.304,
+          "raw_bonafide_logit": 0.420231,
+          "raw_spoof_softmax": 0.146172,
+          "model_input_sha256": "e39bb63a9af082e93b22dc0f7d9fed1b797eeafefc9fe1152fa1f32535dd68dd",
+          "padded_samples": 28332
+        }
+      ]
+    },
+    {
+      "id": "6b77139fa4d3251cb818594e",
+      "group": "72fd6a405814ffd4a3af5097ab791ea909f335483c308322d717aafa6f6fd762",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "b31b2323bce31ef8e6ce9fbd42490ad8325399c189ab41dea4738502cfc745ee",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "178a332d211bc2ceb9d96059bad3d1b328e308b231d78ccf24f9771951b14e32",
+      "score": 0.6934069773720348,
+      "seconds": 0.34895349998259917,
+      "scoredDurationSeconds": 6.408,
+      "totalDurationSeconds": 6.408,
+      "inputTrace": {
+        "sourceSha256": "178a332d211bc2ceb9d96059bad3d1b328e308b231d78ccf24f9771951b14e32",
+        "decoded": true,
+        "resampledFloat32Sha256": "6c585a495afd6d1ba24905112ed4fb1fef0f8a1ba20287928dbd523eb8e43f06",
+        "modelSamples": 102528,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.172413,
+          "raw_spoof_softmax": 0.979861,
+          "model_input_sha256": "72fc6af8d26787abef366a31066f322d9d335ecca1d5ca05be446635351c8390",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.408,
+          "raw_bonafide_logit": 0.211355,
+          "raw_spoof_softmax": 0.205674,
+          "model_input_sha256": "9dd9c139833a98cbb7a4b16bd287d7188b0e55cfbf78ee595c2b2ce37965e0c3",
+          "padded_samples": 26672
+        }
+      ]
+    },
+    {
+      "id": "fce6a9ed4272b03ee29564bd",
+      "group": "e5a233967c0003415e869e05a84bba43a3f69c7f8020b3cf3059488053a00355",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "07e0c2a51d8ab41bb04b0c67d3dd9bd64ca3af96608cbdabb62626523453f841",
+      "variant": "original",
+      "derivedSha256": "07e0c2a51d8ab41bb04b0c67d3dd9bd64ca3af96608cbdabb62626523453f841",
+      "score": 0.994433,
+      "seconds": 0.18378570000641048,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.698,
+      "inputTrace": {
+        "sourceSha256": "07e0c2a51d8ab41bb04b0c67d3dd9bd64ca3af96608cbdabb62626523453f841",
+        "decoded": true,
+        "resampledFloat32Sha256": "85f6f836ecefc12b7a9f725bc50217de3e78e398b0591f7ffdb0e340252e1e98",
+        "modelSamples": 75161,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.6975625,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.695447,
+          "raw_spoof_softmax": 0.994433,
+          "model_input_sha256": "acee28c225cccc0091bf539ae76beca48d92d46482e1b11a64665aa6852b1a3d",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "fce6a9ed4272b03ee29564bd",
+      "group": "e5a233967c0003415e869e05a84bba43a3f69c7f8020b3cf3059488053a00355",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "07e0c2a51d8ab41bb04b0c67d3dd9bd64ca3af96608cbdabb62626523453f841",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "ef5a0ab0b171e4d19aad3ce9f5c0ef86432489d4461cddaefc29dad5d10e4b21",
+      "score": 0.899533,
+      "seconds": 0.18138089997228235,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.788,
+      "inputTrace": {
+        "sourceSha256": "ef5a0ab0b171e4d19aad3ce9f5c0ef86432489d4461cddaefc29dad5d10e4b21",
+        "decoded": true,
+        "resampledFloat32Sha256": "5a0af8f92ef3525f14add87614f1d7c55469e4ac23b1e613227c8c9dc8ede221",
+        "modelSamples": 76608,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.788,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.446397,
+          "raw_spoof_softmax": 0.899533,
+          "model_input_sha256": "fb0ff5688be0482e0493842cea3b9a25b92929260e3a32ce2245b3c045e54603",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "9262dae7b4a8d06fbc6c07f5",
+      "group": "e5a233967c0003415e869e05a84bba43a3f69c7f8020b3cf3059488053a00355",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "08cc3cbdb5b2177549c9a73d3f6b9b06b7e6d0bc8cf52f87228673e170d179c4",
+      "variant": "original",
+      "derivedSha256": "08cc3cbdb5b2177549c9a73d3f6b9b06b7e6d0bc8cf52f87228673e170d179c4",
+      "score": 0.860019,
+      "seconds": 0.18976859998656437,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.702,
+      "inputTrace": {
+        "sourceSha256": "08cc3cbdb5b2177549c9a73d3f6b9b06b7e6d0bc8cf52f87228673e170d179c4",
+        "decoded": true,
+        "resampledFloat32Sha256": "4fa3968c035dfa6778d7594441a16ca5b07c97c415f57a8d096e39fa5ad6840e",
+        "modelSamples": 75233,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.7020625,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.22429,
+          "raw_spoof_softmax": 0.860019,
+          "model_input_sha256": "64a18ce60ed286bfdf75d8b8fb650cf55b87848c31574fd12bbe60e69d63fa5b",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "9262dae7b4a8d06fbc6c07f5",
+      "group": "e5a233967c0003415e869e05a84bba43a3f69c7f8020b3cf3059488053a00355",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "08cc3cbdb5b2177549c9a73d3f6b9b06b7e6d0bc8cf52f87228673e170d179c4",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "7f5e55f4ffeec213d18ba154046fd566e3d3c74ee6ddf2164d580ff3be8ce63b",
+      "score": 0.537639,
+      "seconds": 0.17834069998934865,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.788,
+      "inputTrace": {
+        "sourceSha256": "7f5e55f4ffeec213d18ba154046fd566e3d3c74ee6ddf2164d580ff3be8ce63b",
+        "decoded": true,
+        "resampledFloat32Sha256": "1d66db041c7794a46f719cdf0ab79f48c3b75b8c9b1c7769e29c68f6c9c448d7",
+        "modelSamples": 76608,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.788,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -0.522688,
+          "raw_spoof_softmax": 0.537639,
+          "model_input_sha256": "fc9f407b915787fac6a4a02733ec25dc8f8eb6fa5f4a3b7e24ddea74a60178c5",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "94f91bc1e2ee663623c86ebe",
+      "group": "a4296538057df4939cdc38e4e4715b339bb090180d3bd5768ee84558e8c885f3",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "a3f076441f8e7edec640d9b274e42c82cce70b2eea403e27030cb13f19c9a9cf",
+      "variant": "original",
+      "derivedSha256": "a3f076441f8e7edec640d9b274e42c82cce70b2eea403e27030cb13f19c9a9cf",
+      "score": 0.9868965933492394,
+      "seconds": 0.3583363000070676,
+      "scoredDurationSeconds": 6.706,
+      "totalDurationSeconds": 6.706,
+      "inputTrace": {
+        "sourceSha256": "a3f076441f8e7edec640d9b274e42c82cce70b2eea403e27030cb13f19c9a9cf",
+        "decoded": true,
+        "resampledFloat32Sha256": "19111d719351344d4818537ae8dc37963ff8f2e85eea83bb22199bdd03922fe2",
+        "modelSamples": 107298,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.888534,
+          "raw_spoof_softmax": 0.995938,
+          "model_input_sha256": "dad7f8229405d7f8f3dd7ed07c44b0d9c39423dbe8b0c598392f676c175f9f61",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.706,
+          "raw_bonafide_logit": -1.951914,
+          "raw_spoof_softmax": 0.973221,
+          "model_input_sha256": "ce266f58189751984f89a473d199cf13014d6ccdab3766c6130707558d5fa735",
+          "padded_samples": 21902
+        }
+      ]
+    },
+    {
+      "id": "94f91bc1e2ee663623c86ebe",
+      "group": "a4296538057df4939cdc38e4e4715b339bb090180d3bd5768ee84558e8c885f3",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "a3f076441f8e7edec640d9b274e42c82cce70b2eea403e27030cb13f19c9a9cf",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "5d75e01dc711ace514cdc7d94b02629a6d36fd8252531f35884b7bb9f29759ee",
+      "score": 0.9871373020282187,
+      "seconds": 0.3619601000100374,
+      "scoredDurationSeconds": 6.804,
+      "totalDurationSeconds": 6.804,
+      "inputTrace": {
+        "sourceSha256": "5d75e01dc711ace514cdc7d94b02629a6d36fd8252531f35884b7bb9f29759ee",
+        "decoded": true,
+        "resampledFloat32Sha256": "bfbc99a1b98672b3507b9af989d77ee2df75c67294b39c9a2be7db3fe67c13c8",
+        "modelSamples": 108864,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.419306,
+          "raw_spoof_softmax": 0.989764,
+          "model_input_sha256": "24a459701bfe81b43981b612ea8aae44b5c2a26ec635693a057f062cd632c4ce",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.804,
+          "raw_bonafide_logit": -2.198768,
+          "raw_spoof_softmax": 0.983305,
+          "model_input_sha256": "44d5a217300e4e26b290262e3c93f1a6523848dc2626c3e989d8702abe31302d",
+          "padded_samples": 20336
+        }
+      ]
+    },
+    {
+      "id": "26f661bc76a60f5f5edecb72",
+      "group": "a4296538057df4939cdc38e4e4715b339bb090180d3bd5768ee84558e8c885f3",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "28ff7361dddc8303568ad59d78ece19a09b2b3f8460a824e36086f367c4b2aec",
+      "variant": "original",
+      "derivedSha256": "28ff7361dddc8303568ad59d78ece19a09b2b3f8460a824e36086f367c4b2aec",
+      "score": 0.9742592860974519,
+      "seconds": 0.35070479998830706,
+      "scoredDurationSeconds": 6.711,
+      "totalDurationSeconds": 6.711,
+      "inputTrace": {
+        "sourceSha256": "28ff7361dddc8303568ad59d78ece19a09b2b3f8460a824e36086f367c4b2aec",
+        "decoded": true,
+        "resampledFloat32Sha256": "369176c8ed8a26df51391a5b7e9a44d14893c31bb65c9b457171804906f958f1",
+        "modelSamples": 107370,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.763894,
+          "raw_spoof_softmax": 0.994285,
+          "model_input_sha256": "d3dbd204bb1e8ad2bb26d0cd0f04c006d0b2ef1e1a1f6892dc9fc1b9679919c4",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.711,
+          "raw_bonafide_logit": -1.640082,
+          "raw_spoof_softmax": 0.944026,
+          "model_input_sha256": "dabfaa7db8b2d78a2cb8a4a13c87691ce14859e8d9345417e340a622b1e12bb1",
+          "padded_samples": 21830
+        }
+      ]
+    },
+    {
+      "id": "26f661bc76a60f5f5edecb72",
+      "group": "a4296538057df4939cdc38e4e4715b339bb090180d3bd5768ee84558e8c885f3",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "28ff7361dddc8303568ad59d78ece19a09b2b3f8460a824e36086f367c4b2aec",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "97bff8703b851762801c2c28346ca46b4f7ac2685b0e2ed6d7bddb3b34b5d0f3",
+      "score": 0.9646867820399764,
+      "seconds": 0.3364335999940522,
+      "scoredDurationSeconds": 6.804,
+      "totalDurationSeconds": 6.804,
+      "inputTrace": {
+        "sourceSha256": "97bff8703b851762801c2c28346ca46b4f7ac2685b0e2ed6d7bddb3b34b5d0f3",
+        "decoded": true,
+        "resampledFloat32Sha256": "c161802228f561dfba7c0e3ba314b51a916c8582139523d968a36062cada7c2c",
+        "modelSamples": 108864,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.885077,
+          "raw_spoof_softmax": 0.965468,
+          "model_input_sha256": "8f81fac6337bd0e82c37ce7a541b3750907664540587abe7cdbe754d12597448",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.804,
+          "raw_bonafide_logit": -1.880997,
+          "raw_spoof_softmax": 0.963547,
+          "model_input_sha256": "1d2d6de5f0560663a9afa6f2a5ad69559960f4d8941dde3952b5d9e40253b920",
+          "padded_samples": 20336
+        }
+      ]
+    },
+    {
+      "id": "f0c15cd7a01c336cf25e2ccb",
+      "group": "339acfecda5d293b040c6b81dcc4bd5512c94983e889d0950c6dd64d072344b6",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "a88129cf4fcd72945a445de0bf437057846a5fa4505d62ce4e629fee99eadb05",
+      "variant": "original",
+      "derivedSha256": "a88129cf4fcd72945a445de0bf437057846a5fa4505d62ce4e629fee99eadb05",
+      "score": 0.7434796098659299,
+      "seconds": 0.5237482999800704,
+      "scoredDurationSeconds": 9.771,
+      "totalDurationSeconds": 9.771,
+      "inputTrace": {
+        "sourceSha256": "a88129cf4fcd72945a445de0bf437057846a5fa4505d62ce4e629fee99eadb05",
+        "decoded": true,
+        "resampledFloat32Sha256": "8d18ef816330ba63f7524e827b4d8eac1c62f8549e3f2e83046d8b575417d4c5",
+        "modelSamples": 156338,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.161353,
+          "raw_spoof_softmax": 0.981936,
+          "model_input_sha256": "04bf4a25b7949ec4785b8c45597370e7ac1f4d9d93c3b4585392ab03cb490aec",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 8.075,
+          "raw_bonafide_logit": -0.230653,
+          "raw_spoof_softmax": 0.404638,
+          "model_input_sha256": "d2274fda23f36404cc0e87a466b76438be05d2cd47a63c45a2d10493c0b77654",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 8.075,
+          "end_seconds": 9.771,
+          "raw_bonafide_logit": -2.138408,
+          "raw_spoof_softmax": 0.982627,
+          "model_input_sha256": "1293300b1f444306af6003ddcc8b5283bc69001b779a7ce5a789118a20d81a32",
+          "padded_samples": 37462
+        }
+      ]
+    },
+    {
+      "id": "f0c15cd7a01c336cf25e2ccb",
+      "group": "339acfecda5d293b040c6b81dcc4bd5512c94983e889d0950c6dd64d072344b6",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "a88129cf4fcd72945a445de0bf437057846a5fa4505d62ce4e629fee99eadb05",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "e14c62f37c17ab83829a78d15c17b618cb99eeee3ffe1cfad83cdfb219fd370b",
+      "score": 0.6757824890510948,
+      "seconds": 0.5484978999593295,
+      "scoredDurationSeconds": 9.864,
+      "totalDurationSeconds": 9.864,
+      "inputTrace": {
+        "sourceSha256": "e14c62f37c17ab83829a78d15c17b618cb99eeee3ffe1cfad83cdfb219fd370b",
+        "decoded": true,
+        "resampledFloat32Sha256": "5c71677f2c3fdf22ceb0c04996a0ce858e5a1f7149a592dbf078c76fb012b5ad",
+        "modelSamples": 157824,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.77653,
+          "raw_spoof_softmax": 0.995304,
+          "model_input_sha256": "134475dab3cfc0825fd1f32a862904f0aba65d0f90e20d4451b901836a933984",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 8.075,
+          "raw_bonafide_logit": 0.133165,
+          "raw_spoof_softmax": 0.226547,
+          "model_input_sha256": "a75010e556b21a94ef66f859306dff1b1c70b44b8881eb9924118aba5e6057be",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 8.075,
+          "end_seconds": 9.864,
+          "raw_bonafide_logit": -1.852697,
+          "raw_spoof_softmax": 0.968742,
+          "model_input_sha256": "7ca56406c2ebfecf2f2475d979eada20aacfb2761c3f46d0d164107f1ea858a4",
+          "padded_samples": 35976
+        }
+      ]
+    },
+    {
+      "id": "70bd857edd1fcdb4c972250d",
+      "group": "339acfecda5d293b040c6b81dcc4bd5512c94983e889d0950c6dd64d072344b6",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "4127ffaa842aa5c1d55b9808558309055e04692e54a8dfd502c2a1957e9561e5",
+      "variant": "original",
+      "derivedSha256": "4127ffaa842aa5c1d55b9808558309055e04692e54a8dfd502c2a1957e9561e5",
+      "score": 0.8286177721972177,
+      "seconds": 0.5452374999877065,
+      "scoredDurationSeconds": 9.776,
+      "totalDurationSeconds": 9.776,
+      "inputTrace": {
+        "sourceSha256": "4127ffaa842aa5c1d55b9808558309055e04692e54a8dfd502c2a1957e9561e5",
+        "decoded": true,
+        "resampledFloat32Sha256": "1f9d249f3449cdb710c46436587c7c862928f7e1a6caac81c9e849cdc4f7a66d",
+        "modelSamples": 156410,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.523132,
+          "raw_spoof_softmax": 0.991246,
+          "model_input_sha256": "c9615fc637b2fe7bed3af84d4584703c7fda9a8c936e4f147f277736faa6c2af",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 8.075,
+          "raw_bonafide_logit": -0.51041,
+          "raw_spoof_softmax": 0.594391,
+          "model_input_sha256": "c391712dfe45b8bde5172b1503bba5bf7135413e5825e3e8b4268b5a4186275d",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 8.075,
+          "end_seconds": 9.776,
+          "raw_bonafide_logit": -3.400156,
+          "raw_spoof_softmax": 0.998681,
+          "model_input_sha256": "302b20555871da0f93f0e138dd3df13aa35011c8d1463d416edd04faed7b7d8d",
+          "padded_samples": 37390
+        }
+      ]
+    },
+    {
+      "id": "70bd857edd1fcdb4c972250d",
+      "group": "339acfecda5d293b040c6b81dcc4bd5512c94983e889d0950c6dd64d072344b6",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "4127ffaa842aa5c1d55b9808558309055e04692e54a8dfd502c2a1957e9561e5",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "49ac877bcce426c0f8fd5158373a49548e321635edbcc0afa29391ef855df4b1",
+      "score": 0.8496225380170317,
+      "seconds": 0.5415752999833785,
+      "scoredDurationSeconds": 9.864,
+      "totalDurationSeconds": 9.864,
+      "inputTrace": {
+        "sourceSha256": "49ac877bcce426c0f8fd5158373a49548e321635edbcc0afa29391ef855df4b1",
+        "decoded": true,
+        "resampledFloat32Sha256": "af7ecf020c430db2915c013a948a0341cdff0665ec5471e4d996c889d420bfd6",
+        "modelSamples": 157824,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.053131,
+          "raw_spoof_softmax": 0.975632,
+          "model_input_sha256": "39b1e34aa29ba403d4a1358c8cc9146471191be899908578590c9c3439eb1a2f",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 8.075,
+          "raw_bonafide_logit": -0.703413,
+          "raw_spoof_softmax": 0.657265,
+          "model_input_sha256": "8493f0852b6290bc2d904a096fc0c1d66d94475cc9ed01ffa563bc8315ca715a",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 8.075,
+          "end_seconds": 9.864,
+          "raw_bonafide_logit": -3.76566,
+          "raw_spoof_softmax": 0.999449,
+          "model_input_sha256": "c14837e0694f391a4f059f3c8f21afbf9bfe831c4dce65368db0ee4ab3565123",
+          "padded_samples": 35976
+        }
+      ]
+    },
+    {
+      "id": "dee7c9336fb8f62acbba047c",
+      "group": "fff79adf495f4521771540492283e2089b3f6dfe8cd6c0917d798ddc06bdfe89",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "be4cd24c6373f1cb34466634f472f06820d247bb093f1951ecaef0655d14e376",
+      "variant": "original",
+      "derivedSha256": "be4cd24c6373f1cb34466634f472f06820d247bb093f1951ecaef0655d14e376",
+      "score": 0.9924109999999999,
+      "seconds": 0.18036519997986034,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 5.011,
+      "inputTrace": {
+        "sourceSha256": "be4cd24c6373f1cb34466634f472f06820d247bb093f1951ecaef0655d14e376",
+        "decoded": true,
+        "resampledFloat32Sha256": "214cf59947978b5438fe6745f3f60bf2fc4e86ecabe4ff354b4942c0b0c2192a",
+        "modelSamples": 80177,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 5.0110625,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.542753,
+          "raw_spoof_softmax": 0.992411,
+          "model_input_sha256": "77cf58bc9a0a1a8627b1ceeea5e93388f3852c1d388c3ca47452eb09f980ae04",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "dee7c9336fb8f62acbba047c",
+      "group": "fff79adf495f4521771540492283e2089b3f6dfe8cd6c0917d798ddc06bdfe89",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "be4cd24c6373f1cb34466634f472f06820d247bb093f1951ecaef0655d14e376",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "21873b82facf2eb7fad162d4a429cf536239c023b6da19841305bbfe1bebaaab",
+      "score": 0.9107909127543035,
+      "seconds": 0.3696516000200063,
+      "scoredDurationSeconds": 5.112,
+      "totalDurationSeconds": 5.112,
+      "inputTrace": {
+        "sourceSha256": "21873b82facf2eb7fad162d4a429cf536239c023b6da19841305bbfe1bebaaab",
+        "decoded": true,
+        "resampledFloat32Sha256": "b355feab12e4087e464000319c4943c6459deb30ea10159896d78050b70c51ad",
+        "modelSamples": 81792,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.327492,
+          "raw_spoof_softmax": 0.998583,
+          "model_input_sha256": "87170701e519d2d555a59262130c8232102361bf0d62da2ec17ba3ecda7a9950",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 5.112,
+          "raw_bonafide_logit": -0.642196,
+          "raw_spoof_softmax": 0.581101,
+          "model_input_sha256": "0369a9a9586491effbfac48760e951d77dbef2d71220825e07695874558d4a04",
+          "padded_samples": 47408
+        }
+      ]
+    },
+    {
+      "id": "7a0955953acd8e97a95795dd",
+      "group": "fff79adf495f4521771540492283e2089b3f6dfe8cd6c0917d798ddc06bdfe89",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "fdcb44d528035fc7246d8e2650c16dcafdf93f872b7ebe10a9f6cd61adbe1f73",
+      "variant": "original",
+      "derivedSha256": "fdcb44d528035fc7246d8e2650c16dcafdf93f872b7ebe10a9f6cd61adbe1f73",
+      "score": 0.982389,
+      "seconds": 0.18674939998891205,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 5.016,
+      "inputTrace": {
+        "sourceSha256": "fdcb44d528035fc7246d8e2650c16dcafdf93f872b7ebe10a9f6cd61adbe1f73",
+        "decoded": true,
+        "resampledFloat32Sha256": "5d11e69d4c4fe0dd3e61242a14e361e7400fe6090c85a24bdc7026a0eef43fbb",
+        "modelSamples": 80249,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 5.0155625,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.180453,
+          "raw_spoof_softmax": 0.982389,
+          "model_input_sha256": "3ca059cf8452af246d4c38a875abfa305d5151782bdaa10a4eccff5603f36cba",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "7a0955953acd8e97a95795dd",
+      "group": "fff79adf495f4521771540492283e2089b3f6dfe8cd6c0917d798ddc06bdfe89",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "fdcb44d528035fc7246d8e2650c16dcafdf93f872b7ebe10a9f6cd61adbe1f73",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "5a7e9b8a25e6c48c715c4f0acd6d5a93a387a17471d4e9b2c9f584ec572d10cd",
+      "score": 0.9618519704616588,
+      "seconds": 0.3594394000247121,
+      "scoredDurationSeconds": 5.112,
+      "totalDurationSeconds": 5.112,
+      "inputTrace": {
+        "sourceSha256": "5a7e9b8a25e6c48c715c4f0acd6d5a93a387a17471d4e9b2c9f584ec572d10cd",
+        "decoded": true,
+        "resampledFloat32Sha256": "5598915539ee94c51ece7081618a7e0c6682ccd665e74dd1bf1d03be751c2ba0",
+        "modelSamples": 81792,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.894854,
+          "raw_spoof_softmax": 0.966079,
+          "model_input_sha256": "b58dee9f61e0c211a8486f1de1aa676edab4aa8fb67fcab0485204f345e58603",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 5.112,
+          "raw_bonafide_logit": -1.969048,
+          "raw_spoof_softmax": 0.945978,
+          "model_input_sha256": "9eb3e04c0a1a06fb6aec0c693112c998e1de817872a009c1e51b35d42c8f8c85",
+          "padded_samples": 47408
+        }
+      ]
+    },
+    {
+      "id": "5c62729b49ce1c174e85ac40",
+      "group": "a18a2545f6cc334fe181c9938f593f751291b2bf527f614e4de5d79cbfe763fc",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "f18600db32e923f1dae40f8ede197d2d2b6ad433da7f27373e4662e5fc6f750a",
+      "variant": "original",
+      "derivedSha256": "f18600db32e923f1dae40f8ede197d2d2b6ad433da7f27373e4662e5fc6f750a",
+      "score": 0.999414,
+      "seconds": 0.18144630000460893,
+      "scoredDurationSeconds": 2.155,
+      "totalDurationSeconds": 2.155,
+      "inputTrace": {
+        "sourceSha256": "f18600db32e923f1dae40f8ede197d2d2b6ad433da7f27373e4662e5fc6f750a",
+        "decoded": true,
+        "resampledFloat32Sha256": "be742dea9ed2ed8e4d39d0b76025e12140028a036f04f1b06bf3bb6b81d0df86",
+        "modelSamples": 34480,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 2.155,
+          "raw_bonafide_logit": -3.759264,
+          "raw_spoof_softmax": 0.999414,
+          "model_input_sha256": "8601137c45b7d412f6fae1f1960ef969900423a8a23a7d6b00633e5c236e89a0",
+          "padded_samples": 30120
+        }
+      ]
+    },
+    {
+      "id": "5c62729b49ce1c174e85ac40",
+      "group": "a18a2545f6cc334fe181c9938f593f751291b2bf527f614e4de5d79cbfe763fc",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "f18600db32e923f1dae40f8ede197d2d2b6ad433da7f27373e4662e5fc6f750a",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "ddbcd412a0e5e6d191f0e57f3ad2ae996629f49628820cf033b0f63cedbc73a1",
+      "score": 0.9940229999999999,
+      "seconds": 0.18368040001951158,
+      "scoredDurationSeconds": 2.232,
+      "totalDurationSeconds": 2.232,
+      "inputTrace": {
+        "sourceSha256": "ddbcd412a0e5e6d191f0e57f3ad2ae996629f49628820cf033b0f63cedbc73a1",
+        "decoded": true,
+        "resampledFloat32Sha256": "eddc8d7dcbcbab29f990b73334feaff23dbc18a151aaf7aaea9f3f19b4d8fdf3",
+        "modelSamples": 35712,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 2.232,
+          "raw_bonafide_logit": -2.700014,
+          "raw_spoof_softmax": 0.994023,
+          "model_input_sha256": "4c6aecf028fdc89840c7e4ddfb02eb4d3b52f7027156708e966c9a95306a4540",
+          "padded_samples": 28888
+        }
+      ]
+    },
+    {
+      "id": "e2492d634e06673b5aadd812",
+      "group": "a18a2545f6cc334fe181c9938f593f751291b2bf527f614e4de5d79cbfe763fc",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "23e9d2a1f66e4acb396b5c99a77abde63f5947ebe9b3f580cbf54209d14dd878",
+      "variant": "original",
+      "derivedSha256": "23e9d2a1f66e4acb396b5c99a77abde63f5947ebe9b3f580cbf54209d14dd878",
+      "score": 0.99727,
+      "seconds": 0.18520960002206266,
+      "scoredDurationSeconds": 2.159,
+      "totalDurationSeconds": 2.159,
+      "inputTrace": {
+        "sourceSha256": "23e9d2a1f66e4acb396b5c99a77abde63f5947ebe9b3f580cbf54209d14dd878",
+        "decoded": true,
+        "resampledFloat32Sha256": "3f0a2eb8a742a22cbc47e7660aeb1a0206829ce39b48f102498b57be7a2c8930",
+        "modelSamples": 34552,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 2.159,
+          "raw_bonafide_logit": -3.11686,
+          "raw_spoof_softmax": 0.99727,
+          "model_input_sha256": "1b0a40ec86bf1e6acd660cca34a6ed37b4b4ad35e99607d13094abf81aa740aa",
+          "padded_samples": 30048
+        }
+      ]
+    },
+    {
+      "id": "e2492d634e06673b5aadd812",
+      "group": "a18a2545f6cc334fe181c9938f593f751291b2bf527f614e4de5d79cbfe763fc",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "23e9d2a1f66e4acb396b5c99a77abde63f5947ebe9b3f580cbf54209d14dd878",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "624ec47bbe2442707644c0d4caa7ecc2c6ddbef360dddde90de6a85c324cdd97",
+      "score": 0.9973829999999999,
+      "seconds": 0.17091260000597686,
+      "scoredDurationSeconds": 2.232,
+      "totalDurationSeconds": 2.232,
+      "inputTrace": {
+        "sourceSha256": "624ec47bbe2442707644c0d4caa7ecc2c6ddbef360dddde90de6a85c324cdd97",
+        "decoded": true,
+        "resampledFloat32Sha256": "ee2260a39aae130106981b93127454e21f791f4f6c8bc8b81508b51c9066a46a",
+        "modelSamples": 35712,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 2.232,
+          "raw_bonafide_logit": -3.140516,
+          "raw_spoof_softmax": 0.997383,
+          "model_input_sha256": "2dfa5112a88ba1e676b4dcdabefa096ae8461f13b8b250e69d11c970d68fe7df",
+          "padded_samples": 28888
+        }
+      ]
+    },
+    {
+      "id": "e5bfaa610cf0e1af5dc85bf1",
+      "group": "3ea5c84f829f3c3431d3f631896eda635549f38cedc625040bd740ab4bfb1c54",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "e08327ad6042ed1b6d993eef229ea78ce5fdb5c75b3bdc40b57bde7b465db85d",
+      "variant": "original",
+      "derivedSha256": "e08327ad6042ed1b6d993eef229ea78ce5fdb5c75b3bdc40b57bde7b465db85d",
+      "score": 0.999344,
+      "seconds": 0.19347950001247227,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.907,
+      "inputTrace": {
+        "sourceSha256": "e08327ad6042ed1b6d993eef229ea78ce5fdb5c75b3bdc40b57bde7b465db85d",
+        "decoded": true,
+        "resampledFloat32Sha256": "4d012c40f7aa5a1e849d21ab627cefc3c02c3c6f00e4e8975453202871dcd01d",
+        "modelSamples": 78505,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.9065625,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.693696,
+          "raw_spoof_softmax": 0.999344,
+          "model_input_sha256": "77c598e9cbbed34603d0c9208071a7a15195030e471175f05c66d347d0f910fe",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "e5bfaa610cf0e1af5dc85bf1",
+      "group": "3ea5c84f829f3c3431d3f631896eda635549f38cedc625040bd740ab4bfb1c54",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "e08327ad6042ed1b6d993eef229ea78ce5fdb5c75b3bdc40b57bde7b465db85d",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "050f462a6f901af300f7c22cb0c6c8f4d0126d5c6b5163a27d338ea7145360d0",
+      "score": 0.9991380000000001,
+      "seconds": 0.17508610000368208,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 5.004,
+      "inputTrace": {
+        "sourceSha256": "050f462a6f901af300f7c22cb0c6c8f4d0126d5c6b5163a27d338ea7145360d0",
+        "decoded": true,
+        "resampledFloat32Sha256": "1c7dd6d86463fcc93ac8279261e0c32f1a8e53bb09a4158e6dad833a9951ab11",
+        "modelSamples": 80064,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 5.004,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.570235,
+          "raw_spoof_softmax": 0.999138,
+          "model_input_sha256": "8fdeb15c749abc0ef32d1fb6b0c6300d0c1f83f14e34d689f84afa9c30fbf147",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "fecd596ced8f98c491f51069",
+      "group": "3ea5c84f829f3c3431d3f631896eda635549f38cedc625040bd740ab4bfb1c54",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "382a121d04e982945332368932f56822dcf6e04817fa7498fbecf9a69e040483",
+      "variant": "original",
+      "derivedSha256": "382a121d04e982945332368932f56822dcf6e04817fa7498fbecf9a69e040483",
+      "score": 0.980961,
+      "seconds": 0.1855441999505274,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.911,
+      "inputTrace": {
+        "sourceSha256": "382a121d04e982945332368932f56822dcf6e04817fa7498fbecf9a69e040483",
+        "decoded": true,
+        "resampledFloat32Sha256": "c7432856269c5c70620144df88fe504da726460dd6b722626dc699b9ce5a033e",
+        "modelSamples": 78577,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.9110625,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.114001,
+          "raw_spoof_softmax": 0.980961,
+          "model_input_sha256": "030e98674b065d3f95065ccf8d1c443408417057de13eaf968c48ff364f5fe93",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "fecd596ced8f98c491f51069",
+      "group": "3ea5c84f829f3c3431d3f631896eda635549f38cedc625040bd740ab4bfb1c54",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "382a121d04e982945332368932f56822dcf6e04817fa7498fbecf9a69e040483",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "587123736dbb08e6ed0daba41da7a1b40ba3808ba74d4a43e1def0ffe53b342e",
+      "score": 0.979157,
+      "seconds": 0.176672299974598,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 5.004,
+      "inputTrace": {
+        "sourceSha256": "587123736dbb08e6ed0daba41da7a1b40ba3808ba74d4a43e1def0ffe53b342e",
+        "decoded": true,
+        "resampledFloat32Sha256": "7fabc157b13f9ec459fb646002679e87c367cad85222cb0dcd95a94a868f3a98",
+        "modelSamples": 80064,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 5.004,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.09786,
+          "raw_spoof_softmax": 0.979157,
+          "model_input_sha256": "f7e012d7bbe6c10bdcd84aa47b5ca8c5c0436f74267e3ef961ff65c3a8d058d9",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "fd90a2ca86f0c172ccc9e9f1",
+      "group": "adb35def76b94eda66df0f71d47a869a750798ca6a76e8a1a1036535429e40a1",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "b1e6551073f4732c1a0dcfb9dac01f543944331bf4fc819ed899e24e18576127",
+      "variant": "original",
+      "derivedSha256": "b1e6551073f4732c1a0dcfb9dac01f543944331bf4fc819ed899e24e18576127",
+      "score": 0.999907,
+      "seconds": 0.17422350001288578,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.57,
+      "inputTrace": {
+        "sourceSha256": "b1e6551073f4732c1a0dcfb9dac01f543944331bf4fc819ed899e24e18576127",
+        "decoded": true,
+        "resampledFloat32Sha256": "8aaa0853f0cf6010ac6f774c379ce8360aee153b658e92358807c36d71cd281d",
+        "modelSamples": 73118,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.569875,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -4.639082,
+          "raw_spoof_softmax": 0.999907,
+          "model_input_sha256": "bd76bee8e09bd4d3355c7951940ecbf9deb9de8948feade7320572361e1626fe",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "fd90a2ca86f0c172ccc9e9f1",
+      "group": "adb35def76b94eda66df0f71d47a869a750798ca6a76e8a1a1036535429e40a1",
+      "role": "development",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "b1e6551073f4732c1a0dcfb9dac01f543944331bf4fc819ed899e24e18576127",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "c85bc7fe2170e7c1a599f16a87f7f532c5aa10fc124c8f4a919da0963e0b136a",
+      "score": 0.997536,
+      "seconds": 0.18523299996741116,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.644,
+      "inputTrace": {
+        "sourceSha256": "c85bc7fe2170e7c1a599f16a87f7f532c5aa10fc124c8f4a919da0963e0b136a",
+        "decoded": true,
+        "resampledFloat32Sha256": "7100fc4321075e2d97b947d365b86e1bc4c922e22a10bb7d93b3acd874fa4d58",
+        "modelSamples": 74304,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.644,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.07449,
+          "raw_spoof_softmax": 0.997536,
+          "model_input_sha256": "9b0ef6b9dcda0872d962011b5df15820759112758752a3f221ea65155df9438e",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "9cee4b06fec94b00cee8d766",
+      "group": "adb35def76b94eda66df0f71d47a869a750798ca6a76e8a1a1036535429e40a1",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "4056c29cef00ea5da0e4590b102464c8017d25c60820b8c53f8cc01cd542a224",
+      "variant": "original",
+      "derivedSha256": "4056c29cef00ea5da0e4590b102464c8017d25c60820b8c53f8cc01cd542a224",
+      "score": 0.9998880000000001,
+      "seconds": 0.1904727999935858,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.574,
+      "inputTrace": {
+        "sourceSha256": "4056c29cef00ea5da0e4590b102464c8017d25c60820b8c53f8cc01cd542a224",
+        "decoded": true,
+        "resampledFloat32Sha256": "d74ab240bf665b0baf82ff1d32cc0169675c85b374802a9da697e1b49941e2da",
+        "modelSamples": 73190,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.574375,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -4.598843,
+          "raw_spoof_softmax": 0.999888,
+          "model_input_sha256": "c45ed80e406a0cbf9f3d9cd257cdf484d230d52b343673f25e2e09a01872d6c4",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "9cee4b06fec94b00cee8d766",
+      "group": "adb35def76b94eda66df0f71d47a869a750798ca6a76e8a1a1036535429e40a1",
+      "role": "development",
+      "label": "synthetic",
+      "generator": "ljspeech_melgan",
+      "sourceSha256": "4056c29cef00ea5da0e4590b102464c8017d25c60820b8c53f8cc01cd542a224",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "efd3c4f0ea61ae07c2dc90bc29fec0f5c77c95e5ceec487b2c87c865c4ff175f",
+      "score": 0.9999010000000002,
+      "seconds": 0.19210829999065027,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.68,
+      "inputTrace": {
+        "sourceSha256": "efd3c4f0ea61ae07c2dc90bc29fec0f5c77c95e5ceec487b2c87c865c4ff175f",
+        "decoded": true,
+        "resampledFloat32Sha256": "dc97134ff7ab669b17c0d8868d7638b39606813e357556425cffed8723032d3b",
+        "modelSamples": 74880,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.68,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -4.591812,
+          "raw_spoof_softmax": 0.999901,
+          "model_input_sha256": "6c89245434d5a5089a780f86b13d2a933cfd258b87c30b20e7e527e6002ca2f6",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "65b5dde1ad97da6a9da751bb",
+      "group": "ef41f91fc1f92be9edcdd27c9af66f5db88ed75c48ad55dd0709824f19971ed5",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "492a809691d429811078b8474d4f01dfb75403b1d46fa71c811d1110c490ddbc",
+      "variant": "original",
+      "derivedSha256": "492a809691d429811078b8474d4f01dfb75403b1d46fa71c811d1110c490ddbc",
+      "score": 0.97098,
+      "seconds": 0.1879043999942951,
+      "scoredDurationSeconds": 3.293,
+      "totalDurationSeconds": 3.293,
+      "inputTrace": {
+        "sourceSha256": "492a809691d429811078b8474d4f01dfb75403b1d46fa71c811d1110c490ddbc",
+        "decoded": true,
+        "resampledFloat32Sha256": "9ff112d0f7265d22b773ea0a29c77cca01dd2e3bdb2b5d18f8af8ce0aacf30f2",
+        "modelSamples": 52684,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 3.293,
+          "raw_bonafide_logit": -1.986226,
+          "raw_spoof_softmax": 0.97098,
+          "model_input_sha256": "7523335d12f6e16ea4870e3aa2edbda84accb4888757bcd686deb3b5c24c09df",
+          "padded_samples": 11916
+        }
+      ]
+    },
+    {
+      "id": "65b5dde1ad97da6a9da751bb",
+      "group": "ef41f91fc1f92be9edcdd27c9af66f5db88ed75c48ad55dd0709824f19971ed5",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "492a809691d429811078b8474d4f01dfb75403b1d46fa71c811d1110c490ddbc",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "59a7edea39c5d4101c6f6075081d05b77350060b60407818c30f9b383d69a69f",
+      "score": 0.9665619999999999,
+      "seconds": 0.1905234000296332,
+      "scoredDurationSeconds": 3.384,
+      "totalDurationSeconds": 3.384,
+      "inputTrace": {
+        "sourceSha256": "59a7edea39c5d4101c6f6075081d05b77350060b60407818c30f9b383d69a69f",
+        "decoded": true,
+        "resampledFloat32Sha256": "5740d2a363410a8845600301b5b052d8fef01bbe4bec050dc4a44f670e8a82f1",
+        "modelSamples": 54144,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 3.384,
+          "raw_bonafide_logit": -1.926404,
+          "raw_spoof_softmax": 0.966562,
+          "model_input_sha256": "76db0890640fc00524119337513e8f5e44bd349b73145b386f261fc0900ec395",
+          "padded_samples": 10456
+        }
+      ]
+    },
+    {
+      "id": "69f80cb0f23925daf286992d",
+      "group": "ef41f91fc1f92be9edcdd27c9af66f5db88ed75c48ad55dd0709824f19971ed5",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "8a6708eef2b14ca45234ab90185bad1a43b348044fd55b1ff78b13b30a6771b4",
+      "variant": "original",
+      "derivedSha256": "8a6708eef2b14ca45234ab90185bad1a43b348044fd55b1ff78b13b30a6771b4",
+      "score": 0.98985,
+      "seconds": 0.19133250002050772,
+      "scoredDurationSeconds": 3.297,
+      "totalDurationSeconds": 3.297,
+      "inputTrace": {
+        "sourceSha256": "8a6708eef2b14ca45234ab90185bad1a43b348044fd55b1ff78b13b30a6771b4",
+        "decoded": true,
+        "resampledFloat32Sha256": "751b09d2ee775205f9c15f8937db024dbe487b0e394a1ea3fe2bd9c82d7f5554",
+        "modelSamples": 52756,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 3.297,
+          "raw_bonafide_logit": -2.528644,
+          "raw_spoof_softmax": 0.98985,
+          "model_input_sha256": "e8236b88cccb1dc78d407d9549a55f325d65214dd025f2c1bd2e4420e80a7ee4",
+          "padded_samples": 11844
+        }
+      ]
+    },
+    {
+      "id": "69f80cb0f23925daf286992d",
+      "group": "ef41f91fc1f92be9edcdd27c9af66f5db88ed75c48ad55dd0709824f19971ed5",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "8a6708eef2b14ca45234ab90185bad1a43b348044fd55b1ff78b13b30a6771b4",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "4b256b1e385602059e76755576d013c807e2d6f9094a4454f78499dbbe57bcea",
+      "score": 0.967107,
+      "seconds": 0.19361379998736084,
+      "scoredDurationSeconds": 3.384,
+      "totalDurationSeconds": 3.384,
+      "inputTrace": {
+        "sourceSha256": "4b256b1e385602059e76755576d013c807e2d6f9094a4454f78499dbbe57bcea",
+        "decoded": true,
+        "resampledFloat32Sha256": "274e1d9697edef782a3ee2e43f8e0c2f8094cc38e60e03e62a406ead8df925a0",
+        "modelSamples": 54144,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 3.384,
+          "raw_bonafide_logit": -1.903214,
+          "raw_spoof_softmax": 0.967107,
+          "model_input_sha256": "12d4b0e2c202362d699b48402d30e0e51e975acfd64bebcd55e9a9fe9b59f0a3",
+          "padded_samples": 10456
+        }
+      ]
+    },
+    {
+      "id": "d18568612458e04e683124dc",
+      "group": "034010af35a153632d71e166110ae4ed9a27aa6ad7af35fe90d5729afdee4418",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "f4a00e7df9565d39b6ffaeaf2e45faf84f0874727bcf96db9dd55968a33de9c2",
+      "variant": "original",
+      "derivedSha256": "f4a00e7df9565d39b6ffaeaf2e45faf84f0874727bcf96db9dd55968a33de9c2",
+      "score": 0.9758228530776992,
+      "seconds": 0.5609124000184238,
+      "scoredDurationSeconds": 9.91,
+      "totalDurationSeconds": 9.91,
+      "inputTrace": {
+        "sourceSha256": "f4a00e7df9565d39b6ffaeaf2e45faf84f0874727bcf96db9dd55968a33de9c2",
+        "decoded": true,
+        "resampledFloat32Sha256": "e908a082021474a3e5d6a8a3413d1a448df54ec9a4d74a2fd535da7f7e3d7b9c",
+        "modelSamples": 158567,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.151967,
+          "raw_spoof_softmax": 0.980725,
+          "model_input_sha256": "5add4d26705f3355c6b38154120aefa751cc6915d81aaf70aa640c7673c4041f",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 8.075,
+          "raw_bonafide_logit": -1.815879,
+          "raw_spoof_softmax": 0.960788,
+          "model_input_sha256": "2450b0329350a07dd5da4c87c6e879a135370e7e514b59503aa36ad8365e2dc8",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 8.075,
+          "end_seconds": 9.91,
+          "raw_bonafide_logit": -3.154801,
+          "raw_spoof_softmax": 0.998123,
+          "model_input_sha256": "9e9bea45d0c2d6120c0766b34f62dd3de60df33937d89604f64a6a3863e43062",
+          "padded_samples": 35233
+        }
+      ]
+    },
+    {
+      "id": "d18568612458e04e683124dc",
+      "group": "034010af35a153632d71e166110ae4ed9a27aa6ad7af35fe90d5729afdee4418",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "f4a00e7df9565d39b6ffaeaf2e45faf84f0874727bcf96db9dd55968a33de9c2",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "1a7079e11a98239646e55fdf9299e2272a2cc6d0c4b8742d026b9157807eb2b0",
+      "score": 0.9934911888489208,
+      "seconds": 0.5388732000137679,
+      "scoredDurationSeconds": 10.008,
+      "totalDurationSeconds": 10.008,
+      "inputTrace": {
+        "sourceSha256": "1a7079e11a98239646e55fdf9299e2272a2cc6d0c4b8742d026b9157807eb2b0",
+        "decoded": true,
+        "resampledFloat32Sha256": "6f78361515aa91d7532d4a0d6e5de7f480bf1ed7ced343a4b92564f625b38126",
+        "modelSamples": 160128,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.446752,
+          "raw_spoof_softmax": 0.990176,
+          "model_input_sha256": "a79f10d4c7b5e3701e23dd1fc5df8e26697608abde76f7bc6c258eca4a024c4f",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 8.075,
+          "raw_bonafide_logit": -2.759235,
+          "raw_spoof_softmax": 0.994831,
+          "model_input_sha256": "94d33a979f326ed164cfca1fea87dd24a868d1e2f40e5d476a18076aa09c8f4e",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 8.075,
+          "end_seconds": 10.008,
+          "raw_bonafide_logit": -3.022061,
+          "raw_spoof_softmax": 0.997616,
+          "model_input_sha256": "ca6062f9d2bed106fe66bc785ce3e49aeeeb0624adf88416cf6e5a8b45845ad0",
+          "padded_samples": 33672
+        }
+      ]
+    },
+    {
+      "id": "df75880b80a2602f05f61904",
+      "group": "034010af35a153632d71e166110ae4ed9a27aa6ad7af35fe90d5729afdee4418",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "ca28a0c58d8fb1cd5e98c84f8b15ec96b283364c9a02e80c35e0a8d094f49b5b",
+      "variant": "original",
+      "derivedSha256": "ca28a0c58d8fb1cd5e98c84f8b15ec96b283364c9a02e80c35e0a8d094f49b5b",
+      "score": 0.9945243613716592,
+      "seconds": 0.5456559999729507,
+      "scoredDurationSeconds": 9.915,
+      "totalDurationSeconds": 9.915,
+      "inputTrace": {
+        "sourceSha256": "ca28a0c58d8fb1cd5e98c84f8b15ec96b283364c9a02e80c35e0a8d094f49b5b",
+        "decoded": true,
+        "resampledFloat32Sha256": "9785ad20461e79f1a0a4dd4ff88916157f82f84eefea03c567610f49b0584ab8",
+        "modelSamples": 158639,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.335547,
+          "raw_spoof_softmax": 0.998649,
+          "model_input_sha256": "27a8d19c462cca30460fad898a13dc377c0dbbfba353d192c815aaac183c72fc",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 8.075,
+          "raw_bonafide_logit": -2.54027,
+          "raw_spoof_softmax": 0.991505,
+          "model_input_sha256": "20ea809e970a4afd70a7bc0bef345f6d6df6d55b73d898fb73b42b1ff9c80d21",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 8.075,
+          "end_seconds": 9.915,
+          "raw_bonafide_logit": -2.500316,
+          "raw_spoof_softmax": 0.992101,
+          "model_input_sha256": "ce201ffdd2d7985314640165a0c686583b0c04dc5f86875e08df387252ee5417",
+          "padded_samples": 35161
+        }
+      ]
+    },
+    {
+      "id": "df75880b80a2602f05f61904",
+      "group": "034010af35a153632d71e166110ae4ed9a27aa6ad7af35fe90d5729afdee4418",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "ca28a0c58d8fb1cd5e98c84f8b15ec96b283364c9a02e80c35e0a8d094f49b5b",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "33fa55756886b0e4ea057d6718b59443f6a8dd0c5f937b2215d496cee6d61704",
+      "score": 0.9951918081534772,
+      "seconds": 0.5329448999837041,
+      "scoredDurationSeconds": 10.008,
+      "totalDurationSeconds": 10.008,
+      "inputTrace": {
+        "sourceSha256": "33fa55756886b0e4ea057d6718b59443f6a8dd0c5f937b2215d496cee6d61704",
+        "decoded": true,
+        "resampledFloat32Sha256": "6dc3cbbbe14188f612f37360125032492d23d52ca870a6c250b4194ece953093",
+        "modelSamples": 160128,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.578757,
+          "raw_spoof_softmax": 0.999147,
+          "model_input_sha256": "79440899f07fc1125c215e3900436e5c481365ebc5cc895d4116b10477aa0a59",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 8.075,
+          "raw_bonafide_logit": -2.869692,
+          "raw_spoof_softmax": 0.99616,
+          "model_input_sha256": "9b4daaaa317c7cf28c6fca7eda2157662de0549f61751eb16c9904676740c497",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 8.075,
+          "end_seconds": 10.008,
+          "raw_bonafide_logit": -2.17368,
+          "raw_spoof_softmax": 0.984909,
+          "model_input_sha256": "8b874a2a2c39f349311756cf8f29bf6c05a69208993c5b6aae16e1f1a2fd4caa",
+          "padded_samples": 33672
+        }
+      ]
+    },
+    {
+      "id": "98767e348cb1683e8fdc69e4",
+      "group": "cec4b020640e851c68cf789b80af706fd0d0452607acedafcedb10a9aafea9c6",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "3e3d835af14e453c09481609ec80312fd61a5d071ea3437489c83931515e7326",
+      "variant": "original",
+      "derivedSha256": "3e3d835af14e453c09481609ec80312fd61a5d071ea3437489c83931515e7326",
+      "score": 0.8654970599842147,
+      "seconds": 0.38431860000127926,
+      "scoredDurationSeconds": 6.335,
+      "totalDurationSeconds": 6.335,
+      "inputTrace": {
+        "sourceSha256": "3e3d835af14e453c09481609ec80312fd61a5d071ea3437489c83931515e7326",
+        "decoded": true,
+        "resampledFloat32Sha256": "7f97c3ef6539946a01f7fdef0def0e5d37273be761d87179448fe18834b5b9af",
+        "modelSamples": 101353,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.684225,
+          "raw_spoof_softmax": 0.993913,
+          "model_input_sha256": "08fc5a6daabe8a621fbbf95b87862254d1ea190b8d93053825270470d8eef6af",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.335,
+          "raw_bonafide_logit": -0.577124,
+          "raw_spoof_softmax": 0.639903,
+          "model_input_sha256": "090a9cc94514c3331f9f2b1b0718ac5c59a696ed8208a6bf58ce1f55a89f2c56",
+          "padded_samples": 27847
+        }
+      ]
+    },
+    {
+      "id": "98767e348cb1683e8fdc69e4",
+      "group": "cec4b020640e851c68cf789b80af706fd0d0452607acedafcedb10a9aafea9c6",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "3e3d835af14e453c09481609ec80312fd61a5d071ea3437489c83931515e7326",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "9d9f1ee61fa9b35e00aab56ba632acc3b4bb76d8c4ffc0b300cf7161e8370866",
+      "score": 0.8865339357053683,
+      "seconds": 0.3582382000167854,
+      "scoredDurationSeconds": 6.408,
+      "totalDurationSeconds": 6.408,
+      "inputTrace": {
+        "sourceSha256": "9d9f1ee61fa9b35e00aab56ba632acc3b4bb76d8c4ffc0b300cf7161e8370866",
+        "decoded": true,
+        "resampledFloat32Sha256": "1523874523fba47835b4916fa10fca9ab091954faca2fb0ddaf869ca0f6f8437",
+        "modelSamples": 102528,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.73442,
+          "raw_spoof_softmax": 0.954362,
+          "model_input_sha256": "052b149d08dab29d3566e0d3ffce8d366bdfb22b0d0d8bb1a11c9f7b7323505c",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.408,
+          "raw_bonafide_logit": -0.969287,
+          "raw_spoof_softmax": 0.771046,
+          "model_input_sha256": "49a964a5251c29fa0311401ff527981fbb716da30c48f532d709c5f9d3c8f9c3",
+          "padded_samples": 26672
+        }
+      ]
+    },
+    {
+      "id": "9b4f2af1530b70f1c4eb861b",
+      "group": "cec4b020640e851c68cf789b80af706fd0d0452607acedafcedb10a9aafea9c6",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "a67007910847f812a2849718fc0d02f7f5bef269ad8a39ff705cd8c36ec07009",
+      "variant": "original",
+      "derivedSha256": "a67007910847f812a2849718fc0d02f7f5bef269ad8a39ff705cd8c36ec07009",
+      "score": 0.9102598035967818,
+      "seconds": 0.3520542000187561,
+      "scoredDurationSeconds": 6.339,
+      "totalDurationSeconds": 6.339,
+      "inputTrace": {
+        "sourceSha256": "a67007910847f812a2849718fc0d02f7f5bef269ad8a39ff705cd8c36ec07009",
+        "decoded": true,
+        "resampledFloat32Sha256": "019e67da3f55052465f49756256330fae48d9582e9f5a2f734042b793d371c43",
+        "modelSamples": 101425,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.020475,
+          "raw_spoof_softmax": 0.997251,
+          "model_input_sha256": "9d2bfe395305779c9de7678cab067107f84bbb1a7c93130e0eb154e59454cd03",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.339,
+          "raw_bonafide_logit": -0.935128,
+          "raw_spoof_softmax": 0.757704,
+          "model_input_sha256": "5509be25d12f7cbd836e80cf547d8a1553848e445790871f7d3717e1281f6f2e",
+          "padded_samples": 27775
+        }
+      ]
+    },
+    {
+      "id": "9b4f2af1530b70f1c4eb861b",
+      "group": "cec4b020640e851c68cf789b80af706fd0d0452607acedafcedb10a9aafea9c6",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "a67007910847f812a2849718fc0d02f7f5bef269ad8a39ff705cd8c36ec07009",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "a6892f3c4d554553237906ed09923d776285d2b96b5f918b2ec910674051605a",
+      "score": 0.9411860318125388,
+      "seconds": 0.384194899990689,
+      "scoredDurationSeconds": 6.444,
+      "totalDurationSeconds": 6.444,
+      "inputTrace": {
+        "sourceSha256": "a6892f3c4d554553237906ed09923d776285d2b96b5f918b2ec910674051605a",
+        "decoded": true,
+        "resampledFloat32Sha256": "a0f3612c817297b4aca57302031a3581764fa25475735952e404cb29c0323d05",
+        "modelSamples": 103104,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.204632,
+          "raw_spoof_softmax": 0.998297,
+          "model_input_sha256": "f71d1b559e4f5b9d1c17bf105c713b0b9ada520bac8c30c018e969b4ec0e3304",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.444,
+          "raw_bonafide_logit": -1.214208,
+          "raw_spoof_softmax": 0.8454,
+          "model_input_sha256": "0e6ba8ca289b0505812e3326265702e819013d2767a5909bcdb3a02e693e03fb",
+          "padded_samples": 26096
+        }
+      ]
+    },
+    {
+      "id": "3ef591a455e2c2b088e812c1",
+      "group": "5edc688b49f09ead0f6981d00c5d97dbe0fa182c11ca0a29de13b193648d8071",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "84a1e47a59c9f3da1b248edd6673a5ee090a91e648adafa350b2e9cd710deb6c",
+      "variant": "original",
+      "derivedSha256": "84a1e47a59c9f3da1b248edd6673a5ee090a91e648adafa350b2e9cd710deb6c",
+      "score": 0.9572822786377709,
+      "seconds": 0.39299230003962293,
+      "scoredDurationSeconds": 8.075,
+      "totalDurationSeconds": 8.645,
+      "inputTrace": {
+        "sourceSha256": "84a1e47a59c9f3da1b248edd6673a5ee090a91e648adafa350b2e9cd710deb6c",
+        "decoded": true,
+        "resampledFloat32Sha256": "51563d8fc03ebb34cdb8300baf36109d763e0af405cb20d78e85aba798b9ff57",
+        "modelSamples": 138320,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 8.075,
+            "end_seconds": 8.645,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.842592,
+          "raw_spoof_softmax": 0.99945,
+          "model_input_sha256": "aacafa52d75df208cc20281993a7f093d65a45feee93e0203c5e71163d828d0b",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 8.075,
+          "raw_bonafide_logit": -1.439633,
+          "raw_spoof_softmax": 0.915125,
+          "model_input_sha256": "c476d01a3ca30603af24c432363f309f50e0fdc6d9822891978620c7cb0282de",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "3ef591a455e2c2b088e812c1",
+      "group": "5edc688b49f09ead0f6981d00c5d97dbe0fa182c11ca0a29de13b193648d8071",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "84a1e47a59c9f3da1b248edd6673a5ee090a91e648adafa350b2e9cd710deb6c",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "3ad26d7a829df971af6f2ed28091eeefd43e371f07b7a804676ae3b5680d93df",
+      "score": 0.7898765260681114,
+      "seconds": 0.37334239995107055,
+      "scoredDurationSeconds": 8.075,
+      "totalDurationSeconds": 8.748,
+      "inputTrace": {
+        "sourceSha256": "3ad26d7a829df971af6f2ed28091eeefd43e371f07b7a804676ae3b5680d93df",
+        "decoded": true,
+        "resampledFloat32Sha256": "8c6c0d8a781f9fba6aa6fbf7c6cd3a181deb83344d01e9688973e59fd6e67503",
+        "modelSamples": 139968,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 8.075,
+            "end_seconds": 8.748,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -4.100623,
+          "raw_spoof_softmax": 0.999642,
+          "model_input_sha256": "5aaa4cdbc1f69c1262bbf0ba13ee4e150dd8098d745119ef01cf8ab2497ae03b",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 8.075,
+          "raw_bonafide_logit": -0.529823,
+          "raw_spoof_softmax": 0.580163,
+          "model_input_sha256": "f146d1debac93a4ea58cbacd0e76346ddf5a5bb06ad4e2aac7c116f1369f14d7",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "806ed735f1ee1435a24e1b9c",
+      "group": "5edc688b49f09ead0f6981d00c5d97dbe0fa182c11ca0a29de13b193648d8071",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "97604446ba8f53525ecebe30808d38a748b75bcab09434666369570947bc287e",
+      "variant": "original",
+      "derivedSha256": "97604446ba8f53525ecebe30808d38a748b75bcab09434666369570947bc287e",
+      "score": 0.9520557413003096,
+      "seconds": 0.36902759998338297,
+      "scoredDurationSeconds": 8.075,
+      "totalDurationSeconds": 8.649,
+      "inputTrace": {
+        "sourceSha256": "97604446ba8f53525ecebe30808d38a748b75bcab09434666369570947bc287e",
+        "decoded": true,
+        "resampledFloat32Sha256": "3166458966865ffa598c7f9d1fac10d01d77647b3f953fb7a1ffad4522435c9e",
+        "modelSamples": 138391,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 8.075,
+            "end_seconds": 8.6494375,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.824787,
+          "raw_spoof_softmax": 0.994525,
+          "model_input_sha256": "2451018650613918ab04df6dc62a237ed96dcdf2f17d48ab79522b808c3a8c21",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 8.075,
+          "raw_bonafide_logit": -1.361117,
+          "raw_spoof_softmax": 0.909597,
+          "model_input_sha256": "03a2a9efc81e783a67cac385223e6e7f86b8a963c084d19bdd08142f0ee0b0c7",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "806ed735f1ee1435a24e1b9c",
+      "group": "5edc688b49f09ead0f6981d00c5d97dbe0fa182c11ca0a29de13b193648d8071",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "97604446ba8f53525ecebe30808d38a748b75bcab09434666369570947bc287e",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "e822435b9a667043bbcdd8ecdca6dc7fae75e37655d4f908f7476ec0510d9520",
+      "score": 0.5536991162848297,
+      "seconds": 0.3538119000149891,
+      "scoredDurationSeconds": 8.075,
+      "totalDurationSeconds": 8.748,
+      "inputTrace": {
+        "sourceSha256": "e822435b9a667043bbcdd8ecdca6dc7fae75e37655d4f908f7476ec0510d9520",
+        "decoded": true,
+        "resampledFloat32Sha256": "af5c8176794648a1e3d1c7a3b66bef8d15f2a4dbf130b63ab18d230bc657924d",
+        "modelSamples": 139968,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 8.075,
+            "end_seconds": 8.748,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.772461,
+          "raw_spoof_softmax": 0.992902,
+          "model_input_sha256": "919446e176282e8324350c3ab6a853facca359a7ca9514854e0d2538ddef7cb2",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 8.075,
+          "raw_bonafide_logit": 0.544979,
+          "raw_spoof_softmax": 0.114605,
+          "model_input_sha256": "d86d025c9aafc04eb9ac02060af423d81b77bdc66855a6f0e9356e630d1830da",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "27c5221cc80c7e50e27054bb",
+      "group": "77026b6ea714280c81acfc3ee41e99225ffcef77239f07ffe93b1133d093465e",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "c1d48dca0c4d620e6865a1d82d90eb877948f183e9236d1fbeda344066e8f834",
+      "variant": "original",
+      "derivedSha256": "c1d48dca0c4d620e6865a1d82d90eb877948f183e9236d1fbeda344066e8f834",
+      "score": 0.9976530000000001,
+      "seconds": 0.188094999990426,
+      "scoredDurationSeconds": 1.342,
+      "totalDurationSeconds": 1.342,
+      "inputTrace": {
+        "sourceSha256": "c1d48dca0c4d620e6865a1d82d90eb877948f183e9236d1fbeda344066e8f834",
+        "decoded": true,
+        "resampledFloat32Sha256": "f92b6a82b3a48a90bfd57adbd418e6a5635f5c5f2ff060325eff39fadd781b33",
+        "modelSamples": 21477,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 1.342,
+          "raw_bonafide_logit": -3.140575,
+          "raw_spoof_softmax": 0.997653,
+          "model_input_sha256": "8627277cae982455822706400ced28d5413cbc22ec00788b954221119f68e89a",
+          "padded_samples": 43123
+        }
+      ]
+    },
+    {
+      "id": "27c5221cc80c7e50e27054bb",
+      "group": "77026b6ea714280c81acfc3ee41e99225ffcef77239f07ffe93b1133d093465e",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "c1d48dca0c4d620e6865a1d82d90eb877948f183e9236d1fbeda344066e8f834",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "b064f8263a976ca305999ee09f3ad402b4ea4d30c7e6faaa43491f0128ded9b9",
+      "score": 0.997306,
+      "seconds": 0.18002970004454255,
+      "scoredDurationSeconds": 1.44,
+      "totalDurationSeconds": 1.44,
+      "inputTrace": {
+        "sourceSha256": "b064f8263a976ca305999ee09f3ad402b4ea4d30c7e6faaa43491f0128ded9b9",
+        "decoded": true,
+        "resampledFloat32Sha256": "8ae2f7a346c766e637614c0b1efcb7fd0ea151cacda1cc6f833c1a19383dd1a7",
+        "modelSamples": 23040,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 1.44,
+          "raw_bonafide_logit": -3.073466,
+          "raw_spoof_softmax": 0.997306,
+          "model_input_sha256": "157c2c9757840b9476797a2b0abec1b1400463902ef6380acae31c15cf42c32f",
+          "padded_samples": 41560
+        }
+      ]
+    },
+    {
+      "id": "499a638ece85b39f11fdb791",
+      "group": "77026b6ea714280c81acfc3ee41e99225ffcef77239f07ffe93b1133d093465e",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "2aab69344329ddf83d20d76878b5fe188d9083b91435da30d302e708911a1e33",
+      "variant": "original",
+      "derivedSha256": "2aab69344329ddf83d20d76878b5fe188d9083b91435da30d302e708911a1e33",
+      "score": 0.999122,
+      "seconds": 0.17491400003200397,
+      "scoredDurationSeconds": 1.347,
+      "totalDurationSeconds": 1.347,
+      "inputTrace": {
+        "sourceSha256": "2aab69344329ddf83d20d76878b5fe188d9083b91435da30d302e708911a1e33",
+        "decoded": true,
+        "resampledFloat32Sha256": "15b9e8ff7577b13fef86aaa5e65b90332074b359a1d14ca633ba058173910780",
+        "modelSamples": 21549,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 1.347,
+          "raw_bonafide_logit": -3.564703,
+          "raw_spoof_softmax": 0.999122,
+          "model_input_sha256": "9b5bb4dcd9bd69b172fb7d4fb8ec92fe1368981a86c7829600ebd615252e1665",
+          "padded_samples": 43051
+        }
+      ]
+    },
+    {
+      "id": "499a638ece85b39f11fdb791",
+      "group": "77026b6ea714280c81acfc3ee41e99225ffcef77239f07ffe93b1133d093465e",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "2aab69344329ddf83d20d76878b5fe188d9083b91435da30d302e708911a1e33",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "541653b16d28b2993d915c19a2cc2ea4aa82d1014f5aeb630ae3a6826706eb99",
+      "score": 0.998547,
+      "seconds": 0.1783900000154972,
+      "scoredDurationSeconds": 1.44,
+      "totalDurationSeconds": 1.44,
+      "inputTrace": {
+        "sourceSha256": "541653b16d28b2993d915c19a2cc2ea4aa82d1014f5aeb630ae3a6826706eb99",
+        "decoded": true,
+        "resampledFloat32Sha256": "3eec40382fdcea03cafc8c8701161916aa3bc186e0d2ed4eb5c3755a3e25b52a",
+        "modelSamples": 23040,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 1.44,
+          "raw_bonafide_logit": -3.373799,
+          "raw_spoof_softmax": 0.998547,
+          "model_input_sha256": "cd511fb15ddc7656da7f0859f80b3949ffdb32e1221f409cb219fbf670253148",
+          "padded_samples": 41560
+        }
+      ]
+    },
+    {
+      "id": "d8c73f13ba417be578d2a46f",
+      "group": "fe9e455878d8d58b9d86715bd0f345d80bc778c6979cbbf8dc8578c070e5ab20",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "9933a74fed7b342c9419f02a81e6aefed9aa62b1c8d6df3b70a4c322d0d83d86",
+      "variant": "original",
+      "derivedSha256": "9933a74fed7b342c9419f02a81e6aefed9aa62b1c8d6df3b70a4c322d0d83d86",
+      "score": 0.998185,
+      "seconds": 0.19040570000652224,
+      "scoredDurationSeconds": 3.525,
+      "totalDurationSeconds": 3.525,
+      "inputTrace": {
+        "sourceSha256": "9933a74fed7b342c9419f02a81e6aefed9aa62b1c8d6df3b70a4c322d0d83d86",
+        "decoded": true,
+        "resampledFloat32Sha256": "3cde62c3b06ad4de74624d561663192f7c96a3967a11917a506f65be3f406024",
+        "modelSamples": 56400,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 3.525,
+          "raw_bonafide_logit": -3.250041,
+          "raw_spoof_softmax": 0.998185,
+          "model_input_sha256": "c3e3ae3eee7abf7d2aadd7499cc03c2c6de62ea2f82aa8a85dd73496925603bb",
+          "padded_samples": 8200
+        }
+      ]
+    },
+    {
+      "id": "d8c73f13ba417be578d2a46f",
+      "group": "fe9e455878d8d58b9d86715bd0f345d80bc778c6979cbbf8dc8578c070e5ab20",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "9933a74fed7b342c9419f02a81e6aefed9aa62b1c8d6df3b70a4c322d0d83d86",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "27efe100e55a7315eb3bfebac816a9d98340d26c843eb0b3fdfc766174799929",
+      "score": 0.99896,
+      "seconds": 0.19186680001439527,
+      "scoredDurationSeconds": 3.6,
+      "totalDurationSeconds": 3.6,
+      "inputTrace": {
+        "sourceSha256": "27efe100e55a7315eb3bfebac816a9d98340d26c843eb0b3fdfc766174799929",
+        "decoded": true,
+        "resampledFloat32Sha256": "a020401305f50438fb7a6ab3c33956a6337a86fd56ca805ede35d8382a6e8162",
+        "modelSamples": 57600,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 3.6,
+          "raw_bonafide_logit": -3.473187,
+          "raw_spoof_softmax": 0.99896,
+          "model_input_sha256": "4e819f2f5d41f4a721cd7884bf47237fe7e612bf8536d57a3b1651f389be14c3",
+          "padded_samples": 7000
+        }
+      ]
+    },
+    {
+      "id": "b461d6466b0cb0dcb24e241b",
+      "group": "fe9e455878d8d58b9d86715bd0f345d80bc778c6979cbbf8dc8578c070e5ab20",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "9151fb1ccad143d26dcdb8ac9604bdd772fa70fd7de8e2cfdb86d9d25ebb6522",
+      "variant": "original",
+      "derivedSha256": "9151fb1ccad143d26dcdb8ac9604bdd772fa70fd7de8e2cfdb86d9d25ebb6522",
+      "score": 0.999578,
+      "seconds": 0.19314899999881163,
+      "scoredDurationSeconds": 3.529,
+      "totalDurationSeconds": 3.529,
+      "inputTrace": {
+        "sourceSha256": "9151fb1ccad143d26dcdb8ac9604bdd772fa70fd7de8e2cfdb86d9d25ebb6522",
+        "decoded": true,
+        "resampledFloat32Sha256": "df96fc215ddf1e513b0d7d6e403070025710c67d209b871c0b8f250b7ed718fa",
+        "modelSamples": 56471,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 3.529,
+          "raw_bonafide_logit": -3.891984,
+          "raw_spoof_softmax": 0.999578,
+          "model_input_sha256": "1ead2ed270be72c9e1d60b5a5df8a4c29845dd67fa95401beca00b594d6451e3",
+          "padded_samples": 8129
+        }
+      ]
+    },
+    {
+      "id": "b461d6466b0cb0dcb24e241b",
+      "group": "fe9e455878d8d58b9d86715bd0f345d80bc778c6979cbbf8dc8578c070e5ab20",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "9151fb1ccad143d26dcdb8ac9604bdd772fa70fd7de8e2cfdb86d9d25ebb6522",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "929e560688564cc7fc18f5801689dee3821c5f304ebe475eb77ee8cffef8423a",
+      "score": 0.998959,
+      "seconds": 0.18778980005299672,
+      "scoredDurationSeconds": 3.636,
+      "totalDurationSeconds": 3.636,
+      "inputTrace": {
+        "sourceSha256": "929e560688564cc7fc18f5801689dee3821c5f304ebe475eb77ee8cffef8423a",
+        "decoded": true,
+        "resampledFloat32Sha256": "de91fc2935b5d6076fecbfb5ff5cc2ec933a3b79b5a41696a3195e0317d5696d",
+        "modelSamples": 58176,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 3.636,
+          "raw_bonafide_logit": -3.468605,
+          "raw_spoof_softmax": 0.998959,
+          "model_input_sha256": "4f08333ad1497173b070ce408f3d0fdefc6667b399d4a41c7f34f49397365cec",
+          "padded_samples": 6424
+        }
+      ]
+    },
+    {
+      "id": "ce126800ee4e37e9c5667a74",
+      "group": "e8e33042ebec9916c2cddf1a237225f9a00fd12210856f486921d43a289d2372",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "8d9462ea307825d9a0d3db22412928dea7f4115f3eb38b6c4bd9bd0c985cdef0",
+      "variant": "original",
+      "derivedSha256": "8d9462ea307825d9a0d3db22412928dea7f4115f3eb38b6c4bd9bd0c985cdef0",
+      "score": 0.9713074856032502,
+      "seconds": 0.38092790002701804,
+      "scoredDurationSeconds": 5.661,
+      "totalDurationSeconds": 5.661,
+      "inputTrace": {
+        "sourceSha256": "8d9462ea307825d9a0d3db22412928dea7f4115f3eb38b6c4bd9bd0c985cdef0",
+        "decoded": true,
+        "resampledFloat32Sha256": "63c225fd9f8270356d3f607993bb00315aeab74357c5ae0c217185c2ef0c4934",
+        "modelSamples": 90579,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.80242,
+          "raw_spoof_softmax": 0.959996,
+          "model_input_sha256": "4fcc87eeb8a9e61cb739c8bba289b4054f1125188073f642ea04fc83a2a191a4",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 5.661,
+          "raw_bonafide_logit": -3.764668,
+          "raw_spoof_softmax": 0.999426,
+          "model_input_sha256": "62905a31c64e41a8edc0442323c4797b0aa45a91c8711ed87f53d56b06e6c0c4",
+          "padded_samples": 38621
+        }
+      ]
+    },
+    {
+      "id": "ce126800ee4e37e9c5667a74",
+      "group": "e8e33042ebec9916c2cddf1a237225f9a00fd12210856f486921d43a289d2372",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "8d9462ea307825d9a0d3db22412928dea7f4115f3eb38b6c4bd9bd0c985cdef0",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "ca4e8f093900526ba7b1f75a55f584bc370e202748da7245d896ccb88aeb646f",
+      "score": 0.7825969258680555,
+      "seconds": 0.3679699000203982,
+      "scoredDurationSeconds": 5.76,
+      "totalDurationSeconds": 5.76,
+      "inputTrace": {
+        "sourceSha256": "ca4e8f093900526ba7b1f75a55f584bc370e202748da7245d896ccb88aeb646f",
+        "decoded": true,
+        "resampledFloat32Sha256": "b7b1bb36a1ed1d8e5026848037db8140873cbc62270d228500a0a4eac0549423",
+        "modelSamples": 92160,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.326745,
+          "raw_spoof_softmax": 0.897909,
+          "model_input_sha256": "7b8fcfdb0522cbfc95db1e3dca15b5f4dec93106c7461ac762b6519e4d767e8c",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 5.76,
+          "raw_bonafide_logit": -0.27735,
+          "raw_spoof_softmax": 0.51242,
+          "model_input_sha256": "00a491b61d5f9006d9401e30b7f30f50f3812281716f7fd5bb01ad6b7314dba0",
+          "padded_samples": 37040
+        }
+      ]
+    },
+    {
+      "id": "c156ffa0e1f3e92028ac05ae",
+      "group": "e8e33042ebec9916c2cddf1a237225f9a00fd12210856f486921d43a289d2372",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "3395571fdb749d7c0e53bd5e173bbeaa4f9736cb464624b456cdd77df7c255bc",
+      "variant": "original",
+      "derivedSha256": "3395571fdb749d7c0e53bd5e173bbeaa4f9736cb464624b456cdd77df7c255bc",
+      "score": 0.9984537163783974,
+      "seconds": 0.3947873000288382,
+      "scoredDurationSeconds": 5.666,
+      "totalDurationSeconds": 5.666,
+      "inputTrace": {
+        "sourceSha256": "3395571fdb749d7c0e53bd5e173bbeaa4f9736cb464624b456cdd77df7c255bc",
+        "decoded": true,
+        "resampledFloat32Sha256": "ef22a85f6d623721a35fb3ebf6f188a626b7583e375ab00fce147e875fefb051",
+        "modelSamples": 90651,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.208337,
+          "raw_spoof_softmax": 0.998201,
+          "model_input_sha256": "73c3ff3c1fe04969db854685d2f951144d945ea490030f9880dab5836ecfc621",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 5.666,
+          "raw_bonafide_logit": -3.574017,
+          "raw_spoof_softmax": 0.99908,
+          "model_input_sha256": "d9e59bb8f1cec1dcaccb2736afd58492df5b308818d192c51968c0b5dd4ab2cb",
+          "padded_samples": 38549
+        }
+      ]
+    },
+    {
+      "id": "c156ffa0e1f3e92028ac05ae",
+      "group": "e8e33042ebec9916c2cddf1a237225f9a00fd12210856f486921d43a289d2372",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "3395571fdb749d7c0e53bd5e173bbeaa4f9736cb464624b456cdd77df7c255bc",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "98ff301b6dc76819b98a34e74d233500974bf7defb305bf6e1a928ffd4a5560f",
+      "score": 0.9128918852430555,
+      "seconds": 0.36678480001864955,
+      "scoredDurationSeconds": 5.76,
+      "totalDurationSeconds": 5.76,
+      "inputTrace": {
+        "sourceSha256": "98ff301b6dc76819b98a34e74d233500974bf7defb305bf6e1a928ffd4a5560f",
+        "decoded": true,
+        "resampledFloat32Sha256": "a0e0b169bbd4f6d3bfc0adab7d9db3719bef1ed0807c6d9bce69e086aa05cef3",
+        "modelSamples": 92160,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.868287,
+          "raw_spoof_softmax": 0.99628,
+          "model_input_sha256": "ccdd9cc1334e134cb2d2a820eed4fb6a93c1bfd23deb05c59ee01c8322024008",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 5.76,
+          "raw_bonafide_logit": -0.733554,
+          "raw_spoof_softmax": 0.717513,
+          "model_input_sha256": "b8f4d582b5f3014379889a0cdd4c078fe4dc01622131d92e7f66428f634bc049",
+          "padded_samples": 37040
+        }
+      ]
+    },
+    {
+      "id": "bcfa26ade24c23f568ccc3d1",
+      "group": "0e52ead69fc7db092bb73a5cca44a813427b6dc21ee0caf2f81db508716e4a4a",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "d6fa8b1e58a984b46738f113b4018d5d15ab3ac6b50c98a9c24b536d98907600",
+      "variant": "original",
+      "derivedSha256": "d6fa8b1e58a984b46738f113b4018d5d15ab3ac6b50c98a9c24b536d98907600",
+      "score": 0.989064,
+      "seconds": 0.1818780000321567,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.686,
+      "inputTrace": {
+        "sourceSha256": "d6fa8b1e58a984b46738f113b4018d5d15ab3ac6b50c98a9c24b536d98907600",
+        "decoded": true,
+        "resampledFloat32Sha256": "6b2344c2a60e516361b40ed4067cc2b74adbe377361acfa3b68a51f2f5c0b53e",
+        "modelSamples": 74976,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.686,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.336215,
+          "raw_spoof_softmax": 0.989064,
+          "model_input_sha256": "c5a6a92f51b77ae0b3eb34ea6cbb606777df0203a5b836eea3a8f068d592059e",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "bcfa26ade24c23f568ccc3d1",
+      "group": "0e52ead69fc7db092bb73a5cca44a813427b6dc21ee0caf2f81db508716e4a4a",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "d6fa8b1e58a984b46738f113b4018d5d15ab3ac6b50c98a9c24b536d98907600",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "f71c81aaa610d0e70a0c4c34c32ce29b3e76dc07e3fcdc5cdae2ff78c4dfcbe9",
+      "score": 0.965978,
+      "seconds": 0.17874850000953302,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.788,
+      "inputTrace": {
+        "sourceSha256": "f71c81aaa610d0e70a0c4c34c32ce29b3e76dc07e3fcdc5cdae2ff78c4dfcbe9",
+        "decoded": true,
+        "resampledFloat32Sha256": "ced65921e817ac9458e6c4a3ca75c564470f507d614bd25cb55448ff8ea9a7ff",
+        "modelSamples": 76608,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.788,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.845774,
+          "raw_spoof_softmax": 0.965978,
+          "model_input_sha256": "e3e7215c15ed942c103c184ac03282bed9cd6bc9aa2c37139427d4da72dca076",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "6cba2b4b58a97dcdb22f35cd",
+      "group": "0e52ead69fc7db092bb73a5cca44a813427b6dc21ee0caf2f81db508716e4a4a",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "120d9d0249dc650e38e61703356a7acbc4cd5fb9f7906bb26631dce9604e0d12",
+      "variant": "original",
+      "derivedSha256": "120d9d0249dc650e38e61703356a7acbc4cd5fb9f7906bb26631dce9604e0d12",
+      "score": 0.9965739999999998,
+      "seconds": 0.1903106000390835,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.69,
+      "inputTrace": {
+        "sourceSha256": "120d9d0249dc650e38e61703356a7acbc4cd5fb9f7906bb26631dce9604e0d12",
+        "decoded": true,
+        "resampledFloat32Sha256": "01d305a2f5c88f8fac37c685adcef7176e68bb796608403bb03b4a127f6c81ef",
+        "modelSamples": 75047,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.6904375,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.842128,
+          "raw_spoof_softmax": 0.996574,
+          "model_input_sha256": "c4e9b5090374fbc7019c51b246822e7e8ec68eee655e8f2f0d68700fed9be3a6",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "6cba2b4b58a97dcdb22f35cd",
+      "group": "0e52ead69fc7db092bb73a5cca44a813427b6dc21ee0caf2f81db508716e4a4a",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "120d9d0249dc650e38e61703356a7acbc4cd5fb9f7906bb26631dce9604e0d12",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "676cd83312ad28c93af78bef0f6d0e1047004e45ae93cdecebfacf1b4718a43a",
+      "score": 0.969033,
+      "seconds": 0.18634820001898333,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.788,
+      "inputTrace": {
+        "sourceSha256": "676cd83312ad28c93af78bef0f6d0e1047004e45ae93cdecebfacf1b4718a43a",
+        "decoded": true,
+        "resampledFloat32Sha256": "a0a19224af9ad085d57f82769bf1641ff212c619f3002df5b8dda00977717340",
+        "modelSamples": 76608,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.788,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.861599,
+          "raw_spoof_softmax": 0.969033,
+          "model_input_sha256": "d4317071f0605426ca4269f118f9c7a621c30ee9dff4e762cd6e3a4d3565ad40",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "e6505736df375505c725b01a",
+      "group": "82bd716d9d360168cf111cf718e846d7f773c9e41c3a8beb2041275588d4e77e",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "09842f121b47d9c62e78f963bc05d00aed07448d74755738b004f7b782829ed8",
+      "variant": "original",
+      "derivedSha256": "09842f121b47d9c62e78f963bc05d00aed07448d74755738b004f7b782829ed8",
+      "score": 0.9949939999999999,
+      "seconds": 0.1957455999800004,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.245,
+      "inputTrace": {
+        "sourceSha256": "09842f121b47d9c62e78f963bc05d00aed07448d74755738b004f7b782829ed8",
+        "decoded": true,
+        "resampledFloat32Sha256": "5fc26f5a8107a46fe1659ea4155701aec8e08d31911a3ce441f516582d362fe6",
+        "modelSamples": 67917,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.2448125,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.756808,
+          "raw_spoof_softmax": 0.994994,
+          "model_input_sha256": "f0148e4bbfae642d02c6d89435da71ab68494a55a8623966be4127ae4aeeb4ce",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "e6505736df375505c725b01a",
+      "group": "82bd716d9d360168cf111cf718e846d7f773c9e41c3a8beb2041275588d4e77e",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "09842f121b47d9c62e78f963bc05d00aed07448d74755738b004f7b782829ed8",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "2416301b14bfe7bede4445b3e309f0650f20c937bb190860f4f730722481bf8e",
+      "score": 0.385907,
+      "seconds": 0.19468890002463013,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.32,
+      "inputTrace": {
+        "sourceSha256": "2416301b14bfe7bede4445b3e309f0650f20c937bb190860f4f730722481bf8e",
+        "decoded": true,
+        "resampledFloat32Sha256": "f80aef237a09850568e69c1f2d4ccd0cc961ada5c59394f14f45fe654de57160",
+        "modelSamples": 69120,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.32,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -0.152468,
+          "raw_spoof_softmax": 0.385907,
+          "model_input_sha256": "345c004a00a9a4a1ee10e64d85e14b8af5f2b5dba0fb6b7f826ec8732fb1a2fc",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "bcef26a6a14fa72384362ddf",
+      "group": "82bd716d9d360168cf111cf718e846d7f773c9e41c3a8beb2041275588d4e77e",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "82f2aa1763b23efae76e41073d480c1f403a059937c7bb98f44c369b7dc769f1",
+      "variant": "original",
+      "derivedSha256": "82f2aa1763b23efae76e41073d480c1f403a059937c7bb98f44c369b7dc769f1",
+      "score": 0.9973909999999999,
+      "seconds": 0.19174199999542907,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.249,
+      "inputTrace": {
+        "sourceSha256": "82f2aa1763b23efae76e41073d480c1f403a059937c7bb98f44c369b7dc769f1",
+        "decoded": true,
+        "resampledFloat32Sha256": "a8dc9c534b8f9292154dba4bcdd4221ec9c3d5fa77f5143a3841583a21e735c9",
+        "modelSamples": 67989,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.2493125,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.099239,
+          "raw_spoof_softmax": 0.997391,
+          "model_input_sha256": "36fc48f83c090553b5ea320e3b0e9b1609d64b6a7a2cd4a1d7d808cde1854908",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "bcef26a6a14fa72384362ddf",
+      "group": "82bd716d9d360168cf111cf718e846d7f773c9e41c3a8beb2041275588d4e77e",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "82f2aa1763b23efae76e41073d480c1f403a059937c7bb98f44c369b7dc769f1",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "36809af3e97197361d8affabd074189be92200bd6406e63bbe0a1baffea10f11",
+      "score": 0.908368,
+      "seconds": 0.19670799997402355,
+      "scoredDurationSeconds": 4.037,
+      "totalDurationSeconds": 4.356,
+      "inputTrace": {
+        "sourceSha256": "36809af3e97197361d8affabd074189be92200bd6406e63bbe0a1baffea10f11",
+        "decoded": true,
+        "resampledFloat32Sha256": "ae6f958e5b994687dfcc9a4d0c13901728c6e4928b58e81ebdd4cd27687ffddf",
+        "modelSamples": 69696,
+        "windowSamples": 64600,
+        "skippedWindows": [
+          {
+            "start_seconds": 4.0375,
+            "end_seconds": 4.356,
+            "reason": "short_tail"
+          }
+        ],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -1.400277,
+          "raw_spoof_softmax": 0.908368,
+          "model_input_sha256": "504e55b55385f5e332385da6ce76c93bb2b32c605abec8f88632c093fcdfee18",
+          "padded_samples": 0
+        }
+      ]
+    },
+    {
+      "id": "4bdb2017941a9b1dd0a9afa2",
+      "group": "2d00aa0ecefd9b8865612a8bcf8d0b08e443afffc8abd2c0e250e30c39aa720f",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "a19e2a3260b8f161587fa014b1d04142d5893addbb6549930360e00e0f4f9e30",
+      "variant": "original",
+      "derivedSha256": "a19e2a3260b8f161587fa014b1d04142d5893addbb6549930360e00e0f4f9e30",
+      "score": 0.989442,
+      "seconds": 0.19964110001455992,
+      "scoredDurationSeconds": 2.886,
+      "totalDurationSeconds": 2.886,
+      "inputTrace": {
+        "sourceSha256": "a19e2a3260b8f161587fa014b1d04142d5893addbb6549930360e00e0f4f9e30",
+        "decoded": true,
+        "resampledFloat32Sha256": "7b566104b6983be57433566ec8f21de23335d033929d9504ca7308077eb459db",
+        "modelSamples": 46183,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 2.886,
+          "raw_bonafide_logit": -2.429471,
+          "raw_spoof_softmax": 0.989442,
+          "model_input_sha256": "9c6d81e7cef8c5c12ec4dea54b0de1f1422cd150db1e4d7bdfd53d65d9d462cc",
+          "padded_samples": 18417
+        }
+      ]
+    },
+    {
+      "id": "4bdb2017941a9b1dd0a9afa2",
+      "group": "2d00aa0ecefd9b8865612a8bcf8d0b08e443afffc8abd2c0e250e30c39aa720f",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "a19e2a3260b8f161587fa014b1d04142d5893addbb6549930360e00e0f4f9e30",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "3caa510658430c9ccd3bf53f38b293460ede3ebb5af50331a398cf8d10130c0d",
+      "score": 0.991003,
+      "seconds": 0.1956658000126481,
+      "scoredDurationSeconds": 2.988,
+      "totalDurationSeconds": 2.988,
+      "inputTrace": {
+        "sourceSha256": "3caa510658430c9ccd3bf53f38b293460ede3ebb5af50331a398cf8d10130c0d",
+        "decoded": true,
+        "resampledFloat32Sha256": "f580f0ae68f8c832370f0f7b370d81438d430d39b31e4606b4a148bf511552bd",
+        "modelSamples": 47808,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 2.988,
+          "raw_bonafide_logit": -2.534576,
+          "raw_spoof_softmax": 0.991003,
+          "model_input_sha256": "764ddf607641dab631853e2bf383b259710d2b1a6e028a45b25606802475711a",
+          "padded_samples": 16792
+        }
+      ]
+    },
+    {
+      "id": "3183b879168764811d3f0f28",
+      "group": "2d00aa0ecefd9b8865612a8bcf8d0b08e443afffc8abd2c0e250e30c39aa720f",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "d6222671b72d431eee58d4a05e883d6d2cc4b2eadca53c5272203bd43228e4b4",
+      "variant": "original",
+      "derivedSha256": "d6222671b72d431eee58d4a05e883d6d2cc4b2eadca53c5272203bd43228e4b4",
+      "score": 0.968026,
+      "seconds": 0.19409379997523502,
+      "scoredDurationSeconds": 2.891,
+      "totalDurationSeconds": 2.891,
+      "inputTrace": {
+        "sourceSha256": "d6222671b72d431eee58d4a05e883d6d2cc4b2eadca53c5272203bd43228e4b4",
+        "decoded": true,
+        "resampledFloat32Sha256": "a326617d87ce4147e9014fed5855cc073ea233c7d12686f3a3041ed72a7781c0",
+        "modelSamples": 46255,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 2.891,
+          "raw_bonafide_logit": -1.917799,
+          "raw_spoof_softmax": 0.968026,
+          "model_input_sha256": "02626be7812172403c5ae23e959a097217315fe7befcb3928a5644cd5390564b",
+          "padded_samples": 18345
+        }
+      ]
+    },
+    {
+      "id": "3183b879168764811d3f0f28",
+      "group": "2d00aa0ecefd9b8865612a8bcf8d0b08e443afffc8abd2c0e250e30c39aa720f",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "d6222671b72d431eee58d4a05e883d6d2cc4b2eadca53c5272203bd43228e4b4",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "c8917b1d6fe94058781ea81cf39add6fe3c6bf6b1515d60bafb99134191a7df8",
+      "score": 0.9491590000000001,
+      "seconds": 0.19123220001347363,
+      "scoredDurationSeconds": 2.988,
+      "totalDurationSeconds": 2.988,
+      "inputTrace": {
+        "sourceSha256": "c8917b1d6fe94058781ea81cf39add6fe3c6bf6b1515d60bafb99134191a7df8",
+        "decoded": true,
+        "resampledFloat32Sha256": "132bc7fa465cbb605e79da6cfa9fbd3ddbecace95e0236d6f5bfa9af785ad73e",
+        "modelSamples": 47808,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 2.988,
+          "raw_bonafide_logit": -1.699532,
+          "raw_spoof_softmax": 0.949159,
+          "model_input_sha256": "1c851c6e7439656ff53d7d32bfd7d85a89caaa75906dd8d1976bd9c4b9f53ae8",
+          "padded_samples": 16792
+        }
+      ]
+    },
+    {
+      "id": "2bca97ca62c3edc549911fe9",
+      "group": "2b8d73e0f34add7679523b92290d33f04d4ffaa144c4c7cf5a7d93272c1cc2d6",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "fa894095ff5ef72d8c2e5966f89a2bcf252e6303f9e3a4953e578c04abb15b96",
+      "variant": "original",
+      "derivedSha256": "fa894095ff5ef72d8c2e5966f89a2bcf252e6303f9e3a4953e578c04abb15b96",
+      "score": 0.8082157512044968,
+      "seconds": 0.39725500001804903,
+      "scoredDurationSeconds": 7.472,
+      "totalDurationSeconds": 7.472,
+      "inputTrace": {
+        "sourceSha256": "fa894095ff5ef72d8c2e5966f89a2bcf252e6303f9e3a4953e578c04abb15b96",
+        "decoded": true,
+        "resampledFloat32Sha256": "9c55c59751b7aad70b385ccfe30d468ad250da7b17df790dfda1f44149cfaf18",
+        "modelSamples": 119558,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -3.44708,
+          "raw_spoof_softmax": 0.998844,
+          "model_input_sha256": "0a67d26fbe109aaee4bda9cb173fd4d155f7970106eba3d53665d7037fe7f39f",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 7.472,
+          "raw_bonafide_logit": -0.529232,
+          "raw_spoof_softmax": 0.584179,
+          "model_input_sha256": "903553d5a3c59c5fd500e3f7d8ef58c455d94512f7edddb4b165bd9eecb2cde1",
+          "padded_samples": 9642
+        }
+      ]
+    },
+    {
+      "id": "2bca97ca62c3edc549911fe9",
+      "group": "2b8d73e0f34add7679523b92290d33f04d4ffaa144c4c7cf5a7d93272c1cc2d6",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "fa894095ff5ef72d8c2e5966f89a2bcf252e6303f9e3a4953e578c04abb15b96",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "31079b0941791c3ee686e853ed1f475e33c69339fac2518c18fd732810369d5d",
+      "score": 0.7230620396825397,
+      "seconds": 0.4028025000006892,
+      "scoredDurationSeconds": 7.56,
+      "totalDurationSeconds": 7.56,
+      "inputTrace": {
+        "sourceSha256": "31079b0941791c3ee686e853ed1f475e33c69339fac2518c18fd732810369d5d",
+        "decoded": true,
+        "resampledFloat32Sha256": "fdd2f7a1a4e98cb329c1fe959878f23d3968f6ad69a24a38320054830977af28",
+        "modelSamples": 120960,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.344385,
+          "raw_spoof_softmax": 0.987315,
+          "model_input_sha256": "d6b8370536ee8de825a11a90d838599e3fc83083c4a05b5c5adc8ad3a447a69e",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 7.56,
+          "raw_bonafide_logit": -0.239255,
+          "raw_spoof_softmax": 0.420255,
+          "model_input_sha256": "2cd1d8717605abf8e2e1cea6c3a19a8a6ca46ecae0b0054eb9aafa8db1ba83ff",
+          "padded_samples": 8240
+        }
+      ]
+    },
+    {
+      "id": "ac074cbc16682c2d9a9080a5",
+      "group": "2b8d73e0f34add7679523b92290d33f04d4ffaa144c4c7cf5a7d93272c1cc2d6",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "b1a3f600f7dff816950a05d8706b490b5937dcaeb2f903aaf05c3addd4d20cd5",
+      "variant": "original",
+      "derivedSha256": "b1a3f600f7dff816950a05d8706b490b5937dcaeb2f903aaf05c3addd4d20cd5",
+      "score": 0.9802697834693059,
+      "seconds": 0.38749880000250414,
+      "scoredDurationSeconds": 7.477,
+      "totalDurationSeconds": 7.477,
+      "inputTrace": {
+        "sourceSha256": "b1a3f600f7dff816950a05d8706b490b5937dcaeb2f903aaf05c3addd4d20cd5",
+        "decoded": true,
+        "resampledFloat32Sha256": "193ecae856f3f42f6509e0bb9b559b42632043e3e2578475a953d5f8c80f2ba0",
+        "modelSamples": 119630,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -4.060978,
+          "raw_spoof_softmax": 0.999703,
+          "model_input_sha256": "8a8b6bf3cf093dc6b599b65c028b1873e4f3ac1722c28fca32704a3234dc01ac",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 7.477,
+          "raw_bonafide_logit": -1.728761,
+          "raw_spoof_softmax": 0.957464,
+          "model_input_sha256": "5a727af079b162239a87f324864c9841e4eb59b324bc0fa43511a9c4d5fa9ed5",
+          "padded_samples": 9570
+        }
+      ]
+    },
+    {
+      "id": "ac074cbc16682c2d9a9080a5",
+      "group": "2b8d73e0f34add7679523b92290d33f04d4ffaa144c4c7cf5a7d93272c1cc2d6",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "b1a3f600f7dff816950a05d8706b490b5937dcaeb2f903aaf05c3addd4d20cd5",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "33d898ae5df80ea85c94e5bf90c1b52af8a7ea56bb572e4d67c833f67d186c03",
+      "score": 0.973248155952381,
+      "seconds": 0.3546804999932647,
+      "scoredDurationSeconds": 7.56,
+      "totalDurationSeconds": 7.56,
+      "inputTrace": {
+        "sourceSha256": "33d898ae5df80ea85c94e5bf90c1b52af8a7ea56bb572e4d67c833f67d186c03",
+        "decoded": true,
+        "resampledFloat32Sha256": "2fb10a74c71c8386db8dc1cb568cd51aee8979eef0191f03c8ee2a497c23a86e",
+        "modelSamples": 120960,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.882686,
+          "raw_spoof_softmax": 0.996328,
+          "model_input_sha256": "3e876dea12c159671ac17cb3c1c9e03f868b88e44c0579480bc3c88c5cb1620f",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 7.56,
+          "raw_bonafide_logit": -1.591624,
+          "raw_spoof_softmax": 0.946801,
+          "model_input_sha256": "5c5010a3a4b1e7e5990bb514a9d88432b3f0d2623a620da29586f20565aa1097",
+          "padded_samples": 8240
+        }
+      ]
+    },
+    {
+      "id": "fb92164b19770f1bc636dd9c",
+      "group": "f88465b4a4d007d8be49e9f91d45d79bcf278860a9d42b28984fcd55969e613f",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "85dfb09d5ae9753d474e21d5ff2733e95e9378daa1593fe5e979c5cb892f4f29",
+      "variant": "original",
+      "derivedSha256": "85dfb09d5ae9753d474e21d5ff2733e95e9378daa1593fe5e979c5cb892f4f29",
+      "score": 0.9873913710002883,
+      "seconds": 0.3909641999634914,
+      "scoredDurationSeconds": 6.938,
+      "totalDurationSeconds": 6.938,
+      "inputTrace": {
+        "sourceSha256": "85dfb09d5ae9753d474e21d5ff2733e95e9378daa1593fe5e979c5cb892f4f29",
+        "decoded": true,
+        "resampledFloat32Sha256": "ac7f54746a186ecc02e2c82d70258832a48120d9ad48496adf3dfaf499f9c0ad",
+        "modelSamples": 111013,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.735217,
+          "raw_spoof_softmax": 0.994324,
+          "model_input_sha256": "47b972ec8b19e08d2ac520f0a8803d77d11048e7cba6ac69305498693b7a6fa7",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.938,
+          "raw_bonafide_logit": -2.025272,
+          "raw_spoof_softmax": 0.977744,
+          "model_input_sha256": "45195ec28b884203ac6869c271f965f41fc7304f16db38a33cd1a54db326e482",
+          "padded_samples": 18187
+        }
+      ]
+    },
+    {
+      "id": "fb92164b19770f1bc636dd9c",
+      "group": "f88465b4a4d007d8be49e9f91d45d79bcf278860a9d42b28984fcd55969e613f",
+      "role": "held_out",
+      "label": "genuine",
+      "generator": "human_Linda_Johnson",
+      "sourceSha256": "85dfb09d5ae9753d474e21d5ff2733e95e9378daa1593fe5e979c5cb892f4f29",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "62df128196a4b1256ac9de3600faa0f283011465f264fa1f43b08ea2878a8063",
+      "score": 0.9924548256410256,
+      "seconds": 0.37743809999665245,
+      "scoredDurationSeconds": 7.02,
+      "totalDurationSeconds": 7.02,
+      "inputTrace": {
+        "sourceSha256": "62df128196a4b1256ac9de3600faa0f283011465f264fa1f43b08ea2878a8063",
+        "decoded": true,
+        "resampledFloat32Sha256": "2adb6e555108ca1ed269ee29bd7c2639339916897d8dc20b9035e17144504b89",
+        "modelSamples": 112320,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.971055,
+          "raw_spoof_softmax": 0.996784,
+          "model_input_sha256": "5d9d7bd0a9ef94a47d15fe4da99a6289060ef982bede431cdc1c755f98a77232",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 7.02,
+          "raw_bonafide_logit": -2.317507,
+          "raw_spoof_softmax": 0.986596,
+          "model_input_sha256": "98c676de1d3e161eb836610d77b77410b069ab489a3363ee58180fa4d4a389fc",
+          "padded_samples": 16880
+        }
+      ]
+    },
+    {
+      "id": "0e60caa672ce6ec20a9cdf81",
+      "group": "f88465b4a4d007d8be49e9f91d45d79bcf278860a9d42b28984fcd55969e613f",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "019f5dd59e1746d52bdc9dd2bd3f67c663327fe8c8244f856ba727144026d7b9",
+      "variant": "original",
+      "derivedSha256": "019f5dd59e1746d52bdc9dd2bd3f67c663327fe8c8244f856ba727144026d7b9",
+      "score": 0.9959200864179749,
+      "seconds": 0.37945579999359325,
+      "scoredDurationSeconds": 6.943,
+      "totalDurationSeconds": 6.943,
+      "inputTrace": {
+        "sourceSha256": "019f5dd59e1746d52bdc9dd2bd3f67c663327fe8c8244f856ba727144026d7b9",
+        "decoded": true,
+        "resampledFloat32Sha256": "8cae231089bc4956f90529aefabcc0b3931eaef3869425ceaa173d72a060d4cc",
+        "modelSamples": 111085,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.810968,
+          "raw_spoof_softmax": 0.995142,
+          "model_input_sha256": "213c3f66a4aad8fa23873b8653db44830b52bf2e14a526b426bca1f7e31f5851",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 6.943,
+          "raw_bonafide_logit": -2.939281,
+          "raw_spoof_softmax": 0.997001,
+          "model_input_sha256": "ee79fe8479d7027a845968535ab90fe36803d01a8ddeb376f1b32cccad7cf3d7",
+          "padded_samples": 18115
+        }
+      ]
+    },
+    {
+      "id": "0e60caa672ce6ec20a9cdf81",
+      "group": "f88465b4a4d007d8be49e9f91d45d79bcf278860a9d42b28984fcd55969e613f",
+      "role": "held_out",
+      "label": "synthetic",
+      "generator": "ljspeech_waveglow",
+      "sourceSha256": "019f5dd59e1746d52bdc9dd2bd3f67c663327fe8c8244f856ba727144026d7b9",
+      "variant": "mp3_64k_16khz",
+      "derivedSha256": "c46d1554dc59405110063013376740b92eba9c6cda030bc542f61ad91a930876",
+      "score": 0.9959363535612537,
+      "seconds": 0.36962059995858,
+      "scoredDurationSeconds": 7.02,
+      "totalDurationSeconds": 7.02,
+      "inputTrace": {
+        "sourceSha256": "c46d1554dc59405110063013376740b92eba9c6cda030bc542f61ad91a930876",
+        "decoded": true,
+        "resampledFloat32Sha256": "68acdf7a3ae504eca85d64dff1944e65664fa7a511781c507c6aab64ed4121b7",
+        "modelSamples": 112320,
+        "windowSamples": 64600,
+        "skippedWindows": [],
+        "speechPresence": "not_verified",
+        "status": "segments_available",
+        "conversion": "libsndfile float32 decode; arithmetic-mean downmix; polyphase 16kHz resample; repeat-pad usable tail; RMS silence gate only"
+      },
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "end_seconds": 4.037,
+          "raw_bonafide_logit": -2.833925,
+          "raw_spoof_softmax": 0.995361,
+          "model_input_sha256": "56c4a31f3d88d50217c3fda4cfb63dc7aebfe0cea644bd567f89bbd878b844da",
+          "padded_samples": 0
+        },
+        {
+          "start_seconds": 4.037,
+          "end_seconds": 7.02,
+          "raw_bonafide_logit": -2.973576,
+          "raw_spoof_softmax": 0.996715,
+          "model_input_sha256": "a23f02db65511578a6d0e14560c6261f8d0ee67fd12ce818c0e5cdd8d841a884",
+          "padded_samples": 16880
+        }
+      ]
+    }
+  ]
+}
