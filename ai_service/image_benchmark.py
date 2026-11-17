@@ -6,6 +6,7 @@ import json
 import math
 import os
 import platform
+import re
 import statistics
 import time
 from pathlib import Path
@@ -31,6 +32,21 @@ def wilson(successes, count):
 
 
 def summarize(rows):
+    rows = list(rows)
+    sample_ids=set()
+    for row in rows:
+        if (not isinstance(row,dict) or not isinstance(row.get("id"),str) or
+                not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}",row["id"])):
+            raise ValueError("Each benchmark row requires a well-formed id")
+        if row["id"] in sample_ids:
+            raise ValueError("Duplicate benchmark sample id")
+        sample_ids.add(row["id"])
+        if (not isinstance(row.get("group"),str) or
+                not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}",row["group"])):
+            raise ValueError("Source-group bootstrap requires a well-formed group id")
+        if "seconds" in row and (type(row["seconds"]) not in (int,float) or
+                                  not math.isfinite(row["seconds"]) or row["seconds"] < 0):
+            raise ValueError("Benchmark latency must be finite and nonnegative")
     result = metrics(rows, .5)
     tp, fp, tn, fn = (result[k] for k in ("tp", "fp", "tn", "fn"))
     n = tp+fp+tn+fn
@@ -51,7 +67,7 @@ def summarize(rows):
     import numpy as np
     groups = {}
     for row in rows:
-        groups.setdefault(row.get("group", row["id"]), []).append(row)
+        groups.setdefault(row["group"], []).append(row)
     keys = sorted(groups)
     rng = np.random.default_rng(20261115)
     bootstrap_metrics = ("accuracy", "precision", "recall", "specificity", "balanced_accuracy",
