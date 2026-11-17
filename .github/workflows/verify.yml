@@ -37,6 +37,7 @@ jobs:
       - run: npm test
       - run: npm run test:claim-provider
       - run: npm run test:nli
+      - run: npm run test:advanced-claims
       - run: npm run test:engine3
       - run: npm run test:engine4
       - run: npm run test:diagnostics

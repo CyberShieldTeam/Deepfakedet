@@ -1,0 +1,12 @@
+{
+  "version": "engine2-scifact-relevance-v1",
+  "source": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip",
+  "publisherMd5": "5f7d1de60b170fc8027bb7898e2efca1",
+  "seed": "veritas-scifact-relevance-v1",
+  "roles": {"development": 15, "validation": 15, "held_out": 30},
+  "sample": "Hash-ordered BEIR test qrels; no shared gold document IDs or token-Jaccard >=0.8 claim variants across selected queries. Full shared retrieval corpus is intentional; source-topic independence and pretraining absence are unknown.",
+  "candidatePool": "Full 5183-abstract corpus, application BM25 query/title+abstract scores, top six positive lexical candidates. No gold candidate injection or sentence selection using labels.",
+  "reranker": "Pinned ms-marco-MiniLM-L6-v2, exact claim/title+abstract, one pair CPU, 512-token no-truncation bound. Any unscored candidate retains full query baseline order. No fitting or thresholds.",
+  "metrics": "Document/whole-abstract relevance Recall@1/3/6, full-list MRR, nDCG@1/3/6 using supplied qrels. Unjudged documents treated as zero only for standard benchmark metrics, not proof of irrelevance. Not NLI or factual accuracy.",
+  "adoption": "Only optional experimental relevance ordering if validation MRR and nDCG@3 improve and Recall@6 unchanged. No default enablement or authoritative stance promotion. Held-out reported once without retuning. English scientific abstracts do not validate Wikipedia/news/multilingual accuracy."
+}

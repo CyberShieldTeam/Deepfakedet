@@ -34,16 +34,28 @@ export function wikipediaQuery(claim: string) {
 export function clearWikipediaCache() {
   cache.clear();
 }
-export function wikipediaSearchQuery(claim:string){
+export function wikipediaSubject(claim:string){
+  // Exact input tokens only. This is a narrow English subject heuristic, not NER.
+  const match=claim.trim().match(/^(?:the\s+|an?\s+)?(.+?)\s+(?:is|are|was|were|has|have|had|can|does|did)\b/iu);
+  if(!match||!/^[A-Z]/u.test(match[1]))return null;
+  const subject=match[1].split(/\s+(?:in|on|at)\s+/iu)[0];
+  const tokens=claimTokens(subject);
+  return tokens.length>=1&&tokens.length<=8&&subject.length<=120?tokens.join(' '):null;
+}
+export function wikipediaSearchQuery(claim:string,mode:'legacy'|'subject'='legacy'){
   const full=wikipediaQuery(claim),tokens=full.split(' '),relaxed=tokens.filter(t=>!/^\p{N}+$/u.test(t)&&!['not','no','never','नहीं','కాదు','లేదు'].includes(t));
   // Counter-evidence can lack the asserted number/polarity. One bounded server-built
   // OR query broadens retrieval only; the exact claim passed to NLI/review is unchanged.
   const alternate=relaxed.join(' '),combined=`(${full}) OR (${alternate})`;
-  return relaxed.length>=2&&alternate!==full&&combined.length<=500?combined:full;
+  const legacy=relaxed.length>=2&&alternate!==full&&combined.length<=500?combined:full;
+  const subject=mode==='subject'?wikipediaSubject(claim):null;
+  const expanded=subject?`(${legacy}) OR (intitle:"${subject}")`:legacy;
+  return expanded.length<=500?expanded:legacy;
 }
 export async function wikipediaEvidence(
   claim: string,
   fetcher: typeof fetch = fetch,
+  searchMode:'legacy'|'subject'='legacy',
 ): Promise<{ items: RetrievedEvidence[]; state: ProviderState }> {
   const state: ProviderState = {
     provider: "wikipedia",
@@ -53,7 +65,7 @@ export async function wikipediaEvidence(
   };
   if (process.env.VERITAS_WIKIPEDIA_ENABLED !== "1") return { items: [], state };
   const language = process.env.VERITAS_WIKIPEDIA_LANGUAGE || "en",
-    query = wikipediaSearchQuery(claim);
+    query = wikipediaSearchQuery(claim,searchMode);
   if (!["en", "hi", "te"].includes(language))
     return {
       items: [],

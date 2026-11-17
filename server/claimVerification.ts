@@ -7,6 +7,8 @@ import {wikipediaEvidence} from './wikipediaEvidence';
 import {approveClaimSelection,textHash} from './claimExtraction';
 import {assessClaimRelationships} from './claimStance';
 import {owner} from './security';
+import {evidenceSummary} from '../src/evidenceSummary';
+import {rerankEvidence} from './claimReranking';
 import type {ClaimSelection} from '../src/claimTypes';
 import {
   corpusEvidence,
@@ -110,7 +112,7 @@ export async function rankEvidence(
   };
 }
 
-export async function retrieveEvidence(claim: string, local: Evidence[] = []) {
+export async function retrieveEvidence(claim: string, local: Evidence[] = [],language?:string) {
   const [corpus, google, wikipedia] = await Promise.all([corpusEvidence(), googleEvidence(claim), wikipediaEvidence(claim)]);
   const controls: RetrievedEvidence[] = local.map((e) => ({
     title: e.title,
@@ -121,8 +123,11 @@ export async function retrieveEvidence(claim: string, local: Evidence[] = []) {
     provider: "software_test",
   }));
   const ranking = await rankEvidence(claim, [...corpus.items, ...google.items, ...wikipedia.items, ...controls]);
+  const reranking=await rerankEvidence(claim,ranking.ranked,language);
   return {
     ...ranking,
+    ranked:reranking.ranked,
+    reranking:reranking.analysis,
     providers: [corpus.state, google.state, wikipedia.state],
     retrievalStatus: [corpus.state.detail, google.state.detail, wikipedia.state.detail].join("; "),
   };
@@ -133,7 +138,7 @@ export async function verifyWithEvidence(claim: string,selection?:ClaimSelection
     selectionReview=selection?approveClaimSelection(claim,selection,owner()):undefined,
     checkedClaim=selectionReview?.text??claim,
     analysis = analyzeClaim(checkedClaim);
-  const retrieval = await retrieveEvidence(analysis.normalized);
+  const retrieval = await retrieveEvidence(analysis.normalized,[],selectionReview?.language);
   const sources: GroundedSource[] = retrieval.ranked.map((e, i) => ({
     id: `E${i + 1}`,
     title: e.title,
@@ -151,8 +156,9 @@ export async function verifyWithEvidence(claim: string,selection?:ClaimSelection
     relevance: { lexicalScore: e.lexicalScore, semanticScore: e.semanticScore, rank: e.rank },
     license: e.license,
     originalUrl:e.originalUrl,sourceType:e.sourceType,retrievalMethod:e.retrievalMethod,locator:e.locator,
-    revisionId:e.revisionId,revisionUrl:e.revisionUrl,modifiedAt:e.modifiedAt,passageSha256:e.passageSha256,
+    revisionId:e.revisionId,revisionUrl:e.revisionUrl,modifiedAt:e.modifiedAt,passageSha256:e.passageSha256??textHash(e.excerpt),
     licenseUrl:e.licenseUrl,sourceLimitations:e.sourceLimitations,
+    ...(retrieval.reranking.status!=='unconfigured'?{reranking:{modelId:retrieval.reranking.modelId,version:retrieval.reranking.version,status:retrieval.reranking.status,applied:retrieval.reranking.applied,candidate:retrieval.reranking.candidates.find(c=>c.url===e.url&&c.passageSha256===textHash(e.excerpt))}}:{}),
   }));
   const unavailable = !sources.length && !retrieval.providers.some((p) => p.status === "available");
   const missingEvidence = [
@@ -222,6 +228,7 @@ export async function verifyWithEvidence(claim: string,selection?:ClaimSelection
       elapsedMs: performance.now() - started,
       processRssBytes: process.memoryUsage().rss,
       queries: [analysis.normalized,...retrieval.providers.flatMap(p=>p.query?[p.query]:[])],
+      reranking:retrieval.reranking,
     },
   };
   result.nli=await assessClaimRelationships(result);
@@ -230,6 +237,7 @@ export async function verifyWithEvidence(claim: string,selection?:ClaimSelection
     result.limitations.push('Experimental English NLI failed held-out validation. Its raw softmax and suggested relationships are not calibrated truth probabilities.');
   }
   result.analysis=claimDiagnostics(result,performance.now()-started);
+  result.evidenceSummary=evidenceSummary(result);
   return result;
 }
 
@@ -367,5 +375,6 @@ export function reviewEvidence(
   } as ClaimVerificationResult;
   if(reviewedResult.nli)reviewedResult.nli={...reviewedResult.nli,relationships:reviewedResult.nli.relationships.map(r=>{const s=sources.find(s=>s.id===r.sourceId),current=s?.review?{...s.review,stance:s.stance}:s?.reviewHistory?.at(-1);return {...r,humanReviewState:current?'reviewed':'pending',humanStance:current?.stance,reviewedBy:current?.reviewedBy,reviewedAt:current?.reviewedAt}})};
   reviewedResult.analysis=claimDiagnostics(reviewedResult,performance.now()-started);
+  reviewedResult.evidenceSummary=evidenceSummary(reviewedResult);
   return reviewedResult;
 }

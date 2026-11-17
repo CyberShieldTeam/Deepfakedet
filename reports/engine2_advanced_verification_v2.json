@@ -1,0 +1,1450 @@
+{
+  "scope": "Software availability and small frozen research samples, not production factual accuracy",
+  "browserResult": "passed",
+  "browserAt": "2026-11-17T10:42:55.959Z",
+  "warmup": {
+    "scope": "Authored transport warmup, not independent accuracy; model ready before browser launch",
+    "startupMs": 9784.80970003875,
+    "memory": {
+      "rssBytes": 544239616,
+      "peakWorkingSetBytes": 544239616
+    }
+  },
+  "rerankerWarmup": {
+    "startupMs": 9681.09640001785,
+    "memory": {
+      "rssBytes": 411406336,
+      "peakWorkingSetBytes": 411406336
+    },
+    "scope": "Authored transport control, real relevance inference; not accuracy"
+  },
+  "checks": [
+    {
+      "id": "A",
+      "expectedDiagnostic": "supports",
+      "observedSuggestion": "abstained",
+      "diagnosticMatch": false,
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 6,
+      "reranking": {
+        "status": "executed",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": true,
+        "elapsedMs": 312.09969999999885,
+        "reason": "Experimental English relevance order. Raw logits are not stance, truth or credibility probabilities. Small scientific-abstract benchmark does not validate this deployment domain.",
+        "candidates": [
+          {
+            "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+            "inputSha256": "1a3f089a57bdd33251101a641629f4fedd68a6a85f193e0b280ab89a005908c7",
+            "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+            "status": "executed",
+            "score": 7.097364902496338,
+            "tokens": 215,
+            "elapsedMs": 57.13190004462376
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+            "inputSha256": "5aa8cc2ce434b58f1cfe9b3c8aaf510be21a89d490e79a2b1b7779214f27f8af",
+            "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+            "status": "executed",
+            "score": 3.099343776702881,
+            "tokens": 266,
+            "elapsedMs": 63.5488000116311
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+            "inputSha256": "285f8023ce58db6d029f81c35807fd1c86a3f9a008e7ef882876d3edd9d5ee4e",
+            "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+            "status": "executed",
+            "score": 1.9760630130767822,
+            "tokens": 188,
+            "elapsedMs": 44.50540000107139
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Charminar",
+            "inputSha256": "4d5c1beae1af3e9931bab5033262dfc257e1441cedbb7229278025c829d7d596",
+            "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+            "status": "executed",
+            "score": 9.988323211669922,
+            "tokens": 280,
+            "elapsedMs": 61.331600008998066
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+            "inputSha256": "4aa496b54a9ed0333cc1a0b0fa0090ab6bd22058e8ad5fa4f4820caf4c41b476",
+            "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+            "status": "executed",
+            "score": 3.6555113792419434,
+            "tokens": 226,
+            "elapsedMs": 52.18519998015836
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+            "inputSha256": "6dfaa9bb3505342157b7dc2f56d73368f9b88f11dc8a04f9cf6adaa665574cb3",
+            "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+            "status": "executed",
+            "score": -0.979796290397644,
+            "tokens": 122,
+            "elapsedMs": 30.825700028799474
+          }
+        ],
+        "startupMs": 9681.09640001785,
+        "memory": {
+          "rssBytes": 425447424,
+          "peakWorkingSetBytes": 425447424
+        }
+      },
+      "nliStatuses": [
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed"
+      ],
+      "sources": [
+        {
+          "id": "E1",
+          "title": "Charminar",
+          "url": "https://en.wikipedia.org/wiki/Charminar",
+          "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+          "revisionId": 1376727486
+        },
+        {
+          "id": "E2",
+          "title": "Old City (Hyderabad, India)",
+          "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+          "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+          "revisionId": 1376954526
+        },
+        {
+          "id": "E3",
+          "title": "Qutb Shahi architecture",
+          "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+          "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+          "revisionId": 1302425743
+        },
+        {
+          "id": "E4",
+          "title": "Gulzar Houz",
+          "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+          "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+          "revisionId": 1361287715
+        },
+        {
+          "id": "E5",
+          "title": "Bahadurabad",
+          "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+          "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+          "revisionId": 1378242416
+        },
+        {
+          "id": "E6",
+          "title": "Architecture of Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+          "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+          "revisionId": 1378920915
+        }
+      ]
+    },
+    {
+      "id": "citation-opening-and-missing-date",
+      "openedUrl": "https://en.wikipedia.org/wiki/Charminar",
+      "domContentLoaded": true,
+      "publicationDateInvented": false
+    },
+    {
+      "id": "A-human-review",
+      "scope": "Authored software action, not independent adjudication",
+      "claimStatus": "SUPPORTED",
+      "sourceCount": 6,
+      "reranking": {
+        "status": "executed",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": true,
+        "elapsedMs": 312.09969999999885,
+        "reason": "Experimental English relevance order. Raw logits are not stance, truth or credibility probabilities. Small scientific-abstract benchmark does not validate this deployment domain.",
+        "candidates": [
+          {
+            "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+            "inputSha256": "1a3f089a57bdd33251101a641629f4fedd68a6a85f193e0b280ab89a005908c7",
+            "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+            "status": "executed",
+            "score": 7.097364902496338,
+            "tokens": 215,
+            "elapsedMs": 57.13190004462376
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+            "inputSha256": "5aa8cc2ce434b58f1cfe9b3c8aaf510be21a89d490e79a2b1b7779214f27f8af",
+            "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+            "status": "executed",
+            "score": 3.099343776702881,
+            "tokens": 266,
+            "elapsedMs": 63.5488000116311
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+            "inputSha256": "285f8023ce58db6d029f81c35807fd1c86a3f9a008e7ef882876d3edd9d5ee4e",
+            "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+            "status": "executed",
+            "score": 1.9760630130767822,
+            "tokens": 188,
+            "elapsedMs": 44.50540000107139
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Charminar",
+            "inputSha256": "4d5c1beae1af3e9931bab5033262dfc257e1441cedbb7229278025c829d7d596",
+            "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+            "status": "executed",
+            "score": 9.988323211669922,
+            "tokens": 280,
+            "elapsedMs": 61.331600008998066
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+            "inputSha256": "4aa496b54a9ed0333cc1a0b0fa0090ab6bd22058e8ad5fa4f4820caf4c41b476",
+            "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+            "status": "executed",
+            "score": 3.6555113792419434,
+            "tokens": 226,
+            "elapsedMs": 52.18519998015836
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+            "inputSha256": "6dfaa9bb3505342157b7dc2f56d73368f9b88f11dc8a04f9cf6adaa665574cb3",
+            "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+            "status": "executed",
+            "score": -0.979796290397644,
+            "tokens": 122,
+            "elapsedMs": 30.825700028799474
+          }
+        ],
+        "startupMs": 9681.09640001785,
+        "memory": {
+          "rssBytes": 425447424,
+          "peakWorkingSetBytes": 425447424
+        }
+      },
+      "nliStatuses": [
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed"
+      ],
+      "sources": [
+        {
+          "id": "E1",
+          "title": "Charminar",
+          "url": "https://en.wikipedia.org/wiki/Charminar",
+          "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+          "revisionId": 1376727486
+        },
+        {
+          "id": "E2",
+          "title": "Old City (Hyderabad, India)",
+          "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+          "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+          "revisionId": 1376954526
+        },
+        {
+          "id": "E3",
+          "title": "Qutb Shahi architecture",
+          "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+          "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+          "revisionId": 1302425743
+        },
+        {
+          "id": "E4",
+          "title": "Gulzar Houz",
+          "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+          "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+          "revisionId": 1361287715
+        },
+        {
+          "id": "E5",
+          "title": "Bahadurabad",
+          "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+          "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+          "revisionId": 1378242416
+        },
+        {
+          "id": "E6",
+          "title": "Architecture of Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+          "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+          "revisionId": 1378920915
+        }
+      ]
+    },
+    {
+      "id": "human-review-correction",
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 6,
+      "reranking": {
+        "status": "executed",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": true,
+        "elapsedMs": 312.09969999999885,
+        "reason": "Experimental English relevance order. Raw logits are not stance, truth or credibility probabilities. Small scientific-abstract benchmark does not validate this deployment domain.",
+        "candidates": [
+          {
+            "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+            "inputSha256": "1a3f089a57bdd33251101a641629f4fedd68a6a85f193e0b280ab89a005908c7",
+            "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+            "status": "executed",
+            "score": 7.097364902496338,
+            "tokens": 215,
+            "elapsedMs": 57.13190004462376
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+            "inputSha256": "5aa8cc2ce434b58f1cfe9b3c8aaf510be21a89d490e79a2b1b7779214f27f8af",
+            "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+            "status": "executed",
+            "score": 3.099343776702881,
+            "tokens": 266,
+            "elapsedMs": 63.5488000116311
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+            "inputSha256": "285f8023ce58db6d029f81c35807fd1c86a3f9a008e7ef882876d3edd9d5ee4e",
+            "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+            "status": "executed",
+            "score": 1.9760630130767822,
+            "tokens": 188,
+            "elapsedMs": 44.50540000107139
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Charminar",
+            "inputSha256": "4d5c1beae1af3e9931bab5033262dfc257e1441cedbb7229278025c829d7d596",
+            "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+            "status": "executed",
+            "score": 9.988323211669922,
+            "tokens": 280,
+            "elapsedMs": 61.331600008998066
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+            "inputSha256": "4aa496b54a9ed0333cc1a0b0fa0090ab6bd22058e8ad5fa4f4820caf4c41b476",
+            "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+            "status": "executed",
+            "score": 3.6555113792419434,
+            "tokens": 226,
+            "elapsedMs": 52.18519998015836
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+            "inputSha256": "6dfaa9bb3505342157b7dc2f56d73368f9b88f11dc8a04f9cf6adaa665574cb3",
+            "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+            "status": "executed",
+            "score": -0.979796290397644,
+            "tokens": 122,
+            "elapsedMs": 30.825700028799474
+          }
+        ],
+        "startupMs": 9681.09640001785,
+        "memory": {
+          "rssBytes": 425447424,
+          "peakWorkingSetBytes": 425447424
+        }
+      },
+      "nliStatuses": [
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed"
+      ],
+      "sources": [
+        {
+          "id": "E1",
+          "title": "Charminar",
+          "url": "https://en.wikipedia.org/wiki/Charminar",
+          "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+          "revisionId": 1376727486
+        },
+        {
+          "id": "E2",
+          "title": "Old City (Hyderabad, India)",
+          "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+          "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+          "revisionId": 1376954526
+        },
+        {
+          "id": "E3",
+          "title": "Qutb Shahi architecture",
+          "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+          "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+          "revisionId": 1302425743
+        },
+        {
+          "id": "E4",
+          "title": "Gulzar Houz",
+          "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+          "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+          "revisionId": 1361287715
+        },
+        {
+          "id": "E5",
+          "title": "Bahadurabad",
+          "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+          "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+          "revisionId": 1378242416
+        },
+        {
+          "id": "E6",
+          "title": "Architecture of Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+          "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+          "revisionId": 1378920915
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "expectedDiagnostic": "contradicts",
+      "observedSuggestion": "abstained",
+      "diagnosticMatch": false,
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 6,
+      "reranking": {
+        "status": "executed",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": true,
+        "elapsedMs": 284.03380000000107,
+        "reason": "Experimental English relevance order. Raw logits are not stance, truth or credibility probabilities. Small scientific-abstract benchmark does not validate this deployment domain.",
+        "candidates": [
+          {
+            "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+            "inputSha256": "5aa8cc2ce434b58f1cfe9b3c8aaf510be21a89d490e79a2b1b7779214f27f8af",
+            "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+            "status": "executed",
+            "score": 2.77925181388855,
+            "tokens": 265,
+            "elapsedMs": 82.84819999244064
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Badshahi_Ashurkhana",
+            "inputSha256": "bb1b59c5aefc5f7a39c8a068e3d6a4d0c5a8503ffd785374d6d0e89fb5436758",
+            "passageSha256": "9ab58b60ae70af3e7dc432e86d8cc2b1fa80cdff1978b04519f5a95854d84358",
+            "status": "executed",
+            "score": 3.828400135040283,
+            "tokens": 66,
+            "elapsedMs": 23.096199962310493
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+            "inputSha256": "285f8023ce58db6d029f81c35807fd1c86a3f9a008e7ef882876d3edd9d5ee4e",
+            "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+            "status": "executed",
+            "score": 1.852104663848877,
+            "tokens": 187,
+            "elapsedMs": 42.49039996648207
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Charminar",
+            "inputSha256": "4d5c1beae1af3e9931bab5033262dfc257e1441cedbb7229278025c829d7d596",
+            "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+            "status": "executed",
+            "score": 6.70824670791626,
+            "tokens": 279,
+            "elapsedMs": 57.77529999613762
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+            "inputSha256": "4aa496b54a9ed0333cc1a0b0fa0090ab6bd22058e8ad5fa4f4820caf4c41b476",
+            "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+            "status": "executed",
+            "score": 3.112100124359131,
+            "tokens": 225,
+            "elapsedMs": 48.01769996993244
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+            "inputSha256": "6dfaa9bb3505342157b7dc2f56d73368f9b88f11dc8a04f9cf6adaa665574cb3",
+            "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+            "status": "executed",
+            "score": -1.138322353363037,
+            "tokens": 121,
+            "elapsedMs": 28.30449998145923
+          }
+        ],
+        "startupMs": 9681.09640001785,
+        "memory": {
+          "rssBytes": 427081728,
+          "peakWorkingSetBytes": 427081728
+        }
+      },
+      "nliStatuses": [
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed"
+      ],
+      "sources": [
+        {
+          "id": "E1",
+          "title": "Charminar",
+          "url": "https://en.wikipedia.org/wiki/Charminar",
+          "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+          "revisionId": 1376727486
+        },
+        {
+          "id": "E2",
+          "title": "Badshahi Ashurkhana",
+          "url": "https://en.wikipedia.org/wiki/Badshahi_Ashurkhana",
+          "passageSha256": "9ab58b60ae70af3e7dc432e86d8cc2b1fa80cdff1978b04519f5a95854d84358",
+          "revisionId": 1383768340
+        },
+        {
+          "id": "E3",
+          "title": "Qutb Shahi architecture",
+          "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+          "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+          "revisionId": 1302425743
+        },
+        {
+          "id": "E4",
+          "title": "Gulzar Houz",
+          "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+          "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+          "revisionId": 1361287715
+        },
+        {
+          "id": "E5",
+          "title": "Bahadurabad",
+          "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+          "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+          "revisionId": 1378242416
+        },
+        {
+          "id": "E6",
+          "title": "Architecture of Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+          "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+          "revisionId": 1378920915
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "expectedDiagnostic": "contradicts",
+      "observedSuggestion": "abstained",
+      "diagnosticMatch": false,
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 6,
+      "reranking": {
+        "status": "executed",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": true,
+        "elapsedMs": 318.0468000000001,
+        "reason": "Experimental English relevance order. Raw logits are not stance, truth or credibility probabilities. Small scientific-abstract benchmark does not validate this deployment domain.",
+        "candidates": [
+          {
+            "url": "https://en.wikipedia.org/wiki/Charminar",
+            "inputSha256": "4d5c1beae1af3e9931bab5033262dfc257e1441cedbb7229278025c829d7d596",
+            "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+            "status": "executed",
+            "score": 5.336469650268555,
+            "tokens": 277,
+            "elapsedMs": 87.90919999592006
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Sunehri_Bagh_Masjid",
+            "inputSha256": "c0ab99d8e7b385bc6514370a8c5e56e6222319c6cafd2b70860096a97d8a135d",
+            "passageSha256": "0687280fafa084eed1c152391e6d62fe6fb9d22a377107b71b3b5a4b265b4700",
+            "status": "executed",
+            "score": -2.223687171936035,
+            "tokens": 205,
+            "elapsedMs": 51.10650003189221
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/List_of_tourist_attractions_in_Hyderabad",
+            "inputSha256": "a26f5fb7cda0d52c0018b30f9b76f3926cc43f7d6d50ca3b229f96444327ea0b",
+            "passageSha256": "7eef02723ce7e6677919758b3d97679ff68e16052f7b8aa5e82bf4e183568f16",
+            "status": "executed",
+            "score": -1.370575189590454,
+            "tokens": 274,
+            "elapsedMs": 58.38880001101643
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Jama_Masjid,_Delhi",
+            "inputSha256": "3aacfd9a5cc56d2a4404f5487ac0846e4376b89d415092677bc0a51ad066ed08",
+            "passageSha256": "019e281a167b61efec338fb2a3a6b1e758ea72bf0f38e17152213bcce2991115",
+            "status": "executed",
+            "score": -1.5645016431808472,
+            "tokens": 189,
+            "elapsedMs": 48.53420000290498
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/SC_Delhi",
+            "inputSha256": "8bfae2e3c94a7dd70f2adbf4a7d168d099468415db77e10609d7370d83a3ecc2",
+            "passageSha256": "4e1df548bcd28b2028135a4c7a74937e9db8fb0a464d9b29fd0b75e559e31ed9",
+            "status": "executed",
+            "score": -2.373276948928833,
+            "tokens": 237,
+            "elapsedMs": 47.697799978777766
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Hyderabad_Deccan_railway_station",
+            "inputSha256": "3469ea20a2dd50dd5ab120c3b1a04570a2461bf8ba83875c405c10655adfc990",
+            "passageSha256": "b515e7cbf7fe1c8379bce564b735a95178cd75c9a9b0d8105c020e1ba091bf56",
+            "status": "executed",
+            "score": -9.793011665344238,
+            "tokens": 108,
+            "elapsedMs": 23.052599979564548
+          }
+        ],
+        "startupMs": 9681.09640001785,
+        "memory": {
+          "rssBytes": 429207552,
+          "peakWorkingSetBytes": 429207552
+        }
+      },
+      "nliStatuses": [
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed"
+      ],
+      "sources": [
+        {
+          "id": "E1",
+          "title": "Charminar",
+          "url": "https://en.wikipedia.org/wiki/Charminar",
+          "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+          "revisionId": 1376727486
+        },
+        {
+          "id": "E2",
+          "title": "List of tourist attractions in Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/List_of_tourist_attractions_in_Hyderabad",
+          "passageSha256": "7eef02723ce7e6677919758b3d97679ff68e16052f7b8aa5e82bf4e183568f16",
+          "revisionId": 1376902546
+        },
+        {
+          "id": "E3",
+          "title": "Jama Masjid, Delhi",
+          "url": "https://en.wikipedia.org/wiki/Jama_Masjid,_Delhi",
+          "passageSha256": "019e281a167b61efec338fb2a3a6b1e758ea72bf0f38e17152213bcce2991115",
+          "revisionId": 1383333586
+        },
+        {
+          "id": "E4",
+          "title": "Sunehri Bagh Masjid",
+          "url": "https://en.wikipedia.org/wiki/Sunehri_Bagh_Masjid",
+          "passageSha256": "0687280fafa084eed1c152391e6d62fe6fb9d22a377107b71b3b5a4b265b4700",
+          "revisionId": 1366862065
+        },
+        {
+          "id": "E5",
+          "title": "SC Delhi",
+          "url": "https://en.wikipedia.org/wiki/SC_Delhi",
+          "passageSha256": "4e1df548bcd28b2028135a4c7a74937e9db8fb0a464d9b29fd0b75e559e31ed9",
+          "revisionId": 1384199675
+        },
+        {
+          "id": "E6",
+          "title": "Hyderabad Deccan railway station",
+          "url": "https://en.wikipedia.org/wiki/Hyderabad_Deccan_railway_station",
+          "passageSha256": "b515e7cbf7fe1c8379bce564b735a95178cd75c9a9b0d8105c020e1ba091bf56",
+          "revisionId": 1379345365
+        }
+      ]
+    },
+    {
+      "id": "D",
+      "expectedDiagnostic": "contradicts",
+      "observedSuggestion": "abstained",
+      "diagnosticMatch": false,
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 6,
+      "reranking": {
+        "status": "executed",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": true,
+        "elapsedMs": 384.45640000000276,
+        "reason": "Experimental English relevance order. Raw logits are not stance, truth or credibility probabilities. Small scientific-abstract benchmark does not validate this deployment domain.",
+        "candidates": [
+          {
+            "url": "https://en.wikipedia.org/wiki/Charminar",
+            "inputSha256": "4d5c1beae1af3e9931bab5033262dfc257e1441cedbb7229278025c829d7d596",
+            "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+            "status": "executed",
+            "score": 6.753192901611328,
+            "tokens": 279,
+            "elapsedMs": 98.67000003578141
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/List_of_tourist_attractions_in_Hyderabad",
+            "inputSha256": "a26f5fb7cda0d52c0018b30f9b76f3926cc43f7d6d50ca3b229f96444327ea0b",
+            "passageSha256": "7eef02723ce7e6677919758b3d97679ff68e16052f7b8aa5e82bf4e183568f16",
+            "status": "executed",
+            "score": -5.5318403244018555,
+            "tokens": 276,
+            "elapsedMs": 74.69820004189387
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Muhammad_Quli_Qutb_Shah",
+            "inputSha256": "9c0d9701b93499c67c477721c8c9cf4b90a22f5b31595ed85f622b2e6fde0f98",
+            "passageSha256": "c30159e18158323d2e28f2d865030ba72248ed8fd579b80c8e4d27f8472a9cae",
+            "status": "executed",
+            "score": 1.3812663555145264,
+            "tokens": 110,
+            "elapsedMs": 28.086400008760393
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Culture_of_Hyderabad",
+            "inputSha256": "d7e53687281d338500f22fae493ee0c5eba1388bd78b6eed05ea031f1713afd7",
+            "passageSha256": "e4605ad856b29cc7464b4ab722411fdca0901d47fabc193a2fe96cda0414eea3",
+            "status": "executed",
+            "score": -8.241808891296387,
+            "tokens": 293,
+            "elapsedMs": 82.96690002316609
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+            "inputSha256": "4aa496b54a9ed0333cc1a0b0fa0090ab6bd22058e8ad5fa4f4820caf4c41b476",
+            "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+            "status": "executed",
+            "score": -1.8419069051742554,
+            "tokens": 225,
+            "elapsedMs": 61.46130000706762
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+            "inputSha256": "6dfaa9bb3505342157b7dc2f56d73368f9b88f11dc8a04f9cf6adaa665574cb3",
+            "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+            "status": "executed",
+            "score": -10.509071350097656,
+            "tokens": 121,
+            "elapsedMs": 37.29670000029728
+          }
+        ],
+        "startupMs": 9681.09640001785,
+        "memory": {
+          "rssBytes": 430546944,
+          "peakWorkingSetBytes": 430546944
+        }
+      },
+      "nliStatuses": [
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed"
+      ],
+      "sources": [
+        {
+          "id": "E1",
+          "title": "Charminar",
+          "url": "https://en.wikipedia.org/wiki/Charminar",
+          "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+          "revisionId": 1376727486
+        },
+        {
+          "id": "E2",
+          "title": "Muhammad Quli Qutb Shah",
+          "url": "https://en.wikipedia.org/wiki/Muhammad_Quli_Qutb_Shah",
+          "passageSha256": "c30159e18158323d2e28f2d865030ba72248ed8fd579b80c8e4d27f8472a9cae",
+          "revisionId": 1373146972
+        },
+        {
+          "id": "E3",
+          "title": "Qutb Shahi architecture",
+          "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+          "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+          "revisionId": 1302425743
+        },
+        {
+          "id": "E4",
+          "title": "List of tourist attractions in Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/List_of_tourist_attractions_in_Hyderabad",
+          "passageSha256": "7eef02723ce7e6677919758b3d97679ff68e16052f7b8aa5e82bf4e183568f16",
+          "revisionId": 1376902546
+        },
+        {
+          "id": "E5",
+          "title": "Culture of Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/Culture_of_Hyderabad",
+          "passageSha256": "e4605ad856b29cc7464b4ab722411fdca0901d47fabc193a2fe96cda0414eea3",
+          "revisionId": 1376669744
+        },
+        {
+          "id": "E6",
+          "title": "Architecture of Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+          "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+          "revisionId": 1378920915
+        }
+      ]
+    },
+    {
+      "id": "E",
+      "expectedDiagnostic": "supports",
+      "observedSuggestion": "abstained",
+      "diagnosticMatch": false,
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 6,
+      "reranking": {
+        "status": "executed",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": true,
+        "elapsedMs": 425.0607999999993,
+        "reason": "Experimental English relevance order. Raw logits are not stance, truth or credibility probabilities. Small scientific-abstract benchmark does not validate this deployment domain.",
+        "candidates": [
+          {
+            "url": "https://en.wikipedia.org/wiki/Charminar",
+            "inputSha256": "4d5c1beae1af3e9931bab5033262dfc257e1441cedbb7229278025c829d7d596",
+            "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+            "status": "executed",
+            "score": 9.617329597473145,
+            "tokens": 277,
+            "elapsedMs": 91.00389998639002
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Hyderabad_Deccan_railway_station",
+            "inputSha256": "3469ea20a2dd50dd5ab120c3b1a04570a2461bf8ba83875c405c10655adfc990",
+            "passageSha256": "b515e7cbf7fe1c8379bce564b735a95178cd75c9a9b0d8105c020e1ba091bf56",
+            "status": "executed",
+            "score": -0.2881045341491699,
+            "tokens": 108,
+            "elapsedMs": 36.08930000336841
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/List_of_tourist_attractions_in_Hyderabad",
+            "inputSha256": "a26f5fb7cda0d52c0018b30f9b76f3926cc43f7d6d50ca3b229f96444327ea0b",
+            "passageSha256": "7eef02723ce7e6677919758b3d97679ff68e16052f7b8aa5e82bf4e183568f16",
+            "status": "executed",
+            "score": 3.9551618099212646,
+            "tokens": 274,
+            "elapsedMs": 77.48589996481314
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/History_of_Hyderabad",
+            "inputSha256": "3025866318a648780e6b4287d1caf1afc295d9b49eaf9fafe333a6e4669ab74c",
+            "passageSha256": "d9bee103e90d3a7a55236167d58e94ea87570de791109af862c1e813870ea441",
+            "status": "executed",
+            "score": 4.915623664855957,
+            "tokens": 283,
+            "elapsedMs": 78.64590000826865
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+            "inputSha256": "1a3f089a57bdd33251101a641629f4fedd68a6a85f193e0b280ab89a005908c7",
+            "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+            "status": "executed",
+            "score": 6.16120719909668,
+            "tokens": 212,
+            "elapsedMs": 58.65930003346875
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Hyderabad",
+            "inputSha256": "2633447371ed614dd6137c48520819af7526e3f86330cfd4aef1ffc419f2434c",
+            "passageSha256": "8c2758a33b01f98ee71e59fc6af44eb8e4aae52a67a019c375fc6937c81c4f46",
+            "status": "executed",
+            "score": -1.6203839778900146,
+            "tokens": 284,
+            "elapsedMs": 81.81790000526235
+          }
+        ],
+        "startupMs": 9681.09640001785,
+        "memory": {
+          "rssBytes": 431345664,
+          "peakWorkingSetBytes": 431345664
+        }
+      },
+      "nliStatuses": [
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed"
+      ],
+      "sources": [
+        {
+          "id": "E1",
+          "title": "Charminar",
+          "url": "https://en.wikipedia.org/wiki/Charminar",
+          "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+          "revisionId": 1376727486
+        },
+        {
+          "id": "E2",
+          "title": "Old City (Hyderabad, India)",
+          "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+          "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+          "revisionId": 1376954526
+        },
+        {
+          "id": "E3",
+          "title": "History of Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/History_of_Hyderabad",
+          "passageSha256": "d9bee103e90d3a7a55236167d58e94ea87570de791109af862c1e813870ea441",
+          "revisionId": 1376916956
+        },
+        {
+          "id": "E4",
+          "title": "List of tourist attractions in Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/List_of_tourist_attractions_in_Hyderabad",
+          "passageSha256": "7eef02723ce7e6677919758b3d97679ff68e16052f7b8aa5e82bf4e183568f16",
+          "revisionId": 1376902546
+        },
+        {
+          "id": "E5",
+          "title": "Hyderabad Deccan railway station",
+          "url": "https://en.wikipedia.org/wiki/Hyderabad_Deccan_railway_station",
+          "passageSha256": "b515e7cbf7fe1c8379bce564b735a95178cd75c9a9b0d8105c020e1ba091bf56",
+          "revisionId": 1379345365
+        },
+        {
+          "id": "E6",
+          "title": "Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/Hyderabad",
+          "passageSha256": "8c2758a33b01f98ee71e59fc6af44eb8e4aae52a67a019c375fc6937c81c4f46",
+          "revisionId": 1383921087
+        }
+      ]
+    },
+    {
+      "id": "no-evidence",
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 0,
+      "reranking": {
+        "status": "not_applicable",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": false,
+        "elapsedMs": 0.13479999999981374,
+        "reason": "No candidates; no inference.",
+        "candidates": []
+      },
+      "nliStatuses": [],
+      "sources": []
+    },
+    {
+      "id": "unsupported-language-hi",
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 0,
+      "reranking": {
+        "status": "not_applicable",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": false,
+        "elapsedMs": 0.030599999998230487,
+        "reason": "No candidates; no inference.",
+        "candidates": []
+      },
+      "nliStatuses": [],
+      "sources": []
+    },
+    {
+      "id": "unsupported-language-te",
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 0,
+      "reranking": {
+        "status": "not_applicable",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": false,
+        "elapsedMs": 0.013699999995878898,
+        "reason": "No candidates; no inference.",
+        "candidates": []
+      },
+      "nliStatuses": [],
+      "sources": []
+    },
+    {
+      "id": "retrieval-timeout",
+      "scope": "Injected transport timeout, not a live upstream failure",
+      "claimStatus": "UNAVAILABLE",
+      "sourceCount": 0,
+      "reranking": {
+        "status": "not_applicable",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": false,
+        "elapsedMs": 0.020100000001548324,
+        "reason": "No candidates; no inference.",
+        "candidates": []
+      },
+      "nliStatuses": [],
+      "sources": []
+    },
+    {
+      "id": "nli-unavailable",
+      "scope": "Actual worker missing-snapshot response in isolated configuration",
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 6,
+      "reranking": {
+        "status": "executed",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": true,
+        "elapsedMs": 328.2233999999953,
+        "reason": "Experimental English relevance order. Raw logits are not stance, truth or credibility probabilities. Small scientific-abstract benchmark does not validate this deployment domain.",
+        "candidates": [
+          {
+            "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+            "inputSha256": "1a3f089a57bdd33251101a641629f4fedd68a6a85f193e0b280ab89a005908c7",
+            "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+            "status": "executed",
+            "score": 7.097364902496338,
+            "tokens": 215,
+            "elapsedMs": 68.1149999727495
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+            "inputSha256": "5aa8cc2ce434b58f1cfe9b3c8aaf510be21a89d490e79a2b1b7779214f27f8af",
+            "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+            "status": "executed",
+            "score": 3.099343776702881,
+            "tokens": 266,
+            "elapsedMs": 65.25270000565797
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+            "inputSha256": "285f8023ce58db6d029f81c35807fd1c86a3f9a008e7ef882876d3edd9d5ee4e",
+            "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+            "status": "executed",
+            "score": 1.9760630130767822,
+            "tokens": 188,
+            "elapsedMs": 48.419700004160404
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Charminar",
+            "inputSha256": "4d5c1beae1af3e9931bab5033262dfc257e1441cedbb7229278025c829d7d596",
+            "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+            "status": "executed",
+            "score": 9.988323211669922,
+            "tokens": 280,
+            "elapsedMs": 76.95419999072328
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+            "inputSha256": "4aa496b54a9ed0333cc1a0b0fa0090ab6bd22058e8ad5fa4f4820caf4c41b476",
+            "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+            "status": "executed",
+            "score": 3.6555113792419434,
+            "tokens": 226,
+            "elapsedMs": 44.74280000431463
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+            "inputSha256": "6dfaa9bb3505342157b7dc2f56d73368f9b88f11dc8a04f9cf6adaa665574cb3",
+            "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+            "status": "executed",
+            "score": -0.979796290397644,
+            "tokens": 122,
+            "elapsedMs": 23.660300008486956
+          }
+        ],
+        "startupMs": 9681.09640001785,
+        "memory": {
+          "rssBytes": 431874048,
+          "peakWorkingSetBytes": 431874048
+        }
+      },
+      "nliStatuses": [
+        "unavailable",
+        "unavailable",
+        "unavailable",
+        "unavailable",
+        "unavailable",
+        "unavailable"
+      ],
+      "sources": [
+        {
+          "id": "E1",
+          "title": "Charminar",
+          "url": "https://en.wikipedia.org/wiki/Charminar",
+          "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+          "revisionId": 1376727486
+        },
+        {
+          "id": "E2",
+          "title": "Old City (Hyderabad, India)",
+          "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+          "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+          "revisionId": 1376954526
+        },
+        {
+          "id": "E3",
+          "title": "Qutb Shahi architecture",
+          "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+          "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+          "revisionId": 1302425743
+        },
+        {
+          "id": "E4",
+          "title": "Gulzar Houz",
+          "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+          "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+          "revisionId": 1361287715
+        },
+        {
+          "id": "E5",
+          "title": "Bahadurabad",
+          "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+          "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+          "revisionId": 1378242416
+        },
+        {
+          "id": "E6",
+          "title": "Architecture of Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+          "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+          "revisionId": 1378920915
+        }
+      ]
+    },
+    {
+      "id": "reranker-unavailable",
+      "scope": "Actual worker missing-snapshot response in isolated configuration",
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 6,
+      "reranking": {
+        "status": "unavailable",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": false,
+        "elapsedMs": 288.1200000000026,
+        "reason": "Reranker SNAPSHOT_MISSING; original relevance order and all passages retained. No replacement score invented.",
+        "candidates": []
+      },
+      "nliStatuses": [
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed"
+      ],
+      "sources": [
+        {
+          "id": "E1",
+          "title": "Old City (Hyderabad, India)",
+          "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+          "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+          "revisionId": 1376954526
+        },
+        {
+          "id": "E2",
+          "title": "Gulzar Houz",
+          "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+          "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+          "revisionId": 1361287715
+        },
+        {
+          "id": "E3",
+          "title": "Bahadurabad",
+          "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+          "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+          "revisionId": 1378242416
+        },
+        {
+          "id": "E4",
+          "title": "Charminar",
+          "url": "https://en.wikipedia.org/wiki/Charminar",
+          "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+          "revisionId": 1376727486
+        },
+        {
+          "id": "E5",
+          "title": "Qutb Shahi architecture",
+          "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+          "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+          "revisionId": 1302425743
+        },
+        {
+          "id": "E6",
+          "title": "Architecture of Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+          "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+          "revisionId": 1378920915
+        }
+      ]
+    },
+    {
+      "id": "compound-selection",
+      "claimStatus": "INSUFFICIENT_EVIDENCE",
+      "sourceCount": 6,
+      "reranking": {
+        "status": "executed",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": true,
+        "elapsedMs": 10345.309999999998,
+        "reason": "Experimental English relevance order. Raw logits are not stance, truth or credibility probabilities. Small scientific-abstract benchmark does not validate this deployment domain.",
+        "candidates": [
+          {
+            "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+            "inputSha256": "1a3f089a57bdd33251101a641629f4fedd68a6a85f193e0b280ab89a005908c7",
+            "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+            "status": "executed",
+            "score": 7.097364902496338,
+            "tokens": 215,
+            "elapsedMs": 70.98259998019785
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+            "inputSha256": "5aa8cc2ce434b58f1cfe9b3c8aaf510be21a89d490e79a2b1b7779214f27f8af",
+            "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+            "status": "executed",
+            "score": 3.099343776702881,
+            "tokens": 266,
+            "elapsedMs": 55.03129999851808
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+            "inputSha256": "285f8023ce58db6d029f81c35807fd1c86a3f9a008e7ef882876d3edd9d5ee4e",
+            "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+            "status": "executed",
+            "score": 1.9760630130767822,
+            "tokens": 188,
+            "elapsedMs": 45.61390000162646
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Charminar",
+            "inputSha256": "4d5c1beae1af3e9931bab5033262dfc257e1441cedbb7229278025c829d7d596",
+            "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+            "status": "executed",
+            "score": 9.988323211669922,
+            "tokens": 280,
+            "elapsedMs": 66.38040003599599
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+            "inputSha256": "4aa496b54a9ed0333cc1a0b0fa0090ab6bd22058e8ad5fa4f4820caf4c41b476",
+            "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+            "status": "executed",
+            "score": 3.6555113792419434,
+            "tokens": 226,
+            "elapsedMs": 59.28510002559051
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+            "inputSha256": "6dfaa9bb3505342157b7dc2f56d73368f9b88f11dc8a04f9cf6adaa665574cb3",
+            "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+            "status": "executed",
+            "score": -0.979796290397644,
+            "tokens": 122,
+            "elapsedMs": 25.63029999146238
+          }
+        ],
+        "startupMs": 9781.8222999922,
+        "memory": {
+          "rssBytes": 425463808,
+          "peakWorkingSetBytes": 425463808
+        }
+      },
+      "nliStatuses": [
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed",
+        "executed"
+      ],
+      "sources": [
+        {
+          "id": "E1",
+          "title": "Charminar",
+          "url": "https://en.wikipedia.org/wiki/Charminar",
+          "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+          "revisionId": 1376727486
+        },
+        {
+          "id": "E2",
+          "title": "Old City (Hyderabad, India)",
+          "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+          "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+          "revisionId": 1376954526
+        },
+        {
+          "id": "E3",
+          "title": "Qutb Shahi architecture",
+          "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+          "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+          "revisionId": 1302425743
+        },
+        {
+          "id": "E4",
+          "title": "Gulzar Houz",
+          "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+          "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+          "revisionId": 1361287715
+        },
+        {
+          "id": "E5",
+          "title": "Bahadurabad",
+          "url": "https://en.wikipedia.org/wiki/Bahadurabad",
+          "passageSha256": "a887eb305fc6fa0ae869c981a99773e108cc8ad30f3a6eb835891e4eafe29d63",
+          "revisionId": 1378242416
+        },
+        {
+          "id": "E6",
+          "title": "Architecture of Hyderabad",
+          "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+          "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+          "revisionId": 1378920915
+        }
+      ]
+    },
+    {
+      "id": "persistence-correlation-report",
+      "pass": true,
+      "exactApiDiskReportParity": true
+    },
+    {
+      "id": "authored-conflict",
+      "scope": "Authored passages and review actions; not independent accuracy evidence",
+      "claimStatus": "CONFLICTING_EVIDENCE",
+      "sourceCount": 2,
+      "reranking": {
+        "status": "executed",
+        "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "evaluationStatus": "experimental_relevance_only",
+        "applied": true,
+        "elapsedMs": 62.508399999991525,
+        "reason": "Experimental English relevance order. Raw logits are not stance, truth or credibility probabilities. Small scientific-abstract benchmark does not validate this deployment domain.",
+        "candidates": [
+          {
+            "url": "https://example.org/control-1992",
+            "inputSha256": "3493e61f8ea0b5783c5562e327333c9d733022cccc8bdc63ca8a7a3347a39b1d",
+            "passageSha256": "0eee25a3666299d347da4d5a8bb1729b13bf966e08ecce861d4018e581cc72a2",
+            "status": "executed",
+            "score": 9.048782348632812,
+            "tokens": 21,
+            "elapsedMs": 50.04140001256019
+          },
+          {
+            "url": "https://example.org/control-1993",
+            "inputSha256": "a4950437feb88b29a618fff190c2a8eb5966dd63e74a85554a1492fd19f6a90e",
+            "passageSha256": "7f3250bc4dff0534e95381822630b2763a6372112f6c9b7765926b19117fa49c",
+            "status": "executed",
+            "score": 5.818236351013184,
+            "tokens": 21,
+            "elapsedMs": 11.297899996861815
+          }
+        ],
+        "startupMs": 9781.8222999922,
+        "memory": {
+          "rssBytes": 418795520,
+          "peakWorkingSetBytes": 425537536
+        }
+      },
+      "nliStatuses": [
+        "executed",
+        "executed"
+      ],
+      "sources": [
+        {
+          "id": "E1",
+          "title": "Authored software passage 1992",
+          "url": "https://example.org/control-1992",
+          "passageSha256": "0eee25a3666299d347da4d5a8bb1729b13bf966e08ecce861d4018e581cc72a2"
+        },
+        {
+          "id": "E2",
+          "title": "Authored software passage 1993",
+          "url": "https://example.org/control-1993",
+          "passageSha256": "7f3250bc4dff0534e95381822630b2763a6372112f6c9b7765926b19117fa49c"
+        }
+      ]
+    }
+  ],
+  "pairedUncertainty": {
+    "scifact": {
+      "mrr": {
+        "mean": 0.022222222222222223,
+        "pairedQueryBootstrap95": [
+          0.0,
+          0.06666666666666668
+        ],
+        "resamples": 5000,
+        "seed": 7017
+      },
+      "ndcg": {
+        "mean": 0.016666666666666666,
+        "pairedQueryBootstrap95": [
+          0.0,
+          0.05
+        ],
+        "resamples": 5000,
+        "seed": 7017
+      }
+    },
+    "fever_page_proxy": {
+      "mrr": {
+        "mean": 0.07111111111111111,
+        "pairedQueryBootstrap95": [
+          0.01,
+          0.14444444444444446
+        ],
+        "resamples": 5000,
+        "seed": 7017
+      },
+      "ndcg": {
+        "mean": 0.053771573092181946,
+        "pairedQueryBootstrap95": [
+          0.00813589821123053,
+          0.1079380164285695
+        ],
+        "resamples": 5000,
+        "seed": 7017
+      }
+    }
+  },
+  "uncertaintyLimitations": [
+    "Query bootstrap assumes independent sampled claim groups; ignores unknown topic/pretraining and candidate-corpus dependencies.",
+    "Small sample intervals are exploratory; all-sample results and negative development/held-out findings retained. No significance-based tuning or authoritative promotion."
+  ],
+  "reportIdentities": {
+    "reports\\engine2_advanced_deberta_r2_v1.json": "20f23edc3906e815ebff8499dc99635b2c1f4127f117619deaa51d2cf1563d45",
+    "reports\\engine2_advanced_minilm_r2_v1.json": "9d9e8a7fe19ab5c8fd37c7fd9ac2630cf9ff5977f0c27ec6c190c1240c2f193f",
+    "reports\\engine2_advanced_reranker_v1.json": "e00e730cb73e4b74132e614c4bc6426a1fb95638f370991ad7aea51de537ca26",
+    "reports\\engine2_advanced_retrieval_baseline_v1.json": "3b193abe8e7518a26f723fb0a3c8bd0ce915438f557a9af9e1d4227d863f44a5",
+    "reports\\engine2_advanced_retrieval_reranked_v1.json": "37460e5fb4609a7045721ebb18b7901907cb673018679eec0e35d777ffb58381",
+    "reports\\engine2_advanced_verification_v1.json": "28a9356c63d60a411f356c3d37dc6df12d1c03da502e2cb31bf93b41b569a4e4",
+    "reports\\engine2_charminar_ranking_v1.json": "633a514260709af53640289051780a144ffbbffe7999ef313df5e66e085d64b4",
+    "reports\\engine2_hard_cases_deberta_v1.json": "fe8ff224a947fc17c13a9e4b7cd4e19e541746991e2480b9de1b238f8a1e3b0c",
+    "reports\\engine2_hard_cases_minilm_v1.json": "0369937b66b399e2c01d89983567f49489b8ae4f9722d4595d97157f99c909f0",
+    "reports\\engine2_nli_anli_v1.json": "cff2f5866eb061d0718d0ccf5b0b3e8a994339499e376bdd13884c61d28eced9",
+    "reports\\engine2_nli_browser_v1.json": "4027f6e3921b24f28ac04b7a4af39ffc134f3f7264779fa1a0d1d94074ef565e",
+    "reports\\engine2_query_expansion_v2.json": "429561f42adf2c63d64888e09f68d7a4271145f4cde16c985d1355fbdae32fc7",
+    "reports\\engine2_scifact_reranker_v1.json": "9b12eaa11338a91466647f17efe5ea012adf5e00de5dbe9cbce54b08a772a8c3"
+  }
+}

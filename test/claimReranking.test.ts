@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {rerankEvidence,rerankerProtocol,RERANKER_MODEL,RERANKER_VERSION} from '../server/claimReranking';
+import {NliWorkerError} from '../server/nliWorker';
+const claim='The authored museum opened in 1992.',hash=(s:string)=>createHash('sha256').update(s).digest('hex');
+const items=[1993,1992].map((year,i)=>({title:'Authored passage '+year,url:'https://example.org/'+year,excerpt:`The authored museum opened in ${year}.`,provider:'operator_corpus' as const,language:'en',retrievedAt:'2026-01-01T00:00:00.000Z',rank:2-i,lexicalScore:2-i,semanticScore:null}));
+const memory={rssBytes:123,peakWorkingSetBytes:null};let calls=0;
+const infer:Parameters<typeof rerankEvidence>[3]=async pairs=>{calls++;assert.equal(pairs[0].premise,items[0].title+' '+items[0].excerpt);assert.equal(pairs[0].hypothesis,claim);return {requestId:'control',results:pairs.map((_,i)=>({status:'executed' as const,score:i?2:-1,tokens:20,elapsedMs:1})),elapsedMs:2,startupMs:3,memory}};
+Object.assign(process.env,{VERITAS_RERANKER_ENABLED:'0',VERITAS_RERANKER_MODEL_PATH:'authored-control-not-real'});
+assert.equal((await rerankEvidence(claim,items,'en',infer)).analysis.status,'unconfigured');assert.equal(calls,0);
+process.env.VERITAS_RERANKER_ENABLED='1';
+for(const language of ['hi','te','unknown',undefined])assert.equal((await rerankEvidence(claim,items,language,infer)).analysis.status,'unsupported_language');assert.equal(calls,0);
+assert.equal((await rerankEvidence(claim,[{...items[0],provider:'google_fact_check'}],'en',infer)).analysis.status,'unsupported_language');
+assert.equal((await rerankEvidence(claim,[{...items[0],passageSha256:'0'.repeat(64)}],'en',infer)).analysis.status,'unavailable');assert.equal(calls,0);
+const applied=await rerankEvidence(claim,items,'en',infer);assert.equal(applied.analysis.applied,true);assert.equal(applied.ranked[0].url,items[1].url);assert.deepEqual(applied.ranked.map(x=>x.url).sort(),items.map(x=>x.url).sort());assert.equal(applied.analysis.candidates[0].passageSha256,hash(items[0].excerpt));assert.equal(applied.analysis.candidates[0].inputSha256,hash(items[0].title+' '+items[0].excerpt));assert.equal(items[0].rank,2);
+const over=await rerankEvidence(claim,items,'en',async()=>({requestId:'control',results:[{status:'input_over_limit',tokens:513},{status:'executed',score:1,tokens:12,elapsedMs:1}],elapsedMs:2,startupMs:1,memory}));assert.equal(over.analysis.applied,false);assert.equal(over.analysis.status,'input_over_limit');assert.deepEqual(over.ranked,items);
+for(const category of ['BUSY','TIMEOUT','INPUT_LIMIT','MODEL_LOAD_FAILED']){const failed=await rerankEvidence(claim,items,'en',async()=>{throw new NliWorkerError(category)});assert.equal(failed.analysis.applied,false);assert.deepEqual(failed.ranked,items);assert.equal(failed.analysis.candidates.length,0);assert.equal(failed.analysis.status,({BUSY:'busy',TIMEOUT:'timeout',INPUT_LIMIT:'input_over_limit',MODEL_LOAD_FAILED:'unavailable'} as const)[category]);}
+assert.ok(rerankerProtocol.ready.safeParse({event:'ready',modelId:RERANKER_MODEL,version:RERANKER_VERSION,startupMs:1,memory}).success);
+assert.ok(!rerankerProtocol.ready.safeParse({event:'ready',modelId:'wrong',version:RERANKER_VERSION,startupMs:1,memory}).success);
+for(const value of [NaN,Infinity,'0.9'])assert.ok(!rerankerProtocol.reply.safeParse({requestId:'control',results:[{status:'executed',score:value,tokens:20,elapsedMs:1}],elapsedMs:1,memory}).success);
+assert.ok(!rerankerProtocol.reply.safeParse({requestId:'control',results:[{status:'executed',scores:{entailment:1},tokens:20,elapsedMs:1}],elapsedMs:1,memory}).success);
+console.log('Reranker opt-in, exact input/order/hash, language/metadata gates, contradiction retention, full-query fallback and protocol controls passed; authored scores are not model evaluation.');

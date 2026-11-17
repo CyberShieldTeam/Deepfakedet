@@ -1,0 +1,26 @@
+{
+  "version": "engine2-advanced-v1",
+  "frozenBeforeScoring": true,
+  "retrieval": {
+    "dataset": "FEVER shared_task_dev.jsonl",
+    "seed": "veritas-retrieval-advanced-v1",
+    "roles": {"development": 15, "validation": 15, "held_out": 30},
+    "selection": "SUPPORTS/REFUTES with annotated page IDs; hash-ordered; no shared annotated pages, exact normalized claims or token Jaccard >= 0.8 across selected claims",
+    "candidateLimit": 6,
+    "k": [1, 3, 6],
+    "judgment": "Binary annotated evidence-page identity only; other returned pages are unjudged, not established irrelevant. Not passage-level judgments or factual accuracy.",
+    "entityRule": "Conservative exact subject-title priority only, corroborated by lead identity; ambiguous title families or disambiguation leads abstain; no date/negation agreement reward",
+    "adoption": "Freeze rule before scoring. Validation MRR and known-page nDCG@3 must not decrease; Recall@6 unchanged; candidate set unchanged. Held-out reported once, no retuning. Reranker remains offline experimental without passage relevance annotations."
+  },
+  "nli": {
+    "dataset": "ANLI v1.0 R2 dev/test",
+    "seed": "veritas-advanced-nli-v1",
+    "roles": {"development": 60, "validation": 60, "held_out": 120},
+    "selection": "Class-balanced, unique normalized premises/pairs/IDs. Exclude previous frozen R1 premise and hypothesis hashes, cross-role exact premises and near-duplicate claim Jaccard >= 0.8. Test premises from all R2 dev excluded. Original source/topic lineage remains unknown.",
+    "maximumRawScore": 0.9,
+    "minimumMargin": 0.5,
+    "promotion": false,
+    "numericalGates": {"macroF1": 0.85, "falseSupportWilsonUpper": 0.05, "falseContradictionWilsonUpper": 0.05, "coverage": 0.5, "selectiveAccuracyWilsonLower": 0.95},
+    "reason": "Independent representative target-domain and supported-language evaluation still required even if numerical gates pass. No automatic production model replacement."
+  }
+}

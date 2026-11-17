@@ -18,6 +18,13 @@ separate from human-reviewed evidence and never create automatic factual verdict
 See [Engine 2 workflow and setup](docs/ENGINE2_USER_WORKFLOW.md) and
 [measured evaluation](docs/ENGINE2_NLI_EVALUATION.md).
 
+An optional pinned MS MARCO reranker now improves experimental English source ordering;
+the exact reported Charminar example moved from fourth to first over identical passages.
+Small external abstract-relevance results and failed NLI comparisons are recorded in
+[advanced validation and local testing](docs/ENGINE2_ADVANCED_VALIDATION.md).
+Source-grounded summaries keep clickable exact quotations, review status and provenance
+separate from model suggestions. Reranking is disabled by default and never verifies truth.
+
 ## Problem and approach
 
 A media anomaly, a disputed claim and a burst of similar posts answer different questions.

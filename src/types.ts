@@ -251,6 +251,7 @@ export type AnalysisEngine =
   | "local_video_frames";
 
 export interface GroundedSource {
+  reranking?:{modelId:string;version:string;status:string;applied:boolean;candidate?:import('./claimTypes').RerankingAnalysis['candidates'][number]};
   reviewHistory?:{stance:'supports'|'contradicts'|'mixed'|'neutral';quote:string;contextConfirmed:boolean;reviewedBy:string;reviewedAt:string;claim:string;note:string}[];
   originalUrl?:string;
   sourceType?:'encyclopedia_excerpt'|'fact_check_metadata'|'imported_passage';
@@ -314,6 +315,7 @@ export type ClaimAssessment =
   | "unverified";
 
 export interface ClaimVerificationResult {
+  evidenceSummary?:import('./evidenceSummary').EvidenceSummary;
   selectionReview?:import('./claimTypes').ClaimSelectionReview;
   nli?:import('./claimTypes').NliAnalysis;
   extractionOrigin?:import('./extractionTypes').ExtractionOrigin;
@@ -340,6 +342,7 @@ export interface ClaimVerificationResult {
     candidates?:import('./claimTypes').ClaimCandidate[];
   };
   retrievalDetails?: {
+    reranking?:import('./claimTypes').RerankingAnalysis;
     candidateCount?:number;
     omittedCount?:number;
     embeddingDiagnostics?:{cacheHits:number;uniqueMisses:number;deduplicatedInputs:number;requests:number}|null;

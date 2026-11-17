@@ -141,6 +141,9 @@ try {
   assert.deepEqual(disk, report.investigation);
   assert.deepEqual(disk.claimResults[0].nli, corrected.nli);
   assert.deepEqual(disk.claimResults[0].selectionReview, corrected.selectionReview);
+  assert.deepEqual(disk.claimResults[0].evidenceSummary,corrected.evidenceSummary);
+  assert.equal(disk.claimResults[0].evidenceSummary.citations[0].relationship,'unreviewed');
+  assert.equal(disk.claimResults[0].sources[0].passageSha256,createHash('sha256').update(excerpt).digest('hex'));
   assert.equal(disk.claimResults[0].sources[0].excerpt, excerpt);
   console.log(
     "Engine2 API controls passed: authenticated extraction, explicit original-bound selection, owner-bound inference/review receipts, unchanged aggregate gate, review history, graph and exact disk/report preservation.",

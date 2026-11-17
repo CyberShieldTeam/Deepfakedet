@@ -4,6 +4,7 @@ import { ClaimVerificationResult, Investigation } from "../types";
 import { verifyClaim, reviewClaim,extractClaims } from "../services/api";
 import type {ClaimCandidate,ClaimSelection} from '../claimTypes';
 import {SourceRelationship} from './ClaimRelationships';
+import {evidenceSummary,citationGroup} from '../evidenceSummary';
 import {
   Button,
   Card,
@@ -79,6 +80,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
     r.verificationMode === "simulated_demo" ||
     r.verificationMode === "analyst_reviewed";
   const lang = r.detectedLanguage && r.detectedLanguage !== "English" ? r.detectedLanguage : null;
+  const summary=r.evidenceSummary??evidenceSummary(r);
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-2">
@@ -103,6 +105,20 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
       </div>}
       {r.nli && r.nli.status!=='unconfigured' && <div role="status" className="rounded border border-amber-700/50 p-3 text-sm"><b>Experimental evidence relationships</b><p>{r.nli.summary}</p><p>This model failed the held-out NLI evaluation. Its suggestions are research observations, not reliable automated assessments. Human review remains required.</p></div>}
       <AnalysisStatus analysis={r.analysis}/>
+      {r.retrievalDetails?.reranking&&r.retrievalDetails.reranking.status!=='unconfigured'&&<p role="status" className="text-sm text-amber-200">Experimental relevance reranker: {r.retrievalDetails.reranking.applied?'applied':'original order retained'}. Relevance is not factual support. {r.retrievalDetails.reranking.reason}</p>}
+      {!r.isSimulated && <section aria-label="Source-grounded evidence summary" className="rounded border border-slate-700 p-3 text-sm">
+        <h3 className="font-medium text-cyan-200">Evidence assessment</h3>
+        <p className="mt-1">{summary.assessment}</p>
+        <p className="mt-1 text-xs text-slate-400">{summary.limitations[0]}</p>
+        <details className="mt-2"><summary className="cursor-pointer">Read cited passages and review status</summary>
+          {summary.citations.map(c=><div key={c.citationId} className="mt-3">
+            <a className="text-cyan-300 underline" href={c.url} target="_blank" rel="noreferrer">[{c.citationId} / {c.sourceId}] {c.title}</a>
+            <p>Relationship: {c.relationship==='unreviewed'?'unverified; no support or contradiction established':`human-reviewed ${c.relationship}`}</p>
+            <blockquote className="border-l border-slate-600 pl-2">{c.quote}</blockquote>
+            {c.quoteTruncated&&<p className="text-xs text-slate-400">Exact excerpt preview ends here; read the retained source passage below for context.</p>}
+          </div>)}
+        </details>
+      </section>}
       {(r.retrievalDetails?.omittedCount || 0)>0 && <p role="status" className="text-sm text-amber-200">Some ranked evidence was omitted. Narrow the claim or corpus before recording a decisive assessment.</p>}
       {r.verificationStatus && (
         <div className="rounded border border-cyan-900 p-3 text-sm" role="status">
@@ -173,6 +189,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
           <div className="space-y-2">
             {r.sources.map((s, i) => (
               <div key={i} className="rounded-lg border border-slate-800 p-3 text-xs">
+                {!s.isSimulated&&<p className="mb-1 text-cyan-200">{citationGroup(s)}</p>}
                 <div className="flex items-center gap-2 text-sm">
                   {s.url ? (
                     <a
@@ -258,6 +275,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
       </div>
 
       <Details title="Technical details (for experts)">
+        {r.retrievalDetails?.reranking&&<details><summary className="cursor-pointer">Reranker diagnostics</summary><p>{r.retrievalDetails.reranking.modelId} @ {r.retrievalDetails.reranking.version} · {r.retrievalDetails.reranking.status} · {r.retrievalDetails.reranking.elapsedMs.toFixed(1)} ms</p><p>{r.retrievalDetails.reranking.reason}</p>{r.retrievalDetails.reranking.candidates.map(c=><p key={c.url} className="break-all">{c.url} · {c.status} · raw relevance logit {c.score??'not measured'} · tokens {c.tokens??'not measured'} · input SHA-256 {c.inputSha256} · source passage SHA-256 {c.passageSha256}</p>)}</details>}
         {r.retrievalDetails?.providers && <div>
           <p>Configured retrieval providers (availability is separate from factual accuracy):</p>
           {r.retrievalDetails.providers.map(p=><p key={p.provider}>{p.provider}: {p.status} · {p.retrieved} passages · {p.detail}{p.query ? ` · Query: ${p.query}` : ''}{p.errorCategory ? ` · ${p.errorCategory}` : ''}</p>)}

@@ -1,0 +1,6312 @@
+{
+  "scope": "External SciFact scientific abstract/document relevance using standard BEIR qrels; not general passage relevance, factual/clinical truth or NLI accuracy",
+  "source": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip",
+  "license": "SciFact claims/annotations CC BY 4.0; S2ORC abstracts ODC-By 1.0; https://github.com/allenai/scifact/blob/master/LICENSE.md",
+  "archiveSha256": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165",
+  "manifestSha256": "7e3dc9f130d90706670eb49a4f99ae5538c5d38231f2c619d224fcfb2366f1bb",
+  "protocolSha256": "0f2e08b6844ffd8a5d75786bd23771663a781b7c5662f9d5d124744cf758b001",
+  "model": {
+    "id": "cross-encoder/ms-marco-MiniLM-L6-v2",
+    "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+    "license": "Apache-2.0",
+    "minimumFreeGiB": 1.5
+  },
+  "startupMs": 9193.832700024359,
+  "memory": {
+    "rssBytes": 475394048,
+    "peakWorkingSetBytes": 475394048
+  },
+  "latencyMs": {
+    "median": 83.54889997281134,
+    "p95": 138.38860002579167
+  },
+  "validationGatePassed": true,
+  "authoritativeStancePromotion": false,
+  "splits": {
+    "development": {
+      "queries": 15,
+      "complete": 7,
+      "baseline": {
+        "1": {
+          "recall": 0.7666666666666667,
+          "mrr": 0.8555555555555555,
+          "ndcg": 0.8
+        },
+        "3": {
+          "recall": 0.85,
+          "mrr": 0.8555555555555555,
+          "ndcg": 0.8272819402487549
+        },
+        "6": {
+          "recall": 0.8666666666666667,
+          "mrr": 0.8555555555555555,
+          "ndcg": 0.8340312799822662
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.6333333333333333,
+          "mrr": 0.7777777777777778,
+          "ndcg": 0.6666666666666666
+        },
+        "3": {
+          "recall": 0.85,
+          "mrr": 0.7777777777777778,
+          "ndcg": 0.7693439238201855
+        },
+        "6": {
+          "recall": 0.8666666666666667,
+          "mrr": 0.7777777777777778,
+          "ndcg": 0.7760932635536968
+        }
+      }
+    },
+    "validation": {
+      "queries": 15,
+      "complete": 10,
+      "baseline": {
+        "1": {
+          "recall": 0.4666666666666667,
+          "mrr": 0.5722222222222222,
+          "ndcg": 0.4666666666666667
+        },
+        "3": {
+          "recall": 0.6333333333333333,
+          "mrr": 0.5722222222222222,
+          "ndcg": 0.5712288735683763
+        },
+        "6": {
+          "recall": 0.7,
+          "mrr": 0.5722222222222222,
+          "ndcg": 0.5999406441066025
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.5333333333333333,
+          "mrr": 0.6333333333333333,
+          "ndcg": 0.5333333333333333
+        },
+        "3": {
+          "recall": 0.7,
+          "mrr": 0.6333333333333333,
+          "ndcg": 0.6432474876251638
+        },
+        "6": {
+          "recall": 0.7,
+          "mrr": 0.6333333333333333,
+          "ndcg": 0.6432474876251638
+        }
+      }
+    },
+    "held_out": {
+      "queries": 30,
+      "complete": 14,
+      "baseline": {
+        "1": {
+          "recall": 0.48333333333333334,
+          "mrr": 0.5722222222222222,
+          "ndcg": 0.5
+        },
+        "3": {
+          "recall": 0.6333333333333333,
+          "mrr": 0.5722222222222222,
+          "ndcg": 0.5727193432097034
+        },
+        "6": {
+          "recall": 0.6833333333333333,
+          "mrr": 0.5722222222222222,
+          "ndcg": 0.5958774992312362
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.5166666666666667,
+          "mrr": 0.5944444444444444,
+          "ndcg": 0.5333333333333333
+        },
+        "3": {
+          "recall": 0.6333333333333333,
+          "mrr": 0.5944444444444444,
+          "ndcg": 0.5893860098763701
+        },
+        "6": {
+          "recall": 0.6833333333333333,
+          "mrr": 0.5944444444444444,
+          "ndcg": 0.6125441658979028
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "1379",
+      "role": "development",
+      "claimSha256": "bdb0e883f83ed5b7ddcaeec12ccc8e32d8c11680f042c7c8f59d6134f3fb9c54",
+      "judgments": {
+        "16322674": 1,
+        "17450673": 1,
+        "23557241": 1,
+        "27123743": 1
+      },
+      "baselineMs": 472.12699999999995,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "37480103",
+          "passageSha256": "dfc5b8258d905a0568845907e79fbad1c4e90f4ab412f01d7b8218474b38b5a8",
+          "status": "input_over_limit",
+          "tokens": 529
+        },
+        {
+          "id": "17450673",
+          "passageSha256": "e9253e27e810c0ce3aef4be522cd12287cf43f81a830e1c0800fa2e6118b002c",
+          "status": "executed",
+          "values": [
+            2.1293258666992188
+          ],
+          "tokens": 473,
+          "elapsedMs": 127.78680003248155
+        },
+        {
+          "id": "5487448",
+          "passageSha256": "84923a3c3d00a7230c57e60c030711f3ed9e2c78c1dd45f271df5bd655a0df2e",
+          "status": "executed",
+          "values": [
+            3.0365653038024902
+          ],
+          "tokens": 391,
+          "elapsedMs": 86.63999999407679
+        },
+        {
+          "id": "38784540",
+          "passageSha256": "5d315e792587723d14000a5a05300313fbc05b449feba103e503be424a4724e1",
+          "status": "executed",
+          "values": [
+            0.36748379468917847
+          ],
+          "tokens": 370,
+          "elapsedMs": 70.73140004649758
+        },
+        {
+          "id": "16322674",
+          "passageSha256": "fddae3ebb2657b0df37bab62b355f186bfa1e295bd54886f72384939fca753a9",
+          "status": "input_over_limit",
+          "tokens": 602
+        },
+        {
+          "id": "16098747",
+          "passageSha256": "ddd8f04750e1d003b545a0aad577d8a2400971498a934b08ac5f85bfdd6e52c2",
+          "status": "executed",
+          "values": [
+            -1.6344459056854248
+          ],
+          "tokens": 416,
+          "elapsedMs": 75.32950001768768
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.5,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.25,
+          "mrr": 0.5,
+          "ndcg": 0.2960819109658652
+        },
+        "6": {
+          "recall": 0.5,
+          "mrr": 0.5,
+          "ndcg": 0.3973220069685352
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.5,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.25,
+          "mrr": 0.5,
+          "ndcg": 0.2960819109658652
+        },
+        "6": {
+          "recall": 0.5,
+          "mrr": 0.5,
+          "ndcg": 0.3973220069685352
+        }
+      }
+    },
+    {
+      "id": "13",
+      "role": "development",
+      "claimSha256": "c96eec2a10bd47899176e2344a178f1d468e19bf2eec3eea203be9cb815be61d",
+      "judgments": {
+        "1606628": 1
+      },
+      "baselineMs": 390.47109999999986,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "1263446",
+          "passageSha256": "139158d713fb0e641765ba6429f6fc8fe0c7bf2dc2f8c2cf5988fcfe7fa6ec06",
+          "status": "input_over_limit",
+          "tokens": 531
+        },
+        {
+          "id": "7662395",
+          "passageSha256": "71827ce2ffc3a9772c9238352526501cb3db722cd384430766d0522699e31e32",
+          "status": "executed",
+          "values": [
+            -3.1306605339050293
+          ],
+          "tokens": 339,
+          "elapsedMs": 76.8705999944359
+        },
+        {
+          "id": "17450673",
+          "passageSha256": "e9253e27e810c0ce3aef4be522cd12287cf43f81a830e1c0800fa2e6118b002c",
+          "status": "executed",
+          "values": [
+            -1.317014455795288
+          ],
+          "tokens": 470,
+          "elapsedMs": 90.11170000303537
+        },
+        {
+          "id": "8842332",
+          "passageSha256": "ec52374105ab81d13e5a4c6f2a5f6130f8f6d034ac616d51794ab8997ad8b614",
+          "status": "input_over_limit",
+          "tokens": 668
+        },
+        {
+          "id": "12779444",
+          "passageSha256": "c786950f1aff858c0822f931ef5f09c3b9a342762a80c1f98f450219e9f796d8",
+          "status": "executed",
+          "values": [
+            -4.898505210876465
+          ],
+          "tokens": 211,
+          "elapsedMs": 42.95870003988966
+        },
+        {
+          "id": "5487448",
+          "passageSha256": "84923a3c3d00a7230c57e60c030711f3ed9e2c78c1dd45f271df5bd655a0df2e",
+          "status": "executed",
+          "values": [
+            -4.366226673126221
+          ],
+          "tokens": 388,
+          "elapsedMs": 80.33580001210794
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "1062",
+      "role": "development",
+      "claimSha256": "0be45458128f812b9074980ae32e5c00db4e6225a541bf60014ecec4aa5058c5",
+      "judgments": {
+        "20381484": 1
+      },
+      "baselineMs": 319.16679999999997,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "20381484",
+          "passageSha256": "6a866e30f196a44700fd4594c612b992beafa9a3c75b7f8fdda8b96c2b41d22e",
+          "status": "executed",
+          "values": [
+            6.901028633117676
+          ],
+          "tokens": 413,
+          "elapsedMs": 90.81119997426867
+        },
+        {
+          "id": "2831620",
+          "passageSha256": "93856c26c7abb327a12e173ff7a8b5b84f8a9701e165b26509ea718c51c04762",
+          "status": "executed",
+          "values": [
+            -0.6503394842147827
+          ],
+          "tokens": 310,
+          "elapsedMs": 59.433799993712455
+        },
+        {
+          "id": "25748308",
+          "passageSha256": "de492753dfe246843fb311ca30852d32b867b8f08be64e3a0c08a50ab7374029",
+          "status": "executed",
+          "values": [
+            1.017143964767456
+          ],
+          "tokens": 259,
+          "elapsedMs": 57.91909998515621
+        },
+        {
+          "id": "2139357",
+          "passageSha256": "3b1ed4146f85d9d00cee3d27fd70440d805c4034bec844217dc0ae0cf1d552da",
+          "status": "executed",
+          "values": [
+            -0.726654589176178
+          ],
+          "tokens": 446,
+          "elapsedMs": 84.67539999401197
+        },
+        {
+          "id": "665817",
+          "passageSha256": "e0ba133547f53f3e3b77ea9635d14e9d56fee6baf780280e021937c005f1ad98",
+          "status": "executed",
+          "values": [
+            -0.4335790276527405
+          ],
+          "tokens": 386,
+          "elapsedMs": 104.69990002457052
+        },
+        {
+          "id": "18678095",
+          "passageSha256": "c5657c30e5d57a11acae8db9976f0d6bad212afbba44ff1b6af4aeb7866e3add",
+          "status": "executed",
+          "values": [
+            -5.585996150970459
+          ],
+          "tokens": 274,
+          "elapsedMs": 80.95989999128506
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "528",
+      "role": "development",
+      "claimSha256": "c93e2da0c3bcac139511cc24fdfb5e847e8efac8bfe375a6fcd840710caa83d0",
+      "judgments": {
+        "5476778": 1
+      },
+      "baselineMs": 475.77650000000017,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "5476778",
+          "passageSha256": "f735ac313635a8f3c6f2b7468cd6b8bb001f0ad3694224d0d4ffc9052912cdd4",
+          "status": "executed",
+          "values": [
+            -0.31839877367019653
+          ],
+          "tokens": 450,
+          "elapsedMs": 135.4624999803491
+        },
+        {
+          "id": "23326722",
+          "passageSha256": "05057a2ae4ea5c501889101916e7a7cfe465d4fd41fc97869a6a8f62dc03ea89",
+          "status": "executed",
+          "values": [
+            2.5136332511901855
+          ],
+          "tokens": 268,
+          "elapsedMs": 59.667999972589314
+        },
+        {
+          "id": "22937651",
+          "passageSha256": "b3695fcba21ba0d98523bfac814699e342e09336ff1670ad4c380bacd86fe813",
+          "status": "executed",
+          "values": [
+            -6.262935638427734
+          ],
+          "tokens": 394,
+          "elapsedMs": 102.61299996636808
+        },
+        {
+          "id": "24512064",
+          "passageSha256": "27300b4a5289515c5e2112e9763c919407a1178b73ce6e0c49bc7ba5ccf10032",
+          "status": "executed",
+          "values": [
+            0.029411036521196365
+          ],
+          "tokens": 345,
+          "elapsedMs": 93.20619999198243
+        },
+        {
+          "id": "44420873",
+          "passageSha256": "d0f53d39fd217dc222b2cfa6b06a9fe5b64db9a53e461341712c74b13cc7251b",
+          "status": "executed",
+          "values": [
+            -9.509166717529297
+          ],
+          "tokens": 310,
+          "elapsedMs": 89.40970001276582
+        },
+        {
+          "id": "23915841",
+          "passageSha256": "3be00d328437a37d951e2f8c34819cd263224f6db4984bbaa6cc0b5336d8fbce",
+          "status": "executed",
+          "values": [
+            -6.54289436340332
+          ],
+          "tokens": 347,
+          "elapsedMs": 93.23180001229048
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      }
+    },
+    {
+      "id": "1187",
+      "role": "development",
+      "claimSha256": "950daf7be6d4c1d64be2260f6d75efbe75fc26fa70093e2ae24633f122021273",
+      "judgments": {
+        "52873726": 1
+      },
+      "baselineMs": 456.8499999999999,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "52873726",
+          "passageSha256": "f917e34a72eb7f989a94e4e5a87ac9b3823c629680bfdd7270f39ca5e681e1e7",
+          "status": "executed",
+          "values": [
+            2.070434093475342
+          ],
+          "tokens": 384,
+          "elapsedMs": 98.08289998909459
+        },
+        {
+          "id": "3893473",
+          "passageSha256": "23aeb677f9252746b5fe089fc08f4649c68d657a388efa06a356549250c97fb8",
+          "status": "executed",
+          "values": [
+            -2.908939838409424
+          ],
+          "tokens": 235,
+          "elapsedMs": 65.98379998467863
+        },
+        {
+          "id": "19099739",
+          "passageSha256": "f1b0e68f013b2a22fdbc5035944686cc84ac5ad190ae0766efcc98d71c52a0df",
+          "status": "executed",
+          "values": [
+            -2.852893114089966
+          ],
+          "tokens": 228,
+          "elapsedMs": 49.376799957826734
+        },
+        {
+          "id": "12737132",
+          "passageSha256": "5c4e1dc98f2c00ed369fb35e7a45377badc4292a6334dcda44868a3b5b651043",
+          "status": "executed",
+          "values": [
+            1.5396528244018555
+          ],
+          "tokens": 231,
+          "elapsedMs": 61.67320004897192
+        },
+        {
+          "id": "40667066",
+          "passageSha256": "18465404812a5ba1b5d879ab4232706b6254a77e0c728f63d0fe4e10e0420eb0",
+          "status": "executed",
+          "values": [
+            -1.8869245052337646
+          ],
+          "tokens": 343,
+          "elapsedMs": 87.71530003286898
+        },
+        {
+          "id": "34071621",
+          "passageSha256": "3e14034eaa932cb123143b662abb6574b739e6f80b6f0bd50869d9cadc60de6b",
+          "status": "executed",
+          "values": [
+            -4.309817314147949
+          ],
+          "tokens": 283,
+          "elapsedMs": 92.3398999730125
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "742",
+      "role": "development",
+      "claimSha256": "501aa61b6c89d79f9289a62a84e32b1a3c086ce65531de69c112366b580431ce",
+      "judgments": {
+        "32159283": 1
+      },
+      "baselineMs": 298.09619999999995,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "32159283",
+          "passageSha256": "7133b39495618634fff380159549822cb440fb863c22f99a9c47cd1702c87fb0",
+          "status": "executed",
+          "values": [
+            2.80660343170166
+          ],
+          "tokens": 416,
+          "elapsedMs": 79.4101000064984
+        },
+        {
+          "id": "20526907",
+          "passageSha256": "5ba4306d0b620c41c5838a8371677b61b4b44706f698f3791dd57204483e9e92",
+          "status": "executed",
+          "values": [
+            -4.8798909187316895
+          ],
+          "tokens": 386,
+          "elapsedMs": 94.64660001685843
+        },
+        {
+          "id": "17897801",
+          "passageSha256": "510c544ee4f4a29aa9e85bf80921c3cafa779ef657b5c5d6b5d842c95558e4e9",
+          "status": "executed",
+          "values": [
+            -1.5462476015090942
+          ],
+          "tokens": 444,
+          "elapsedMs": 121.72479997389019
+        },
+        {
+          "id": "43629704",
+          "passageSha256": "3548bc343ea693c38f9e996feead042ac66e17da7739f31c855b01f1144961d8",
+          "status": "input_over_limit",
+          "tokens": 548
+        },
+        {
+          "id": "5884524",
+          "passageSha256": "7cd610ebc63c4649aeb1eb1deff7f23a7c82324d18460534a6655eb5317bb2dd",
+          "status": "executed",
+          "values": [
+            -3.3377411365509033
+          ],
+          "tokens": 497,
+          "elapsedMs": 139.5255000097677
+        },
+        {
+          "id": "34873974",
+          "passageSha256": "f1cf866ba0e99d1b91f79c17a1441e2f85cc259240fc06909ec50efce41805e5",
+          "status": "input_over_limit",
+          "tokens": 730
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "636",
+      "role": "development",
+      "claimSha256": "69c042bfdaad584f12039ce69b35fa6141dab56dc919671617c83b12f49e725a",
+      "judgments": {
+        "24294572": 1
+      },
+      "baselineMs": 365.29219999999987,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "42708716",
+          "passageSha256": "87bd97b4a782478825de0a5fb526c20e2a9fcc7b0ee39e42fb608a24ec37aed5",
+          "status": "input_over_limit",
+          "tokens": 616
+        },
+        {
+          "id": "22025252",
+          "passageSha256": "e8e157538fda340f18d24ddb403e5ec54dc5ecb090398d0ec78be60da4abc787",
+          "status": "input_over_limit",
+          "tokens": 632
+        },
+        {
+          "id": "24294572",
+          "passageSha256": "ad4380c62da35a137b255ab13d7c3bff6d86fb1e14c72fd03b1e6c032f298932",
+          "status": "executed",
+          "values": [
+            3.331038475036621
+          ],
+          "tokens": 392,
+          "elapsedMs": 118.6514999717474
+        },
+        {
+          "id": "11289247",
+          "passageSha256": "60b1c0cf5a0ec9c59511b191a5ebe111c367fe4b25621c8895a454aeda47ee2a",
+          "status": "executed",
+          "values": [
+            -3.574277400970459
+          ],
+          "tokens": 333,
+          "elapsedMs": 81.36170002399012
+        },
+        {
+          "id": "14328288",
+          "passageSha256": "ef6d01668b5bfb7fb9c44ff4edb864360c0c0770e05214d9cd288c3931ee4c29",
+          "status": "input_over_limit",
+          "tokens": 543
+        },
+        {
+          "id": "6492658",
+          "passageSha256": "496d82d69ee53110ad81aec865d2430ac1205d7292b9ad0126a763b4bafc9b96",
+          "status": "executed",
+          "values": [
+            -3.140249490737915
+          ],
+          "tokens": 266,
+          "elapsedMs": 67.60040001245216
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      }
+    },
+    {
+      "id": "443",
+      "role": "development",
+      "claimSha256": "b0072de55892db7178f7d2c4515e5b86fb06130672cf25e3dc95a2c634b1a81e",
+      "judgments": {
+        "10165258": 1
+      },
+      "baselineMs": 319.69889999999987,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "10165258",
+          "passageSha256": "9e9ee69372a680602990c3b28112e10cca9ea52a843fce4f0abff17a3df69ca8",
+          "status": "executed",
+          "values": [
+            8.356983184814453
+          ],
+          "tokens": 319,
+          "elapsedMs": 83.63889995962381
+        },
+        {
+          "id": "16728949",
+          "passageSha256": "698b3ad58cdc49d2ad608c3bde9b697b993f52ce9358650877c3c8b3a09b6f61",
+          "status": "executed",
+          "values": [
+            1.8227479457855225
+          ],
+          "tokens": 222,
+          "elapsedMs": 59.76770003326237
+        },
+        {
+          "id": "11289247",
+          "passageSha256": "60b1c0cf5a0ec9c59511b191a5ebe111c367fe4b25621c8895a454aeda47ee2a",
+          "status": "executed",
+          "values": [
+            1.781132698059082
+          ],
+          "tokens": 315,
+          "elapsedMs": 95.10979999322444
+        },
+        {
+          "id": "2853291",
+          "passageSha256": "7672e930590d1164967637151d832c47d2fb69df7e2d9108dd7794efa8ea0bdb",
+          "status": "executed",
+          "values": [
+            1.4199920892715454
+          ],
+          "tokens": 314,
+          "elapsedMs": 78.6274999845773
+        },
+        {
+          "id": "11900630",
+          "passageSha256": "12b50e3730b3a0b5205e7bb66998ddd8b02a6546271bc60a59355add3cd54643",
+          "status": "executed",
+          "values": [
+            1.9428246021270752
+          ],
+          "tokens": 498,
+          "elapsedMs": 112.62339999666438
+        },
+        {
+          "id": "8724666",
+          "passageSha256": "88c589efb8407add0cb6abe0ad120033979dab3c10f4df10d28d38d1acba39e7",
+          "status": "executed",
+          "values": [
+            0.9084891676902771
+          ],
+          "tokens": 288,
+          "elapsedMs": 74.51870001386851
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "1292",
+      "role": "development",
+      "claimSha256": "1b42e5ea2d62b88bd5b14b27b6f5ba78ff5636f0679821294539a8718f62b1ba",
+      "judgments": {
+        "56893404": 1
+      },
+      "baselineMs": 321.1242000000002,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "56893404",
+          "passageSha256": "49c7d58dae562e09139243ebf3c92cb187f1aa26e622dffdddd6d2ce9c6d7f55",
+          "status": "executed",
+          "values": [
+            2.1403470039367676
+          ],
+          "tokens": 231,
+          "elapsedMs": 50.41409999830648
+        },
+        {
+          "id": "198133135",
+          "passageSha256": "8826286d33cdb49ba23d0f8f1d4098fbc8934d345c3d3723960aec799093ebc8",
+          "status": "executed",
+          "values": [
+            -2.1749305725097656
+          ],
+          "tokens": 437,
+          "elapsedMs": 132.77209998341277
+        },
+        {
+          "id": "9394119",
+          "passageSha256": "3d5293f80c917ed89f4142d9d7e046a60e3fd35074c0f61ac9a927f64c81d388",
+          "status": "input_over_limit",
+          "tokens": 926
+        },
+        {
+          "id": "13619127",
+          "passageSha256": "e741a9e4af2855e4ba5ee6e0478a6b5d60cafc180ef65645e47ea9e0fae41b27",
+          "status": "input_over_limit",
+          "tokens": 875
+        },
+        {
+          "id": "4886637",
+          "passageSha256": "d70ed3cb89478026508157ec1ef4f5121f506034d5fd60f4cad32c3c53b1d2c8",
+          "status": "executed",
+          "values": [
+            2.7590389251708984
+          ],
+          "tokens": 278,
+          "elapsedMs": 70.9272000240162
+        },
+        {
+          "id": "27449472",
+          "passageSha256": "6401c453d504dfac3509a0e62a6276130e7a18988b613be8b8d8b04c4ed8380e",
+          "status": "executed",
+          "values": [
+            -0.2921166718006134
+          ],
+          "tokens": 341,
+          "elapsedMs": 91.83679998386651
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "1290",
+      "role": "development",
+      "claimSha256": "82bf5ea4c7646524d19f6f993478b12e05cf05905435c56c28c4433ee62954d5",
+      "judgments": {
+        "4687948": 1
+      },
+      "baselineMs": 317.42980000000034,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "4687948",
+          "passageSha256": "9a82395f28b86774bc5aee3b4c1c79de31d868124a962270a216400c3f570cc0",
+          "status": "input_over_limit",
+          "tokens": 641
+        },
+        {
+          "id": "16812091",
+          "passageSha256": "83faeb164eae804feb2ef0bf98446a1a5324f70dac67d9ef0220d03c8565e165",
+          "status": "executed",
+          "values": [
+            -5.228896141052246
+          ],
+          "tokens": 419,
+          "elapsedMs": 109.93079998297617
+        },
+        {
+          "id": "7965928",
+          "passageSha256": "eee113901361fa9a214a9fc3b6587e53d7d8cb8bd46bc9f9936a1902bf40200c",
+          "status": "input_over_limit",
+          "tokens": 562
+        },
+        {
+          "id": "2391552",
+          "passageSha256": "5a518dbcc28dbeab0c72cbfda3cf559af4fb72c1f4f9e83a68c820ab442cce4c",
+          "status": "input_over_limit",
+          "tokens": 569
+        },
+        {
+          "id": "22420524",
+          "passageSha256": "5ddbae73596cb577a6c57b408be115f2d56ec3939d8a21ad1345fdae89871ce9",
+          "status": "input_over_limit",
+          "tokens": 586
+        },
+        {
+          "id": "42298280",
+          "passageSha256": "f00941e73db4f0108b2ea0a8a5b526f6532295dae5c22b3e62caba68c31956dc",
+          "status": "executed",
+          "values": [
+            -8.991013526916504
+          ],
+          "tokens": 335,
+          "elapsedMs": 78.01369996741414
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "118",
+      "role": "development",
+      "claimSha256": "717d90fed7d3ee67f42b2115fd99152012680636d89be7aac769b12b7f3af23d",
+      "judgments": {
+        "6372244": 1
+      },
+      "baselineMs": 330.1824999999999,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "6372244",
+          "passageSha256": "2a7202d92acf95a312397d3f451305cf5163482b14e6ca61f5e3a40a0e0fde4d",
+          "status": "executed",
+          "values": [
+            9.402567863464355
+          ],
+          "tokens": 279,
+          "elapsedMs": 85.5289000319317
+        },
+        {
+          "id": "4465735",
+          "passageSha256": "31db677f39fb1c9b5cf542c3d5d093a2b8b128779e3251cbb0ec7dec84510da5",
+          "status": "executed",
+          "values": [
+            6.36256217956543
+          ],
+          "tokens": 367,
+          "elapsedMs": 112.0550999767147
+        },
+        {
+          "id": "32454714",
+          "passageSha256": "e6b82bb1c0b95b9b8e127f7876072705da4c8e61674c520db97847daa97ba78c",
+          "status": "executed",
+          "values": [
+            1.6324249505996704
+          ],
+          "tokens": 364,
+          "elapsedMs": 77.78779999352992
+        },
+        {
+          "id": "13714201",
+          "passageSha256": "82caf4e465f34873c4fce61cbd2f8755414cfc721afb154f98515c14b4e02096",
+          "status": "executed",
+          "values": [
+            -2.250762462615967
+          ],
+          "tokens": 462,
+          "elapsedMs": 145.0808999943547
+        },
+        {
+          "id": "15578265",
+          "passageSha256": "f49b0a6df0405f70e0022937a2e54c8ae45f4f669a6ac62e577485fa8a81d921",
+          "status": "executed",
+          "values": [
+            -3.584672451019287
+          ],
+          "tokens": 390,
+          "elapsedMs": 86.05039998656139
+        },
+        {
+          "id": "4492358",
+          "passageSha256": "c0c3928973e8af79619aa2bf0679551d4a0bfd8790702b8a36cf33e19b352480",
+          "status": "executed",
+          "values": [
+            -4.837314605712891
+          ],
+          "tokens": 379,
+          "elapsedMs": 104.09310000250116
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "641",
+      "role": "development",
+      "claimSha256": "e846de4e73864b6522368d2207b7eb28ca53e61460a1ac695a24f517700e629a",
+      "judgments": {
+        "5912283": 1,
+        "31554917": 1
+      },
+      "baselineMs": 306.3903999999993,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "5912283",
+          "passageSha256": "6d0b1c9b16c004ad773b17e8c0d130d46b27ae1a231eef7dc6059e1a63b2a936",
+          "status": "input_over_limit",
+          "tokens": 540
+        },
+        {
+          "id": "24865781",
+          "passageSha256": "6d9e8025bf3459b0a24a1ba7c0144b938e304026702891db4313ff7eaf89f6bb",
+          "status": "executed",
+          "values": [
+            -0.04526600241661072
+          ],
+          "tokens": 226,
+          "elapsedMs": 55.87689997628331
+        },
+        {
+          "id": "24159217",
+          "passageSha256": "84522e6697c1a6eda3d1690374b390a47dbb0094ff32e74afdb2f501902a2b14",
+          "status": "input_over_limit",
+          "tokens": 664
+        },
+        {
+          "id": "24346598",
+          "passageSha256": "6ce18122d11e9483db545a6b45d3959d8db8fcd4719b24110a5dda59936af16e",
+          "status": "executed",
+          "values": [
+            -3.3487987518310547
+          ],
+          "tokens": 401,
+          "elapsedMs": 95.71329999016598
+        },
+        {
+          "id": "7627167",
+          "passageSha256": "57c4ba469cf8dfb8aa5f7e6fbb68017d57430f6562ff7919cc2372fc04267cae",
+          "status": "executed",
+          "values": [
+            -2.7119572162628174
+          ],
+          "tokens": 305,
+          "elapsedMs": 95.39190004579723
+        },
+        {
+          "id": "6191684",
+          "passageSha256": "82bb486ce18b1a4d75f12ca13cef63d1b7f61c2a74b8b00725fe2b6d56ab5e13",
+          "status": "input_over_limit",
+          "tokens": 545
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 0.6131471927654584
+        },
+        "6": {
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 0.6131471927654584
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 0.6131471927654584
+        },
+        "6": {
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 0.6131471927654584
+        }
+      }
+    },
+    {
+      "id": "57",
+      "role": "development",
+      "claimSha256": "37e95ed99a1e591a004f64d269deff7ed398eaf43a0cf6c1640b58aa60ee0ead",
+      "judgments": {
+        "4709641": 1
+      },
+      "baselineMs": 368.35210000000006,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "4709641",
+          "passageSha256": "bd29ebaea1cb01bd24cebc0467676ee0a3d7843caf5434acc9b01d014f0d1e63",
+          "status": "executed",
+          "values": [
+            4.667240142822266
+          ],
+          "tokens": 338,
+          "elapsedMs": 102.24929999094456
+        },
+        {
+          "id": "11659421",
+          "passageSha256": "758af2b165cf150bee507bbf0c3891deb4ca6c3f8fda6005cf6f3901612f4919",
+          "status": "executed",
+          "values": [
+            -3.5800070762634277
+          ],
+          "tokens": 306,
+          "elapsedMs": 88.2038000272587
+        },
+        {
+          "id": "22185730",
+          "passageSha256": "0e8e5865ff805c5af3a7c91d0e44fac13108114274e88fa006438b2a8332a65b",
+          "status": "executed",
+          "values": [
+            -0.8464469909667969
+          ],
+          "tokens": 449,
+          "elapsedMs": 113.73310000635684
+        },
+        {
+          "id": "13969173",
+          "passageSha256": "ab58ca27233cd89a532b8c2f56cdaa437e41f3bb7d3c457bc5f7eae32bdbd1c4",
+          "status": "executed",
+          "values": [
+            -7.873165607452393
+          ],
+          "tokens": 304,
+          "elapsedMs": 79.63530003326014
+        },
+        {
+          "id": "35520219",
+          "passageSha256": "ae1b5ce3bfafcbfb583089c26658132ae5d5305c294ed085930583f4d32c7b96",
+          "status": "input_over_limit",
+          "tokens": 619
+        },
+        {
+          "id": "4423401",
+          "passageSha256": "f1f96e63ed7d822fdcedc2c80d48df6afeee98422cb6d1ba28bae69730af0a21",
+          "status": "executed",
+          "values": [
+            -5.313064098358154
+          ],
+          "tokens": 365,
+          "elapsedMs": 92.67109999200329
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "507",
+      "role": "development",
+      "claimSha256": "ec6e984ab05bf302291585d670ca79d1a9578dfd53505bb347b79e55ffad70f9",
+      "judgments": {
+        "30774694": 1
+      },
+      "baselineMs": 355.7554999999993,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "30774694",
+          "passageSha256": "213a7ca27c4aa72b5b5466ac7a84c0103fce14f0f53f623336357bfbcacd4887",
+          "status": "executed",
+          "values": [
+            4.446646690368652
+          ],
+          "tokens": 282,
+          "elapsedMs": 63.958499988075346
+        },
+        {
+          "id": "7433668",
+          "passageSha256": "a05b86265f6f9c3194e143c568c76252f650ae3c720fa80f1c11684975a3e6e7",
+          "status": "executed",
+          "values": [
+            6.827578544616699
+          ],
+          "tokens": 380,
+          "elapsedMs": 117.10329999914393
+        },
+        {
+          "id": "35079452",
+          "passageSha256": "914b68e84a1e496422942a01ab7db1ed73fff44ea44ddea175b51e2b20f8fb00",
+          "status": "executed",
+          "values": [
+            1.2931044101715088
+          ],
+          "tokens": 247,
+          "elapsedMs": 52.625800017267466
+        },
+        {
+          "id": "16066726",
+          "passageSha256": "fe2d12610c19370b47df83d76b00cb15fa427ba76c1bfac2400225a72b79c8b4",
+          "status": "executed",
+          "values": [
+            1.6416125297546387
+          ],
+          "tokens": 291,
+          "elapsedMs": 66.18349999189377
+        },
+        {
+          "id": "11837657",
+          "passageSha256": "52c6a2a7e1977b6d3164240cea6d7318d7799987367c02750b28058bf68309de",
+          "status": "executed",
+          "values": [
+            2.7769339084625244
+          ],
+          "tokens": 497,
+          "elapsedMs": 134.90460003959015
+        },
+        {
+          "id": "7230315",
+          "passageSha256": "79bf859df4b498ac5144939871d622a27a1e895efe25bfa4f1bc3eae942f0187",
+          "status": "executed",
+          "values": [
+            -2.1438465118408203
+          ],
+          "tokens": 299,
+          "elapsedMs": 59.28640003548935
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.5,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        }
+      }
+    },
+    {
+      "id": "1303",
+      "role": "development",
+      "claimSha256": "e36985c5a4b1c6e014bf48df04d48f0a011d9f1bca3e4154fbe5d787c3336bcf",
+      "judgments": {
+        "12631697": 1
+      },
+      "baselineMs": 307.3024000000005,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "12631697",
+          "passageSha256": "bd798d7fdd260f3b767c58d2d6d4a5878a8675d24ed016162587ba48b287f111",
+          "status": "executed",
+          "values": [
+            -4.67867374420166
+          ],
+          "tokens": 311,
+          "elapsedMs": 59.125599975232035
+        },
+        {
+          "id": "43048059",
+          "passageSha256": "dde3a0e085d07c0a6a3aa93895f6560f6da62b10bc36c2509f46e90a08098203",
+          "status": "executed",
+          "values": [
+            -7.123075008392334
+          ],
+          "tokens": 509,
+          "elapsedMs": 134.76980000268668
+        },
+        {
+          "id": "40631095",
+          "passageSha256": "d2f9e09468642001ecbdf5aadaefa4d7b7dffdad9172176d6f6303ce3de76068",
+          "status": "executed",
+          "values": [
+            -6.432365417480469
+          ],
+          "tokens": 456,
+          "elapsedMs": 134.2663000104949
+        },
+        {
+          "id": "34328964",
+          "passageSha256": "79ceab4828d8b3a573a386214038e7836c35251ab38d9a817d1a80b3d92560ec",
+          "status": "executed",
+          "values": [
+            -6.877016067504883
+          ],
+          "tokens": 211,
+          "elapsedMs": 61.537399946246296
+        },
+        {
+          "id": "5828251",
+          "passageSha256": "a1331a811fbcbfb52db7d12b4ff7735c3db68fdccb2210dafa961334b2587b4c",
+          "status": "executed",
+          "values": [
+            -8.763827323913574
+          ],
+          "tokens": 350,
+          "elapsedMs": 95.11900000507012
+        },
+        {
+          "id": "33554389",
+          "passageSha256": "2707dd08190e61458e8c58c8da9755a558a8aad54a35a07ff1c0e8b647b78ac3",
+          "status": "executed",
+          "values": [
+            -7.339165687561035
+          ],
+          "tokens": 203,
+          "elapsedMs": 49.11030002404004
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "212",
+      "role": "validation",
+      "claimSha256": "ffdef727ad758265da468fc599538f562c53c807f6af7f165a15406260e52775",
+      "judgments": {
+        "22038539": 1
+      },
+      "baselineMs": 296.41759999999977,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "23017040",
+          "passageSha256": "bdd622e7807c99d14e7e9518f1d0f914036506116204b39d9d70d78dc6c27d0e",
+          "status": "executed",
+          "values": [
+            -2.6423308849334717
+          ],
+          "tokens": 398,
+          "elapsedMs": 102.88190003484488
+        },
+        {
+          "id": "4434951",
+          "passageSha256": "d14f8a278de15c939717dcf7deaceabb33eebf2fe6dbbf2e98e1acff9c6d036e",
+          "status": "executed",
+          "values": [
+            -0.3081580400466919
+          ],
+          "tokens": 386,
+          "elapsedMs": 109.31600001640618
+        },
+        {
+          "id": "14475235",
+          "passageSha256": "f72faf5725c1dee7198d6d6c32225c506cd2b922182a74f2c2cc695233720aad",
+          "status": "executed",
+          "values": [
+            1.0545845031738281
+          ],
+          "tokens": 393,
+          "elapsedMs": 120.27100002160296
+        },
+        {
+          "id": "22038539",
+          "passageSha256": "774efa5a69049b4cd2067be373109e32803b880f9a9d92eacca94a3ae076cbfb",
+          "status": "executed",
+          "values": [
+            0.45571279525756836
+          ],
+          "tokens": 299,
+          "elapsedMs": 83.54889997281134
+        },
+        {
+          "id": "6042706",
+          "passageSha256": "48f2da52bd9476166af7b461d8878497f4d37996dfac4fd2582be5f81800ffa0",
+          "status": "executed",
+          "values": [
+            -4.216829299926758
+          ],
+          "tokens": 397,
+          "elapsedMs": 108.5742000141181
+        },
+        {
+          "id": "9558539",
+          "passageSha256": "9cfb7e19fe54bebea5ba6ea1a94c6640c365aa3922a363f91e490e3a028d40d0",
+          "status": "executed",
+          "values": [
+            -6.126215934753418
+          ],
+          "tokens": 334,
+          "elapsedMs": 80.51199995679781
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.25,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0.25,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.25,
+          "ndcg": 0.43067655807339306
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.5,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        }
+      }
+    },
+    {
+      "id": "1316",
+      "role": "validation",
+      "claimSha256": "0a1e2b044f8609dcdf1352525cc79c841f65af0a117196b1a5ab07e3b3a766e6",
+      "judgments": {
+        "27910499": 1
+      },
+      "baselineMs": 316.7711999999992,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "27243019",
+          "passageSha256": "e2f0e2e3f21139fe143546d4f0d3451da7745d96653b395512ace2e1fd626c29",
+          "status": "executed",
+          "values": [
+            -2.154534339904785
+          ],
+          "tokens": 246,
+          "elapsedMs": 58.46450000535697
+        },
+        {
+          "id": "43587663",
+          "passageSha256": "e4d8bdba180551cee1cdafa7675f0454a1c5082ba8dd34c88233e163c6ea7a6c",
+          "status": "executed",
+          "values": [
+            -2.839970588684082
+          ],
+          "tokens": 411,
+          "elapsedMs": 82.5565000413917
+        },
+        {
+          "id": "18834078",
+          "passageSha256": "793e642922c3ed8bc98966eef364264162eca45fc988613017a264a5d4bc4e4e",
+          "status": "executed",
+          "values": [
+            -1.9583804607391357
+          ],
+          "tokens": 223,
+          "elapsedMs": 59.5708999899216
+        },
+        {
+          "id": "13398997",
+          "passageSha256": "57b5e2dc5f169a56a5207f859586144be8281308bdd5e45176ff027bbe9670c9",
+          "status": "executed",
+          "values": [
+            -2.481614589691162
+          ],
+          "tokens": 388,
+          "elapsedMs": 93.82940002251416
+        },
+        {
+          "id": "26105746",
+          "passageSha256": "a5c369c66a5c7ae6ede0d36db04d5f48149e1de82057add9bf488133829d384b",
+          "status": "executed",
+          "values": [
+            -8.975465774536133
+          ],
+          "tokens": 177,
+          "elapsedMs": 44.43629999877885
+        },
+        {
+          "id": "39539647",
+          "passageSha256": "8e5b768562ede7d8f433c5fe578c2bc5cb35863f88492be2c48394f3c7f0d4e1",
+          "status": "executed",
+          "values": [
+            -4.627910137176514
+          ],
+          "tokens": 437,
+          "elapsedMs": 111.70130001846701
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "904",
+      "role": "validation",
+      "claimSha256": "b4946c564b4cec12e4d9c4aae22c974de433b241a30758b27a38d99d942d60d5",
+      "judgments": {
+        "7370282": 1
+      },
+      "baselineMs": 416.0057999999999,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "7370282",
+          "passageSha256": "720ab8aa69f1104dddb27cf41518375d6e336e8b7352775b7b3a1d169874093a",
+          "status": "executed",
+          "values": [
+            9.477334976196289
+          ],
+          "tokens": 362,
+          "elapsedMs": 105.7699000230059
+        },
+        {
+          "id": "5700349",
+          "passageSha256": "44fb8b38c494150394ac38560b289ed0cdccab40d61612e3f7af47a6af8e49db",
+          "status": "executed",
+          "values": [
+            -3.47054386138916
+          ],
+          "tokens": 385,
+          "elapsedMs": 91.4525999687612
+        },
+        {
+          "id": "2603304",
+          "passageSha256": "6a3dddc32a5907f9be3724a054c91065fe45df94d102003724bca9ce0e83a9a1",
+          "status": "executed",
+          "values": [
+            -5.372836112976074
+          ],
+          "tokens": 362,
+          "elapsedMs": 75.50099998479709
+        },
+        {
+          "id": "3825472",
+          "passageSha256": "c490a2fb242e63218a091763a761069bee158b9f59619ff6c4862a9faea83ebb",
+          "status": "executed",
+          "values": [
+            -4.650864124298096
+          ],
+          "tokens": 304,
+          "elapsedMs": 55.9349000104703
+        },
+        {
+          "id": "8563659",
+          "passageSha256": "33fa045aa5166087aaeaf9f25b4813a5f89385eeb0a4c9435ab1887295896122",
+          "status": "executed",
+          "values": [
+            -7.617352485656738
+          ],
+          "tokens": 336,
+          "elapsedMs": 66.54489994980395
+        },
+        {
+          "id": "8596357",
+          "passageSha256": "6b8227ea39665f40084ec75bb55eec03005895a0a48f6b239043157f4cfe9b1f",
+          "status": "executed",
+          "values": [
+            -0.5850715637207031
+          ],
+          "tokens": 384,
+          "elapsedMs": 69.54890000633895
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "1282",
+      "role": "validation",
+      "claimSha256": "3646829da12da657bc7c6898038959d43661fa2647dc26a701213bbfc86bd444",
+      "judgments": {
+        "23649163": 1
+      },
+      "baselineMs": 348.79529999999977,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "23649163",
+          "passageSha256": "f73d0c85e15fc101e7d8c5ac7b76eec5d7f2b993160d0353356e9868c0cbcc0c",
+          "status": "executed",
+          "values": [
+            1.7482922077178955
+          ],
+          "tokens": 426,
+          "elapsedMs": 82.00100000249222
+        },
+        {
+          "id": "5402581",
+          "passageSha256": "0ec0d1132fd107b92cea9d2bc14526d8449ced709c8746e5078321264bd1eb97",
+          "status": "input_over_limit",
+          "tokens": 635
+        },
+        {
+          "id": "44265107",
+          "passageSha256": "af214f4e26a9cd3182447241ff1a2148151b0de48b2de9f9e6acc521d8c36cb7",
+          "status": "executed",
+          "values": [
+            -4.73392391204834
+          ],
+          "tokens": 409,
+          "elapsedMs": 75.53869998082519
+        },
+        {
+          "id": "22482820",
+          "passageSha256": "26b2baaab4a61793b79949b72d0e742cc9c01c593f47c40462fea5d28c58062d",
+          "status": "executed",
+          "values": [
+            -5.884527683258057
+          ],
+          "tokens": 310,
+          "elapsedMs": 55.152099987026304
+        },
+        {
+          "id": "27024392",
+          "passageSha256": "6d59d0d3f03d96a5d341c6a96904aec1d0e05d2eeaf3a56a9c520bdb50c1b3cc",
+          "status": "input_over_limit",
+          "tokens": 590
+        },
+        {
+          "id": "37205685",
+          "passageSha256": "eb173830f6bc7ecdf76f0681d2942ac5b9519e5837b43cbc91cf6f1017de75b3",
+          "status": "executed",
+          "values": [
+            -6.4324846267700195
+          ],
+          "tokens": 187,
+          "elapsedMs": 37.13539999444038
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "385",
+      "role": "validation",
+      "claimSha256": "ab255cf79560704cf23d8adfc4c50ad2e03a7b98f9bfd6a71ac9356f3b07d6f8",
+      "judgments": {
+        "9767444": 1,
+        "9955779": 1
+      },
+      "baselineMs": 359.28620000000046,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "1032372",
+          "passageSha256": "b45e5421af7bda7582b7399a5be0c12f7e0f439ee923d4e11c90e69b3faea073",
+          "status": "executed",
+          "values": [
+            6.809077262878418
+          ],
+          "tokens": 239,
+          "elapsedMs": 46.4289000374265
+        },
+        {
+          "id": "5991309",
+          "passageSha256": "0a35b1bb00e62ae4f2a621b6323e6334c9f2c6cc0c501f2987f90981fae6fa31",
+          "status": "executed",
+          "values": [
+            0.5108485221862793
+          ],
+          "tokens": 238,
+          "elapsedMs": 50.25109997950494
+        },
+        {
+          "id": "9767444",
+          "passageSha256": "cc732a9c409b85e34c2480dd9724c06fbb05086d0dda5ebe29e089b9ac140012",
+          "status": "executed",
+          "values": [
+            3.1763715744018555
+          ],
+          "tokens": 430,
+          "elapsedMs": 89.18850001646206
+        },
+        {
+          "id": "12641252",
+          "passageSha256": "eb859ba9d293cedb08d424faebfb46ee73b640f10e545fd5d63b11e236bec1c0",
+          "status": "executed",
+          "values": [
+            -2.9074208736419678
+          ],
+          "tokens": 279,
+          "elapsedMs": 52.06309998175129
+        },
+        {
+          "id": "15541119",
+          "passageSha256": "d059ce42a72f1852603669fc97d325c2d694f7ab411d7455be18c75c261e83a1",
+          "status": "executed",
+          "values": [
+            0.196258544921875
+          ],
+          "tokens": 309,
+          "elapsedMs": 55.913499963935465
+        },
+        {
+          "id": "32742683",
+          "passageSha256": "c91d4137ff6f17267982afaa2304037f7415bfa7b0f76dbda27b7e9225b635a0",
+          "status": "executed",
+          "values": [
+            -0.11068955808877945
+          ],
+          "tokens": 202,
+          "elapsedMs": 36.51740000350401
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.5,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.3065735963827292
+        },
+        "6": {
+          "recall": 0.5,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.3065735963827292
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.5,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.5,
+          "mrr": 0.5,
+          "ndcg": 0.38685280723454163
+        },
+        "6": {
+          "recall": 0.5,
+          "mrr": 0.5,
+          "ndcg": 0.38685280723454163
+        }
+      }
+    },
+    {
+      "id": "1104",
+      "role": "validation",
+      "claimSha256": "ad58517d2428923cd868c1d9e5c94d26d3a19c45f1a8ce9bdebb644da14e59b8",
+      "judgments": {
+        "3898784": 1
+      },
+      "baselineMs": 383.2521999999999,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "3898784",
+          "passageSha256": "def4a9dfce0644074bcf432125aeb1f33153de0eaab27c8520d047db7d295d5c",
+          "status": "input_over_limit",
+          "tokens": 938
+        },
+        {
+          "id": "4910408",
+          "passageSha256": "23d262781ed7d25c05b56ab8ee6be64fa46e7972e18f9299ae75c97b3bfe8209",
+          "status": "input_over_limit",
+          "tokens": 555
+        },
+        {
+          "id": "32328114",
+          "passageSha256": "326ed1e6641e835aa75f64da1563b99bc3dd19c340ed3eeffd93f4e3bf63fbf5",
+          "status": "executed",
+          "values": [
+            -1.613534688949585
+          ],
+          "tokens": 450,
+          "elapsedMs": 82.99399999668822
+        },
+        {
+          "id": "36003142",
+          "passageSha256": "c2c75ce6a766eeb25402ad76da3374c550ee52335881dbfd21c1f24e211c2e1a",
+          "status": "executed",
+          "values": [
+            -1.5421741008758545
+          ],
+          "tokens": 445,
+          "elapsedMs": 90.92849999433383
+        },
+        {
+          "id": "11718220",
+          "passageSha256": "ec12e9607405ca43ca41078a6f5cac43892a10983283d67a6b8cd36e9f8563a4",
+          "status": "input_over_limit",
+          "tokens": 550
+        },
+        {
+          "id": "27054878",
+          "passageSha256": "da8f7383446ae95e8109647bb0135bc2b3ef2835c42669c18a170210da9f75fc",
+          "status": "executed",
+          "values": [
+            -6.119770050048828
+          ],
+          "tokens": 478,
+          "elapsedMs": 102.76709997560829
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "521",
+      "role": "validation",
+      "claimSha256": "df0786000fb9a183b4599f9ba481ff71fd103fdac20929bb7c07887d54b4a0b1",
+      "judgments": {
+        "34873974": 1
+      },
+      "baselineMs": 459.35529999999926,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "34873974",
+          "passageSha256": "f1cf866ba0e99d1b91f79c17a1441e2f85cc259240fc06909ec50efce41805e5",
+          "status": "input_over_limit",
+          "tokens": 756
+        },
+        {
+          "id": "3056682",
+          "passageSha256": "3039f20c805b35ffb7fc65cf85f0161ae1f3fdba028d400754686d7e3a713017",
+          "status": "executed",
+          "values": [
+            -1.5871541500091553
+          ],
+          "tokens": 429,
+          "elapsedMs": 168.1451000040397
+        },
+        {
+          "id": "29526125",
+          "passageSha256": "a3bd23f107cda400c09870b299d423fd26449fdd2ae92d1b9bc8210e26b6139b",
+          "status": "input_over_limit",
+          "tokens": 615
+        },
+        {
+          "id": "25028913",
+          "passageSha256": "43f690a44f285c0d4d5062eed8ef78e3cfb7a0a96d6f291221a2c876d08916d4",
+          "status": "input_over_limit",
+          "tokens": 656
+        },
+        {
+          "id": "34054472",
+          "passageSha256": "ab64d67c35be3eb0896a62629ab82addecbde2406ab02d9bbd10ff26725b84ae",
+          "status": "executed",
+          "values": [
+            -7.162470817565918
+          ],
+          "tokens": 347,
+          "elapsedMs": 106.19209997821599
+        },
+        {
+          "id": "17897801",
+          "passageSha256": "510c544ee4f4a29aa9e85bf80921c3cafa779ef657b5c5d6b5d842c95558e4e9",
+          "status": "executed",
+          "values": [
+            -8.229971885681152
+          ],
+          "tokens": 470,
+          "elapsedMs": 219.37920001801103
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "1245",
+      "role": "validation",
+      "claimSha256": "91cd83fc01c4b9a5157058ef9ca7a6b8e29cff5d963b74d05df6d5cb96123e18",
+      "judgments": {
+        "7662395": 1
+      },
+      "baselineMs": 325.8540000000012,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "11748341",
+          "passageSha256": "e93c9e8ae66151c685108b9b598aa9dceb24b26eec96a35bc4b8eb465a7b27b6",
+          "status": "executed",
+          "values": [
+            -5.301610469818115
+          ],
+          "tokens": 451,
+          "elapsedMs": 88.03779998561367
+        },
+        {
+          "id": "39593548",
+          "passageSha256": "e095f8b89997f655fb24c5da0d607262f251bb9d2b5d16cd47fc2c867ff741db",
+          "status": "executed",
+          "values": [
+            -10.209240913391113
+          ],
+          "tokens": 282,
+          "elapsedMs": 64.93130000308156
+        },
+        {
+          "id": "49429882",
+          "passageSha256": "ec9db47cfd0d23e7573f36bd070b215680a62f126623e76cfe550599f6bafa81",
+          "status": "executed",
+          "values": [
+            -4.792882919311523
+          ],
+          "tokens": 477,
+          "elapsedMs": 78.54389998828992
+        },
+        {
+          "id": "8595678",
+          "passageSha256": "7328cddd8ab96aa1e1e4d2ed87dbb755e9f13b08acaea2dd548fb55dec035e0a",
+          "status": "input_over_limit",
+          "tokens": 734
+        },
+        {
+          "id": "704526",
+          "passageSha256": "71c000a909c2e742fc16b22733b59813b5d3bd68e85847bd37112220ecafc755",
+          "status": "executed",
+          "values": [
+            -8.510482788085938
+          ],
+          "tokens": 447,
+          "elapsedMs": 65.27760002063587
+        },
+        {
+          "id": "154763124",
+          "passageSha256": "322be9be0c282a035b840aaa04536d9ffc4de995ccd0e3ad786667cf8b6f07cd",
+          "status": "executed",
+          "values": [
+            -10.938055992126465
+          ],
+          "tokens": 304,
+          "elapsedMs": 49.315999960526824
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "294",
+      "role": "validation",
+      "claimSha256": "d0bed8d7ba848b0e7c1e93a559c1bdcb195b6f0ae2cb4a7d3c93530e09d74e29",
+      "judgments": {
+        "10874408": 1
+      },
+      "baselineMs": 345.26060000000143,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "10874408",
+          "passageSha256": "cf7704565f5d3801865949f8dac568c4a2d11b6ca0c21d8f4fcdb6373d934f50",
+          "status": "executed",
+          "values": [
+            0.7867434024810791
+          ],
+          "tokens": 408,
+          "elapsedMs": 72.012500022538
+        },
+        {
+          "id": "32638085",
+          "passageSha256": "21761c66033e3b981a8d23cb0b21f1390af31c25bd8ce3daabe34579d01a9d33",
+          "status": "executed",
+          "values": [
+            -2.1199748516082764
+          ],
+          "tokens": 171,
+          "elapsedMs": 26.888999971561134
+        },
+        {
+          "id": "21170174",
+          "passageSha256": "a73c3fdf27dd7f92210988fe293da9c96207bdfc3e213c83e8f4d564a0f7e09b",
+          "status": "executed",
+          "values": [
+            -3.1994991302490234
+          ],
+          "tokens": 260,
+          "elapsedMs": 39.61860004346818
+        },
+        {
+          "id": "16237005",
+          "passageSha256": "282827619da8dc063ddc6b6cbc73472127ec126905f27d62a4be13a7734fe713",
+          "status": "executed",
+          "values": [
+            -4.0142927169799805
+          ],
+          "tokens": 231,
+          "elapsedMs": 35.29719996731728
+        },
+        {
+          "id": "23604601",
+          "passageSha256": "aa32ac009fac702d9921f2e127865161765222f4fa2261aa67c5b786799a1a89",
+          "status": "executed",
+          "values": [
+            -3.6447339057922363
+          ],
+          "tokens": 312,
+          "elapsedMs": 71.97440002346411
+        },
+        {
+          "id": "9704467",
+          "passageSha256": "2534bce89c05f72ec05f65bec106900e2ebed8cae767d1b9ef990b12fd146e68",
+          "status": "executed",
+          "values": [
+            -3.3160367012023926
+          ],
+          "tokens": 204,
+          "elapsedMs": 31.39680001186207
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "249",
+      "role": "validation",
+      "claimSha256": "c27e99d504bfe060fea34d6f8a67136eeb2fed4e8f7843502061bbd2af2423d9",
+      "judgments": {
+        "1568684": 1
+      },
+      "baselineMs": 290.65970000000016,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "25050364",
+          "passageSha256": "4086a34e8314aebd6bc48b81507fc4a38428de624d1c93cfa8eb4a8e2ba5d497",
+          "status": "executed",
+          "values": [
+            -1.5230077505111694
+          ],
+          "tokens": 433,
+          "elapsedMs": 66.67920004110783
+        },
+        {
+          "id": "1568684",
+          "passageSha256": "618ad83d19c0ee995aa8259ce8e835039ac7a7105dc53e2b5fb14f62cbf7d7b8",
+          "status": "executed",
+          "values": [
+            5.374120235443115
+          ],
+          "tokens": 233,
+          "elapsedMs": 37.5969999586232
+        },
+        {
+          "id": "23369842",
+          "passageSha256": "31be749eb8331ece61ff30d68012f367a4061bed58db62f905d2294a84a86f5b",
+          "status": "executed",
+          "values": [
+            -5.043002605438232
+          ],
+          "tokens": 334,
+          "elapsedMs": 54.81649999273941
+        },
+        {
+          "id": "14865329",
+          "passageSha256": "47c574c32f08b30e71a7660880f92b5077e2c05e7ad10af6d888cf597473b05f",
+          "status": "executed",
+          "values": [
+            -5.123760223388672
+          ],
+          "tokens": 268,
+          "elapsedMs": 42.61389997554943
+        },
+        {
+          "id": "45154987",
+          "passageSha256": "3d4a912b221cfc2a31f4743fa3f92d1e1e51e8bdad4d4322271abf4c0060986b",
+          "status": "executed",
+          "values": [
+            -7.486899375915527
+          ],
+          "tokens": 295,
+          "elapsedMs": 44.64239999651909
+        },
+        {
+          "id": "26107000",
+          "passageSha256": "a85f3a9db6afbbf0aab8b3a82629626cd1d34f59a36b8d3d4bfd5ec38c2ce9e4",
+          "status": "executed",
+          "values": [
+            -8.084406852722168
+          ],
+          "tokens": 428,
+          "elapsedMs": 71.80829998105764
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.5,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "527",
+      "role": "validation",
+      "claimSha256": "6ab4948be5c8d290c5260791af7d5263b4c25ad6c143e3dad43e66846108055d",
+      "judgments": {
+        "3863543": 1
+      },
+      "baselineMs": 384.1922999999988,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "1617327",
+          "passageSha256": "982710c29f26c81acfbdd54821407a0a47fc5ccbab2a9eb62940ee26a6018199",
+          "status": "executed",
+          "values": [
+            0.1244581937789917
+          ],
+          "tokens": 337,
+          "elapsedMs": 55.354900017846376
+        },
+        {
+          "id": "3863543",
+          "passageSha256": "66094de1413889caa93ac6f62d4e72f3cf663296028c282b4bf607e898abb603",
+          "status": "executed",
+          "values": [
+            -4.055249214172363
+          ],
+          "tokens": 322,
+          "elapsedMs": 59.20590000459924
+        },
+        {
+          "id": "4421742",
+          "passageSha256": "09929415a3605c3d19be75f6be9b87e6907b430759807c941bc18bb3205082d3",
+          "status": "executed",
+          "values": [
+            -5.343845367431641
+          ],
+          "tokens": 255,
+          "elapsedMs": 44.41520001273602
+        },
+        {
+          "id": "4366738",
+          "passageSha256": "5a1b63e4961882888e2277a4bd464b5dfa38c24d780ca83ee8d03e186255b827",
+          "status": "executed",
+          "values": [
+            -2.1976232528686523
+          ],
+          "tokens": 439,
+          "elapsedMs": 126.73319998430088
+        },
+        {
+          "id": "43385013",
+          "passageSha256": "95c0709448f54485dbebcbf0cdd403a99afd711f127256fe9d4bfb2973ac378b",
+          "status": "input_over_limit",
+          "tokens": 542
+        },
+        {
+          "id": "25827024",
+          "passageSha256": "74a53196dab4dafc32ff22c7a861d14d97bebeab9571d808adb39f1aadf793b0",
+          "status": "executed",
+          "values": [
+            -1.9611406326293945
+          ],
+          "tokens": 448,
+          "elapsedMs": 127.25459999637678
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.5,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.5,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        }
+      }
+    },
+    {
+      "id": "475",
+      "role": "validation",
+      "claimSha256": "6625465278c997081ee501ab45feb03cb8ee33406b7743f44e7e513134ece353",
+      "judgments": {
+        "18678095": 1
+      },
+      "baselineMs": 365.78999999999905,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "23576165",
+          "passageSha256": "c5c7206c451e9f88a6381e3eb926bd59ffd5c14d4e8d9762508db44c7c0eef83",
+          "status": "executed",
+          "values": [
+            -2.023003101348877
+          ],
+          "tokens": 265,
+          "elapsedMs": 52.950499986764044
+        },
+        {
+          "id": "195689757",
+          "passageSha256": "87912a6a075e1128591ab0af1783b7875a60a372348fa68ac7bbf3242580c671",
+          "status": "executed",
+          "values": [
+            -2.3205161094665527
+          ],
+          "tokens": 271,
+          "elapsedMs": 70.22779999533668
+        },
+        {
+          "id": "33030946",
+          "passageSha256": "f84d69457dd82d9a6656371c39f54ac4e50c7a779a5cc089b41e53b90d6f6378",
+          "status": "executed",
+          "values": [
+            -4.779646396636963
+          ],
+          "tokens": 472,
+          "elapsedMs": 128.36309999693185
+        },
+        {
+          "id": "23148978",
+          "passageSha256": "99aebb9f32384f4a22ff7f8c93639934c12c0b9ac3590ac41f49fcd7d7d3fa12",
+          "status": "executed",
+          "values": [
+            -6.737142562866211
+          ],
+          "tokens": 411,
+          "elapsedMs": 100.36240000044927
+        },
+        {
+          "id": "8477699",
+          "passageSha256": "9a2c127983401f388cfa03862c78f31b15079dd6d86a625fb6ace9cae46ca8c2",
+          "status": "executed",
+          "values": [
+            -3.5442118644714355
+          ],
+          "tokens": 285,
+          "elapsedMs": 90.4294999781996
+        },
+        {
+          "id": "8724666",
+          "passageSha256": "88c589efb8407add0cb6abe0ad120033979dab3c10f4df10d28d38d1acba39e7",
+          "status": "executed",
+          "values": [
+            -3.342480182647705
+          ],
+          "tokens": 286,
+          "elapsedMs": 78.84699996793643
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "350",
+      "role": "validation",
+      "claimSha256": "8a95bd545af0f4b9055dfe53a764e3803a886d723ff0fc51bdf5c5cf5e553173",
+      "judgments": {
+        "16927286": 1
+      },
+      "baselineMs": 397.19550000000163,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "16927286",
+          "passageSha256": "30a5f4dfffbf6ec5adb1a1757e18a311acad00d00eb54fe124cc2f18e0109c67",
+          "status": "executed",
+          "values": [
+            3.271303653717041
+          ],
+          "tokens": 225,
+          "elapsedMs": 55.50970003241673
+        },
+        {
+          "id": "23342686",
+          "passageSha256": "9d998f811ade60d9bf4a3eee0d2c6bedda279e5134c0a0ae8eac342b0160cd65",
+          "status": "executed",
+          "values": [
+            -1.9129173755645752
+          ],
+          "tokens": 280,
+          "elapsedMs": 84.93720000842586
+        },
+        {
+          "id": "8698857",
+          "passageSha256": "e79df582d63deea5c1a38ecc3abe80ab5fab0167914a7039f2f0d1b8cdfa7c7c",
+          "status": "executed",
+          "values": [
+            -6.559541702270508
+          ],
+          "tokens": 297,
+          "elapsedMs": 92.27999998256564
+        },
+        {
+          "id": "16242975",
+          "passageSha256": "95c6c8e300344f55ea530726ed439bf5d25d5e40b89557fc7c8b4a98c7fcfd0f",
+          "status": "executed",
+          "values": [
+            -6.801471710205078
+          ],
+          "tokens": 298,
+          "elapsedMs": 90.99759999662638
+        },
+        {
+          "id": "30261663",
+          "passageSha256": "1ade46d2859ae94e0d4bbaba2a695b8617c2a814badd21e1b452105175da14ea",
+          "status": "executed",
+          "values": [
+            -5.124238967895508
+          ],
+          "tokens": 336,
+          "elapsedMs": 104.86740001942962
+        },
+        {
+          "id": "2479538",
+          "passageSha256": "e6d1c55c7e5bc37d48e9e63a693c7f05d743c4675782c381e3ee54574d0d7778",
+          "status": "executed",
+          "values": [
+            -6.624016761779785
+          ],
+          "tokens": 402,
+          "elapsedMs": 128.33510001655668
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "431",
+      "role": "validation",
+      "claimSha256": "2e42cb2dfac47a8d50891164d81142d5aa584845fd551207b5dfd38a03dde43b",
+      "judgments": {
+        "28937856": 1
+      },
+      "baselineMs": 322.8127000000004,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "19922508",
+          "passageSha256": "8748249b1edf793971f219b347f489c9eeec46ae08b25b4fbab5a9ff63197214",
+          "status": "executed",
+          "values": [
+            1.664062738418579
+          ],
+          "tokens": 232,
+          "elapsedMs": 68.0525999632664
+        },
+        {
+          "id": "22696649",
+          "passageSha256": "a5d56c9e602ba1382b5b30c0b8de17a8d017cec0ba710e44acb5a9a9f03787b3",
+          "status": "executed",
+          "values": [
+            0.882536768913269
+          ],
+          "tokens": 264,
+          "elapsedMs": 76.72140002250671
+        },
+        {
+          "id": "10993232",
+          "passageSha256": "e070409dbb343b357e7c9308239da4d8c80c0cae04c97295856086dec60e6d98",
+          "status": "executed",
+          "values": [
+            1.0110623836517334
+          ],
+          "tokens": 200,
+          "elapsedMs": 56.075099972076714
+        },
+        {
+          "id": "36838958",
+          "passageSha256": "36868aae091c953c75cbf4eaed7d94759847d5c71afc6acc011787f0d6572e17",
+          "status": "executed",
+          "values": [
+            1.1304949522018433
+          ],
+          "tokens": 450,
+          "elapsedMs": 118.34149999776855
+        },
+        {
+          "id": "29073751",
+          "passageSha256": "7613cc2db3fa43c4c917bbcdbd6aa04699620965166ff77f1ed2518461ef91a6",
+          "status": "executed",
+          "values": [
+            2.5058717727661133
+          ],
+          "tokens": 234,
+          "elapsedMs": 67.22640001680702
+        },
+        {
+          "id": "2543135",
+          "passageSha256": "93c791dcc3cc9e77b9787d1426dc058a9a6c3c870aa093e29e77b58a62c0c8ab",
+          "status": "executed",
+          "values": [
+            1.9129552841186523
+          ],
+          "tokens": 271,
+          "elapsedMs": 77.63569999951869
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "1273",
+      "role": "validation",
+      "claimSha256": "cb0c4abb5f201437e9cedc531ef0d78d50752054d2b7bd98c897ad20d7be62de",
+      "judgments": {
+        "11041152": 1
+      },
+      "baselineMs": 355.53229999999894,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "11041152",
+          "passageSha256": "3df4f734d307caab5f0732fec230cadf9d795df4aa54b36a0b993452e84e052c",
+          "status": "executed",
+          "values": [
+            8.525737762451172
+          ],
+          "tokens": 302,
+          "elapsedMs": 95.02379997866228
+        },
+        {
+          "id": "1684489",
+          "passageSha256": "15813e771bee98cc1309f1d99b11aef990533fbce65b1dcf71dda4e2a4305366",
+          "status": "executed",
+          "values": [
+            1.4435243606567383
+          ],
+          "tokens": 371,
+          "elapsedMs": 102.33110003173351
+        },
+        {
+          "id": "24555417",
+          "passageSha256": "3f16cfeb5a332fbf376b2159f07852437eb3c695e61560a05424a5aa1714d7f3",
+          "status": "executed",
+          "values": [
+            -0.8093382120132446
+          ],
+          "tokens": 344,
+          "elapsedMs": 106.74069996457547
+        },
+        {
+          "id": "7681810",
+          "passageSha256": "143bf6c36eda218b710637c9566409ae457d6828a21a4717f278ba7015542704",
+          "status": "executed",
+          "values": [
+            -1.5413799285888672
+          ],
+          "tokens": 288,
+          "elapsedMs": 80.8619000017643
+        },
+        {
+          "id": "38127792",
+          "passageSha256": "733c505fca25456c2cb513c6bd7297dcb74f276ef2c79016b3cea825e20eb026",
+          "status": "executed",
+          "values": [
+            -3.0583431720733643
+          ],
+          "tokens": 200,
+          "elapsedMs": 40.56950000813231
+        },
+        {
+          "id": "14205246",
+          "passageSha256": "d6eaeba9808ca266cff457710b5a4502011fd9bd3021e01bcdb6d83fb92c1d2d",
+          "status": "executed",
+          "values": [
+            -2.8116278648376465
+          ],
+          "tokens": 343,
+          "elapsedMs": 106.0048000072129
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "1088",
+      "role": "held_out",
+      "claimSha256": "3fe686fe7956a53d3ddb2effb35141851fa65f5d17ed344d46e5caff346e8f14",
+      "judgments": {
+        "37549932": 1
+      },
+      "baselineMs": 370.38850000000093,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "11915280",
+          "passageSha256": "25ceeb535617763bf562d6e96178ba89af8e4652dc5098a4dd30a2f447a844e7",
+          "status": "executed",
+          "values": [
+            3.083526134490967
+          ],
+          "tokens": 256,
+          "elapsedMs": 76.89940003911033
+        },
+        {
+          "id": "5765455",
+          "passageSha256": "81f2313793558f23d74af6b0f3051036145d400cba7f26e8a80eb1691299e115",
+          "status": "executed",
+          "values": [
+            -3.5962793827056885
+          ],
+          "tokens": 372,
+          "elapsedMs": 114.26679999567568
+        },
+        {
+          "id": "14863011",
+          "passageSha256": "97cbf7ed8286650de22f57fae389ec31b548cd09ba8caa3f93963efaaf5228ff",
+          "status": "executed",
+          "values": [
+            -2.3136377334594727
+          ],
+          "tokens": 298,
+          "elapsedMs": 92.76780002983287
+        },
+        {
+          "id": "24282306",
+          "passageSha256": "49fc448198511faeda3b5035d594d9e84f63dac88ca93ecf963f86f54716f754",
+          "status": "executed",
+          "values": [
+            -6.400206565856934
+          ],
+          "tokens": 160,
+          "elapsedMs": 41.454699996393174
+        },
+        {
+          "id": "41548287",
+          "passageSha256": "287380a3f28f2c365c2f07efa719f21b652c8d43366b02ca7db99c6bd2d0d472",
+          "status": "executed",
+          "values": [
+            -3.7807750701904297
+          ],
+          "tokens": 438,
+          "elapsedMs": 125.24799996754155
+        },
+        {
+          "id": "7621534",
+          "passageSha256": "2b49df7e550a08d3dacbd07560efb42170656cba674a50076afa3278f9001a4b",
+          "status": "executed",
+          "values": [
+            -2.556572675704956
+          ],
+          "tokens": 481,
+          "elapsedMs": 146.66339999530464
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "1144",
+      "role": "held_out",
+      "claimSha256": "a612d156ae7518d1358ca696352252a5e031bd88c572c234009e91e3266f5dcd",
+      "judgments": {
+        "10071552": 1
+      },
+      "baselineMs": 399.01380000000063,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "10071552",
+          "passageSha256": "99139c7849700129a69d7839bc8461c3adc7572a4352527950c0bab6e0bbbb00",
+          "status": "input_over_limit",
+          "tokens": 553
+        },
+        {
+          "id": "9822397",
+          "passageSha256": "4b69c8a75c99012522cd5f44d3ccb893b21ff08bf2fa3d87012303a53bb45c67",
+          "status": "input_over_limit",
+          "tokens": 534
+        },
+        {
+          "id": "12224536",
+          "passageSha256": "9e8bb34245285f6de4832f0e9b8c596c3c2289dd01717fda6e5fbf93d7e5fc8f",
+          "status": "executed",
+          "values": [
+            -4.743917465209961
+          ],
+          "tokens": 402,
+          "elapsedMs": 123.0148000176996
+        },
+        {
+          "id": "3770750",
+          "passageSha256": "3dc8f93a70e75f2380874791fbc1de7ed49e379a1d4358f45a4e8a57a8a97e9e",
+          "status": "executed",
+          "values": [
+            -2.2094547748565674
+          ],
+          "tokens": 502,
+          "elapsedMs": 170.0979999732226
+        },
+        {
+          "id": "33960383",
+          "passageSha256": "7159c44c2c96128458fac7668aac8e388d0c7354edb7a75c5065d58185e2c16e",
+          "status": "executed",
+          "values": [
+            -4.462863922119141
+          ],
+          "tokens": 415,
+          "elapsedMs": 138.38860002579167
+        },
+        {
+          "id": "40156901",
+          "passageSha256": "c0d45e80e676324b8781fa64b24617c58bb4f75aafb973c3af018f7c47fb3780",
+          "status": "input_over_limit",
+          "tokens": 515
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "300",
+      "role": "held_out",
+      "claimSha256": "eca5897967ece83764c3eb7110b2a7c0cd12ddcfb6662741ba2fc35f324d41df",
+      "judgments": {
+        "3553087": 1
+      },
+      "baselineMs": 338.14500000000044,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "16120395",
+          "passageSha256": "cb7cd745ab7c6cce871b367dff3e64efdfeef94b72af15835b7c7b9a5ab30d63",
+          "status": "executed",
+          "values": [
+            -0.21106944978237152
+          ],
+          "tokens": 296,
+          "elapsedMs": 74.83130000764504
+        },
+        {
+          "id": "15551129",
+          "passageSha256": "cd26d87711c11b301fe44bbd331265bd9e15ce874393759a380370c97816ba77",
+          "status": "executed",
+          "values": [
+            -4.925522804260254
+          ],
+          "tokens": 371,
+          "elapsedMs": 104.95090001495555
+        },
+        {
+          "id": "6828370",
+          "passageSha256": "8d4d480469a4c5c9e1c988a2c141edd1dfaef7800edcda3fd27154386661dcf4",
+          "status": "executed",
+          "values": [
+            -3.9007506370544434
+          ],
+          "tokens": 305,
+          "elapsedMs": 65.59230003040284
+        },
+        {
+          "id": "12652963",
+          "passageSha256": "89a14a74bbf961d29ec313a2b6467e6f2cbd4170b6cc776edb1102bad36f8381",
+          "status": "executed",
+          "values": [
+            -3.4864957332611084
+          ],
+          "tokens": 261,
+          "elapsedMs": 62.55470000905916
+        },
+        {
+          "id": "6722522",
+          "passageSha256": "a1ddbf110433fd5e2fb2e5b5b867ef401fdb2ec38183352923fae01d2747ed58",
+          "status": "executed",
+          "values": [
+            -5.760022163391113
+          ],
+          "tokens": 383,
+          "elapsedMs": 98.932099994272
+        },
+        {
+          "id": "7970974",
+          "passageSha256": "9ff9d9ee32a912fcb438acbf6796464c6aac6281720c0a107a82a0e22116323f",
+          "status": "executed",
+          "values": [
+            -7.937369346618652
+          ],
+          "tokens": 253,
+          "elapsedMs": 59.33989997720346
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "756",
+      "role": "held_out",
+      "claimSha256": "7541482281368eb5372e015385051c865ec50f9919811102e866e6301f3d7347",
+      "judgments": {
+        "2831620": 1
+      },
+      "baselineMs": 416.14780000000064,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "17919731",
+          "passageSha256": "bc5b452d78450d73d37916c5bd3366746494fb88c4797faacd25bd7a44b18c3c",
+          "status": "executed",
+          "values": [
+            5.550570011138916
+          ],
+          "tokens": 173,
+          "elapsedMs": 41.796900040935725
+        },
+        {
+          "id": "27134527",
+          "passageSha256": "70e4e19c489b26f0f7d156c07e82346a7bd5ea4e3665a1af9b309fbe8825bd1b",
+          "status": "executed",
+          "values": [
+            5.986680030822754
+          ],
+          "tokens": 257,
+          "elapsedMs": 58.559699973557144
+        },
+        {
+          "id": "3230361",
+          "passageSha256": "581ed8e6ba04394854f0045ecd8a7d138d68251b2715faca698689072fa5f138",
+          "status": "executed",
+          "values": [
+            -1.0337963104248047
+          ],
+          "tokens": 407,
+          "elapsedMs": 108.71439997572452
+        },
+        {
+          "id": "175735",
+          "passageSha256": "06aeb953561f95c6f815ff4c0f596a827cb8941d64be878d0f9241410e621d8c",
+          "status": "executed",
+          "values": [
+            0.7277052402496338
+          ],
+          "tokens": 360,
+          "elapsedMs": 110.41399999521673
+        },
+        {
+          "id": "8646760",
+          "passageSha256": "cc9828a1482dd7c3db2d903a4379074cb51022c773ea5725c6f067855199d88e",
+          "status": "executed",
+          "values": [
+            2.96189284324646
+          ],
+          "tokens": 392,
+          "elapsedMs": 104.65200000908226
+        },
+        {
+          "id": "25606339",
+          "passageSha256": "4cf8ac4f0e7de4748f8602a9c7eb10ef94c5f22d78db88ada782d1c938485120",
+          "status": "executed",
+          "values": [
+            -0.5725511312484741
+          ],
+          "tokens": 444,
+          "elapsedMs": 108.55999996419996
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "127",
+      "role": "held_out",
+      "claimSha256": "1fbc93b2c87a6c0c96a00b599f8dac1af692ddc814a44e8bb09b8fab7771dc9d",
+      "judgments": {
+        "21598000": 1
+      },
+      "baselineMs": 337.15140000000065,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "35231675",
+          "passageSha256": "678617de19825307335bbb59c9edc285108d80150fca6294e1e8089b9ce3b7de",
+          "status": "executed",
+          "values": [
+            1.6191256046295166
+          ],
+          "tokens": 433,
+          "elapsedMs": 100.29889998259023
+        },
+        {
+          "id": "21598000",
+          "passageSha256": "ee2cc2ccd37ebcc80b09528c1d1258c456e9328f3839b44a562e714268e23646",
+          "status": "executed",
+          "values": [
+            -0.5850257873535156
+          ],
+          "tokens": 311,
+          "elapsedMs": 68.97260004188865
+        },
+        {
+          "id": "293661",
+          "passageSha256": "b1db10e3321fa169b5b129046d897b022cdc1b4435a7a679256c2b3575946dd6",
+          "status": "executed",
+          "values": [
+            -5.540196895599365
+          ],
+          "tokens": 241,
+          "elapsedMs": 60.142099973745644
+        },
+        {
+          "id": "18126445",
+          "passageSha256": "02c00bf213a6f8fd146f2a22526df0cfac7aa40fb6475dff37fb0239e203ba0a",
+          "status": "executed",
+          "values": [
+            -3.121845245361328
+          ],
+          "tokens": 340,
+          "elapsedMs": 83.06000003358349
+        },
+        {
+          "id": "2727303",
+          "passageSha256": "496a3774b5b8e70f5f9f382fcede3581f295d37c34ff080cfcdb69ec91bbe4c3",
+          "status": "executed",
+          "values": [
+            -2.296682834625244
+          ],
+          "tokens": 417,
+          "elapsedMs": 118.30010003177449
+        },
+        {
+          "id": "38623601",
+          "passageSha256": "81e37531f6c4719cf01527c909d5135c14f00531fe05cfee788b1cc563c96d68",
+          "status": "executed",
+          "values": [
+            -2.0644149780273438
+          ],
+          "tokens": 383,
+          "elapsedMs": 103.29920001095161
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.5,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.5,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        }
+      }
+    },
+    {
+      "id": "982",
+      "role": "held_out",
+      "claimSha256": "a47e4e20b77a8a6736c8cc81b9ea9df5d61846db2d6fa9e7ad25aabf26e845a8",
+      "judgments": {
+        "2988714": 1
+      },
+      "baselineMs": 355.35360000000037,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "2988714",
+          "passageSha256": "7d28094d443fba1dc4fdc85ee82b6145ede3ea058d5a3603d3388443db419dd2",
+          "status": "executed",
+          "values": [
+            4.052006244659424
+          ],
+          "tokens": 251,
+          "elapsedMs": 74.07509995391592
+        },
+        {
+          "id": "33912020",
+          "passageSha256": "17df0e92eac7c84cb06103c44839b5963c5aeb7fcb2197f592dc9904055de6aa",
+          "status": "executed",
+          "values": [
+            -5.744730472564697
+          ],
+          "tokens": 320,
+          "elapsedMs": 92.0685000019148
+        },
+        {
+          "id": "9513785",
+          "passageSha256": "589ec3103dcf7bf0bd42f06fdda067dbc54713296063ce79f8fe806ed8be71fb",
+          "status": "executed",
+          "values": [
+            -7.595850467681885
+          ],
+          "tokens": 404,
+          "elapsedMs": 95.63019999768585
+        },
+        {
+          "id": "22159299",
+          "passageSha256": "4a254085ffc6677b64b225e37a65699cf591c3d4ae81f670c05b698266aa2526",
+          "status": "executed",
+          "values": [
+            -7.578457832336426
+          ],
+          "tokens": 440,
+          "elapsedMs": 123.8895999849774
+        },
+        {
+          "id": "8428935",
+          "passageSha256": "499c3b8f075bd23a4ff6b4555505d7d09f06e55ed33c68e20a887691a99a7a1c",
+          "status": "executed",
+          "values": [
+            -11.245339393615723
+          ],
+          "tokens": 433,
+          "elapsedMs": 103.6290000192821
+        },
+        {
+          "id": "6609935",
+          "passageSha256": "318809f75f58b20512018878d3a7c25ed828adbfe43edfb3899bb247bcad6d53",
+          "status": "executed",
+          "values": [
+            -4.293331146240234
+          ],
+          "tokens": 303,
+          "elapsedMs": 66.46549998549744
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "185",
+      "role": "held_out",
+      "claimSha256": "2a9b3f71602f31fa63bbc7a7ef3fc92b760872f072cd72459c0c0fb1a8eb22ee",
+      "judgments": {
+        "18340282": 1
+      },
+      "baselineMs": 283.27719999999863,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "21874312",
+          "passageSha256": "e25fbe05b50cdda0e16d57b719f514e35844b8a779d12e00f321587b7469690c",
+          "status": "executed",
+          "values": [
+            4.362076282501221
+          ],
+          "tokens": 160,
+          "elapsedMs": 41.33970005204901
+        },
+        {
+          "id": "15512462",
+          "passageSha256": "6d398fe53ea1a841f3e733a67a241d252b88e774cf4058eecf6eb4b1806c1471",
+          "status": "executed",
+          "values": [
+            -3.3152365684509277
+          ],
+          "tokens": 286,
+          "elapsedMs": 78.27840000391006
+        },
+        {
+          "id": "18340282",
+          "passageSha256": "6a10956bf6ad24c7e1d3a8e540233411c4c8ad69f4e3d7544d81d703ccc9b08b",
+          "status": "input_over_limit",
+          "tokens": 527
+        },
+        {
+          "id": "23557241",
+          "passageSha256": "d4338c1ef74462065d4824cda9b4f0902f82a88f41de13492983da9a4e835e8e",
+          "status": "executed",
+          "values": [
+            2.848651885986328
+          ],
+          "tokens": 449,
+          "elapsedMs": 102.20080002909526
+        },
+        {
+          "id": "5864770",
+          "passageSha256": "25173ef957a985a147b9a4a1c51481751896c9bdc4fffedf2f492e8427908bd0",
+          "status": "executed",
+          "values": [
+            0.9585627317428589
+          ],
+          "tokens": 370,
+          "elapsedMs": 90.35179996863008
+        },
+        {
+          "id": "3524352",
+          "passageSha256": "7e3196ca4fca91031fb1b7efa0780b52e587ea49b338dc964d6a4f115230e4bf",
+          "status": "executed",
+          "values": [
+            -2.3115592002868652
+          ],
+          "tokens": 449,
+          "elapsedMs": 127.32719996711239
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      }
+    },
+    {
+      "id": "700",
+      "role": "held_out",
+      "claimSha256": "96b6a0b2cbf74464003776d458aef25c388a905b3fb4d3bd8b065704e29b17a9",
+      "judgments": {
+        "4350400": 1
+      },
+      "baselineMs": 376.89940000000024,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "16557565",
+          "passageSha256": "a8415c4e12992f06baa6d2a19f708b3b827caa984626d4f1040b2662c14de5bd",
+          "status": "executed",
+          "values": [
+            0.9386365413665771
+          ],
+          "tokens": 239,
+          "elapsedMs": 65.7696999842301
+        },
+        {
+          "id": "4350400",
+          "passageSha256": "8318ce46bc50a0bd75813f1c2af33c1070f840b4e4c117fc9074183f6df296b3",
+          "status": "executed",
+          "values": [
+            -4.321739196777344
+          ],
+          "tokens": 354,
+          "elapsedMs": 93.46370003186166
+        },
+        {
+          "id": "52944377",
+          "passageSha256": "35cf085c5efc50e67c8dc3fddbb5917ca6f8cf242568f612a6d7537d43249a30",
+          "status": "executed",
+          "values": [
+            -4.569161415100098
+          ],
+          "tokens": 286,
+          "elapsedMs": 73.76459997612983
+        },
+        {
+          "id": "1669173",
+          "passageSha256": "02e93972860c7565ec8920abfd599def23836c7433a61d0896b11ed2fcbc9ced",
+          "status": "executed",
+          "values": [
+            -2.9445853233337402
+          ],
+          "tokens": 286,
+          "elapsedMs": 76.64350001141429
+        },
+        {
+          "id": "1354567",
+          "passageSha256": "fe60edaebfaa29c88a5e18d03c889a3ef713a302bd573c2aedf04f5a43e48a75",
+          "status": "executed",
+          "values": [
+            -1.8067381381988525
+          ],
+          "tokens": 320,
+          "elapsedMs": 62.3827000381425
+        },
+        {
+          "id": "20977638",
+          "passageSha256": "89da978d404b6cf158c39fd1508c351eb970cda617ac7a14a673c5f20a2468dd",
+          "status": "input_over_limit",
+          "tokens": 516
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.5,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.5,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        }
+      }
+    },
+    {
+      "id": "54",
+      "role": "held_out",
+      "claimSha256": "3302315065db282a5a26c69859b6e9b5549da1b69ff085989ce142f55a0241f1",
+      "judgments": {
+        "49556906": 1
+      },
+      "baselineMs": 337.3370999999988,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "3973445",
+          "passageSha256": "4034fd5948fd16cf62d54965a07bbdb15f556919dc777d60482a9b53032578b9",
+          "status": "executed",
+          "values": [
+            6.527184009552002
+          ],
+          "tokens": 404,
+          "elapsedMs": 91.54380002291873
+        },
+        {
+          "id": "9899292",
+          "passageSha256": "258a0bc43142ad3d7f30d5a1b2fda2a9335cd91c2def754ddfd0e0243c0be888",
+          "status": "executed",
+          "values": [
+            3.3349997997283936
+          ],
+          "tokens": 343,
+          "elapsedMs": 108.18549996474758
+        },
+        {
+          "id": "9752604",
+          "passageSha256": "81acd442a721ac82f8363bdec5d6145709c60848347d05786124c4aeb447da4b",
+          "status": "executed",
+          "values": [
+            3.2275142669677734
+          ],
+          "tokens": 383,
+          "elapsedMs": 118.60540002817288
+        },
+        {
+          "id": "3419709",
+          "passageSha256": "a07d25faec0eb51c54d258067a3161e9027a894ac70595997bec3734e536786d",
+          "status": "executed",
+          "values": [
+            2.860626220703125
+          ],
+          "tokens": 280,
+          "elapsedMs": 69.82060003792867
+        },
+        {
+          "id": "24721866",
+          "passageSha256": "fc34c88432d584920402543927ace01e4fe3e961b8880d5a18456d7fe4c7e281",
+          "status": "input_over_limit",
+          "tokens": 518
+        },
+        {
+          "id": "1590744",
+          "passageSha256": "f6cb87dffabb8f6775af3f38a86de070842a6e16ed6aafb43b45210c73a23e62",
+          "status": "executed",
+          "values": [
+            3.5134382247924805
+          ],
+          "tokens": 192,
+          "elapsedMs": 43.14680001698434
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "549",
+      "role": "held_out",
+      "claimSha256": "1aeaf441becd8fe677df59c8fd1f897a4dfc4f7ecb22bff063b3cebfc70128de",
+      "judgments": {
+        "9433958": 1
+      },
+      "baselineMs": 305.09220000000096,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "9433958",
+          "passageSha256": "61c0e3d26ba89ba8217a935981e528435d76600a1008964dbd97ac3f2fff653c",
+          "status": "executed",
+          "values": [
+            3.0409536361694336
+          ],
+          "tokens": 283,
+          "elapsedMs": 82.61389995459467
+        },
+        {
+          "id": "9539248",
+          "passageSha256": "7bc2c6b0b1e6793d6a1e5af67b6ca795c9de587a0794077818bb2db8eb712b55",
+          "status": "executed",
+          "values": [
+            -7.5792622566223145
+          ],
+          "tokens": 341,
+          "elapsedMs": 87.30260003358126
+        },
+        {
+          "id": "1970884",
+          "passageSha256": "b45cde62db84b10f28a24065f54939835fad691eb70385ab4fe2e67d8ca35a69",
+          "status": "executed",
+          "values": [
+            -5.728278160095215
+          ],
+          "tokens": 427,
+          "elapsedMs": 220.2490999479778
+        },
+        {
+          "id": "30034334",
+          "passageSha256": "fa5b24df4536cad6b0d08a258c734ad6fa67723b356b2b516ffe79bed218c7f8",
+          "status": "executed",
+          "values": [
+            -5.147096633911133
+          ],
+          "tokens": 324,
+          "elapsedMs": 64.94719994952902
+        },
+        {
+          "id": "7820043",
+          "passageSha256": "7424831867fe44134c6bf47d2080c4651d63e55fc92c24c401573b8d004afe0d",
+          "status": "executed",
+          "values": [
+            0.024925418198108673
+          ],
+          "tokens": 296,
+          "elapsedMs": 69.75270004477352
+        },
+        {
+          "id": "17682477",
+          "passageSha256": "14e81f965d65b7b16f232c2b3928f15b73098bc8650559191c7cad2ba6832f7e",
+          "status": "executed",
+          "values": [
+            -3.164137601852417
+          ],
+          "tokens": 512,
+          "elapsedMs": 102.54089999943972
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "1089",
+      "role": "held_out",
+      "claimSha256": "f02dd9e2d9a7c8a33854ac7c450f89b2e406f55199dd4ee25b0f59a5dde9d42b",
+      "judgments": {
+        "17628888": 1
+      },
+      "baselineMs": 370.41480000000047,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "17628888",
+          "passageSha256": "96336b8b1362d5dfe6b8972ca70f47ae203ce65a8890bf61af11659f1b30c6fb",
+          "status": "executed",
+          "values": [
+            6.876372337341309
+          ],
+          "tokens": 400,
+          "elapsedMs": 75.97909995820373
+        },
+        {
+          "id": "7915836",
+          "passageSha256": "32f218479f6a7ee16321bf150ca51b0d311c03cb147faac67c4aaa23145d0ae0",
+          "status": "executed",
+          "values": [
+            3.411893606185913
+          ],
+          "tokens": 302,
+          "elapsedMs": 54.971300007309765
+        },
+        {
+          "id": "7645565",
+          "passageSha256": "41affb52dfa88d5bd8bdf234b528e5d2dc6acdc8c1d79bd84f725b0d8a036366",
+          "status": "executed",
+          "values": [
+            -2.013228416442871
+          ],
+          "tokens": 280,
+          "elapsedMs": 58.02100000437349
+        },
+        {
+          "id": "23577014",
+          "passageSha256": "af10cdd4cad3bebd827377159c580de9365d42debe6b0b77001346c96faa0372",
+          "status": "executed",
+          "values": [
+            -1.0686008930206299
+          ],
+          "tokens": 283,
+          "elapsedMs": 64.40809997729957
+        },
+        {
+          "id": "143251",
+          "passageSha256": "7597291e056b9ef5977109280ff977384b93b563503fe5d9c658ed0ba308d014",
+          "status": "executed",
+          "values": [
+            -5.202138423919678
+          ],
+          "tokens": 413,
+          "elapsedMs": 88.43880001222715
+        },
+        {
+          "id": "11903247",
+          "passageSha256": "d0cc27103836642254fdd9315f922eb9b265d7b82abfe11bc7d5e07b5ed789e0",
+          "status": "executed",
+          "values": [
+            -8.074372291564941
+          ],
+          "tokens": 302,
+          "elapsedMs": 63.60710004810244
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "674",
+      "role": "held_out",
+      "claimSha256": "cad856721fbd27e00dd7c84ec9371c133df67b655f055742fe7f6dc5687908b3",
+      "judgments": {
+        "2095573": 1
+      },
+      "baselineMs": 316.9403000000002,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "2095573",
+          "passageSha256": "4cf4a9e53921b21df76eb46dbd913599e741727a758c995b483993c08215efd1",
+          "status": "input_over_limit",
+          "tokens": 566
+        },
+        {
+          "id": "30981192",
+          "passageSha256": "c5c83f9cfa7c975fb0ddafb147928277fa4446cee185c682a50a1f53ce4ff971",
+          "status": "executed",
+          "values": [
+            1.513214111328125
+          ],
+          "tokens": 400,
+          "elapsedMs": 89.05590005451813
+        },
+        {
+          "id": "5612738",
+          "passageSha256": "5bc835fe7bd9f4ef3ff1f1e83826ad9a5ff7286e54d06251445d605f4974428f",
+          "status": "executed",
+          "values": [
+            -1.938636302947998
+          ],
+          "tokens": 336,
+          "elapsedMs": 79.61869996506721
+        },
+        {
+          "id": "7662206",
+          "passageSha256": "c338c776100a52d936088ea80b8be810d7502bf33b8d958f60281c91dc46d26b",
+          "status": "executed",
+          "values": [
+            0.38264328241348267
+          ],
+          "tokens": 182,
+          "elapsedMs": 34.14060000795871
+        },
+        {
+          "id": "4647303",
+          "passageSha256": "efbb422d6b3aa486e2d1bf5a187bcbc0c069c4126c7476279346257153b67a3d",
+          "status": "input_over_limit",
+          "tokens": 584
+        },
+        {
+          "id": "9814332",
+          "passageSha256": "657118642528bc23ca426c6ab303216ec41bdfd61b314a18af70eb366a74fac0",
+          "status": "executed",
+          "values": [
+            -2.5839314460754395
+          ],
+          "tokens": 502,
+          "elapsedMs": 125.22739998530596
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "1014",
+      "role": "held_out",
+      "claimSha256": "24f8ee1689159dc06c38ebe346f49381a84249d54401e5e148f33df0baf8d9ae",
+      "judgments": {
+        "6277638": 1
+      },
+      "baselineMs": 304.65860000000066,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "6277638",
+          "passageSha256": "931e4700291b818494f1300dd0483cdab778ee7cfa6e664b3527d451f8b2cd74",
+          "status": "executed",
+          "values": [
+            0.49850836396217346
+          ],
+          "tokens": 228,
+          "elapsedMs": 44.331900018732995
+        },
+        {
+          "id": "18557974",
+          "passageSha256": "fd1371ed41c6f617db0507f8f2ba24e12ee8d3362f59afb8a78e202911553746",
+          "status": "executed",
+          "values": [
+            -3.4995369911193848
+          ],
+          "tokens": 426,
+          "elapsedMs": 110.00899999635294
+        },
+        {
+          "id": "2266471",
+          "passageSha256": "a506a05066f65df8495394d80e4d4a332a5dae75dc48823b6912b3fee2b7bb09",
+          "status": "input_over_limit",
+          "tokens": 540
+        },
+        {
+          "id": "15615957",
+          "passageSha256": "ff67cd9122a061f390b572fcd49818ce04a7261ff079d12183891dfd3b6add71",
+          "status": "input_over_limit",
+          "tokens": 532
+        },
+        {
+          "id": "34760396",
+          "passageSha256": "da30405b60a8a76f8dd7071f0e24d62e3107876c81a1b8ce8fe2b22efa99e4eb",
+          "status": "executed",
+          "values": [
+            -10.229598999023438
+          ],
+          "tokens": 433,
+          "elapsedMs": 99.94639997603372
+        },
+        {
+          "id": "13162391",
+          "passageSha256": "78ba72603b038bed14389ca40f5bd36870b85f7ea8464ad41e018cd76b044ae0",
+          "status": "executed",
+          "values": [
+            -10.93694019317627
+          ],
+          "tokens": 168,
+          "elapsedMs": 44.57840003306046
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "230",
+      "role": "held_out",
+      "claimSha256": "2b5238f973d22b06bf8528a0619bc10fb2afb52502f5332667632fced5f4c034",
+      "judgments": {
+        "3067015": 1
+      },
+      "baselineMs": 387.5545000000002,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "3067015",
+          "passageSha256": "0dd63cde83a188c9a95638f916981874c5bb8b3d1beb9eacbc7a7650db5b0413",
+          "status": "executed",
+          "values": [
+            -1.4804167747497559
+          ],
+          "tokens": 503,
+          "elapsedMs": 136.3724999828264
+        },
+        {
+          "id": "11457219",
+          "passageSha256": "dcb5c11d92cafdc33278ee00f7c540e8a08145ecc5a23f8fc3753c9fa178bcf3",
+          "status": "executed",
+          "values": [
+            -4.882758617401123
+          ],
+          "tokens": 211,
+          "elapsedMs": 70.62289997702464
+        },
+        {
+          "id": "38028419",
+          "passageSha256": "5bad6914a73cea21e46c606028f29f1780a08733a843f0f35552306a245a72ca",
+          "status": "executed",
+          "values": [
+            -5.595924377441406
+          ],
+          "tokens": 366,
+          "elapsedMs": 108.01600001286715
+        },
+        {
+          "id": "3285322",
+          "passageSha256": "defcc57fe4d6b127519b3f6624dfff96dc89c4916a72f7b06bea85d3aff3e8d6",
+          "status": "executed",
+          "values": [
+            -7.274051189422607
+          ],
+          "tokens": 427,
+          "elapsedMs": 84.45090003078803
+        },
+        {
+          "id": "9394119",
+          "passageSha256": "3d5293f80c917ed89f4142d9d7e046a60e3fd35074c0f61ac9a927f64c81d388",
+          "status": "input_over_limit",
+          "tokens": 931
+        },
+        {
+          "id": "8906858",
+          "passageSha256": "551553e5a5e115b41b41caa0e2561b9d7188707e44ba0957081308c2bde456b6",
+          "status": "executed",
+          "values": [
+            -9.560823440551758
+          ],
+          "tokens": 430,
+          "elapsedMs": 113.9056000392884
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "728",
+      "role": "held_out",
+      "claimSha256": "1a47dd8cb1f117467d2ff4cdea030a194ca5d4095c8a267f0c52579520b689ae",
+      "judgments": {
+        "7521113": 1,
+        "36444198": 1
+      },
+      "baselineMs": 329.5658000000003,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "22406695",
+          "passageSha256": "737416ca10fe6c1339a6ee7882ec97335c6bc471b72daf3a2f33f3f8eb630cfd",
+          "status": "executed",
+          "values": [
+            1.7024565935134888
+          ],
+          "tokens": 250,
+          "elapsedMs": 72.88679998600855
+        },
+        {
+          "id": "14492339",
+          "passageSha256": "96b64a699d74e23aa0340d0819b9c29c7d22ea41ee5179dd8d94391b3040b19e",
+          "status": "executed",
+          "values": [
+            -0.4828261435031891
+          ],
+          "tokens": 258,
+          "elapsedMs": 73.5512999817729
+        },
+        {
+          "id": "12370881",
+          "passageSha256": "7921e1e3ad2e8139023cea0058aa1e3a90a3ee8bb89510406ab29c5013397cfc",
+          "status": "executed",
+          "values": [
+            -5.751206398010254
+          ],
+          "tokens": 294,
+          "elapsedMs": 78.93120002700016
+        },
+        {
+          "id": "7521113",
+          "passageSha256": "0afcece0f5acf00759e629aa118bfb3d8b0294b5da85a0bbd3388eb9780e4eb2",
+          "status": "executed",
+          "values": [
+            -2.5330591201782227
+          ],
+          "tokens": 287,
+          "elapsedMs": 71.82740001007915
+        },
+        {
+          "id": "7948486",
+          "passageSha256": "058bd12c12e989e06028d6f0755f79e5ac42d448257242f6f5b019e766a62cf9",
+          "status": "executed",
+          "values": [
+            -1.5358697175979614
+          ],
+          "tokens": 424,
+          "elapsedMs": 112.77669999981299
+        },
+        {
+          "id": "6123924",
+          "passageSha256": "dce2fa209dcecd18b8236844639242f40ed8afed4c915e622a0c984c98109ecd",
+          "status": "executed",
+          "values": [
+            -6.027346611022949
+          ],
+          "tokens": 316,
+          "elapsedMs": 77.77789997635409
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.25,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0.25,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.5,
+          "mrr": 0.25,
+          "ndcg": 0.2640681225725909
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.25,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0.25,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.5,
+          "mrr": 0.25,
+          "ndcg": 0.2640681225725909
+        }
+      }
+    },
+    {
+      "id": "1389",
+      "role": "held_out",
+      "claimSha256": "ba472dbf3c478dcead941fa2a4678ac9674ba2b0789af2bba9809a1b4b0288fe",
+      "judgments": {
+        "23895668": 1
+      },
+      "baselineMs": 324.9893000000011,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "23895668",
+          "passageSha256": "347687a9ece8279fe51b6c4fba368dbf644b28e0e6fd636cd5a0db07b9034368",
+          "status": "executed",
+          "values": [
+            5.793030738830566
+          ],
+          "tokens": 241,
+          "elapsedMs": 59.81369997607544
+        },
+        {
+          "id": "36180468",
+          "passageSha256": "f0fd7bd3477689409d9538301c573b3bf4f4ae842855b38a9959b5746c51e3be",
+          "status": "executed",
+          "values": [
+            -3.5729074478149414
+          ],
+          "tokens": 382,
+          "elapsedMs": 114.17309998068959
+        },
+        {
+          "id": "5172048",
+          "passageSha256": "c438e3c62ffc63618428489354296148eda1a18a39ebb4e26c348c38939fc7e2",
+          "status": "executed",
+          "values": [
+            -5.408550262451172
+          ],
+          "tokens": 334,
+          "elapsedMs": 212.76700001908466
+        },
+        {
+          "id": "5612738",
+          "passageSha256": "5bc835fe7bd9f4ef3ff1f1e83826ad9a5ff7286e54d06251445d605f4974428f",
+          "status": "executed",
+          "values": [
+            -4.8892436027526855
+          ],
+          "tokens": 337,
+          "elapsedMs": 130.68020000355318
+        },
+        {
+          "id": "30774694",
+          "passageSha256": "213a7ca27c4aa72b5b5466ac7a84c0103fce14f0f53f623336357bfbcacd4887",
+          "status": "executed",
+          "values": [
+            0.5003580451011658
+          ],
+          "tokens": 272,
+          "elapsedMs": 73.28750001033768
+        },
+        {
+          "id": "18810195",
+          "passageSha256": "b3164672250d1fe494eda1ac84506a01db061cdd2c579734f9174c67e3d78099",
+          "status": "executed",
+          "values": [
+            -2.9978957176208496
+          ],
+          "tokens": 357,
+          "elapsedMs": 98.2359999907203
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "94",
+      "role": "held_out",
+      "claimSha256": "83b7fb21df24be8a3d2330ed655322364d6f547108204b4c2cf8ee12cc9ebbbe",
+      "judgments": {
+        "1215116": 1
+      },
+      "baselineMs": 291.2105999999985,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "1215116",
+          "passageSha256": "071da1632ea2633633f3ff0cb3a080bd0b1cd7259c2aa0ff3b3a950102c42431",
+          "status": "executed",
+          "values": [
+            -7.357661247253418
+          ],
+          "tokens": 304,
+          "elapsedMs": 89.95880000293255
+        },
+        {
+          "id": "17327939",
+          "passageSha256": "dec0d6f30b4ac0509800a387ee1ebcbcf67c937bc3710324aaccbc4c2b592974",
+          "status": "executed",
+          "values": [
+            -6.409757614135742
+          ],
+          "tokens": 248,
+          "elapsedMs": 52.939999965019524
+        },
+        {
+          "id": "46926352",
+          "passageSha256": "8561d800bccee62a5222fc56fd458217033d92f84a95bef28680490def7f8600",
+          "status": "executed",
+          "values": [
+            -9.700780868530273
+          ],
+          "tokens": 215,
+          "elapsedMs": 58.08170000091195
+        },
+        {
+          "id": "3896759",
+          "passageSha256": "d439c4a97f353889ebf60c2b1c604d4b01df624b1c1b16bd3c2f31471f166716",
+          "status": "executed",
+          "values": [
+            -10.455038070678711
+          ],
+          "tokens": 189,
+          "elapsedMs": 60.49820000771433
+        },
+        {
+          "id": "13070316",
+          "passageSha256": "a7ae8af76da1b217b6cc31109ee97b092bb3cd137c285c35d442a8839cb0c641",
+          "status": "input_over_limit",
+          "tokens": 579
+        },
+        {
+          "id": "46765242",
+          "passageSha256": "c7642a03021a50e127883db16c1648490f45ad426fcd0e97ffa406fafc2a455e",
+          "status": "executed",
+          "values": [
+            -6.419610023498535
+          ],
+          "tokens": 226,
+          "elapsedMs": 72.77820003218949
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "784",
+      "role": "held_out",
+      "claimSha256": "6f316db475364b66c163d36f36f3aecd0b65c677618c7a178653b4f00acd95b0",
+      "judgments": {
+        "2356950": 1
+      },
+      "baselineMs": 367.3777999999984,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "16999023",
+          "passageSha256": "d4ff077ade69bb04ca354595b12105aac36681eb6640f2a6d74e80d4127ee6cd",
+          "status": "executed",
+          "values": [
+            0.4724721312522888
+          ],
+          "tokens": 279,
+          "elapsedMs": 74.33629996376112
+        },
+        {
+          "id": "23535770",
+          "passageSha256": "f6e8d2d955fe13c0af1d4cdfb106b000d129322e59798f2410e933a37edd694a",
+          "status": "executed",
+          "values": [
+            2.9234423637390137
+          ],
+          "tokens": 451,
+          "elapsedMs": 111.35219997959211
+        },
+        {
+          "id": "2356950",
+          "passageSha256": "e7764499d416e98707efb8be1879173caa3a16cf1a081a14dee7f45d5092d653",
+          "status": "executed",
+          "values": [
+            4.284350395202637
+          ],
+          "tokens": 287,
+          "elapsedMs": 74.89079999504611
+        },
+        {
+          "id": "25597580",
+          "passageSha256": "6dcc53ce7c1b0e21e6c2cff1bcf49fd5a36a5ee1071037cc4dec0cfa969716ad",
+          "status": "executed",
+          "values": [
+            -0.30758583545684814
+          ],
+          "tokens": 279,
+          "elapsedMs": 79.4160999939777
+        },
+        {
+          "id": "38727075",
+          "passageSha256": "8dbc655e66787039c7e8c6ad4d038d9e461edcae0f9c7f7b9acc47e57937ca35",
+          "status": "executed",
+          "values": [
+            -3.172471284866333
+          ],
+          "tokens": 385,
+          "elapsedMs": 81.7426000139676
+        },
+        {
+          "id": "226488",
+          "passageSha256": "b31e4ff3241a8812557888de379879614e245017edf30fe0133ad08928e2ee66",
+          "status": "executed",
+          "values": [
+            0.8134061098098755
+          ],
+          "tokens": 176,
+          "elapsedMs": 49.85589999705553
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "1175",
+      "role": "held_out",
+      "claimSha256": "ba58f9b4867234765aed2630997a27b03a174a31fb3dd70fc1d61aaac19a7b06",
+      "judgments": {
+        "31272411": 1
+      },
+      "baselineMs": 318.21010000000024,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "22191759",
+          "passageSha256": "fa5ccbc423bf91340afad8b600920cf47e6db97d62bc44db306f9cf275e341cc",
+          "status": "input_over_limit",
+          "tokens": 541
+        },
+        {
+          "id": "38899659",
+          "passageSha256": "a072893c3681c60d30588aa171c7c7b0e3b85d013129a193fa141f18e4a16557",
+          "status": "executed",
+          "values": [
+            -8.394058227539062
+          ],
+          "tokens": 348,
+          "elapsedMs": 89.23510002205148
+        },
+        {
+          "id": "24550453",
+          "passageSha256": "dc2803776b116622874bfe70f50563a2a5d52937c74814b73bc24adc7f9a4031",
+          "status": "executed",
+          "values": [
+            -5.541086673736572
+          ],
+          "tokens": 301,
+          "elapsedMs": 73.4781000064686
+        },
+        {
+          "id": "16058322",
+          "passageSha256": "9fd441e554b25847c3a2527394b263edf0727e510081e8a2b8155ab7736b7093",
+          "status": "executed",
+          "values": [
+            -4.196718215942383
+          ],
+          "tokens": 490,
+          "elapsedMs": 123.99579997872934
+        },
+        {
+          "id": "26011884",
+          "passageSha256": "e9d9865540c420b4056739fe60fd058f361ac12c9d33ad4a983c4e1d0815accb",
+          "status": "executed",
+          "values": [
+            -3.9307103157043457
+          ],
+          "tokens": 471,
+          "elapsedMs": 98.70360000059009
+        },
+        {
+          "id": "5702790",
+          "passageSha256": "2fd79fd835595701d583018528b02b2d1d383e3ff2659e23e7e1b58343dce5f9",
+          "status": "executed",
+          "values": [
+            -7.631595134735107
+          ],
+          "tokens": 295,
+          "elapsedMs": 74.77100001415238
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "115",
+      "role": "held_out",
+      "claimSha256": "c9b8f57f1d9f9439baf23ed5cc1370fe25998ed3822edea8460caeb7cdad525f",
+      "judgments": {
+        "33872649": 1
+      },
+      "baselineMs": 340.84029999999984,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "33872649",
+          "passageSha256": "542f00d533714a92b2090bdee1ac74ca2c9a0d1b10bcb07de54180275c855a41",
+          "status": "executed",
+          "values": [
+            0.3120627701282501
+          ],
+          "tokens": 333,
+          "elapsedMs": 85.99049999611452
+        },
+        {
+          "id": "1631583",
+          "passageSha256": "4904efb200e3ec7716276d415ac83904f2ca09067301194d287f25c0b1c91c11",
+          "status": "executed",
+          "values": [
+            -7.467304229736328
+          ],
+          "tokens": 292,
+          "elapsedMs": 63.85450001107529
+        },
+        {
+          "id": "2140513",
+          "passageSha256": "de7fab3894d18c5bfd84839c2a8fec35d35aecf9e940b38db88ade0357409a60",
+          "status": "executed",
+          "values": [
+            -10.086585998535156
+          ],
+          "tokens": 295,
+          "elapsedMs": 67.99020001199096
+        },
+        {
+          "id": "20101846",
+          "passageSha256": "b81d5d437e019627a6c7748c399e74ee0297eb62cf9e51f90c90adf777f0a0ac",
+          "status": "executed",
+          "values": [
+            -10.504999160766602
+          ],
+          "tokens": 240,
+          "elapsedMs": 46.380900021176785
+        },
+        {
+          "id": "22490293",
+          "passageSha256": "2de4a6eed137417fee20a98636b40fd7b1c01f7d3d94219e0f3ceeb744d7b210",
+          "status": "executed",
+          "values": [
+            -10.738300323486328
+          ],
+          "tokens": 374,
+          "elapsedMs": 87.0293999905698
+        },
+        {
+          "id": "15462523",
+          "passageSha256": "8196315640bba3549a33ec780e2f429b21d212ba04030240697f7330527620d7",
+          "status": "executed",
+          "values": [
+            -10.943220138549805
+          ],
+          "tokens": 278,
+          "elapsedMs": 64.79259999468923
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "1241",
+      "role": "held_out",
+      "claimSha256": "8cda86daf4b4e183aafb15402f6d7b312ce59c6c467922963cff9fd5e8247d6a",
+      "judgments": {
+        "4427392": 1
+      },
+      "baselineMs": 307.5298999999977,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "6148876",
+          "passageSha256": "24c09e492111f84708892cf504710ee8e975dd38e196eca05f53db2c5a015ddd",
+          "status": "executed",
+          "values": [
+            -0.14362409710884094
+          ],
+          "tokens": 363,
+          "elapsedMs": 87.25520002190024
+        },
+        {
+          "id": "14296612",
+          "passageSha256": "ca488ea1c46cfda71bfb268e80f069133037270584a3dba2a3b1aa3d705d5db3",
+          "status": "executed",
+          "values": [
+            -2.5173234939575195
+          ],
+          "tokens": 412,
+          "elapsedMs": 92.98969997325912
+        },
+        {
+          "id": "17933691",
+          "passageSha256": "92f3afb4fa3abfeb7f668e3e75e552024f9b152ff2bc2887ec8c9c5f415a88d0",
+          "status": "executed",
+          "values": [
+            -4.189634323120117
+          ],
+          "tokens": 364,
+          "elapsedMs": 79.32550000259653
+        },
+        {
+          "id": "4335423",
+          "passageSha256": "e305f0a5989a34358c1afb9778daed1ea04341ed6c8539982ead469bf4eeb6bb",
+          "status": "executed",
+          "values": [
+            -2.8071117401123047
+          ],
+          "tokens": 353,
+          "elapsedMs": 92.51420001965016
+        },
+        {
+          "id": "32797183",
+          "passageSha256": "ab6fb9aa482eb74b275ed9d8571ef6921508c7a409d2b6e437c8904c61c682cd",
+          "status": "input_over_limit",
+          "tokens": 675
+        },
+        {
+          "id": "4020950",
+          "passageSha256": "e11a203064ebbdfa666371d0107fd6b2ef23f5740dc9430194e92515befd3825",
+          "status": "executed",
+          "values": [
+            -1.5941734313964844
+          ],
+          "tokens": 260,
+          "elapsedMs": 60.241199971642345
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "238",
+      "role": "held_out",
+      "claimSha256": "da762337ae79e7cd6bb3f0cea128e70017e06a2963093bfb33bc4c759241c25b",
+      "judgments": {
+        "2251426": 1
+      },
+      "baselineMs": 313.1462999999967,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "4463811",
+          "passageSha256": "c8a28ce2dc810c9d72bdb035ae8a8747790f088c73e8544cfbce3e93cbe3b460",
+          "status": "executed",
+          "values": [
+            -5.697312355041504
+          ],
+          "tokens": 290,
+          "elapsedMs": 58.862000005319715
+        },
+        {
+          "id": "23017040",
+          "passageSha256": "bdd622e7807c99d14e7e9518f1d0f914036506116204b39d9d70d78dc6c27d0e",
+          "status": "executed",
+          "values": [
+            -4.220898151397705
+          ],
+          "tokens": 401,
+          "elapsedMs": 96.61969996523112
+        },
+        {
+          "id": "28704738",
+          "passageSha256": "457a5c9424835ca0143c34e45126efe388d9384e4554df1897ee150cdebb55a1",
+          "status": "executed",
+          "values": [
+            0.06908508390188217
+          ],
+          "tokens": 301,
+          "elapsedMs": 95.93369998037815
+        },
+        {
+          "id": "36654066",
+          "passageSha256": "585815f241edbc102cbc3ee89a2fd142c0eb095f68dc310225cc7a4e3de1d86e",
+          "status": "executed",
+          "values": [
+            -2.726689100265503
+          ],
+          "tokens": 382,
+          "elapsedMs": 125.35849999403581
+        },
+        {
+          "id": "10463997",
+          "passageSha256": "6938895b21e189c038578f054903c867463baae64e3cce9d46f9f456670c67b3",
+          "status": "executed",
+          "values": [
+            -8.996745109558105
+          ],
+          "tokens": 440,
+          "elapsedMs": 108.48330002045259
+        },
+        {
+          "id": "21601459",
+          "passageSha256": "47b8253e69c4e01eedebdf31b20f0a39a40d3dffe1481e60832fc009272ac812",
+          "status": "executed",
+          "values": [
+            1.5679619312286377
+          ],
+          "tokens": 313,
+          "elapsedMs": 62.30420002248138
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "502",
+      "role": "held_out",
+      "claimSha256": "9da1ff5087009ea4024f5080f197ca84c21e5f6407fcaea3289d20f7943234a1",
+      "judgments": {
+        "13071728": 1
+      },
+      "baselineMs": 390.22529999999824,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "70516463",
+          "passageSha256": "4c75866bdc53b59a26a2149e3f124d42d7fcb5c37dac9e19d89e440d380a3af1",
+          "status": "executed",
+          "values": [
+            -6.318783283233643
+          ],
+          "tokens": 441,
+          "elapsedMs": 99.90440000547096
+        },
+        {
+          "id": "24318630",
+          "passageSha256": "b0838784df5412e79aafb55bb87ad4447a7e27031c205de2e82be3dc5ab06f9b",
+          "status": "executed",
+          "values": [
+            -8.531085968017578
+          ],
+          "tokens": 305,
+          "elapsedMs": 56.99300003470853
+        },
+        {
+          "id": "143796742",
+          "passageSha256": "b12f7e5286ebd16e3ec47fcbe0bcee11f9856aed24c47005f9e12659fe3e6b9d",
+          "status": "executed",
+          "values": [
+            -10.306278228759766
+          ],
+          "tokens": 209,
+          "elapsedMs": 45.2921999967657
+        },
+        {
+          "id": "24315156",
+          "passageSha256": "f39ad7510158b5da8cab6721884cd1fc4aaaef8891d387555dacaaaf32c99db3",
+          "status": "executed",
+          "values": [
+            -10.687053680419922
+          ],
+          "tokens": 145,
+          "elapsedMs": 29.242000018712133
+        },
+        {
+          "id": "20187433",
+          "passageSha256": "4b3d532c3cdbe0992661e2ef502e6059f2c06e319653f3b5a729b226d027c6d0",
+          "status": "executed",
+          "values": [
+            -8.994195938110352
+          ],
+          "tokens": 216,
+          "elapsedMs": 40.51040002377704
+        },
+        {
+          "id": "6993046",
+          "passageSha256": "09324f61defe70ed3a339b90a916f6bd2cfe2b76bcbb58fc98e99b30ec97e5d8",
+          "status": "executed",
+          "values": [
+            -6.857100009918213
+          ],
+          "tokens": 423,
+          "elapsedMs": 103.95509999943897
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "141",
+      "role": "held_out",
+      "claimSha256": "6ade2e8fc2eb356956073fa57e1c73536bb6db086fccaf75f7afc8131c240a52",
+      "judgments": {
+        "6955746": 1,
+        "14437255": 1
+      },
+      "baselineMs": 411.2039999999979,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "14437255",
+          "passageSha256": "2f05721e2bcf0f37af1c020cfacb970063b4ec8e1e63f1d5c31084b6b3feee86",
+          "status": "input_over_limit",
+          "tokens": 522
+        },
+        {
+          "id": "10624000",
+          "passageSha256": "cc2c6277cc272f3988e89cde22db86cdc0727fb91b73a0cfaa88923fb57c4fd8",
+          "status": "executed",
+          "values": [
+            1.1014537811279297
+          ],
+          "tokens": 226,
+          "elapsedMs": 48.017999972216785
+        },
+        {
+          "id": "6955746",
+          "passageSha256": "d316581eafe879391c0a1a87bed5d9cb396f9530aa57b0b0b7e2e2c4a6beca8c",
+          "status": "executed",
+          "values": [
+            0.7493349313735962
+          ],
+          "tokens": 245,
+          "elapsedMs": 69.5990999811329
+        },
+        {
+          "id": "36860856",
+          "passageSha256": "5454cf968adbb4da1ddfadca0ed432754e0f3ed4321e59a1624b30cd4db0996e",
+          "status": "executed",
+          "values": [
+            -4.9980058670043945
+          ],
+          "tokens": 258,
+          "elapsedMs": 60.487199982162565
+        },
+        {
+          "id": "38794814",
+          "passageSha256": "e719758d5f4184eb234d374316a2662f8082e0cc185ad30d7de03f7482e61d7a",
+          "status": "executed",
+          "values": [
+            -1.6049413681030273
+          ],
+          "tokens": 339,
+          "elapsedMs": 81.42069994937629
+        },
+        {
+          "id": "26016929",
+          "passageSha256": "265a7dd2abb83b0fd74e4513ed3d646fd3f5a92c0856b56f6e3b1b0c4b576d97",
+          "status": "executed",
+          "values": [
+            -9.825650215148926
+          ],
+          "tokens": 301,
+          "elapsedMs": 87.19639998162165
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 0.9197207891481876
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 0.9197207891481876
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.5,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 0.9197207891481876
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 0.9197207891481876
+        }
+      }
+    },
+    {
+      "id": "1363",
+      "role": "held_out",
+      "claimSha256": "c883d41845b5c6847b36dd53b888a8fcff5a5968db6f77ede29024e2bb0f45a0",
+      "judgments": {
+        "8290953": 1
+      },
+      "baselineMs": 366.0781999999999,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "8290953",
+          "passageSha256": "79dd9ebc43f10d71623f28526dc8b8a5a54d8020be8ecb02f1baad165f9ba02c",
+          "status": "executed",
+          "values": [
+            -7.0996551513671875
+          ],
+          "tokens": 383,
+          "elapsedMs": 105.13729997910559
+        },
+        {
+          "id": "1122279",
+          "passageSha256": "6ae4b7410a67c28ac2991d34b966a57b613d489d434df16ccde83d0418b389c6",
+          "status": "executed",
+          "values": [
+            -5.368332386016846
+          ],
+          "tokens": 470,
+          "elapsedMs": 143.12809996772557
+        },
+        {
+          "id": "23513718",
+          "passageSha256": "b9128904464822fc292f323ba99827de7e13e12d8a5c48f7f37ca2242eb7229b",
+          "status": "executed",
+          "values": [
+            -7.641109466552734
+          ],
+          "tokens": 512,
+          "elapsedMs": 150.60920000541955
+        },
+        {
+          "id": "19140422",
+          "passageSha256": "1213f644b9c0652fcfda796e09d76807c2184403b03adb74e5241c9958d64083",
+          "status": "input_over_limit",
+          "tokens": 758
+        },
+        {
+          "id": "6417632",
+          "passageSha256": "df7db3b00af24abf92b0e5795fbde71beb4153a8792331e2d9ad0aedb4fc738d",
+          "status": "executed",
+          "values": [
+            -9.399320602416992
+          ],
+          "tokens": 335,
+          "elapsedMs": 94.3031000206247
+        },
+        {
+          "id": "79447",
+          "passageSha256": "22c337a925df384da4198da9377d5913d6ed90a1174d0b6af356b98b3c439d23",
+          "status": "executed",
+          "values": [
+            -4.564823627471924
+          ],
+          "tokens": 418,
+          "elapsedMs": 121.71499995747581
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "768",
+      "role": "held_out",
+      "claimSha256": "fcb95483954a047fd166026feb2301afc4b2fbd34875f343ed660c798f186a40",
+      "judgments": {
+        "6421792": 1
+      },
+      "baselineMs": 335.14510000000155,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "19497526",
+          "passageSha256": "34f6da37e1803539740a77655f6a597eeb023f93e48e5361247a3bc1014e9022",
+          "status": "executed",
+          "values": [
+            -2.352107524871826
+          ],
+          "tokens": 392,
+          "elapsedMs": 116.63140001473948
+        },
+        {
+          "id": "1373287",
+          "passageSha256": "aaca44db4a673eb3ef7851493d40f1732ca37a82c6b73cc83d00e951d83bed99",
+          "status": "input_over_limit",
+          "tokens": 589
+        },
+        {
+          "id": "15778034",
+          "passageSha256": "7e025f810ff81c028462212db6451294ba268c91fde75d7ed33d00ccf9aa17b0",
+          "status": "executed",
+          "values": [
+            -8.503060340881348
+          ],
+          "tokens": 363,
+          "elapsedMs": 106.91889998270199
+        },
+        {
+          "id": "6421792",
+          "passageSha256": "171001575483b795b0be3b41c8b6cdf40ddb98d5d08b55bdafbfb0a243250299",
+          "status": "executed",
+          "values": [
+            -9.000875473022461
+          ],
+          "tokens": 322,
+          "elapsedMs": 84.95460002450272
+        },
+        {
+          "id": "23887844",
+          "passageSha256": "7bce9fb43825a713fd52c626c0fee61f4f15640e4a1d43a9563766636f215c51",
+          "status": "executed",
+          "values": [
+            -8.536617279052734
+          ],
+          "tokens": 283,
+          "elapsedMs": 87.03120000427589
+        },
+        {
+          "id": "2817000",
+          "passageSha256": "d2b8e8de12a8bb5738915469f8768b5e77123390e2a5a2064d92f921efbf934c",
+          "status": "executed",
+          "values": [
+            -8.043950080871582
+          ],
+          "tokens": 302,
+          "elapsedMs": 85.54810000350699
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.25,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0.25,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.25,
+          "ndcg": 0.43067655807339306
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0.25,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0.25,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 0.25,
+          "ndcg": 0.43067655807339306
+        }
+      }
+    },
+    {
+      "id": "124",
+      "role": "held_out",
+      "claimSha256": "ccd0d90bba24df8b44ae83b21296f81a40856af5ab57823a188b033d004a03aa",
+      "judgments": {
+        "4883040": 1
+      },
+      "baselineMs": 430.0573000000004,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "4883040",
+          "passageSha256": "ec0f1381ad70fe47cb0a82840078afe1b1e70dfe3c6f10af495500a7981d0335",
+          "status": "input_over_limit",
+          "tokens": 544
+        },
+        {
+          "id": "7111021",
+          "passageSha256": "e25f4a1243ebef4f4263d50e6e94502f09a1dcaf5d3f57519d8ed6ff0b3d07d5",
+          "status": "input_over_limit",
+          "tokens": 629
+        },
+        {
+          "id": "31363207",
+          "passageSha256": "42a6d4f823388b23264229e9b4ca050c1ead22b0e7014f4fb61af927345f2e04",
+          "status": "executed",
+          "values": [
+            -0.7908437848091125
+          ],
+          "tokens": 484,
+          "elapsedMs": 140.05069999257103
+        },
+        {
+          "id": "13899137",
+          "passageSha256": "d5ffb95697785bab47b749f08a85d61356ccc801d75e97234b72e7e5569f6f01",
+          "status": "input_over_limit",
+          "tokens": 518
+        },
+        {
+          "id": "32012666",
+          "passageSha256": "17ac536dcc292da0a731ded7da10c5e92867248857cf8fcaa3ff46726c9fe204",
+          "status": "executed",
+          "values": [
+            -4.189599990844727
+          ],
+          "tokens": 165,
+          "elapsedMs": 51.11269996268675
+        },
+        {
+          "id": "14319754",
+          "passageSha256": "0a9dde2ae0f9b55d889a4eca8ab62091ed8155646311b1b7261eb64a4552ee5b",
+          "status": "executed",
+          "values": [
+            0.21286781132221222
+          ],
+          "tokens": 512,
+          "elapsedMs": 161.32610000204295
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "552",
+      "role": "held_out",
+      "claimSha256": "a853c00036b91058cc8d1c5427486d8dd2c122986282697ad79f5a34793a4890",
+      "judgments": {
+        "1471041": 1
+      },
+      "baselineMs": 452.37149999999747,
+      "complete": true,
+      "predictions": [
+        {
+          "id": "1471041",
+          "passageSha256": "d59a163a6e1c5c25423e62942fe608a68dcbd2f5407568b95bd2b8f6c1e12d74",
+          "status": "executed",
+          "values": [
+            5.367713928222656
+          ],
+          "tokens": 395,
+          "elapsedMs": 124.16279996978119
+        },
+        {
+          "id": "14340571",
+          "passageSha256": "e16d620d6076db64a79503825dc374a9dd88101274793ace6dc8992b4c937ce5",
+          "status": "executed",
+          "values": [
+            -4.905419826507568
+          ],
+          "tokens": 434,
+          "elapsedMs": 129.90200001513585
+        },
+        {
+          "id": "27772649",
+          "passageSha256": "c53d23b714365ed5fbbc8691d033dd94aeaeead8196856895848e234b89b0e84",
+          "status": "executed",
+          "values": [
+            -0.43270352482795715
+          ],
+          "tokens": 371,
+          "elapsedMs": 106.45939997630194
+        },
+        {
+          "id": "21060008",
+          "passageSha256": "c425f639a3a1836d2bfb8cf0639f280daff6c272cc1626e9430e0d0742e2749f",
+          "status": "executed",
+          "values": [
+            -1.5601284503936768
+          ],
+          "tokens": 463,
+          "elapsedMs": 154.0724000078626
+        },
+        {
+          "id": "10675756",
+          "passageSha256": "c4563130a09525033f3daffdf197b9e6e05e8471bdb5a6724c2deb0fcef62e9f",
+          "status": "executed",
+          "values": [
+            -1.9723045825958252
+          ],
+          "tokens": 446,
+          "elapsedMs": 143.89270002720878
+        },
+        {
+          "id": "3828508",
+          "passageSha256": "0b95012abbd36425fb6153fc5c24b1cd8e7a85bb475212363d4894d4a6e0f27c",
+          "status": "executed",
+          "values": [
+            -10.608646392822266
+          ],
+          "tokens": 470,
+          "elapsedMs": 129.3382999720052
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    },
+    {
+      "id": "1199",
+      "role": "held_out",
+      "claimSha256": "1e5246ce7bc6d3f75868da0cbc43b768072e5360c838de95640751b14eb8c31f",
+      "judgments": {
+        "16760369": 1
+      },
+      "baselineMs": 355.5625,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "7454794",
+          "passageSha256": "be961c34327e931b75b50edeac5a9916eea7728c94b7b86a292d0b7f77aac663",
+          "status": "executed",
+          "values": [
+            3.8064732551574707
+          ],
+          "tokens": 277,
+          "elapsedMs": 170.50609999569133
+        },
+        {
+          "id": "8708082",
+          "passageSha256": "71dc8d0f480ecd57b9adfedeb6c95120b1cadd37fdeacd80b29d95bf61cb1658",
+          "status": "executed",
+          "values": [
+            -2.9980199337005615
+          ],
+          "tokens": 225,
+          "elapsedMs": 68.59040004201233
+        },
+        {
+          "id": "21557614",
+          "passageSha256": "398eb6cfe2d222484c54a96ceb81433e7745b83ae8399d96b261542a6af203fc",
+          "status": "executed",
+          "values": [
+            1.5432382822036743
+          ],
+          "tokens": 277,
+          "elapsedMs": 66.25800003530458
+        },
+        {
+          "id": "40156901",
+          "passageSha256": "c0d45e80e676324b8781fa64b24617c58bb4f75aafb973c3af018f7c47fb3780",
+          "status": "input_over_limit",
+          "tokens": 518
+        },
+        {
+          "id": "437924",
+          "passageSha256": "fc0437f11f43baeac8c35ca00549820d9ce582ca0b88559a6039c1cf1ee904c3",
+          "status": "executed",
+          "values": [
+            -3.5111827850341797
+          ],
+          "tokens": 414,
+          "elapsedMs": 119.85339998500422
+        },
+        {
+          "id": "23294314",
+          "passageSha256": "3c74135e70c89d946e2529cdcdf6b1189cfe9a909b1243ee0ce7ed8df5267ead",
+          "status": "executed",
+          "values": [
+            -5.265321731567383
+          ],
+          "tokens": 383,
+          "elapsedMs": 114.39040000550449
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "3": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        },
+        "6": {
+          "recall": 0.0,
+          "mrr": 0,
+          "ndcg": 0.0
+        }
+      }
+    },
+    {
+      "id": "53",
+      "role": "held_out",
+      "claimSha256": "9b2dfe5b6a8eaf271a580900057e8f0f92d2f6320b510426bd9cff0a36cf000f",
+      "judgments": {
+        "45638119": 1
+      },
+      "baselineMs": 241.66679999999906,
+      "complete": false,
+      "predictions": [
+        {
+          "id": "45638119",
+          "passageSha256": "399a9bb1c202b3e7a5eb77d5d29afe10c76c263ff7652e088d5fe18bcbf0cec1",
+          "status": "executed",
+          "values": [
+            5.232187747955322
+          ],
+          "tokens": 254,
+          "elapsedMs": 75.53440000629053
+        },
+        {
+          "id": "7821634",
+          "passageSha256": "1ff860cd7ffe561e9a1bbc10a72dc600ca90bc45cc38bbb0bfdab5817ae0d245",
+          "status": "executed",
+          "values": [
+            0.8773880004882812
+          ],
+          "tokens": 359,
+          "elapsedMs": 96.37380001368001
+        },
+        {
+          "id": "25973484",
+          "passageSha256": "8ef025e3a66acb38f3efb97adae87728718ce7163f9419e1c6ef6fdf858e17e0",
+          "status": "executed",
+          "values": [
+            -0.41094210743904114
+          ],
+          "tokens": 283,
+          "elapsedMs": 69.96880000224337
+        },
+        {
+          "id": "21439640",
+          "passageSha256": "4a190a323dab32929852524b2656c9996e56fb5181a551e591960635c70d1644",
+          "status": "input_over_limit",
+          "tokens": 527
+        },
+        {
+          "id": "10024681",
+          "passageSha256": "cc93c92e0aa71c45120492f4cfbdceffa654c557770338c025610fb052e06b89",
+          "status": "executed",
+          "values": [
+            2.6048715114593506
+          ],
+          "tokens": 387,
+          "elapsedMs": 107.65789996366948
+        },
+        {
+          "id": "5372432",
+          "passageSha256": "5e07814473392b04f06893c36abba5c4096e6f8d3389cbe861f9be9603e08e26",
+          "status": "executed",
+          "values": [
+            -4.19317102432251
+          ],
+          "tokens": 271,
+          "elapsedMs": 49.9775999924168
+        }
+      ],
+      "baseline": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      },
+      "reranked": {
+        "1": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "3": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        },
+        "6": {
+          "recall": 1.0,
+          "mrr": 1.0,
+          "ndcg": 1.0
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Queries selected from BEIR test qrels (original SciFact public labelled development), not original blind test.",
+    "Unjudged documents count as zero only for standard benchmark metrics; this is not proof of irrelevance.",
+    "Full retrieval corpus shared intentionally; gold source groups and near-claim variants separated. Topic/undisclosed training overlap unknown.",
+    "Any over-limit candidate retains whole-query baseline order; no silent truncation. Small English scientific sample cannot validate Wikipedia/news/Hindi/Telugu."
+  ]
+}

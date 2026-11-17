@@ -1,5 +1,35 @@
 # VERITAS AI implementation progress
 
+## Engine 2 advanced relevance and source-grounded assessment — 2026-11-17
+
+- Started clean at synchronized `4dd8349`, same feature branch. Preserved existing
+  investigations, prior failed-model reports, source/review/receipt/security gates and
+  all classification thresholds. No model training or automatic stance promotion.
+- Approved sequential pinned reranker/DeBERTa snapshots executed offline. Fresh R2:
+  MiniLM2 accuracy 30.00% / macro-F1 .2894; DeBERTa 33.33% / .3233. Both failed fixed
+  gates; DeBERTa did not replace MiniLM2. Authored hard-case observations remain separate.
+- Frozen FEVER page-identity proxy and source-disjoint follow-up query experiment:
+  title-only rule had no benefit; expanded query regressed held-out results and was
+  not adopted. Optional reranker improved first FEVER held-out MRR .3456→.4167.
+- Frozen SciFact scientific-abstract relevance: actual full-corpus BM25 top six, no gold
+  injection; held-out MRR .5722→.5944, nDCG@6 .5959→.6125, Recall@6 unchanged .6833.
+  Only 14/30 held-out queries fully scored; others retain complete baseline order under
+  the no-truncation policy. Development regression and small-sample intervals retained.
+- Exact reported Charminar query reproduced BM25 fourth place; optional real reranker
+  moved the same source/passage to first. Optional experimental English-only ordering,
+  default off; preserves contradictory candidates and falls back on every failure.
+- Added deterministic cited evidence summary, exact bounded previews, missing hashes,
+  review/correction continuity, Engine 4 source metadata and matching escaped reports.
+- Local Python 113/113, Node/API and relevant engine/OCR/startup suites, type/build,
+  actual advanced browser 17 checks and existing production authored-demo acceptance
+  passed. Initial operator-env fixture contamination was diagnosed and rerun explicitly
+  offline without weakening tests. All five historical NLI diagnostics still abstained.
+- Six advanced Engine 2 documents and sanitized raw reports distinguish implemented,
+  tested, experimental and planned work. Primary-source feed integration and independent
+  target-domain multilingual stance validation remain unfinished scientific/product work.
+- See [advanced validation](docs/ENGINE2_ADVANCED_VALIDATION.md) for setup and limitations;
+  exact pushed SHA and hosted CI must be verified after committing these changes.
+
 ## Engine 2 assertion selection and NLI research — 2026-11-17 local date
 
 - Started clean/synchronized at `6430738`, same feature branch. Added authenticated

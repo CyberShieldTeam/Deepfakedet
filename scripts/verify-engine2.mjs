@@ -6,11 +6,12 @@ import crypto from "node:crypto";
 import assert from "node:assert/strict";
 import express from "express";
 import { chromium, expect } from "@playwright/test";
+const advanced=process.env.VERITAS_E2_ADVANCED==='1',outputRoot=advanced?'.model-cache/engine2-advanced/browser':'.model-cache/engine2-nli/browser';
 const scratch = fs.mkdtempSync(path.join(os.tmpdir(), "veritas-engine2-browser-")),
   token = crypto.randomUUID() + crypto.randomUUID(),
   port = Number(process.env.VERITAS_E2_TEST_PORT || 3341),
   url = `http://127.0.0.1:${port}`,
-  output = path.resolve(".model-cache/engine2-nli/browser/run-" + Date.now());
+  output = path.resolve(outputRoot+"/run-" + Date.now());
 fs.mkdirSync(output, { recursive: true });
 if (!process.env.VERITAS_NLI_PYTHON || !process.env.VERITAS_NLI_MODEL_PATH)
   throw Error("Explicit installed Python and verified model snapshot required");
@@ -31,6 +32,12 @@ Object.assign(process.env, {
 });
 const { app } = await import("../server.ts"),
   { shutdownNli, runNli } = await import("../server/nliWorker.ts");
+const {shutdownReranker,runReranker}=await import('../server/claimReranking.ts');
+const {clearWikipediaCache}=await import('../server/wikipediaEvidence.ts');
+if(advanced){
+  if(!process.env.VERITAS_RERANKER_PYTHON||!process.env.VERITAS_RERANKER_MODEL_PATH)throw Error('Explicit reranker snapshot and Python required');
+  process.env.VERITAS_RERANKER_ENABLED='1';
+}else process.env.VERITAS_RERANKER_ENABLED='0';
 app.use(express.static(path.resolve("dist")));
 app.get("*", (_req, res) => res.sendFile(path.resolve("dist/index.html")));
 const listener = app.listen(port, "127.0.0.1");
@@ -54,8 +61,10 @@ try {
     startupMs: warmup.startupMs,
     memory: warmup.memory,
   };
+  if(advanced){const reranker=await runReranker([{premise:'The fictional museum opened in 1992.',hypothesis:'The fictional museum opened in 1992.',language:'en'}]);assert.equal(reranker.results[0].status,'executed');report.rerankerWarmup={startupMs:reranker.startupMs,memory:reranker.memory,scope:'Authored transport control, real relevance inference; not accuracy'};}
   browser = await chromium.launch({ headless: true });
   const page = await browser.newPage({ viewport: { width: 1440, height: 1100 } });
+  report.pageErrors=[];page.on('pageerror',error=>report.pageErrors.push(error.message.slice(0,500)));
   page.setDefaultTimeout(20000);
   page.setDefaultNavigationTimeout(30000);
   await page.route(/^https:\/\/fonts\.(googleapis|gstatic)\.com\//, (r) => r.abort());
@@ -77,7 +86,7 @@ try {
   await page.getByRole("button", { name: "Live analysis", exact: true }).click();
   await page.getByRole("button", { name: "Claim intelligence", exact: true }).first().click();
   await page.getByLabel("Active investigation").selectOption(inv.id);
-  async function analyze(text) {
+  async function analyze(text,language='en',expectedStatus='INSUFFICIENT_EVIDENCE') {
     await page.getByRole("button", { name: "Claim intelligence", exact: true }).first().click();
     await page.locator("textarea").first().fill(text);
     const extracting = page.waitForResponse(
@@ -85,7 +94,7 @@ try {
     );
     await page.getByRole("button", { name: "Extract candidate claims", exact: true }).click();
     const extraction = await (await extracting).json();
-    await page.getByLabel("Selected claim language", { exact: true }).selectOption("en");
+    await page.getByLabel("Selected claim language", { exact: true }).selectOption(language);
     await page
       .getByLabel("Claim selection rationale", { exact: true })
       .fill(
@@ -106,10 +115,11 @@ try {
     assert.equal(response.status(), 200);
     const result = (await response.json()).result;
     assert.equal(result.originalInput, text);
-    assert.equal(result.verificationStatus, "INSUFFICIENT_EVIDENCE");
+    assert.equal(result.verificationStatus, expectedStatus);
     assert.equal(result.confidenceScore, null);
     assert.ok(result.sources.every((s) => s.stance === "neutral" && !s.review));
     assert.equal(result.nli.evaluationStatus, "experimental_failed_validation");
+    if(advanced){await expect(page.getByRole('region',{name:'Source-grounded evidence summary'})).toBeVisible();assert.equal(result.evidenceSummary.citations.length,result.sources.length);for(const c of result.evidenceSummary.citations){const source=result.sources.find(s=>s.id===c.sourceId);assert.equal(c.url,source.url);assert.ok(source.excerpt.includes(c.quote));assert.equal(c.relationship,'unreviewed');}}
     await expect(
       page.getByText("Experimental evidence relationships", { exact: true }),
     ).toBeVisible();
@@ -156,6 +166,13 @@ try {
       extraction,
     });
     if (id === "A") {
+      if(advanced){
+        assert.ok(result.sources.every(s=>s.publishDate===undefined));
+        await page.getByText('Read cited passages and review status',{exact:true}).click();
+        const citation=page.getByRole('region',{name:'Source-grounded evidence summary'}).getByRole('link',{name:new RegExp('Charminar$')});
+        const popupPending=page.waitForEvent('popup');await citation.click();const popup=await popupPending;let loaded=true;try{await popup.waitForLoadState('domcontentloaded',{timeout:15000})}catch{loaded=false}
+        assert.equal(new URL(popup.url()).hostname,'en.wikipedia.org');report.checks.push({id:'citation-opening-and-missing-date',openedUrl:popup.url(),domContentLoaded:loaded,publicationDateInvented:false});await popup.close();
+      }
       await page.screenshot({ path: path.join(output, "claim-a.png"), fullPage: true });
       await page.getByText("Analyst review · assess source applicability", { exact: true }).click();
       await page
@@ -195,12 +212,28 @@ try {
         scope: "Authored software action, not independent adjudication",
         result: reviewed,
       });
+      if(advanced){
+        assert.equal(reviewed.evidenceSummary.citations.find(c=>c.sourceId===source.id).relationship,'supports');
+        await page.getByLabel(`Stance for Charminar [${source.id}]`,{exact:true}).selectOption('neutral');
+        await page.getByLabel('Analyst review rationale',{exact:true}).fill('Authored correction control: retracting the software review while preserving the original attributed event.');
+        const pending=page.waitForResponse(r=>r.url().endsWith('/api/claims/review')&&r.request().method()==='POST');await page.getByRole('button',{name:'Record evidence assessment',exact:true}).click();const corrected=(await(await pending).json()).result;
+        assert.equal(corrected.verificationStatus,'INSUFFICIENT_EVIDENCE');assert.equal(corrected.evidenceSummary.citations.find(c=>c.sourceId===source.id).relationship,'unreviewed');assert.ok(corrected.sources.find(s=>s.id===source.id).reviewHistory.some(h=>h.stance==='supports'));await save();report.checks.push({id:'human-review-correction',result:corrected});
+      }
     }
   }
   const empty = await analyze("Veritaszzunfindableqwpjxyz is a newly discovered island.");
   assert.equal(empty.result.sources.length, 0);
   assert.equal(empty.result.analysis.state, "NO_RELEVANT_SIGNALS");
   report.checks.push({ id: "no-evidence", ...empty });
+  if(advanced){
+    for(const [language,text] of [['hi','चारमीनार हैदराबाद में है।'],['te','చార్మినార్ హైదరాబాద్ లో ఉంది.']]){const r=await analyze(text,language);assert.ok(r.result.nli.relationships.every(n=>n.status!=='executed'));assert.equal(r.result.retrievalDetails.reranking.applied,false);report.checks.push({id:'unsupported-language-'+language,...r});}
+    const actualFetch=globalThis.fetch;clearWikipediaCache();globalThis.fetch=async(...args)=>{if(new URL(String(args[0])).hostname==='en.wikipedia.org')throw new DOMException('Authored provider timeout transport control','TimeoutError');return actualFetch(...args)};
+    try{const r=await analyze('Charminar was constructed in Hyderabad in 1591.','en','UNAVAILABLE');assert.equal(r.result.retrievalDetails.providers.find(p=>p.provider==='wikipedia').errorCategory,'TIMEOUT');report.checks.push({id:'retrieval-timeout',scope:'Injected transport timeout, not a live upstream failure',...r});}finally{globalThis.fetch=actualFetch;clearWikipediaCache();}
+    const modelPath=process.env.VERITAS_NLI_MODEL_PATH;process.env.VERITAS_NLI_MODEL_PATH=path.join(scratch,'deliberately-missing-snapshot');
+    try{const r=await analyze('Charminar was constructed in Hyderabad in 1591.');assert.ok(r.result.nli.relationships.every(n=>n.status!=='executed'));report.checks.push({id:'nli-unavailable',scope:'Actual worker missing-snapshot response in isolated configuration',...r});}finally{process.env.VERITAS_NLI_MODEL_PATH=modelPath;}
+    const rerankerPath=process.env.VERITAS_RERANKER_MODEL_PATH;process.env.VERITAS_RERANKER_MODEL_PATH=path.join(scratch,'deliberately-missing-reranker');
+    try{const r=await analyze('Charminar was constructed in Hyderabad in 1591.');assert.equal(r.result.retrievalDetails.reranking.applied,false);assert.equal(r.result.retrievalDetails.reranking.status,'unavailable');report.checks.push({id:'reranker-unavailable',scope:'Actual worker missing-snapshot response in isolated configuration',...r});}finally{process.env.VERITAS_RERANKER_MODEL_PATH=rerankerPath;}
+  }
   const compound = await analyze(
     "BREAKING: Charminar was constructed in Hyderabad in 1591. Evacuate immediately and share this with everyone!",
   );
@@ -221,6 +254,7 @@ try {
     );
   assert.deepEqual(disk, exported.investigation);
   assert.deepEqual(disk.correlation, graph);
+  if(advanced){for(const c of disk.claimResults){assert.deepEqual(c.evidenceSummary.citations.map(x=>x.url),c.sources.map(x=>x.url));assert.ok(c.retrievalDetails.reranking);}assert.ok(graph.nodes.some(n=>n.type==='source'&&n.metadata.evidenceCitation));assert.ok(graph.nodes.some(n=>n.type==='source'&&n.metadata.relevanceReranking));}
   assert.ok(
     graph.nodes.some(
       (n) =>
@@ -244,6 +278,7 @@ try {
   await expect(
     frame.locator('a[href="https://en.wikipedia.org/wiki/Charminar"]').first(),
   ).toBeVisible();
+  if(advanced){await expect(frame.getByText('Source-grounded evidence assessment',{exact:true}).first()).toBeVisible();await expect(frame.getByText('Relevance reranker',{exact:true}).first()).toBeVisible();}
   report.checks.push({
     id: "persistence-correlation-report",
     pass: true,
@@ -279,6 +314,7 @@ try {
     .digest("hex");
   const { result: conflict } = await analyze("The authored museum opened in 1992.");
   assert.equal(conflict.sources.length, 2);
+  if(advanced){assert.equal(conflict.retrievalDetails.reranking.status,'executed');assert.equal(conflict.retrievalDetails.reranking.applied,true);assert.ok(conflict.retrievalDetails.reranking.candidates.every(c=>Number.isFinite(c.score)));}
   await page.getByText("Analyst review · assess source applicability", { exact: true }).click();
   for (const source of conflict.sources) {
     await page
@@ -310,6 +346,7 @@ try {
     scope: "Authored passages and review actions; not independent accuracy evidence",
     result: conflictReviewed,
   });
+  assert.equal(report.pageErrors.length,0,'Unexpected frontend runtime errors');
   report.result = "passed";
 } catch (error) {
   report.result = "failed";
@@ -317,12 +354,13 @@ try {
   throw error;
 } finally {
   shutdownNli();
+  shutdownReranker();
   await browser?.close();
   await new Promise((resolve) => listener.close(resolve));
   fs.rmSync(scratch, { recursive: true, force: true });
   fs.writeFileSync(path.join(output, "verification.json"), JSON.stringify(report, null, 2));
   fs.writeFileSync(
-    ".model-cache/engine2-nli/browser/latest.json",
+    outputRoot+"/latest.json",
     JSON.stringify({ result: report.result, path: path.join(output, "verification.json") }),
   );
   console.log(

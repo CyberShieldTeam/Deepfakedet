@@ -1,0 +1,214 @@
+{
+  "scope": "Authored textual regression controls only. Premises are stipulated test inputs, not retrieved historical/event evidence or independently annotated accuracy data.",
+  "fixtureSha256": "fae65fc2e277ab1571980e89a45e382f1c8cfad7df2ca6be2a7adc5f9e00a258",
+  "model": {
+    "id": "cross-encoder/nli-deberta-v3-small",
+    "revision": "fa2804872c3b4bd748f38c0185cc85775361e735",
+    "license": "Apache-2.0",
+    "minimumFreeGiB": 2.5
+  },
+  "startupMs": 10446.038599999156,
+  "memory": {
+    "rssBytes": 656842752,
+    "peakWorkingSetBytes": 656842752
+  },
+  "rows": [
+    {
+      "id": "date-match",
+      "expected": "entailment",
+      "status": "executed",
+      "tokens": 21,
+      "elapsedMs": 221.63260000525042,
+      "scores": {
+        "contradiction": 0.0005410680896602571,
+        "entailment": 0.9950679540634155,
+        "neutral": 0.00439099594950676
+      },
+      "argmax": "entailment",
+      "accepted": true
+    },
+    {
+      "id": "date-conflict",
+      "expected": "contradiction",
+      "status": "executed",
+      "tokens": 24,
+      "elapsedMs": 109.31249998975545,
+      "scores": {
+        "contradiction": 0.9988621473312378,
+        "entailment": 0.0004861819907091558,
+        "neutral": 0.0006516828434541821
+      },
+      "argmax": "contradiction",
+      "accepted": true
+    },
+    {
+      "id": "location-match",
+      "expected": "entailment",
+      "status": "executed",
+      "tokens": 17,
+      "elapsedMs": 94.88109999801964,
+      "scores": {
+        "contradiction": 0.0003593929868657142,
+        "entailment": 0.9949759244918823,
+        "neutral": 0.004664732608944178
+      },
+      "argmax": "entailment",
+      "accepted": true
+    },
+    {
+      "id": "location-conflict",
+      "expected": "contradiction",
+      "status": "executed",
+      "tokens": 20,
+      "elapsedMs": 101.3643000042066,
+      "scores": {
+        "contradiction": 0.9994845390319824,
+        "entailment": 0.0002070881164399907,
+        "neutral": 0.0003083421033807099
+      },
+      "argmax": "contradiction",
+      "accepted": true
+    },
+    {
+      "id": "negation",
+      "expected": "contradiction",
+      "status": "executed",
+      "tokens": 17,
+      "elapsedMs": 108.45260001951829,
+      "scores": {
+        "contradiction": 0.9994840621948242,
+        "entailment": 0.000256111758062616,
+        "neutral": 0.00025968588306568563
+      },
+      "argmax": "contradiction",
+      "accepted": true
+    },
+    {
+      "id": "quantity",
+      "expected": "contradiction",
+      "status": "executed",
+      "tokens": 24,
+      "elapsedMs": 98.72639999957755,
+      "scores": {
+        "contradiction": 0.9919384121894836,
+        "entailment": 0.0033585927449166775,
+        "neutral": 0.00470299506559968
+      },
+      "argmax": "contradiction",
+      "accepted": true
+    },
+    {
+      "id": "time-scope",
+      "expected": "neutral",
+      "status": "executed",
+      "tokens": 24,
+      "elapsedMs": 99.16640003211796,
+      "scores": {
+        "contradiction": 0.9951528310775757,
+        "entailment": 0.000811867241282016,
+        "neutral": 0.004035285674035549
+      },
+      "argmax": "contradiction",
+      "accepted": true
+    },
+    {
+      "id": "attribution",
+      "expected": "neutral",
+      "status": "executed",
+      "tokens": 25,
+      "elapsedMs": 108.51540003204718,
+      "scores": {
+        "contradiction": 0.02891651540994644,
+        "entailment": 0.9378157258033752,
+        "neutral": 0.03326771408319473
+      },
+      "argmax": "entailment",
+      "accepted": true
+    },
+    {
+      "id": "inspection",
+      "expected": "neutral",
+      "status": "executed",
+      "tokens": 24,
+      "elapsedMs": 110.70080002536997,
+      "scores": {
+        "contradiction": 0.9967387318611145,
+        "entailment": 8.403303945669904e-05,
+        "neutral": 0.003177287755534053
+      },
+      "argmax": "contradiction",
+      "accepted": true
+    },
+    {
+      "id": "reported-rumor",
+      "expected": "neutral",
+      "status": "executed",
+      "tokens": 23,
+      "elapsedMs": 108.99969999445602,
+      "scores": {
+        "contradiction": 0.2704056203365326,
+        "entailment": 0.3356296420097351,
+        "neutral": 0.3939646780490875
+      },
+      "argmax": "neutral",
+      "accepted": false
+    },
+    {
+      "id": "unit-match",
+      "expected": "entailment",
+      "status": "executed",
+      "tokens": 23,
+      "elapsedMs": 109.42230001091957,
+      "scores": {
+        "contradiction": 0.001351862563751638,
+        "entailment": 0.9887953996658325,
+        "neutral": 0.009852644987404346
+      },
+      "argmax": "entailment",
+      "accepted": true
+    },
+    {
+      "id": "past-present",
+      "expected": "contradiction",
+      "status": "executed",
+      "tokens": 22,
+      "elapsedMs": 111.02180002490059,
+      "scores": {
+        "contradiction": 0.9977013468742371,
+        "entailment": 0.0016762687591835856,
+        "neutral": 0.000622417835984379
+      },
+      "argmax": "contradiction",
+      "accepted": true
+    },
+    {
+      "id": "corrected-context",
+      "expected": "contradiction",
+      "status": "executed",
+      "tokens": 26,
+      "elapsedMs": 94.35860003577545,
+      "scores": {
+        "contradiction": 0.02582913264632225,
+        "entailment": 0.9441855549812317,
+        "neutral": 0.029985299333930016
+      },
+      "argmax": "entailment",
+      "accepted": true
+    },
+    {
+      "id": "instruction-in-evidence",
+      "expected": "neutral",
+      "status": "executed",
+      "tokens": 29,
+      "elapsedMs": 94.08660000190139,
+      "scores": {
+        "contradiction": 0.2714672088623047,
+        "entailment": 0.00018602548516355455,
+        "neutral": 0.7283467054367065
+      },
+      "argmax": "neutral",
+      "accepted": false
+    }
+  ],
+  "authoritativePromotion": false
+}

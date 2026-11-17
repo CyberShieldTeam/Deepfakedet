@@ -80,3 +80,10 @@ export interface NliAnalysis {
   memory?: { rssBytes: number; peakWorkingSetBytes: number | null };
   summary: string;
 }
+
+export interface RerankingAnalysis{
+  status:'unconfigured'|'not_applicable'|'executed'|'unavailable'|'unsupported_language'|'input_over_limit'|'busy'|'timeout';
+  modelId:string;version:string;evaluationStatus:'experimental_relevance_only';applied:boolean;elapsedMs:number;startupMs?:number;
+  memory?:{rssBytes:number;peakWorkingSetBytes:number|null};reason:string;
+  candidates:{url:string;inputSha256:string;passageSha256:string;status:string;score?:number;tokens?:number;elapsedMs?:number}[];
+}

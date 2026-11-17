@@ -1,0 +1,14 @@
+{
+  "version": "engine2-query-expansion-v2",
+  "reason": "First frozen sample exposed weak candidate recall; title priority alone produced no improvement. Fresh sample excludes its annotated pages and near claims; first held-out is already inspected and is not reused as untouched evidence.",
+  "retrieval": {
+    "seed": "veritas-query-expansion-v2",
+    "roles": {"development": 15, "validation": 15, "held_out": 30},
+    "query": "One bounded query: legacy OR intitle quoted exact leading English subject, before a copular/modal predicate, stripped initial article and trailing in/on/at location phrase; <=8 tokens and <=120 characters; <=500 query chars total. No annotations supplied to query builder.",
+    "ranking": "Unchanged BM25; exact subject-title priority measured separately, no adoption without improvement.",
+    "adoption": "Validation known-page Recall@6 increases, MRR and nDCG@3 do not decrease; no threshold tuning after results. Held-out tested once without retuning.",
+    "metrics": "Known annotated evidence-page Recall@1/3/6, full-list MRR and binary known-page nDCG@1/3/6. Unlisted pages remain unjudged, no passage relevance accuracy claim.",
+    "limits": {"results": 6, "timeoutMs": 10000, "bytes": 1048576, "requestsPerStrategyPerClaim": 1},
+    "runtime": "Sequential strategy calls may have order/time bias; latency descriptive, not controlled optimization. No factual assessment changes."
+  }
+}

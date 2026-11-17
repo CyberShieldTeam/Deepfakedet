@@ -1,0 +1,6603 @@
+{
+  "scope": "External FEVER evidence-page identity proxy only; binary known-page nDCG, unlisted candidates unjudged. No passage relevance or factual accuracy claim.",
+  "at": "2026-11-17T10:21:13.672Z",
+  "baselineSha256": "50129f6892d33ee43c93bee19351c5b365570aa0dc4f6cc9da6e4be5d296f405",
+  "protocolSha256": "382c930f9333cbbf771d7a1f2be810736bc792a0d7bd6418e7e15aaa5fea87b2",
+  "entityCodeSha256": "370d93336501f718e035d46938536cfcbe9899f1b3ea4305fc1eb3df2da65fd1",
+  "splits": {
+    "development": {
+      "queries": 15,
+      "providerFailures": 0,
+      "baseline": {
+        "1": {
+          "recall": 0.18333333333333332,
+          "mrr": 0.28888888888888886,
+          "ndcg": 0.26666666666666666
+        },
+        "3": {
+          "recall": 0.26666666666666666,
+          "mrr": 0.28888888888888886,
+          "ndcg": 0.258567188650272
+        },
+        "6": {
+          "recall": 0.3,
+          "mrr": 0.28888888888888886,
+          "ndcg": 0.26759318360472545
+        }
+      },
+      "entity": {
+        "1": {
+          "recall": 0.18333333333333332,
+          "mrr": 0.28888888888888886,
+          "ndcg": 0.26666666666666666
+        },
+        "3": {
+          "recall": 0.26666666666666666,
+          "mrr": 0.28888888888888886,
+          "ndcg": 0.258567188650272
+        },
+        "6": {
+          "recall": 0.3,
+          "mrr": 0.28888888888888886,
+          "ndcg": 0.26759318360472545
+        }
+      },
+      "reranker": {
+        "1": {
+          "recall": 0.25,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.3333333333333333
+        },
+        "3": {
+          "recall": 0.26666666666666666,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.29190052198360533
+        },
+        "6": {
+          "recall": 0.3,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.3009265169380588
+        }
+      }
+    },
+    "validation": {
+      "queries": 15,
+      "providerFailures": 0,
+      "baseline": {
+        "1": {
+          "recall": 0.13333333333333333,
+          "mrr": 0.17777777777777776,
+          "ndcg": 0.13333333333333333
+        },
+        "3": {
+          "recall": 0.26666666666666666,
+          "mrr": 0.17777777777777776,
+          "ndcg": 0.2
+        },
+        "6": {
+          "recall": 0.26666666666666666,
+          "mrr": 0.17777777777777776,
+          "ndcg": 0.2
+        }
+      },
+      "entity": {
+        "1": {
+          "recall": 0.13333333333333333,
+          "mrr": 0.17777777777777776,
+          "ndcg": 0.13333333333333333
+        },
+        "3": {
+          "recall": 0.26666666666666666,
+          "mrr": 0.17777777777777776,
+          "ndcg": 0.2
+        },
+        "6": {
+          "recall": 0.26666666666666666,
+          "mrr": 0.17777777777777776,
+          "ndcg": 0.2
+        }
+      },
+      "reranker": {
+        "1": {
+          "recall": 0.26666666666666666,
+          "mrr": 0.26666666666666666,
+          "ndcg": 0.26666666666666666
+        },
+        "3": {
+          "recall": 0.26666666666666666,
+          "mrr": 0.26666666666666666,
+          "ndcg": 0.26666666666666666
+        },
+        "6": {
+          "recall": 0.26666666666666666,
+          "mrr": 0.26666666666666666,
+          "ndcg": 0.26666666666666666
+        }
+      }
+    },
+    "held_out": {
+      "queries": 30,
+      "providerFailures": 0,
+      "baseline": {
+        "1": {
+          "recall": 0.3,
+          "mrr": 0.34555555555555556,
+          "ndcg": 0.3
+        },
+        "3": {
+          "recall": 0.4,
+          "mrr": 0.34555555555555556,
+          "ndcg": 0.3543643251190486
+        },
+        "6": {
+          "recall": 0.43333333333333335,
+          "mrr": 0.34555555555555556,
+          "ndcg": 0.3672594186935333
+        }
+      },
+      "entity": {
+        "1": {
+          "recall": 0.3,
+          "mrr": 0.34555555555555556,
+          "ndcg": 0.3
+        },
+        "3": {
+          "recall": 0.4,
+          "mrr": 0.34555555555555556,
+          "ndcg": 0.3543643251190486
+        },
+        "6": {
+          "recall": 0.43333333333333335,
+          "mrr": 0.34555555555555556,
+          "ndcg": 0.3672594186935333
+        }
+      },
+      "reranker": {
+        "1": {
+          "recall": 0.4,
+          "mrr": 0.4166666666666667,
+          "ndcg": 0.4
+        },
+        "3": {
+          "recall": 0.43333333333333335,
+          "mrr": 0.4166666666666667,
+          "ndcg": 0.42103099178571524
+        },
+        "6": {
+          "recall": 0.43333333333333335,
+          "mrr": 0.4166666666666667,
+          "ndcg": 0.42103099178571524
+        }
+      }
+    }
+  },
+  "entityValidationGatePassed": true,
+  "rerankerProductionPromotion": false,
+  "rows": [
+    {
+      "id": "5483",
+      "role": "development",
+      "claimSha256": "16cc94b3bef90865fb2b0c2efb517857c6c76a2bf10753248b1d15a6e836fea4",
+      "annotatedPages": [
+        "The_Hit_-LRB-1984_film-RRB-"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 841.1329000000001,
+      "entityMs": 1.0767000000000024,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/DVD_screensaver",
+          "https://en.wikipedia.org/wiki/List_of_Murder,_She_Wrote_home_video_releases",
+          "https://en.wikipedia.org/wiki/Greatest_Hits_(2005_Blondie_album)",
+          "https://en.wikipedia.org/wiki/Seinfeld",
+          "https://en.wikipedia.org/wiki/One_Tree_Hill_(TV_series)",
+          "https://en.wikipedia.org/wiki/Beverly_Hills,_90210"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/DVD_screensaver",
+          "https://en.wikipedia.org/wiki/List_of_Murder,_She_Wrote_home_video_releases",
+          "https://en.wikipedia.org/wiki/Greatest_Hits_(2005_Blondie_album)",
+          "https://en.wikipedia.org/wiki/Seinfeld",
+          "https://en.wikipedia.org/wiki/One_Tree_Hill_(TV_series)",
+          "https://en.wikipedia.org/wiki/Beverly_Hills,_90210"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Greatest_Hits_(2005_Blondie_album)",
+          "https://en.wikipedia.org/wiki/List_of_Murder,_She_Wrote_home_video_releases",
+          "https://en.wikipedia.org/wiki/DVD_screensaver",
+          "https://en.wikipedia.org/wiki/Seinfeld",
+          "https://en.wikipedia.org/wiki/Beverly_Hills,_90210",
+          "https://en.wikipedia.org/wiki/One_Tree_Hill_(TV_series)"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "73208",
+      "role": "development",
+      "claimSha256": "93b8d97407bd5af75b0f15fbb3e40f5df7784e8fbb653799281db3a06f8b2b51",
+      "annotatedPages": [
+        "Reign_Over_Me"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 687.5647999999999,
+      "entityMs": 0.07099999999999795,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Saffron_Burrows",
+          "https://en.wikipedia.org/wiki/Wake_Up_Dead_Man",
+          "https://en.wikipedia.org/wiki/88th_Academy_Awards",
+          "https://en.wikipedia.org/wiki/Taylor_Swift",
+          "https://en.wikipedia.org/wiki/Rob_Gronkowski",
+          "https://en.wikipedia.org/wiki/Tamra_Davis"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Saffron_Burrows",
+          "https://en.wikipedia.org/wiki/Wake_Up_Dead_Man",
+          "https://en.wikipedia.org/wiki/88th_Academy_Awards",
+          "https://en.wikipedia.org/wiki/Taylor_Swift",
+          "https://en.wikipedia.org/wiki/Rob_Gronkowski",
+          "https://en.wikipedia.org/wiki/Tamra_Davis"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Saffron_Burrows",
+          "https://en.wikipedia.org/wiki/Wake_Up_Dead_Man",
+          "https://en.wikipedia.org/wiki/Tamra_Davis",
+          "https://en.wikipedia.org/wiki/88th_Academy_Awards",
+          "https://en.wikipedia.org/wiki/Taylor_Swift",
+          "https://en.wikipedia.org/wiki/Rob_Gronkowski"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "199814",
+      "role": "development",
+      "claimSha256": "d9dc2bceb9aad86606a12b0dc68ab633466d7d6b2b1b42ad7aaafb59c28fcf13",
+      "annotatedPages": [
+        "Sweet_Home_Alabama"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 816.5792000000001,
+      "entityMs": 0.47620000000000573,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Harvest_(Neil_Young_album)",
+          "https://en.wikipedia.org/wiki/Neil_Young_Archives_Volume_III:_1976%E2%80%931987",
+          "https://en.wikipedia.org/wiki/Answer_song",
+          "https://en.wikipedia.org/wiki/Johnny_Cash",
+          "https://en.wikipedia.org/wiki/Diss_track",
+          "https://en.wikipedia.org/wiki/Dolly_Parton"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Harvest_(Neil_Young_album)",
+          "https://en.wikipedia.org/wiki/Neil_Young_Archives_Volume_III:_1976%E2%80%931987",
+          "https://en.wikipedia.org/wiki/Answer_song",
+          "https://en.wikipedia.org/wiki/Johnny_Cash",
+          "https://en.wikipedia.org/wiki/Diss_track",
+          "https://en.wikipedia.org/wiki/Dolly_Parton"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Harvest_(Neil_Young_album)",
+          "https://en.wikipedia.org/wiki/Neil_Young_Archives_Volume_III:_1976%E2%80%931987",
+          "https://en.wikipedia.org/wiki/Answer_song",
+          "https://en.wikipedia.org/wiki/Johnny_Cash",
+          "https://en.wikipedia.org/wiki/Dolly_Parton",
+          "https://en.wikipedia.org/wiki/Diss_track"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "69641",
+      "role": "development",
+      "claimSha256": "a0566ddb33b2244466a3450c12cf8999ac5a028722eaaaed7f49b577d4506e38",
+      "annotatedPages": [
+        "YouTube"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 822.6210000000001,
+      "entityMs": 0.3399000000000001,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/YouTube",
+          "https://en.wikipedia.org/wiki/Mia_Khalifa",
+          "https://en.wikipedia.org/wiki/The_Most_Beautiful_Moment_in_Life:_Young_Forever",
+          "https://en.wikipedia.org/wiki/Billboard_charts",
+          "https://en.wikipedia.org/wiki/One_Direction",
+          "https://en.wikipedia.org/wiki/One_Piece"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/YouTube",
+          "https://en.wikipedia.org/wiki/Mia_Khalifa",
+          "https://en.wikipedia.org/wiki/The_Most_Beautiful_Moment_in_Life:_Young_Forever",
+          "https://en.wikipedia.org/wiki/Billboard_charts",
+          "https://en.wikipedia.org/wiki/One_Direction",
+          "https://en.wikipedia.org/wiki/One_Piece"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/YouTube",
+          "https://en.wikipedia.org/wiki/Mia_Khalifa",
+          "https://en.wikipedia.org/wiki/Billboard_charts",
+          "https://en.wikipedia.org/wiki/One_Direction",
+          "https://en.wikipedia.org/wiki/The_Most_Beautiful_Moment_in_Life:_Young_Forever",
+          "https://en.wikipedia.org/wiki/One_Piece"
+        ]
+      },
+      "entityMatches": [
+        "https://en.wikipedia.org/wiki/YouTube"
+      ]
+    },
+    {
+      "id": "144302",
+      "role": "development",
+      "claimSha256": "c6c6d6700a1d7592e13dfe29fad686ad78c1ddecd1e960359fda7e5829b65886",
+      "annotatedPages": [
+        "Nicholas_Brody"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 604.0965000000006,
+      "entityMs": 0.022500000000007958,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Carrie_Mathison",
+          "https://en.wikipedia.org/wiki/Adrien_Brody",
+          "https://en.wikipedia.org/wiki/Homeland_season_1",
+          "https://en.wikipedia.org/wiki/Hugh_Brody",
+          "https://en.wikipedia.org/wiki/The_Fear_of_13",
+          "https://en.wikipedia.org/wiki/List_of_Homeland_characters"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Carrie_Mathison",
+          "https://en.wikipedia.org/wiki/Adrien_Brody",
+          "https://en.wikipedia.org/wiki/Homeland_season_1",
+          "https://en.wikipedia.org/wiki/Hugh_Brody",
+          "https://en.wikipedia.org/wiki/The_Fear_of_13",
+          "https://en.wikipedia.org/wiki/List_of_Homeland_characters"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Adrien_Brody",
+          "https://en.wikipedia.org/wiki/Carrie_Mathison",
+          "https://en.wikipedia.org/wiki/Hugh_Brody",
+          "https://en.wikipedia.org/wiki/Homeland_season_1",
+          "https://en.wikipedia.org/wiki/The_Fear_of_13",
+          "https://en.wikipedia.org/wiki/List_of_Homeland_characters"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "95239",
+      "role": "development",
+      "claimSha256": "a0097f7dc51bd6cc37d05a6d32928d8eac7050eee8c716ae36dbe419eeed5402",
+      "annotatedPages": [
+        "The_Gifted_-LRB-TV_series-RRB-"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 543.4534999999996,
+      "entityMs": 0.019700000000000273,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/A_Gifted_Man",
+          "https://en.wikipedia.org/wiki/Gifted_(manga)",
+          "https://en.wikipedia.org/wiki/Natalie_Alyn_Lind",
+          "https://en.wikipedia.org/wiki/Murder_by_Numbers",
+          "https://en.wikipedia.org/wiki/Murder_Mubarak",
+          "https://en.wikipedia.org/wiki/List_of_Midsomer_Murders_episodes"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/A_Gifted_Man",
+          "https://en.wikipedia.org/wiki/Gifted_(manga)",
+          "https://en.wikipedia.org/wiki/Natalie_Alyn_Lind",
+          "https://en.wikipedia.org/wiki/Murder_by_Numbers",
+          "https://en.wikipedia.org/wiki/Murder_Mubarak",
+          "https://en.wikipedia.org/wiki/List_of_Midsomer_Murders_episodes"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/A_Gifted_Man",
+          "https://en.wikipedia.org/wiki/Gifted_(manga)",
+          "https://en.wikipedia.org/wiki/Natalie_Alyn_Lind",
+          "https://en.wikipedia.org/wiki/List_of_Midsomer_Murders_episodes",
+          "https://en.wikipedia.org/wiki/Murder_by_Numbers",
+          "https://en.wikipedia.org/wiki/Murder_Mubarak"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "174878",
+      "role": "development",
+      "claimSha256": "1e0eca177cd4cf39c37ada48aeca078e0de17a9971172ef9788a7db6cb2c4aed",
+      "annotatedPages": [
+        "Alfred_P._Murrah_Federal_Building",
+        "United_States"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 696.9317000000001,
+      "entityMs": 0.0169000000000068,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Waco_siege",
+          "https://en.wikipedia.org/wiki/List_of_national_memorials_of_the_United_States",
+          "https://en.wikipedia.org/wiki/Multiculturalism",
+          "https://en.wikipedia.org/wiki/Oklahoma"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Waco_siege",
+          "https://en.wikipedia.org/wiki/List_of_national_memorials_of_the_United_States",
+          "https://en.wikipedia.org/wiki/Multiculturalism",
+          "https://en.wikipedia.org/wiki/Oklahoma"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Waco_siege",
+          "https://en.wikipedia.org/wiki/List_of_national_memorials_of_the_United_States",
+          "https://en.wikipedia.org/wiki/Oklahoma",
+          "https://en.wikipedia.org/wiki/Multiculturalism"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "17634",
+      "role": "development",
+      "claimSha256": "f56f8d95eb1d6673f2506ab451633fd6b73145b60a17a7dcf6c03b27c51b723a",
+      "annotatedPages": [
+        "I_Kissed_a_Girl"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 676.1997000000001,
+      "entityMs": 0.023099999999999454,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Katy_Perry",
+          "https://en.wikipedia.org/wiki/Peter_Murphy_(musician)",
+          "https://en.wikipedia.org/wiki/Spice_Girls",
+          "https://en.wikipedia.org/wiki/A_Girl_Like_Me_(Rihanna_album)",
+          "https://en.wikipedia.org/wiki/Robert_Smith_(musician)",
+          "https://en.wikipedia.org/wiki/Florence_Welch"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Katy_Perry",
+          "https://en.wikipedia.org/wiki/Peter_Murphy_(musician)",
+          "https://en.wikipedia.org/wiki/Spice_Girls",
+          "https://en.wikipedia.org/wiki/A_Girl_Like_Me_(Rihanna_album)",
+          "https://en.wikipedia.org/wiki/Robert_Smith_(musician)",
+          "https://en.wikipedia.org/wiki/Florence_Welch"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Katy_Perry",
+          "https://en.wikipedia.org/wiki/A_Girl_Like_Me_(Rihanna_album)",
+          "https://en.wikipedia.org/wiki/Peter_Murphy_(musician)",
+          "https://en.wikipedia.org/wiki/Spice_Girls",
+          "https://en.wikipedia.org/wiki/Florence_Welch",
+          "https://en.wikipedia.org/wiki/Robert_Smith_(musician)"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "110429",
+      "role": "development",
+      "claimSha256": "ae8b85d0127fade7680b7961af6f9ce84b689246403f34cc08a393e48021c1aa",
+      "annotatedPages": [
+        "Henry_II_of_France"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 922.8764000000001,
+      "entityMs": 0.02780000000001337,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Catherine_de%27_Medici",
+          "https://en.wikipedia.org/wiki/Louis_de_Saint-Gelais",
+          "https://en.wikipedia.org/wiki/Anne_Boleyn",
+          "https://en.wikipedia.org/wiki/Anne_of_Denmark",
+          "https://en.wikipedia.org/wiki/Anne_de_Montmorency,_1st_Duke_of_Montmorency",
+          "https://en.wikipedia.org/wiki/Paris"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Catherine_de%27_Medici",
+          "https://en.wikipedia.org/wiki/Louis_de_Saint-Gelais",
+          "https://en.wikipedia.org/wiki/Anne_Boleyn",
+          "https://en.wikipedia.org/wiki/Anne_of_Denmark",
+          "https://en.wikipedia.org/wiki/Anne_de_Montmorency,_1st_Duke_of_Montmorency",
+          "https://en.wikipedia.org/wiki/Paris"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Catherine_de%27_Medici",
+          "https://en.wikipedia.org/wiki/Louis_de_Saint-Gelais",
+          "https://en.wikipedia.org/wiki/Anne_de_Montmorency,_1st_Duke_of_Montmorency",
+          "https://en.wikipedia.org/wiki/Anne_of_Denmark",
+          "https://en.wikipedia.org/wiki/Anne_Boleyn",
+          "https://en.wikipedia.org/wiki/Paris"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "79437",
+      "role": "development",
+      "claimSha256": "24fb62efe40d0cb0a1d967a070205ffc8d86f5c65445d97c24d778d527fd3e2e",
+      "annotatedPages": [
+        "Lou_Gehrig"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 556.0380000000005,
+      "entityMs": 0.13360000000000127,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Jamie_Moyer",
+          "https://en.wikipedia.org/wiki/Jimmie_Foxx",
+          "https://en.wikipedia.org/wiki/Lou_Gehrig",
+          "https://en.wikipedia.org/wiki/Cal_Ripken_Jr.",
+          "https://en.wikipedia.org/wiki/Hank_Greenberg",
+          "https://en.wikipedia.org/wiki/Bobby_Richardson"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Jamie_Moyer",
+          "https://en.wikipedia.org/wiki/Jimmie_Foxx",
+          "https://en.wikipedia.org/wiki/Lou_Gehrig",
+          "https://en.wikipedia.org/wiki/Cal_Ripken_Jr.",
+          "https://en.wikipedia.org/wiki/Hank_Greenberg",
+          "https://en.wikipedia.org/wiki/Bobby_Richardson"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Lou_Gehrig",
+          "https://en.wikipedia.org/wiki/Cal_Ripken_Jr.",
+          "https://en.wikipedia.org/wiki/Jamie_Moyer",
+          "https://en.wikipedia.org/wiki/Jimmie_Foxx",
+          "https://en.wikipedia.org/wiki/Hank_Greenberg",
+          "https://en.wikipedia.org/wiki/Bobby_Richardson"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "182917",
+      "role": "development",
+      "claimSha256": "4eb405d47e83ce4cdb3778eb14f4d7eb83c844957ead05685f9d2726c44fe4a2",
+      "annotatedPages": [
+        "Far_from_the_Madding_Crowd_-LRB-1967_film-RRB-",
+        "Nicolas_Roeg"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 712.5498000000007,
+      "entityMs": 0.041400000000010095,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0.5,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 0.5,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 0.6131471927654584
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 0.8772153153380493
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0.5,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 0.5,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 0.6131471927654584
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 0.8772153153380493
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0.5,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 0.5,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 0.6131471927654584
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 0.8772153153380493
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Far_from_the_Madding_Crowd_(1967_film)",
+          "https://en.wikipedia.org/wiki/Far_from_the_Madding_Crowd_(2015_film)",
+          "https://en.wikipedia.org/wiki/Tamara_Drewe_(film)",
+          "https://en.wikipedia.org/wiki/Nicolas_Roeg",
+          "https://en.wikipedia.org/wiki/The_Odyssey_(2026_film)",
+          "https://en.wikipedia.org/wiki/It%27s_a_Mad,_Mad,_Mad,_Mad_World"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Far_from_the_Madding_Crowd_(1967_film)",
+          "https://en.wikipedia.org/wiki/Far_from_the_Madding_Crowd_(2015_film)",
+          "https://en.wikipedia.org/wiki/Tamara_Drewe_(film)",
+          "https://en.wikipedia.org/wiki/Nicolas_Roeg",
+          "https://en.wikipedia.org/wiki/The_Odyssey_(2026_film)",
+          "https://en.wikipedia.org/wiki/It%27s_a_Mad,_Mad,_Mad,_Mad_World"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Far_from_the_Madding_Crowd_(1967_film)",
+          "https://en.wikipedia.org/wiki/Far_from_the_Madding_Crowd_(2015_film)",
+          "https://en.wikipedia.org/wiki/Tamara_Drewe_(film)",
+          "https://en.wikipedia.org/wiki/Nicolas_Roeg",
+          "https://en.wikipedia.org/wiki/It%27s_a_Mad,_Mad,_Mad,_Mad_World",
+          "https://en.wikipedia.org/wiki/The_Odyssey_(2026_film)"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "184292",
+      "role": "development",
+      "claimSha256": "3564aa8f20f28c2486e6fb25c3ee1aedf02ca365d7358e80392699362cce87fd",
+      "annotatedPages": [
+        "Vera_Wang"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 522.0661,
+      "entityMs": 0.05849999999999511,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Vera_Wang",
+          "https://en.wikipedia.org/wiki/Madison_Avenue",
+          "https://en.wikipedia.org/wiki/Queens",
+          "https://en.wikipedia.org/wiki/Coty",
+          "https://en.wikipedia.org/wiki/Chinese-American_Planning_Council",
+          "https://en.wikipedia.org/wiki/Chinese_people_in_the_New_York_metropolitan_area"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Vera_Wang",
+          "https://en.wikipedia.org/wiki/Madison_Avenue",
+          "https://en.wikipedia.org/wiki/Queens",
+          "https://en.wikipedia.org/wiki/Coty",
+          "https://en.wikipedia.org/wiki/Chinese-American_Planning_Council",
+          "https://en.wikipedia.org/wiki/Chinese_people_in_the_New_York_metropolitan_area"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Vera_Wang",
+          "https://en.wikipedia.org/wiki/Queens",
+          "https://en.wikipedia.org/wiki/Chinese_people_in_the_New_York_metropolitan_area",
+          "https://en.wikipedia.org/wiki/Chinese-American_Planning_Council",
+          "https://en.wikipedia.org/wiki/Madison_Avenue",
+          "https://en.wikipedia.org/wiki/Coty"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "110703",
+      "role": "development",
+      "claimSha256": "57abdad0207a53aae591544568acca7dcbc2a3a8fec4fd09fdc51038f14ac80c",
+      "annotatedPages": [
+        "Battle_of_France"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 709.2972000000009,
+      "entityMs": 0.018900000000002137,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Battle_of_Soissons_(1918)",
+          "https://en.wikipedia.org/wiki/Gallipoli_campaign",
+          "https://en.wikipedia.org/wiki/History_of_Germany_during_World_War_I",
+          "https://en.wikipedia.org/wiki/Portugal_during_World_War_I",
+          "https://en.wikipedia.org/wiki/World_War_I",
+          "https://en.wikipedia.org/wiki/Eastern_Front_(World_War_I)"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Battle_of_Soissons_(1918)",
+          "https://en.wikipedia.org/wiki/Gallipoli_campaign",
+          "https://en.wikipedia.org/wiki/History_of_Germany_during_World_War_I",
+          "https://en.wikipedia.org/wiki/Portugal_during_World_War_I",
+          "https://en.wikipedia.org/wiki/World_War_I",
+          "https://en.wikipedia.org/wiki/Eastern_Front_(World_War_I)"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Battle_of_Soissons_(1918)",
+          "https://en.wikipedia.org/wiki/World_War_I",
+          "https://en.wikipedia.org/wiki/Eastern_Front_(World_War_I)",
+          "https://en.wikipedia.org/wiki/History_of_Germany_during_World_War_I",
+          "https://en.wikipedia.org/wiki/Portugal_during_World_War_I",
+          "https://en.wikipedia.org/wiki/Gallipoli_campaign"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "168062",
+      "role": "development",
+      "claimSha256": "de63124760a8d124119e88483efaa872ecd9c12c1fd5402a47fb57638e154a0d",
+      "annotatedPages": [
+        "Larry_Wilmore"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 764.2348000000002,
+      "entityMs": 0.023500000000012733,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Seth_MacFarlane_filmography",
+          "https://en.wikipedia.org/wiki/The_PJs",
+          "https://en.wikipedia.org/wiki/It%27s_a_Mad,_Mad,_Mad,_Mad_Marge",
+          "https://en.wikipedia.org/wiki/List_of_fictional_works_featuring_parallel_universes",
+          "https://en.wikipedia.org/wiki/Garry_Shandling",
+          "https://en.wikipedia.org/wiki/Ghosts_(American_TV_series)"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Seth_MacFarlane_filmography",
+          "https://en.wikipedia.org/wiki/The_PJs",
+          "https://en.wikipedia.org/wiki/It%27s_a_Mad,_Mad,_Mad,_Mad_Marge",
+          "https://en.wikipedia.org/wiki/List_of_fictional_works_featuring_parallel_universes",
+          "https://en.wikipedia.org/wiki/Garry_Shandling",
+          "https://en.wikipedia.org/wiki/Ghosts_(American_TV_series)"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/The_PJs",
+          "https://en.wikipedia.org/wiki/Seth_MacFarlane_filmography",
+          "https://en.wikipedia.org/wiki/Garry_Shandling",
+          "https://en.wikipedia.org/wiki/It%27s_a_Mad,_Mad,_Mad,_Mad_Marge",
+          "https://en.wikipedia.org/wiki/Ghosts_(American_TV_series)",
+          "https://en.wikipedia.org/wiki/List_of_fictional_works_featuring_parallel_universes"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "9713",
+      "role": "development",
+      "claimSha256": "d3fc790424373e000d5274c6588b8152f82b4d9512b59cc96a994fbaceb9bc3c",
+      "annotatedPages": [
+        "No_Love",
+        "Recovery_-LRB-Eminem_album-RRB-",
+        "Relapse_-LRB-Eminem_album-RRB-",
+        "The_Recovery_Tour"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 583.2898999999998,
+      "entityMs": 0.017199999999988336,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0.25,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 0.5,
+          "precision": 0.6666666666666666,
+          "mrr": 1,
+          "ndcg": 0.7653606369886217
+        },
+        "6": {
+          "k": 6,
+          "recall": 0.5,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 0.6366824387328317
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0.25,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 0.5,
+          "precision": 0.6666666666666666,
+          "mrr": 1,
+          "ndcg": 0.7653606369886217
+        },
+        "6": {
+          "k": 6,
+          "recall": 0.5,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 0.6366824387328317
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0.25,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 0.5,
+          "precision": 0.6666666666666666,
+          "mrr": 1,
+          "ndcg": 0.7653606369886217
+        },
+        "6": {
+          "k": 6,
+          "recall": 0.5,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 0.6366824387328317
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Recovery_(Eminem_album)",
+          "https://en.wikipedia.org/wiki/Relapse_(Eminem_album)",
+          "https://en.wikipedia.org/wiki/The_Marshall_Mathers_LP_2",
+          "https://en.wikipedia.org/wiki/Revival_(Eminem_album)",
+          "https://en.wikipedia.org/wiki/Eminem",
+          "https://en.wikipedia.org/wiki/Eminem_albums_discography"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Recovery_(Eminem_album)",
+          "https://en.wikipedia.org/wiki/Relapse_(Eminem_album)",
+          "https://en.wikipedia.org/wiki/The_Marshall_Mathers_LP_2",
+          "https://en.wikipedia.org/wiki/Revival_(Eminem_album)",
+          "https://en.wikipedia.org/wiki/Eminem",
+          "https://en.wikipedia.org/wiki/Eminem_albums_discography"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Recovery_(Eminem_album)",
+          "https://en.wikipedia.org/wiki/Relapse_(Eminem_album)",
+          "https://en.wikipedia.org/wiki/Revival_(Eminem_album)",
+          "https://en.wikipedia.org/wiki/The_Marshall_Mathers_LP_2",
+          "https://en.wikipedia.org/wiki/Eminem",
+          "https://en.wikipedia.org/wiki/Eminem_albums_discography"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "166383",
+      "role": "validation",
+      "claimSha256": "378da6554e335be9c0fd48245d9f3f0cce899d821c6db3f307a8c422102a71d2",
+      "annotatedPages": [
+        "American_Sniper_-LRB-book-RRB-"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 663.5760000000009,
+      "entityMs": 0.01680000000000348,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/We3",
+          "https://en.wikipedia.org/wiki/List_of_Bungo_Stray_Dogs_characters",
+          "https://en.wikipedia.org/wiki/British_big_cats",
+          "https://en.wikipedia.org/wiki/Dogs_in_warfare",
+          "https://en.wikipedia.org/wiki/United_States_presidential_pets",
+          "https://en.wikipedia.org/wiki/Rock-a-Doodle"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/We3",
+          "https://en.wikipedia.org/wiki/List_of_Bungo_Stray_Dogs_characters",
+          "https://en.wikipedia.org/wiki/British_big_cats",
+          "https://en.wikipedia.org/wiki/Dogs_in_warfare",
+          "https://en.wikipedia.org/wiki/United_States_presidential_pets",
+          "https://en.wikipedia.org/wiki/Rock-a-Doodle"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/British_big_cats",
+          "https://en.wikipedia.org/wiki/Dogs_in_warfare",
+          "https://en.wikipedia.org/wiki/United_States_presidential_pets",
+          "https://en.wikipedia.org/wiki/We3",
+          "https://en.wikipedia.org/wiki/Rock-a-Doodle",
+          "https://en.wikipedia.org/wiki/List_of_Bungo_Stray_Dogs_characters"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "112773",
+      "role": "validation",
+      "claimSha256": "ab81e4fe1385ff8c5f59d336296f00892dbe5cc6ad7ac58657e3d60e4cda07d0",
+      "annotatedPages": [
+        "A_View_to_a_Kill"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 645.6000000000004,
+      "entityMs": 0.07019999999999982,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/A_View_to_a_Kill_(video_game)",
+          "https://en.wikipedia.org/wiki/A_View_to_a_Kill_(soundtrack)",
+          "https://en.wikipedia.org/wiki/A_View_to_a_Kill",
+          "https://en.wikipedia.org/wiki/May_Day_(James_Bond)",
+          "https://en.wikipedia.org/wiki/Licence_to_Kill",
+          "https://en.wikipedia.org/wiki/Outline_of_James_Bond"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/A_View_to_a_Kill_(video_game)",
+          "https://en.wikipedia.org/wiki/A_View_to_a_Kill_(soundtrack)",
+          "https://en.wikipedia.org/wiki/A_View_to_a_Kill",
+          "https://en.wikipedia.org/wiki/May_Day_(James_Bond)",
+          "https://en.wikipedia.org/wiki/Licence_to_Kill",
+          "https://en.wikipedia.org/wiki/Outline_of_James_Bond"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/A_View_to_a_Kill",
+          "https://en.wikipedia.org/wiki/A_View_to_a_Kill_(soundtrack)",
+          "https://en.wikipedia.org/wiki/A_View_to_a_Kill_(video_game)",
+          "https://en.wikipedia.org/wiki/May_Day_(James_Bond)",
+          "https://en.wikipedia.org/wiki/Licence_to_Kill",
+          "https://en.wikipedia.org/wiki/Outline_of_James_Bond"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "195008",
+      "role": "validation",
+      "claimSha256": "2bf7f7d9348e3e4aea475dce2cc29ec2fc88a4a8af6ba4e67350cf341a57932a",
+      "annotatedPages": [
+        "Girl_-LRB-Pharrell_Williams_album-RRB-",
+        "Pharrell_Williams"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 1023.4364999999998,
+      "entityMs": 0.020899999999997476,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Kiely_Williams",
+          "https://en.wikipedia.org/wiki/American_Girl",
+          "https://en.wikipedia.org/wiki/The_Girl_of_Your_Dreams_(album)",
+          "https://en.wikipedia.org/wiki/Ashe_(singer)",
+          "https://en.wikipedia.org/wiki/The_Masked_Singer_(American_TV_series)_season_14",
+          "https://en.wikipedia.org/wiki/Bilal_(American_singer)"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Kiely_Williams",
+          "https://en.wikipedia.org/wiki/American_Girl",
+          "https://en.wikipedia.org/wiki/The_Girl_of_Your_Dreams_(album)",
+          "https://en.wikipedia.org/wiki/Ashe_(singer)",
+          "https://en.wikipedia.org/wiki/The_Masked_Singer_(American_TV_series)_season_14",
+          "https://en.wikipedia.org/wiki/Bilal_(American_singer)"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/The_Girl_of_Your_Dreams_(album)",
+          "https://en.wikipedia.org/wiki/Kiely_Williams",
+          "https://en.wikipedia.org/wiki/American_Girl",
+          "https://en.wikipedia.org/wiki/Ashe_(singer)",
+          "https://en.wikipedia.org/wiki/The_Masked_Singer_(American_TV_series)_season_14",
+          "https://en.wikipedia.org/wiki/Bilal_(American_singer)"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "88473",
+      "role": "validation",
+      "claimSha256": "d2044e8543e39ad5286e62563b0d7c6ebaf8aebf15ab3daa54d60fe0f8059c51",
+      "annotatedPages": [
+        "The_Cincinnati_Kid"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 819.9493000000002,
+      "entityMs": 0.09369999999999834,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/The_Cincinnati_Kid",
+          "https://en.wikipedia.org/wiki/List_of_Edward_G._Robinson_performances",
+          "https://en.wikipedia.org/wiki/Edward_G._Robinson",
+          "https://en.wikipedia.org/wiki/Jackie_Robinson",
+          "https://en.wikipedia.org/wiki/List_of_people_from_Cincinnati",
+          "https://en.wikipedia.org/wiki/Joan_Blondell"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/The_Cincinnati_Kid",
+          "https://en.wikipedia.org/wiki/List_of_Edward_G._Robinson_performances",
+          "https://en.wikipedia.org/wiki/Edward_G._Robinson",
+          "https://en.wikipedia.org/wiki/Jackie_Robinson",
+          "https://en.wikipedia.org/wiki/List_of_people_from_Cincinnati",
+          "https://en.wikipedia.org/wiki/Joan_Blondell"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/The_Cincinnati_Kid",
+          "https://en.wikipedia.org/wiki/Edward_G._Robinson",
+          "https://en.wikipedia.org/wiki/List_of_Edward_G._Robinson_performances",
+          "https://en.wikipedia.org/wiki/Jackie_Robinson",
+          "https://en.wikipedia.org/wiki/List_of_people_from_Cincinnati",
+          "https://en.wikipedia.org/wiki/Joan_Blondell"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "180710",
+      "role": "validation",
+      "claimSha256": "665d4d96c0c9c4b9cdece168fcddf4ef278e3e077505280be325b9d1051c3808",
+      "annotatedPages": [
+        "Cary_Elwes"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 613.6856000000007,
+      "entityMs": 0.013300000000000978,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Richard_III_(play)"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Richard_III_(play)"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Richard_III_(play)"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "124022",
+      "role": "validation",
+      "claimSha256": "50839dccc86ef1add5acd879c8e126776127bde50ca393427d1f8246d05e092c",
+      "annotatedPages": [
+        "Yara_Shahidi"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 407.27180000000044,
+      "entityMs": 0.013099999999994338,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Jason_Bolden",
+          "https://en.wikipedia.org/wiki/Smallfoot",
+          "https://en.wikipedia.org/wiki/2019_Teen_Choice_Awards",
+          "https://en.wikipedia.org/wiki/Grown-ish",
+          "https://en.wikipedia.org/wiki/Anousheh_Ansari",
+          "https://en.wikipedia.org/wiki/Black-ish"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Jason_Bolden",
+          "https://en.wikipedia.org/wiki/Smallfoot",
+          "https://en.wikipedia.org/wiki/2019_Teen_Choice_Awards",
+          "https://en.wikipedia.org/wiki/Grown-ish",
+          "https://en.wikipedia.org/wiki/Anousheh_Ansari",
+          "https://en.wikipedia.org/wiki/Black-ish"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Grown-ish",
+          "https://en.wikipedia.org/wiki/Black-ish",
+          "https://en.wikipedia.org/wiki/Smallfoot",
+          "https://en.wikipedia.org/wiki/Anousheh_Ansari",
+          "https://en.wikipedia.org/wiki/Jason_Bolden",
+          "https://en.wikipedia.org/wiki/2019_Teen_Choice_Awards"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "12762",
+      "role": "validation",
+      "claimSha256": "65de37b3ed077fc12cb3882a8dce4e5e14d1f27f3f29ffb7f0e931827eff8422",
+      "annotatedPages": [
+        "Stan_Beeman"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 540.8917000000001,
+      "entityMs": 0.019700000000000273,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Jimmy_Olsen",
+          "https://en.wikipedia.org/wiki/Enid,_Oklahoma",
+          "https://en.wikipedia.org/wiki/The_Flash_season_8",
+          "https://en.wikipedia.org/wiki/List_of_Dexter_characters",
+          "https://en.wikipedia.org/wiki/Falls_Church,_Virginia",
+          "https://en.wikipedia.org/wiki/Timeline_of_women%27s_legal_rights_(other_than_voting)_in_the_20th_century"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Jimmy_Olsen",
+          "https://en.wikipedia.org/wiki/Enid,_Oklahoma",
+          "https://en.wikipedia.org/wiki/The_Flash_season_8",
+          "https://en.wikipedia.org/wiki/List_of_Dexter_characters",
+          "https://en.wikipedia.org/wiki/Falls_Church,_Virginia",
+          "https://en.wikipedia.org/wiki/Timeline_of_women%27s_legal_rights_(other_than_voting)_in_the_20th_century"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Jimmy_Olsen",
+          "https://en.wikipedia.org/wiki/List_of_Dexter_characters",
+          "https://en.wikipedia.org/wiki/The_Flash_season_8",
+          "https://en.wikipedia.org/wiki/Enid,_Oklahoma",
+          "https://en.wikipedia.org/wiki/Timeline_of_women%27s_legal_rights_(other_than_voting)_in_the_20th_century",
+          "https://en.wikipedia.org/wiki/Falls_Church,_Virginia"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "151253",
+      "role": "validation",
+      "claimSha256": "0d3a3faef2f0fb3047b8ef3958f20e5405420cbfd01f59a4f29b08b6020d9faa",
+      "annotatedPages": [
+        "Viola_Davis"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 693.1852000000017,
+      "entityMs": 0.015100000000003888,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Carol_Kane",
+          "https://en.wikipedia.org/wiki/Colman_Domingo",
+          "https://en.wikipedia.org/wiki/Allison_Janney",
+          "https://en.wikipedia.org/wiki/Amanda_Seyfried",
+          "https://en.wikipedia.org/wiki/Eyes_Wide_Shut",
+          "https://en.wikipedia.org/wiki/Gene_Hackman"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Carol_Kane",
+          "https://en.wikipedia.org/wiki/Colman_Domingo",
+          "https://en.wikipedia.org/wiki/Allison_Janney",
+          "https://en.wikipedia.org/wiki/Amanda_Seyfried",
+          "https://en.wikipedia.org/wiki/Eyes_Wide_Shut",
+          "https://en.wikipedia.org/wiki/Gene_Hackman"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Carol_Kane",
+          "https://en.wikipedia.org/wiki/Allison_Janney",
+          "https://en.wikipedia.org/wiki/Colman_Domingo",
+          "https://en.wikipedia.org/wiki/Amanda_Seyfried",
+          "https://en.wikipedia.org/wiki/Gene_Hackman",
+          "https://en.wikipedia.org/wiki/Eyes_Wide_Shut"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "34105",
+      "role": "validation",
+      "claimSha256": "e88c507381257f4985b04779950e2de733c5d16a5e6e7a2c063ba8f007e95927",
+      "annotatedPages": [
+        "Phoenix,_Arizona"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 616.6830000000009,
+      "entityMs": 0.03640000000000043,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Phoenix,_Arizona",
+          "https://en.wikipedia.org/wiki/Mesa,_Arizona",
+          "https://en.wikipedia.org/wiki/Gilbert,_Arizona",
+          "https://en.wikipedia.org/wiki/Maricopa_County,_Arizona",
+          "https://en.wikipedia.org/wiki/Chandler,_Arizona",
+          "https://en.wikipedia.org/wiki/Arizona"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Phoenix,_Arizona",
+          "https://en.wikipedia.org/wiki/Mesa,_Arizona",
+          "https://en.wikipedia.org/wiki/Gilbert,_Arizona",
+          "https://en.wikipedia.org/wiki/Maricopa_County,_Arizona",
+          "https://en.wikipedia.org/wiki/Chandler,_Arizona",
+          "https://en.wikipedia.org/wiki/Arizona"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Phoenix,_Arizona",
+          "https://en.wikipedia.org/wiki/Arizona",
+          "https://en.wikipedia.org/wiki/Maricopa_County,_Arizona",
+          "https://en.wikipedia.org/wiki/Mesa,_Arizona",
+          "https://en.wikipedia.org/wiki/Gilbert,_Arizona",
+          "https://en.wikipedia.org/wiki/Chandler,_Arizona"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "205125",
+      "role": "validation",
+      "claimSha256": "24d6fc60c76b122d1c3ea6275449af643b8ee689c3df55bf53f529ee1f98598f",
+      "annotatedPages": [
+        "Gaius_Julius_Caesar_-LRB-proconsul-RRB-"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 610.2749999999978,
+      "entityMs": 0.03249999999999886,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Lucius_Caesar",
+          "https://en.wikipedia.org/wiki/Gaius_Caesar",
+          "https://en.wikipedia.org/wiki/Julia_gens",
+          "https://en.wikipedia.org/wiki/Julius_Caesar",
+          "https://en.wikipedia.org/wiki/Augustus",
+          "https://en.wikipedia.org/wiki/Aurelia_(mother_of_Caesar)"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Lucius_Caesar",
+          "https://en.wikipedia.org/wiki/Gaius_Caesar",
+          "https://en.wikipedia.org/wiki/Julia_gens",
+          "https://en.wikipedia.org/wiki/Julius_Caesar",
+          "https://en.wikipedia.org/wiki/Augustus",
+          "https://en.wikipedia.org/wiki/Aurelia_(mother_of_Caesar)"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Lucius_Caesar",
+          "https://en.wikipedia.org/wiki/Julius_Caesar",
+          "https://en.wikipedia.org/wiki/Gaius_Caesar",
+          "https://en.wikipedia.org/wiki/Augustus",
+          "https://en.wikipedia.org/wiki/Aurelia_(mother_of_Caesar)",
+          "https://en.wikipedia.org/wiki/Julia_gens"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "87918",
+      "role": "validation",
+      "claimSha256": "bb6071748c0ba189d32148c87f24ef48112be9c4c49e0b69e3926e65d8db146c",
+      "annotatedPages": [
+        "Donald_Duck"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 580.9558000000034,
+      "entityMs": 0.004699999999999704,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": false,
+      "orders": {
+        "baseline": [],
+        "entity": [],
+        "reranker": []
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "194365",
+      "role": "validation",
+      "claimSha256": "40560433d92fe3281626a665313f6d3551f1efd3cd64a5a9c37eda665f290afa",
+      "annotatedPages": [
+        "Happiness_in_Slavery",
+        "Nine_Inch_Nails"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 696.9241000000002,
+      "entityMs": 0.0169000000000068,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Broken_(1993_film)",
+          "https://en.wikipedia.org/wiki/Broken_(Nine_Inch_Nails_EP)",
+          "https://en.wikipedia.org/wiki/Mastodon_(band)",
+          "https://en.wikipedia.org/wiki/Metallica",
+          "https://en.wikipedia.org/wiki/Iron_Maiden",
+          "https://en.wikipedia.org/wiki/Gojira_(band)"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Broken_(1993_film)",
+          "https://en.wikipedia.org/wiki/Broken_(Nine_Inch_Nails_EP)",
+          "https://en.wikipedia.org/wiki/Mastodon_(band)",
+          "https://en.wikipedia.org/wiki/Metallica",
+          "https://en.wikipedia.org/wiki/Iron_Maiden",
+          "https://en.wikipedia.org/wiki/Gojira_(band)"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Broken_(Nine_Inch_Nails_EP)",
+          "https://en.wikipedia.org/wiki/Broken_(1993_film)",
+          "https://en.wikipedia.org/wiki/Metallica",
+          "https://en.wikipedia.org/wiki/Mastodon_(band)",
+          "https://en.wikipedia.org/wiki/Gojira_(band)",
+          "https://en.wikipedia.org/wiki/Iron_Maiden"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "95621",
+      "role": "validation",
+      "claimSha256": "0d4c30b5393b6a92cec7e68391b62f5390670bb6dbaaaa0cb6ea4c692979b147",
+      "annotatedPages": [
+        "T2_Trainspotting"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 563.734199999999,
+      "entityMs": 0.01650000000000773,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Danny_Boyle",
+          "https://en.wikipedia.org/wiki/Jonny_Lee_Miller",
+          "https://en.wikipedia.org/wiki/Prometheus_(2012_film)",
+          "https://en.wikipedia.org/wiki/Lust_for_Life_(Iggy_Pop_song)",
+          "https://en.wikipedia.org/wiki/Irvine_Welsh",
+          "https://en.wikipedia.org/wiki/Hibernian_F.C."
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Danny_Boyle",
+          "https://en.wikipedia.org/wiki/Jonny_Lee_Miller",
+          "https://en.wikipedia.org/wiki/Prometheus_(2012_film)",
+          "https://en.wikipedia.org/wiki/Lust_for_Life_(Iggy_Pop_song)",
+          "https://en.wikipedia.org/wiki/Irvine_Welsh",
+          "https://en.wikipedia.org/wiki/Hibernian_F.C."
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Jonny_Lee_Miller",
+          "https://en.wikipedia.org/wiki/Danny_Boyle",
+          "https://en.wikipedia.org/wiki/Irvine_Welsh",
+          "https://en.wikipedia.org/wiki/Lust_for_Life_(Iggy_Pop_song)",
+          "https://en.wikipedia.org/wiki/Prometheus_(2012_film)",
+          "https://en.wikipedia.org/wiki/Hibernian_F.C."
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "220466",
+      "role": "validation",
+      "claimSha256": "1a97faf18bf93bf96f0ee0dbbe0b44352ba5f9143b93362fbe11b1988cb842f6",
+      "annotatedPages": [
+        "The_Church_of_Jesus_Christ_of_Latter-day_Saints"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 703.0780999999988,
+      "entityMs": 0.019200000000012096,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/History_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints",
+          "https://en.wikipedia.org/wiki/LDS_Church_and_masturbation",
+          "https://en.wikipedia.org/wiki/Mormon_missionary",
+          "https://en.wikipedia.org/wiki/Finances_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints",
+          "https://en.wikipedia.org/wiki/Utah-Idaho_Sugar_Company",
+          "https://en.wikipedia.org/wiki/Li%C3%A8ge_Cathedral"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/History_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints",
+          "https://en.wikipedia.org/wiki/LDS_Church_and_masturbation",
+          "https://en.wikipedia.org/wiki/Mormon_missionary",
+          "https://en.wikipedia.org/wiki/Finances_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints",
+          "https://en.wikipedia.org/wiki/Utah-Idaho_Sugar_Company",
+          "https://en.wikipedia.org/wiki/Li%C3%A8ge_Cathedral"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Finances_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints",
+          "https://en.wikipedia.org/wiki/History_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints",
+          "https://en.wikipedia.org/wiki/LDS_Church_and_masturbation",
+          "https://en.wikipedia.org/wiki/Mormon_missionary",
+          "https://en.wikipedia.org/wiki/Utah-Idaho_Sugar_Company",
+          "https://en.wikipedia.org/wiki/Li%C3%A8ge_Cathedral"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "154190",
+      "role": "validation",
+      "claimSha256": "111d83e5cb3a7c56ff5d2fe1a874c0f85464bdb5d8a6c005ffe52ecc4b083b11",
+      "annotatedPages": [
+        "Grease_-LRB-film-RRB-"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 517.4729000000007,
+      "entityMs": 0.012000000000000455,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Rendering_(animal_products)",
+          "https://en.wikipedia.org/wiki/Grease_trucks",
+          "https://en.wikipedia.org/wiki/Grease_(film)",
+          "https://en.wikipedia.org/wiki/Grease_2",
+          "https://en.wikipedia.org/wiki/Lard_of_the_Dance"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Rendering_(animal_products)",
+          "https://en.wikipedia.org/wiki/Grease_trucks",
+          "https://en.wikipedia.org/wiki/Grease_(film)",
+          "https://en.wikipedia.org/wiki/Grease_2",
+          "https://en.wikipedia.org/wiki/Lard_of_the_Dance"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Grease_(film)",
+          "https://en.wikipedia.org/wiki/Grease_2",
+          "https://en.wikipedia.org/wiki/Grease_trucks",
+          "https://en.wikipedia.org/wiki/Lard_of_the_Dance",
+          "https://en.wikipedia.org/wiki/Rendering_(animal_products)"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "9868",
+      "role": "held_out",
+      "claimSha256": "186297508d6a94d3e3a6d7c24f7a935b3d2cbdd51b038baef9af2c0068b12914",
+      "annotatedPages": [
+        "Google_Search"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 827.6746999999996,
+      "entityMs": 0.2804000000000002,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Google_Search_Console",
+          "https://en.wikipedia.org/wiki/List_of_Year_in_Search_top_searches",
+          "https://en.wikipedia.org/wiki/Google_Search",
+          "https://en.wikipedia.org/wiki/List_of_Google_Easter_eggs",
+          "https://en.wikipedia.org/wiki/Search_engine",
+          "https://en.wikipedia.org/wiki/Google"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Google_Search_Console",
+          "https://en.wikipedia.org/wiki/List_of_Year_in_Search_top_searches",
+          "https://en.wikipedia.org/wiki/Google_Search",
+          "https://en.wikipedia.org/wiki/List_of_Google_Easter_eggs",
+          "https://en.wikipedia.org/wiki/Search_engine",
+          "https://en.wikipedia.org/wiki/Google"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Google_Search",
+          "https://en.wikipedia.org/wiki/Google_Search_Console",
+          "https://en.wikipedia.org/wiki/Google",
+          "https://en.wikipedia.org/wiki/List_of_Year_in_Search_top_searches",
+          "https://en.wikipedia.org/wiki/Search_engine",
+          "https://en.wikipedia.org/wiki/List_of_Google_Easter_eggs"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "10100",
+      "role": "held_out",
+      "claimSha256": "9c622811c452edc83da8979c8dfe088b7ad77cc52c5a696240a89a26830ca4f1",
+      "annotatedPages": [
+        "The_Bahamas"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 612.2003000000004,
+      "entityMs": 0.04449999999999932,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.2,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.2,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.2,
+          "ndcg": 0.38685280723454163
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.2,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.2,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.2,
+          "ndcg": 0.38685280723454163
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.5,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Pig_Beach",
+          "https://en.wikipedia.org/wiki/Governor-General_of_the_Bahamas",
+          "https://en.wikipedia.org/wiki/Bahamas_(musician)",
+          "https://en.wikipedia.org/wiki/Bahamas_Bowl",
+          "https://en.wikipedia.org/wiki/The_Bahamas",
+          "https://en.wikipedia.org/wiki/Monarchy_of_the_Bahamas"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Pig_Beach",
+          "https://en.wikipedia.org/wiki/Governor-General_of_the_Bahamas",
+          "https://en.wikipedia.org/wiki/Bahamas_(musician)",
+          "https://en.wikipedia.org/wiki/Bahamas_Bowl",
+          "https://en.wikipedia.org/wiki/The_Bahamas",
+          "https://en.wikipedia.org/wiki/Monarchy_of_the_Bahamas"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Bahamas_(musician)",
+          "https://en.wikipedia.org/wiki/The_Bahamas",
+          "https://en.wikipedia.org/wiki/Pig_Beach",
+          "https://en.wikipedia.org/wiki/Monarchy_of_the_Bahamas",
+          "https://en.wikipedia.org/wiki/Governor-General_of_the_Bahamas",
+          "https://en.wikipedia.org/wiki/Bahamas_Bowl"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "98966",
+      "role": "held_out",
+      "claimSha256": "d7aff4e0c3adf8832e16c20e7c5d4339e767aa6fc4a45beff1f353a5b664d848",
+      "annotatedPages": [
+        "Justine_Bateman"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 511.20390000000043,
+      "entityMs": 0.01859999999999218,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Leif_Garrett",
+          "https://en.wikipedia.org/wiki/List_of_Arrested_Development_characters",
+          "https://en.wikipedia.org/wiki/Timeline_of_LGBTQ_history_in_the_United_Kingdom",
+          "https://en.wikipedia.org/wiki/List_of_comedy_television_series_with_LGBTQ_characters",
+          "https://en.wikipedia.org/wiki/List_of_American_films_of_2013"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Leif_Garrett",
+          "https://en.wikipedia.org/wiki/List_of_Arrested_Development_characters",
+          "https://en.wikipedia.org/wiki/Timeline_of_LGBTQ_history_in_the_United_Kingdom",
+          "https://en.wikipedia.org/wiki/List_of_comedy_television_series_with_LGBTQ_characters",
+          "https://en.wikipedia.org/wiki/List_of_American_films_of_2013"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Leif_Garrett",
+          "https://en.wikipedia.org/wiki/List_of_Arrested_Development_characters",
+          "https://en.wikipedia.org/wiki/Timeline_of_LGBTQ_history_in_the_United_Kingdom",
+          "https://en.wikipedia.org/wiki/List_of_comedy_television_series_with_LGBTQ_characters",
+          "https://en.wikipedia.org/wiki/List_of_American_films_of_2013"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "21085",
+      "role": "held_out",
+      "claimSha256": "72efe23193efa67c51d63decb1506f224fa4aaee983622f9f568a07033b74ecb",
+      "annotatedPages": [
+        "Amyotrophic_lateral_sclerosis"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 521.2548999999999,
+      "entityMs": 0.01640000000000441,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Motor_neuron_diseases",
+          "https://en.wikipedia.org/wiki/ALS",
+          "https://en.wikipedia.org/wiki/Restless_legs_syndrome",
+          "https://en.wikipedia.org/wiki/Ketogenic_diet",
+          "https://en.wikipedia.org/wiki/Mobile_genetic_elements",
+          "https://en.wikipedia.org/wiki/Chronic_traumatic_encephalopathy"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Motor_neuron_diseases",
+          "https://en.wikipedia.org/wiki/ALS",
+          "https://en.wikipedia.org/wiki/Restless_legs_syndrome",
+          "https://en.wikipedia.org/wiki/Ketogenic_diet",
+          "https://en.wikipedia.org/wiki/Mobile_genetic_elements",
+          "https://en.wikipedia.org/wiki/Chronic_traumatic_encephalopathy"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/ALS",
+          "https://en.wikipedia.org/wiki/Motor_neuron_diseases",
+          "https://en.wikipedia.org/wiki/Chronic_traumatic_encephalopathy",
+          "https://en.wikipedia.org/wiki/Restless_legs_syndrome",
+          "https://en.wikipedia.org/wiki/Ketogenic_diet",
+          "https://en.wikipedia.org/wiki/Mobile_genetic_elements"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "205738",
+      "role": "held_out",
+      "claimSha256": "c47e1344b322e89b21f3f23043a28f7e683bd8ee2e3db83b3f178114506fb975",
+      "annotatedPages": [
+        "First_Motion_Picture_Unit"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 610.6273000000001,
+      "entityMs": 0.087600000000009,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/First_Motion_Picture_Unit",
+          "https://en.wikipedia.org/wiki/The_Fantastic_Four:_First_Steps",
+          "https://en.wikipedia.org/wiki/Zero_Dark_Thirty",
+          "https://en.wikipedia.org/wiki/Godzilla_Minus_Zero",
+          "https://en.wikipedia.org/wiki/Dune:_Part_Two",
+          "https://en.wikipedia.org/wiki/2026_in_film"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/First_Motion_Picture_Unit",
+          "https://en.wikipedia.org/wiki/The_Fantastic_Four:_First_Steps",
+          "https://en.wikipedia.org/wiki/Zero_Dark_Thirty",
+          "https://en.wikipedia.org/wiki/Godzilla_Minus_Zero",
+          "https://en.wikipedia.org/wiki/Dune:_Part_Two",
+          "https://en.wikipedia.org/wiki/2026_in_film"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/First_Motion_Picture_Unit",
+          "https://en.wikipedia.org/wiki/Zero_Dark_Thirty",
+          "https://en.wikipedia.org/wiki/Godzilla_Minus_Zero",
+          "https://en.wikipedia.org/wiki/The_Fantastic_Four:_First_Steps",
+          "https://en.wikipedia.org/wiki/Dune:_Part_Two",
+          "https://en.wikipedia.org/wiki/2026_in_film"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "99852",
+      "role": "held_out",
+      "claimSha256": "10fdcd854ff8b9ff331ea6f753e9e2efdc93b6f9fa5108ab0f023de50dcbe8eb",
+      "annotatedPages": [
+        "A_Good_Day_to_Die_Hard"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 632.5387999999984,
+      "entityMs": 0.0870999999999924,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/A_Good_Day_to_Die_Hard",
+          "https://en.wikipedia.org/wiki/Die_Hard_2",
+          "https://en.wikipedia.org/wiki/Die_Hard_with_a_Vengeance",
+          "https://en.wikipedia.org/wiki/Die_Hard_(franchise)",
+          "https://en.wikipedia.org/wiki/Live_Free_or_Die_Hard",
+          "https://en.wikipedia.org/wiki/Bruce_Willis_filmography"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/A_Good_Day_to_Die_Hard",
+          "https://en.wikipedia.org/wiki/Die_Hard_2",
+          "https://en.wikipedia.org/wiki/Die_Hard_with_a_Vengeance",
+          "https://en.wikipedia.org/wiki/Die_Hard_(franchise)",
+          "https://en.wikipedia.org/wiki/Live_Free_or_Die_Hard",
+          "https://en.wikipedia.org/wiki/Bruce_Willis_filmography"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/A_Good_Day_to_Die_Hard",
+          "https://en.wikipedia.org/wiki/Die_Hard_with_a_Vengeance",
+          "https://en.wikipedia.org/wiki/Die_Hard_2",
+          "https://en.wikipedia.org/wiki/Die_Hard_(franchise)",
+          "https://en.wikipedia.org/wiki/Bruce_Willis_filmography",
+          "https://en.wikipedia.org/wiki/Live_Free_or_Die_Hard"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "206174",
+      "role": "held_out",
+      "claimSha256": "054624b5be7eedc559405d2e4863804f289c44bcae7f241e77af66c60d05d5ee",
+      "annotatedPages": [
+        "Palo_Alto,_California"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 1411.6448000000019,
+      "entityMs": 0.061599999999998545,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.3333333333333333,
+          "ndcg": 0.5
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Mega_Mart",
+          "https://en.wikipedia.org/wiki/Silicon_Valley",
+          "https://en.wikipedia.org/wiki/Palo_Alto,_California",
+          "https://en.wikipedia.org/wiki/East_Palo_Alto,_California",
+          "https://en.wikipedia.org/wiki/Sofia_University_(California)",
+          "https://en.wikipedia.org/wiki/Mayfield,_California"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Mega_Mart",
+          "https://en.wikipedia.org/wiki/Silicon_Valley",
+          "https://en.wikipedia.org/wiki/Palo_Alto,_California",
+          "https://en.wikipedia.org/wiki/East_Palo_Alto,_California",
+          "https://en.wikipedia.org/wiki/Sofia_University_(California)",
+          "https://en.wikipedia.org/wiki/Mayfield,_California"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Palo_Alto,_California",
+          "https://en.wikipedia.org/wiki/East_Palo_Alto,_California",
+          "https://en.wikipedia.org/wiki/Silicon_Valley",
+          "https://en.wikipedia.org/wiki/Mega_Mart",
+          "https://en.wikipedia.org/wiki/Sofia_University_(California)",
+          "https://en.wikipedia.org/wiki/Mayfield,_California"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "35123",
+      "role": "held_out",
+      "claimSha256": "94a30b1e67f805f50f583c8c94a56df35ff82c236a7f7236c6d99811285518f7",
+      "annotatedPages": [
+        "House_-LRB-TV_series-RRB-"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 821.0118000000002,
+      "entityMs": 0.020699999999990837,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/House_(TV_series)",
+          "https://en.wikipedia.org/wiki/Fox_House",
+          "https://en.wikipedia.org/wiki/Fox_Corporation",
+          "https://en.wikipedia.org/wiki/Fox_Broadcasting_Company",
+          "https://en.wikipedia.org/wiki/Fox",
+          "https://en.wikipedia.org/wiki/Megan_Fox"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/House_(TV_series)",
+          "https://en.wikipedia.org/wiki/Fox_House",
+          "https://en.wikipedia.org/wiki/Fox_Corporation",
+          "https://en.wikipedia.org/wiki/Fox_Broadcasting_Company",
+          "https://en.wikipedia.org/wiki/Fox",
+          "https://en.wikipedia.org/wiki/Megan_Fox"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/House_(TV_series)",
+          "https://en.wikipedia.org/wiki/Fox_House",
+          "https://en.wikipedia.org/wiki/Fox_Broadcasting_Company",
+          "https://en.wikipedia.org/wiki/Fox_Corporation",
+          "https://en.wikipedia.org/wiki/Fox",
+          "https://en.wikipedia.org/wiki/Megan_Fox"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "216197",
+      "role": "held_out",
+      "claimSha256": "f511fe02739a54843475046415c8ee09d5ef934f62023c45d83185a4dfb64e0a",
+      "annotatedPages": [
+        "Tenacious_D_-LRB-album-RRB-"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 377.97359999999753,
+      "entityMs": 0.10660000000001446,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Tenacious_D_(album)",
+          "https://en.wikipedia.org/wiki/Tenacious_D_discography",
+          "https://en.wikipedia.org/wiki/Tenacious_D",
+          "https://en.wikipedia.org/wiki/Tenacious_D_in_The_Pick_of_Destiny",
+          "https://en.wikipedia.org/wiki/List_of_songs_recorded_by_Tenacious_D",
+          "https://en.wikipedia.org/wiki/Tenacious_D_(TV_series)"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Tenacious_D_(album)",
+          "https://en.wikipedia.org/wiki/Tenacious_D_discography",
+          "https://en.wikipedia.org/wiki/Tenacious_D",
+          "https://en.wikipedia.org/wiki/Tenacious_D_in_The_Pick_of_Destiny",
+          "https://en.wikipedia.org/wiki/List_of_songs_recorded_by_Tenacious_D",
+          "https://en.wikipedia.org/wiki/Tenacious_D_(TV_series)"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Tenacious_D_(album)",
+          "https://en.wikipedia.org/wiki/Tenacious_D_in_The_Pick_of_Destiny",
+          "https://en.wikipedia.org/wiki/Tenacious_D",
+          "https://en.wikipedia.org/wiki/List_of_songs_recorded_by_Tenacious_D",
+          "https://en.wikipedia.org/wiki/Tenacious_D_(TV_series)",
+          "https://en.wikipedia.org/wiki/Tenacious_D_discography"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "193902",
+      "role": "held_out",
+      "claimSha256": "a029b4c6460a88fab11d8e61238b9f9805ec595b1eb02ffad193cb8fa68f1049",
+      "annotatedPages": [
+        "Bea_Arthur"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 577.2152999999998,
+      "entityMs": 0.02400000000000091,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/List_of_Green_Acres_episodes",
+          "https://en.wikipedia.org/wiki/List_of_EastEnders_characters_introduced_in_2017",
+          "https://en.wikipedia.org/wiki/List_of_EastEnders_characters_introduced_in_1995",
+          "https://en.wikipedia.org/wiki/List_of_Petticoat_Junction_episodes"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/List_of_Green_Acres_episodes",
+          "https://en.wikipedia.org/wiki/List_of_EastEnders_characters_introduced_in_2017",
+          "https://en.wikipedia.org/wiki/List_of_EastEnders_characters_introduced_in_1995",
+          "https://en.wikipedia.org/wiki/List_of_Petticoat_Junction_episodes"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/List_of_Green_Acres_episodes",
+          "https://en.wikipedia.org/wiki/List_of_EastEnders_characters_introduced_in_2017",
+          "https://en.wikipedia.org/wiki/List_of_Petticoat_Junction_episodes",
+          "https://en.wikipedia.org/wiki/List_of_EastEnders_characters_introduced_in_1995"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "118081",
+      "role": "held_out",
+      "claimSha256": "c0f38dec2cb1cb007e1a8be690d93b926ebdce4d760e70358eea8c96f9c83d98",
+      "annotatedPages": [
+        "Battle_of_the_Bastards"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 611.4484000000011,
+      "entityMs": 0.05150000000000432,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Game_of_Thrones_season_6",
+          "https://en.wikipedia.org/wiki/Bangladesh_Liberation_War",
+          "https://en.wikipedia.org/wiki/Japanese_war_crimes",
+          "https://en.wikipedia.org/wiki/Beyond_the_Wall_(Game_of_Thrones)",
+          "https://en.wikipedia.org/wiki/The_Winds_of_Winter_(Game_of_Thrones)",
+          "https://en.wikipedia.org/wiki/Soviet_partisans"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Game_of_Thrones_season_6",
+          "https://en.wikipedia.org/wiki/Bangladesh_Liberation_War",
+          "https://en.wikipedia.org/wiki/Japanese_war_crimes",
+          "https://en.wikipedia.org/wiki/Beyond_the_Wall_(Game_of_Thrones)",
+          "https://en.wikipedia.org/wiki/The_Winds_of_Winter_(Game_of_Thrones)",
+          "https://en.wikipedia.org/wiki/Soviet_partisans"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Game_of_Thrones_season_6",
+          "https://en.wikipedia.org/wiki/Beyond_the_Wall_(Game_of_Thrones)",
+          "https://en.wikipedia.org/wiki/Japanese_war_crimes",
+          "https://en.wikipedia.org/wiki/Bangladesh_Liberation_War",
+          "https://en.wikipedia.org/wiki/The_Winds_of_Winter_(Game_of_Thrones)",
+          "https://en.wikipedia.org/wiki/Soviet_partisans"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "5705",
+      "role": "held_out",
+      "claimSha256": "6b1740ab76ed4ac2a0e8f2365cce45f65c8b45ed72766f9ade41a8684aba2c31",
+      "annotatedPages": [
+        "Emma_Watson"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 689.7073999999993,
+      "entityMs": 0.039600000000007185,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Harris_Reed",
+          "https://en.wikipedia.org/wiki/Jonathan_Palmer",
+          "https://en.wikipedia.org/wiki/Akshata_Murty",
+          "https://en.wikipedia.org/wiki/Ewan_McGregor",
+          "https://en.wikipedia.org/wiki/Belle_(Disney_character)",
+          "https://en.wikipedia.org/wiki/List_of_female_racing_drivers"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Harris_Reed",
+          "https://en.wikipedia.org/wiki/Jonathan_Palmer",
+          "https://en.wikipedia.org/wiki/Akshata_Murty",
+          "https://en.wikipedia.org/wiki/Ewan_McGregor",
+          "https://en.wikipedia.org/wiki/Belle_(Disney_character)",
+          "https://en.wikipedia.org/wiki/List_of_female_racing_drivers"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Jonathan_Palmer",
+          "https://en.wikipedia.org/wiki/Harris_Reed",
+          "https://en.wikipedia.org/wiki/Akshata_Murty",
+          "https://en.wikipedia.org/wiki/Ewan_McGregor",
+          "https://en.wikipedia.org/wiki/Belle_(Disney_character)",
+          "https://en.wikipedia.org/wiki/List_of_female_racing_drivers"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "174624",
+      "role": "held_out",
+      "claimSha256": "51be9a30bbb32fcd78c676b9758588efe84d2625a23cb11541fe5e851a9bafcc",
+      "annotatedPages": [
+        "The_X-Files_-LRB-film-RRB-",
+        "The_X-Files_-LRB-franchise-RRB-"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 713.3631999999998,
+      "entityMs": 0.021100000000018326,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Robert_Patrick",
+          "https://en.wikipedia.org/wiki/What_Lies_Beneath",
+          "https://en.wikipedia.org/wiki/Garret_Dillahunt",
+          "https://en.wikipedia.org/wiki/Wendie_Malick",
+          "https://en.wikipedia.org/wiki/James_Caan"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Robert_Patrick",
+          "https://en.wikipedia.org/wiki/What_Lies_Beneath",
+          "https://en.wikipedia.org/wiki/Garret_Dillahunt",
+          "https://en.wikipedia.org/wiki/Wendie_Malick",
+          "https://en.wikipedia.org/wiki/James_Caan"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/What_Lies_Beneath",
+          "https://en.wikipedia.org/wiki/Robert_Patrick",
+          "https://en.wikipedia.org/wiki/Garret_Dillahunt",
+          "https://en.wikipedia.org/wiki/James_Caan",
+          "https://en.wikipedia.org/wiki/Wendie_Malick"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "24247",
+      "role": "held_out",
+      "claimSha256": "cef18c42755b1158551be7942615a172740d2d0cc978ce1f749d70e861497602",
+      "annotatedPages": [
+        "Mohra"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 520.2250999999997,
+      "entityMs": 0.023200000000002774,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Paresh_Rawal",
+          "https://en.wikipedia.org/wiki/Akshay_Kumar",
+          "https://en.wikipedia.org/wiki/1942:_A_Love_Story",
+          "https://en.wikipedia.org/wiki/Raveena_Tandon_filmography",
+          "https://en.wikipedia.org/wiki/Divya_Bharti",
+          "https://en.wikipedia.org/wiki/Fargo_(1996_film)"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Paresh_Rawal",
+          "https://en.wikipedia.org/wiki/Akshay_Kumar",
+          "https://en.wikipedia.org/wiki/1942:_A_Love_Story",
+          "https://en.wikipedia.org/wiki/Raveena_Tandon_filmography",
+          "https://en.wikipedia.org/wiki/Divya_Bharti",
+          "https://en.wikipedia.org/wiki/Fargo_(1996_film)"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Raveena_Tandon_filmography",
+          "https://en.wikipedia.org/wiki/Akshay_Kumar",
+          "https://en.wikipedia.org/wiki/Paresh_Rawal",
+          "https://en.wikipedia.org/wiki/Divya_Bharti",
+          "https://en.wikipedia.org/wiki/1942:_A_Love_Story",
+          "https://en.wikipedia.org/wiki/Fargo_(1996_film)"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "155995",
+      "role": "held_out",
+      "claimSha256": "e2b2d0b60603ac25dae15e840158593fefdfec76262315ae2ed26b76f773ba68",
+      "annotatedPages": [
+        "Harold_Macmillan"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 498.0616999999984,
+      "entityMs": 0.10110000000000241,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.5,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0.5,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 0.5,
+          "ndcg": 0.6309297535714575
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Birch_Grove",
+          "https://en.wikipedia.org/wiki/Harold_Macmillan",
+          "https://en.wikipedia.org/wiki/Harold_Watkinson",
+          "https://en.wikipedia.org/wiki/Lady_Caroline_Faber",
+          "https://en.wikipedia.org/wiki/Anthony_Barber"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Birch_Grove",
+          "https://en.wikipedia.org/wiki/Harold_Macmillan",
+          "https://en.wikipedia.org/wiki/Harold_Watkinson",
+          "https://en.wikipedia.org/wiki/Lady_Caroline_Faber",
+          "https://en.wikipedia.org/wiki/Anthony_Barber"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Harold_Macmillan",
+          "https://en.wikipedia.org/wiki/Birch_Grove",
+          "https://en.wikipedia.org/wiki/Harold_Watkinson",
+          "https://en.wikipedia.org/wiki/Lady_Caroline_Faber",
+          "https://en.wikipedia.org/wiki/Anthony_Barber"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "179089",
+      "role": "held_out",
+      "claimSha256": "60ee726a10c708416e5468bbeda037b831042f482adb2d1af32ede5266c81f68",
+      "annotatedPages": [
+        "The_Good_German"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 744.1782999999996,
+      "entityMs": 0.02569999999997208,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/The_Good_German",
+          "https://en.wikipedia.org/wiki/George_Clooney",
+          "https://en.wikipedia.org/wiki/Jay_Kelly",
+          "https://en.wikipedia.org/wiki/George_Clooney_filmography",
+          "https://en.wikipedia.org/wiki/The_Monuments_Men",
+          "https://en.wikipedia.org/wiki/The_Boys_in_the_Boat_(film)"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/The_Good_German",
+          "https://en.wikipedia.org/wiki/George_Clooney",
+          "https://en.wikipedia.org/wiki/Jay_Kelly",
+          "https://en.wikipedia.org/wiki/George_Clooney_filmography",
+          "https://en.wikipedia.org/wiki/The_Monuments_Men",
+          "https://en.wikipedia.org/wiki/The_Boys_in_the_Boat_(film)"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/The_Good_German",
+          "https://en.wikipedia.org/wiki/George_Clooney",
+          "https://en.wikipedia.org/wiki/George_Clooney_filmography",
+          "https://en.wikipedia.org/wiki/Jay_Kelly",
+          "https://en.wikipedia.org/wiki/The_Monuments_Men",
+          "https://en.wikipedia.org/wiki/The_Boys_in_the_Boat_(film)"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "5598",
+      "role": "held_out",
+      "claimSha256": "48430450a88a15a3262388bf6d3d3ea224e741778c0e1d8634914f2bb845f7ce",
+      "annotatedPages": [
+        "San_Francisco_Bay_Area"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 486.89429999999993,
+      "entityMs": 0.15610000000000923,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/List_of_cities_and_towns_in_the_San_Francisco_Bay_Area",
+          "https://en.wikipedia.org/wiki/Blue_Bottle_Coffee",
+          "https://en.wikipedia.org/wiki/San_Francisco",
+          "https://en.wikipedia.org/wiki/Colma,_California",
+          "https://en.wikipedia.org/wiki/Midpeninsula_Regional_Open_Space_District",
+          "https://en.wikipedia.org/wiki/Half_Moon_Bay,_California"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/San_Francisco",
+          "https://en.wikipedia.org/wiki/List_of_cities_and_towns_in_the_San_Francisco_Bay_Area",
+          "https://en.wikipedia.org/wiki/Blue_Bottle_Coffee",
+          "https://en.wikipedia.org/wiki/Colma,_California",
+          "https://en.wikipedia.org/wiki/Midpeninsula_Regional_Open_Space_District",
+          "https://en.wikipedia.org/wiki/Half_Moon_Bay,_California"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/List_of_cities_and_towns_in_the_San_Francisco_Bay_Area",
+          "https://en.wikipedia.org/wiki/San_Francisco",
+          "https://en.wikipedia.org/wiki/Colma,_California",
+          "https://en.wikipedia.org/wiki/Half_Moon_Bay,_California",
+          "https://en.wikipedia.org/wiki/Midpeninsula_Regional_Open_Space_District",
+          "https://en.wikipedia.org/wiki/Blue_Bottle_Coffee"
+        ]
+      },
+      "entityMatches": [
+        "https://en.wikipedia.org/wiki/San_Francisco"
+      ]
+    },
+    {
+      "id": "219205",
+      "role": "held_out",
+      "claimSha256": "8a9cc3fa3f6fbdb373b28955e6787d53d01c1279d691a8ffed53180b801f65af",
+      "annotatedPages": [
+        "Species_distribution"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 819.8032999999996,
+      "entityMs": 0.03469999999998663,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Ernst_Mayr",
+          "https://en.wikipedia.org/wiki/Biogeography",
+          "https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event",
+          "https://en.wikipedia.org/wiki/Evolution",
+          "https://en.wikipedia.org/wiki/Extinction_event",
+          "https://en.wikipedia.org/wiki/Evidence_of_common_descent"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Ernst_Mayr",
+          "https://en.wikipedia.org/wiki/Biogeography",
+          "https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event",
+          "https://en.wikipedia.org/wiki/Evolution",
+          "https://en.wikipedia.org/wiki/Extinction_event",
+          "https://en.wikipedia.org/wiki/Evidence_of_common_descent"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Evolution",
+          "https://en.wikipedia.org/wiki/Biogeography",
+          "https://en.wikipedia.org/wiki/Ernst_Mayr",
+          "https://en.wikipedia.org/wiki/Extinction_event",
+          "https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event",
+          "https://en.wikipedia.org/wiki/Evidence_of_common_descent"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "74430",
+      "role": "held_out",
+      "claimSha256": "19c8c65132b1add71b2c1d4621f687856e7a7ea25c2f3d2f7d8c802adb43b4b1",
+      "annotatedPages": [
+        "The_Paper_-LRB-film-RRB-"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 714.017700000004,
+      "entityMs": 0.02760000000000673,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Pixels_(2015_film)",
+          "https://en.wikipedia.org/wiki/Roommates_(2026_film)",
+          "https://en.wikipedia.org/wiki/List_of_21st-century_films_considered_the_worst",
+          "https://en.wikipedia.org/wiki/Netflix",
+          "https://en.wikipedia.org/wiki/Saturday_Night_Live_season_19"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Pixels_(2015_film)",
+          "https://en.wikipedia.org/wiki/Roommates_(2026_film)",
+          "https://en.wikipedia.org/wiki/List_of_21st-century_films_considered_the_worst",
+          "https://en.wikipedia.org/wiki/Netflix",
+          "https://en.wikipedia.org/wiki/Saturday_Night_Live_season_19"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Pixels_(2015_film)",
+          "https://en.wikipedia.org/wiki/Roommates_(2026_film)",
+          "https://en.wikipedia.org/wiki/List_of_21st-century_films_considered_the_worst",
+          "https://en.wikipedia.org/wiki/Netflix",
+          "https://en.wikipedia.org/wiki/Saturday_Night_Live_season_19"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "35381",
+      "role": "held_out",
+      "claimSha256": "9a7fcb6bccdcb8abb9519e2f85a947e9d6c408792e187290581028675555c95b",
+      "annotatedPages": [
+        "Ann_Richards",
+        "Treasurer"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 764.2156000000032,
+      "entityMs": 0.025999999999982037,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Governor_of_Texas",
+          "https://en.wikipedia.org/wiki/Department_of_Government_Efficiency",
+          "https://en.wikipedia.org/wiki/Waco_siege",
+          "https://en.wikipedia.org/wiki/Texas_Education_Agency",
+          "https://en.wikipedia.org/wiki/2018_Texas_gubernatorial_election",
+          "https://en.wikipedia.org/wiki/Mark_White_(Texas_politician)"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Governor_of_Texas",
+          "https://en.wikipedia.org/wiki/Department_of_Government_Efficiency",
+          "https://en.wikipedia.org/wiki/Waco_siege",
+          "https://en.wikipedia.org/wiki/Texas_Education_Agency",
+          "https://en.wikipedia.org/wiki/2018_Texas_gubernatorial_election",
+          "https://en.wikipedia.org/wiki/Mark_White_(Texas_politician)"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Governor_of_Texas",
+          "https://en.wikipedia.org/wiki/Texas_Education_Agency",
+          "https://en.wikipedia.org/wiki/Mark_White_(Texas_politician)",
+          "https://en.wikipedia.org/wiki/2018_Texas_gubernatorial_election",
+          "https://en.wikipedia.org/wiki/Waco_siege",
+          "https://en.wikipedia.org/wiki/Department_of_Government_Efficiency"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "129241",
+      "role": "held_out",
+      "claimSha256": "da46c7a01033bc1a0177aaa69552ad7d15b63fa37f77685d2f136c6dbadb22c6",
+      "annotatedPages": [
+        "Super_Bowl_XLV"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 668.9141999999993,
+      "entityMs": 0.026899999999983493,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Super_Bowl_XXVI",
+          "https://en.wikipedia.org/wiki/Super_Bowl_50",
+          "https://en.wikipedia.org/wiki/Super_Bowl_XLII",
+          "https://en.wikipedia.org/wiki/List_of_national_anthem_performers_at_the_Super_Bowl",
+          "https://en.wikipedia.org/wiki/NFL_Kickoff_Game",
+          "https://en.wikipedia.org/wiki/Chicago_Bears"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Super_Bowl_XXVI",
+          "https://en.wikipedia.org/wiki/Super_Bowl_50",
+          "https://en.wikipedia.org/wiki/Super_Bowl_XLII",
+          "https://en.wikipedia.org/wiki/List_of_national_anthem_performers_at_the_Super_Bowl",
+          "https://en.wikipedia.org/wiki/NFL_Kickoff_Game",
+          "https://en.wikipedia.org/wiki/Chicago_Bears"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Super_Bowl_XLII",
+          "https://en.wikipedia.org/wiki/Super_Bowl_XXVI",
+          "https://en.wikipedia.org/wiki/Super_Bowl_50",
+          "https://en.wikipedia.org/wiki/List_of_national_anthem_performers_at_the_Super_Bowl",
+          "https://en.wikipedia.org/wiki/NFL_Kickoff_Game",
+          "https://en.wikipedia.org/wiki/Chicago_Bears"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "7287",
+      "role": "held_out",
+      "claimSha256": "4164c9aa500bbda92e8b0cef5532886672b964694a4baec60e4e4d1ff94753b9",
+      "annotatedPages": [
+        "The_Beverly_Hillbillies"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 1439.0685000000012,
+      "entityMs": 0.07789999999999964,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/The_Beverly_Hillbillies",
+          "https://en.wikipedia.org/wiki/Series_finale",
+          "https://en.wikipedia.org/wiki/List_of_Bewitched_episodes",
+          "https://en.wikipedia.org/wiki/Beverly_Hills,_90210",
+          "https://en.wikipedia.org/wiki/Lea_Thompson",
+          "https://en.wikipedia.org/wiki/List_of_Green_Acres_episodes"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/The_Beverly_Hillbillies",
+          "https://en.wikipedia.org/wiki/Series_finale",
+          "https://en.wikipedia.org/wiki/List_of_Bewitched_episodes",
+          "https://en.wikipedia.org/wiki/Beverly_Hills,_90210",
+          "https://en.wikipedia.org/wiki/Lea_Thompson",
+          "https://en.wikipedia.org/wiki/List_of_Green_Acres_episodes"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/The_Beverly_Hillbillies",
+          "https://en.wikipedia.org/wiki/Beverly_Hills,_90210",
+          "https://en.wikipedia.org/wiki/Lea_Thompson",
+          "https://en.wikipedia.org/wiki/List_of_Bewitched_episodes",
+          "https://en.wikipedia.org/wiki/List_of_Green_Acres_episodes",
+          "https://en.wikipedia.org/wiki/Series_finale"
+        ]
+      },
+      "entityMatches": [
+        "https://en.wikipedia.org/wiki/The_Beverly_Hillbillies"
+      ]
+    },
+    {
+      "id": "194455",
+      "role": "held_out",
+      "claimSha256": "5b4e031654d4aa9a5be013bbc1cc67f6001bd27b624307469fb9d6b41770aeab",
+      "annotatedPages": [
+        "Tilda_Swinton"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 433.92439999999624,
+      "entityMs": 0.05709999999999127,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Tilda_Swinton",
+          "https://en.wikipedia.org/wiki/The_Personal_History_of_David_Copperfield",
+          "https://en.wikipedia.org/wiki/Luca_Guadagnino",
+          "https://en.wikipedia.org/wiki/We_Need_to_Talk_About_Kevin_(film)",
+          "https://en.wikipedia.org/wiki/Only_Lovers_Left_Alive",
+          "https://en.wikipedia.org/wiki/John_Swinton_of_Kimmerghame"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Tilda_Swinton",
+          "https://en.wikipedia.org/wiki/The_Personal_History_of_David_Copperfield",
+          "https://en.wikipedia.org/wiki/Luca_Guadagnino",
+          "https://en.wikipedia.org/wiki/We_Need_to_Talk_About_Kevin_(film)",
+          "https://en.wikipedia.org/wiki/Only_Lovers_Left_Alive",
+          "https://en.wikipedia.org/wiki/John_Swinton_of_Kimmerghame"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Tilda_Swinton",
+          "https://en.wikipedia.org/wiki/John_Swinton_of_Kimmerghame",
+          "https://en.wikipedia.org/wiki/We_Need_to_Talk_About_Kevin_(film)",
+          "https://en.wikipedia.org/wiki/Luca_Guadagnino",
+          "https://en.wikipedia.org/wiki/Only_Lovers_Left_Alive",
+          "https://en.wikipedia.org/wiki/The_Personal_History_of_David_Copperfield"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "212195",
+      "role": "held_out",
+      "claimSha256": "e8f5762240ef89cb2995c341a3718d37ece6d8486ce1f9c6588f47f858a9b685",
+      "annotatedPages": [
+        "Miracle_at_St._Anna"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 793.2390999999989,
+      "entityMs": 0.024199999999979127,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/History_of_Germany",
+          "https://en.wikipedia.org/wiki/East_Germany",
+          "https://en.wikipedia.org/wiki/Padre_Pio",
+          "https://en.wikipedia.org/wiki/Legnica",
+          "https://en.wikipedia.org/wiki/Pope_Pius_X"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/History_of_Germany",
+          "https://en.wikipedia.org/wiki/East_Germany",
+          "https://en.wikipedia.org/wiki/Padre_Pio",
+          "https://en.wikipedia.org/wiki/Legnica",
+          "https://en.wikipedia.org/wiki/Pope_Pius_X"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/History_of_Germany",
+          "https://en.wikipedia.org/wiki/East_Germany",
+          "https://en.wikipedia.org/wiki/Padre_Pio",
+          "https://en.wikipedia.org/wiki/Pope_Pius_X",
+          "https://en.wikipedia.org/wiki/Legnica"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "202738",
+      "role": "held_out",
+      "claimSha256": "4b555a8e050a40f5300a415ffa8bdfb069f1ef949b285282b8595064796da348",
+      "annotatedPages": [
+        "The_Chaperone_-LRB-film-RRB-"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 919.0795999999973,
+      "entityMs": 0.015199999999992997,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/The_Drowsy_Chaperone",
+          "https://en.wikipedia.org/wiki/List_of_Christmas_films",
+          "https://en.wikipedia.org/wiki/Sutton_Foster",
+          "https://en.wikipedia.org/wiki/List_of_A24_films",
+          "https://en.wikipedia.org/wiki/Jason_Kravits",
+          "https://en.wikipedia.org/wiki/Georgia_Engel"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/The_Drowsy_Chaperone",
+          "https://en.wikipedia.org/wiki/List_of_Christmas_films",
+          "https://en.wikipedia.org/wiki/Sutton_Foster",
+          "https://en.wikipedia.org/wiki/List_of_A24_films",
+          "https://en.wikipedia.org/wiki/Jason_Kravits",
+          "https://en.wikipedia.org/wiki/Georgia_Engel"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/The_Drowsy_Chaperone",
+          "https://en.wikipedia.org/wiki/Sutton_Foster",
+          "https://en.wikipedia.org/wiki/Jason_Kravits",
+          "https://en.wikipedia.org/wiki/List_of_A24_films",
+          "https://en.wikipedia.org/wiki/List_of_Christmas_films",
+          "https://en.wikipedia.org/wiki/Georgia_Engel"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "89364",
+      "role": "held_out",
+      "claimSha256": "f9de23bc20c3e082a891d75b12b9ae60fabd8cf18c43cab7cc79fa69cdded17b",
+      "annotatedPages": [
+        "Elevator_to_the_Gallows",
+        "Louis_Malle",
+        "The_Silent_World"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 651.6535999999978,
+      "entityMs": 0.013300000000015189,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Jacques_Cousteau",
+          "https://en.wikipedia.org/wiki/Farewell_My_Concubine_(film)",
+          "https://en.wikipedia.org/wiki/Alain_Delon",
+          "https://en.wikipedia.org/wiki/Louis_Vuitton",
+          "https://en.wikipedia.org/wiki/Gaumont",
+          "https://en.wikipedia.org/wiki/Universal_Pictures"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Jacques_Cousteau",
+          "https://en.wikipedia.org/wiki/Farewell_My_Concubine_(film)",
+          "https://en.wikipedia.org/wiki/Alain_Delon",
+          "https://en.wikipedia.org/wiki/Louis_Vuitton",
+          "https://en.wikipedia.org/wiki/Gaumont",
+          "https://en.wikipedia.org/wiki/Universal_Pictures"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Jacques_Cousteau",
+          "https://en.wikipedia.org/wiki/Alain_Delon",
+          "https://en.wikipedia.org/wiki/Louis_Vuitton",
+          "https://en.wikipedia.org/wiki/Farewell_My_Concubine_(film)",
+          "https://en.wikipedia.org/wiki/Gaumont",
+          "https://en.wikipedia.org/wiki/Universal_Pictures"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "183938",
+      "role": "held_out",
+      "claimSha256": "6424a175ab300b4caebc0e21a6001640f681fb07f7ff9323acff3ae695e0c6a2",
+      "annotatedPages": [
+        "Gotham_City_Sirens"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 678.5429999999978,
+      "entityMs": 0.03170000000000073,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Gotham_City_Sirens",
+          "https://en.wikipedia.org/wiki/Batman:_Streets_of_Gotham",
+          "https://en.wikipedia.org/wiki/Harley_Quinn",
+          "https://en.wikipedia.org/wiki/Paul_Dini",
+          "https://en.wikipedia.org/wiki/Batman:_Gotham_Knights",
+          "https://en.wikipedia.org/wiki/Poison_Ivy_(character)"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Gotham_City_Sirens",
+          "https://en.wikipedia.org/wiki/Batman:_Streets_of_Gotham",
+          "https://en.wikipedia.org/wiki/Harley_Quinn",
+          "https://en.wikipedia.org/wiki/Paul_Dini",
+          "https://en.wikipedia.org/wiki/Batman:_Gotham_Knights",
+          "https://en.wikipedia.org/wiki/Poison_Ivy_(character)"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Gotham_City_Sirens",
+          "https://en.wikipedia.org/wiki/Batman:_Streets_of_Gotham",
+          "https://en.wikipedia.org/wiki/Paul_Dini",
+          "https://en.wikipedia.org/wiki/Harley_Quinn",
+          "https://en.wikipedia.org/wiki/Batman:_Gotham_Knights",
+          "https://en.wikipedia.org/wiki/Poison_Ivy_(character)"
+        ]
+      },
+      "entityMatches": [
+        "https://en.wikipedia.org/wiki/Gotham_City_Sirens"
+      ]
+    },
+    {
+      "id": "87783",
+      "role": "held_out",
+      "claimSha256": "6fe614cbee49018079205125f97b8ecd08e8692272945fd69cca2cb5eece5770",
+      "annotatedPages": [
+        "2003_NCAA_Division_I_Men's_Basketball_Tournament"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 516.5982000000004,
+      "entityMs": 0.014299999999991542,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Yale_University"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Yale_University"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Yale_University"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "153303",
+      "role": "held_out",
+      "claimSha256": "f22847da634fb7a809adcf71a51fe5df42962cef04f27d9ba8b15348aa565edb",
+      "annotatedPages": [
+        "EA_Black_Box"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 713.2035000000033,
+      "entityMs": 0.01690000000002101,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "3": {
+          "k": 3,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        },
+        "6": {
+          "k": 6,
+          "recall": 0,
+          "precision": 0,
+          "mrr": 0,
+          "ndcg": 0
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/NBA_Street_Homecourt",
+          "https://en.wikipedia.org/wiki/NHL_2004",
+          "https://en.wikipedia.org/wiki/Need_for_Speed:_Hot_Pursuit_2",
+          "https://en.wikipedia.org/wiki/Need_for_Speed",
+          "https://en.wikipedia.org/wiki/Madden_NFL",
+          "https://en.wikipedia.org/wiki/NHL_(video_game_series)"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/NBA_Street_Homecourt",
+          "https://en.wikipedia.org/wiki/NHL_2004",
+          "https://en.wikipedia.org/wiki/Need_for_Speed:_Hot_Pursuit_2",
+          "https://en.wikipedia.org/wiki/Need_for_Speed",
+          "https://en.wikipedia.org/wiki/Madden_NFL",
+          "https://en.wikipedia.org/wiki/NHL_(video_game_series)"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/NHL_2004",
+          "https://en.wikipedia.org/wiki/NBA_Street_Homecourt",
+          "https://en.wikipedia.org/wiki/Need_for_Speed:_Hot_Pursuit_2",
+          "https://en.wikipedia.org/wiki/Need_for_Speed",
+          "https://en.wikipedia.org/wiki/NHL_(video_game_series)",
+          "https://en.wikipedia.org/wiki/Madden_NFL"
+        ]
+      },
+      "entityMatches": []
+    },
+    {
+      "id": "215202",
+      "role": "held_out",
+      "claimSha256": "3ebd079a644afb51f08dc37e7feff109b72b8b89ca47830d419ba5d97a51f5fb",
+      "annotatedPages": [
+        "Dreamer_-LRB-2005_film-RRB-"
+      ],
+      "providerStatus": "available",
+      "retrievalMs": 412.6131999999998,
+      "entityMs": 0.030799999999999272,
+      "baseline": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "entity": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "reranker": {
+        "1": {
+          "k": 1,
+          "recall": 1,
+          "precision": 1,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "3": {
+          "k": 3,
+          "recall": 1,
+          "precision": 0.3333333333333333,
+          "mrr": 1,
+          "ndcg": 1
+        },
+        "6": {
+          "k": 6,
+          "recall": 1,
+          "precision": 0.16666666666666666,
+          "mrr": 1,
+          "ndcg": 1
+        }
+      },
+      "rerankerComplete": true,
+      "orders": {
+        "baseline": [
+          "https://en.wikipedia.org/wiki/Dreamer_(2005_film)",
+          "https://en.wikipedia.org/wiki/John_Debney",
+          "https://en.wikipedia.org/wiki/List_of_American_films_of_2005",
+          "https://en.wikipedia.org/wiki/Toronto_International_Film_Festival_People%27s_Choice_Award",
+          "https://en.wikipedia.org/wiki/List_of_remakes_and_adaptations_of_Disney_animated_films",
+          "https://en.wikipedia.org/wiki/CinemaScore"
+        ],
+        "entity": [
+          "https://en.wikipedia.org/wiki/Dreamer_(2005_film)",
+          "https://en.wikipedia.org/wiki/John_Debney",
+          "https://en.wikipedia.org/wiki/List_of_American_films_of_2005",
+          "https://en.wikipedia.org/wiki/Toronto_International_Film_Festival_People%27s_Choice_Award",
+          "https://en.wikipedia.org/wiki/List_of_remakes_and_adaptations_of_Disney_animated_films",
+          "https://en.wikipedia.org/wiki/CinemaScore"
+        ],
+        "reranker": [
+          "https://en.wikipedia.org/wiki/Dreamer_(2005_film)",
+          "https://en.wikipedia.org/wiki/List_of_American_films_of_2005",
+          "https://en.wikipedia.org/wiki/John_Debney",
+          "https://en.wikipedia.org/wiki/List_of_remakes_and_adaptations_of_Disney_animated_films",
+          "https://en.wikipedia.org/wiki/Toronto_International_Film_Festival_People%27s_Choice_Award",
+          "https://en.wikipedia.org/wiki/CinemaScore"
+        ]
+      },
+      "entityMatches": []
+    }
+  ],
+  "limitations": [
+    "Current search and lead extracts differ from FEVER 2017 sentence evidence; annotated pages may be renamed/missing.",
+    "No exhaustive passage annotations; absence from gold does not establish irrelevance. Page retrieval metrics cannot justify stance.",
+    "Source-page and near-claim separation do not ensure disjoint topics/families or absence from model pretraining.",
+    "MRR uses the full bounded list; recall denominator includes all annotated pages even absent from candidate pool.",
+    "Reranker failure/over-limit uses unchanged baseline order and is counted; never fabricated scores."
+  ]
+}

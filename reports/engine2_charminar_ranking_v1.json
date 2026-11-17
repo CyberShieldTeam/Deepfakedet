@@ -1,0 +1,161 @@
+{
+  "at": "2026-11-17T10:40:41.359Z",
+  "scope": "Real live paired candidate/ranking diagnostic for the user-reported historical example; not a labelled independent benchmark",
+  "claim": "The Charminar in Hyderabad was built in 1591.",
+  "query": "(charminar hyderabad built 1591) OR (charminar hyderabad built)",
+  "provider": {
+    "provider": "wikipedia",
+    "status": "available",
+    "retrieved": 6,
+    "detail": "Wikipedia en: 6 real lead extracts; 0 empty/missing pages omitted; top 6 candidates only, search is not exhaustive. Additional search results were not fetched. No automatic stance or truth inferred.",
+    "query": "(charminar hyderabad built 1591) OR (charminar hyderabad built)",
+    "hasMoreResults": true
+  },
+  "baseline": [
+    {
+      "rank": 1,
+      "title": "Dar-ul-Shifa",
+      "url": "https://en.wikipedia.org/wiki/Dar-ul-Shifa",
+      "lexicalScore": 2.899510536881509,
+      "passageSha256": "b6f728875acd71d8efe6798b7164e2e2abb4737007a6e413ac2fb5b1d339e62d"
+    },
+    {
+      "rank": 2,
+      "title": "Old City (Hyderabad, India)",
+      "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+      "lexicalScore": 2.8195616024963672,
+      "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f"
+    },
+    {
+      "rank": 3,
+      "title": "Gulzar Houz",
+      "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+      "lexicalScore": 2.630908799542267,
+      "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0"
+    },
+    {
+      "rank": 4,
+      "title": "Charminar",
+      "url": "https://en.wikipedia.org/wiki/Charminar",
+      "lexicalScore": 1.4415725869498186,
+      "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f"
+    },
+    {
+      "rank": 5,
+      "title": "Qutb Shahi architecture",
+      "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+      "lexicalScore": 0.6315762872260757,
+      "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922"
+    },
+    {
+      "rank": 6,
+      "title": "Architecture of Hyderabad",
+      "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+      "lexicalScore": 0.39971023369648473,
+      "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968"
+    }
+  ],
+  "reranked": [
+    {
+      "rank": 1,
+      "title": "Charminar",
+      "url": "https://en.wikipedia.org/wiki/Charminar"
+    },
+    {
+      "rank": 2,
+      "title": "Old City (Hyderabad, India)",
+      "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)"
+    },
+    {
+      "rank": 3,
+      "title": "Dar-ul-Shifa",
+      "url": "https://en.wikipedia.org/wiki/Dar-ul-Shifa"
+    },
+    {
+      "rank": 4,
+      "title": "Gulzar Houz",
+      "url": "https://en.wikipedia.org/wiki/Gulzar_Houz"
+    },
+    {
+      "rank": 5,
+      "title": "Qutb Shahi architecture",
+      "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture"
+    },
+    {
+      "rank": 6,
+      "title": "Architecture of Hyderabad",
+      "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad"
+    }
+  ],
+  "analysis": {
+    "status": "executed",
+    "modelId": "cross-encoder/ms-marco-MiniLM-L6-v2",
+    "version": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+    "evaluationStatus": "experimental_relevance_only",
+    "applied": true,
+    "elapsedMs": 10498.257599999999,
+    "reason": "Experimental English relevance order. Raw logits are not stance, truth or credibility probabilities. Small scientific-abstract benchmark does not validate this deployment domain.",
+    "candidates": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Dar-ul-Shifa",
+        "inputSha256": "66e61b7c808b3e49b6e69d625d563afa2a9838d923089492c04cc8fc6f825257",
+        "passageSha256": "b6f728875acd71d8efe6798b7164e2e2abb4737007a6e413ac2fb5b1d339e62d",
+        "status": "executed",
+        "score": 5.791765213012695,
+        "tokens": 274,
+        "elapsedMs": 89.47750000515953
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Old_City_(Hyderabad,_India)",
+        "inputSha256": "1a3f089a57bdd33251101a641629f4fedd68a6a85f193e0b280ab89a005908c7",
+        "passageSha256": "6001a0c186daa6c84727e82f3706a2602428ba4f6a18d2011579c2c070416c3f",
+        "status": "executed",
+        "score": 7.298959255218506,
+        "tokens": 216,
+        "elapsedMs": 53.904600034002215
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Gulzar_Houz",
+        "inputSha256": "5aa8cc2ce434b58f1cfe9b3c8aaf510be21a89d490e79a2b1b7779214f27f8af",
+        "passageSha256": "95c10485c6bebd17050bd944bae061ab0f7e28ee41ab664c512a80a95c6f0cd0",
+        "status": "executed",
+        "score": 3.3357276916503906,
+        "tokens": 267,
+        "elapsedMs": 71.99329999275506
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Charminar",
+        "inputSha256": "4d5c1beae1af3e9931bab5033262dfc257e1441cedbb7229278025c829d7d596",
+        "passageSha256": "c7c033de0b1817105422b5e5b03a835d75b8ef2b9ff7a55df815670a4052967f",
+        "status": "executed",
+        "score": 9.935403823852539,
+        "tokens": 281,
+        "elapsedMs": 86.31060004699975
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Qutb_Shahi_architecture",
+        "inputSha256": "4aa496b54a9ed0333cc1a0b0fa0090ab6bd22058e8ad5fa4f4820caf4c41b476",
+        "passageSha256": "9d95c2bc80794631a0935d371a929315d22a649ad71e11afb4b067242202b922",
+        "status": "executed",
+        "score": 3.254926919937134,
+        "tokens": 227,
+        "elapsedMs": 69.07039997167885
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Architecture_of_Hyderabad",
+        "inputSha256": "6dfaa9bb3505342157b7dc2f56d73368f9b88f11dc8a04f9cf6adaa665574cb3",
+        "passageSha256": "1aa8c6af50c90d7a8c17152a95a64416c1a355e64ada8ed897c7f388e7fb9968",
+        "status": "executed",
+        "score": -1.4019718170166016,
+        "tokens": 123,
+        "elapsedMs": 38.47149998182431
+      }
+    ],
+    "startupMs": 9777.907799987588,
+    "memory": {
+      "rssBytes": 424112128,
+      "peakWorkingSetBytes": 424112128
+    }
+  },
+  "causalScope": "Same candidates, same passage bytes and unchanged BM25; only optional relevance reranking changes order. Live current search can differ from prior sessions."
+}

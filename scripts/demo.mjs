@@ -24,6 +24,7 @@ const children=[];let stopping=false;
 env.VERITAS_AUTHORED_DEMO='1';
 env.VERITAS_WIKIPEDIA_ENABLED='0';
 env.VERITAS_NLI_ENABLED='0';
+  env.VERITAS_RERANKER_ENABLED='0';
 env.VERITAS_OCR_PREPARATION_URL=env.VERITAS_AI_SERVICE_URL;env.VERITAS_AI_SERVICE_URL='';
 function stop(code){if(stopping)return;stopping=true;for(const child of children)if(child.exitCode===null)child.kill('SIGTERM');const force=setTimeout(()=>process.exit(code),4000);force.unref();Promise.all(children.map(child=>child.exitCode!==null?Promise.resolve():new Promise(resolve=>child.once('exit',resolve)))).then(()=>process.exit(code));}
 for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>stop(0));

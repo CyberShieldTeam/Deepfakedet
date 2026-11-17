@@ -23,6 +23,7 @@ import { verifyWithEvidence } from "./server/evidence";
 import { claimReviewSchema, reviewEvidence } from "./server/claimVerification";
 import {extractClaimCandidates,approveClaimSelection} from './server/claimExtraction';
 import {shutdownNli} from './server/nliWorker';
+import {shutdownReranker} from './server/claimReranking';
 import { runCampaign, CampaignRunError } from "./server/campaignRunner";
 import { campaignEmbeddings } from "./server/campaignEmbedding";
 import {networkDiagnostics,logAnalysis,failedDiagnostic} from './server/analysisDiagnostics';
@@ -1113,7 +1114,7 @@ async function start() {
   });
   let stopping=false;
   for(const signal of ['SIGINT','SIGTERM'] as const)process.once(signal,()=>{
-    if(stopping)return;stopping=true;shutdownNli();
+    if(stopping)return;stopping=true;shutdownNli();shutdownReranker();
     const deadline=setTimeout(()=>process.exit(1),5000);deadline.unref();
     listener.close(()=>{void vite?.close().finally(()=>process.exit(0));if(!vite)process.exit(0)});
     listener.closeIdleConnections();

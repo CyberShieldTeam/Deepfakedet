@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Download, Printer, X } from "lucide-react";
 import { fetchReport, Report } from "../services/api";
 import { Button, ErrorBox } from "./ui";
+import {evidenceSummary} from '../evidenceSummary';
 
 const esc = (s: any) =>
   String(s ?? "").replace(
@@ -35,6 +36,17 @@ function nliReport(claim:NonNullable<Report['investigation']['claimResults']>[nu
    <blockquote>${esc(n.passage)}</blockquote><p>Exact model-input window offsets ${n.span.start}–${n.span.end}; passage SHA-256 ${esc(n.passageSha256)}; source SHA-256 ${esc(n.sourcePassageSha256)}. ${esc(n.reason)}</p>
    ${n.scores?`<p>Raw softmax (not truth probabilities): entailment ${esc(n.scores.entailment)}, contradiction ${esc(n.scores.contradiction)}, neutral ${esc(n.scores.neutral)}.</p>`:''}</li>`;
  }).join('')}</ul>`;
+}
+
+function summaryReport(claim:NonNullable<Report['investigation']['claimResults']>[number]){
+ if(claim.isSimulated)return '';
+ const summary=claim.evidenceSummary??evidenceSummary(claim);
+ return `<h4>Source-grounded evidence assessment</h4><p>${esc(summary.assessment)}</p>${list(summary.limitations)}<ul>${summary.citations.map(c=>`<li>[${esc(c.citationId)} / ${esc(c.sourceId)}] <a href="${safeUrl(c.url)}">${esc(c.title)}</a>: ${esc(c.relationship)}<blockquote>${esc(c.quote)}</blockquote>${c.quoteTruncated?'<p>Exact excerpt preview ends here; consult the retained passage for context.</p>':''}${c.passageSha256?`Passage SHA-256: ${esc(c.passageSha256)}`:''}</li>`).join('')}</ul>`;
+}
+
+function rerankerReport(claim:NonNullable<Report['investigation']['claimResults']>[number]){
+ const r=claim.retrievalDetails?.reranking;if(!r)return '';
+ return `<h4>Relevance reranker</h4><p>${esc(r.modelId)} @ ${esc(r.version)}; ${esc(r.status)}; applied ${esc(r.applied)}; ${esc(r.elapsedMs)} ms. ${esc(r.reason)}</p><ul>${r.candidates.map(c=>`<li><a href="${safeUrl(c.url)}">Retrieved source</a>; ${esc(c.status)}; raw relevance logit ${esc(c.score??'not measured')} (not truth probability); input SHA-256 ${esc(c.inputSha256)}; passage SHA-256 ${esc(c.passageSha256)}</li>`).join('')}</ul>`;
 }
 
 function correlationHtml(inv:Report['investigation']){
@@ -131,6 +143,8 @@ ${
 <p><b>Claim:</b> ${esc(x.targetClaim)}</p>${x.translatedText ? `<p><b>Original (${esc(x.detectedLanguage)}):</b> ${esc(x.originalInput)}<br><b>Translation:</b> ${esc(x.translatedText)}</p>` : ""}
 ${x.selectionReview ? `<p><b>Original input:</b> ${esc(x.originalInput)}</p><p>Claim wording/language selected by ${esc(x.selectionReview.reviewedBy)} at ${esc(x.selectionReview.reviewedAt)}; declared language ${esc(x.selectionReview.language)}; edited ${esc(x.selectionReview.edited)}. This is not factual endorsement.</p><p>${esc(x.selectionReview.note)}</p>` : ''}
 ${nliReport(x)}
+${summaryReport(x)}
+${rerankerReport(x)}
 <p><b>Verification mode:</b> ${esc((x.verificationMode || "rule_based").replace(/_/g, " "))} · <b>Assessment:</b> ${esc((x.assessment || "unverified").replace(/_/g, " "))}</p>
 ${x.verificationStatus ? `<p><b>Claim status:</b> ${esc(x.verificationStatus)} · distinct from media and dissemination observations.</p>` : ""}
 ${x.normalizedClaim ? `<p><b>Normalized claim:</b> ${esc(x.normalizedClaim)}</p>` : ""}

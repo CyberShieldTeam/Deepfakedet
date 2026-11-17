@@ -1,0 +1,3812 @@
+{
+  "schemaVersion": 1,
+  "kind": "reranker",
+  "model": {
+    "id": "cross-encoder/ms-marco-MiniLM-L6-v2",
+    "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+    "license": "Apache-2.0",
+    "minimumFreeGiB": 1.5,
+    "parameters": 22713601
+  },
+  "manifestSha256": "50129f6892d33ee43c93bee19351c5b365570aa0dc4f6cc9da6e4be5d296f405",
+  "protocolSha256": "382c930f9333cbbf771d7a1f2be810736bc792a0d7bd6418e7e15aaa5fea87b2",
+  "startupMs": 9123.989999992773,
+  "elapsedMs": 27869.94770000456,
+  "memory": {
+    "rssBytes": 471822336,
+    "peakWorkingSetBytes": 471822336
+  },
+  "latencyMs": {
+    "median": 57.89360002381727,
+    "p95": 85.24290000787005
+  },
+  "authoritativePromotion": false,
+  "rows": [
+    {
+      "id": "5483",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Seinfeld",
+          "passageSha256": "43225b8388fdbc8db51d9716ace7b10bf7a13640c0faf70d8fe1c449b63819a0",
+          "status": "executed",
+          "values": [
+            -8.744136810302734
+          ],
+          "tokens": 276,
+          "elapsedMs": 102.4189000017941
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Beverly_Hills,_90210",
+          "passageSha256": "59f89996edff16e72464835b093004ff26e9828e055965de23462d397cefd27e",
+          "status": "executed",
+          "values": [
+            -9.566661834716797
+          ],
+          "tokens": 271,
+          "elapsedMs": 58.19569999584928
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/One_Tree_Hill_(TV_series)",
+          "passageSha256": "df11427c77ccabe4c9c5403c23f6b94b166e15f0cc558d4b53d1649567729936",
+          "status": "executed",
+          "values": [
+            -9.697614669799805
+          ],
+          "tokens": 265,
+          "elapsedMs": 56.51419999776408
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Greatest_Hits_(2005_Blondie_album)",
+          "passageSha256": "9a219a92aabe768136bdc831f86eda1625698945e216b96484e908f294bf4fbe",
+          "status": "executed",
+          "values": [
+            5.9725446701049805
+          ],
+          "tokens": 96,
+          "elapsedMs": 24.916999973356724
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Murder,_She_Wrote_home_video_releases",
+          "passageSha256": "bf798b47b36a51690bb1f69684de591ef649a43caa53134a0cd16434f3c9c7fe",
+          "status": "executed",
+          "values": [
+            0.05161747708916664
+          ],
+          "tokens": 164,
+          "elapsedMs": 49.145600001793355
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/DVD_screensaver",
+          "passageSha256": "127bb4970c1fb35308e61f6e6724f1ff7de4f5e2819b0d9c8ee9a7665e9f8777",
+          "status": "executed",
+          "values": [
+            -5.00065803527832
+          ],
+          "tokens": 79,
+          "elapsedMs": 25.612900033593178
+        }
+      ]
+    },
+    {
+      "id": "73208",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Saffron_Burrows",
+          "passageSha256": "9560c0e5c2bbe7fde77e733971698192d56de16db6891786a44e9ca6f4f394bb",
+          "status": "executed",
+          "values": [
+            -1.0456774234771729
+          ],
+          "tokens": 148,
+          "elapsedMs": 44.706900021992624
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Tamra_Davis",
+          "passageSha256": "e7539e3347b155dcc61e4a0ab20d1547fb997c3cf302c949e1bed1fbaa6616e9",
+          "status": "executed",
+          "values": [
+            -6.779776573181152
+          ],
+          "tokens": 38,
+          "elapsedMs": 13.961700024083257
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Taylor_Swift",
+          "passageSha256": "74c35abe9acbcdf125d62e001303a818e4dd7c321c85b65d780767e223da222c",
+          "status": "executed",
+          "values": [
+            -10.019660949707031
+          ],
+          "tokens": 279,
+          "elapsedMs": 66.32099999114871
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Rob_Gronkowski",
+          "passageSha256": "0e1c52dee59e0f79d09c310dacb2b4b88ccb2bef0686138eaea6b6cf236aef81",
+          "status": "executed",
+          "values": [
+            -10.89460563659668
+          ],
+          "tokens": 283,
+          "elapsedMs": 71.13439997192472
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/88th_Academy_Awards",
+          "passageSha256": "e77d5df5f7f080cd08cd8e4d63a81653a69639d001e3f4f03a0cef5c926f7e61",
+          "status": "executed",
+          "values": [
+            -8.445834159851074
+          ],
+          "tokens": 272,
+          "elapsedMs": 76.12209999933839
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Wake_Up_Dead_Man",
+          "passageSha256": "83acec5f4bb13847aa6b16d53f3c44f53be660ae8624351465e6191a5127c763",
+          "status": "executed",
+          "values": [
+            -4.1264967918396
+          ],
+          "tokens": 211,
+          "elapsedMs": 47.717099951114506
+        }
+      ]
+    },
+    {
+      "id": "199814",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Dolly_Parton",
+          "passageSha256": "b581e6171375211346717159a3d9c73f219d8b4d8dddb38cd18151b8e36a8752",
+          "status": "executed",
+          "values": [
+            -10.297747611999512
+          ],
+          "tokens": 292,
+          "elapsedMs": 59.91180002456531
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Harvest_(Neil_Young_album)",
+          "passageSha256": "2a38119a0a02da3369b252b5d2a61e672232b141497d40ceaf9a96cd6348e099",
+          "status": "executed",
+          "values": [
+            -2.7485146522521973
+          ],
+          "tokens": 246,
+          "elapsedMs": 49.59720000624657
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Answer_song",
+          "passageSha256": "112a4fbdaf204221d7be03e28d4adbe8e99c9499ade7bfef48cf209c67ec3cf4",
+          "status": "executed",
+          "values": [
+            -9.29909610748291
+          ],
+          "tokens": 284,
+          "elapsedMs": 85.24290000787005
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Diss_track",
+          "passageSha256": "c6250fde7f790476851ca2188c6933aeac247021c030b731dbbc0c150ecf6957",
+          "status": "executed",
+          "values": [
+            -11.070220947265625
+          ],
+          "tokens": 289,
+          "elapsedMs": 77.33709999592975
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Johnny_Cash",
+          "passageSha256": "ce1c488e4e7d093aa3554b00a955407e969897985999311a0fe974e6a9c690a0",
+          "status": "executed",
+          "values": [
+            -10.078171730041504
+          ],
+          "tokens": 293,
+          "elapsedMs": 69.27099998574704
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Neil_Young_Archives_Volume_III:_1976%E2%80%931987",
+          "passageSha256": "1e167012d4da40b3e8734257f6fb9ee0b82668bbeaf96383e9f8760c99b390c0",
+          "status": "executed",
+          "values": [
+            -4.984591007232666
+          ],
+          "tokens": 277,
+          "elapsedMs": 68.60950001282617
+        }
+      ]
+    },
+    {
+      "id": "69641",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/One_Piece",
+          "passageSha256": "e80c994e1c79ca7373e728d34faa133c847e852bc59270d69becdf7ca7d5d044",
+          "status": "executed",
+          "values": [
+            -10.696142196655273
+          ],
+          "tokens": 275,
+          "elapsedMs": 70.2566999825649
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Billboard_charts",
+          "passageSha256": "197c85873db66fd8d9d9a9cef601d4df8116c482513cf12053872c1b75595641",
+          "status": "executed",
+          "values": [
+            -7.706232070922852
+          ],
+          "tokens": 266,
+          "elapsedMs": 63.047199975699186
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/YouTube",
+          "passageSha256": "00717911e66e83907c1abd4ed4c4a7c1f648bfd76fac37280b116198f25132a5",
+          "status": "executed",
+          "values": [
+            2.6958606243133545
+          ],
+          "tokens": 267,
+          "elapsedMs": 53.81049995776266
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/One_Direction",
+          "passageSha256": "eb55d93a7e532614f5295230aeb00073e2fd6b6cfe464861ead8fd4d4d1d7f5a",
+          "status": "executed",
+          "values": [
+            -9.625596046447754
+          ],
+          "tokens": 278,
+          "elapsedMs": 51.701099961064756
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Mia_Khalifa",
+          "passageSha256": "f2375df11ba3702e95d9f00484718bc7d12b0dbdbb2832e64dd9fabeb0a47633",
+          "status": "executed",
+          "values": [
+            -5.582943916320801
+          ],
+          "tokens": 197,
+          "elapsedMs": 38.42649998841807
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Most_Beautiful_Moment_in_Life:_Young_Forever",
+          "passageSha256": "330575e4e07f7ac1f6350b5c0cc7146b8706e264c702735d801e943a1decb1fc",
+          "status": "executed",
+          "values": [
+            -10.217132568359375
+          ],
+          "tokens": 144,
+          "elapsedMs": 36.17350000422448
+        }
+      ]
+    },
+    {
+      "id": "144302",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Adrien_Brody",
+          "passageSha256": "de6d61e930fee49ceb0b4f9af8d2e26ced32ab057f36c06754c434765c7a5f5f",
+          "status": "executed",
+          "values": [
+            7.082449913024902
+          ],
+          "tokens": 297,
+          "elapsedMs": 56.90750002395362
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Hugh_Brody",
+          "passageSha256": "e50e5bdb8256d7256fbecae025e264762ce137c80d29a4f13724af4aa2080b1a",
+          "status": "executed",
+          "values": [
+            1.654465675354004
+          ],
+          "tokens": 28,
+          "elapsedMs": 9.281600010581315
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Carrie_Mathison",
+          "passageSha256": "25300d03c8d12aaac92d9c339dc348ba02ca45fab1d6dc40563316fc37d6923c",
+          "status": "executed",
+          "values": [
+            1.888176679611206
+          ],
+          "tokens": 231,
+          "elapsedMs": 42.755300004500896
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Homeland_season_1",
+          "passageSha256": "6a6100e65f200a457c2cfc3d6503cbd7543f59ffb541e09e31f81347c17d130a",
+          "status": "executed",
+          "values": [
+            -0.9540345072746277
+          ],
+          "tokens": 253,
+          "elapsedMs": 44.45119999581948
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Homeland_characters",
+          "passageSha256": "45bc78047db4c1d523c8fd3bb4e8f51327d6ca567327a0793d7c04ee1822fed2",
+          "status": "executed",
+          "values": [
+            -11.409082412719727
+          ],
+          "tokens": 28,
+          "elapsedMs": 10.076000005938113
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Fear_of_13",
+          "passageSha256": "b032243e759900de839594243456309f09caa00c7774feff8374378115df1f1d",
+          "status": "executed",
+          "values": [
+            -2.825730323791504
+          ],
+          "tokens": 183,
+          "elapsedMs": 47.969400009606034
+        }
+      ]
+    },
+    {
+      "id": "95239",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Murder_by_Numbers",
+          "passageSha256": "19771901d2ce3c8ff9e017b59818c84c2f8abc8c4d6f5ce655e08a0c35afac67",
+          "status": "executed",
+          "values": [
+            -7.407173156738281
+          ],
+          "tokens": 82,
+          "elapsedMs": 23.558299988508224
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Midsomer_Murders_episodes",
+          "passageSha256": "db772a1d1fd241d06eac33effdea294b5d821e1489231fe6be29711639f88af6",
+          "status": "executed",
+          "values": [
+            -6.498241424560547
+          ],
+          "tokens": 286,
+          "elapsedMs": 54.476399964187294
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/A_Gifted_Man",
+          "passageSha256": "801ac733355b484177fc078bb697b3b086da422c5f28d8d8d129d97cc89093bf",
+          "status": "executed",
+          "values": [
+            1.5837547779083252
+          ],
+          "tokens": 88,
+          "elapsedMs": 18.293800007086247
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Natalie_Alyn_Lind",
+          "passageSha256": "669e81832d59caf3ef861bf73190e445f33ad0675f81b747413fb900dfbfe51c",
+          "status": "executed",
+          "values": [
+            -6.147038459777832
+          ],
+          "tokens": 134,
+          "elapsedMs": 37.69339999416843
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Murder_Mubarak",
+          "passageSha256": "8f0bd36a785083b9a9590478302a3e447e5246952a5f50e659b28ea7fcb6e60c",
+          "status": "executed",
+          "values": [
+            -7.588798522949219
+          ],
+          "tokens": 138,
+          "elapsedMs": 30.69730004062876
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Gifted_(manga)",
+          "passageSha256": "d7f121de956af3ed01be2b886f6529656e98d8b199130a6cbe42993ee639baa2",
+          "status": "executed",
+          "values": [
+            -0.11280161887407303
+          ],
+          "tokens": 115,
+          "elapsedMs": 35.74069996830076
+        }
+      ]
+    },
+    {
+      "id": "174878",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Oklahoma",
+          "passageSha256": "70d540c85da6c4842eb51d2a2f3b91798eee71370433adc9aa9f6f872e221e01",
+          "status": "executed",
+          "values": [
+            -10.841241836547852
+          ],
+          "tokens": 295,
+          "elapsedMs": 88.3015000144951
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Multiculturalism",
+          "passageSha256": "68d19a5162a6911bdd078401d07913975199ed4e9976274bb864572a847de125",
+          "status": "executed",
+          "values": [
+            -10.874626159667969
+          ],
+          "tokens": 257,
+          "elapsedMs": 74.9970999895595
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_national_memorials_of_the_United_States",
+          "passageSha256": "ad31e104b7d8f5967debb13060a433394fecb06625019ea816cf2a51b9eb2e2d",
+          "status": "executed",
+          "values": [
+            -10.83084774017334
+          ],
+          "tokens": 252,
+          "elapsedMs": 69.9151000007987
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Waco_siege",
+          "passageSha256": "6429036062099c9ccdb363d1fc446e2b6656bab99fa7e54f5b5ac4c1dc9293c2",
+          "status": "executed",
+          "values": [
+            -10.452045440673828
+          ],
+          "tokens": 283,
+          "elapsedMs": 76.97799999732524
+        }
+      ]
+    },
+    {
+      "id": "17634",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Spice_Girls",
+          "passageSha256": "0dc613afea1239d6ea93852aec6303b2e7e0fb21db3302c9e46503fb42257ab0",
+          "status": "executed",
+          "values": [
+            -9.452608108520508
+          ],
+          "tokens": 301,
+          "elapsedMs": 81.13589999265969
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Robert_Smith_(musician)",
+          "passageSha256": "35604dfc66a1f7b53735d0382cbfe9fad4943966c677eac859047c761d051c08",
+          "status": "executed",
+          "values": [
+            -10.748590469360352
+          ],
+          "tokens": 224,
+          "elapsedMs": 57.62379994848743
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/A_Girl_Like_Me_(Rihanna_album)",
+          "passageSha256": "ffd83af4f2d0e8b837d5513275e50701e30b539894d7677de98d111c9c505616",
+          "status": "executed",
+          "values": [
+            -5.4319047927856445
+          ],
+          "tokens": 296,
+          "elapsedMs": 78.0681999749504
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Peter_Murphy_(musician)",
+          "passageSha256": "e7778aeab8db46778645012f471bd9e74fbd73f9b1a42b62c935669cf7eea87b",
+          "status": "executed",
+          "values": [
+            -7.773967742919922
+          ],
+          "tokens": 284,
+          "elapsedMs": 76.22480002464727
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Katy_Perry",
+          "passageSha256": "32fca0e0cc9513e6939a90cd586988df03289fd5d4b3a20f703b2ecb140b6354",
+          "status": "executed",
+          "values": [
+            -3.642273426055908
+          ],
+          "tokens": 330,
+          "elapsedMs": 73.46529996721074
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Florence_Welch",
+          "passageSha256": "9c5992ccc4ba9f471640292cd4765c1fa35bab2069bb73499f6ab88262e00a72",
+          "status": "executed",
+          "values": [
+            -10.398540496826172
+          ],
+          "tokens": 115,
+          "elapsedMs": 22.23160001449287
+        }
+      ]
+    },
+    {
+      "id": "110429",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Paris",
+          "passageSha256": "e4f8bf6493dced32147543dd2edd423f49783a6804a4385982cdc225b36990bc",
+          "status": "executed",
+          "values": [
+            -10.637334823608398
+          ],
+          "tokens": 284,
+          "elapsedMs": 56.99340003775433
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Anne_Boleyn",
+          "passageSha256": "73e2840f0d2bed3e3f29d36a1b199f90d0fbbd79af8d155d5bc891c0cf3dd90c",
+          "status": "executed",
+          "values": [
+            -8.121353149414062
+          ],
+          "tokens": 300,
+          "elapsedMs": 81.15630003158003
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Catherine_de%27_Medici",
+          "passageSha256": "19055a3bae433321a530a54e35106113b1d007c8c46efb29861cd3c02c319300",
+          "status": "executed",
+          "values": [
+            -3.4074020385742188
+          ],
+          "tokens": 294,
+          "elapsedMs": 77.16899999650195
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Anne_of_Denmark",
+          "passageSha256": "adc9351a7c2a1edf28fd3abcb8823895e3dc11180c2a549932e3aafd20f6b4e5",
+          "status": "executed",
+          "values": [
+            -6.904454231262207
+          ],
+          "tokens": 263,
+          "elapsedMs": 78.17279995651916
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Anne_de_Montmorency,_1st_Duke_of_Montmorency",
+          "passageSha256": "f844479d9ca62e8cc66b04d55d79d721995b3047c99f6c810217c11258c1f3ac",
+          "status": "executed",
+          "values": [
+            -6.6396894454956055
+          ],
+          "tokens": 313,
+          "elapsedMs": 87.14299998246133
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Louis_de_Saint-Gelais",
+          "passageSha256": "a7400c24dc024e95192af99335b3d87e92c402a301978cf1f948e19c1a0f7f1b",
+          "status": "executed",
+          "values": [
+            -6.0020952224731445
+          ],
+          "tokens": 291,
+          "elapsedMs": 83.65619997493923
+        }
+      ]
+    },
+    {
+      "id": "79437",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Hank_Greenberg",
+          "passageSha256": "13910ee076261e461ea26ff259f88c5c7b6faa7e9604b1c3eee55f8a97ad6262",
+          "status": "executed",
+          "values": [
+            -4.815638542175293
+          ],
+          "tokens": 297,
+          "elapsedMs": 64.77520003682002
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Cal_Ripken_Jr.",
+          "passageSha256": "46b3f973a28c885f0a01d54893710e62b70d1c33f5941ee3a78e7e37f07ad2ff",
+          "status": "executed",
+          "values": [
+            -1.1428987979888916
+          ],
+          "tokens": 315,
+          "elapsedMs": 94.7168999700807
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Jimmie_Foxx",
+          "passageSha256": "9a906e1984fff58944956ea7dd0e9c2f9318047843fa5a9d824259820346b437",
+          "status": "executed",
+          "values": [
+            -3.6875133514404297
+          ],
+          "tokens": 295,
+          "elapsedMs": 80.11889999033883
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Jamie_Moyer",
+          "passageSha256": "007a97b09efc6ff35fbf2b144ad480b6488f4936201c202168c10212d4cad174",
+          "status": "executed",
+          "values": [
+            -2.6516833305358887
+          ],
+          "tokens": 296,
+          "elapsedMs": 84.48929997393861
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Bobby_Richardson",
+          "passageSha256": "44a5f05d66e7e995aee95cacf733527126426e56dff56026702445d33456cb5c",
+          "status": "executed",
+          "values": [
+            -5.763455390930176
+          ],
+          "tokens": 291,
+          "elapsedMs": 61.85950001236051
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Lou_Gehrig",
+          "passageSha256": "763a411f7c81df27c3942eeea3131c9c1ef07fe5c093b3513fa3e15e428cfd7e",
+          "status": "executed",
+          "values": [
+            3.338286876678467
+          ],
+          "tokens": 318,
+          "elapsedMs": 61.93140003597364
+        }
+      ]
+    },
+    {
+      "id": "182917",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Nicolas_Roeg",
+          "passageSha256": "96c5a2dd1b58e3ac038dca9e20fb9454860c93ddc19e05545bdc6b11ce77eaed",
+          "status": "executed",
+          "values": [
+            -3.645277261734009
+          ],
+          "tokens": 219,
+          "elapsedMs": 41.49120004149154
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Far_from_the_Madding_Crowd_(1967_film)",
+          "passageSha256": "171914ba3578e16337c961328efa7a53a6bde50a159db2ecd88ffcf7b80df4e5",
+          "status": "executed",
+          "values": [
+            8.14075756072998
+          ],
+          "tokens": 184,
+          "elapsedMs": 38.09799998998642
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/It%27s_a_Mad,_Mad,_Mad,_Mad_World",
+          "passageSha256": "9ce322c3d64a23553df6c85dda61428f2f3b0a5e9a872047f2b0041c9af5477f",
+          "status": "executed",
+          "values": [
+            -6.348443031311035
+          ],
+          "tokens": 302,
+          "elapsedMs": 91.43269999185577
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Tamara_Drewe_(film)",
+          "passageSha256": "a0f083b57781816c1bc93a8f53c22e0ea0fe2af9cd1709abe8e1d395dfd47752",
+          "status": "executed",
+          "values": [
+            3.2263059616088867
+          ],
+          "tokens": 144,
+          "elapsedMs": 40.7874999800697
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Far_from_the_Madding_Crowd_(2015_film)",
+          "passageSha256": "fc5c1ba93d07e357ee6256a5d9cd2642d9dec285de2a7851925b5b18db9ad633",
+          "status": "executed",
+          "values": [
+            6.390607833862305
+          ],
+          "tokens": 102,
+          "elapsedMs": 34.356100019067526
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Odyssey_(2026_film)",
+          "passageSha256": "7b80ff63b4cc258624a0b3986227f74a87d9eb26e0fb160c57333cb51c117269",
+          "status": "executed",
+          "values": [
+            -9.815778732299805
+          ],
+          "tokens": 285,
+          "elapsedMs": 73.97720002336428
+        }
+      ]
+    },
+    {
+      "id": "184292",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Queens",
+          "passageSha256": "1219e5b0b401cdce7d728fd5d788676d3953378ca5de8f39bbd59a258db2a6d7",
+          "status": "executed",
+          "values": [
+            -7.004403591156006
+          ],
+          "tokens": 271,
+          "elapsedMs": 80.28509997529909
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Vera_Wang",
+          "passageSha256": "0218b94b8a0671df6d2ff6fb40a06f0b2d47edbeb2e70d25962e3bf029eb3ec4",
+          "status": "executed",
+          "values": [
+            2.067229986190796
+          ],
+          "tokens": 132,
+          "elapsedMs": 28.25430000666529
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Madison_Avenue",
+          "passageSha256": "5f9ebdd35f8c99f71f561107419edcb3ce059c433ac0065ece5a799496c7a88b",
+          "status": "executed",
+          "values": [
+            -9.513835906982422
+          ],
+          "tokens": 255,
+          "elapsedMs": 71.26980001339689
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Coty",
+          "passageSha256": "be41d39ea19a1b51380423ae8f55701e33d282690b94531a3aeadf6717ffc219",
+          "status": "executed",
+          "values": [
+            -9.7383451461792
+          ],
+          "tokens": 99,
+          "elapsedMs": 25.79909999622032
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Chinese-American_Planning_Council",
+          "passageSha256": "03d4b749ca62988c1778318a7320eb80bb3d626d4ac2d551a216d5c9ca5edefc",
+          "status": "executed",
+          "values": [
+            -8.220702171325684
+          ],
+          "tokens": 193,
+          "elapsedMs": 51.065499952528626
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Chinese_people_in_the_New_York_metropolitan_area",
+          "passageSha256": "f98aadc50b79e8142bb7ad92b82d9aec6dcbcb06c1c0aeb917e494c84517243f",
+          "status": "executed",
+          "values": [
+            -7.21607780456543
+          ],
+          "tokens": 255,
+          "elapsedMs": 73.15940002445132
+        }
+      ]
+    },
+    {
+      "id": "110703",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Gallipoli_campaign",
+          "passageSha256": "7947f60dae743d1c4ffbc3fd7af646eaa0e51c32eeb20c4591c34c5661b1d52e",
+          "status": "executed",
+          "values": [
+            0.5319379568099976
+          ],
+          "tokens": 283,
+          "elapsedMs": 87.75120001519099
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Eastern_Front_(World_War_I)",
+          "passageSha256": "1b599948a63d41409f73c7c0b3cdfb03943898de6bbfd5d115e87999699f4149",
+          "status": "executed",
+          "values": [
+            3.2019667625427246
+          ],
+          "tokens": 249,
+          "elapsedMs": 69.37300000572577
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Portugal_during_World_War_I",
+          "passageSha256": "f815a0f5962768aa7e543165ec22a56fd1c8e3383c06707d4ffd15fe4c0593e2",
+          "status": "executed",
+          "values": [
+            0.8451862931251526
+          ],
+          "tokens": 255,
+          "elapsedMs": 65.68729999708012
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Battle_of_Soissons_(1918)",
+          "passageSha256": "b84112ec3578567437e1336bed6cd3599a9093102f6941e8120a2da14f1485fc",
+          "status": "executed",
+          "values": [
+            6.102005481719971
+          ],
+          "tokens": 230,
+          "elapsedMs": 49.32879999978468
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/History_of_Germany_during_World_War_I",
+          "passageSha256": "09c70d12f21190aac233ff99372aee4aaa49f9ea4aa52606ff4b977970d81586",
+          "status": "executed",
+          "values": [
+            1.4264178276062012
+          ],
+          "tokens": 165,
+          "elapsedMs": 33.614200016018
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/World_War_I",
+          "passageSha256": "04cc2233d4e4eff7d64f0ea29ad45b82419ca0bc7077d411e5b285be00333344",
+          "status": "executed",
+          "values": [
+            4.193093299865723
+          ],
+          "tokens": 270,
+          "elapsedMs": 56.53499998152256
+        }
+      ]
+    },
+    {
+      "id": "168062",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Garry_Shandling",
+          "passageSha256": "88900f44c089fdc84871f1d24352f6381f443e9b4f6d60e44ae118b2a4ecff0e",
+          "status": "executed",
+          "values": [
+            -6.9408369064331055
+          ],
+          "tokens": 282,
+          "elapsedMs": 66.52960000792518
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/It%27s_a_Mad,_Mad,_Mad,_Mad_Marge",
+          "passageSha256": "683f241f8cdc598de6c0c2dd4f42b058afdc53d063216b73436f48c7b567608c",
+          "status": "executed",
+          "values": [
+            -9.586073875427246
+          ],
+          "tokens": 186,
+          "elapsedMs": 37.59010002249852
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_PJs",
+          "passageSha256": "953d58bf057180ab60b9617e95b8349684a8c598f998e8309a9f4c3383991cc1",
+          "status": "executed",
+          "values": [
+            -4.04339599609375
+          ],
+          "tokens": 203,
+          "elapsedMs": 38.9011999941431
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Seth_MacFarlane_filmography",
+          "passageSha256": "ddfa7345853619769ee11eded9c42ea7a5a028122e57650583481c62e562f7ec",
+          "status": "executed",
+          "values": [
+            -4.85225248336792
+          ],
+          "tokens": 269,
+          "elapsedMs": 52.874700049869716
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Ghosts_(American_TV_series)",
+          "passageSha256": "aa98eb5e0f12f4d4d049319c62756435db7946312355bbae66f4e72bf2a23d53",
+          "status": "executed",
+          "values": [
+            -10.884325981140137
+          ],
+          "tokens": 138,
+          "elapsedMs": 27.189299988094717
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_fictional_works_featuring_parallel_universes",
+          "passageSha256": "ffae12c6da5f684d029e9015398695dcf3f20d4593594015ecbd3458680e3c4c",
+          "status": "executed",
+          "values": [
+            -11.223176956176758
+          ],
+          "tokens": 54,
+          "elapsedMs": 15.106699953321368
+        }
+      ]
+    },
+    {
+      "id": "9713",
+      "role": "development",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Eminem_albums_discography",
+          "passageSha256": "bb874760475d72bc8a4727bd1ba1bb73d3022144fb6c2249fe2df22941226eb2",
+          "status": "executed",
+          "values": [
+            -0.024995025247335434
+          ],
+          "tokens": 259,
+          "elapsedMs": 70.54980000248179
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Eminem",
+          "passageSha256": "f0ecf70f3e0dcbf6aef609fd4da62df113002e1b99bda4082134ce069b295b91",
+          "status": "executed",
+          "values": [
+            1.3476736545562744
+          ],
+          "tokens": 270,
+          "elapsedMs": 60.694699990563095
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Relapse_(Eminem_album)",
+          "passageSha256": "97a2b02e51a96b6a93675eec92c64842ded1ec830e5eeb506866088dbbef4d3e",
+          "status": "executed",
+          "values": [
+            7.25779914855957
+          ],
+          "tokens": 302,
+          "elapsedMs": 73.95069999620318
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Recovery_(Eminem_album)",
+          "passageSha256": "e5c0cdfc06e4f505168bb6c992f059fcc0915d0b527e10987c9271916109f493",
+          "status": "executed",
+          "values": [
+            8.322973251342773
+          ],
+          "tokens": 287,
+          "elapsedMs": 59.072299976833165
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Marshall_Mathers_LP_2",
+          "passageSha256": "3546ce65f0ebb23b1ce1fc871208880cec38f196067c43dc62ebc7a71ed5f761",
+          "status": "executed",
+          "values": [
+            2.185365915298462
+          ],
+          "tokens": 303,
+          "elapsedMs": 58.25019994517788
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Revival_(Eminem_album)",
+          "passageSha256": "1efd430cf643243124fa2a87035b8cc8f218a9e774c22b40ae310adc3548a276",
+          "status": "executed",
+          "values": [
+            3.592411518096924
+          ],
+          "tokens": 300,
+          "elapsedMs": 64.81010001152754
+        }
+      ]
+    },
+    {
+      "id": "166383",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/United_States_presidential_pets",
+          "passageSha256": "463f07d6a390e81f3bf5298e60dcd8dca68ef611ffb42b2a47d42384bd6694ce",
+          "status": "executed",
+          "values": [
+            -9.249876022338867
+          ],
+          "tokens": 77,
+          "elapsedMs": 18.253900052513927
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/We3",
+          "passageSha256": "b5bb439fdd2f87f5a8d679adbc1a4a76ca2c6719a5f1ab0db51db305d26a38d7",
+          "status": "executed",
+          "values": [
+            -9.972806930541992
+          ],
+          "tokens": 70,
+          "elapsedMs": 17.40890002110973
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Rock-a-Doodle",
+          "passageSha256": "3eafd9893234753952968c90fd559f6a3e9096cdfcd8481888897fd1f90c0ac4",
+          "status": "executed",
+          "values": [
+            -10.787111282348633
+          ],
+          "tokens": 280,
+          "elapsedMs": 63.15510004060343
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Dogs_in_warfare",
+          "passageSha256": "9102d3a155dcc7893e5e7c99993a8e692f54379bf84985b03ff187c8891c40a2",
+          "status": "executed",
+          "values": [
+            -8.746429443359375
+          ],
+          "tokens": 72,
+          "elapsedMs": 19.492799998261034
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/British_big_cats",
+          "passageSha256": "997e55e91632350378d87faca22e0a64b05e5743f008aefb3b8ae96f5561e7ac",
+          "status": "executed",
+          "values": [
+            -8.730720520019531
+          ],
+          "tokens": 254,
+          "elapsedMs": 49.07920002005994
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Bungo_Stray_Dogs_characters",
+          "passageSha256": "7e51104b6ecaecaf08f75a2191e29afee87899b729e3988301bb00994e575b45",
+          "status": "executed",
+          "values": [
+            -10.932968139648438
+          ],
+          "tokens": 38,
+          "elapsedMs": 12.900599977001548
+        }
+      ]
+    },
+    {
+      "id": "112773",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Licence_to_Kill",
+          "passageSha256": "4ce1de0891be2835bdcb33b770b73d13a35e0ac91e144b48e663f4fd5a77a9dc",
+          "status": "executed",
+          "values": [
+            4.342165946960449
+          ],
+          "tokens": 277,
+          "elapsedMs": 60.27590000303462
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/A_View_to_a_Kill",
+          "passageSha256": "570b10c6b16bd30d103efe447e0e0bac59091e5aef682e29bd1337ee48741415",
+          "status": "executed",
+          "values": [
+            10.885740280151367
+          ],
+          "tokens": 270,
+          "elapsedMs": 44.77690003113821
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/A_View_to_a_Kill_(soundtrack)",
+          "passageSha256": "fb720eacfd15e45973e38fc4e939a755151e290e7a1a3c385d3212794b567a15",
+          "status": "executed",
+          "values": [
+            9.807353973388672
+          ],
+          "tokens": 49,
+          "elapsedMs": 11.192900012247264
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/A_View_to_a_Kill_(video_game)",
+          "passageSha256": "787f78423213b087a366d48dd4eadff5b0a063fb8c6f2cdf9958c3f689fb2323",
+          "status": "executed",
+          "values": [
+            9.64297103881836
+          ],
+          "tokens": 143,
+          "elapsedMs": 31.244600017089397
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Outline_of_James_Bond",
+          "passageSha256": "c9a061bacf8b7a35f28fc3a7c5ebab0eae864cd5c9dabc2a40d44ea98865bf3f",
+          "status": "executed",
+          "values": [
+            -0.6646321415901184
+          ],
+          "tokens": 137,
+          "elapsedMs": 28.742399998009205
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/May_Day_(James_Bond)",
+          "passageSha256": "f90dd95709e0f6d3931d0e4ba99ec844a620bb3538a3eb48148048eb42df796d",
+          "status": "executed",
+          "values": [
+            8.387518882751465
+          ],
+          "tokens": 58,
+          "elapsedMs": 13.557699974626303
+        }
+      ]
+    },
+    {
+      "id": "195008",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Kiely_Williams",
+          "passageSha256": "e79b1f163c852d391e61d9cfaeaaa01e7c3d79b60242f6fea9fe0485de62120c",
+          "status": "executed",
+          "values": [
+            4.677310943603516
+          ],
+          "tokens": 48,
+          "elapsedMs": 15.662299992982298
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/American_Girl",
+          "passageSha256": "df9009351fa16d2f9715b039aa2dbdfb4439f6c7e9f0c951068c0e6764696a56",
+          "status": "executed",
+          "values": [
+            3.344730854034424
+          ],
+          "tokens": 251,
+          "elapsedMs": 47.221000015269965
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Bilal_(American_singer)",
+          "passageSha256": "ab28f43785b37e2d4684c07d14e1c13a5dda0125c0f0bbfb2e04b15bb3b79fe3",
+          "status": "executed",
+          "values": [
+            -1.8685734272003174
+          ],
+          "tokens": 269,
+          "elapsedMs": 46.491799992509186
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Ashe_(singer)",
+          "passageSha256": "f0bdc9a87534141331f947eb761edaaf51b8192de11169c9c2a9d86ad5678f6f",
+          "status": "executed",
+          "values": [
+            2.457970142364502
+          ],
+          "tokens": 290,
+          "elapsedMs": 58.7091000052169
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Masked_Singer_(American_TV_series)_season_14",
+          "passageSha256": "f08d45f96d0087287f4f91401a8c48806acbfda0a00bd698db34391feadf25c8",
+          "status": "executed",
+          "values": [
+            1.8870110511779785
+          ],
+          "tokens": 107,
+          "elapsedMs": 23.96759996190667
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Girl_of_Your_Dreams_(album)",
+          "passageSha256": "9cb8f7e09c4574f97032cf48dbaf6d950c485205a7e7738f70b5aa98a4ecea05",
+          "status": "executed",
+          "values": [
+            5.0574822425842285
+          ],
+          "tokens": 98,
+          "elapsedMs": 24.935699999332428
+        }
+      ]
+    },
+    {
+      "id": "88473",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Jackie_Robinson",
+          "passageSha256": "26bbbecc27c28a80ef8946386751b068bf3aa610c0e6330d7a8b201de8ef154f",
+          "status": "executed",
+          "values": [
+            -2.341249942779541
+          ],
+          "tokens": 251,
+          "elapsedMs": 40.999600023496896
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Edward_G._Robinson",
+          "passageSha256": "d7dfa5258f6c67e1003c30b1ed165b4e01dabdbf0831ea22f502d5a0eec39ad8",
+          "status": "executed",
+          "values": [
+            4.530140399932861
+          ],
+          "tokens": 278,
+          "elapsedMs": 47.19329997897148
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Joan_Blondell",
+          "passageSha256": "6b414d9ee1d8987d117cfc1c8c174bb1da84884557d52e7cb663b67cfe13eb55",
+          "status": "executed",
+          "values": [
+            -10.249022483825684
+          ],
+          "tokens": 275,
+          "elapsedMs": 47.017899982165545
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Cincinnati_Kid",
+          "passageSha256": "755ac1c8372fe604ea197c1904231a767be7c1ca98d94501066d4f419050ab05",
+          "status": "executed",
+          "values": [
+            7.122368812561035
+          ],
+          "tokens": 278,
+          "elapsedMs": 60.53129996871576
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_people_from_Cincinnati",
+          "passageSha256": "d3dd75df3a44bbef37cf5fd8a6b09b92380c3af0ae6efcc0434dc4c8582f8d42",
+          "status": "executed",
+          "values": [
+            -8.415304183959961
+          ],
+          "tokens": 32,
+          "elapsedMs": 11.500699969474226
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Edward_G._Robinson_performances",
+          "passageSha256": "437a2988c1c5014348fb8d175f9bd08364df9cc019431edfcdc48268308d7f8c",
+          "status": "executed",
+          "values": [
+            2.0826380252838135
+          ],
+          "tokens": 37,
+          "elapsedMs": 12.917799991555512
+        }
+      ]
+    },
+    {
+      "id": "180710",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Richard_III_(play)",
+          "passageSha256": "d0fa2761cfdde0bb69444d73841bd13d667fe64df99436652211933e4110addb",
+          "status": "executed",
+          "values": [
+            -10.973716735839844
+          ],
+          "tokens": 251,
+          "elapsedMs": 60.131700010970235
+        }
+      ]
+    },
+    {
+      "id": "124022",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Anousheh_Ansari",
+          "passageSha256": "197e87ce158f9d1917297af284215504a84e376aeedccefa21bb505b512927c2",
+          "status": "executed",
+          "values": [
+            -9.613685607910156
+          ],
+          "tokens": 226,
+          "elapsedMs": 56.60160002298653
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Black-ish",
+          "passageSha256": "b8ac70db124005beddff175b8a83f7288695e46f989f8759af2b1a9ae972690a",
+          "status": "executed",
+          "values": [
+            -5.087496757507324
+          ],
+          "tokens": 306,
+          "elapsedMs": 63.05430002976209
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Smallfoot",
+          "passageSha256": "1d829c0a33fa62dbc902374fb7ca0f4e34fa923d44d79b7054845951cb0cfdd2",
+          "status": "executed",
+          "values": [
+            -6.083662033081055
+          ],
+          "tokens": 181,
+          "elapsedMs": 35.45309999026358
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Grown-ish",
+          "passageSha256": "52dbddb13f95ea3a429b6ef7201ababf466d043655e609a6e1a0b81b0f8928ec",
+          "status": "executed",
+          "values": [
+            -3.7786169052124023
+          ],
+          "tokens": 297,
+          "elapsedMs": 57.46879999060184
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/2019_Teen_Choice_Awards",
+          "passageSha256": "531042509835c5938862f4ffcfcfb35bc0d4b334b78c4919b2fc8e1845e30a82",
+          "status": "executed",
+          "values": [
+            -10.953512191772461
+          ],
+          "tokens": 160,
+          "elapsedMs": 32.942900026682764
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Jason_Bolden",
+          "passageSha256": "48a7c1189c066d7448aaf3462eecd3fc4b7a0210c58e006c3916d70eeb39e18c",
+          "status": "executed",
+          "values": [
+            -9.665975570678711
+          ],
+          "tokens": 66,
+          "elapsedMs": 17.262500012293458
+        }
+      ]
+    },
+    {
+      "id": "12762",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Falls_Church,_Virginia",
+          "passageSha256": "bbcc0d0bdc271a48102078aef134190bc503e4defb3ace9a00ca2eab74a48cba",
+          "status": "executed",
+          "values": [
+            -11.103586196899414
+          ],
+          "tokens": 256,
+          "elapsedMs": 45.19299999810755
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Enid,_Oklahoma",
+          "passageSha256": "61394c796f5a983a79f6edbad99221374466e73de45c44eeebe8c9eeec1ba216",
+          "status": "executed",
+          "values": [
+            -11.045694351196289
+          ],
+          "tokens": 165,
+          "elapsedMs": 31.40410000924021
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Jimmy_Olsen",
+          "passageSha256": "3499ea6ee5944aa5db2fb1c1ebf820dddec81e0717764146bf8c64b3512989e2",
+          "status": "executed",
+          "values": [
+            -7.968316555023193
+          ],
+          "tokens": 265,
+          "elapsedMs": 69.77559998631477
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Dexter_characters",
+          "passageSha256": "577cd58cb053c65ece2b5915bb6a40f7ae86832e25d37480d943b45d3b5950bd",
+          "status": "executed",
+          "values": [
+            -9.81149673461914
+          ],
+          "tokens": 170,
+          "elapsedMs": 51.16309999721125
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Timeline_of_women%27s_legal_rights_(other_than_voting)_in_the_20th_century",
+          "passageSha256": "9b86b2facfbeb3e0841e18486859003f41f04c36931d255f5c68f02823620822",
+          "status": "executed",
+          "values": [
+            -11.1017484664917
+          ],
+          "tokens": 123,
+          "elapsedMs": 28.453300008550286
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Flash_season_8",
+          "passageSha256": "735714fb66908daecc0eac1cb45c789a081879f332f516363675a287079d389b",
+          "status": "executed",
+          "values": [
+            -10.030385971069336
+          ],
+          "tokens": 233,
+          "elapsedMs": 49.36429997906089
+        }
+      ]
+    },
+    {
+      "id": "151253",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Carol_Kane",
+          "passageSha256": "1574a32b0df411f3474f4fa73d12a3b716152cb39315f52eb979c362cfdfaaa0",
+          "status": "executed",
+          "values": [
+            -3.1851935386657715
+          ],
+          "tokens": 238,
+          "elapsedMs": 71.37200003489852
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Eyes_Wide_Shut",
+          "passageSha256": "2149f8ae8a16c0af9e6101f15d6a4ac77ac18c597629ecfbb89afbfa57ede8b3",
+          "status": "executed",
+          "values": [
+            -8.59860610961914
+          ],
+          "tokens": 262,
+          "elapsedMs": 77.17459998093545
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Gene_Hackman",
+          "passageSha256": "70f8fcd1c480434b412c2bb7c309013cef6c90814fdf302b02b1eef3a4c58fbb",
+          "status": "executed",
+          "values": [
+            -7.654178619384766
+          ],
+          "tokens": 274,
+          "elapsedMs": 72.6954999845475
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Allison_Janney",
+          "passageSha256": "e112a57712979fbba1e8581769552c90472f9e5f967bc4842dfa26a4fae4b05f",
+          "status": "executed",
+          "values": [
+            -3.6902337074279785
+          ],
+          "tokens": 278,
+          "elapsedMs": 61.83170003350824
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Amanda_Seyfried",
+          "passageSha256": "8e146828ae4d758b95b3a90818998254bfccdf4530aabdd7c0b2ebb4e77a0bb1",
+          "status": "executed",
+          "values": [
+            -4.570884704589844
+          ],
+          "tokens": 317,
+          "elapsedMs": 92.37919998122379
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Colman_Domingo",
+          "passageSha256": "812b1ea9f28d06884c08574b2f0eebd5df5486d04e042157d14cba5ce28f4b7f",
+          "status": "executed",
+          "values": [
+            -4.495937824249268
+          ],
+          "tokens": 275,
+          "elapsedMs": 69.11929999478161
+        }
+      ]
+    },
+    {
+      "id": "34105",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Phoenix,_Arizona",
+          "passageSha256": "7f63b95700b5f08008bde31b042be151da3bfaf3a39a57b2baa20bf3fe4a586c",
+          "status": "executed",
+          "values": [
+            9.981250762939453
+          ],
+          "tokens": 280,
+          "elapsedMs": 61.65569997392595
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Maricopa_County,_Arizona",
+          "passageSha256": "7c3a9891b51bca56b26a02861b22eb9a49a6c670cbea540fcb36f9430d059033",
+          "status": "executed",
+          "values": [
+            7.26854133605957
+          ],
+          "tokens": 253,
+          "elapsedMs": 76.7090999870561
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Chandler,_Arizona",
+          "passageSha256": "4eace12e5c8406fc7abb9dc8cc437742a52cfd15682e5652a0ea88820ba2623d",
+          "status": "executed",
+          "values": [
+            2.1861531734466553
+          ],
+          "tokens": 120,
+          "elapsedMs": 35.54090001853183
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Gilbert,_Arizona",
+          "passageSha256": "3fc273d06882fb7b362320ac17ffdba8d2ae531568f4d2ae4a8c8343e2b5211b",
+          "status": "executed",
+          "values": [
+            3.5885868072509766
+          ],
+          "tokens": 113,
+          "elapsedMs": 33.98830001242459
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Mesa,_Arizona",
+          "passageSha256": "b2384cd68b7873fc9c2093b72b5d30ae92af5f5e1f4f87440d3c44929448e162",
+          "status": "executed",
+          "values": [
+            6.010332107543945
+          ],
+          "tokens": 223,
+          "elapsedMs": 55.31030002748594
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Arizona",
+          "passageSha256": "1ae6042307354520cf12c0cdfe256b9ae208d55a1a890a35414e6679c4a97a13",
+          "status": "executed",
+          "values": [
+            7.994959831237793
+          ],
+          "tokens": 251,
+          "elapsedMs": 61.44399999175221
+        }
+      ]
+    },
+    {
+      "id": "205125",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Augustus",
+          "passageSha256": "7a638d19b1757e179973fa74dc5e96c0fb20428f11310667a6c843dc052a3ea1",
+          "status": "executed",
+          "values": [
+            2.039569854736328
+          ],
+          "tokens": 278,
+          "elapsedMs": 85.41120000882074
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Julius_Caesar",
+          "passageSha256": "cbc8f2237c9c7058ac3bec31f2088fe1f4ddd7093df5952e26e4e3f0ed1aefd9",
+          "status": "executed",
+          "values": [
+            6.894374847412109
+          ],
+          "tokens": 265,
+          "elapsedMs": 78.77290004398674
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Gaius_Caesar",
+          "passageSha256": "aa19a26e39c7f22d4f472c5989fef3dff8c190af264467e4db643fc8206b192d",
+          "status": "executed",
+          "values": [
+            5.994240760803223
+          ],
+          "tokens": 275,
+          "elapsedMs": 77.02819997211918
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Julia_gens",
+          "passageSha256": "5eb0433b4fc9257a61446b6ee9fe0420d31a5673603f75cfe4287d739d3b99e8",
+          "status": "executed",
+          "values": [
+            -0.09875200688838959
+          ],
+          "tokens": 141,
+          "elapsedMs": 42.764399957377464
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Lucius_Caesar",
+          "passageSha256": "120fe9d7e498f231148f2a365ff0ea5cb0220dc10bb6c6988f35a3678f027740",
+          "status": "executed",
+          "values": [
+            7.004307270050049
+          ],
+          "tokens": 190,
+          "elapsedMs": 49.23369997413829
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Aurelia_(mother_of_Caesar)",
+          "passageSha256": "865468ccc6c3e741750083a34e4ae5f6811fc413866dc07f895b45d644af1209",
+          "status": "executed",
+          "values": [
+            0.751990556716919
+          ],
+          "tokens": 45,
+          "elapsedMs": 17.187099962029606
+        }
+      ]
+    },
+    {
+      "id": "87918",
+      "role": "validation",
+      "candidates": []
+    },
+    {
+      "id": "194365",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Metallica",
+          "passageSha256": "2b1f84242cac55a143532a7d54e71704e74767ec3d5f6e31751a88a8c11a1fac",
+          "status": "executed",
+          "values": [
+            -8.85488510131836
+          ],
+          "tokens": 279,
+          "elapsedMs": 82.29879999998957
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Iron_Maiden",
+          "passageSha256": "25ab24a9101ca09049da84e878022852b29cbdf8a1c1f5bcad46422abbf1caf2",
+          "status": "executed",
+          "values": [
+            -10.117721557617188
+          ],
+          "tokens": 279,
+          "elapsedMs": 84.12849996238947
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Broken_(Nine_Inch_Nails_EP)",
+          "passageSha256": "6b267dbc54cb21da7d38922c4f8ba85b7ca885fc6e75a35c3f51dca755c4d855",
+          "status": "executed",
+          "values": [
+            -2.0167202949523926
+          ],
+          "tokens": 256,
+          "elapsedMs": 60.67370000528172
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Broken_(1993_film)",
+          "passageSha256": "85816af93311c416d227e2fc64fe2a74fb51b7a987386fc30b72c2a818ed54cd",
+          "status": "executed",
+          "values": [
+            -4.213879585266113
+          ],
+          "tokens": 286,
+          "elapsedMs": 50.71700003463775
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Mastodon_(band)",
+          "passageSha256": "ed616591a2b84156cbf11981dceffbdf6cb2a6dd9b2f9642bcce8b0d66e7cef3",
+          "status": "executed",
+          "values": [
+            -8.95608901977539
+          ],
+          "tokens": 296,
+          "elapsedMs": 82.62589998776093
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Gojira_(band)",
+          "passageSha256": "9ea27e1401bd5f9e3d069ee92d10360122ca2edfc68ff2d9f653223d96648d2e",
+          "status": "executed",
+          "values": [
+            -9.88829231262207
+          ],
+          "tokens": 303,
+          "elapsedMs": 84.2996999854222
+        }
+      ]
+    },
+    {
+      "id": "95621",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Irvine_Welsh",
+          "passageSha256": "5ea340f149dbd1ff49dbbf7a02b001c9b4baa3757567feec184b830f87432111",
+          "status": "executed",
+          "values": [
+            -2.1473355293273926
+          ],
+          "tokens": 199,
+          "elapsedMs": 56.991999968886375
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Danny_Boyle",
+          "passageSha256": "ff8e8b6ead3f626bf546e382861e3baf80d5f8ca8e59d51a5eeb81369ce43ac0",
+          "status": "executed",
+          "values": [
+            -0.9204486608505249
+          ],
+          "tokens": 268,
+          "elapsedMs": 68.829600000754
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Hibernian_F.C.",
+          "passageSha256": "688b20b5349512cbe6376c8abaf00b318a92086382653e55ed568db372636ee2",
+          "status": "executed",
+          "values": [
+            -10.87570858001709
+          ],
+          "tokens": 269,
+          "elapsedMs": 79.01819999096915
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Jonny_Lee_Miller",
+          "passageSha256": "a2a12a1534f85109c27499cdd58df874d168335b0e0c937380fa940b80323532",
+          "status": "executed",
+          "values": [
+            1.5037240982055664
+          ],
+          "tokens": 281,
+          "elapsedMs": 71.93539995932952
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Lust_for_Life_(Iggy_Pop_song)",
+          "passageSha256": "911a678a3080c6e4cbf021ca4cdce785f51093f386f96a8e14c00c3a4f5c0feb",
+          "status": "executed",
+          "values": [
+            -6.348945140838623
+          ],
+          "tokens": 129,
+          "elapsedMs": 38.935699965804815
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Prometheus_(2012_film)",
+          "passageSha256": "6814f42c330eba8e242142588a13e4506b9920cce936fb5bdc9b4a181993ed6c",
+          "status": "executed",
+          "values": [
+            -10.79735279083252
+          ],
+          "tokens": 280,
+          "elapsedMs": 78.19039997411892
+        }
+      ]
+    },
+    {
+      "id": "220466",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/History_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints",
+          "passageSha256": "2a9d671a9309631af0c90a8eacf40932d86092f4b5049ff54a24cf9c36d590bd",
+          "status": "executed",
+          "values": [
+            -0.2585543692111969
+          ],
+          "tokens": 285,
+          "elapsedMs": 81.45830000285059
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Mormon_missionary",
+          "passageSha256": "b20c4d2e71d519a2327edcf1493f8d779ee733db8bf44ab05a683e22d26159d1",
+          "status": "executed",
+          "values": [
+            -2.436767578125
+          ],
+          "tokens": 260,
+          "elapsedMs": 72.01180001720786
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Finances_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints",
+          "passageSha256": "f596cc7c8dfd54a8774514700742bf94786edfbe02ab4d20b99354c6c115dfa9",
+          "status": "executed",
+          "values": [
+            1.6695225238800049
+          ],
+          "tokens": 250,
+          "elapsedMs": 73.86620005127043
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Li%C3%A8ge_Cathedral",
+          "passageSha256": "9e507959c459b7ff2b04d88125d18cdc89636440e20ac164ae8ddfc3ac99c475",
+          "status": "executed",
+          "values": [
+            -10.651548385620117
+          ],
+          "tokens": 109,
+          "elapsedMs": 36.90580005059019
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Utah-Idaho_Sugar_Company",
+          "passageSha256": "575f4d6a259ed676026cf17d72a761c6af604a54df25a60b5a7156899c8cb6b2",
+          "status": "executed",
+          "values": [
+            -4.297640800476074
+          ],
+          "tokens": 172,
+          "elapsedMs": 53.36489999899641
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/LDS_Church_and_masturbation",
+          "passageSha256": "a005818c1b8446560044db5a308d299157d7da39dce9718433d277b94148e20f",
+          "status": "executed",
+          "values": [
+            -0.3212747871875763
+          ],
+          "tokens": 270,
+          "elapsedMs": 81.32949995342642
+        }
+      ]
+    },
+    {
+      "id": "154190",
+      "role": "validation",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Grease_2",
+          "passageSha256": "1d8bc417d22778f1c9cc66972fe83ccaf4f9986ef56c8b1e55921f1242f0e73d",
+          "status": "executed",
+          "values": [
+            -0.052574414759874344
+          ],
+          "tokens": 223,
+          "elapsedMs": 61.76420004339889
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Grease_(film)",
+          "passageSha256": "8e598f5bc69c5942bdcd1e3891873a2f91bb6896fcea6cdfb214a03949d3ce66",
+          "status": "executed",
+          "values": [
+            2.3875620365142822
+          ],
+          "tokens": 264,
+          "elapsedMs": 68.30530002480373
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Rendering_(animal_products)",
+          "passageSha256": "ba332f3b35a552e5262afbfc2270c73e11bcdd2ee7bf0848b87cd96ad50f6cf4",
+          "status": "executed",
+          "values": [
+            -11.088069915771484
+          ],
+          "tokens": 127,
+          "elapsedMs": 31.91670001251623
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Lard_of_the_Dance",
+          "passageSha256": "fbe8ad26dcb09d8c7b85f3f2647e143fd6c3ac8bf1ad14f1ad20ef735aff73a6",
+          "status": "executed",
+          "values": [
+            -6.477017402648926
+          ],
+          "tokens": 134,
+          "elapsedMs": 40.24659999413416
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Grease_trucks",
+          "passageSha256": "a3d86afc5aace99ce69e4efd7ebe0cd1595c734ba289e0709ce91a37f8fcf91a",
+          "status": "executed",
+          "values": [
+            -5.7275390625
+          ],
+          "tokens": 211,
+          "elapsedMs": 60.49970001913607
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Redemption_of_the_Beast",
+          "passageSha256": "9f82be8ddc3da3047bd2af2cc97e0fcf59fd8261aff1ac79ab595d2dbbe83315",
+          "status": "executed",
+          "values": [
+            -10.79499340057373
+          ],
+          "tokens": 63,
+          "elapsedMs": 21.34980005212128
+        }
+      ]
+    },
+    {
+      "id": "9868",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Google_Search",
+          "passageSha256": "48951becdb2dda2a0b0475720899168c04fc81aef089d92d5bec8a7b156632aa",
+          "status": "executed",
+          "values": [
+            0.33479464054107666
+          ],
+          "tokens": 254,
+          "elapsedMs": 54.5943999895826
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Google",
+          "passageSha256": "69e2959d270d2cc00d2a4c85902897a5bd5f97d5c20b83cc6814d78d1e529854",
+          "status": "executed",
+          "values": [
+            -3.9281506538391113
+          ],
+          "tokens": 258,
+          "elapsedMs": 64.46309998864308
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Google_Easter_eggs",
+          "passageSha256": "d3c7bab3caf06d09ec3a02f42800767db6396c8685433dc9b321ae88d1251b01",
+          "status": "executed",
+          "values": [
+            -8.228863716125488
+          ],
+          "tokens": 75,
+          "elapsedMs": 24.12049996200949
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Search_engine",
+          "passageSha256": "504202f248131e553d7c93976f8b87ef82b1083f06ea3cc71f07c04f8897bc10",
+          "status": "executed",
+          "values": [
+            -6.093369007110596
+          ],
+          "tokens": 260,
+          "elapsedMs": 69.35249996604398
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Google_Search_Console",
+          "passageSha256": "5fb7560ea9ec5769bf26efb45523f13217af55f307372dcbc7dc0afe94152084",
+          "status": "executed",
+          "values": [
+            -1.2593367099761963
+          ],
+          "tokens": 155,
+          "elapsedMs": 47.10319999139756
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Year_in_Search_top_searches",
+          "passageSha256": "5ea50e59e918a0646318c8f045f46e182291b627c2e60409a4712cf8d7a48afe",
+          "status": "executed",
+          "values": [
+            -6.036898612976074
+          ],
+          "tokens": 103,
+          "elapsedMs": 23.965600004885346
+        }
+      ]
+    },
+    {
+      "id": "10100",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Bahamas",
+          "passageSha256": "6a99e90d49292cbd6ac24e849c0a2eff9503cd8e30a36e2cd9e7e3f0a73fd0da",
+          "status": "executed",
+          "values": [
+            5.562717437744141
+          ],
+          "tokens": 279,
+          "elapsedMs": 72.21050001680851
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Governor-General_of_the_Bahamas",
+          "passageSha256": "b582f415b4f9751b1a9987e78cbcb1b5dfc2499a9e5b7c95952daa489138f634",
+          "status": "executed",
+          "values": [
+            1.2314729690551758
+          ],
+          "tokens": 244,
+          "elapsedMs": 64.65039995964617
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Monarchy_of_the_Bahamas",
+          "passageSha256": "dcc1ce57e09bccddf0257f7392f249374db8e2113c871aa34fdceb17cc196a62",
+          "status": "executed",
+          "values": [
+            2.8784656524658203
+          ],
+          "tokens": 246,
+          "elapsedMs": 53.42169996583834
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Bahamas_(musician)",
+          "passageSha256": "57da64e48796500426b3db088130654b1d5568a0ddb4616b110c0775af7288e0",
+          "status": "executed",
+          "values": [
+            5.914028167724609
+          ],
+          "tokens": 41,
+          "elapsedMs": 10.042999987490475
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Pig_Beach",
+          "passageSha256": "b46fc1743a0a9ed882879e58770b506e249fce154a6f48f12d271a0442cbcb97",
+          "status": "executed",
+          "values": [
+            3.4539897441864014
+          ],
+          "tokens": 112,
+          "elapsedMs": 26.35179995559156
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Bahamas_Bowl",
+          "passageSha256": "024d6d4be951c9a0b51ac8d2cbd42e0cfe5daee0edab3bcdf0199b2f0e8f4224",
+          "status": "executed",
+          "values": [
+            -1.150407314300537
+          ],
+          "tokens": 198,
+          "elapsedMs": 53.47409995738417
+        }
+      ]
+    },
+    {
+      "id": "98966",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Leif_Garrett",
+          "passageSha256": "a8575b2028c96239db5d450b1be55f278cc391593eeec434a348d28c519c13aa",
+          "status": "executed",
+          "values": [
+            -8.300146102905273
+          ],
+          "tokens": 65,
+          "elapsedMs": 22.069400001782924
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Arrested_Development_characters",
+          "passageSha256": "b8ba534c69b0f6ab020e0dc4856649187443c531cf75abbe3dfe4393781a8769",
+          "status": "executed",
+          "values": [
+            -9.406097412109375
+          ],
+          "tokens": 220,
+          "elapsedMs": 64.95889998041093
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Timeline_of_LGBTQ_history_in_the_United_Kingdom",
+          "passageSha256": "dd9fd12b3f469ce06ca17bf01e3b9bc8b05888740dff61960b43f0447d491a05",
+          "status": "executed",
+          "values": [
+            -11.090642929077148
+          ],
+          "tokens": 62,
+          "elapsedMs": 20.796200027689338
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_comedy_television_series_with_LGBTQ_characters",
+          "passageSha256": "fa7d1c7d536bd6ea2c73e2bd99a3d4cbacfb363a784d333e5584ef9fc8f68f94",
+          "status": "executed",
+          "values": [
+            -11.163562774658203
+          ],
+          "tokens": 87,
+          "elapsedMs": 27.54460001597181
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_American_films_of_2013",
+          "passageSha256": "08927a2b35e4174dc4a2c4482a787b2a9333b841eb43c0fb1e9dd7854b015b1d",
+          "status": "executed",
+          "values": [
+            -11.215213775634766
+          ],
+          "tokens": 29,
+          "elapsedMs": 12.604999996256083
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_films_directed_by_women",
+          "passageSha256": "b7837c0435f9efb8678c75f3052f73b8cf4b1d50486c6114e3c7355dc7341c06",
+          "status": "executed",
+          "values": [
+            -11.215632438659668
+          ],
+          "tokens": 30,
+          "elapsedMs": 12.35199999064207
+        }
+      ]
+    },
+    {
+      "id": "21085",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Motor_neuron_diseases",
+          "passageSha256": "1dde7910a80f5b3f9ca402d7f02e0c3b0562a613a20be518028356c9f35ed80e",
+          "status": "executed",
+          "values": [
+            -2.044469118118286
+          ],
+          "tokens": 303,
+          "elapsedMs": 89.73989996593446
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Restless_legs_syndrome",
+          "passageSha256": "5432b53888c8232151a97701117a8ad597da0195b87ee4333d65ce457b994426",
+          "status": "executed",
+          "values": [
+            -10.032818794250488
+          ],
+          "tokens": 185,
+          "elapsedMs": 56.05850002029911
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Ketogenic_diet",
+          "passageSha256": "9dcd309e990053d114048948fffb1e26b9c4b5096c20f235b4ae438cbf110627",
+          "status": "executed",
+          "values": [
+            -10.892230987548828
+          ],
+          "tokens": 297,
+          "elapsedMs": 84.78430000832304
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Mobile_genetic_elements",
+          "passageSha256": "92c0144aa620292c7e0bf4333324ecf27620add55e6e3bf89def9efde160d363",
+          "status": "executed",
+          "values": [
+            -10.942712783813477
+          ],
+          "tokens": 246,
+          "elapsedMs": 72.93349999235943
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Chronic_traumatic_encephalopathy",
+          "passageSha256": "bbadd6106dd2432e92726df9f13e56ea086940d8382872eae7dc2fdaf6974961",
+          "status": "executed",
+          "values": [
+            -9.26007080078125
+          ],
+          "tokens": 282,
+          "elapsedMs": 82.19619997544214
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/ALS",
+          "passageSha256": "7f5ef4c9f1198c08da1f73291ee2a581ac4dc8b577d78302fbe828e8296c5212",
+          "status": "executed",
+          "values": [
+            3.0463039875030518
+          ],
+          "tokens": 294,
+          "elapsedMs": 86.46979997865856
+        }
+      ]
+    },
+    {
+      "id": "205738",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/First_Motion_Picture_Unit",
+          "passageSha256": "4123f8c134103da79c7ddfac6b3b32baec47b916eba147e333e4982d25a2ee13",
+          "status": "executed",
+          "values": [
+            5.958437919616699
+          ],
+          "tokens": 220,
+          "elapsedMs": 62.49829998705536
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Zero_Dark_Thirty",
+          "passageSha256": "ed4c386dc5191e88476355238fe475a8f40a0b80b254d1b52c9d1caad5dceb57",
+          "status": "executed",
+          "values": [
+            -0.3569048345088959
+          ],
+          "tokens": 266,
+          "elapsedMs": 60.66880002617836
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Fantastic_Four:_First_Steps",
+          "passageSha256": "e06ba24a91674b271e13710357cf27b3dc119b704741d25e00a1623453b0ce26",
+          "status": "executed",
+          "values": [
+            -4.242100715637207
+          ],
+          "tokens": 275,
+          "elapsedMs": 72.99549999879673
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Dune:_Part_Two",
+          "passageSha256": "39d92938a07fe765493841c10c8b904cee5d3ef3a40c0ec5b8d1f1647412f529",
+          "status": "executed",
+          "values": [
+            -9.116050720214844
+          ],
+          "tokens": 272,
+          "elapsedMs": 79.64659994468093
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/2026_in_film",
+          "passageSha256": "91476d0ed92d803a66d29da4c2404565cb20cb7debfc0ae3ac6d84e4201fe65e",
+          "status": "executed",
+          "values": [
+            -10.432151794433594
+          ],
+          "tokens": 58,
+          "elapsedMs": 22.185100009664893
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Godzilla_Minus_Zero",
+          "passageSha256": "bbed2fe1746b39111f80571ffbe8d08fb506244edf4e9bf27d25fda432fcee91",
+          "status": "executed",
+          "values": [
+            -2.9147043228149414
+          ],
+          "tokens": 314,
+          "elapsedMs": 74.87910002237186
+        }
+      ]
+    },
+    {
+      "id": "99852",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Die_Hard_with_a_Vengeance",
+          "passageSha256": "fdc3cdeebcc58e47403a481ef782efc8f6dd503d4ca1db281ada50c011d4f4b5",
+          "status": "executed",
+          "values": [
+            7.974860668182373
+          ],
+          "tokens": 291,
+          "elapsedMs": 76.62180002080277
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Die_Hard_2",
+          "passageSha256": "1797bda4f03f581f67ffaff38caa9314d7275902443b8594bf18b8db56ee58d8",
+          "status": "executed",
+          "values": [
+            7.752874851226807
+          ],
+          "tokens": 276,
+          "elapsedMs": 78.49879999412224
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Live_Free_or_Die_Hard",
+          "passageSha256": "804c5ffd9c1248ccb99fb24caf2c8fbbfb82d9c2599f1fdbcd777db6d2c2b12e",
+          "status": "executed",
+          "values": [
+            5.111583709716797
+          ],
+          "tokens": 288,
+          "elapsedMs": 77.2570000262931
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Die_Hard_(franchise)",
+          "passageSha256": "c4b703fe96582ac02f407487e3222661cf91f9c4ee4e6d806e6b6be77aba024e",
+          "status": "executed",
+          "values": [
+            6.850109100341797
+          ],
+          "tokens": 161,
+          "elapsedMs": 48.390000010840595
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/A_Good_Day_to_Die_Hard",
+          "passageSha256": "cc36e16412bbfb1351251bf8990530851dfdfa171aac90f6bee530cebf5e8eb5",
+          "status": "executed",
+          "values": [
+            10.951101303100586
+          ],
+          "tokens": 285,
+          "elapsedMs": 83.80749996285886
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Bruce_Willis_filmography",
+          "passageSha256": "1ac83ecc6d71be9595c6cd1876b5d6d9bec82b203eb7b6f771db6e4de22eab7b",
+          "status": "executed",
+          "values": [
+            5.83368444442749
+          ],
+          "tokens": 281,
+          "elapsedMs": 72.8765000239946
+        }
+      ]
+    },
+    {
+      "id": "206174",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Silicon_Valley",
+          "passageSha256": "f75ae527b64a8f3f83542f397c22841076e844d62fb49d58a43f7c29fabec5aa",
+          "status": "executed",
+          "values": [
+            1.2555572986602783
+          ],
+          "tokens": 251,
+          "elapsedMs": 64.16109995916486
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Palo_Alto,_California",
+          "passageSha256": "0479aace8e850118dfb48bcbe6af3ccd1e644b96aae92f932b5effa980c89277",
+          "status": "executed",
+          "values": [
+            8.06618595123291
+          ],
+          "tokens": 276,
+          "elapsedMs": 83.6482000304386
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/East_Palo_Alto,_California",
+          "passageSha256": "63a23b31da672777c55c7b3fc00c77efc9bf90427d0431895f0d31afca01bed5",
+          "status": "executed",
+          "values": [
+            6.60957145690918
+          ],
+          "tokens": 277,
+          "elapsedMs": 67.90610001189634
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Sofia_University_(California)",
+          "passageSha256": "823ce27d37bf4d8ee9c60c02606d92a0a0aca267abc7bfb1e290b0a6817b326f",
+          "status": "executed",
+          "values": [
+            -3.1011862754821777
+          ],
+          "tokens": 70,
+          "elapsedMs": 15.23229997837916
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Mayfield,_California",
+          "passageSha256": "901cdf38486cb822636ef4c00d1619e73b5b7a8df86440f4395640b71acea1bd",
+          "status": "executed",
+          "values": [
+            -4.585904598236084
+          ],
+          "tokens": 156,
+          "elapsedMs": 41.370200051460415
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Mega_Mart",
+          "passageSha256": "d914e9394a4b2a9d4325b46795bb3a98f6a91d72f060d6a28c695396c3efa024",
+          "status": "executed",
+          "values": [
+            -0.0823657289147377
+          ],
+          "tokens": 236,
+          "elapsedMs": 68.43869999283925
+        }
+      ]
+    },
+    {
+      "id": "35123",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Fox",
+          "passageSha256": "7053005c85235d917fb427318a22a685d3db9307984949d1740b2913830e1fec",
+          "status": "executed",
+          "values": [
+            -1.3954963684082031
+          ],
+          "tokens": 237,
+          "elapsedMs": 68.90750001184642
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Fox_Broadcasting_Company",
+          "passageSha256": "301a547b3c1aa481e0dc1e9915ffde77e8d2732a19bfe6d682f06d3c8eeb5cf5",
+          "status": "executed",
+          "values": [
+            0.5322091579437256
+          ],
+          "tokens": 238,
+          "elapsedMs": 69.51020000269637
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/House_(TV_series)",
+          "passageSha256": "450476b4056359181323644903afbc1374d05e38d6eaed2bce4090c54bd1f55e",
+          "status": "executed",
+          "values": [
+            7.251450538635254
+          ],
+          "tokens": 277,
+          "elapsedMs": 82.88090000860393
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Megan_Fox",
+          "passageSha256": "24c24bcb1bd149bbc2b30864d6774ce59a8906034e46cfe9599f9c96eab33d6c",
+          "status": "executed",
+          "values": [
+            -4.034721374511719
+          ],
+          "tokens": 232,
+          "elapsedMs": 68.5636000125669
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Fox_House",
+          "passageSha256": "cace6be04d733027445dcdb551772901d4fe37850a832e42f4f47f6b34fffa26",
+          "status": "executed",
+          "values": [
+            5.06068229675293
+          ],
+          "tokens": 30,
+          "elapsedMs": 12.429800000973046
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Fox_Corporation",
+          "passageSha256": "dde37c54b20e2c17ac141b807ab8c5835e70f36a241447d27d230e21ee57e805",
+          "status": "executed",
+          "values": [
+            -0.7168262004852295
+          ],
+          "tokens": 256,
+          "elapsedMs": 77.86049996502697
+        }
+      ]
+    },
+    {
+      "id": "216197",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Tenacious_D",
+          "passageSha256": "c3b7add0338067b84a3b752d30f66b06ad93ed7f73bdfadfbd9fcbe6f2183ddb",
+          "status": "executed",
+          "values": [
+            6.356476783752441
+          ],
+          "tokens": 274,
+          "elapsedMs": 81.87569997971877
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Tenacious_D_(album)",
+          "passageSha256": "7d591f0426a96568d2f87e6e1429e2ee28e828a719dbc522db6401d73aa2c5ba",
+          "status": "executed",
+          "values": [
+            9.164992332458496
+          ],
+          "tokens": 171,
+          "elapsedMs": 49.24660001415759
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Tenacious_D_in_The_Pick_of_Destiny",
+          "passageSha256": "5248d670e10e1eb1093565606973a1e3300ef1d3ec0fc487b5e078f0551dfc64",
+          "status": "executed",
+          "values": [
+            6.771568298339844
+          ],
+          "tokens": 180,
+          "elapsedMs": 50.283599994145334
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Tenacious_D_(TV_series)",
+          "passageSha256": "f328ffe66ebd1638fe2a99bf9b70cba0b4899579a6bbea52c479753b39256308",
+          "status": "executed",
+          "values": [
+            4.984231948852539
+          ],
+          "tokens": 143,
+          "elapsedMs": 40.21420003846288
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Tenacious_D_discography",
+          "passageSha256": "c4adaab2bd6849db7c3113b5a9270962261eed3ac5e0e46c69980aaae6c07ff6",
+          "status": "executed",
+          "values": [
+            4.683831214904785
+          ],
+          "tokens": 256,
+          "elapsedMs": 69.0541000221856
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_songs_recorded_by_Tenacious_D",
+          "passageSha256": "7f2f55ce0bd13eaddd89c35eb0ffe39839cc51674c1d00097506a57ec759723b",
+          "status": "executed",
+          "values": [
+            6.223112106323242
+          ],
+          "tokens": 271,
+          "elapsedMs": 71.51050004176795
+        }
+      ]
+    },
+    {
+      "id": "193902",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Green_Acres_episodes",
+          "passageSha256": "57162b5df35d3a8d47d46c4c4e2e103625809a5839f7e82f9ba51f8e224be677",
+          "status": "executed",
+          "values": [
+            -11.244529724121094
+          ],
+          "tokens": 76,
+          "elapsedMs": 26.27780003240332
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Petticoat_Junction_episodes",
+          "passageSha256": "86ad4dc2e430afe3cd78e780a12597914090f5236fcad72b1d82983b51678151",
+          "status": "executed",
+          "values": [
+            -11.347142219543457
+          ],
+          "tokens": 58,
+          "elapsedMs": 21.282400004565716
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_EastEnders_characters_introduced_in_1995",
+          "passageSha256": "23c7844bcb0badbe9b2bed3d137a766ddd3f356d7c27b8b84cd0dcf520593328",
+          "status": "executed",
+          "values": [
+            -11.389533996582031
+          ],
+          "tokens": 47,
+          "elapsedMs": 18.736700003501028
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_EastEnders_characters_introduced_in_2017",
+          "passageSha256": "6a8fe765bc54b185a5b8c1d5946ec6019ba89c97a6174b8a650b38350e71c7e5",
+          "status": "executed",
+          "values": [
+            -11.26097297668457
+          ],
+          "tokens": 315,
+          "elapsedMs": 99.47910002665594
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/2026_in_the_United_Kingdom",
+          "passageSha256": "56cea2383fbade7f60bce7a03173897f0071ee35b64ef0ee13dfc2d3b72a770e",
+          "status": "executed",
+          "values": [
+            -11.106678009033203
+          ],
+          "tokens": 32,
+          "elapsedMs": 14.342200011014938
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_films_with_post-credits_scenes_(2010s)",
+          "passageSha256": "2cc88e9ce7a03cd106afb0cb0e9e87fe53d9703d6fc49472402ee94b612287ad",
+          "status": "executed",
+          "values": [
+            -11.345832824707031
+          ],
+          "tokens": 57,
+          "elapsedMs": 21.90679998602718
+        }
+      ]
+    },
+    {
+      "id": "118081",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Bangladesh_Liberation_War",
+          "passageSha256": "e171d8954da61966ca693748c5508c7976f7316145edd9472355de31c4511933",
+          "status": "executed",
+          "values": [
+            -8.780384063720703
+          ],
+          "tokens": 251,
+          "elapsedMs": 63.50789999123663
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Japanese_war_crimes",
+          "passageSha256": "e68305f93f1609e32a80883457e1e8e4dce8d9d44382fa96d6413694fb0caa4e",
+          "status": "executed",
+          "values": [
+            -8.39850902557373
+          ],
+          "tokens": 263,
+          "elapsedMs": 76.85689994832501
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Soviet_partisans",
+          "passageSha256": "05d72b260ce7ecbde07b97802552b2afe4521fcaabb785024e874fb035fadf55",
+          "status": "executed",
+          "values": [
+            -9.547086715698242
+          ],
+          "tokens": 217,
+          "elapsedMs": 70.73709997348487
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Game_of_Thrones_season_6",
+          "passageSha256": "cf8707326f5e4e98c125a1ec7a0de1caf11705b486af194efd84fe7bd9ed328c",
+          "status": "executed",
+          "values": [
+            -6.993867874145508
+          ],
+          "tokens": 292,
+          "elapsedMs": 92.4964000005275
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Winds_of_Winter_(Game_of_Thrones)",
+          "passageSha256": "6ba0309aaa607e72854c855a71badf374d3640bcf70e588549dcfd01a8f2d37e",
+          "status": "executed",
+          "values": [
+            -9.278751373291016
+          ],
+          "tokens": 306,
+          "elapsedMs": 71.59109995700419
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Beyond_the_Wall_(Game_of_Thrones)",
+          "passageSha256": "cb80930347a92c13052ab5546e138ef9efc7bd396569fd72f8aa18405aed60e2",
+          "status": "executed",
+          "values": [
+            -8.355944633483887
+          ],
+          "tokens": 287,
+          "elapsedMs": 85.19399998476729
+        }
+      ]
+    },
+    {
+      "id": "5705",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Jonathan_Palmer",
+          "passageSha256": "1e836381baca8b3b022a9264878a570f614a72c2a538f17ca7c358ef1b7be0b1",
+          "status": "executed",
+          "values": [
+            -7.157933235168457
+          ],
+          "tokens": 263,
+          "elapsedMs": 54.01229998096824
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Belle_(Disney_character)",
+          "passageSha256": "338b1b583e9acf1edf8db0be8d45c0b94ee856d7fb0769ec90340fc70c7def43",
+          "status": "executed",
+          "values": [
+            -10.865399360656738
+          ],
+          "tokens": 254,
+          "elapsedMs": 60.16350002028048
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Ewan_McGregor",
+          "passageSha256": "35218effefca2c0ec8cb0a998a784f4717954b0af455136008fb206352d222f9",
+          "status": "executed",
+          "values": [
+            -10.197891235351562
+          ],
+          "tokens": 282,
+          "elapsedMs": 60.84490002831444
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_female_racing_drivers",
+          "passageSha256": "e564b3f5392109a8999a405a3301f65f07e8848f913e6d2bdef03e906c81153b",
+          "status": "executed",
+          "values": [
+            -11.326591491699219
+          ],
+          "tokens": 42,
+          "elapsedMs": 16.01309998659417
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Harris_Reed",
+          "passageSha256": "7b3b363f99bc61e4fecec8cf412c7bc585de792e73521c693e5d40376d44a1c2",
+          "status": "executed",
+          "values": [
+            -7.364840507507324
+          ],
+          "tokens": 62,
+          "elapsedMs": 20.830299996305257
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Akshata_Murty",
+          "passageSha256": "545b3621e25e480aaa0f8c6b4decd218282d2a9d519e46b583cee55859bc57c2",
+          "status": "executed",
+          "values": [
+            -9.798652648925781
+          ],
+          "tokens": 294,
+          "elapsedMs": 72.41229998180643
+        }
+      ]
+    },
+    {
+      "id": "174624",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/James_Caan",
+          "passageSha256": "ed51399f0cc9e5ffd39a5eeda02fd2d71346a9c2d529765925c6ef86cc286923",
+          "status": "executed",
+          "values": [
+            -7.035833358764648
+          ],
+          "tokens": 304,
+          "elapsedMs": 76.6791999922134
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Robert_Patrick",
+          "passageSha256": "84adab50ea99b70219a76773664ca9d07b3e0c600aea1035774fbbe4630d65d0",
+          "status": "executed",
+          "values": [
+            -2.8269200325012207
+          ],
+          "tokens": 333,
+          "elapsedMs": 91.63769998122007
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/What_Lies_Beneath",
+          "passageSha256": "64ee15d1e3a1b9a8de18f6a5096f73e20c3cadcc2ba0eeab7a970c625e155466",
+          "status": "executed",
+          "values": [
+            -0.7505896091461182
+          ],
+          "tokens": 252,
+          "elapsedMs": 75.46429999638349
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Wendie_Malick",
+          "passageSha256": "1f5a9a5670a082048a40d8860479a6797e59187abd1f9cec5500d9bfb1396f23",
+          "status": "executed",
+          "values": [
+            -9.289271354675293
+          ],
+          "tokens": 300,
+          "elapsedMs": 86.63549995981157
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Garret_Dillahunt",
+          "passageSha256": "7422af59c822bb4f1f529966bc42a215703a11caa5132e79ec36bda218139e40",
+          "status": "executed",
+          "values": [
+            -6.326974391937256
+          ],
+          "tokens": 200,
+          "elapsedMs": 57.11589998099953
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Christopher_Allport",
+          "passageSha256": "bb7f116fe80927f5c5cfe35f4b9e903b5cce8b7bebe3ced178d8dc92793235c3",
+          "status": "executed",
+          "values": [
+            -10.091718673706055
+          ],
+          "tokens": 41,
+          "elapsedMs": 15.742199961096048
+        }
+      ]
+    },
+    {
+      "id": "24247",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Fargo_(1996_film)",
+          "passageSha256": "3b19e5a8421db60817a3aadaaaed379b8d21fe08c0ae043b76ee4e6f93565cfe",
+          "status": "executed",
+          "values": [
+            -9.16179084777832
+          ],
+          "tokens": 295,
+          "elapsedMs": 86.34290000190958
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Akshay_Kumar",
+          "passageSha256": "b246ff5fbbfe39b9f78209c8e8665892bd7ae32f814fbf41a70863d97cd13a32",
+          "status": "executed",
+          "values": [
+            -6.461726188659668
+          ],
+          "tokens": 308,
+          "elapsedMs": 82.32850005151704
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/1942:_A_Love_Story",
+          "passageSha256": "4f3e84babb1df5bfdb21e4f73e5bc5dfd899420a03af5fdc77d7086a4da8111d",
+          "status": "executed",
+          "values": [
+            -8.663538932800293
+          ],
+          "tokens": 248,
+          "elapsedMs": 56.65169999701902
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Paresh_Rawal",
+          "passageSha256": "9925a59190d1583d440ffc9979c12037af219ab8c63d9663bfcc0a7bf21fdfbe",
+          "status": "executed",
+          "values": [
+            -7.741758346557617
+          ],
+          "tokens": 251,
+          "elapsedMs": 57.906200003344566
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Divya_Bharti",
+          "passageSha256": "421d57deb93277a9331734c1a5232c48e8bdb0dad6095a24a15aae0bd8191b44",
+          "status": "executed",
+          "values": [
+            -8.316959381103516
+          ],
+          "tokens": 296,
+          "elapsedMs": 57.306700036861
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Raveena_Tandon_filmography",
+          "passageSha256": "d4a57113fe3f69e2d71a4f660cc3c492eb8738edf353eccb257c5ee6f8914e17",
+          "status": "executed",
+          "values": [
+            -2.7618770599365234
+          ],
+          "tokens": 285,
+          "elapsedMs": 51.41469999216497
+        }
+      ]
+    },
+    {
+      "id": "155995",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Harold_Macmillan",
+          "passageSha256": "277da5c7f307cb0bd142e36dda791c825f5978c59bd2ac9c510b6a9697815a6a",
+          "status": "executed",
+          "values": [
+            7.705615997314453
+          ],
+          "tokens": 258,
+          "elapsedMs": 69.9841000023298
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Anthony_Barber",
+          "passageSha256": "8388886670ade71ab26eebf1cafdf3acaff4e018e10a1cf3e5561944c04394f2",
+          "status": "executed",
+          "values": [
+            -1.4232875108718872
+          ],
+          "tokens": 249,
+          "elapsedMs": 53.01959998905659
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Harold_Watkinson",
+          "passageSha256": "66e42ed694e8431dfce8005ecab49a96e857a3d4b38b7600f54dd39d64ba4f40",
+          "status": "executed",
+          "values": [
+            0.12431877851486206
+          ],
+          "tokens": 92,
+          "elapsedMs": 29.624000017065555
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Lady_Caroline_Faber",
+          "passageSha256": "37b7a90f708fbeb3a22751ed96afc5b2e8f19f9c0fbda11c8f0c1fd5c8b7cd1d",
+          "status": "executed",
+          "values": [
+            -0.16274875402450562
+          ],
+          "tokens": 55,
+          "elapsedMs": 19.501600007060915
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/1945_in_the_United_Kingdom",
+          "passageSha256": "df1f61aaf9e939fea67b04b0572b13916efa9b524bf3c1cf85b3e75e1184ebaf",
+          "status": "executed",
+          "values": [
+            -10.83026123046875
+          ],
+          "tokens": 47,
+          "elapsedMs": 14.011899998877198
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Birch_Grove",
+          "passageSha256": "c45b8aaced1a56ca43080eba221bf4e9ecdc1a8b7786036ce5df41cfbe02a501",
+          "status": "executed",
+          "values": [
+            4.057697772979736
+          ],
+          "tokens": 118,
+          "elapsedMs": 36.12179995980114
+        }
+      ]
+    },
+    {
+      "id": "179089",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/George_Clooney",
+          "passageSha256": "eae87409a70ff7032f6fb07fb1653a93c3793b5c59041f1bde6ec25bc6c81218",
+          "status": "executed",
+          "values": [
+            3.8429372310638428
+          ],
+          "tokens": 296,
+          "elapsedMs": 73.78320000134408
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Good_German",
+          "passageSha256": "5e6547799ee335cb42d50d4733453ee53f2fbeb44db78e057352ff7057fef4b4",
+          "status": "executed",
+          "values": [
+            10.088244438171387
+          ],
+          "tokens": 278,
+          "elapsedMs": 76.41790003981441
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/George_Clooney_filmography",
+          "passageSha256": "1a5522806dad3d55c2f819a24011701ecbfe4e96f38be17adbe6c89da969bbcd",
+          "status": "executed",
+          "values": [
+            3.3234620094299316
+          ],
+          "tokens": 309,
+          "elapsedMs": 82.61809998657554
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Monuments_Men",
+          "passageSha256": "662dcf0c43beebb84807d7f766439e52b788ba08252e3748ad7c6f4da6772eb3",
+          "status": "executed",
+          "values": [
+            3.1133296489715576
+          ],
+          "tokens": 210,
+          "elapsedMs": 52.69809998571873
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Boys_in_the_Boat_(film)",
+          "passageSha256": "9f33003a74577cda45082d05ad310ce9778bd4f39fec964c9b8ca1bdac6f38a5",
+          "status": "executed",
+          "values": [
+            1.4756710529327393
+          ],
+          "tokens": 161,
+          "elapsedMs": 46.43400001805276
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Jay_Kelly",
+          "passageSha256": "33c3bf08d701b53867ae8aea865d2e4cf4c546b1c86a3fb89c4b7cc07fff3274",
+          "status": "executed",
+          "values": [
+            3.133211135864258
+          ],
+          "tokens": 200,
+          "elapsedMs": 46.58600001130253
+        }
+      ]
+    },
+    {
+      "id": "5598",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/San_Francisco",
+          "passageSha256": "0b258a444cc2fb4e5a9fd40c236b9532664955a32932df142f91f7f2ccacfa0b",
+          "status": "executed",
+          "values": [
+            5.721254348754883
+          ],
+          "tokens": 282,
+          "elapsedMs": 72.35269999364391
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Colma,_California",
+          "passageSha256": "771b62b486aed2539cae925cde2fc799da85c6a6450bdad4714fbcade66b6e16",
+          "status": "executed",
+          "values": [
+            -2.0342884063720703
+          ],
+          "tokens": 175,
+          "elapsedMs": 34.35559995705262
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Half_Moon_Bay,_California",
+          "passageSha256": "47aaff25925505027cd38dd2d7512733225181b352ccc441abff26f9be1708fb",
+          "status": "executed",
+          "values": [
+            -4.602860450744629
+          ],
+          "tokens": 275,
+          "elapsedMs": 74.7368999873288
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Midpeninsula_Regional_Open_Space_District",
+          "passageSha256": "fb12bb3bbc9f8e29d4c95360638b17ba36b32a0003ab7ae73b5cbca8522febb6",
+          "status": "executed",
+          "values": [
+            -5.362207412719727
+          ],
+          "tokens": 269,
+          "elapsedMs": 80.92029998078942
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_cities_and_towns_in_the_San_Francisco_Bay_Area",
+          "passageSha256": "60fd67625d555d46119c86e1f49396bc21cbdb6252ad23807a60bc4d05f1cfb9",
+          "status": "executed",
+          "values": [
+            7.185619354248047
+          ],
+          "tokens": 288,
+          "elapsedMs": 74.5325000025332
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Blue_Bottle_Coffee",
+          "passageSha256": "4dea43101e7278339aa4d03f253d3e5596c498a1f5606e09e76e9b193df9714c",
+          "status": "executed",
+          "values": [
+            -10.701715469360352
+          ],
+          "tokens": 117,
+          "elapsedMs": 27.942500018980354
+        }
+      ]
+    },
+    {
+      "id": "219205",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Evolution",
+          "passageSha256": "71073c88968eb0850f584a1aeafa92e525443bbbd267e89f2bc2c2df0e15863a",
+          "status": "executed",
+          "values": [
+            -6.83882999420166
+          ],
+          "tokens": 239,
+          "elapsedMs": 70.75089996214956
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Ernst_Mayr",
+          "passageSha256": "0ace68e4d371e1f446f9dc85bb5444e4e6f263f5727ed782d464a2b8464d7116",
+          "status": "executed",
+          "values": [
+            -7.820423126220703
+          ],
+          "tokens": 261,
+          "elapsedMs": 68.74179997248575
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Extinction_event",
+          "passageSha256": "c0b675fdbc01ee368e486c9e94be923cd7008d58f0cc933da284e2b62a7df3ee",
+          "status": "executed",
+          "values": [
+            -7.968822479248047
+          ],
+          "tokens": 139,
+          "elapsedMs": 35.46510002342984
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Biogeography",
+          "passageSha256": "f22a7072e9709aae2699a67485b36811788664df77483153edb40032841f47ba",
+          "status": "executed",
+          "values": [
+            -7.041093826293945
+          ],
+          "tokens": 243,
+          "elapsedMs": 53.88269998366013
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Evidence_of_common_descent",
+          "passageSha256": "db3b235503c5401e9ab1d539542bc2fd5d347bd988c8a97eb48481b68d2f5da7",
+          "status": "executed",
+          "values": [
+            -10.602094650268555
+          ],
+          "tokens": 234,
+          "elapsedMs": 78.136199968867
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event",
+          "passageSha256": "a055ea0ec21570362b003049481844438b43ac002ea8b6643ce6c200b5557b23",
+          "status": "executed",
+          "values": [
+            -9.772329330444336
+          ],
+          "tokens": 297,
+          "elapsedMs": 68.56709998100996
+        }
+      ]
+    },
+    {
+      "id": "74430",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Netflix",
+          "passageSha256": "a9690ff3b65c43affc6408a87cfc4d1be4ed86c580db8f82819f715c850c1d78",
+          "status": "executed",
+          "values": [
+            -11.009130477905273
+          ],
+          "tokens": 248,
+          "elapsedMs": 54.46660000598058
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Aileen_Tan",
+          "passageSha256": "fdf8d49373c44f01d1a76597cd153a9e8ebcf693224e5fc8f66c7adb13067508",
+          "status": "executed",
+          "values": [
+            -10.842960357666016
+          ],
+          "tokens": 25,
+          "elapsedMs": 8.964599983301014
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Saturday_Night_Live_season_19",
+          "passageSha256": "5adbfb734d64c764bcbf48ca5addf395b1bac4af593f04da3d3cbef79518c098",
+          "status": "executed",
+          "values": [
+            -11.058706283569336
+          ],
+          "tokens": 50,
+          "elapsedMs": 12.664199981372803
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Pixels_(2015_film)",
+          "passageSha256": "4eb52ff665d0402268d72c8ced637e447eb89b0dda50df8198aff3b7ac49cb29",
+          "status": "executed",
+          "values": [
+            2.2532410621643066
+          ],
+          "tokens": 266,
+          "elapsedMs": 52.793100010603666
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Roommates_(2026_film)",
+          "passageSha256": "9d460ed462b4d8ed445dbf9dd4d1be59ad4724abcb5513af5f679906b855f87e",
+          "status": "executed",
+          "values": [
+            -2.651744842529297
+          ],
+          "tokens": 137,
+          "elapsedMs": 34.518899978138506
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_21st-century_films_considered_the_worst",
+          "passageSha256": "4d329e781dc2b9a477b7be4d38f80ecaab50541ae816cd2605d997c8345d1974",
+          "status": "executed",
+          "values": [
+            -10.972311019897461
+          ],
+          "tokens": 210,
+          "elapsedMs": 46.634299971628934
+        }
+      ]
+    },
+    {
+      "id": "35381",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Governor_of_Texas",
+          "passageSha256": "3bf600226055a4868224561ae07a54e73bdd5d8e9bafaa264401da937392d5e9",
+          "status": "executed",
+          "values": [
+            2.6872787475585938
+          ],
+          "tokens": 158,
+          "elapsedMs": 29.431800008751452
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Mark_White_(Texas_politician)",
+          "passageSha256": "5da1409879ea4d8883254e2fefeddb483733ac45e57d1077d4043d0dd7899457",
+          "status": "executed",
+          "values": [
+            -3.9154701232910156
+          ],
+          "tokens": 185,
+          "elapsedMs": 39.97420001542196
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Waco_siege",
+          "passageSha256": "6429036062099c9ccdb363d1fc446e2b6656bab99fa7e54f5b5ac4c1dc9293c2",
+          "status": "executed",
+          "values": [
+            -8.53078556060791
+          ],
+          "tokens": 280,
+          "elapsedMs": 74.16750001721084
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Texas_Education_Agency",
+          "passageSha256": "8e216e465645535225f48b291b6bdedde8d0a3c9770f64a7fcda0b3b87b6a561",
+          "status": "executed",
+          "values": [
+            -2.91306734085083
+          ],
+          "tokens": 130,
+          "elapsedMs": 38.54360000696033
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/2018_Texas_gubernatorial_election",
+          "passageSha256": "44718c5760817d1a3866337fb6895149a20327cb7a120708aaf69fd43e719c5e",
+          "status": "executed",
+          "values": [
+            -7.832767486572266
+          ],
+          "tokens": 267,
+          "elapsedMs": 67.31790001504123
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Department_of_Government_Efficiency",
+          "passageSha256": "94fb39bc981c20dd7279b93b7e7747b7681ca30ba6baf4f5f42ad868b2608a6d",
+          "status": "executed",
+          "values": [
+            -10.594213485717773
+          ],
+          "tokens": 235,
+          "elapsedMs": 58.007099956739694
+        }
+      ]
+    },
+    {
+      "id": "129241",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Chicago_Bears",
+          "passageSha256": "6ceb71124849c03aeda00175e0939f515ba6495b666f99cfe56aaf8ae216066b",
+          "status": "executed",
+          "values": [
+            -10.656394004821777
+          ],
+          "tokens": 273,
+          "elapsedMs": 58.99849999696016
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Super_Bowl_XXVI",
+          "passageSha256": "b910256f295bf433241c6307156d410dde47bc536658ec427c478d1dbf773f2d",
+          "status": "executed",
+          "values": [
+            0.3907153606414795
+          ],
+          "tokens": 274,
+          "elapsedMs": 51.920700003392994
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Super_Bowl_XLII",
+          "passageSha256": "2c5115c5d7b97e0bff1d9a6b2e6d026a3327a5073c9fe3ba2da2a651f65bf958",
+          "status": "executed",
+          "values": [
+            2.376715660095215
+          ],
+          "tokens": 270,
+          "elapsedMs": 66.9229999766685
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/NFL_Kickoff_Game",
+          "passageSha256": "d52616b0369b86005fc5b1c0091fa5cc1aff0ddc31322628c1941a4896b9edc1",
+          "status": "executed",
+          "values": [
+            -7.859928131103516
+          ],
+          "tokens": 259,
+          "elapsedMs": 53.70220000622794
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_national_anthem_performers_at_the_Super_Bowl",
+          "passageSha256": "892b1b793ebdd11d4663ef53bd3ad71c152454e6c5958d6b4c007cd95ea11284",
+          "status": "executed",
+          "values": [
+            -4.577303409576416
+          ],
+          "tokens": 255,
+          "elapsedMs": 48.68509998777881
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Super_Bowl_50",
+          "passageSha256": "5479039435e463d2326de5027b9aadfc00905e9c36fcc670e94621b594227c9b",
+          "status": "executed",
+          "values": [
+            -0.9283061623573303
+          ],
+          "tokens": 280,
+          "elapsedMs": 62.4256000155583
+        }
+      ]
+    },
+    {
+      "id": "7287",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Beverly_Hillbillies",
+          "passageSha256": "5c0a3fc1e159ee9ab9fb68dd254952fc99b3f164b1f281180feffbcb3f965241",
+          "status": "executed",
+          "values": [
+            7.35975456237793
+          ],
+          "tokens": 266,
+          "elapsedMs": 57.239599991589785
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Beverly_Hills,_90210",
+          "passageSha256": "59f89996edff16e72464835b093004ff26e9828e055965de23462d397cefd27e",
+          "status": "executed",
+          "values": [
+            -3.403818130493164
+          ],
+          "tokens": 281,
+          "elapsedMs": 55.87179999565706
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Series_finale",
+          "passageSha256": "2d9c2cce3f34e24b5298a1cd8bb9780b955099c7b991e40cc8d7b9c591efa97c",
+          "status": "executed",
+          "values": [
+            -10.541207313537598
+          ],
+          "tokens": 72,
+          "elapsedMs": 23.59029999934137
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Lea_Thompson",
+          "passageSha256": "727384cfd726d6d406a67d14a681acd662d88e68b08e938db67a68a2b1dbe944",
+          "status": "executed",
+          "values": [
+            -6.63528299331665
+          ],
+          "tokens": 180,
+          "elapsedMs": 36.19590000016615
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Bewitched_episodes",
+          "passageSha256": "72cae30b46c2f82a4b8cc9780dd0b483a0dcf334ec601881026d7a0171429e03",
+          "status": "executed",
+          "values": [
+            -8.491162300109863
+          ],
+          "tokens": 175,
+          "elapsedMs": 32.95679995790124
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Green_Acres_episodes",
+          "passageSha256": "57162b5df35d3a8d47d46c4c4e2e103625809a5839f7e82f9ba51f8e224be677",
+          "status": "executed",
+          "values": [
+            -10.006414413452148
+          ],
+          "tokens": 81,
+          "elapsedMs": 19.406700041145086
+        }
+      ]
+    },
+    {
+      "id": "194455",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Tilda_Swinton",
+          "passageSha256": "4e51c86411bdfca2a6a871322c83297f95aa8421e58f65faf57bfcf3734de807",
+          "status": "executed",
+          "values": [
+            6.934489727020264
+          ],
+          "tokens": 293,
+          "elapsedMs": 59.70270000398159
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/We_Need_to_Talk_About_Kevin_(film)",
+          "passageSha256": "aa84351bf521f58972ce0d04656fbacfd3ce5569fc8738b820030d5e43b65d10",
+          "status": "executed",
+          "values": [
+            -3.497112512588501
+          ],
+          "tokens": 181,
+          "elapsedMs": 33.927999960724264
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/John_Swinton_of_Kimmerghame",
+          "passageSha256": "2965cff5659e62d0840ddbc44788fe4a2230e8a34d1113b891f26b7eb4fe42a3",
+          "status": "executed",
+          "values": [
+            2.167145252227783
+          ],
+          "tokens": 85,
+          "elapsedMs": 18.943400005809963
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Luca_Guadagnino",
+          "passageSha256": "7fb84d75a1719e59616a0e95b53f379ada058715a3625259cf7164b4dbdb978d",
+          "status": "executed",
+          "values": [
+            -4.149763107299805
+          ],
+          "tokens": 297,
+          "elapsedMs": 57.881000044289976
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Only_Lovers_Left_Alive",
+          "passageSha256": "b180744d158e2b7a1b16bc52fec38fd5ccc9e2e9f2543f52eba1cdc5a9b463c5",
+          "status": "executed",
+          "values": [
+            -5.153485298156738
+          ],
+          "tokens": 162,
+          "elapsedMs": 41.62470001028851
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Personal_History_of_David_Copperfield",
+          "passageSha256": "f57d66271d3abb373966491ac37cae31e2b69a9a3eea5db078310b76bd053bbe",
+          "status": "executed",
+          "values": [
+            -5.695163726806641
+          ],
+          "tokens": 154,
+          "elapsedMs": 45.041600009426475
+        }
+      ]
+    },
+    {
+      "id": "212195",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/East_Germany",
+          "passageSha256": "606bc8f933762769c810ce0d56317906a5e0a1c1565cfdd283bbe0676072ec8b",
+          "status": "executed",
+          "values": [
+            -10.160087585449219
+          ],
+          "tokens": 256,
+          "elapsedMs": 80.16170002520084
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/History_of_Germany",
+          "passageSha256": "9bb3b5c8939f0f1e6622e3e855fd5c93e9c3a759ec5eae8e14918532e0eabf08",
+          "status": "executed",
+          "values": [
+            -9.759721755981445
+          ],
+          "tokens": 254,
+          "elapsedMs": 52.212400012649596
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Legnica",
+          "passageSha256": "cdbae38bd0fb7999f213ea56c7677f5623b634e5f2d4e85094f154f70767ffa1",
+          "status": "executed",
+          "values": [
+            -10.719470977783203
+          ],
+          "tokens": 309,
+          "elapsedMs": 57.30520002543926
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Pope_Pius_X",
+          "passageSha256": "ecc594853eb51ab607d74b9f19f37a240587c38d86ce36dd7410da485ae36864",
+          "status": "executed",
+          "values": [
+            -10.692523956298828
+          ],
+          "tokens": 273,
+          "elapsedMs": 61.44330004462972
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Padre_Pio",
+          "passageSha256": "e22f120bcd2aefcd3ffb1052fc0a9d36a1ef5bb7af74001c804d2e086415b13a",
+          "status": "executed",
+          "values": [
+            -10.572576522827148
+          ],
+          "tokens": 282,
+          "elapsedMs": 64.35589998727664
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Martin_Hengel",
+          "passageSha256": "986f212aae3cb429adf4313602132c7cd7641f3df1f7cdc77d05b961d7787f50",
+          "status": "executed",
+          "values": [
+            -8.50581169128418
+          ],
+          "tokens": 60,
+          "elapsedMs": 19.222999981138855
+        }
+      ]
+    },
+    {
+      "id": "202738",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Georgia_Engel",
+          "passageSha256": "ae8c636a75697fc90841b891479ebeb550eae38a97f731115757ebbe53170278",
+          "status": "executed",
+          "values": [
+            -10.425647735595703
+          ],
+          "tokens": 100,
+          "elapsedMs": 25.39929997874424
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Sutton_Foster",
+          "passageSha256": "ecccc98c618a15eca426711e55994b6e56f5fb297adf7df2bda8813bf88d8a85",
+          "status": "executed",
+          "values": [
+            -5.6806960105896
+          ],
+          "tokens": 287,
+          "elapsedMs": 83.54810002492741
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_Christmas_films",
+          "passageSha256": "0075aaea39a6428833918b302d20f13b638e7f50f8c5606f734bf781d6b7792f",
+          "status": "executed",
+          "values": [
+            -10.300352096557617
+          ],
+          "tokens": 203,
+          "elapsedMs": 50.27980002341792
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/The_Drowsy_Chaperone",
+          "passageSha256": "dbda9913398f765f36b1bd540f7a1d9bd10852204c4fb2c1867ca4c2b957a0e0",
+          "status": "executed",
+          "values": [
+            1.0518312454223633
+          ],
+          "tokens": 265,
+          "elapsedMs": 71.88140001380816
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Jason_Kravits",
+          "passageSha256": "861a6aa6e3aee7efb06a50288c9d848e2fc8e85dbed97282ed3688a7644eecf7",
+          "status": "executed",
+          "values": [
+            -7.823373794555664
+          ],
+          "tokens": 61,
+          "elapsedMs": 19.98959999764338
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_A24_films",
+          "passageSha256": "6485d93b173737536fce670faa19fe91155b23cf6cfa643b119e977d32b1334c",
+          "status": "executed",
+          "values": [
+            -8.890701293945312
+          ],
+          "tokens": 278,
+          "elapsedMs": 73.12789995921776
+        }
+      ]
+    },
+    {
+      "id": "89364",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Jacques_Cousteau",
+          "passageSha256": "e499f1d2ba2a4fcc190895fb48ee7e9276a5c86ceb30757b6565d9d0297a029f",
+          "status": "executed",
+          "values": [
+            -2.711935520172119
+          ],
+          "tokens": 285,
+          "elapsedMs": 65.58009999571368
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Universal_Pictures",
+          "passageSha256": "328c8df6dca7752f4e76ac23df2f12d874e4e2849159f3e10eb16a0378d30138",
+          "status": "executed",
+          "values": [
+            -9.328887939453125
+          ],
+          "tokens": 271,
+          "elapsedMs": 76.16720005171373
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Gaumont",
+          "passageSha256": "1171a100aa88bb28b105101b54dc95d2354649cb4cd5231b7c6458032f8b9edb",
+          "status": "executed",
+          "values": [
+            -7.542490005493164
+          ],
+          "tokens": 272,
+          "elapsedMs": 71.73710002098233
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Farewell_My_Concubine_(film)",
+          "passageSha256": "30b0167688716171ad6258849807c5d43a89993239c417836c5233f4db930f52",
+          "status": "executed",
+          "values": [
+            -6.1670823097229
+          ],
+          "tokens": 278,
+          "elapsedMs": 67.20009999116883
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Alain_Delon",
+          "passageSha256": "3743c98487a34432b1ce206b84aa4346636010bde0eacbf18b511029c4ba7b83",
+          "status": "executed",
+          "values": [
+            -3.0035715103149414
+          ],
+          "tokens": 317,
+          "elapsedMs": 87.04469999065623
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Louis_Vuitton",
+          "passageSha256": "f7e86777004c81fe8a35ee493221bff024f50102a07a2994872107df0533267c",
+          "status": "executed",
+          "values": [
+            -5.688096523284912
+          ],
+          "tokens": 294,
+          "elapsedMs": 86.55179996276274
+        }
+      ]
+    },
+    {
+      "id": "183938",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Poison_Ivy_(character)",
+          "passageSha256": "68bbbebdf1fbead88e49fc226014ebb0ac8568e517a0739eb4fb85bd49fd1e00",
+          "status": "executed",
+          "values": [
+            -3.608931541442871
+          ],
+          "tokens": 284,
+          "elapsedMs": 83.81300000473857
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Harley_Quinn",
+          "passageSha256": "477530831a1bfb4a8ffa48dbc2a86faf352fe2b92ce6c141f031385add4fd0de",
+          "status": "executed",
+          "values": [
+            2.547076940536499
+          ],
+          "tokens": 277,
+          "elapsedMs": 82.34939997782931
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Batman:_Gotham_Knights",
+          "passageSha256": "c29456dfd65f244cf7bba8387bb344574bae99a2adaf37bc859d5bbf5987181f",
+          "status": "executed",
+          "values": [
+            -1.7919502258300781
+          ],
+          "tokens": 250,
+          "elapsedMs": 70.20630000624806
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Paul_Dini",
+          "passageSha256": "94b7f892c8c538f78e0b845234b74056ba872d327fdf3b418ada097e27045256",
+          "status": "executed",
+          "values": [
+            2.8897390365600586
+          ],
+          "tokens": 301,
+          "elapsedMs": 78.00500001758337
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Batman:_Streets_of_Gotham",
+          "passageSha256": "be8098785c540295736c1403b5b0fe1dd7c4421f0f441290685ee9129b0d76b0",
+          "status": "executed",
+          "values": [
+            7.883746147155762
+          ],
+          "tokens": 256,
+          "elapsedMs": 76.42539998050779
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Gotham_City_Sirens",
+          "passageSha256": "6d04f603ca9d9211e809308dd88c8b04892d132c076e64b8aa4c115d65db044d",
+          "status": "executed",
+          "values": [
+            10.706363677978516
+          ],
+          "tokens": 117,
+          "elapsedMs": 35.49479995854199
+        }
+      ]
+    },
+    {
+      "id": "87783",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Yale_University",
+          "passageSha256": "e7baa6c300001927de313df28d56e5a1215720c0cd866d941684fbb72d2ebfcd",
+          "status": "executed",
+          "values": [
+            -10.897713661193848
+          ],
+          "tokens": 240,
+          "elapsedMs": 70.12440002290532
+        }
+      ]
+    },
+    {
+      "id": "153303",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Madden_NFL",
+          "passageSha256": "0bf62cccbe82e422d6bb6e512e606fcc44a111b6ec7559a80a5a5d9250e589f5",
+          "status": "executed",
+          "values": [
+            -4.578983306884766
+          ],
+          "tokens": 245,
+          "elapsedMs": 61.2159000011161
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Need_for_Speed",
+          "passageSha256": "3f4e4a9606852dd40bdaf87edaa02b44ae65701f13ba766b2e50e529fc401129",
+          "status": "executed",
+          "values": [
+            -3.9490585327148438
+          ],
+          "tokens": 258,
+          "elapsedMs": 76.73169998452067
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/NHL_(video_game_series)",
+          "passageSha256": "eb9ac1143cf1829ad6fecf106630505d81eed10dcfa4e29c0f84f0987da19ff1",
+          "status": "executed",
+          "values": [
+            -4.11256742477417
+          ],
+          "tokens": 115,
+          "elapsedMs": 29.14310002233833
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Need_for_Speed:_Hot_Pursuit_2",
+          "passageSha256": "0448a99377229a87910411147078d7d80c2ad725666667ef7d20df0348b7d28e",
+          "status": "executed",
+          "values": [
+            -0.9100127816200256
+          ],
+          "tokens": 225,
+          "elapsedMs": 47.36650001723319
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/NHL_2004",
+          "passageSha256": "029403414249472722a3d892405ab04890de2cf41af5b8fdb2b361768b30097f",
+          "status": "executed",
+          "values": [
+            3.367304563522339
+          ],
+          "tokens": 91,
+          "elapsedMs": 27.417899982538074
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/NBA_Street_Homecourt",
+          "passageSha256": "6e3417b9dfe342bd3494d564a66319276010bcf102e2b5586f07ab4e18594be1",
+          "status": "executed",
+          "values": [
+            1.4123090505599976
+          ],
+          "tokens": 142,
+          "elapsedMs": 32.555999991018325
+        }
+      ]
+    },
+    {
+      "id": "215202",
+      "role": "held_out",
+      "candidates": [
+        {
+          "url": "https://en.wikipedia.org/wiki/John_Debney",
+          "passageSha256": "16b9440f7038f4f4ca2b02c2e5e4a1780a09687b0248b1de804c252026b4f69e",
+          "status": "executed",
+          "values": [
+            -3.5503041744232178
+          ],
+          "tokens": 171,
+          "elapsedMs": 50.705700006801635
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Dreamer_(2005_film)",
+          "passageSha256": "c2589f3ae2e6f4d457efde3b006ea4ef3634e5d35fcde8a73337ac1e46156128",
+          "status": "executed",
+          "values": [
+            10.947044372558594
+          ],
+          "tokens": 172,
+          "elapsedMs": 41.094699990935624
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_American_films_of_2005",
+          "passageSha256": "1515a1a8e1c893a865c9e317561acf4f895dd794f7c5cc3b9f2481b9e2e4eff2",
+          "status": "executed",
+          "values": [
+            -3.3829827308654785
+          ],
+          "tokens": 33,
+          "elapsedMs": 10.213600005954504
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/CinemaScore",
+          "passageSha256": "2ee8363e077bf0e0f5fc507a8bacbd0641e14d8584df18a6e1dad30ab238e368",
+          "status": "executed",
+          "values": [
+            -11.037213325500488
+          ],
+          "tokens": 58,
+          "elapsedMs": 13.818399980664253
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/List_of_remakes_and_adaptations_of_Disney_animated_films",
+          "passageSha256": "7c861024d82d6c68437495a45dc97ba0ee12a4f357620ecae244c5b71c4145f0",
+          "status": "executed",
+          "values": [
+            -10.181294441223145
+          ],
+          "tokens": 228,
+          "elapsedMs": 58.195199992042035
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Toronto_International_Film_Festival_People%27s_Choice_Award",
+          "passageSha256": "7fa8244f61c76c790b99b95af5171f98416f7e5cf231316990d0c37d6dd58118",
+          "status": "executed",
+          "values": [
+            -10.543256759643555
+          ],
+          "tokens": 261,
+          "elapsedMs": 66.21489999815822
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Research-only; no factual truth probabilities or production model replacement.",
+    "ANLI R2 is adversarial NLI, not target-domain fact verification; backbone/undisclosed training overlap unknown.",
+    "FEVER labels identify historical evidence pages, not relevance or stance of present lead extracts. Unlisted pages are unjudged.",
+    "Exact premise and near-claim checks cannot establish original article/topic independence.",
+    "Latency measured on this CPU with OS cache/load, not an SLA. Raw scores are uncalibrated."
+  ]
+}

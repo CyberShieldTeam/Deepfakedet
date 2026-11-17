@@ -53,13 +53,16 @@ const reply = z
   })
   .strict();
 export type NliPair = { premise: string; hypothesis: string; language: string };
+type ReadyMessage={event:'ready';modelId:string;version:string;startupMs:number;memory:z.infer<typeof memory>};
+type ReplyMessage<T>={requestId:string;results:T[];elapsedMs:number;memory:z.infer<typeof memory>};
+type ModelProtocol<T>={ready:z.ZodType<ReadyMessage>;reply:z.ZodType<ReplyMessage<T>>};
 export class NliWorkerError extends Error {
   constructor(public category: string) {
     super(category);
   }
 }
 /** Single local model worker. No request cache or cross-owner claim retention. */
-export class NliWorker {
+export class NliWorker<T=z.infer<typeof item>> {
   private child: ChildProcessWithoutNullStreams | null = null;
   private buffer = "";
   private waiter: ((line: string) => void) | null = null;
@@ -68,12 +71,13 @@ export class NliWorker {
   private idle: ReturnType<typeof setTimeout> | undefined;
   private busy = false;
   private starts: number[] = [];
-  private startup: z.infer<typeof ready> | undefined;
+  private startup: ReadyMessage | undefined;
   private retiring: Promise<boolean> = Promise.resolve(true);
   constructor(
     private command: string,
     private args: string[],
     private limits = NLI_CAPS,
+    private protocol:ModelProtocol<T>={ready,reply} as unknown as ModelProtocol<T>,
   ) {}
   private fail(category: string) {
     this.rejecter?.(new NliWorkerError(category));
@@ -198,7 +202,7 @@ export class NliWorker {
           ? message.category
           : "MODEL_LOAD_FAILED",
       );
-    this.startup = ready.parse(message);
+    this.startup = this.protocol.ready.parse(message);
   }
   async infer(pairs: NliPair[]) {
     if (this.busy) throw new NliWorkerError("BUSY");
@@ -220,7 +224,7 @@ export class NliWorker {
       if (Buffer.byteLength(line) > this.limits.bytes) throw new NliWorkerError("INPUT_LIMIT");
       const output = this.line(this.limits.requestMs);
       this.child!.stdin.write(line);
-      const parsed = reply.parse(JSON.parse(await output));
+      const parsed = this.protocol.reply.parse(JSON.parse(await output));
       if (parsed.requestId !== requestId || parsed.results.length !== pairs.length)
         throw new NliWorkerError("MISMATCHED_RESPONSE");
       return { ...parsed, startupMs: this.startup!.startupMs };

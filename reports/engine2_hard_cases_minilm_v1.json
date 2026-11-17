@@ -1,0 +1,212 @@
+{
+  "scope": "Authored textual regression controls only. Premises are stipulated test inputs, not retrieved historical/event evidence or independently annotated accuracy data.",
+  "fixtureSha256": "fae65fc2e277ab1571980e89a45e382f1c8cfad7df2ca6be2a7adc5f9e00a258",
+  "model": {
+    "id": "cross-encoder/nli-MiniLM2-L6-H768",
+    "revision": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d"
+  },
+  "startupMs": 9606.55389999738,
+  "memory": {
+    "rssBytes": 553803776,
+    "peakWorkingSetBytes": 553803776
+  },
+  "rows": [
+    {
+      "id": "date-match",
+      "expected": "entailment",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.0019458356546238065,
+        "entailment": 0.9930478930473328,
+        "neutral": 0.005006368272006512
+      },
+      "tokens": 25,
+      "elapsedMs": 77.48540001921356,
+      "argmax": "entailment",
+      "accepted": true
+    },
+    {
+      "id": "date-conflict",
+      "expected": "contradiction",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.989983081817627,
+        "entailment": 0.005521636921912432,
+        "neutral": 0.004495151340961456
+      },
+      "tokens": 30,
+      "elapsedMs": 37.63869998510927,
+      "argmax": "contradiction",
+      "accepted": true
+    },
+    {
+      "id": "location-match",
+      "expected": "entailment",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.0007673712098039687,
+        "entailment": 0.9919500350952148,
+        "neutral": 0.007282598409801722
+      },
+      "tokens": 22,
+      "elapsedMs": 33.29920000396669,
+      "argmax": "entailment",
+      "accepted": true
+    },
+    {
+      "id": "location-conflict",
+      "expected": "contradiction",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.9978286623954773,
+        "entailment": 0.0008421407546848059,
+        "neutral": 0.0013291192008182406
+      },
+      "tokens": 24,
+      "elapsedMs": 41.97220003698021,
+      "argmax": "contradiction",
+      "accepted": true
+    },
+    {
+      "id": "negation",
+      "expected": "contradiction",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.9958003163337708,
+        "entailment": 0.0017970300978049636,
+        "neutral": 0.0024026562459766865
+      },
+      "tokens": 18,
+      "elapsedMs": 32.56229998078197,
+      "argmax": "contradiction",
+      "accepted": true
+    },
+    {
+      "id": "quantity",
+      "expected": "contradiction",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.9952740669250488,
+        "entailment": 0.002106194384396076,
+        "neutral": 0.0026197079569101334
+      },
+      "tokens": 27,
+      "elapsedMs": 39.43569998955354,
+      "argmax": "contradiction",
+      "accepted": true
+    },
+    {
+      "id": "time-scope",
+      "expected": "neutral",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.5581092238426208,
+        "entailment": 0.39653435349464417,
+        "neutral": 0.0453563816845417
+      },
+      "tokens": 25,
+      "elapsedMs": 38.92189997714013,
+      "argmax": "contradiction",
+      "accepted": false
+    },
+    {
+      "id": "attribution",
+      "expected": "neutral",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.0032751045655459166,
+        "entailment": 0.9798818826675415,
+        "neutral": 0.016843006014823914
+      },
+      "tokens": 26,
+      "elapsedMs": 39.59579998627305,
+      "argmax": "entailment",
+      "accepted": true
+    },
+    {
+      "id": "inspection",
+      "expected": "neutral",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.840717613697052,
+        "entailment": 0.005778382066637278,
+        "neutral": 0.15350398421287537
+      },
+      "tokens": 25,
+      "elapsedMs": 39.4533000071533,
+      "argmax": "contradiction",
+      "accepted": false
+    },
+    {
+      "id": "reported-rumor",
+      "expected": "neutral",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.14492352306842804,
+        "entailment": 0.5073882937431335,
+        "neutral": 0.3476882576942444
+      },
+      "tokens": 24,
+      "elapsedMs": 39.827900007367134,
+      "argmax": "entailment",
+      "accepted": false
+    },
+    {
+      "id": "unit-match",
+      "expected": "entailment",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.0008957993122749031,
+        "entailment": 0.9901421666145325,
+        "neutral": 0.008962043561041355
+      },
+      "tokens": 26,
+      "elapsedMs": 29.913199949078262,
+      "argmax": "entailment",
+      "accepted": true
+    },
+    {
+      "id": "past-present",
+      "expected": "contradiction",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.9892714023590088,
+        "entailment": 0.00775390537455678,
+        "neutral": 0.0029746457003057003
+      },
+      "tokens": 23,
+      "elapsedMs": 33.37499999906868,
+      "argmax": "contradiction",
+      "accepted": true
+    },
+    {
+      "id": "corrected-context",
+      "expected": "contradiction",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.8291228413581848,
+        "entailment": 0.145762100815773,
+        "neutral": 0.025115039199590683
+      },
+      "tokens": 27,
+      "elapsedMs": 37.02049999265,
+      "argmax": "contradiction",
+      "accepted": false
+    },
+    {
+      "id": "instruction-in-evidence",
+      "expected": "neutral",
+      "status": "executed",
+      "scores": {
+        "contradiction": 0.03693002089858055,
+        "entailment": 0.0015222630463540554,
+        "neutral": 0.9615477323532104
+      },
+      "tokens": 30,
+      "elapsedMs": 34.071700007189065,
+      "argmax": "neutral",
+      "accepted": true
+    }
+  ],
+  "authoritativePromotion": false
+}
