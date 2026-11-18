@@ -19,7 +19,7 @@ import {
 import { claimAssessment, Details, PageHeader, plainClaim, Term, VerdictBanner } from "./plain";
 import type { AttachFn } from "../App";
 import {AnalysisStatus} from './AnalysisStatus';
-import { claimResultSummary } from "../resultSummaries";
+import { claimResultSummary, reviewedClaimSources } from "../resultSummaries";
 
 const SAMPLES = [
   {
@@ -83,6 +83,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
   const lang = r.detectedLanguage && r.detectedLanguage !== "English" ? r.detectedLanguage : null;
   const summary=r.evidenceSummary??evidenceSummary(r);
   const userSummary = claimResultSummary(r);
+  const decisiveSources = userSummary.status === "NOT_VERIFIED" ? [] : reviewedClaimSources(r);
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-2">
@@ -110,7 +111,12 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
         })}
         extra={!r.isSimulated ? <div className="mt-3 rounded border border-slate-700/80 bg-slate-950/40 p-2">
           <div className="font-mono text-xs font-semibold tracking-wide text-cyan-200">{userSummary.status}</div>
-          {userSummary.evidence.length ? <ul className="mt-1 list-disc pl-4 text-xs text-slate-300">{userSummary.evidence.slice(0, 3).map((item) => <li key={item}>{item}</li>)}</ul> : <p className="mt-1 text-xs text-slate-400">No reviewed attributable passage currently supports a definitive label.</p>}
+          {decisiveSources.length ? <div className="mt-2 space-y-2">{decisiveSources.slice(0, 3).map((source) => <div key={source.id} className="rounded border border-slate-700 bg-slate-950/60 p-2 text-xs">
+            <a href={source.url} target="_blank" rel="noreferrer" className="font-medium text-cyan-300 underline">{source.title}</a>
+            <p className="text-slate-400">{source.publisher || source.domain} · {source.publishDate ? `published/updated ${source.publishDate}` : "publication date not provided"} · human-reviewed {source.stance}</p>
+            <blockquote className="mt-1 border-l border-cyan-700 pl-2 text-slate-200">“{source.review!.quote}”</blockquote>
+            <p className="mt-1 text-slate-400">This reviewed passage {source.stance === "supports" ? "supports" : source.stance === "contradicts" ? "contradicts" : "adds material context to"} the exact claim. Reviewed by {source.review!.reviewedBy} on {fmtDate(source.review!.reviewedAt)}.</p>
+          </div>)}</div> : <div className="mt-1 text-xs text-slate-400"><p>No reviewed attributable passage currently supports a definitive label.</p>{r.sources.slice(0, 3).map((source) => <div key={source.id||source.url} className="mt-2 rounded border border-slate-700 p-2"><a href={source.url} target="_blank" rel="noreferrer" className="text-cyan-300 underline">{source.title}</a><p>Retrieved but unreviewed relationship · {source.publisher||source.domain}</p><blockquote className="border-l border-slate-600 pl-2">“{source.excerpt.slice(0, 400)}”</blockquote></div>)}{!r.sources.length&&r.retrievalDetails?.providers.map((provider)=><p key={provider.provider} className="mt-1">{provider.provider}: {provider.status} — {provider.detail}</p>)}{r.missingEvidence?.slice(0, 2).map((item) => <p key={item} className="text-amber-200">Missing: {item}</p>)}</div>}
         </div> : undefined}
       />
       {r.selectionReview && <div className="rounded border border-slate-700 p-3 text-sm">

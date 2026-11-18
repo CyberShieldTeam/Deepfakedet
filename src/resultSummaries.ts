@@ -1,4 +1,5 @@
-import type { CampaignAnalysisResult, ClaimVerificationResult } from "./types";
+import type { CampaignAnalysisResult, ClaimVerificationResult, GroundedSource } from "./types";
+import type { CorrelationResult } from "./correlationTypes";
 
 export type ClaimDisplayStatus = "VERIFIED" | "CONTRADICTED" | "MISLEADING" | "NOT_VERIFIED";
 export type NetworkDisplayStatus =
@@ -16,7 +17,7 @@ export interface ResultSummary<S extends string> {
   tone: "green" | "red" | "amber" | "sky" | "slate";
 }
 
-const reviewedForClaim = (result: ClaimVerificationResult) =>
+export const reviewedClaimSources = (result: ClaimVerificationResult): GroundedSource[] =>
   result.sources.filter(
     (source) =>
       !!source.id &&
@@ -31,7 +32,7 @@ const reviewedForClaim = (result: ClaimVerificationResult) =>
 export function claimResultSummary(
   result: ClaimVerificationResult,
 ): ResultSummary<ClaimDisplayStatus> {
-  const reviewed = reviewedForClaim(result);
+  const reviewed = reviewedClaimSources(result);
   const evidence = reviewed.map(
     (source) => `[${source.id}] ${source.review!.quote} — ${source.publisher || source.domain}`,
   );
@@ -99,6 +100,30 @@ export function claimResultSummary(
   };
 }
 
+export function correlationResultSummary(result: CorrelationResult) {
+  const engines = [...new Set(result.nodes.flatMap((node) => node.engines))].filter(
+    (engine) => engine !== "investigation",
+  );
+  const important = result.relationships
+    .filter((relationship) => relationship.crossEngine)
+    .slice(0, 3)
+    .map((relationship) => relationship.explanation);
+  return {
+    headline:
+      result.state === "CORRELATION_UNAVAILABLE"
+        ? "Evidence correlation unavailable"
+        : result.counts.crossEngineLinks
+          ? "Cross-engine evidence connections found"
+          : "No supported cross-engine connection found",
+    explanation: `${engines.length ? engines.join(", ") : "No source engines"} contributed ${result.counts.nodes} evidence records and ${result.counts.relationships} relationships, including ${result.counts.crossEngineLinks} cross-engine links. Correlation does not establish a global fake/real verdict.`,
+    important,
+    unresolved: [...result.missingEvidence, ...(result.truncated ? ["Processing limits omitted some evidence."] : [])],
+    nextAction: result.counts.crossEngineLinks
+      ? "Review the highlighted connections, then confirm each source engine's result independently."
+      : "Add or review evidence in the source engines before drawing a cross-engine conclusion.",
+  };
+}
+
 export function networkResultSummary(
   result: CampaignAnalysisResult,
 ): ResultSummary<NetworkDisplayStatus> {
@@ -129,17 +154,26 @@ export function networkResultSummary(
       tone: "slate",
     };
   const recurring = episode.associations.filter((association) => association.recurrenceEligible);
+  const witnessSummary = (ids: string[]) => ids.slice(0, 2).map((id) => {
+    const witness = episode.witnesses.find((item) => item.id === id);
+    if (!witness) return `Witness ${id}`;
+    const source = episode.posts.find((post) => post.reference === witness.sourcePost);
+    const target = episode.posts.find((post) => post.reference === witness.targetPost);
+    return `Posts ${source?.postId || witness.sourcePost} (${witness.sourceTimestamp}) ↔ ${target?.postId || witness.targetPost} (${witness.targetTimestamp}); shared URLs: ${witness.sharedUrls.join(", ") || "none"}`;
+  });
   if (recurring.length)
     return {
       status: "REPEATED_COORDINATION_SIGNALS",
       headline: "Repeated coordination signals observed",
       explanation: `${recurring.length} account pair${recurring.length === 1 ? " has" : "s have"} qualifying observations in separated episodes. This describes recurrence, not malicious intent or common ownership.`,
-      evidence: recurring
-        .slice(0, 5)
-        .map(
+      evidence: [
+        `${result.totalPosts} posts · ${result.totalAccounts} accounts · ${result.edges.length} observed account relationships · ${episode.episodes.length} bounded episodes`,
+        ...recurring.slice(0, 3).map(
           (a) =>
             `${a.source} ↔ ${a.target}: ${a.separatedEpisodeCount} separated episodes (${a.witnessIds.length} witnesses)`,
         ),
+        ...witnessSummary(recurring.flatMap((item) => item.witnessIds)),
+      ],
       nextAction:
         "Inspect the episode witnesses and compare them with legitimate scheduling, syndication and breaking-news explanations.",
       tone: "amber",
@@ -149,12 +183,14 @@ export function networkResultSummary(
       status: "ASSOCIATED_ACTIVITY_OBSERVED",
       headline: "Associated activity observed",
       explanation: `${episode.associations.length} account pair${episode.associations.length === 1 ? " has" : "s have"} measured content, URL, hashtag or timing relationships, but no eligible repeated pattern was established.`,
-      evidence: episode.associations
-        .slice(0, 5)
-        .map(
+      evidence: [
+        `${result.totalPosts} posts · ${result.totalAccounts} accounts · ${result.edges.length} observed account relationships · ${episode.episodes.length} bounded episodes`,
+        ...episode.associations.slice(0, 3).map(
           (a) =>
             `${a.source} ↔ ${a.target}: ${a.episodeIds.length} observed episode${a.episodeIds.length === 1 ? "" : "s"}`,
         ),
+        ...witnessSummary(episode.associations.flatMap((item) => item.witnessIds)),
+      ],
       nextAction:
         "Review the source posts and collect additional complete observations before drawing conclusions.",
       tone: "sky",
@@ -165,7 +201,7 @@ export function networkResultSummary(
     explanation:
       "No account pair met the configured observable-association policy in the supplied dataset. This does not prove that no relationship exists outside the dataset.",
     evidence: [
-      `${episode.posts.length} posts checked`,
+      `${episode.posts.length} posts checked across ${result.totalAccounts} accounts; ${result.edges.length} observed account relationships`,
       `${episode.duplicatesRemoved} duplicates removed`,
     ],
     nextAction:

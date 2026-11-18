@@ -4,7 +4,7 @@ import { fetchReport, Report } from "../services/api";
 import { Button, ErrorBox } from "./ui";
 import {evidenceSummary} from '../evidenceSummary';
 import {mediaModelDetails} from '../mediaModelDetails';
-import { claimResultSummary, networkResultSummary } from "../resultSummaries";
+import { claimResultSummary, correlationResultSummary, networkResultSummary, reviewedClaimSources } from "../resultSummaries";
 
 const esc = (s: any) =>
   String(s ?? "").replace(
@@ -76,6 +76,10 @@ export function reportHtml(r: Report): string {
       ? [inv.claimResult]
       : [];
   const c = inv.campaignResult;
+  const claimSummaries=claims.map(claim=>({claim,summary:claimResultSummary(claim),sources:reviewedClaimSources(claim)}));
+  const networkSummary=c?networkResultSummary(c):null;
+  const correlationSummary=inv.correlationRun?.status==='current'&&inv.correlation?correlationResultSummary(inv.correlation):null;
+  const recommendedNextAction=claimSummaries.find(item=>item.summary.status==='NOT_VERIFIED')?.summary.nextAction??networkSummary?.nextAction??correlationSummary?.nextAction??'Review the source-engine evidence and limitations before drawing a conclusion.';
   const analyses=[...media.map(m=>m.analysis),...claims.map(x=>x.analysis),c?.analysis].filter(Boolean);
   const allLimits = Array.from(
     new Set([...media.flatMap((m) => m.limitations), ...claims.flatMap((x) => x.limitations)]),
@@ -95,6 +99,13 @@ table{border-collapse:collapse;width:100%;font-size:12px}td,th{border:1px solid 
 <div class="meta">Report ${esc(r.reportId)} · Case ${esc(inv.caseNumber)} · ID ${esc(inv.id)} · Generated ${esc(new Date(r.generatedAt).toLocaleString())}</div>
 <div class="meta">Integrity hash (SHA-256 of case record): ${esc(r.integrityHash)}</div>
 ${inv.isSimulatedDemo ? '<div class="sim">SIMULATED DEMONSTRATION — This report describes fictional incident data. It is not a real emergency, and no real government announcement is represented.</div>' : ""}
+<h2>Executive Investigation Summary</h2>
+<div class="box"><p><b>Important:</b> Media authenticity, factual accuracy, dissemination patterns and cross-engine relationships are separate evidence dimensions. VERITAS does not calculate a global fake/real score.</p>
+<h3>Claim verification</h3>${claimSummaries.length?claimSummaries.map(({claim,summary,sources})=>`<p><b>${esc(summary.status)}:</b> ${esc(claim.targetClaim)} — ${esc(summary.explanation)}</p>${sources.length&&summary.status!=='NOT_VERIFIED'?`<ul>${sources.map(source=>`<li><a href="${safeUrl(source.url)}">${esc(source.title)}</a> · ${esc(source.publisher||source.domain)} · ${esc(source.publishDate||'publication/update date not provided')} · human-reviewed ${esc(source.stance)} by ${esc(source.review?.reviewedBy)}<blockquote>${esc(source.review?.quote)}</blockquote><p>This reviewed passage ${source.stance==='supports'?'supports':source.stance==='contradicts'?'contradicts':'adds material context to'} the exact claim.</p></li>`).join('')}</ul>`:`<p class="muted">No decisive reviewed source. ${esc(claim.missingEvidence?.[0]||'Retrieved evidence remains unreviewed or insufficient.')}</p>`}`).join(''):'<p>Not checked in this investigation.</p>'}
+<h3>Media authenticity</h3><p>${media.length?`${media.length} result(s) retained; ${media.filter(m=>m.inference?.status==='available').length} had an available dedicated classifier. ${media.map(m=>`${esc(m.fileName||m.modality)}: ${esc(m.headlineSummary)}`).join(' ')}`:'Not checked in this investigation.'}</p>
+<h3>Network observation</h3><p>${networkSummary?`<b>${esc(networkSummary.status)}:</b> ${esc(networkSummary.explanation)}`:'Not checked in this investigation.'}</p>
+<h3>Cross-engine correlation</h3><p>${correlationSummary?`${esc(correlationSummary.explanation)} ${esc(correlationSummary.important[0]||'No supported cross-engine link was highlighted.')}`:'No current correlation result.'}</p>
+<p><b>Overall recommended next action:</b> ${esc(recommendedNextAction)}</p></div>
 <h2>1. Incident summary</h2>
 ${correlationHtml(inv)}
 <h2>Machine extraction and human review</h2><p>Acceptance confirms source representation, not factual truth. Last run: ${esc(inv.extractionRun?.state??'not run')} · ${esc(inv.extractionRun?.detail)}</p>
