@@ -47,7 +47,21 @@ def read_manifest(path):
 
 
 def metrics(rows, threshold):
-    scored = [r for r in rows if r.get("score") is not None]
+    if type(threshold) not in (int,float) or not math.isfinite(threshold) or not 0 <= threshold <= 1:
+        raise ValueError("Threshold must be finite and between zero and one")
+    try:
+        rows = list(rows)
+    except TypeError as error:
+        raise ValueError("Rows must be iterable") from error
+    for row in rows:
+        if not isinstance(row,dict) or "label" not in row or "score" not in row:
+            raise ValueError("Each metric row requires label and score")
+        if row["label"] not in ("genuine","synthetic"):
+            raise ValueError("Metric row has unknown label")
+        score=row["score"]
+        if score is not None and (type(score) not in (int,float) or not math.isfinite(score) or not 0 <= score <= 1):
+            raise ValueError("Metric score must be null or finite and between zero and one")
+    scored = [r for r in rows if r["score"] is not None]
     positive = [r["score"] for r in scored if r["label"] == "synthetic"]
     negative = [r["score"] for r in scored if r["label"] == "genuine"]
     tp = sum(s >= threshold for s in positive)
@@ -64,11 +78,16 @@ def metrics(rows, threshold):
             rank_sum += sum(label for _, label in ordered[i:j]) * (i + 1 + j) / 2
             i = j
         auc = (rank_sum - len(positive) * (len(positive) + 1) / 2) / (len(positive) * len(negative))
+    tn = len(negative) - fp
+    specificity = tn / len(negative) if negative else None
+    recall = tp / len(positive) if positive else None
+    balanced_accuracy = (specificity + recall) / 2 if specificity is not None and recall is not None else None
     return {"total": len(rows), "scored": len(scored), "failed_or_skipped": len(rows) - len(scored),
             "genuine": len(negative), "synthetic": len(positive), "tp": tp, "fp": fp,
-            "tn": len(negative) - fp, "fn": len(positive) - tp,
+            "tn": tn, "fn": len(positive) - tp,
             "false_positive_rate": fp / len(negative) if negative else None,
-            "recall": tp / len(positive) if positive else None, "auroc": auc}
+            "specificity": specificity, "recall": recall,
+            "balanced_accuracy": balanced_accuracy, "auroc": auc}
 
 
 def evaluate(prepared, endpoint, threshold, fetch):

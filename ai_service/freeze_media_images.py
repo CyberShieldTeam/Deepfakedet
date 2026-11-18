@@ -7,7 +7,8 @@ import json
 from pathlib import Path
 import re
 from PIL import Image, ImageOps
-from ai_service.prepare_media_image_evaluation import DATASET,REVISION,LICENSE
+from ai_service.prepare_media_image_evaluation import (DATASET,REVISION,LICENSE,
+    canonical_inventory_sha256,strict_json_loads)
 
 PROTOCOL=Path('test/fixtures/engine1_image_protocol.json')
 digest=lambda b:hashlib.sha256(b).hexdigest()
@@ -16,7 +17,7 @@ digest=lambda b:hashlib.sha256(b).hexdigest()
 def freeze(inventory,shards,output):
     if output.exists():raise ValueError('FROZEN_OUTPUT_EXISTS')
     import pyarrow.parquet as pq
-    data=json.loads(inventory.read_bytes());protocol=json.loads(PROTOCOL.read_bytes())
+    data=strict_json_loads(inventory.read_bytes());protocol=strict_json_loads(PROTOCOL.read_bytes())
     if data['dataset']!=DATASET or data['revision']!=REVISION:raise ValueError('SOURCE_IDENTITY')
     candidates=defaultdict(list)
     for row in data['rows']:
@@ -52,10 +53,15 @@ def freeze(inventory,shards,output):
                 raw=cache[name][row['index']]
                 if len(raw)>10*1024*1024:excluded['byte_limit']+=1;continue
                 with Image.open(io.BytesIO(raw)) as source:
-                    if source.width*source.height>24_000_000 or min(source.size)<64:excluded['geometry']+=1;continue
+                    if (source.format not in ('JPEG','PNG','WEBP') or source.width*source.height>24_000_000 or
+                        min(source.size)<64):excluded['geometry']+=1;continue
                     oriented=ImageOps.exif_transpose(source).convert('RGB');pixel_hash=digest(oriented.tobytes())
                     geometry=dict(format=source.format,width=source.width,height=source.height,orientedSize=list(oriented.size),mode=source.mode)
                 sha=digest(raw)
+                if (row.get('imagePath')!=f"{row['shard']}#row={row['index']}" or
+                    row.get('imageSha256')!=sha or row.get('decodedSha256')!=pixel_hash or
+                    row.get('imageGeometry')!=geometry):
+                    raise ValueError('INVENTORY_IMAGE_EVIDENCE_MISMATCH')
                 if sha in encoded or pixel_hash in pixels:excluded['duplicate']+=1;continue
                 key=digest(identity.encode())[:24];target=root/(key+'.'+geometry['format'].lower().replace('jpeg','jpg'))
                 with target.open('xb') as file:file.write(raw)
@@ -67,9 +73,9 @@ def freeze(inventory,shards,output):
             if count!=quota:raise ValueError('INSUFFICIENT_ELIGIBLE_ROWS_NO_FABRICATED_REPLACEMENT')
         # Release binary shard buffers between roles; source files remain immutable.
         cache.clear()
-    result=dict(dataset=DATASET,revision=REVISION,license=LICENSE,protocolSha256=digest(PROTOCOL.read_bytes()),inventorySha256=digest(inventory.read_bytes()),exclusions=dict(excluded),rows=selected,scope='Frozen external research comparison; incomplete original/identity/training lineage, no authoritative validation')
+    result=dict(dataset=DATASET,revision=REVISION,license=LICENSE,protocolSha256=digest(PROTOCOL.read_bytes()),inventorySha256=canonical_inventory_sha256(data),exclusions=dict(excluded),rows=selected,scope='Frozen external research comparison; publisher metadata labels and source identifiers, not verified camera chain of custody; incomplete identity/training lineage, no authoritative validation')
     with output.open('x',encoding='utf8') as file:json.dump(result,file,ensure_ascii=False,indent=2)
-    print(json.dumps({'samples':len(selected),'protocolSha256':result['protocolSha256'],'exclusions':dict(excluded),'syntheticGenerators':sorted({r['generator'] for r in selected if r['label']=='synthetic'})}))
+    print(json.dumps({'samples':len(selected),'protocolSha256':result['protocolSha256'],'inventorySha256':result['inventorySha256'],'exclusions':dict(excluded),'syntheticGenerators':sorted({r['generator'] for r in selected if r['label']=='synthetic'})}))
 
 
 if __name__=='__main__':
