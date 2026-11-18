@@ -34,7 +34,7 @@ const responseSchema = z.object({
   generationAssessment: z.enum(["suspected_ai_generated", "no_clear_ai_indicators", "inconclusive"]).default("inconclusive"),
   generationIndicators: z.array(z.string().trim().min(1).max(300)).max(6).default([]),
   limitations: z.array(z.string().trim().min(1).max(300)).max(8),
-}).strict();
+}).strict().refine(v => v.generationAssessment !== "suspected_ai_generated" || v.generationIndicators.length > 0, "Suspected AI generation requires specific indicators");
 
 const dataPart = (url: string): { part: GeminiImagePart; bytes: number } | null => {
   const match = /^data:(image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/]*={0,2})$/.exec(url);
