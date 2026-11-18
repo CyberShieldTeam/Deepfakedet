@@ -10,6 +10,8 @@ export type GeminiMediaAssessment = {
   status: "not_requested" | "not_configured" | "complete" | "input_limit" | "unsupported_duration" | "quota_exceeded" | "rate_limited" | "timeout" | "provider_error";
   explanation: string;
   observations: string[];
+  generationAssessment?: "suspected_ai_generated" | "no_clear_ai_indicators" | "inconclusive";
+  generationIndicators?: string[];
   limitations: string[];
   model: string | null;
 };
@@ -29,6 +31,8 @@ export function geminiMediaFailure(kind: "quota_exceeded" | "rate_limited" | "ov
 const responseSchema = z.object({
   explanation: z.string().trim().min(1).max(1200),
   observations: z.array(z.string().trim().min(1).max(300)).max(8),
+  generationAssessment: z.enum(["suspected_ai_generated", "no_clear_ai_indicators", "inconclusive"]).default("inconclusive"),
+  generationIndicators: z.array(z.string().trim().min(1).max(300)).max(6).default([]),
   limitations: z.array(z.string().trim().min(1).max(300)).max(8),
 }).strict();
 
