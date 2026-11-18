@@ -1,65 +1,106 @@
 # VERITAS AI — Suraksha Suchan
 
-**An evidence-led workspace for investigating misinformation across media, claims, public-post networks, and the relationships between them.**
+VERITAS is a workspace for investigating misinformation. It helps analysts inspect suspicious media, research claims, examine related posts, and connect their evidence in one case.
 
-A misinformation investigation rarely starts with one clean signal. An analyst may receive a suspicious image, a disputed statement, and a burst of near-identical posts—each answering a different question and carrying different uncertainty. VERITAS keeps those observations separate, preserves their provenance, requires review where automation is not trustworthy, and brings accepted evidence into one case and report.
+An image detector cannot tell whether a caption is true. A fact-check does not show how posts spread. VERITAS connects those findings in one case while keeping the sources, uncertainty, and analyst decisions visible.
 
-Unlike a single “real or fake” score, VERITAS exposes the evidence trail: submitted-byte hashes, forensic measurements, exact source passages, analyst decisions, post witnesses, temporal episodes, and deterministic cross-engine links. Unavailable services remain unavailable; experimental model outputs do not silently become verdicts.
+[Run the local demo](#run-the-demo) · [Take the judge’s tour](#judges-quick-tour) · [Read the verification ledger](docs/FINAL_VERIFICATION.md) · [See known limitations](#limitations)
 
-**[Run the verified local demonstration](docs/DEMO_SETUP.md)** · **[Follow the judge’s quick tour](#judges-quick-tour)** · **[Inspect the verification ledger](docs/FINAL_VERIFICATION.md)** · **[Review capability boundaries](docs/HACKATHON_READINESS.md)**
+![VERITAS AI case workspace showing media, claim, network, OCR review, and reporting evidence](docs/images/submission-workflow.png)
 
-![VERITAS AI investigation workspace showing a fictional case with media, claim, network, OCR-review, and reporting evidence](docs/images/submission-workflow.png)
+<sub>Actual VERITAS application screenshot from the authored demo. The museum notice, sources, and posts are fictional fixtures; the OCR, APIs, review flow, graph construction, persistence, and report generation are real application paths.</sub>
 
-> This is a genuine screenshot of the application processing the repository’s fictional submission fixtures. It is not a real-world fact-check or proof of detector accuracy. There is **no verified public deployment**; the demonstrated path runs locally.
+## What we built
 
-## At a glance
+VERITAS combines four implemented engines around a shared investigation record:
 
-| Engine | Purpose | Implemented evidence | Deliberate boundary |
-|---|---|---|---|
-| **1 · Media Forensics** | Inspect submitted images, audio, and short video | Original-input identity, browser signals, provenance state, bounded frame/audio evidence, optional experimental classifiers | No validated universal deepfake verdict or calibrated authenticity probability |
-| **2 · Claim Intelligence** | Turn a reviewed assertion into traceable source research | Claim selection, optional Wikipedia/corpus retrieval, exact quotations, citation provenance, analyst review, experimental reranking/NLI | Retrieval is not truth; the evaluated NLI model failed validation |
-| **3 · Network Intelligence** | Describe relationships and episodes in uploaded public posts | Original post witnesses, shared text/URLs, timing, clusters, recurrence and coverage disclosures | Similarity and timing do not prove coordination or malicious intent |
-| **4 · Evidence Correlation** | Connect accepted case evidence without erasing uncertainty | Deterministic case graph, attributed relationships, timeline, JSON export and HTML report | No automatic misinformation, causality, or campaign verdict |
+| Engine | Question it helps answer | What it produces |
+|---|---|---|
+| **1. Media Forensics** | What can we measure about this image, audio clip, or short video? | File identity, browser-computed signals, provenance state, frame/audio observations, and optional experimental model output |
+| **2. Claim Intelligence** | What exactly is being claimed, and what do the available sources say? | Reviewed claim text, retrieved passages, citations, source-review history, and optional relevance/NLI research output |
+| **3. Network Intelligence** | Which posts share text, URLs, timing, or recurring activity? | Original post witnesses, explainable links, account clusters, episodes, recurrence, and coverage disclosures |
+| **4. Evidence Correlation** | How does the accepted evidence in this case relate? | A deterministic case graph, supporting paths, an uncertainty-aware timeline, JSON export, and HTML report |
 
-### Evidence flow
+This separation matters. A suspicious image does not prove its caption is false; repeated posts do not prove malicious coordination; a relevant source does not automatically support a claim. VERITAS preserves those distinctions instead of hiding them behind one confidence percentage.
 
-1. An analyst creates a case and submits media, a claim, or a bounded post dataset.
-2. Engines 1–3 produce independent, signed evidence records with status, provenance, and limitations.
-3. OCR-derived text and source stance enter the case only after explicit analyst review; corrections remain traceable.
-4. Engine 4 projects the current case into deterministic relationships. It preserves inconclusive results, conflicting sources, partial coverage, and failed or stale runs.
-5. The same saved investigation drives the case view, JSON export, and HTML report.
-
-## Architecture
+## How an investigation flows
 
 ```mermaid
 flowchart LR
-    A["Analyst in React workspace"] --> B["Express API<br/>authentication, validation, limits"]
-    B --> E1["Engine 1<br/>Media Forensics"]
-    B --> X["Bounded OCR worker<br/>Tesseract.js"]
-    X --> P["Optional Python<br/>image preparation"]
-    X --> R["Analyst accepts or<br/>corrects extracted text"]
-    R --> E2["Engine 2<br/>Claim Intelligence"]
-    E2 --> S["Optional approved corpus,<br/>Wikipedia, or fact-check provider"]
-    B --> E3["Engine 3<br/>Network Intelligence worker"]
-    E1 --> E4["Engine 4<br/>Evidence Correlation worker"]
-    E2 --> E4
-    E3 --> E4
-    E4 --> D["Single-process atomic<br/>JSON repository"]
-    D --> O["Case view · JSON export<br/>HTML report"]
+    U["Analyst"] --> A["React workspace"]
+    A --> API["Express API<br/>auth · validation · limits"]
+
+    API --> M["Engine 1<br/>Media Forensics"]
+    API --> O["English image OCR<br/>bounded Tesseract worker"]
+    O --> H["Human review<br/>accept or correct"]
+    H --> C["Engine 2<br/>Claim Intelligence"]
+    C --> R["Approved corpus or<br/>optional external retrieval"]
+    API --> N["Engine 3<br/>Network Intelligence"]
+
+    M --> E["Engine 4<br/>Evidence Correlation"]
+    C --> E
+    N --> E
+    E --> S["Atomic case store"]
+    S --> P["Case view · JSON · HTML report"]
 ```
 
-This reflects the implemented process boundaries. There is no graph database, automatic truth engine, durable job queue, or multiwriter datastore. The optional full Python service supplies media evidence; the judged OCR workflow uses the smaller preparation-only service. See the [architecture notes](docs/ARCHITECTURE.md), [model contract](docs/MODEL_CONTRACT.md), and [deployment boundaries](docs/DEPLOYMENT.md).
+The diagram mirrors the current implementation: React and TypeScript in the browser; an Express API; bounded workers for OCR, network analysis, research inference, and correlation; optional Python media/preparation services; and a single-process JSON repository. There is no graph database, automatic truth engine, or multiwriter backend. More detail is in [Architecture and evidence boundaries](docs/ARCHITECTURE.md).
+
+## Key implemented capabilities
+
+- **Evidence identity:** server-issued receipts, input hashes, model/source identities, timestamps, and review revisions survive case attachment and reporting.
+- **Media inspection:** image ELA/frequency measurements, metadata and C2PA states, video frame/temporal observations, audio measurements, and optional local model adapters are reported independently.
+- **Review-gated OCR:** English text extraction retains the original OCR, geometry, corrections, reviewer, time, and rationale. Unreviewed text cannot silently become a claim.
+- **Traceable claim research:** local approved corpora and opt-in Wikipedia retrieval return exact passages and clickable source/revision references. Source applicability and stance remain analyst decisions.
+- **Explainable network analysis:** every graph link is backed by observed text, URL, timing, or episode evidence. Original posts and coverage limitations remain available for inspection.
+- **Deterministic correlation:** Engine 4 connects only case-scoped evidence using documented rules, preserves conflicting and incomplete evidence, and produces stable relationship IDs.
+- **Failure-safe persistence:** atomic writes, rollback tests, stale-run markers, ownership checks, bounded workers, and escaped reports protect the evidence already stored.
 
 ## Judge’s Quick Tour
 
-The shortest verified route takes about 10 minutes after prerequisites are installed. It uses actual application APIs, OCR, review gates, network analysis, correlation, persistence, and reporting with clearly disclosed fictional fixtures.
+Start here if you're reviewing the project. The six steps below use the normal application and supplied fictional files, not a separate presentation screen. Setup instructions follow in [Run the demo](#run-the-demo).
 
-### 1. Start the reproducible demonstration
+After setup:
 
-Prerequisites: Git, **Node.js 24** (declared minimum 22.12), npm, and **CPython 3.13**. The verified host used Windows; hosted CI also exercised Windows and Ubuntu.
+1. Start the demo and sign in with the ephemeral token printed in the terminal.
+2. Open **Media Forensics** and upload [`fixtures/submission/notice.png`](fixtures/submission/notice.png). Inspect the measurements and save the inconclusive result.
+3. Open the case, run **Extract and review image text**, compare the OCR with the source image, and accept or correct the proposed claim.
+4. In **Claim Intelligence**, retrieve the hash-approved fixture passage. Review the exact quotation and its context before saving it.
+5. In **Network Intelligence**, upload [`fixtures/submission/posts.json`](fixtures/submission/posts.json). Inspect the original posts, link reasons, groups, and activity episodes.
+6. Return to the case, generate **Evidence Correlation**, inspect a relationship’s supporting path, and open the final report.
+
+The checked workflow uses the normal UI and APIs—not a separate presentation screen or hardcoded verdict.
+
+## Verified walkthrough: the Amber Museum fixture
+
+The repository includes a fictional notice stating that the fictional Amber Museum offers free entry. It is paired with an authored source corpus and authored public posts. These inputs exist solely to make the whole investigation reproducible.
+
+| Step | Application behavior | Evidence preserved |
+|---|---|---|
+| Upload | Engine 1 processes `notice.png` and returns an inconclusive media result | Submitted-byte identity, receipt, measurements, and processing status |
+| Extract | The OCR worker proposes English text from the image | Raw text, word boxes, source/display coordinates, model identity, and image hash |
+| Review | The analyst checks the source image and accepts or corrects the claim | Immutable original OCR plus revision, reviewer, time, and rationale |
+| Research | Engine 2 retrieves the approved fictional passage | Corpus hash, title, URL, exact quote, context, and attributed stance review |
+| Map spread | Engine 3 processes the authored posts | Original IDs, text, timestamps, links, clusters, episodes, and coverage notes |
+| Correlate | Engine 4 connects the reviewed claim with its media, source, and literal post mentions | Deterministic nodes, edges, and supporting paths without a misinformation verdict |
+| Report | The case is exported through the report API and UI | API, stored investigation, graph export, and rendered report parity |
+
+One recorded Engine 4 control case contains **47 nodes, 101 relationships, and 25 cross-engine links**. These are fixture graph counts, not accuracy or scale claims. The full record is in [Engine 4 validation](docs/ENGINE4_VALIDATION.md) and [`reports/engine4_workflow_verified.json`](reports/engine4_workflow_verified.json).
+
+## Run the demo
+
+### Prerequisites
+
+- Git
+- Node.js 24 and npm (the package declares Node.js 22.12 or newer)
+- CPython 3.13 for the OCR preparation service
+
+The recorded clean setup used Windows. The project’s GitHub Actions workflow also exercised the core/demo path on Windows and Ubuntu. macOS has not been verified.
+
+### Windows PowerShell
 
 ```powershell
-git clone --branch codex/integrate-figma-upgrade https://github.com/CyberShieldTeam/Deepfakedet.git
+git clone https://github.com/CyberShieldTeam/Deepfakedet.git
 cd Deepfakedet
 npm ci
 py -3.13 -m venv .venv-demo
@@ -68,77 +109,21 @@ py -3.13 -m venv .venv-demo
 npm run demo
 ```
 
-The explicit download is one pinned 4,113,088-byte English OCR data file; the downloader checks its size, blob, and SHA-256 and refuses to overwrite it. `npm run demo` starts loopback-only preparation and application processes, creates a fresh isolated store, and prints an ephemeral access token. It does not reset existing investigations or use personal API keys.
-
-Linux/macOS equivalent (not verified on the recorded Windows host):
+### Linux/macOS equivalent
 
 ```sh
+git clone https://github.com/CyberShieldTeam/Deepfakedet.git
+cd Deepfakedet
+npm ci
 python3.13 -m venv .venv-demo
 .venv-demo/bin/python -m pip install -r ai_service/requirements-demo-lock.txt
 .venv-demo/bin/python -m ai_service.download_ocr
 npm run demo
 ```
 
-### 2. Follow one investigation end to end
+The downloader installs one pinned 4,113,088-byte English OCR data file and verifies its size, blob identity, and SHA-256. The demo launcher binds both services to loopback, creates a fresh isolated case store, disables unrelated external providers, and prints a temporary access token. It does not reset the normal investigation store.
 
-Use the detailed [demo setup and recovery guide](docs/DEMO_SETUP.md) or this compact route:
-
-1. Sign in with the ephemeral token and confirm the orange banner identifies an **authored demonstration**.
-2. Open **Media Forensics**, upload [`fixtures/submission/notice.png`](fixtures/submission/notice.png), inspect the inconclusive media result, and save it to the case.
-3. In the case, run **Extract and review image text**. Compare OCR with the unchanged source image, then explicitly accept or correct the assertion.
-4. Open **Claim Intelligence**. Retrieve the hash-approved fictional corpus passage, inspect the exact quote and context, record an attributed review, and save it.
-5. Open **Network Intelligence** and upload [`fixtures/submission/posts.json`](fixtures/submission/posts.json). Inspect original post witnesses, grouping reasons, time episodes, and coverage warnings before saving.
-6. Return to **My cases & reports**, generate correlation, inspect a relationship’s supporting path, then open the report and export JSON/HTML.
-
-For a repeatable automated acceptance run after installing Chromium, use:
-
-```powershell
-npx playwright install chromium
-npm run demo:check -- --port 3337 --python-port 8417
-```
-
-The acceptance check signs in through the real UI and verifies OCR → review → source retrieval → post upload → correlation → API/disk/report parity against a fresh store. It is an engineering workflow test, not an ML accuracy benchmark.
-
-## Example investigation: fictional museum notice
-
-All inputs below are **fictional, authored software fixtures**. They demonstrate evidence handling, not a real event or independent fact-check.
-
-| Stage | What happens | Evidence retained |
-|---|---|---|
-| **Input** | An analyst uploads `notice.png`, which states that the fictional Amber Museum offers free entry, plus an authored set of public posts | Original input identity, server receipt, hashes, timestamps, fixture provenance |
-| **Media processing** | Engine 1 records image measurements and an inconclusive result; English OCR proposes text | Media observations remain separate from OCR; no authenticity score is invented |
-| **Analyst review** | The analyst compares the proposed text with the source image and accepts or corrects the claim wording | Immutable raw OCR, source/display boxes, correction history, reviewer, time, rationale |
-| **Claim research** | Engine 2 retrieves an authored, hash-approved local passage; the analyst reviews exact quote and context | Source title/URL, passage, content hash, review stance and citation path |
-| **Network analysis** | Engine 3 processes the authored post file and exposes accounts, repeated content/URLs, witnesses, episodes, and coverage | Original post IDs/text/times and human-readable relationship reasons |
-| **Correlation** | Engine 4 connects media context, the reviewed assertion, source evidence, and literal post mentions | Deterministic nodes/edges with supporting paths; inconclusive and conflicting states preserved |
-| **Final report** | The application renders the stored case as an HTML report and downloadable JSON | API, stored investigation, graph, and report are checked for parity |
-
-The verified workflow artifact contains 47 nodes, 101 relationships, and 25 cross-engine links for its authored control case. Those counts describe one deterministic software fixture; they are **not** performance or accuracy metrics. See the [Engine 4 validation record](docs/ENGINE4_VALIDATION.md) and [`reports/engine4_workflow_verified.json`](reports/engine4_workflow_verified.json).
-
-## Capability status
-
-| Status | Capability | What that means in this repository |
-|---|---|---|
-| **Implemented** | Authenticated cases, input receipts/hashes, browser media measurements, post graph/episodes, deterministic correlation, atomic single-process storage, JSON/HTML reports | Exercised by unit, API, failure-recovery, and browser workflow tests |
-| **Implemented with review gate** | English image OCR, claim selection, exact-passage review, OCR correction history | Automation proposes evidence; the analyst must accept or correct it before downstream use |
-| **Optional** | Full Python media service, C2PA/EXIF inspection, AASIST, image/face models, Wikipedia or approved-corpus retrieval, Google Fact Check, Gemini explanations | Requires explicit local configuration, dependencies, assets, credentials, or network access; absence is reported |
-| **Experimental** | Deepfake/image classifiers, temporal measurements, AASIST scores, multilingual embeddings, NLI suggestions, MS MARCO reranking | Raw or diagnostic output only; disabled or quarantined where validation gates were not met |
-| **Simulated** | Submission notice, local source corpus, public posts, seeded/demo investigations and alert story | Clearly marked fictional fixtures processed by real application workflows |
-| **Unavailable / not claimed** | Validated universal deepfake accuracy, automatic factual truth, automatic malicious-coordination proof, native-script OCR validation, public deployment, Docker deployment, production-scale multiwriter storage | No substitute result or URL is fabricated |
-
-## Technology stack
-
-| Layer | Technology and role |
-|---|---|
-| Frontend | React 19, TypeScript, Vite 8, Tailwind CSS, Recharts, Lucide, Motion |
-| Application API | Node.js 22.12+, Express 4, Zod validation, server-sent events |
-| Workers | Bounded Node worker processes for OCR, network analysis, NLI research, and correlation |
-| OCR and preparation | Tesseract.js 7 with pinned English data; optional FastAPI/Pillow preparation service |
-| Optional media research | Python, OpenCV, PyTorch/Transformers, AASIST, C2PA SDK, FFmpeg-dependent video/audio paths |
-| Persistence and reports | Owner-scoped, atomic single-process JSON repository; deterministic JSON and escaped HTML exports |
-| Verification | Node/TypeScript tests, Python `unittest`, Supertest, Playwright, GitHub Actions |
-
-## Installation and operating modes
+See [Demo setup and recovery](docs/DEMO_SETUP.md) for ports, production-like mode, troubleshooting, and cleanup.
 
 ### Node-only development
 
@@ -147,43 +132,45 @@ npm ci
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). No `.env`, Python, model weights, or API key is required to start. Cases, browser measurements, network analysis, correlation, and reports work; unconfigured OCR, retrieval, and classifier services report unavailable states. Development binds to loopback by default.
+Open [http://localhost:3000](http://localhost:3000). The app starts without Python, model weights, or API keys. Core case, browser-measurement, network, correlation, and reporting paths remain available; unconfigured OCR, retrieval, and classifier services report an unavailable state.
 
-### Production-like local run
+For a production-like local run:
 
 ```sh
 npm run build
 npm run demo -- --production
 ```
 
-For an operator-managed server, copy [`.env.example`](.env.example), configure random 32+ character user tokens, exact origin, protected persistent storage, TLS termination, and only the optional providers you intend to use. Then run `NODE_ENV=production npm start`. Keep development dependencies installed because runtime currently uses `tsx` and imports Vite.
+Static-only hosting and `npm run preview` do not serve the API. The historical `docker-compose.yml` references a missing Dockerfile and is not a supported installation path. A real deployment also needs TLS, protected persistent storage, secrets management, and the controls described in [Deployment boundaries](docs/DEPLOYMENT.md) and [Security](SECURITY.md).
 
-Static hosting and `npm run preview` do not serve the API. `docker-compose.yml` is historical and references a missing Dockerfile, so Docker is **not supported**. Do not expose the unauthenticated Python service publicly. See [deployment boundaries](docs/DEPLOYMENT.md) and [security guidance](SECURITY.md).
+## Technology stack
 
-Key configuration groups are documented in [`.env.example`](.env.example):
+| Layer | Technologies |
+|---|---|
+| Web application | React 19, TypeScript, Vite 8, Tailwind CSS, Recharts, Lucide, Motion |
+| API and validation | Node.js, Express 4, Zod, server-sent events |
+| Analysis workers | Node worker processes for OCR, network analysis, correlation, and optional research inference |
+| OCR | Tesseract.js 7 with pinned English data; FastAPI/Pillow preparation endpoint |
+| Optional media services | Python, OpenCV, PyTorch/Transformers, AASIST, C2PA SDK, FFmpeg paths |
+| Storage and reports | Owner-scoped atomic JSON repository, JSON export, escaped HTML report |
+| Testing | Node assertions, Python `unittest`, Supertest, Playwright, GitHub Actions |
 
-- `PORT`, `VERITAS_HOST`, `VERITAS_PUBLIC_ORIGIN`, `VERITAS_USERS`, `VERITAS_STORE`
-- `VERITAS_OCR_PREPARATION_URL`, `VERITAS_AI_SERVICE_URL`
-- `VERITAS_CLAIM_CORPUS`, `VERITAS_CLAIM_CORPUS_SHA256`, `VERITAS_WIKIPEDIA_ENABLED`
-- optional `GOOGLE_FACT_CHECK_API_KEY`, `APP_GEMINI_API_KEY`, and model/provider flags
+## Testing and technical evidence
 
-## Testing and evaluation
+**Verified engineering:** the end-to-end investigation, evidence integrity across the API and reports, and error handling. **Not validated:** reliable real-world deepfake classification, automatic claim truth, or malicious-intent identification. Passing software tests do not establish model accuracy.
 
-### Engineering verification
+### Reproducibility and software verification
 
-The repository verifies software behavior, evidence integrity, and failure boundaries—not universal model accuracy.
-
-| Area | Recorded result | Evidence |
+| Check | Recorded result | Evidence |
 |---|---|---|
-| Reproducible submission demo | Real UI sign-in and OCR → review → corpus → posts → correlation → report passed in development and production-like modes | [Final verification](docs/FINAL_VERIFICATION.md), [demo setup](docs/DEMO_SETUP.md) |
-| Core APIs and evidence integrity | Authentication, ownership, validation, signed attachments, atomic rollback, hashes, review revisions, failure retention, and report parity passed | [Core capability verification](docs/CORE_CAPABILITY_VERIFICATION.md) |
-| Engine 1 integration | Image, audio, and video transport and evidence contracts passed; optional model absence and inconclusive states preserved | [Engine 1 verification](docs/ENGINE1_FINAL_VERIFICATION.md) |
-| Engine 2 integration | Retrieval, citations, selection, review, persistence, report propagation, and research-provider failure handling passed | [Engine 2 verification](docs/ENGINE2_FINAL_VERIFICATION.md), [advanced validation](docs/ENGINE2_ADVANCED_VALIDATION.md) |
-| Engine 3 integration | Upload, API, worker, UI, case, and report boundaries and bounded failure recovery passed | [Engine 3 verification](docs/ENGINE3_VERIFICATION.md) |
-| Engine 4 integration | Deterministic graph, scope isolation, caps, stale-run recovery, and API/disk/report equality passed | [Engine 4 validation](docs/ENGINE4_VALIDATION.md) |
-| OCR controls | Authored OCR/review controls passed; independent dataset coverage was insufficient for a release accuracy claim | [OCR validation](docs/ENGINE42_VALIDATION.md), [release limits](docs/ENGINE43_VALIDATION.md) |
+| Clean authored demo | Development and production-like browser workflows passed: sign-in, upload, real OCR, review, retrieval, post import, correlation, persistence, and report parity | [Final verification](docs/FINAL_VERIFICATION.md) |
+| Hosted CI | Windows and Ubuntu application jobs passed the core/demo workflow; the separate full-Python job reported 95 passes and three absent-asset skips | [GitHub Actions run 43953655764](https://github.com/CyberShieldTeam/Deepfakedet/actions/runs/43953655764) |
+| Engine 1 | Input identity, media transport, optional-model failure states, persistence, and reporting passed; final local ledger records 118 Python tests with no skips | [Engine 1 final verification](docs/ENGINE1_FINAL_VERIFICATION.md) |
+| Engine 2 | Claim selection, retrieval, citations, review history, optional worker controls, persistence, and reporting passed | [Engine 2 final verification](docs/ENGINE2_FINAL_VERIFICATION.md) |
+| Engine 3 | Upload-to-worker-to-UI-to-report boundaries, caps, busy/timeout handling, and recovery passed | [Engine 3 verification](docs/ENGINE3_VERIFICATION.md) |
+| Engine 4 | Determinism, scope isolation, caps, stale-run recovery, and API/store/report equality passed | [Engine 4 validation](docs/ENGINE4_VALIDATION.md) |
 
-Run the principal documentation and application checks:
+Run the principal repository checks with:
 
 ```sh
 npm run docs:check
@@ -198,41 +185,54 @@ npm run test:extraction
 npm run test:engine42
 ```
 
-Some optional runtime tests require the corresponding Python service, model asset, corpus, or browser installation. A setup-gated skip is not counted as a pass in the linked ledgers.
+Optional live-model, OCR-runtime, and browser suites need their documented services or assets. A setup-gated skip is not counted as a pass.
 
-### Independent ML accuracy: not established
+### Model and evaluation results
 
-- The admitted media fixtures are smoke and integration material, not a representative deepfake benchmark. Deepfake detector accuracy remains unvalidated; raw model outputs are not calibrated probabilities. See [model evaluation](docs/IMAGE_MODEL_EVALUATION.md) and [dataset readiness](EVALUATION_DATASETS.md).
-- The offline English NLI checkpoint failed its predeclared external validation criteria. It remains opt-in research output and cannot create an authoritative factual verdict. See [NLI evaluation](docs/ENGINE2_NLI_EVALUATION.md).
-- The optional reranker improved ordering in a recorded example and has small relevance experiments, but remains experimental and cannot verify truth. See [reranker evaluation](docs/ENGINE2_RERANKER_EVALUATION.md).
-- OCR has authored controls and bounded independent experiments, but no completed rights-cleared screenshot holdout, native-script accuracy result, or validated automatic profile selector. See [OCR release validation](docs/ENGINE43_VALIDATION.md).
-- Engine 3 and Engine 4 have no independently labelled malicious-campaign or misinformation accuracy result. Their rules expose associations and evidence paths, not intent.
+| Evaluation | Actual result | Decision |
+|---|---|---|
+| Image/audio/video models | The available media sets are small integration or research samples. Image candidates did not clear every validation gate; AASIST showed severe genuine false positives; no trained temporal detector was validated | Keep media models experimental and authenticity results inconclusive. [Engine 1 evaluation](docs/ENGINE1_FINAL_VERIFICATION.md) |
+| English NLI on held-out ANLI (300 pairs) | 32.33% three-class accuracy, macro-F1 .3184; accepted predictions were 27.27% accurate | Failed every promotion gate; the worker remains opt-in research output. [NLI evaluation](docs/ENGINE2_NLI_EVALUATION.md) |
+| Relevance reranking on held-out SciFact (30 queries) | MRR .5722 → .5944 and nDCG@6 .5959 → .6125; Recall@6 unchanged at .6833. The development split regressed | Optional experimental ordering only; it does not infer stance or truth. [Reranker evaluation](docs/ENGINE2_RERANKER_EVALUATION.md) |
+| OCR | Authored controls and bounded independent experiments exist, but no completed rights-cleared screenshot holdout or native-script accuracy study exists | English image OCR stays review-gated; no automatic profile selector is enabled. [OCR validation](docs/ENGINE43_VALIDATION.md) |
+| Network/correlation | Rule, API, resource, and authored workflow controls passed; the independent campaign evaluator admitted zero campaigns | No precision/recall or malicious-intent claim. [Engine 3 evaluation](docs/ENGINE3_EVALUATION.md) |
 
-## Limitations and responsible interpretation
+## Capability status
 
-- **Media detection is unvalidated.** Image, face, audio, and temporal models and signals have different scopes and failure modes; none is a universal deepfake detector. Compression, capture pipeline, speech presence, motion, lighting, and domain shift can change outputs.
-- **NLI validation failed.** Model suggestions are visibly separated from analyst-reviewed evidence and default workflows do not promote them to factual decisions.
-- **Reranking is experimental.** A high relevance score only changes ordering; it does not establish source authority, applicability, stance, independence, or truth.
-- **OCR does not generalize by assumption.** The demonstrated path is English image OCR. Hindi and Telugu, video, and speech extraction are unavailable in this version; screenshots, rotation, scale, layout, and unseen domains need independent evaluation.
-- **Network evidence is descriptive.** Repeated text, shared URLs, close timing, graph density, or recurrence can occur for legitimate reporting and do not automatically prove coordination or malicious intent.
-- **Correlation is deterministic, not causal.** A literal mention may quote or deny a claim; a shared URL may change; timeline order does not prove causality; analyst assertions are attributed but not independently true.
-- **Optional services may be unavailable.** Models, model weights, external providers, FFmpeg capabilities, API quotas, or credentials are not bundled uniformly. Health and result states disclose the gap rather than inventing output.
-- **The demo is simulated.** Its notice, sources, public posts, cases, and alert narrative are fictional. Real software processes them, but this is not independent evidence of real-world accuracy.
-- **No public deployment is verified.** The supported path is local. Storage is one application process and one JSON writer; there is no object archive, durable queue, database replication, OAuth or MFA, deployment-wide quota system, or validated service-level objective.
-- **Original media is not an evidence archive.** Submitted-byte identity and stored hashes support traceability for the processed input, but operators must preserve originals and chain of custody separately.
-- All outputs are decision support. Consequential claims require human review, suitable primary sources, and applicable legal or organizational procedures.
+| Status | Included capabilities |
+|---|---|
+| **Implemented** | Authenticated cases; evidence receipts and hashes; browser media measurements; English OCR and review history; approved-corpus retrieval; post graphs and episodes; deterministic correlation; JSON/HTML reports |
+| **Optional** | Full Python media service; C2PA/EXIF inspection; AASIST; image/face models; Wikipedia, Google Fact Check, Gemini explanation/translation, embeddings, NLI, and reranking providers |
+| **Experimental** | Media classifiers, temporal signals, AASIST scores, semantic diagnostics, NLI suggestions, and relevance reranking |
+| **Simulated for the demo** | The Amber Museum notice, source corpus, public posts, initial cases, and alert narrative |
+| **Not available or not claimed** | Validated universal deepfake detection, automatic truth verification, proof of malicious coordination, Hindi/Telugu OCR, speech/video transcription, public deployment, Docker deployment, or multiwriter storage |
 
-## Documentation map
+## Limitations
 
-- **Start here:** [demo setup](docs/DEMO_SETUP.md), [architecture](docs/ARCHITECTURE.md), [final verification](docs/FINAL_VERIFICATION.md), [hackathon readiness](docs/HACKATHON_READINESS.md)
-- **Media:** [model card](MODEL_CARD.md), [audio model card](AUDIO_MODEL_CARD.md), [video engine](VIDEO_ENGINE.md), [provenance and signals](docs/IMAGE_PROVENANCE_AND_SIGNALS.md)
-- **Claims:** [claim workflow](docs/CLAIM_VERIFICATION.md), [source citations](docs/CLAIM_SOURCE_CITATIONS.md), [NLI evaluation](docs/ENGINE2_NLI_EVALUATION.md), [advanced validation](docs/ENGINE2_ADVANCED_VALIDATION.md)
-- **Networks:** [campaign API](docs/CAMPAIGN_API.md), [episode model](docs/CAMPAIGN_EPISODES.md), [evaluation limits](docs/ENGINE3_EVALUATION.md)
-- **Correlation and OCR:** [evidence model](docs/ENGINE4_EVIDENCE_MODEL.md), [Engine 4 limits](docs/ENGINE4_LIMITATIONS.md), [OCR audit](docs/ENGINE42_OCR_AUDIT.md), [OCR release limits](docs/ENGINE43_VALIDATION.md)
-- **Operations:** [security](SECURITY.md), [deployment](docs/DEPLOYMENT.md), [contributing](CONTRIBUTING.md), [implementation history](IMPLEMENTATION_PROGRESS.md)
+This section summarizes the most important limitations. Methods and results are linked above.
 
-## Repository and licensing
+- **Deepfake accuracy is not validated.** The media adapters expose measurements and research scores, not a dependable universal detector or calibrated authenticity probability.
+- **The NLI model failed validation.** Its suggestions cannot create an authoritative factual verdict. Human-reviewed source evidence remains decisive.
+- **Reranking is experimental.** It can reorder existing English passages, but relevance is not support, source authority, or truth.
+- **OCR scope is narrow.** The demonstrated path is English text in images. Hindi/Telugu OCR, speech transcription, video text extraction, and cross-domain accuracy remain unvalidated or unavailable.
+- **Network patterns are not intent.** Similar text, shared URLs, timing, density, and recurrence can arise from legitimate reporting. VERITAS does not automatically prove coordination or malicious behavior.
+- **Correlation is not causation.** A post may quote or deny a claim; an analyst caption is attributed context, not independent truth; timeline order does not establish causality.
+- **Optional services can be absent.** Model files, external APIs, credentials, quotas, or system codecs are not guaranteed. Missing dependencies produce explicit unavailable or failed states.
+- **The demo inputs are fictional.** They demonstrate the real workflow, not real-world fact-checking accuracy.
+- **Deployment remains local and single-process.** There is no verified public URL, multiwriter database, object archive, durable queue, OAuth/MFA, or measured service-level objective.
+- **VERITAS is decision support.** High-impact conclusions still require qualified human review, appropriate primary sources, and a separately maintained chain of custody for original media.
 
-Repository: [CyberShieldTeam/Deepfakedet](https://github.com/CyberShieldTeam/Deepfakedet), branch `codex/integrate-figma-upgrade`.
+## Documentation and references
 
-No repository-wide `LICENSE` file or verified individual team roster is present, so this README does not invent either. Third-party code, models, data, and assets retain their own terms. The authored demonstration fixture provenance is recorded in [`fixtures/submission/manifest.json`](fixtures/submission/manifest.json).
+| Topic | Documents |
+|---|---|
+| Start and operate | [Demo setup](docs/DEMO_SETUP.md) · [Architecture](docs/ARCHITECTURE.md) · [Deployment](docs/DEPLOYMENT.md) · [Security](SECURITY.md) |
+| Media | [Model card](MODEL_CARD.md) · [Audio model card](AUDIO_MODEL_CARD.md) · [Video engine](VIDEO_ENGINE.md) · [Image provenance and signals](docs/IMAGE_PROVENANCE_AND_SIGNALS.md) |
+| Claims | [Claim workflow](docs/CLAIM_VERIFICATION.md) · [Source citations](docs/CLAIM_SOURCE_CITATIONS.md) · [NLI evaluation](docs/ENGINE2_NLI_EVALUATION.md) · [Reranker evaluation](docs/ENGINE2_RERANKER_EVALUATION.md) |
+| Networks | [Campaign API](docs/CAMPAIGN_API.md) · [Episodes](docs/CAMPAIGN_EPISODES.md) · [Engine 3 evaluation](docs/ENGINE3_EVALUATION.md) |
+| Correlation and OCR | [Evidence model](docs/ENGINE4_EVIDENCE_MODEL.md) · [Engine 4 limits](docs/ENGINE4_LIMITATIONS.md) · [OCR audit](docs/ENGINE42_OCR_AUDIT.md) · [OCR release validation](docs/ENGINE43_VALIDATION.md) |
+| Project evidence | [Final verification](docs/FINAL_VERIFICATION.md) · [Dataset readiness](EVALUATION_DATASETS.md) · [Implementation history](IMPLEMENTATION_PROGRESS.md) · [Contributing](CONTRIBUTING.md) |
+
+## License and attribution
+
+No repository-wide `LICENSE` file or verified individual team roster is currently present, so this README does not assign one. Third-party code, models, data, and assets retain their own terms. Provenance for the authored demo assets is recorded in [`fixtures/submission/manifest.json`](fixtures/submission/manifest.json).
