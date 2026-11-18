@@ -147,7 +147,8 @@ def health():
     return {"status": "ready" if model is not None else "unavailable", "model": MODEL_ID,
             "revision": MODEL_REVISION, "reason": load_error if model is None else None,
             "face_detector": "ready" if face_detector is not None else "unavailable",
-            "audio": audio_service.health(), "face_classifier": face_service.health()}
+            "audio": audio_service.health(), "face_classifier": face_service.health(),
+            "video": video_service.health()}
 
 
 @app.post("/v1/image/analyze")

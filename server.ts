@@ -700,7 +700,17 @@ function parseJSON(text: string): any | null {
 }
 
 // ---------------------------------------------------------------- Core APIs
-app.get("/api/health", (_req, res) => {
+app.get("/api/health", async (_req, res) => {
+  const mediaEndpoint=process.env.VERITAS_AI_SERVICE_URL?.trim();
+  let localMediaService:any={status:'unconfigured',video:{status:'unavailable'},detail:'VERITAS_AI_SERVICE_URL is not configured'};
+  if(mediaEndpoint){
+    try{
+      const response=await fetch(`${mediaEndpoint.replace(/\/$/,'')}/health`,{signal:AbortSignal.timeout(2500)});
+      if(!response.ok)throw new Error(`HTTP ${response.status}`);
+      const value:any=await response.json();
+      localMediaService={status:'available',video:value.video??{status:'unavailable'},image:{status:value.status,model:value.model,revision:value.revision,reason:value.reason},audio:value.audio,faceDetector:value.face_detector,faceClassifier:value.face_classifier};
+    }catch(error){localMediaService={status:'unavailable',video:{status:'unavailable'},detail:error instanceof Error?error.message.slice(0,160):'Health request failed'};}
+  }
   res.json({
     authoredDemonstration: process.env.VERITAS_AUTHORED_DEMO === '1',
     authenticationMode:
@@ -715,6 +725,7 @@ app.get("/api/health", (_req, res) => {
     geminiStatus: gemini.status,
     geminiMessage: gemini.message,
     geminiModel: ai ? GEMINI_MODEL : null,
+    localMediaService,
     geminiLastModelUsed: gemini.lastModelUsed,
     geminiModelCandidates: ai ? MODEL_CANDIDATES : [],
     searchGrounding: ai

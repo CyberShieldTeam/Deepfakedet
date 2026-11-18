@@ -8,7 +8,7 @@ export type ModalityType = "image" | "video" | "audio" | "text_claim" | "social_
 /** Processing/evidence state, independent of authenticity, truth or maliciousness verdicts. */
 export type AnalysisState='SUFFICIENT_EVIDENCE'|'INSUFFICIENT_EVIDENCE'|'NO_RELEVANT_SIGNALS'|'ANALYSIS_UNAVAILABLE'|'ANALYSIS_FAILED'|'PARTIAL_ANALYSIS';
 export interface AnalysisStage {
-  stage:string;status:'available'|'unconfigured'|'unavailable'|'failed'|'skipped';count?:number;errorCategory?:string;
+  stage:string;status:'available'|'unconfigured'|'unavailable'|'failed'|'skipped';count?:number;errorCategory?:string;message?:string;
 }
 export interface AnalysisDiagnostics {
   id:string;engine:'media'|'claim'|'network';state:AnalysisState;
