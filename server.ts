@@ -15,6 +15,7 @@ import {
   installSecurity,
   mediaInput,
   owner,
+  PUBLIC_DEMO,
   validate,
 } from "./server/security";
 import { analyzeMediaPipeline } from "./server/mediaPipeline";
@@ -697,6 +698,18 @@ function parseJSON(text: string): any | null {
 
 // ---------------------------------------------------------------- Core APIs
 app.get("/api/health", (_req, res) => {
+  if (PUBLIC_DEMO) {
+    return void res.json({
+      publicDemo: true,
+      authoredDemonstration: process.env.VERITAS_AUTHORED_DEMO === '1',
+      authenticationMode: "public-demo",
+      engines: inferenceRegistry().map(({ task, status }) => ({ task, status })),
+      status: "ONLINE",
+      geminiReady: gemini.status === "ready",
+      activeInvestigations: investigations.filter(visible).length,
+      timestamp: new Date().toISOString(),
+    });
+  }
   res.json({
     authoredDemonstration: process.env.VERITAS_AUTHORED_DEMO === '1',
     authenticationMode:
@@ -729,9 +742,26 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
-app.get("/api/models", (_req, res) => res.json({ models: modelRegistry() }));
+app.get("/api/models", (_req, res) => {
+  const models = modelRegistry();
+  if (PUBLIC_DEMO) {
+    return void res.json({
+      models: models.map(({ id, name, task, status, accuracyBenchmark }) => ({
+        id,
+        name,
+        task,
+        status,
+        accuracyBenchmark,
+      })),
+    });
+  }
+  res.json({ models });
+});
 
 app.get("/api/stats", (_req, res) => {
+  const ownedPosts=recentEvents.filter(
+    (e)=>eventOwners.get(e.id)===owner()&&!e.isSimulated&&e.kind==="post",
+  );
   const recentAlerts = recentEvents.filter(
     (e) =>
       eventOwners.get(e.id) === owner() &&
@@ -750,9 +780,12 @@ app.get("/api/stats", (_req, res) => {
           : "GUARDED";
   res.json({
     ...stats,
-    postsIngested: recentEvents.filter(
-      (e) => eventOwners.get(e.id) === owner() && !e.isSimulated && e.kind === "post",
-    ).length,
+    byLanguage:PUBLIC_DEMO?ownedPosts.reduce((counts,event)=>{
+      const language=event.language||"Unknown";
+      counts[language]=(counts[language]||0)+1;
+      return counts;
+    },{} as Record<string,number>):stats.byLanguage,
+    postsIngested: ownedPosts.length,
     alertsRaised: recentAlerts.length,
     threatLevel: threat,
     recentAlertCount: recentAlerts.length,

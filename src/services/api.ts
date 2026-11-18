@@ -9,13 +9,21 @@ import type {CorrelationResult,MediaContextInput} from '../correlationTypes';
 export const correlateInvestigation=(id:string,contexts?:MediaContextInput[])=>post<{investigation:Investigation;result:CorrelationResult}>(`/api/investigations/${encodeURIComponent(id)}/correlate`,contexts===undefined?{}:{contexts});
 export const extractionRequest=(id:string,action:string,body:unknown)=>post<{investigation:Investigation}>(`/api/investigations/${encodeURIComponent(id)}/${action}`,body);
 
-async function req<T>(url: string, init?: RequestInit): Promise<T> {
+let publicDemoMode=false;
+export const setPublicDemoMode=(enabled:boolean)=>{publicDemoMode=enabled;};
+
+async function req<T>(url: string, init?: RequestInit, allowSessionRetry=true): Promise<T> {
   const res = await fetch(url, {
+    credentials: "same-origin",
     headers: { "Content-Type": "application/json" },
     signal: AbortSignal.timeout(180000),
     ...init,
   });
   const data = await res.json().catch(() => ({}));
+  if(res.status===401&&publicDemoMode&&allowSessionRetry&&url!=="/api/session"){
+    const renewed=await fetch("/api/session",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:"{}"});
+    if(renewed.ok)return req<T>(url,init,false);
+  }
   if (res.status === 401) window.dispatchEvent(new Event("veritas:auth-required"));
   if (!res.ok) {
     const error=new Error(data.analysis?`${data.analysis.state}: ${data.error || 'Analysis failed'}. ${data.analysis.summary}`:data.error || `Request failed (${res.status})`);
@@ -28,14 +36,15 @@ const post = <T>(url: string, body: any) =>
 
 export interface Health {
   authoredDemonstration?: boolean;
+  publicDemo?: boolean;
   status: string;
   authenticationMode: string;
-  engines: { task: string; status: string; modelId: string; version: string }[];
-  geminiConfigured: boolean;
-  geminiReady: boolean;
-  geminiStatus: string;
-  geminiMessage: string;
-  geminiModel: string | null;
+  engines: { task: string; status: string; modelId?: string; version?: string }[];
+  geminiConfigured?: boolean;
+  geminiReady?: boolean;
+  geminiStatus?: string;
+  geminiMessage?: string;
+  geminiModel?: string | null;
   activeInvestigations: number;
 }
 export interface Stats {
@@ -55,6 +64,7 @@ export interface Report {
 }
 
 export const fetchHealth = () => req<Health>("/api/health");
+export const createPublicDemoSession=()=>post<{authenticated:boolean;mode:"public-demo"}>("/api/session",{});
 export const fetchStats = () => req<Stats>("/api/stats");
 export const fetchModels = () =>
   req<{ models: ModelRegistryItem[] }>("/api/models").then((d) => d.models);

@@ -421,3 +421,17 @@ test("Real browser video frame extraction reports its actual interval", async ({
       : "Sampled-frame evidence · not a video-level probability", { exact: true }),
   ).toBeVisible();
 });
+
+test("Public judge demo opens the dashboard without credentials", async ({ page }) => {
+  test.skip(process.env.VERITAS_PUBLIC_DEMO_UI !== "1", "Requires an isolated server with VERITAS_PUBLIC_DEMO=true");
+  await page.goto("/");
+  await expect(page.getByRole("note").filter({ hasText: "PUBLIC JUDGE DEMO" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Investigation overview/ })).toBeVisible();
+  await expect(page.getByLabel("Analyst access token")).toHaveCount(0);
+  await expect(page.getByText("Analyst workspace", { exact: true })).toHaveCount(0);
+  const cookie = (await page.context().cookies()).find((item) => item.name === "veritas_demo_session");
+  expect(cookie?.httpOnly).toBe(true);
+  expect(cookie?.secure).toBe(true);
+  expect(cookie?.sameSite).toBe("Strict");
+  expect((await page.request.get("/api/investigations")).status()).toBe(200);
+});

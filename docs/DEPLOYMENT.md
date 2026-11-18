@@ -29,6 +29,38 @@ passed the core/demo workflow; see FINAL_VERIFICATION.md. Other host combination
 uses `ai_service/requirements.txt`; its larger ML dependencies/checkpoints are unnecessary
 for the judged OCR path. Individual model cards describe optional inference limitations.
 
+## Render public judge demo mode
+
+For a public hackathon demonstration, configure the Render web service with these
+environment variables and commands. This is an explicit opt-in to anonymous public use;
+it does not make the service suitable for private investigations.
+
+- Set `NODE_ENV=production` and `VERITAS_PUBLIC_DEMO=true`.
+- Set `VERITAS_PUBLIC_ORIGIN=https://deepfakedet-bjq0.onrender.com` to the exact HTTPS
+  service origin. Update it if the Render service URL or custom domain changes.
+- `VERITAS_USERS` is not required in this mode. Remove it from the Render environment;
+  public mode ignores analyst credentials and accepts no token or password.
+- Set the Render build command to `npm ci && npm run build` and the start command to
+  `npm start`. The production server binds to `0.0.0.0` and Render supplies `PORT`.
+- Attach a persistent disk and set `VERITAS_STORE` to a file path on its mount if judge
+  investigations should survive a restart. Without persistent storage, saved cases may
+  be lost when the service restarts.
+
+On first visit, the browser receives a random, eight-hour, `Secure`, `HttpOnly`,
+`SameSite=Strict` cookie. The server maps that cookie to a random owner ID; it never sends
+the owner ID in the session response. API ownership checks continue to scope investigations,
+reports and streams to that browser. Scripted scenarios and sample datasets are labelled as
+simulated; user-submitted media and claims use configured engines, and unavailable evidence remains unavailable or inconclusive. Existing request validation, origin
+checks, upload limits and mutation rate limits remain active. Keep provider API keys only
+in Render's server-side environment; never put them in `VITE_*` variables.
+
+The session map and IP rate limiter are in memory and are local to one server process.
+Run one instance only: multiple instances do not share session state, and a restart expires
+all browser sessions. This mode does not provide durable identity, distributed rate limiting,
+private analyst access, or a production capacity guarantee. Review Render storage, retention
+and provider-quota settings before opening the URL to judges. The switch changes access
+behavior only on a redeploy; setting it to `false` or removing it restores the normal
+production analyst-token requirement.
 ## Operational limits
 
 One process owns each JSON store. Do not use replicas, cluster mode or concurrent writers.
