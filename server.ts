@@ -13,6 +13,7 @@ import { callLocalImage, localImageResult, type LocalImageResponse } from './ser
 import { callImageProvenance, type ImageProvenance } from './server/imageProvenance';
 import { callLocalAudio, localAudioResult, type LocalAudioResponse } from './server/localAudio';
 import { callLocalVideo, callLocalVideoFrames, localVideoResult, type LocalVideoEvidence } from './server/localVideo';
+import { decideClaimStatus } from './server/claimEvidence';
 import { ClaimVerificationResult, ForensicAnalysisResult, Investigation, LiveEvent, ModelRegistryItem, RiskLevel, GroundedSource } from './src/types';
 
 // ---------------------------------------------------------------- Gemini (server-side only)
@@ -827,9 +828,12 @@ async function geminiVerifyClaim(claimText: string, lang: string): Promise<Claim
   let verdict = modelVerdict;
   let assessment: ClaimVerificationResult['assessment'];
   let cap: number;
+  // Retrieval proves relevance only. Grounding metadata does not establish that a publisher passage
+  // supports/contradicts the exact assertion, so it cannot authorize a definitive status.
   if (grounded && sources.length > 0 && modelVerdict !== 'Insufficient Evidence') {
     mode = 'search_grounded';
-    assessment = modelVerdict === 'Supported' ? 'verified_true' : modelVerdict === 'Contradicted' ? 'verified_false' : 'verified_mixed';
+    assessment = 'unverified';
+    verdict = 'Insufficient Evidence';
     cap = capForSources(sources.length);
   } else if (grounded) {
     mode = 'insufficient_external_evidence';
@@ -847,6 +851,7 @@ async function geminiVerifyClaim(claimText: string, lang: string): Promise<Claim
   const confidenceScore = Math.min(modelConf, cap);
   const capped = modelConf > cap;
 
+  const decision = decideClaimStatus(sources);
   return {
     originalInput: claimText, detectedLanguage: p.detectedLanguage || lang, translatedText: p.englishTranslation,
     targetClaim: p.targetClaim || claimText, extractedClaims: p.extractedClaims || [claimText],
@@ -865,6 +870,7 @@ async function geminiVerifyClaim(claimText: string, lang: string): Promise<Claim
     ],
     timestamp: retrievedAt, engine: 'gemini', modelUsed: r.modelUsed,
     verificationMode: mode, assessment, searchQueries: meta?.webSearchQueries || [],
+    claimStatus: decision.status, conclusion: decision.explanation, missingEvidence: decision.missingEvidence, nextAction: decision.nextAction,
     engineNote:
       mode === 'search_grounded' ? `Gemini ${r.modelUsed} with Google Search grounding (${sources.length} source${sources.length === 1 ? '' : 's'}).`
       : mode === 'insufficient_external_evidence' ? `Gemini ${r.modelUsed} with Google Search grounding — no usable external sources found.`
@@ -874,7 +880,7 @@ async function geminiVerifyClaim(claimText: string, lang: string): Promise<Claim
 
 app.post('/api/claims/verify', async (req, res) => {
   try {
-    const { claimText } = req.body || {};
+    const { claimText, ocrReview } = req.body || {};
     if (!claimText || typeof claimText !== 'string' || !claimText.trim()) return res.status(400).json({ error: 'claimText is required' });
     const lang = detectScriptLanguage(claimText);
     let result: ClaimVerificationResult | null = null;
@@ -913,7 +919,12 @@ app.post('/api/claims/verify', async (req, res) => {
         verificationMode: reg ? 'simulated_demo' : 'rule_based',
         assessment: reg ? 'verified_false' : 'unverified'
       };
+      const decision = reg
+        ? { status: 'CONTRADICTED' as const, explanation: 'The simulated demo bulletin contradicts the simulated claim.', missingEvidence: [] as string[], nextAction: 'Treat this only as fictional demonstration data.' }
+        : decideClaimStatus(result.sources);
+      Object.assign(result, { claimStatus: decision.status, conclusion: decision.explanation, missingEvidence: decision.missingEvidence, nextAction: decision.nextAction });
     }
+    if (ocrReview && typeof ocrReview === 'object' && typeof ocrReview.imageSha256 === 'string') result.ocrReview = ocrReview;
     if (result.assessment === 'verified_false' || (result.verdict === 'Contradicted' && !result.assessment))
       raiseAlert('claim_contradicted', 'high', 'Claim contradicted', result.targetClaim.slice(0, 140), !!result.isSimulated);
     else if (result.assessment === 'implausible')

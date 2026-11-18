@@ -129,7 +129,11 @@ export interface GroundedSource {
   citedFor?: string;
   /** Search grounding only: when the source was retrieved (the API does not provide publication dates). */
   retrievedAt?: string;
+  /** True only after a reviewer/provider supplied passage was checked against the exact claim and source context. */
+  contextReviewed?: boolean;
 }
+
+export type EvidenceGroundedClaimStatus = 'VERIFIED' | 'CONTRADICTED' | 'MISLEADING_CONTEXT' | 'NOT_VERIFIED';
 
 /** How a claim result was produced — shown to the user so verified results are never confused with AI opinion. */
 export type VerificationMode = 'search_grounded' | 'ai_knowledge_only' | 'insufficient_external_evidence' | 'rule_based' | 'simulated_demo';
@@ -164,6 +168,22 @@ export interface ClaimVerificationResult {
   confidenceNote?: string;
   searchQueries?: string[];
   modelUsed?: string;
+  claimStatus?: EvidenceGroundedClaimStatus;
+  conclusion?: string;
+  nextAction?: string;
+  missingEvidence?: string[];
+  ocrReview?: OcrReview;
+}
+
+export interface OcrWordBox { text: string; confidence: number; x: number; y: number; width: number; height: number }
+export interface OcrAttempt { transformation: string; rotationDegrees: number; text: string; confidence: number; boxes: OcrWordBox[] }
+export interface OcrReview {
+  originalText: string;
+  reviewedText: string;
+  imageSha256: string;
+  selectedTransformation: string;
+  attempts: OcrAttempt[];
+  history: { text: string; changedAt: string; note: string }[];
 }
 
 export interface SocialPostNode {
@@ -178,7 +198,9 @@ export interface SocialPostNode {
   urls: string[];
   hashtags: string[];
   clusterId: number;
-  botLikelihoodScore: number; // 0 - 100
+  /** Deprecated display compatibility. It is an association heuristic, never a bot probability. */
+  botLikelihoodScore: number;
+  associationSignalCount?: number;
   amplificationWeight: number; // size on graph
   language?: string;
   suspicious?: boolean;
@@ -195,6 +217,7 @@ export interface NetworkEdge {
   weight: number; // 0 - 1
   coordinationType: 'semantic_copy' | 'temporal_burst' | 'shared_url' | 'hashtag_cascade' | 'retweet_ring';
   description: string;
+  evidence?: { sourcePostId: string; targetPostId: string; sourceTimestamp: string | null; targetTimestamp: string | null; sourceUrl?: string; targetUrl?: string; signals: string[]; textSimilarity: number | null }[];
 }
 
 export interface CampaignCluster {
@@ -227,6 +250,13 @@ export interface CampaignAnalysisResult {
   languageBreakdown?: { language: string; count: number }[];
   engine?: AnalysisEngine;
   isSimulated?: boolean;
+  patternStatus?: 'NO_SIGNIFICANT_PATTERN_OBSERVED' | 'ASSOCIATED_ACTIVITY_OBSERVED' | 'REPEATED_COORDINATION_SIGNALS' | 'INSUFFICIENT_DATA';
+  conclusion?: string;
+  nextAction?: string;
+  coverageLimitations?: string[];
+  invalidPostCount?: number;
+  duplicatePostCount?: number;
+  missingTimestampCount?: number;
 }
 
 export interface TimelineEntry {

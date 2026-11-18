@@ -3,7 +3,7 @@ import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis
 import { Database, Download, Network, Upload } from 'lucide-react';
 import { CampaignAnalysisResult, Investigation } from '../types';
 import { analyzeCampaign } from '../services/api';
-import { Button, Card, Empty, EngineBadge, ErrorBox, Meter, SimulatedBadge, Stat, fmtTime } from './ui';
+import { Button, Card, Empty, EngineBadge, ErrorBox, SimulatedBadge, Stat, fmtTime } from './ui';
 import { EDGE_LEGEND, ForceGraph } from './ForceGraph';
 import { Details, PageHeader, VerdictBanner } from './plain';
 import type { AttachFn } from '../App';
@@ -86,9 +86,13 @@ export const CampaignView: React.FC<{ attach: AttachFn; active: Investigation | 
             {result.isSimulated && <SimulatedBadge label="synthetic dataset" />}
           </div>
           <VerdictBanner
-            {...(result.clusters.length
-              ? { tone: (result.overallCoordinationIndex >= 60 ? 'red' : 'orange') as 'red' | 'orange', headline: `We found ${result.clusters.length} group${result.clusters.length > 1 ? 's' : ''} of accounts that appear to be working together`, explain: `${result.clusters.reduce((n, c) => n + c.accountCount, 0)} of ${result.totalAccounts} accounts posted near-identical text, shared the same link, or posted within two minutes of each other.`, advice: 'Review the flagged accounts before reporting them — real people sometimes share the same news too.' }
-              : { tone: 'green' as const, headline: 'No coordinated groups found', explain: 'None of the accounts in this file showed copy-paste, shared-link or same-minute posting patterns.' })}
+            {...(result.patternStatus === 'REPEATED_COORDINATION_SIGNALS'
+              ? { tone: 'orange' as const, headline: 'Repeated coordination signals observed', explain: result.conclusion || 'Multiple observable associations recur in this dataset.', advice: result.nextAction }
+              : result.patternStatus === 'ASSOCIATED_ACTIVITY_OBSERVED'
+              ? { tone: 'sky' as const, headline: 'Associated activity observed', explain: result.conclusion || 'Some posts share observable features, without establishing intent.', advice: result.nextAction }
+              : result.patternStatus === 'INSUFFICIENT_DATA'
+              ? { tone: 'slate' as const, headline: 'Insufficient data', explain: result.conclusion || 'The supplied observations are incomplete.', advice: result.nextAction }
+              : { tone: 'green' as const, headline: 'No significant pattern observed', explain: result.conclusion || 'No account pair met the configured thresholds in this dataset.' })}
           />
           <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
             <Stat label="Coordination score" value={result.overallCoordinationIndex} sub="0 = none · 100 = highly coordinated" accent={result.overallCoordinationIndex >= 60 ? 'text-rose-300' : 'text-amber-300'} />
@@ -125,10 +129,10 @@ export const CampaignView: React.FC<{ attach: AttachFn; active: Investigation | 
                     <span>Age: {node.accountAgeDays >= 0 ? `${node.accountAgeDays}d` : 'n/a'}</span><span>Followers: {node.followerCount >= 0 ? node.followerCount : 'n/a'}</span>
                     <span>First post: {fmtTime(node.timestamp)}</span><span>Links: {nodeEdges.length}</span>
                   </div>
-                  <div><div className="mb-1 text-[10px] text-slate-500">Suspicion score {node.botLikelihoodScore} (links ×10 + repeats + age/follower signals)</div><Meter value={node.botLikelihoodScore} /></div>
+                  <div className="text-[11px] text-slate-400">Observable association signals: {node.associationSignalCount ?? nodeEdges.length}. This is not a bot or maliciousness score.</div>
                   {node.urls.length > 0 && <div className="break-all text-[11px] text-amber-300">{node.urls.join(', ')}</div>}
                   <div className="max-h-44 space-y-1 overflow-y-auto">
-                    {nodeEdges.map(e => <div key={e.id} className="rounded border border-slate-800 p-1.5 text-[11px] text-slate-400"><span style={{ color: EDGE_LEGEND[e.coordinationType] }}>{e.coordinationType}</span> ↔ {result.nodes.find(n => n.id === (e.source === node.id ? e.target : e.source))?.accountHandle}: {e.description}</div>)}
+                    {nodeEdges.map(e => <details key={e.id} className="rounded border border-slate-800 p-1.5 text-[11px] text-slate-400"><summary className="cursor-pointer"><span style={{ color: EDGE_LEGEND[e.coordinationType] }}>{e.coordinationType}</span> ↔ {result.nodes.find(n => n.id === (e.source === node.id ? e.target : e.source))?.accountHandle}: {e.description}</summary><div className="mt-2 space-y-1">{e.evidence?.map((x, i) => <div key={i} className="rounded bg-slate-950 p-2"><div>Posts {x.sourcePostId} ↔ {x.targetPostId}</div><div>{x.sourceTimestamp || 'timestamp missing'} ↔ {x.targetTimestamp || 'timestamp missing'}</div><div>{x.signals.join(' · ')}</div>{(x.sourceUrl || x.targetUrl) && <div className="break-all">{x.sourceUrl || '—'} ↔ {x.targetUrl || '—'}</div>}</div>)}</div></details>)}
                   </div>
                 </div>
               ) : result.clusters.length === 0 ? (
@@ -167,6 +171,7 @@ export const CampaignView: React.FC<{ attach: AttachFn; active: Investigation | 
             <Card title="What we found — and innocent explanations">
               <ul className="list-disc space-y-1 pl-4 text-xs text-slate-300">{result.tacticalSummary.map((t, i) => <li key={i}>{t}</li>)}</ul>
               <ul className="mt-3 list-disc space-y-1 pl-4 text-xs text-amber-200/70">{result.alternativeExplanations.map((t, i) => <li key={i}>{t}</li>)}</ul>
+              {result.coverageLimitations?.length ? <Details title="Dataset coverage and missing signals"><ul className="list-disc space-y-1 pl-4 text-xs text-slate-400">{result.coverageLimitations.map((t, i) => <li key={i}>{t}</li>)}</ul><div className="text-[11px] text-slate-500">Duplicates removed: {result.duplicatePostCount || 0} · Missing timestamps: {result.missingTimestampCount || 0}</div></Details> : null}
             </Card>
           </div>
         </>

@@ -113,6 +113,10 @@ export function claimAssessment(r: ClaimVerificationResult): NonNullable<ClaimVe
 
 /** Everyday-language reading of a claim result. */
 export function plainClaim(r: ClaimVerificationResult): Plain {
+  if (r.claimStatus === 'VERIFIED') return { tone: 'green', headline: 'Verified by reviewed evidence', explain: r.conclusion || 'Reviewed attributable evidence supports the assertion.', advice: r.nextAction };
+  if (r.claimStatus === 'CONTRADICTED') return { tone: 'red', headline: 'Contradicted by reviewed evidence', explain: r.conclusion || 'Reviewed attributable evidence contradicts the assertion.', advice: r.nextAction };
+  if (r.claimStatus === 'MISLEADING_CONTEXT') return { tone: 'amber', headline: 'Important context is missing', explain: r.conclusion || 'The assertion changes or omits material source context.', advice: r.nextAction };
+  if (r.claimStatus === 'NOT_VERIFIED') return { tone: 'slate', headline: 'Not verified', explain: r.conclusion || 'The available evidence does not support a definitive conclusion.', advice: r.nextAction };
   const noSources = 'No news or official sources were checked — this is only the AI’s own knowledge.';
   switch (claimAssessment(r)) {
     case 'verified_true': return { tone: 'green', headline: 'True — confirmed by sources', explain: 'The sources listed below support this claim.' };

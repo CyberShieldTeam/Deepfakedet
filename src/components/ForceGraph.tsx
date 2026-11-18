@@ -101,7 +101,7 @@ export const ForceGraph: React.FC<{
             {n.suspicious && <circle r={r + 5} fill="none" stroke={color(n)} strokeOpacity={0.35} strokeWidth={1}><animate attributeName="r" values={`${r + 3};${r + 8};${r + 3}`} dur="2.4s" repeatCount="indefinite" /></circle>}
             <circle r={r} fill={color(n)} fillOpacity={n.clusterId ? 0.85 : 0.5} stroke={on ? '#fff' : '#020617'} strokeWidth={on ? 2.5 : 1.5} />
             <text y={r + 11} textAnchor="middle" fontSize="9" fill="#94a3b8" fontFamily="JetBrains Mono, monospace">{n.accountHandle.slice(0, 16)}</text>
-            <title>{`${n.accountHandle} · ${n.language} · suspicion ${n.botLikelihoodScore}`}</title>
+            <title>{`${n.accountHandle} · ${n.language} · ${n.associationSignalCount ?? 0} observable association signals`}</title>
           </g>
         );
       })}

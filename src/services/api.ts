@@ -22,7 +22,7 @@ export const attachResult = (id: string, kind: 'media' | 'claim' | 'campaign', r
   post<{ investigation: Investigation }>(`/api/investigations/${id}/attach`, { kind, result }).then(d => d.investigation);
 export const analyzeMedia = (p: { modality: string; fileName: string; mimeType: string; measurements: any; mediaData?: string; originalImageData?: string; keyframes?: string[]; sampledFrames?: { timestampSeconds: number; imageData: string }[]; detailTiles?: string[] }) =>
   post<{ result: ForensicAnalysisResult }>('/api/forensics/analyze-media', p).then(d => d.result);
-export const verifyClaim = (claimText: string) => post<{ result: ClaimVerificationResult }>('/api/claims/verify', { claimText }).then(d => d.result);
+export const verifyClaim = (claimText: string, ocrReview?: import('../types').OcrReview) => post<{ result: ClaimVerificationResult }>('/api/claims/verify', { claimText, ocrReview }).then(d => d.result);
 export const analyzeCampaign = (p: { datasetName: string; posts?: any[]; csv?: string; isSimulated?: boolean }) =>
   post<{ result: CampaignAnalysisResult }>('/api/campaigns/analyze', p).then(d => d.result);
 export const runDemoScenario = () => post<{ investigation: Investigation }>('/api/demo/scenario', {}).then(d => d.investigation);

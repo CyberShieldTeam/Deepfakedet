@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Brain, CheckCircle2, ExternalLink, Globe, Loader2, Search, SearchX } from 'lucide-react';
-import { ClaimVerificationResult, Investigation } from '../types';
+import { ClaimVerificationResult, Investigation, OcrReview } from '../types';
 import { verifyClaim } from '../services/api';
 import { Button, Card, Empty, EngineBadge, ErrorBox, Meter, SimulatedBadge, VERDICT_CLS, fmtDate } from './ui';
 import { claimAssessment, Details, PageHeader, plainClaim, Term, VerdictBanner } from './plain';
 import type { AttachFn } from '../App';
+import { OcrClaimInput } from './OcrClaimInput';
 
 const SAMPLES = [
   { lang: 'English', text: 'BREAKING: The dam near Hyderabad has collapsed. Evacuate immediately and share this with everyone!' },
@@ -46,6 +47,12 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
       <span className="text-[11px] text-slate-500">checked {fmtDate(r.timestamp)}</span>
     </div>
     <VerdictBanner {...plainClaim(r)} />
+    {r.claimStatus && <div className="rounded-lg border border-slate-700 bg-slate-900/60 p-3">
+      <div className="text-xs font-mono font-semibold tracking-wide text-cyan-300">{r.claimStatus}</div>
+      <p className="mt-1 text-sm text-slate-300">{r.conclusion}</p>
+      {r.missingEvidence?.length ? <div className="mt-2 text-xs text-amber-200">Missing: {r.missingEvidence.join(' ')}</div> : null}
+      {r.nextAction && <div className="mt-2 text-xs text-slate-400"><b>Next action:</b> {r.nextAction}</div>}
+    </div>}
     {r.verdictRationale && (
       <div>
         <div className="mb-1 text-xs font-medium text-slate-400">Why</div>
@@ -118,6 +125,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
       {r.searchQueries && r.searchQueries.length > 0 && (
         <div className="text-[11px] text-slate-400"><span className="font-mono uppercase text-slate-500">Google searches run: </span>{r.searchQueries.map(q => `"${q}"`).join(' · ')}</div>
       )}
+      {r.ocrReview && <div className="space-y-1 text-[11px] text-slate-400"><div className="font-medium text-slate-300">OCR provenance</div><div>Image SHA-256: <span className="break-all font-mono">{r.ocrReview.imageSha256}</span></div><div>Selected transformation: {r.ocrReview.selectedTransformation} · attempts preserved: {r.ocrReview.attempts.length} · recorded reviews: {r.ocrReview.history.length}</div><details><summary className="cursor-pointer">Original OCR text and confidence</summary><pre className="mt-1 whitespace-pre-wrap rounded bg-slate-950 p-2">{r.ocrReview.originalText}</pre>{r.ocrReview.attempts.map(a => <div key={a.transformation}>{a.transformation}: {a.confidence}% · {a.boxes.length} boxes</div>)}</details></div>}
       {r.factCheckerConsensus && <div className="text-[11px] text-amber-200/80">{r.factCheckerConsensus}</div>}
       <div>
         <div className="mb-1 text-xs font-medium text-slate-400">Limitations</div>
@@ -134,12 +142,13 @@ export const ClaimView: React.FC<{ attach: AttachFn; active: Investigation | nul
   const [error, setError] = useState('');
   const [result, setResult] = useState<ClaimVerificationResult | null>(null);
   const [saved, setSaved] = useState('');
+  const [ocrReview, setOcrReview] = useState<OcrReview | undefined>();
   const demo = active?.isSimulatedDemo ? active.claimResult : undefined;
 
   const run = async () => {
     if (!text.trim()) return;
     setBusy(true); setError(''); setSaved('');
-    try { setResult(await verifyClaim(text)); } catch (e: any) { setError(e.message); } finally { setBusy(false); }
+    try { setResult(await verifyClaim(text, ocrReview)); } catch (e: any) { setError(e.message); } finally { setBusy(false); }
   };
   const save = async () => {
     if (!result) return;
@@ -158,6 +167,7 @@ export const ClaimView: React.FC<{ attach: AttachFn; active: Investigation | nul
       <div className="grid gap-4 xl:grid-cols-5">
         <div className="space-y-4 xl:col-span-2">
           <Card title="1 · What do you want to check?">
+            <OcrClaimInput onText={setText} onReview={setOcrReview} />
             <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="e.g. “The dam near Hyderabad has collapsed, evacuate now!”"
               className="w-full resize-none rounded-lg border border-slate-700 bg-slate-950 p-3 text-sm text-slate-100 outline-none focus:border-cyan-500" />
             <div className="mt-2 flex items-center justify-between">

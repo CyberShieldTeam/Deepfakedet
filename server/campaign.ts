@@ -11,6 +11,7 @@
 import { CampaignAnalysisResult, CampaignCluster, NetworkEdge, SocialPostNode } from '../src/types';
 
 export interface RawPost {
+  postId: string;
   accountId: string;
   username: string;
   content: string;
@@ -20,6 +21,21 @@ export interface RawPost {
   language: string;
   accountAgeDays?: number;
   followerCount?: number;
+  timestampValid: boolean;
+}
+
+export function normalizeUrl(value?: string): string | undefined {
+  if (!value) return undefined;
+  try {
+    const u = new URL(value.trim());
+    u.hash = '';
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid', 'gclid'].forEach(k => u.searchParams.delete(k));
+    u.hostname = u.hostname.toLowerCase().replace(/^www\./, '');
+    u.pathname = u.pathname.replace(/\/$/, '') || '/';
+    const entries = Array.from(u.searchParams.entries()).sort(([a], [b]) => a.localeCompare(b));
+    u.search = ''; entries.forEach(([k, v]) => u.searchParams.append(k, v));
+    return u.toString();
+  } catch { return undefined; }
 }
 
 const CLUSTER_COLORS = ['#ef4444', '#f97316', '#eab308', '#a855f7', '#ec4899', '#22d3ee', '#84cc16'];
@@ -44,11 +60,13 @@ export function normalizePosts(input: any[]): RawPost[] {
       const parsed = ts ? new Date(ts) : new Date(NaN);
       const accountId = String(pick(p, ['account_id', 'accountId', 'user_id', 'userId', 'id']) ?? `acct-${i}`);
       return {
+        postId: String(pick(p, ['post_id', 'postId', 'status_id']) ?? `post-${i}`),
         accountId,
         username: String(pick(p, ['username', 'handle', 'user', 'accountHandle', 'screen_name']) ?? accountId),
         content,
-        timestamp: isNaN(parsed.getTime()) ? new Date(Date.now() - i * 60000).toISOString() : parsed.toISOString(),
-        url: urlField ? String(urlField) : urlsInText[0],
+        timestamp: isNaN(parsed.getTime()) ? '' : parsed.toISOString(),
+        timestampValid: !isNaN(parsed.getTime()),
+        url: normalizeUrl(urlField ? String(urlField) : urlsInText[0]),
         hashtags,
         language: String(pick(p, ['language', 'lang']) ?? detectScriptLanguage(content)),
         accountAgeDays: num(pick(p, ['account_age_days', 'accountAgeDays'])),
@@ -85,7 +103,15 @@ export function jaccard(a: Set<string>, b: Set<string>): number {
 }
 
 export function analyzeCampaign(datasetName: string, input: any[], isSimulated: boolean): CampaignAnalysisResult {
-  const posts = normalizePosts(input).sort((a, b) => a.timestamp.localeCompare(b.timestamp));
+  const normalized = normalizePosts(input);
+  const seen = new Set<string>();
+  let duplicatePostCount = 0;
+  const posts = normalized.filter(p => {
+    const key = `${p.accountId}\u0000${p.content.trim().toLowerCase()}\u0000${p.timestamp}\u0000${p.url || ''}`;
+    if (seen.has(key)) { duplicatePostCount++; return false; }
+    seen.add(key); return true;
+  }).sort((a, b) => (a.timestamp || '9999').localeCompare(b.timestamp || '9999'));
+  const missingTimestampCount = posts.filter(p => !p.timestampValid).length;
   const tokens = posts.map(p => tokenize(p.content));
 
   // --- account-level aggregation
@@ -97,13 +123,17 @@ export function analyzeCampaign(datasetName: string, input: any[], isSimulated: 
   const accountIds = Array.from(accounts.keys());
 
   // --- pairwise post links, rolled up to account pairs
-  type Link = { weight: number; type: NetworkEdge['coordinationType']; desc: string };
+  type Link = { weight: number; type: NetworkEdge['coordinationType']; desc: string; evidence: NonNullable<NetworkEdge['evidence']> };
   const pairLinks = new Map<string, Link>();
   const suspiciousPosts = new Set<number>();
   const keep = (a: string, b: string, l: Link) => {
     const key = a < b ? `${a}|${b}` : `${b}|${a}`;
     const prev = pairLinks.get(key);
-    if (!prev || l.weight > prev.weight) pairLinks.set(key, l);
+    if (!prev) pairLinks.set(key, l);
+    else {
+      prev.evidence.push(...l.evidence);
+      if (l.weight > prev.weight) Object.assign(prev, { weight: l.weight, type: l.type, desc: l.desc });
+    }
   };
 
   for (let i = 0; i < posts.length; i++) {
@@ -111,15 +141,18 @@ export function analyzeCampaign(datasetName: string, input: any[], isSimulated: 
       const a = posts[i], b = posts[j];
       if (a.accountId === b.accountId) continue;
       const sim = jaccard(tokens[i], tokens[j]);
-      const dt = Math.abs(new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()) / 1000;
+      const dt = a.timestampValid && b.timestampValid ? Math.abs(new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()) / 1000 : Number.POSITIVE_INFINITY;
       const sharedTag = a.hashtags.find(h => b.hashtags.includes(h));
+      const sameUrl = !!a.url && a.url === b.url;
+      const signals = [sim >= 0.45 ? `text_overlap:${sim.toFixed(3)}` : '', sameUrl ? 'normalized_shared_url' : '', sharedTag && dt <= 120 ? `shared_hashtag_within_120s:${sharedTag}` : ''].filter(Boolean);
+      const evidence = [{ sourcePostId: a.postId, targetPostId: b.postId, sourceTimestamp: a.timestamp || null, targetTimestamp: b.timestamp || null, sourceUrl: a.url, targetUrl: b.url, signals, textSimilarity: Number(sim.toFixed(3)) }];
       let link: Link | null = null;
       if (sim >= 0.45) {
-        link = { weight: Math.min(1, 0.5 + sim / 2), type: 'semantic_copy', desc: `${Math.round(sim * 100)}% token overlap, ${Math.round(dt)}s apart` };
-      } else if (a.url && b.url && a.url === b.url) {
-        link = { weight: dt < 600 ? 0.8 : 0.65, type: 'shared_url', desc: `Same URL ${a.url} shared ${Math.round(dt / 60)} min apart` };
+        link = { weight: Math.min(1, 0.5 + sim / 2), type: 'semantic_copy', desc: `${Math.round(sim * 100)}% token overlap${Number.isFinite(dt) ? `, ${Math.round(dt)}s apart` : '; timestamp unavailable'}`, evidence };
+      } else if (sameUrl) {
+        link = { weight: dt < 600 ? 0.8 : 0.65, type: 'shared_url', desc: `Same normalized URL ${a.url}${Number.isFinite(dt) ? ` shared ${Math.round(dt / 60)} min apart` : '; timing unavailable'}`, evidence };
       } else if (sharedTag && dt <= 120) {
-        link = { weight: 0.6, type: 'temporal_burst', desc: `Posted ${Math.round(dt)}s apart with ${sharedTag}` };
+        link = { weight: 0.6, type: 'temporal_burst', desc: `Posted ${Math.round(dt)}s apart with ${sharedTag}`, evidence };
       }
       if (link) {
         keep(a.accountId, b.accountId, link);
@@ -148,7 +181,7 @@ export function analyzeCampaign(datasetName: string, input: any[], isSimulated: 
 
   const edges: NetworkEdge[] = Array.from(pairLinks.entries()).map(([key, l], i) => {
     const [source, target] = key.split('|');
-    return { id: `e${i}`, source, target, weight: Number(l.weight.toFixed(2)), coordinationType: l.type, description: l.desc };
+    return { id: `e${i}`, source, target, weight: Number(l.weight.toFixed(2)), coordinationType: l.type, description: l.desc, evidence: l.evidence };
   });
 
   const degree = new Map<string, number>();
@@ -216,6 +249,7 @@ export function analyzeCampaign(datasetName: string, input: any[], isSimulated: 
       hashtags: Array.from(new Set(idxs.flatMap(i => posts[i].hashtags))),
       clusterId: clusterOf.get(id) ?? 0,
       botLikelihoodScore: suspicion,
+      associationSignalCount: edges.filter(e => e.source === id || e.target === id).reduce((n, e) => n + (e.evidence?.reduce((m, x) => m + x.signals.length, 0) || 0), 0),
       amplificationWeight: 6 + Math.min(14, deg * 2 + idxs.length * 2),
       language: first.language,
       suspicious: clusterOf.has(id)
@@ -223,9 +257,10 @@ export function analyzeCampaign(datasetName: string, input: any[], isSimulated: 
   });
 
   // --- temporal bursts: bucket posts per 5 minutes from the first post
-  const t0 = posts.length ? new Date(posts[0].timestamp).getTime() : Date.now();
+  const timedPosts = posts.filter(p => p.timestampValid);
+  const t0 = timedPosts.length ? new Date(timedPosts[0].timestamp).getTime() : Date.now();
   const buckets = new Map<number, { count: number; cl: Map<number, number> }>();
-  posts.forEach(p => {
+  timedPosts.forEach(p => {
     const b = Math.floor((new Date(p.timestamp).getTime() - t0) / 300000);
     if (!buckets.has(b)) buckets.set(b, { count: 0, cl: new Map() });
     const e = buckets.get(b)!;
@@ -248,6 +283,11 @@ export function analyzeCampaign(datasetName: string, input: any[], isSimulated: 
   const langMap = new Map<string, number>();
   posts.forEach(p => langMap.set(p.language, (langMap.get(p.language) || 0) + 1));
 
+  // A single viral/scheduled episode can naturally share text, URL and timing at once.
+  // Reserve the repeated label for account pairs observed in at least two distinct post pairs.
+  const repeatedEdges = edges.filter(e => (e.evidence?.length || 0) >= 2);
+  const patternStatus: CampaignAnalysisResult['patternStatus'] = posts.length < 2 || accountIds.length < 2 || missingTimestampCount === posts.length
+    ? 'INSUFFICIENT_DATA' : repeatedEdges.length ? 'REPEATED_COORDINATION_SIGNALS' : edges.length ? 'ASSOCIATED_ACTIVITY_OBSERVED' : 'NO_SIGNIFICANT_PATTERN_OBSERVED';
   return {
     datasetName,
     totalPosts: posts.length,
@@ -269,7 +309,12 @@ export function analyzeCampaign(datasetName: string, input: any[], isSimulated: 
     suspiciousPostCount: suspiciousPosts.size,
     languageBreakdown: Array.from(langMap.entries()).map(([language, count]) => ({ language, count })),
     engine: 'graph_heuristics',
-    isSimulated
+    isSimulated,
+    patternStatus,
+    conclusion: patternStatus === 'REPEATED_COORDINATION_SIGNALS' ? `${repeatedEdges.length} account association(s) recur across posts or contain multiple observable signals.` : patternStatus === 'ASSOCIATED_ACTIVITY_OBSERVED' ? 'Some accounts share content, URLs or timing, but the observations alone do not establish coordination.' : patternStatus === 'INSUFFICIENT_DATA' ? 'The dataset lacks enough accounts or valid timing information for a meaningful pattern conclusion.' : 'No account pair met the configured observable-association thresholds.',
+    nextAction: patternStatus === 'REPEATED_COORDINATION_SIGNALS' ? 'Inspect each edge evidence record and compare with legitimate scheduling or breaking-news explanations.' : 'Collect more complete posts and timestamps before drawing conclusions.',
+    coverageLimitations: [`${missingTimestampCount} post(s) lack a valid timestamp; no timestamp was invented.`, 'Shared text, URLs or short intervals do not prove manipulation, common ownership or malicious intent.', 'The dataset contains only supplied observations; deleted, private and uncollected posts are outside coverage.'],
+    invalidPostCount: Math.max(0, input.length - normalized.length), duplicatePostCount, missingTimestampCount
   };
 }
 
