@@ -20,8 +20,10 @@ assert.equal(prepareGeminiMedia({ modality: "audio", measurements: {}, mediaData
 assert.equal(prepareGeminiMedia({ modality: "video", measurements: { duration: 1 }, keyframes: ["data:image/jpeg;base64," + "A".repeat(9 * 1024 * 1024)] }).status, "input_limit");
 
 assert.deepEqual(parseGeminiMediaResponse(JSON.stringify({ explanation: "Visible scene details.", observations: ["A sign appears in the frame."], limitations: ["A still image cannot establish provenance."] })), {
-  explanation: "Visible scene details.", observations: ["A sign appears in the frame."], limitations: ["A still image cannot establish provenance."],
+  explanation: "Visible scene details.", observations: ["A sign appears in the frame."], generationAssessment: "inconclusive", generationIndicators: [], limitations: ["A still image cannot establish provenance."],
 });
+assert.deepEqual(parseGeminiMediaResponse(JSON.stringify({ explanation: "Anomalous geometry could merit investigation.", observations: ["Inconsistent finger contours."], generationAssessment: "suspected_ai_generated", generationIndicators: ["Finger contours differ between frames."], limitations: ["Frames do not establish provenance."] }))?.generationAssessment, "suspected_ai_generated");
+assert.equal(parseGeminiMediaResponse(JSON.stringify({ explanation: "Unjustified certainty.", observations: [], generationAssessment: "definitely_ai", generationIndicators: [], limitations: [] })), null);
 assert.equal(parseGeminiMediaResponse('{"verdict":"real","probability":0.99}'), null);
 assert.equal(parseGeminiMediaResponse("not json"), null);
 assert.equal(notRequestedGeminiAssessment().status, "not_requested");
