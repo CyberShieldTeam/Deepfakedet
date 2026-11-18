@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'none'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="description" content="A read-only tour of fictional VERITAS AI demonstration data and precomputed outputs." />
+    <title>VERITAS AI · Public Demo</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./demo.js"></script>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="#overview" aria-label="VERITAS AI public demo home">
+          <span class="brand-mark" aria-hidden="true">V</span>
+          <span><strong>VERITAS AI</strong><small>PUBLIC DEMONSTRATION</small></span>
+        </a>
+        <div class="read-only"><span class="live-dot"></span> STATIC · READ ONLY</div>
+      </header>
+
+      <main>
+        <section class="hero" id="overview">
+          <div class="hero-copy">
+            <p class="eyebrow">INVESTIGATIVE WORKFLOW · FICTIONAL CASE</p>
+            <h1>See the evidence.<br /><em>Keep the uncertainty.</em></h1>
+            <p class="hero-lede">A guided look at how a media submission, a claim review, and a synthetic post set can be presented together for analyst review.</p>
+            <div class="hero-tags"><span>Precomputed example</span><span>No account required</span><span>No live services</span></div>
+          </div>
+          <aside class="scope-card" aria-label="Demo scope">
+            <div class="scope-icon" aria-hidden="true">i</div>
+            <div><strong>Demonstration scope</strong><p>Everything here is project-authored and fictional. The page only displays static files already bundled with it.</p></div>
+          </aside>
+        </section>
+
+        <section class="notice" aria-label="Important demo disclosure">
+          <div class="notice-symbol" aria-hidden="true">!</div>
+          <div><strong>Fictional, simulated, and precomputed outputs</strong><p>This public demo does not run inference, retrieve evidence, accept uploads, save investigations, or contact a backend. “Actual output” means a result recorded during a prior local verification run, not work performed by this page.</p></div>
+        </section>
+
+        <section class="workspace" aria-label="Read-only investigation walkthrough">
+          <aside class="rail">
+            <div class="case-label">DEMO CASE <span>DEMO-001</span></div>
+            <nav class="stage-nav" aria-label="Demo stages" role="tablist">
+              <button class="stage active" id="tab-media" role="tab" aria-selected="true" aria-controls="stage-panel" data-stage="media"><span class="stage-no">01</span><span><b>Media review</b><small>Fictional image</small></span><span class="stage-state actual">PRECOMPUTED</span></button>
+              <button class="stage" id="tab-claim" role="tab" aria-selected="false" aria-controls="stage-panel" data-stage="claim"><span class="stage-no">02</span><span><b>Claim context</b><small>Local authored corpus</small></span><span class="stage-state simulated">SIMULATED</span></button>
+              <button class="stage" id="tab-network" role="tab" aria-selected="false" aria-controls="stage-panel" data-stage="network"><span class="stage-no">03</span><span><b>Post patterns</b><small>Synthetic accounts</small></span><span class="stage-state simulated">SIMULATED</span></button>
+              <button class="stage" id="tab-summary" role="tab" aria-selected="false" aria-controls="stage-panel" data-stage="summary"><span class="stage-no">04</span><span><b>Case summary</b><small>Interpretation limits</small></span><span class="stage-state actual">PRECOMPUTED</span></button>
+            </nav>
+            <div class="rail-foot"><span class="lock" aria-hidden="true">▣</span><span>No login · No uploads · No saved data</span></div>
+          </aside>
+
+          <section class="stage-content" id="stage-panel" role="tabpanel" aria-labelledby="tab-media" tabindex="0">
+            <div class="panel-heading"><div><p class="eyebrow" id="stage-kicker">01 / MEDIA REVIEW</p><h2 id="stage-title">A fictional image, inspected</h2></div><span class="output-pill actual" id="stage-badge">ACTUAL · PRECOMPUTED</span></div>
+            <p class="panel-intro" id="stage-intro">This authored notice is a software fixture. The displayed OCR transcript comes from a prior verified local run and is shown as a recorded output.</p>
+            <div id="stage-body">
+            <div class="media-grid" id="media-grid">
+              <figure class="image-card"><div class="image-frame"><img src="./assets/notice.png" alt="Fictional software fixture notice about free entry to the fictional Amber Museum" /><span class="image-chip">FICTIONAL FIXTURE</span></div><figcaption><span>Submission preview</span><code>notice.png · 1500 × 240</code></figcaption></figure>
+              <div class="result-card">
+                <div class="card-top"><div><span class="label">RECORDED OCR TRANSCRIPT</span><span class="result-mark actual">ACTUAL OUTPUT</span></div><span class="tiny-state">PRIOR LOCAL RUN</span></div>
+                <blockquote>“Software fixture: the fictional Amber Museum offers free entry.”</blockquote>
+                <div class="data-points"><div><span>Method</span><strong>Tesseract.js 7 · English</strong></div><div><span>Recognition</span><strong>Text extraction only</strong></div><div><span>Source revision</span><strong>Earlier fixture bytes</strong></div></div>
+                <p class="caveat">The archived run used a different image checksum than the bundled revision. The transcript text matches the fixture text; this page did not re-run OCR. Recognition confidence is not a measure of truth.</p>
+              </div>
+            </div>
+            <div class="section-divider"><span>WHAT THE OUTPUT MEANS</span></div>
+            <div class="insight-row"><div class="insight-icon neutral">≋</div><div><strong>Text was recognized in a prior local run</strong><p>The output records a configured English OCR pass on an earlier authored revision.</p></div><span class="tag actual">VERIFIED OUTPUT</span></div>
+            <div class="insight-row"><div class="insight-icon muted">?</div><div><strong>Authenticity remains undetermined</strong><p>No image authenticity classifier was configured for this fixture. OCR alone cannot establish whether a claim is true.</p></div><span class="tag muted">NO VERDICT</span></div>
+            </div>
+          </section>
+        </section>
+
+        <section class="provenance" aria-label="Data provenance and labels">
+          <div><span class="prov-icon fictional">F</span><span><strong>Fictional</strong><small>Project-authored image, text, accounts, and source excerpt.</small></span></div>
+          <div><span class="prov-icon simulated">S</span><span><strong>Simulated</strong><small>Network activity and relationships use synthetic posts.</small></span></div>
+          <div><span class="prov-icon actual">A</span><span><strong>Actual output</strong><small>Recorded result from prior local verification, clearly scoped.</small></span></div>
+          <div><span class="prov-icon static">R</span><span><strong>Read-only</strong><small>No API, service, upload, retrieval, or persistence.</small></span></div>
+        </section>
+      </main>
+
+      <footer><span>VERITAS AI · STATIC PUBLIC DEMO</span><span>Project-authored examples · Not factual evidence</span><span>© 2026</span></footer>
+    </div>
+  </body>
+</html>
