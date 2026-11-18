@@ -43,6 +43,25 @@ const dataPart = (url: string): { part: GeminiImagePart; bytes: number } | null 
   return { part: { inlineData: { mimeType: match[1], data: match[2] } }, bytes: bytes.byteLength };
 };
 
+/** Return at most six ascending indexes, preferring local pairs in long clips. */
+export function selectGeminiFrameIndexes(count: number): number[] {
+  if (!Number.isSafeInteger(count) || count < 1) return [];
+  if (count <= MAX_VIDEO_FRAMES) return Array.from({ length: count }, (_, i) => i);
+  const centers = [0.2, 0.5, 0.8].map(f => Math.max(0, Math.min(count - 2, Math.round(f * (count - 1)) - 1)));
+  const selected = new Set<number>();
+  for (const c of centers) {
+    selected.add(c);
+    selected.add(c + 1);
+  }
+  // On short arrays, pair windows can overlap. Fill any leftover slots with
+  // evenly spaced frames, without exceeding six total.
+  for (let i = 0; selected.size < MAX_VIDEO_FRAMES && i < count; i++) {
+    const index = Math.round(i * (count - 1) / Math.max(1, count - 1));
+    selected.add(index);
+  }
+  return [...selected].sort((a, b) => a - b).slice(0, MAX_VIDEO_FRAMES);
+}
+
 export function prepareGeminiMedia(input: {
   modality: "image" | "video" | "audio";
   measurements: Record<string, unknown>;
@@ -64,10 +83,10 @@ export function prepareGeminiMedia(input: {
     return { status: "unsupported_duration", parts: [], sampledTimes: [] };
   const frames = input.keyframes || [];
   if (!frames.length) return { status: "input_limit", parts: [], sampledTimes: [] };
-  const indexes = Array.from({ length: Math.min(MAX_VIDEO_FRAMES, frames.length) }, (_, i) =>
-    Math.round((i * (frames.length - 1)) / Math.max(1, Math.min(MAX_VIDEO_FRAMES, frames.length) - 1)),
-  );
-  const unique = [...new Set(indexes)];
+  // Prefer three neighboring frame pairs distributed across the clip when
+  // available: widely spaced stills cannot show even short-range consistency.
+  // This remains sparse visual screening, not validated temporal forensics.
+  const unique = selectGeminiFrameIndexes(frames.length);
   const parts: GeminiImagePart[] = [];
   let total = 0;
   for (const index of unique) {
