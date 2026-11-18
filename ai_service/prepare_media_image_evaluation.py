@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import io
 from pathlib import Path
 import re
 from urllib.request import Request, urlopen
@@ -12,6 +13,50 @@ MAX_TOTAL=160*1024*1024
 MAX_SHARD=16*1024*1024
 MAX_FILES=16
 LICENSE='CC BY-NC-SA 4.0; publisher permits noncommercial research/education; underlying RAISE/COCO/FFHQ/LAION terms and attribution remain relevant. No media redistribution.'
+
+
+def _unique_object(pairs):
+    result={}
+    for key,value in pairs:
+        if key in result:raise ValueError('DUPLICATE_JSON_KEY')
+        result[key]=value
+    return result
+
+
+def _reject_json_constant(value):
+    raise ValueError('NONFINITE_JSON_NUMBER')
+
+
+def strict_json_loads(raw):
+    return json.loads(raw,object_pairs_hook=_unique_object,parse_constant=_reject_json_constant)
+
+
+def canonical_inventory_bytes(data):
+    """Canonical UTF-8 JSON for the complete parsed inventory object."""
+    return json.dumps(data,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False).encode('utf-8')
+
+
+def canonical_inventory_sha256(data):
+    return hashlib.sha256(canonical_inventory_bytes(data)).hexdigest()
+
+
+def inventory_sha256_file(path):
+    return canonical_inventory_sha256(strict_json_loads(Path(path).read_bytes()))
+
+
+def _image_evidence(raw,image_path):
+    from PIL import Image, ImageOps
+    if not isinstance(raw,(bytes,bytearray)) or not raw:raise ValueError('INVENTORY_IMAGE_MISSING')
+    try:
+        with Image.open(io.BytesIO(raw)) as image_source:
+            image_source.load()
+            image=ImageOps.exif_transpose(image_source).convert('RGB')
+            geometry=dict(format=image_source.format,width=image_source.width,height=image_source.height,
+                          orientedSize=list(image.size),mode=image_source.mode)
+    except Exception as error:
+        raise ValueError('INVENTORY_IMAGE_DECODE_FAILED') from error
+    return dict(imagePath=image_path,imageSha256=hashlib.sha256(raw).hexdigest(),
+                decodedSha256=hashlib.sha256(image.tobytes()).hexdigest(),imageGeometry=geometry)
 
 
 def fetch(url, cap):
@@ -64,19 +109,43 @@ def inventory(plan_path,root,output):
         if hashlib.sha256(path.read_bytes()).hexdigest()!=source['sha256']:raise ValueError('SHARD_HASH_MISMATCH')
         parquet=pq.ParquetFile(path)
         if parquet.metadata.num_rows>2048:raise ValueError('SHARD_ROW_LIMIT')
-        columns=[n for n in parquet.schema_arrow.names if n!='image_data']
+        image_column=parquet.schema_arrow.names.index('image_data')
+        image_uncompressed=sum(parquet.metadata.row_group(i).column(image_column).total_uncompressed_size
+                               for i in range(parquet.metadata.num_row_groups))
+        hash_images=image_uncompressed<=64*1024*1024
+        columns=list(parquet.schema_arrow.names) if hash_images else [n for n in parquet.schema_arrow.names if n!='image_data']
         metadata=parquet.read(columns=columns).to_pylist()
         for index,row in enumerate(metadata):
-            # Inventory only. Raw images and any future reserved partition are not opened.
-            rows.append(dict(shard=source['path'],index=index,**row))
+            raw=row.get('image_data')
+            row.pop('image_data',None)
+            entry=dict(shard=source['path'],index=index,**row)
+            eligible=(row.get('split')=='test' and str(row.get('nsfw_flag')).lower()=='false' and
+                      row.get('label') in (0,1) and (row.get('label')==1 or row.get('real_source')=='coco'))
+            if eligible and hash_images:
+                # The pinned inventory binds every potentially selected sample to its source pixels.
+                entry.update(_image_evidence(raw,f"{source['path']}#row={index}"))
+            rows.append(entry)
             counts[(row.get('label'),row.get('model_name'),row.get('real_source'))]+=1
     result=dict(dataset=DATASET,revision=REVISION,planSha256=hashlib.sha256(plan_path.read_bytes()).hexdigest(),license=LICENSE,rows=rows)
     with output.open('x',encoding='utf8') as file:json.dump(result,file,ensure_ascii=False,indent=2)
     print(json.dumps({'rows':len(rows),'strata':[{'label':key[0],'model':key[1],'realSource':key[2],'count':count} for key,count in counts.items()]},ensure_ascii=False))
 
 
+def print_inventory_digest(path):
+    print(canonical_inventory_sha256(strict_json_loads(Path(path).read_bytes())))
+
+
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('action',choices=['plan','download','inventory']);parser.add_argument('--plan',type=Path,required=True);parser.add_argument('--root',type=Path);parser.add_argument('--output',type=Path);args=parser.parse_args()
-    if args.action=='plan':plan(args.plan)
-    elif args.action=='download':download(args.plan,args.root)
-    else:inventory(args.plan,args.root,args.output)
+    parser=argparse.ArgumentParser();parser.add_argument('action',choices=['plan','download','inventory','inventory-digest']);parser.add_argument('--plan',type=Path);parser.add_argument('--root',type=Path);parser.add_argument('--output',type=Path);parser.add_argument('--inventory',type=Path);args=parser.parse_args()
+    if args.action=='plan':
+        if args.plan is None:parser.error('plan requires --plan')
+        plan(args.plan)
+    elif args.action=='download':
+        if args.plan is None or args.root is None:parser.error('download requires --plan and --root')
+        download(args.plan,args.root)
+    elif args.action=='inventory':
+        if args.plan is None or args.root is None or args.output is None:parser.error('inventory requires --plan, --root and --output')
+        inventory(args.plan,args.root,args.output)
+    else:
+        if args.inventory is None:parser.error('inventory-digest requires --inventory')
+        print_inventory_digest(args.inventory)

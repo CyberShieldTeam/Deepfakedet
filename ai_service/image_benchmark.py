@@ -6,6 +6,7 @@ import json
 import math
 import os
 import platform
+import re
 import statistics
 import time
 from pathlib import Path
@@ -31,6 +32,21 @@ def wilson(successes, count):
 
 
 def summarize(rows):
+    rows = list(rows)
+    sample_ids=set()
+    for row in rows:
+        if (not isinstance(row,dict) or not isinstance(row.get("id"),str) or
+                not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}",row["id"])):
+            raise ValueError("Each benchmark row requires a well-formed id")
+        if row["id"] in sample_ids:
+            raise ValueError("Duplicate benchmark sample id")
+        sample_ids.add(row["id"])
+        if (not isinstance(row.get("group"),str) or
+                not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}",row["group"])):
+            raise ValueError("Source-group bootstrap requires a well-formed group id")
+        if "seconds" in row and (type(row["seconds"]) not in (int,float) or
+                                  not math.isfinite(row["seconds"]) or row["seconds"] < 0):
+            raise ValueError("Benchmark latency must be finite and nonnegative")
     result = metrics(rows, .5)
     tp, fp, tn, fn = (result[k] for k in ("tp", "fp", "tn", "fn"))
     n = tp+fp+tn+fn
@@ -38,49 +54,54 @@ def summarize(rows):
     specificity=tn/(tn+fp) if tn+fp else None
     result.update(accuracy=(tp+tn)/n if n else None,
                   precision=tp/(tp+fp) if tp+fp else None,
-                  recall=recall,
-                  specificity=specificity,
+                  recall=recall, specificity=specificity,
                   balanced_accuracy=(recall+specificity)/2 if recall is not None and specificity is not None else None,
                   f1=2*tp/(2*tp+fp+fn) if 2*tp+fp+fn else None,
                   false_negative_rate=fn/(tp+fn) if tp+fn else None,
                   confusion_matrix={"actual_genuine": [tn, fp], "actual_synthetic": [fn, tp]},
                   ci95_wilson={"accuracy": wilson(tp+tn, n), "recall": wilson(tp,tp+fn),
-                               "specificity": wilson(tn,tn+fp),
                                "precision": wilson(tp,tp+fp), "false_positive_rate": wilson(fp,fp+tn),
+                               "specificity": wilson(tn,tn+fp),
                                "false_negative_rate": wilson(fn,fn+tp)})
-    # Resample source groups, not derived image variants, for exploratory interval estimates.
-    # This remains conditional on the completeness of the supplied source grouping.
+    # Resample source groups, not derived image variants, for exploratory intervals.
     import numpy as np
     groups = {}
     for row in rows:
-        if row.get("score") is not None:
-            groups.setdefault(row.get("group", row["id"]), []).append(row)
+        groups.setdefault(row["group"], []).append(row)
     keys = sorted(groups)
     rng = np.random.default_rng(20261115)
-    values={name:[] for name in ("accuracy","precision","recall","specificity","balanced_accuracy","f1","false_positive_rate","false_negative_rate","auroc")}
-    for _ in range(300 if len(keys) > 1 else 0):
+    bootstrap_metrics = ("accuracy", "precision", "recall", "specificity", "balanced_accuracy",
+                         "false_positive_rate", "false_negative_rate", "auroc")
+    draws = {name: [] for name in bootstrap_metrics}
+    replicates = 1000 if len(keys) > 1 else 0
+    for _ in range(replicates):
         sample = [row for index in rng.integers(0,len(keys),len(keys)) for row in groups[keys[index]]]
-        counts=metrics(sample,.5)
-        tp,fp,tn,fn=(counts[k] for k in ("tp","fp","tn","fn"))
-        total=tp+fp+tn+fn;recall=tp/(tp+fn) if tp+fn else None;specificity=tn/(tn+fp) if tn+fp else None
-        sampled={
-            "accuracy":(tp+tn)/total if total else None,
-            "precision":tp/(tp+fp) if tp+fp else None,
-            "recall":recall,
-            "specificity":specificity,
-            "balanced_accuracy":(recall+specificity)/2 if recall is not None and specificity is not None else None,
-            "f1":2*tp/(2*tp+fp+fn) if 2*tp+fp+fn else None,
-            "false_positive_rate":fp/(fp+tn) if fp+tn else None,
-            "false_negative_rate":fn/(fn+tp) if fn+tp else None,
-            "auroc":counts["auroc"],
+        values = metrics(sample,.5)
+        tp_b, fp_b, tn_b, fn_b = (values[k] for k in ("tp", "fp", "tn", "fn"))
+        scored_b = tp_b + fp_b + tn_b + fn_b
+        recall_b = tp_b / (tp_b + fn_b) if tp_b + fn_b else None
+        specificity_b = tn_b / (tn_b + fp_b) if tn_b + fp_b else None
+        derived = {
+            "accuracy": (tp_b + tn_b) / scored_b if scored_b else None,
+            "precision": tp_b / (tp_b + fp_b) if tp_b + fp_b else None,
+            "recall": recall_b,
+            "specificity": specificity_b,
+            "balanced_accuracy": (recall_b + specificity_b) / 2 if recall_b is not None and specificity_b is not None else None,
+            "false_positive_rate": fp_b / (tn_b + fp_b) if tn_b + fp_b else None,
+            "false_negative_rate": fn_b / (tp_b + fn_b) if tp_b + fn_b else None,
+            "auroc": values["auroc"],
         }
-        for name,value in sampled.items():
-            if value is not None:values[name].append(value)
-    intervals={name:(np.quantile(samples,[.025,.975]).tolist() if samples else None) for name,samples in values.items()}
-    result["ci95_group_bootstrap"]={"replicates":300 if len(keys)>1 else 0,"seed":20261115,
-                                    "validReplicates":{name:len(samples) for name,samples in values.items()},
-                                    "metrics":intervals}
-    result["auroc_ci95_group_bootstrap"]=intervals["auroc"]
+        for name, value in derived.items():
+            if value is not None:
+                draws[name].append(value)
+    result["ci95_source_group_bootstrap"] = {
+        "unit": "source_group", "replicates": replicates, "seed": 20261115,
+        "intervals": {name: np.quantile(values,[.025,.975]).tolist() if values else None
+                      for name,values in draws.items()},
+        "valid_replicates": {name: len(values) for name,values in draws.items()},
+    }
+    # Retain the historical AUROC-only field for existing consumers.
+    result["auroc_ci95_group_bootstrap"] = result["ci95_source_group_bootstrap"]["intervals"]["auroc"]
     latency = sorted(r["seconds"] for r in rows if r.get("score") is not None and "seconds" in r)
     result["latency_seconds"] = {"count":len(latency), "mean":statistics.mean(latency) if latency else None,
                                   "p50":statistics.median(latency) if latency else None,
