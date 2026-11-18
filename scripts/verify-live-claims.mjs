@@ -189,7 +189,7 @@ try {
   assert.ok(graph.relationships.some((r) => r.type === "SOURCE_ADDRESSES_CLAIM"));
   await page.getByRole("button", { name: "Report", exact: true }).click();
   const frame = page.frameLocator('iframe[title="report"]');
-  await expect(frame.getByRole("link", { name: "Charminar", exact: true })).toHaveAttribute(
+  await expect(frame.getByRole("link", { name: "Charminar", exact: true }).first()).toHaveAttribute(
     "href",
     source.url,
   );
@@ -197,10 +197,10 @@ try {
     frame.getByRole("link", {
       name: `Reported article revision ${source.revisionId}`,
       exact: true,
-    }),
+    }).first(),
   ).toHaveAttribute("href", source.revisionUrl);
   await expect(
-    frame.getByText(`Passage SHA-256: ${source.passageSha256}`, { exact: true }),
+    frame.getByText(`Passage SHA-256: ${source.passageSha256}`, { exact: true }).first(),
   ).toBeVisible();
   const finalReport = (await (await page.request.get(url + "/api/reports/" + inv.id)).json())
       .report,

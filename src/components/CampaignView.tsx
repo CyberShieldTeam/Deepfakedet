@@ -438,7 +438,7 @@ export const CampaignView: React.FC<{
                           {c.name}
                         </span>
                         <span className="font-mono text-slate-300">
-                          {c.coordinationScore}% association
+                          heuristic association index {c.coordinationScore}/100 · not maliciousness
                         </span>
                       </div>
                       <div className="mt-1 text-slate-400">

@@ -5,6 +5,9 @@ import { analyzeEpisodeCampaign } from "../server/campaignEpisodes";
 import { coverage, episodeControls } from "./fixtures/campaign/episodeControls";
 import { reportHtml } from "../src/components/ReportModal";
 import { buildDemoInvestigation } from "../server/demoScenario";
+import { renderToStaticMarkup } from "react-dom/server";
+import { ClaimResult } from "../src/components/ClaimView";
+import React from "react";
 
 const claim = "The fictional bridge is open.";
 const source = (stance: GroundedSource["stance"]): GroundedSource => ({
@@ -14,6 +17,7 @@ const source = (stance: GroundedSource["stance"]): GroundedSource => ({
   url: "https://example.org/bridge",
   domain: "example.org",
   publisher: "Fixture Publisher",
+  publishDate: "2026-01-01",
   excerpt: "The fictional bridge is open for visitors.",
   stance,
   credibilityRating: "Unverified Source",
@@ -57,6 +61,11 @@ const result = (
 });
 
 assert.equal(claimResultSummary(result("SUPPORTED", [source("supports")])).status, "VERIFIED");
+const decisiveMarkup = renderToStaticMarkup(React.createElement(ClaimResult, { r: result("SUPPORTED", [source("supports")]) }));
+assert.match(decisiveMarkup, /Verified by reviewed evidence/);
+assert.match(decisiveMarkup, /href="https:\/\/example\.org\/bridge"/);
+assert.match(decisiveMarkup, /The fictional bridge is open for visitors/);
+assert.match(decisiveMarkup, /human-reviewed supports/);
 assert.equal(
   claimResultSummary(result("CONTRADICTED", [source("contradicts")])).status,
   "CONTRADICTED",
@@ -79,7 +88,14 @@ assert.equal(
   "NOT_VERIFIED",
   "retrieval or model grounding cannot authorize a definitive label",
 );
+const unreviewedMarkup = renderToStaticMarkup(React.createElement(ClaimResult, { r: result("SUPPORTED", [source("supports")], "search_grounded") }));
+assert.match(unreviewedMarkup, /Retrieved but unreviewed relationship/);
+assert.match(unreviewedMarkup, /href="https:\/\/example\.org\/bridge"/);
 assert.equal(claimResultSummary(result("INSUFFICIENT_EVIDENCE", [])).status, "NOT_VERIFIED");
+const charminar = { ...result("UNAVAILABLE", [], "insufficient_external_evidence"), originalInput: "Charminar is in Hyderabad", targetClaim: "Charminar is in Hyderabad", normalizedClaim: "Charminar is in Hyderabad" };
+const charminarSummary = claimResultSummary(charminar);
+assert.equal(charminarSummary.status, "NOT_VERIFIED");
+assert.match(charminarSummary.explanation, /unavailable|not passed/i);
 
 const single = episodeControls.find((x) => x.name === "public_health")!;
 const repeated = episodeControls.find((x) => x.name === "multi_episode_pattern")!;
@@ -104,7 +120,12 @@ assert.equal(
 );
 
 const inv = buildDemoInvestigation();
-inv.claimResults = [result("SUPPORTED", [source("supports")])];
+inv.claimResults = [
+  result("SUPPORTED", [source("supports")]),
+  result("CONTRADICTED", [source("contradicts")]),
+  result("CONFLICTING_EVIDENCE", [source("mixed")]),
+  charminar,
+];
 inv.campaignResult = analyzeEpisodeCampaign("repeated", repeated.rows, false, {}, null, coverage);
 const html = reportHtml({
   reportId: "summary-test",
@@ -115,8 +136,15 @@ const html = reportHtml({
   investigation: inv,
 });
 assert.match(html, /VERIFIED/);
+assert.match(html, /CONTRADICTED/);
+assert.match(html, /MISLEADING/);
+assert.match(html, /NOT_VERIFIED/);
 assert.match(html, /REPEATED_COORDINATION_SIGNALS/);
 assert.match(html, /Recommended next action/);
+assert.match(html, /Executive Investigation Summary/);
+assert.match(html, /href="https:\/\/example\.org\/bridge"/);
+assert.match(html, /The fictional bridge is open for visitors/);
+assert.match(html, /human-reviewed supports by test-analyst/);
 
 console.log(
   "Result-summary controls passed: reviewed claim gates, conflicts, network recurrence, incomplete data and report output. No factual or maliciousness accuracy claim.",

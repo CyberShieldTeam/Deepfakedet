@@ -17,6 +17,7 @@ import { PageHeader } from "./plain";
 import type { Tab } from "../App";
 import {CorrelationView} from './CorrelationView';
 import {ExtractionView} from './ExtractionView';
+import {claimResultSummary,correlationResultSummary,networkResultSummary} from '../resultSummaries';
 
 export const InvestigationsView: React.FC<{
   investigations: Investigation[];
@@ -219,6 +220,18 @@ export const InvestigationsView: React.FC<{
                     </div>
                   )}
                 </div>
+
+                <section className="rounded-lg border border-cyan-700/60 bg-cyan-950/20 p-3" aria-label="Investigation result summary">
+                  <h3 className="text-sm font-semibold text-cyan-200">Investigation Result</h3>
+                  <p className="mt-1 text-slate-400">VERITAS checked separate evidence dimensions. These results must not be combined into a single fake/real score.</p>
+                  <div className="mt-2 space-y-2">
+                    <p><b>Media authenticity:</b> {media.length ? `${media.length} result${media.length===1?'':'s'} retained; ${media.filter(m=>m.inference?.status==='available').length} had an available dedicated classifier. Review each result and limitation below.` : 'Not checked in this case.'}</p>
+                    <div><b>Claim verification:</b> {claims.length ? claims.map((claim,i)=>{const summary=claimResultSummary(claim);return <p key={i} className="ml-3">{summary.status} — {summary.explanation}</p>}) : 'Not checked in this case.'}</div>
+                    <p><b>Network observation:</b> {sel.campaignResult ? `${networkResultSummary(sel.campaignResult).status} — ${networkResultSummary(sel.campaignResult).explanation}` : 'Not checked in this case.'}</p>
+                    <p><b>Cross-engine correlation:</b> {sel.correlationRun?.status==='current'&&sel.correlation ? correlationResultSummary(sel.correlation).explanation : 'No current correlation result.'}</p>
+                  </div>
+                  <p className="mt-2 text-slate-400"><b>Next action:</b> {claims.find(c=>claimResultSummary(c).status==='NOT_VERIFIED') ? claimResultSummary(claims.find(c=>claimResultSummary(c).status==='NOT_VERIFIED')!).nextAction : sel.campaignResult ? networkResultSummary(sel.campaignResult).nextAction : 'Add or review evidence in the relevant engine before drawing a conclusion.'}</p>
+                </section>
 
                 <div>
                   <div className="mb-1 flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-slate-500">
