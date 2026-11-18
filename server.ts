@@ -947,7 +947,7 @@ async function assessMediaWithGemini(input: z.infer<typeof mediaInput>) {
   try {
     const response = await geminiGenerate({
       contents: [{ role: "user", parts: [{ text: prompt }, ...prepared.parts] }],
-      config: { responseMimeType: "application/json", maxOutputTokens: 700 },
+      config: { responseMimeType: "application/json", maxOutputTokens: 1100 },
     }, { failoverOnQuota: false, maxAttempts: 2, allowFailover: true });
     const parsed = parseGeminiMediaResponse(response.text);
     if (!parsed) return { status: "provider_error" as const, explanation: "Gemini returned a response that did not meet the required structured format.", observations: [], limitations: ["No authenticity verdict or probability was produced."], model: response.modelUsed || GEMINI_MODEL };
