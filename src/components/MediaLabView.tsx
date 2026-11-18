@@ -511,10 +511,10 @@ export const MediaLabView: React.FC<{
         detailTiles = s.detailTiles;
       } else if (modality === "video") {
         // Opt-in visual assessment needs more than three widely spaced stills.
-        // For eligible short clips capture twelve evenly spaced browser frames, then
+        // For eligible short clips capture up to thirty-two browser frames, then
         // the server sends only six paired frames to Gemini under its byte limit.
         // Longer clips retain the analyst's existing interval and sampling settings.
-        const geminiFrameInterval = geminiConsent ? Math.min(intervalSeconds, 2.5) : intervalSeconds;
+        const geminiFrameInterval = geminiConsent ? Math.min(intervalSeconds, 1) : intervalSeconds;
         const s = await analyzeVideo(
           file,
           16,
