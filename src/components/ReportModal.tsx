@@ -4,6 +4,7 @@ import { fetchReport, Report } from "../services/api";
 import { Button, ErrorBox } from "./ui";
 import {evidenceSummary} from '../evidenceSummary';
 import {mediaModelDetails} from '../mediaModelDetails';
+import { claimResultSummary, networkResultSummary } from "../resultSummaries";
 
 const esc = (s: any) =>
   String(s ?? "").replace(
@@ -143,6 +144,7 @@ ${
             i,
           ) => `<div class="box"><h3>3.${i + 1} ${esc(x.verdict)} <span class="tag">${esc(engineLabel(x.engine))}</span></h3>
 <p><b>Claim:</b> ${esc(x.targetClaim)}</p>${x.translatedText ? `<p><b>Original (${esc(x.detectedLanguage)}):</b> ${esc(x.originalInput)}<br><b>Translation:</b> ${esc(x.translatedText)}</p>` : ""}
+<p><b>Plain-language result:</b> ${esc(claimResultSummary(x).status)} — ${esc(claimResultSummary(x).explanation)}</p><p><b>Recommended next action:</b> ${esc(claimResultSummary(x).nextAction)}</p>${list(claimResultSummary(x).evidence)}
 ${x.selectionReview ? `<p><b>Original input:</b> ${esc(x.originalInput)}</p><p>Claim wording/language selected by ${esc(x.selectionReview.reviewedBy)} at ${esc(x.selectionReview.reviewedAt)}; declared language ${esc(x.selectionReview.language)}; edited ${esc(x.selectionReview.edited)}. This is not factual endorsement.</p><p>${esc(x.selectionReview.note)}</p>` : ''}
 ${nliReport(x)}
 ${summaryReport(x)}
@@ -160,7 +162,7 @@ ${x.missingEvidence?.length ? `<b>Missing evidence / review needs</b>${list(x.mi
 <h2>4. Campaign network findings</h2>
 ${
   c
-    ? `<p>${esc(c.datasetName)}${c.isSimulated ? ' <span class="tag">SYNTHETIC DATASET</span>' : ""} — ${c.totalAccounts} accounts, ${c.totalPosts} posts, ${c.suspiciousPostCount ?? "—"} posts warranting review. Assessment: ${esc(c.classification || "Legacy baseline; intent undetermined")}. No maliciousness probability is estimated.</p>
+    ? `<p>${esc(c.datasetName)}${c.isSimulated ? ' <span class="tag">SYNTHETIC DATASET</span>' : ""} — ${c.totalAccounts} accounts, ${c.totalPosts} posts. <b>${esc(networkResultSummary(c).status)}</b>: ${esc(networkResultSummary(c).explanation)} No maliciousness probability is estimated.</p><p><b>Recommended next action:</b> ${esc(networkResultSummary(c).nextAction)}</p>${list(networkResultSummary(c).evidence)}
 <table><tr><th>Cluster</th><th>Accounts</th><th>Posts</th><th>Span (min)</th><th>Score</th><th>Tactics</th></tr>${c.clusters.map((k) => `<tr><td>${esc(k.name)}</td><td>${k.accountCount}</td><td>${k.postCount}</td><td>${k.burstDurationMinutes}</td><td>${k.coordinationScore}</td><td>${esc(k.identifiedTactics.join("; "))}</td></tr>`).join("")}</table>
 ${list(c.tacticalSummary)}`
     : '<p class="muted">No campaign analysed.</p>'

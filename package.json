@@ -20,7 +20,7 @@
     "preview": "vite preview",
     "format": "oxfmt",
     "lint": "tsc --noEmit",
-    "test": "tsx test/forensics.test.ts && tsx test/upgrade.test.ts && tsx test/localImage.test.ts && tsx test/imageEvidence.test.ts && tsx test/imageProvenance.test.ts && tsx test/localAudio.test.ts && tsx test/localVideo.test.ts && tsx test/temporalDiagnostics.test.ts && tsx test/videoFaces.test.ts && tsx test/integrationMerge.test.ts && tsx test/claimEvidence.test.ts && tsx test/claimReadiness.test.ts && tsx test/claimApi.test.ts && tsx test/campaignEpisodes.test.ts && tsx test/campaignApi.test.ts && tsx test/api.test.ts",
+    "test": "tsx test/forensics.test.ts && tsx test/upgrade.test.ts && tsx test/localImage.test.ts && tsx test/imageEvidence.test.ts && tsx test/imageProvenance.test.ts && tsx test/localAudio.test.ts && tsx test/localVideo.test.ts && tsx test/temporalDiagnostics.test.ts && tsx test/videoFaces.test.ts && tsx test/integrationMerge.test.ts && tsx test/claimEvidence.test.ts && tsx test/claimReadiness.test.ts && tsx test/claimApi.test.ts && tsx test/campaignEpisodes.test.ts && tsx test/campaignApi.test.ts && tsx test/resultSummaries.test.ts && tsx test/api.test.ts",
     "test:engine3": "tsx test/engine3Dataset.test.ts && tsx test/engine3Reliability.test.ts",
     "test:diagnostics": "tsx test/analysisDiagnostics.test.ts",
     "test:engine4": "tsx test/engine4.test.ts && tsx test/engine4Api.test.ts",
