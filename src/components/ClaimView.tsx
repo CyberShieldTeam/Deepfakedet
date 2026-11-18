@@ -19,6 +19,7 @@ import {
 import { claimAssessment, Details, PageHeader, plainClaim, Term, VerdictBanner } from "./plain";
 import type { AttachFn } from "../App";
 import {AnalysisStatus} from './AnalysisStatus';
+import { claimResultSummary } from "../resultSummaries";
 
 const SAMPLES = [
   {
@@ -81,6 +82,7 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
     r.verificationMode === "analyst_reviewed";
   const lang = r.detectedLanguage && r.detectedLanguage !== "English" ? r.detectedLanguage : null;
   const summary=r.evidenceSummary??evidenceSummary(r);
+  const userSummary = claimResultSummary(r);
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-2">
@@ -99,7 +101,18 @@ export const ClaimResult: React.FC<{ r: ClaimVerificationResult }> = ({ r }) => 
         )}
         <span className="text-[11px] text-slate-500">checked {fmtDate(r.timestamp)}</span>
       </div>
-      <VerdictBanner {...plainClaim(r)} />
+      <VerdictBanner
+        {...(r.isSimulated ? plainClaim(r) : {
+          tone: userSummary.tone,
+          headline: userSummary.headline,
+          explain: userSummary.explanation,
+          advice: userSummary.nextAction,
+        })}
+        extra={!r.isSimulated ? <div className="mt-3 rounded border border-slate-700/80 bg-slate-950/40 p-2">
+          <div className="font-mono text-xs font-semibold tracking-wide text-cyan-200">{userSummary.status}</div>
+          {userSummary.evidence.length ? <ul className="mt-1 list-disc pl-4 text-xs text-slate-300">{userSummary.evidence.slice(0, 3).map((item) => <li key={item}>{item}</li>)}</ul> : <p className="mt-1 text-xs text-slate-400">No reviewed attributable passage currently supports a definitive label.</p>}
+        </div> : undefined}
+      />
       {r.selectionReview && <div className="rounded border border-slate-700 p-3 text-sm">
         <p><b>Selected claim:</b> {r.targetClaim}</p><details><summary className="cursor-pointer">Original input and selection approval</summary><p>{r.originalInput}</p><p>Selected by {r.selectionReview.reviewedBy} · {fmtDate(r.selectionReview.reviewedAt)} · declared language {r.selectionReview.language}. This approval selects wording, not factual truth.</p><p>{r.selectionReview.note}</p></details>
       </div>}

@@ -28,6 +28,7 @@ import { CampaignEvidence } from './CampaignEvidence';
 import { Details, PageHeader, VerdictBanner } from "./plain";
 import type { AttachFn } from "../App";
 import {AnalysisStatus} from './AnalysisStatus';
+import { networkResultSummary } from "../resultSummaries";
 
 export const CampaignView: React.FC<{
   attach: AttachFn;
@@ -122,6 +123,7 @@ export const CampaignView: React.FC<{
   const node = result?.nodes.find((n) => n.id === selected);
   const nodeEdges =
     result?.edges.filter((e) => e.source === selected || e.target === selected) || [];
+  const userSummary = result ? networkResultSummary(result) : null;
   const graphNodes = (result?.nodes || [])
     .filter((n) => filter == null || n.clusterId === filter)
     .slice(0, 300);
@@ -248,15 +250,14 @@ export const CampaignView: React.FC<{
             {result.isSimulated && <SimulatedBadge label="synthetic dataset" />}
           </div>
           <VerdictBanner
-            tone={
-              result.classification === "Suspicious coordinated amplification" ? "orange" : "sky"
-            }
-            headline={result.analysis||result.episodeEvidence?(result.truncated?'Partial network analysis':result.edges.length?'Observed post relationships':'No qualifying post relationships'):result.classification || "Legacy graph baseline — review required"}
-            explain={
-              result.analysis?.summary || (result.episodeEvidence?`${result.edges.length} observed relationships and ${result.episodeEvidence.episodes.length} pair episodes retained. Intent and common control remain unproven. Processing diagnostics were not recorded for this older result.`:undefined) || result.methodology ||
-              "Union-find comparison on synthetic demonstration data; not a trained coordination classifier."
-            }
-            advice="A shared URL, headline or hashtag alone does not imply malicious coordination. Review recurring independent signals and source context."
+            tone={userSummary!.tone}
+            headline={userSummary!.headline}
+            explain={userSummary!.explanation}
+            advice={userSummary!.nextAction}
+            extra={<div className="mt-3 rounded border border-slate-700/80 bg-slate-950/40 p-2">
+              <div className="font-mono text-xs font-semibold tracking-wide text-cyan-200">{userSummary!.status}</div>
+              {userSummary!.evidence.length ? <ul className="mt-1 list-disc pl-4 text-xs text-slate-300">{userSummary!.evidence.map((item) => <li key={item}>{item}</li>)}</ul> : <p className="mt-1 text-xs text-slate-400">No qualifying association evidence was retained.</p>}
+            </div>}
           />
           <AnalysisStatus analysis={result.analysis}/>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
