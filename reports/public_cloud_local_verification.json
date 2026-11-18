@@ -26,10 +26,15 @@
     "engine3": "passed",
     "focusedPythonServiceAuthPassed": 4,
     "actualOcrApi": "passed",
-    "eslint": "not configured; lint script checks TypeScript"
+    "eslint": "not configured; lint script checks TypeScript",
+    "linuxCiPythonCollected": 143,
+    "linuxCiPythonExecutedPassed": 140,
+    "linuxCiPythonSkipped": 3,
+    "linuxContainerCheck": "passed at 087504b; image/video processing, service authorization, guest case API; separate 512MiB limits, no OOM",
+    "linuxContainerRun": "https://github.com/CyberShieldTeam/Deepfakedet/actions/runs/44292918626"
   },
   "limitations": [
-    "No Linux container build or live cloud verification",
+    "No live Render/Vercel verification or production load test",
     "Vercel team authorization pending",
     "Render tools/credential unavailable",
     "Trained local models not supported by free profile",

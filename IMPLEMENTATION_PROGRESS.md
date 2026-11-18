@@ -9,6 +9,9 @@ protection, public-stage/storage warnings, lean protected Python service packagi
 free-only Render services and Vercel Build Output API routing. No threshold/model verdict
 changed; free-host trained classifier/NLI/reranker/embedding limitations are explicit.
 Actual local two-visitor browser processing, case/graph/report and isolation checks pass.
+Linux CI also built and exercised both containers under separate512MiB limits, including
+protected image/video measurements and guest case APIs; no OOM. The missing lean SciPy
+dependency found by actual processing was added. Full CI Python:140passes/3setup skips.
 Cloud deployment remains **unverified**, blocked on Vercel team authorization and Render
 provisioning. Full setup/results/limits: [free public deployment](docs/FREE_PUBLIC_DEPLOYMENT.md).
 
