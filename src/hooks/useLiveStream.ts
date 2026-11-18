@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import { LiveEvent } from '../types';
 
 /** Subscribes to the server's SSE stream; reconnects automatically (EventSource default). */
-export function useLiveStream(onAlert?: (ev: LiveEvent) => void) {
+export function useLiveStream(onAlert?: (ev: LiveEvent) => void, enabled=true) {
   const [events, setEvents] = useState<LiveEvent[]>([]);
   const [connected, setConnected] = useState(false);
   const cb = useRef(onAlert);
   cb.current = onAlert;
 
   useEffect(() => {
+    if(!enabled){setConnected(false);return;}
     const es = new EventSource('/api/stream');
     es.onopen = () => setConnected(true);
     es.onerror = () => setConnected(false);
@@ -19,7 +20,7 @@ export function useLiveStream(onAlert?: (ev: LiveEvent) => void) {
       if (ev.kind === 'alert') cb.current?.(ev);
     };
     return () => es.close();
-  }, []);
+  }, [enabled]);
 
   return { events, connected };
 }

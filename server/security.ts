@@ -1,11 +1,12 @@
 import crypto from "node:crypto";
 import { AsyncLocalStorage } from "node:async_hooks";
-import type { Express, RequestHandler, ErrorRequestHandler } from "express";
+import type { Express, Request, RequestHandler, ErrorRequestHandler } from "express";
 import { z } from "zod";
 import {engineForPath,failedDiagnostic,logAnalysis} from './analysisDiagnostics';
 
 export const context = new AsyncLocalStorage<{ ownerId: string }>();
 export const owner = () => context.getStore()?.ownerId || "local-analyst";
+export const PUBLIC_DEMO = process.env.VERITAS_PUBLIC_DEMO === "true";
 const text = (max = 500) => z.string().trim().min(1).max(max);
 const risk = z.enum(["Informational", "Low", "Medium", "High", "Critical"]);
 export const correlationInput=z.object({contexts:z.array(z.object({mediaId:text(200),claimId:text(200),kind:z.enum(['user_caption','user_description']),text:text(10000),rationale:text(2000),mediaUrl:z.string().url().max(3000).optional()}).strict()).max(32).optional()}).strict();
@@ -212,13 +213,29 @@ export const validate =
 
 export function installSecurity(app: Express) {
   const production = process.env.NODE_ENV === "production";
-  const users: Record<string, string> = JSON.parse(process.env.VERITAS_USERS || "{}");
+  const users: Record<string, string> = PUBLIC_DEMO ? {} : JSON.parse(process.env.VERITAS_USERS || "{}");
   if (Object.entries(users).some(([token, id]) => token.length < 32 || !id.trim()))
     throw new Error(
       "VERITAS_USERS requires tokens of at least 32 characters mapped to nonempty owner IDs",
     );
   const sessions = new Map<string, { ownerId: string; expires: number }>();
   const limits = new Map<string, { count: number; until: number }>();
+  const sessionCookie = PUBLIC_DEMO ? "veritas_demo_session" : "veritas_session";
+  const cookieOptions = {
+    httpOnly: true,
+    sameSite: "strict" as const,
+    secure: production || PUBLIC_DEMO,
+    maxAge: 8 * 3600000,
+    path: "/api",
+  };
+  const cookieValue = (req: Request, name: string) =>
+    new RegExp(`(?:^|;\\s*)${name}=([^;]+)`).exec(req.headers.cookie || "")?.[1];
+  const activeSession = (id?: string) => {
+    if (!id) return undefined;
+    const session = sessions.get(id);
+    if (session && session.expires <= Date.now()) sessions.delete(id);
+    return session && session.expires > Date.now() ? session : undefined;
+  };
   app.disable("x-powered-by");
   app.use("/api", (req, res, next) => {
     const requestId = crypto.randomUUID();
@@ -265,32 +282,59 @@ export function installSecurity(app: Express) {
     }
     next();
   });
-  app.post("/api/session", validate(z.object({ token: text(512) }).strict()), (req, res) => {
-    const digest = (value: string) => crypto.createHash("sha256").update(value).digest();
-    const match = Object.entries(users).find(([token]) =>
-      crypto.timingSafeEqual(digest(token), digest(req.body.token)),
-    );
-    if (!match) return void res.status(401).json({ error: "Invalid analyst access token" });
-    for (const [id, session] of sessions) if (session.expires < Date.now()) sessions.delete(id);
-    const id = crypto.randomBytes(32).toString("hex");
-    sessions.set(id, { ownerId: match[1], expires: Date.now() + 8 * 3600000 });
-    res.cookie("veritas_session", id, {
-      httpOnly: true,
-      sameSite: "strict",
-      secure: production,
-      maxAge: 8 * 3600000,
-      path: "/api",
+  if (PUBLIC_DEMO) {
+    app.post("/api/session", validate(z.object({}).strict()), (req, res) => {
+      for (const [id, session] of sessions) if (session.expires <= Date.now()) sessions.delete(id);
+      const existingId = cookieValue(req, sessionCookie);
+      const existing = activeSession(existingId);
+      if (existing && existingId) {
+        existing.expires = Date.now() + 8 * 3600000;
+        res.cookie(sessionCookie, existingId, cookieOptions);
+        return void res.json({ authenticated: true, mode: "public-demo" });
+      }
+      if (sessions.size >= 50000)
+        return void res.status(503).json({ error: "Anonymous demo session capacity reached; retry later" });
+      const id = crypto.randomBytes(32).toString("hex");
+      const ownerId = `public-demo:${crypto.randomBytes(24).toString("hex")}`;
+      sessions.set(id, { ownerId, expires: Date.now() + 8 * 3600000 });
+      res.cookie(sessionCookie, id, cookieOptions);
+      res.json({ authenticated: true, mode: "public-demo" });
     });
-    res.json({ authenticated: true });
-  });
+  } else {
+    app.post("/api/session", validate(z.object({ token: text(512) }).strict()), (req, res) => {
+      const digest = (value: string) => crypto.createHash("sha256").update(value).digest();
+      const match = Object.entries(users).find(([token]) =>
+        crypto.timingSafeEqual(digest(token), digest(req.body.token)),
+      );
+      if (!match) return void res.status(401).json({ error: "Invalid analyst access token" });
+      for (const [id, session] of sessions) if (session.expires < Date.now()) sessions.delete(id);
+      const id = crypto.randomBytes(32).toString("hex");
+      sessions.set(id, { ownerId: match[1], expires: Date.now() + 8 * 3600000 });
+      res.cookie(sessionCookie, id, cookieOptions);
+      res.json({ authenticated: true, mode: "required" });
+    });
+  }
   app.delete("/api/session", (req, res) => {
-    const id = /(?:^|;\s*)veritas_session=([^;]+)/.exec(req.headers.cookie || "")?.[1];
-    if (id) sessions.delete(id);
-    res.clearCookie("veritas_session", { path: "/api" }).json({ authenticated: false });
+    for (const name of ["veritas_session", "veritas_demo_session"]) {
+      const id = cookieValue(req, name);
+      if (id) sessions.delete(id);
+      res.clearCookie(name, { path: "/api", httpOnly: true, sameSite: "strict", secure: production || PUBLIC_DEMO });
+    }
+    res.json({ authenticated: false });
   });
   app.use("/api", (req, res, next) => {
-    const id = /(?:^|;\s*)veritas_session=([^;]+)/.exec(req.headers.cookie || "")?.[1];
-    const session = id ? sessions.get(id) : undefined;
+    const id = cookieValue(req, sessionCookie);
+    const session = activeSession(id);
+    if (req.path === "/health") {
+      return context.run(
+        { ownerId: session?.ownerId || (PUBLIC_DEMO ? "public-demo-health" : "anonymous") },
+        next,
+      );
+    }
+    if (PUBLIC_DEMO) {
+      if (session) return context.run({ ownerId: session.ownerId }, next);
+      return void res.status(401).json({ error: "Public demo session required", code: "AUTH_REQUIRED" });
+    }
     const bearer = req.headers.authorization?.replace(/^Bearer /, "");
     const match = bearer
       ? Object.entries(users).find(([key]) =>
@@ -301,7 +345,6 @@ export function installSecurity(app: Express) {
         )
       : undefined;
     const ownerId = session && session.expires > Date.now() ? session.ownerId : match?.[1];
-    if (req.path === "/health") return context.run({ ownerId: ownerId || "anonymous" }, next);
     if (ownerId) return context.run({ ownerId }, next);
     if (!production && !Object.keys(users).length)
       return context.run({ ownerId: "local-analyst" }, next);

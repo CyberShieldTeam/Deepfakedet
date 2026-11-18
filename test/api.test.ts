@@ -9,6 +9,7 @@ process.env.VERITAS_EMBEDDED = "true";
 process.env.NODE_ENV = "production";
 process.env.APP_GEMINI_API_KEY = "";
 process.env.VERITAS_STORE = path.join(root, "cases.json");
+delete process.env.VERITAS_PUBLIC_DEMO;
 const tokenA = "test-only-analyst-a-token-not-a-secret-000000";
 const tokenB = "test-only-analyst-b-token-not-a-secret-000000";
 process.env.VERITAS_USERS = JSON.stringify({ [tokenA]: "analyst-a", [tokenB]: "analyst-b" });
@@ -20,7 +21,8 @@ try {
     a = { Authorization: `Bearer ${tokenA}` },
     b = { Authorization: `Bearer ${tokenB}` };
   await api.get("/api/investigations").expect(401);
-  await api.get("/api/health").expect(200);
+  const health = await api.get("/api/health").expect(200);
+  assert.equal(health.body.authenticationMode, "required");
   await api.post("/api/session").send({ token: "invalid" }).expect(401);
   const session = await api.post("/api/session").send({ token: tokenA }).expect(200);
   assert(String(session.headers["set-cookie"]).includes("HttpOnly"));

@@ -21,10 +21,12 @@ import { Investigation, LiveEvent } from "./types";
 import {
   attachResult,
   createInvestigation,
+  createPublicDemoSession,
   fetchHealth,
   fetchInvestigations,
   Health,
   runDemoScenario,
+  setPublicDemoMode as setApiPublicDemoMode,
 } from "./services/api";
 import { useLiveStream } from "./hooks/useLiveStream";
 import { Button, ErrorBox } from "./components/ui";
@@ -85,6 +87,9 @@ export default function App() {
   const [cases, setCases] = useState<Investigation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [health, setHealth] = useState<Health | null>(null);
+  const [publicDemo, setPublicDemo] = useState(false);
+  const [authModeReady, setAuthModeReady] = useState(false);
+  const [sessionReady, setSessionReady] = useState(false);
   const [reportFor, setReportFor] = useState<string | null>(null);
   const [demoLoading, setDemoLoading] = useState(false);
   const [query, setQuery] = useState("");
@@ -99,7 +104,7 @@ export default function App() {
     setToasts((prev) => [ev, ...prev].slice(0, 3));
     setTimeout(() => setToasts((prev) => prev.filter((e) => e.id !== ev.id)), 7000);
   }, []);
-  const { events: allEvents, connected } = useLiveStream(onAlert);
+  const { events: allEvents, connected } = useLiveStream(onAlert, sessionReady);
   const investigations = useMemo(
     () => cases.filter((i) => !!i.isSimulatedDemo === (mode === "demo")),
     [cases, mode],
@@ -113,21 +118,39 @@ export default function App() {
     return list;
   }, []);
   useEffect(() => {
-    reload()
-      .then((list) => {
-        const first = list.find((i) => i.isSimulatedDemo);
-        if (first) setActiveId(first.id);
-      })
-      .catch((e) => setError(e.message));
+    let publicDemoMode=false;
+    let authModeResolved=false;
+    let cancelled=false;
+    const bootstrap=async()=>{
+      try{
+        const initialHealth=await fetchHealth();
+        if(cancelled)return;
+        publicDemoMode=initialHealth.authenticationMode==="public-demo";
+        authModeResolved=true;
+        setAuthModeReady(true);
+        setPublicDemo(publicDemoMode);
+        setApiPublicDemoMode(publicDemoMode);
+        setHealth(initialHealth);
+        if(publicDemoMode)await createPublicDemoSession();
+        if(cancelled)return;
+        const list=await reload();
+        const first=list.find((item)=>item.isSimulatedDemo) || list[0];
+        if(first)setActiveId(first.id);
+        setSessionReady(true);
+      }catch(e:any){
+        if(!cancelled)setError(e.message);
+      }
+    };
+    void bootstrap();
     const poll = () =>
       fetchHealth()
         .then(setHealth)
         .catch(() => setHealth(null));
-    poll();
     const timer = setInterval(poll, 15000);
-    const login = () => setAuthOpen(true);
+    const login = () => { if(authModeResolved&&!publicDemoMode)setAuthOpen(true); };
     window.addEventListener("veritas:auth-required", login);
     return () => {
+      cancelled=true;
       clearInterval(timer);
       window.removeEventListener("veritas:auth-required", login);
     };
@@ -273,26 +296,30 @@ export default function App() {
             {health ? "Workspace operational" : "Connecting to backend"}
           </div>
           <div className="text-[10px] leading-relaxed text-slate-500">
-            {health?.authenticationMode === "required"
-              ? "Protected analyst access"
-              : "Development · single analyst"}
+            {publicDemo
+              ? "Public judge demo · browser-isolated session"
+              : health?.authenticationMode === "required"
+                ? "Protected analyst access"
+                : "Development · single analyst"}
             <br />
             Classifier availability is reported separately.
           </div>
         </div>
-        <button
-          onClick={() => setAuthOpen(true)}
-          className="flex items-center gap-3 border-t border-slate-800 px-5 py-4 text-left"
-        >
-          <div className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-[10px] font-semibold text-slate-300">
-            VA
-          </div>
-          <div className="flex-1">
-            <div className="text-xs">Analyst workspace</div>
-            <div className="mt-0.5 text-[10px] text-slate-500">Manage access</div>
-          </div>
-          <LogIn size={14} className="text-slate-500" />
-        </button>
+        {authModeReady && !publicDemo && (
+          <button
+            onClick={() => setAuthOpen(true)}
+            className="flex items-center gap-3 border-t border-slate-800 px-5 py-4 text-left"
+          >
+            <div className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-[10px] font-semibold text-slate-300">
+              VA
+            </div>
+            <div className="flex-1">
+              <div className="text-xs">Analyst workspace</div>
+              <div className="mt-0.5 text-[10px] text-slate-500">Manage access</div>
+            </div>
+            <LogIn size={14} className="text-slate-500" />
+          </button>
+        )}
       </aside>
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="workspace-header sticky top-0 z-30 border-b border-slate-800/80 backdrop-blur-xl">
@@ -351,6 +378,12 @@ export default function App() {
           </div>
         </header>
         <main id="main" className="mx-auto w-full max-w-[1600px] flex-1 px-5 py-6 lg:px-8 lg:py-7">
+          {publicDemo && (
+            <div role="note" className="mb-4 rounded-lg border border-amber-500/20 bg-amber-400/5 px-3.5 py-2.5 text-[10px] leading-relaxed text-amber-100/90">
+              <b className="mr-2 tracking-wide">PUBLIC JUDGE DEMO</b>
+              No sign-in required. This browser has an isolated workspace. Scripted scenarios and sample datasets are simulated; user inputs use configured engines, and unavailable evidence stays unavailable or inconclusive.
+            </div>
+          )}
           <div
             className={`mb-6 flex flex-wrap items-center justify-between gap-2 rounded-lg border px-3.5 py-2 text-[10px] ${mode === "demo" ? "border-violet-400/15 bg-violet-400/5 text-violet-200/80" : "border-cyan-500/15 bg-cyan-400/5 text-cyan-200/80"}`}
           >
@@ -514,12 +547,12 @@ export default function App() {
           <ReportModal investigationId={reportFor} onClose={() => setReportFor(null)} />
         )}
       </Suspense>
-      {(authOpen || help) && (
+      {((authOpen && !publicDemo) || help) && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-5 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
-          aria-label={authOpen ? "Analyst access" : "Methodology"}
+          aria-label={authOpen && !publicDemo ? "Analyst access" : "Methodology"}
         >
           <div className="w-full max-w-lg rounded-2xl border border-slate-700 bg-[#101927] p-7">
             <button
@@ -532,7 +565,7 @@ export default function App() {
             >
               <X size={18} />
             </button>
-            {authOpen ? (
+            {authOpen && !publicDemo ? (
               <form onSubmit={login}>
                 <LockKeyhole size={28} className="mb-4 text-cyan-300" />
                 <h2 className="text-xl font-semibold">Analyst access</h2>
