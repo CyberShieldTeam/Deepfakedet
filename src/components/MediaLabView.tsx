@@ -47,6 +47,7 @@ const modalityOf = (f: File): "image" | "video" | "audio" | null => {
 
 export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (seconds:number)=>void }> = ({ r, onSeek }) => {
   const [label, cls] = AUTH_LABEL[r.authenticity] || AUTH_LABEL.inconclusive;
+  const gemini = r.geminiMediaAssessment;
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-2">
@@ -62,6 +63,16 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (second
         )}
       </div>
       <VerdictBanner {...plainMedia(r)} />
+      {gemini && <Card title="AI-assisted media assessment — not validated authenticity detection.">
+        <div className="space-y-2 text-sm text-slate-300">
+          <p className="text-xs uppercase tracking-wide text-cyan-300">Status: {gemini.status.replaceAll("_", " ")}</p>
+          <p>{gemini.explanation}</p>
+          {gemini.observations.length > 0 && <><p className="font-medium text-slate-100">Gemini observations</p><ul className="list-disc space-y-1 pl-5">{gemini.observations.map((item, i) => <li key={i}>{item}</li>)}</ul></>}
+          <p className="font-medium text-slate-100">Limitations</p><ul className="list-disc space-y-1 pl-5">{gemini.limitations.map((item, i) => <li key={i}>{item}</li>)}</ul>
+          {gemini.model && <p className="text-xs text-slate-500">Provider model: {gemini.model}</p>}
+          <p className="text-xs text-amber-200">This separate visual assessment does not change the classifier verdict above.</p>
+        </div>
+      </Card>}
       <AnalysisStatus analysis={r.analysis}/>
       {(r.localImage||r.localAudio||r.localVideo) && <Details title="Research model and input details">
         <p>AI generation, manipulation, provenance and factual accuracy are separate questions. No validated media authenticity conclusion is available.</p>
@@ -425,6 +436,7 @@ export const MediaLabView: React.FC<{
   const [drag, setDrag] = useState(false);
   const [demoIdx, setDemoIdx] = useState<number | null>(null);
   const [intervalSeconds, setIntervalSeconds] = useState(5);
+  const [geminiConsent, setGeminiConsent] = useState(false);
 
   const pick = (f: File) => {
     const m = modalityOf(f);
@@ -454,6 +466,7 @@ export const MediaLabView: React.FC<{
     if (objUrl) URL.revokeObjectURL(objUrl);
     setFile(f);
     setModality(m);
+    setGeminiConsent(false);
     setObjUrl(URL.createObjectURL(f));
     setImg(null);
     setVid(null);
@@ -536,6 +549,7 @@ export const MediaLabView: React.FC<{
       setResult(
         await analyzeMedia({
           modality,
+          geminiConsent: geminiConsent && (modality === "image" || modality === "video"),
           fileName: file.name,
           originalImageData,
           temporalIntervalSeconds: modality==='video' ? intervalSeconds : undefined,
@@ -664,6 +678,10 @@ export const MediaLabView: React.FC<{
                 onChange={(e) => e.target.files?.[0] && pick(e.target.files[0])}
               />
             </label>
+            {(modality === "image" || modality === "video") && <label className="mt-3 flex cursor-pointer items-start gap-2 rounded-lg border border-slate-700 p-3 text-xs text-slate-300">
+              <input type="checkbox" checked={geminiConsent} onChange={(e) => setGeminiConsent(e.target.checked)} className="mt-0.5 accent-cyan-400" />
+              <span><b className="text-slate-100">Optional Gemini visual assessment (off by default).</b> If selected, the image or up to six sampled video frames from clips no longer than 30 seconds will be sent to Google Gemini for visual description. Video audio is not sent. This assessment is not validated authenticity detection.</span>
+            </label>}
             <div className="mt-3 flex items-center gap-2">
               <Button
                 onClick={run}
