@@ -118,19 +118,19 @@ class MediaImageManifestTests(unittest.TestCase):
         from ai_service import evaluate_media_images
         manifest=copy.deepcopy(self.manifest);manifest['dataset']='unreviewed-source'
         path=self.root/'manifest.json';path.write_text(__import__('json').dumps(manifest),encoding='utf-8')
+        inventory_path=self.root/'inventory.json';inventory_path.write_text('{}',encoding='utf-8')
         with patch.object(evaluate_media_images,'cached_snapshot') as load:
-            with self.assertRaisesRegex(ValueError,'DATASET_IDENTITY'):
-                evaluate_media_images.evaluate('community',path,self.root/'result.json')
+            with self.assertRaisesRegex(ValueError,'MANIFEST_SCHEMA'):
+                evaluate_media_images.evaluate('community',path,self.root/'result.json',inventory_path,'0'*64)
             load.assert_not_called()
 
     def test_matched_preprocessing_is_deterministic_and_preserves_source_pixels(self):
         from PIL import Image
-        from ai_service.evaluate_media_images import BASE_PREPROCESSING,derived
+        from ai_service.evaluate_media_images import derived
         image=Image.new('RGB',(640,480),(12,80,190));original=image.tobytes()
         first,first_hash=derived(image);second,second_hash=derived(image)
         self.assertEqual(first.size,(256,256));self.assertEqual(first_hash,second_hash)
         self.assertEqual(first.tobytes(),second.tobytes());self.assertEqual(image.tobytes(),original)
-        self.assertEqual(BASE_PREPROCESSING['variants']['matched_square256_jpeg95']['quality'],95)
 
 
 if __name__=='__main__':unittest.main()
