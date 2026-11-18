@@ -3,7 +3,7 @@
 ## Public cloud guest deployment profile — 2026-11-18
 
 Deployment work is isolated on `codex/free-public-cloud-deployment`, based on reviewed
-teammate commit5743749 (unmerged PR6). No private case/credential or existing checkout
+teammate commit99493f4 (unmerged PR6, including the three newer paired-frame commits). No private case/credential or existing checkout
 was overwritten. Implemented bounded browser guest sessions with owner/receipt/CSRF
 protection, public-stage/storage warnings, lean protected Python service packaging,
 free-only Render services and Vercel Build Output API routing. No threshold/model verdict

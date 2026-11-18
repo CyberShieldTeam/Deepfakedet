@@ -14,7 +14,7 @@
   ],
   "errors": [],
   "nodeHeapLimitMiB": 192,
-  "observedFinalNodeRssBytes": 226893824,
+  "observedFinalNodeRssBytes": 205840384,
   "observedPythonPeakWindowsWorkingSetBytes": 150126592,
   "tests": {
     "pythonCollected": 142,
@@ -23,7 +23,10 @@
     "nodeApi": "passed",
     "pythonSkipped": 2,
     "pythonExecutedPassed": 140,
-    "engine3": "passed"
+    "engine3": "passed",
+    "focusedPythonServiceAuthPassed": 4,
+    "actualOcrApi": "passed",
+    "eslint": "not configured; lint script checks TypeScript"
   },
   "limitations": [
     "No Linux container build or live cloud verification",
