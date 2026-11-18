@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 12438)
-Total output lines: 1161
-
 import { config as loadEnv } from "dotenv";
 import express, { Request, Response } from "express";
 import { z } from "zod";
@@ -527,7 +524,278 @@ function emitPost(text: string, lang: string, tag: string, handle?: string) {
     platform: PLATFORMS[Math.floor(Math.random() * PLATFORMS.length)],
     handle:
       handle ||
-      HANDLES[Math.floor(Math.rando…2438 tokens truncated…me: now, label: "Investigation opened", severity: "info", module: "Case" }],
+      HANDLES[Math.floor(Math.random() * HANDLES.length)] + Math.floor(Math.random() * 90),
+    language: lang,
+    text: `${text} ${tag}`,
+    kind: "post",
+    severity: "info",
+    isSimulated: true,
+  };
+  stats.postsIngested++;
+  stats.byLanguage[lang] = (stats.byLanguage[lang] || 0) + 1;
+  broadcast(ev);
+  detectOnWindow(ev);
+}
+
+/** Real (lightweight) detection over the simulated stream: near-duplicate text and hashtag bursts in a 90 s window. */
+function detectOnWindow(ev: LiveEvent) {
+  const now = Date.now();
+  window60.push(ev);
+  while (window60.length && now - new Date(window60[0].ts).getTime() > 90000) window60.shift();
+  const t = tokenize(ev.text);
+  const similar = window60.filter(
+    (e) => e.handle !== ev.handle && jaccard(tokenize(e.text), t) >= 0.6,
+  );
+  const key = "sim:" + Array.from(t).slice(0, 4).join(" ");
+  if (similar.length >= 2 && now - (alertedKeys.get(key) || 0) > 120000) {
+    alertedKeys.set(key, now);
+    raiseAlert(
+      "similar_content",
+      "high",
+      `${similar.length + 1} accounts posting near-identical content`,
+      `"${ev.text.slice(0, 90)}…" (${ev.language}) — detected on simulated feed`,
+      true,
+    );
+  }
+  const tag = (ev.text.match(/#[\p{L}\p{M}\p{N}_]+/u) || [])[0];
+  if (tag) {
+    const n = window60.filter((e) => e.text.includes(tag)).length;
+    const bk = "burst:" + tag;
+    if (n >= 5 && now - (alertedKeys.get(bk) || 0) > 120000) {
+      alertedKeys.set(bk, now);
+      raiseAlert(
+        "propagation_burst",
+        "medium",
+        `Propagation burst on ${tag}`,
+        `${n} posts in 90 s on simulated feed`,
+        true,
+      );
+    }
+  }
+}
+
+const demoFeed = setInterval(() => {
+  if (process.env.VERITAS_DEMO_FEED !== "true") return;
+  const p = FEED_POOL[Math.floor(Math.random() * FEED_POOL.length)];
+  emitPost(p.text, p.lang, p.tag);
+  // Occasionally a coordinated "wave" of copies from different accounts
+  if (Math.random() < 0.12) {
+    const w = FEED_POOL.filter((_, i) => [1, 3, 6, 8].includes(i))[Math.floor(Math.random() * 4)];
+    [0, 1, 2, 3].forEach((i) => setTimeout(() => emitPost(w.text, w.lang, w.tag), 400 + i * 700));
+  }
+}, 3500);
+demoFeed.unref();
+
+// ---------------------------------------------------------------- Model registry (honest)
+function modelRegistry(): ModelRegistryItem[] {
+  const g = gemini.status === "ready" ? "ONLINE" : ai ? "DEGRADED" : "STANDBY";
+  return [
+    ...inferenceRegistry().map((m) => ({
+      id: `classifier-${m.task}`,
+      name: `${m.task === "embedding" ? "Multilingual SBERT" : m.task === "audio" ? "Speech spoofing classifier" : "Image forensic classifier"}`,
+      task: m.task,
+      architecture: "Versioned inference adapter",
+      license: m.license,
+      version: m.version,
+      status:
+        m.status === "ready"
+          ? ("ONLINE" as const)
+          : m.status === "failed"
+            ? ("DEGRADED" as const)
+            : ("STANDBY" as const),
+      inferenceLatencyAvg: m.configured ? "20 s request deadline" : "not configured",
+      accuracyBenchmark: "No deployment benchmark",
+      description: `${m.status}: ${m.modelId}. ${m.limitations}`,
+    })),
+    {
+      id: "gemini",
+      name: `Google Gemini (${GEMINI_MODEL})`,
+      task: "Evidence-grounded explanation only; not a forensic classifier",
+      architecture: "Hosted multimodal LLM + Google Search grounding",
+      license: "Google API ToS",
+      version: GEMINI_MODEL,
+      status: g as any,
+      inferenceLatencyAvg: ai ? "network-bound" : "not configured",
+      accuracyBenchmark: "No in-house benchmark",
+      description: ai
+        ? `${gemini.status}: ${gemini.message}`
+        : "Set GEMINI_API_KEY in .env to enable. Fallback engines are used meanwhile.",
+    },
+    {
+      id: "ela",
+      name: "Browser ELA (JPEG re-encode residual)",
+      task: "Image compression inconsistency",
+      architecture: "Canvas re-encode at q=0.90, per-pixel |Δ|, 16×16 block stats",
+      license: "Project code",
+      version: "1.0",
+      status: "ONLINE",
+      inferenceLatencyAvg: "<1 s in browser",
+      accuracyBenchmark: "Signal only — not a classifier",
+      description: "Real computation on the uploaded pixels.",
+    },
+    {
+      id: "frames",
+      name: "Video frame sampler + temporal diff",
+      task: "Temporal anomaly indicators",
+      architecture: "HTMLVideoElement seek → canvas, mean abs frame difference, z-score spikes",
+      license: "Project code",
+      version: "1.0",
+      status: "ONLINE",
+      inferenceLatencyAvg: "1–4 s in browser",
+      accuracyBenchmark: "Signal only",
+      description: "Detects cuts/splices; does not detect face swaps on its own.",
+    },
+    {
+      id: "audio",
+      name: "WebAudio spectral statistics",
+      task: "Waveform, spectrogram, band-limit & pause analysis",
+      architecture: "AudioContext decode + radix-2 FFT",
+      license: "Project code",
+      version: "1.0",
+      status: "ONLINE",
+      inferenceLatencyAvg: "<2 s in browser",
+      accuracyBenchmark: "Signal only",
+      description: "Synthetic-voice indicators are heuristics, not a trained detector.",
+    },
+    {
+      id: "graph",
+      name: "Coordination graph heuristics",
+      task: "Coordinated account clustering",
+      architecture: "Indexed multi-signal candidates → DBSCAN; union-find retained as baseline",
+      license: "Project code",
+      version: "1.0",
+      status: "ONLINE",
+      inferenceLatencyAvg: "<100 ms",
+      accuracyBenchmark: "Transparent thresholds",
+      description: "Every edge carries a human-readable reason.",
+    },
+    {
+      id: "rules",
+      name: "Rule-based claim screener",
+      task: "Offline claim triage",
+      architecture: "BM25 + optional multilingual SBERT + Fact Check Tools",
+      license: "Project code",
+      version: "1.0",
+      status: "ONLINE",
+      inferenceLatencyAvg: "<10 ms",
+      accuracyBenchmark: "n/a",
+      description:
+        "No fictional registry in live mode. No verdict without claim-specific evidence.",
+    },
+  ];
+}
+
+// ---------------------------------------------------------------- Helpers
+const riskFrom = (score: number): RiskLevel =>
+  score >= 80 ? "Critical" : score >= 60 ? "High" : score >= 40 ? "Medium" : "Low";
+
+function parseJSON(text: string): any | null {
+  const m = (text || "").match(/\{[\s\S]*\}/);
+  if (!m) return null;
+  try {
+    return JSON.parse(m[0]);
+  } catch {
+    return null;
+  }
+}
+
+// ---------------------------------------------------------------- Core APIs
+app.get("/api/health", (_req, res) => {
+  res.json({
+    authoredDemonstration: process.env.VERITAS_AUTHORED_DEMO === '1',
+    authenticationMode:
+      process.env.NODE_ENV === "production" ||
+      Object.keys(JSON.parse(process.env.VERITAS_USERS || "{}")).length
+        ? "required"
+        : "development-single-analyst",
+    engines: inferenceRegistry(),
+    status: "ONLINE",
+    geminiConfigured: !!ai,
+    geminiReady: gemini.status === "ready",
+    geminiStatus: gemini.status,
+    geminiMessage: gemini.message,
+    geminiModel: ai ? GEMINI_MODEL : null,
+    geminiLastModelUsed: gemini.lastModelUsed,
+    geminiModelCandidates: ai ? MODEL_CANDIDATES : [],
+    searchGrounding: ai
+      ? {
+          status: grounding.status,
+          message: grounding.message,
+          retryAfter:
+            grounding.blockedUntil > Date.now()
+              ? new Date(grounding.blockedUntil).toISOString()
+              : null,
+        }
+      : null,
+    activeInvestigations: investigations.filter(visible).length,
+    streamClients: clients.size,
+    timestamp: new Date().toISOString(),
+  });
+});
+
+app.get("/api/models", (_req, res) => res.json({ models: modelRegistry() }));
+
+app.get("/api/stats", (_req, res) => {
+  const recentAlerts = recentEvents.filter(
+    (e) =>
+      eventOwners.get(e.id) === owner() &&
+      !e.isSimulated &&
+      e.kind === "alert" &&
+      Date.now() - new Date(e.ts).getTime() < 10 * 60000,
+  );
+  const crit = recentAlerts.filter((a) => a.severity === "critical").length;
+  const threat =
+    crit >= 2
+      ? "CRITICAL"
+      : crit >= 1 || recentAlerts.length >= 4
+        ? "HIGH"
+        : recentAlerts.length >= 1
+          ? "ELEVATED"
+          : "GUARDED";
+  res.json({
+    ...stats,
+    postsIngested: recentEvents.filter(
+      (e) => eventOwners.get(e.id) === owner() && !e.isSimulated && e.kind === "post",
+    ).length,
+    alertsRaised: recentAlerts.length,
+    threatLevel: threat,
+    recentAlertCount: recentAlerts.length,
+  });
+});
+
+app.get("/api/investigations", (_req, res) =>
+  res.json({ investigations: investigations.filter(visible) }),
+);
+
+app.get("/api/investigations/:id", (req, res) => {
+  const inv = investigations.find((i) => i.id === req.params.id && visible(i));
+  if (!inv) return res.status(404).json({ error: "Investigation not found" });
+  res.json({ investigation: inv });
+});
+
+app.post("/api/investigations", validate(caseCreate), (req, res) => {
+  const { title, targetSubject, modality, description, analyst, tags, riskLevel } = req.body || {};
+  if (!title || typeof title !== "string")
+    return res.status(400).json({ error: "title is required" });
+  const now = new Date().toISOString();
+  const inv: Investigation = {
+    ownerId: owner(),
+    id: crypto.randomUUID(),
+    caseNumber: `SUR-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
+    title,
+    targetSubject: targetSubject || "Unspecified",
+    modality: modality || "image",
+    status: "In Progress",
+    riskLevel: riskLevel || "Medium",
+    createdAt: now,
+    updatedAt: now,
+    analyst: analyst || "Analyst",
+    tags: Array.isArray(tags) ? tags : [],
+    description: description || "",
+    isSimulatedDemo: !!req.body.isSimulatedDemo,
+    mediaFindings: [],
+    claimResults: [],
+    timeline: [{ time: now, label: "Investigation opened", severity: "info", module: "Case" }],
   };
   investigations.unshift(inv);
   persist();

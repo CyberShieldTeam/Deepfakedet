@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 10939)
-Total output lines: 963
-
 import React, { useEffect, useRef, useState } from "react";
 import {
   CartesianGrid,
@@ -354,7 +351,105 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (second
 const VERDICT_LABEL: Record<string, [string, string]> = {
   likely: ["Likely yes", "text-rose-300 border-rose-500/40 bg-rose-500/10"],
   possible: ["Maybe", "text-orange-300 border-orange-500/40 bg-orange-500/10"],
-  inconclusive: ["Can't tell", "text-amber-300 border-amb…939 tokens truncated…     "video/mp4",
+  inconclusive: ["Can't tell", "text-amber-300 border-amber-500/40 bg-amber-500/10"],
+  no_indicators_found: [
+    "No signs found",
+    "text-emerald-300 border-emerald-500/40 bg-emerald-500/10",
+  ],
+};
+
+const AssessmentCard: React.FC<{ title: string; a: DetectionAssessment }> = ({ title, a }) => {
+  const [label, cls] = VERDICT_LABEL[a.verdict];
+  return (
+    <div className="rounded-lg border border-slate-800 bg-slate-950/30 p-3 text-xs">
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+        <span className="text-sm font-medium text-slate-200">{title}</span>
+        <span className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${cls}`}>
+          {label}
+        </span>
+      </div>
+      <div className="mb-1 flex justify-between text-[11px] text-slate-400">
+        <span>Chance: {a.probability != null ? `${a.probability}%` : "n/a"}</span>
+        <span>
+          <Term k="confidence">Confidence</Term>:{" "}
+          {a.confidence ? `${a.confidence}%` : "not validated"}
+        </span>
+      </div>
+      {a.probability != null && <Meter value={a.probability} />}
+      {a.indicators.length > 0 && (
+        <div className="mt-2">
+          <div className="text-[11px] text-slate-500">What we noticed:</div>
+          <ul className="mt-0.5 list-disc space-y-0.5 pl-4 text-[12px] text-slate-300">
+            {a.indicators.slice(0, 3).map((i, k) => (
+              <li key={k}>{i.indicator}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {a.rationale && (
+        <div className="mt-1.5 text-[11px] leading-snug text-slate-500">{a.rationale}</div>
+      )}
+      {a.samples && a.samples.length > 1 && (
+        <div className="mt-1 text-[10px] text-slate-600">
+          Separate checks scored: {a.samples.join("% · ")}%
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Section: React.FC<{ title: string; items: string[]; tone?: string }> = ({
+  title,
+  items,
+  tone = "text-slate-300",
+}) =>
+  items?.length ? (
+    <div>
+      <div className="mb-1 text-xs font-medium text-slate-400">{title}</div>
+      <ul className={`list-disc space-y-1 pl-4 text-xs ${tone}`}>
+        {items.map((x, i) => (
+          <li key={i}>{x}</li>
+        ))}
+      </ul>
+    </div>
+  ) : null;
+
+export const MediaLabView: React.FC<{
+  attach: AttachFn;
+  active: Investigation | null;
+  onLiveAnalysis?: () => void;
+}> = ({ attach, active, onLiveAnalysis }) => {
+  const videoElement = useRef<HTMLVideoElement>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [modality, setModality] = useState<"image" | "video" | "audio" | null>(null);
+  const [objUrl, setObjUrl] = useState("");
+  const [img, setImg] = useState<ImageSignals | null>(null);
+  const [vid, setVid] = useState<VideoSignals | null>(null);
+  const [aud, setAud] = useState<AudioSignals | null>(null);
+  const [view, setView] = useState<"original" | "ela" | "split">("original");
+  const [split, setSplit] = useState(50);
+  const [stage, setStage] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [result, setResult] = useState<ForensicAnalysisResult | null>(null);
+  const [saved, setSaved] = useState("");
+  const [drag, setDrag] = useState(false);
+  const [demoIdx, setDemoIdx] = useState<number | null>(null);
+  const [intervalSeconds, setIntervalSeconds] = useState(5);
+  const [geminiConsent, setGeminiConsent] = useState(false);
+
+  const pick = (f: File) => {
+    const m = modalityOf(f);
+    if (!m) return setError(`Unsupported file type: ${f.name}`);
+    if (f.size > 24 * 1024 * 1024)
+      return setError("Upload limit is 24 MiB. Use a shorter clip or a smaller original file.");
+    if (
+      f.type &&
+      ![
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "video/mp4",
         "video/quicktime",
         "video/webm",
         "audio/mpeg",
