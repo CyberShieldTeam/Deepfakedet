@@ -36,6 +36,19 @@ class VideoServiceTests(unittest.TestCase):
         self.assertTrue(all(frame["image"]["classification"] == "INCONCLUSIVE" and
                             frame["image"]["fake_probability"] is None for frame in result["frames"]))
 
+    def test_decoder_evidence_survives_when_all_optional_models_are_unavailable(self):
+        with patch.object(image_app, "model", None), patch.object(image_app, "processor", None), \
+             patch.object(image_app, "torch_module", None), patch.object(image_app, "face_detector", None):
+            result = video_service.analyze_video(video_service.VideoRequest(
+                video_base64=base64.b64encode(CLIP.read_bytes()).decode("ascii")))
+        self.assertEqual(len(result["frames"]), 6)
+        self.assertTrue(all(frame["image"]["model_status"] == "unavailable" and
+                            frame["image"]["fake_probability"] is None and
+                            frame["image"]["inputTrace"]["sourceSha256"] for frame in result["frames"]))
+        self.assertTrue(all(frame["quality"]["selectionScore"] >= 0 for frame in result["frames"]))
+        self.assertEqual(result["scope"], "server_decoded_frames")
+        self.assertEqual(video_service.health()["status"], "ready")
+
     def test_quality_prefers_detail_over_flat_frame(self):
         flat = np.full((180, 320, 3), 128, dtype=np.uint8)
         checker = np.indices((180, 320)).sum(axis=0) % 2

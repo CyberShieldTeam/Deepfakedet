@@ -5,10 +5,13 @@ import math
 import hashlib
 import subprocess
 import tempfile
+import io
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
+from PIL import Image
+from ai_service.media_input_trace import image_trace
 
 router = APIRouter()
 MAX_VIDEO_BYTES = 8 * 1024 * 1024
@@ -16,6 +19,44 @@ MAX_DURATION_SECONDS = 120
 MAX_FRAME_COUNT = 3600
 MAX_FRAME_PIXELS = 1920 * 1080
 MAX_AUDIO_SECONDS = 60
+
+
+def health():
+    """Decoder capability is independent from optional forensic checkpoints."""
+    try:
+        import cv2
+        import imageio_ffmpeg
+        ffmpeg = Path(imageio_ffmpeg.get_ffmpeg_exe())
+        ready = bool(cv2.__version__) and ffmpeg.is_file()
+        return {"status": "ready" if ready else "unavailable",
+                "decoder": "OpenCV VideoCapture", "opencv": cv2.__version__,
+                "ffmpeg": "ready" if ffmpeg.is_file() else "unavailable",
+                "limits": {"bytes": MAX_VIDEO_BYTES, "durationSeconds": MAX_DURATION_SECONDS,
+                           "frameCount": MAX_FRAME_COUNT, "sampledFrames": 6}}
+    except Exception as exc:
+        return {"status": "unavailable", "decoder": "OpenCV VideoCapture",
+                "ffmpeg": "unavailable", "reason": f"{type(exc).__name__}: media decoder dependency unavailable"}
+
+
+def screen_sampled_frame(jpg: str):
+    """Retain decoded-frame identity when optional classifiers are unavailable."""
+    from ai_service import app as image_app
+    raw = base64.b64decode(jpg, validate=True)
+    try:
+        return image_app.analyze_image(image_app.ImageRequest(image_base64=jpg))
+    except HTTPException as exc:
+        if exc.status_code != 503:
+            raise
+        with Image.open(io.BytesIO(raw)) as source:
+            image = source.convert("RGB")
+            trace = image_trace(raw, source, image)
+        return {"classification": "INCONCLUSIVE", "fake_probability": None,
+                "model_confidence": None, "model_status": "unavailable",
+                "model": image_app.MODEL_ID, "revision": image_app.MODEL_REVISION,
+                "scope": "general_ai_generated_image", "face_analysis": "not_performed",
+                "face_boxes": [], "signals": [], "inputTrace": trace,
+                "explanation": "Frame decoding succeeded; optional image and face models are unavailable, so no classifier score was produced.",
+                "processing_ms": 0}
 
 
 class VideoRequest(BaseModel):
@@ -196,9 +237,8 @@ def analyze_video(request: VideoRequest):
     duration, width, height, samples = decode_sampled_frames(raw)
     from ai_service.temporal_video import analyze_bytes
     temporal_diagnostics = analyze_bytes(raw,request.temporal_interval_seconds)
-    from ai_service import app as image_app
     frames = [{"timestampSeconds": timestamp, "quality": quality, "temporal": temporal,
-               "image": image_app.analyze_image(image_app.ImageRequest(image_base64=jpg))}
+               "image": screen_sampled_frame(jpg)}
               for timestamp, jpg, quality, temporal in samples]
     return {"scope": "server_decoded_frames", "sourceSha256":hashlib.sha256(raw).hexdigest(),"frames": frames, "temporalDiagnostics": temporal_diagnostics,
             "samplingNote": "Up to six JPEG frames chosen from nearby original-video positions; adjacent originals provide experimental Farneback motion measurements, not a manipulation verdict.",
