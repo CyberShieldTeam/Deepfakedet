@@ -1,8 +1,8 @@
 # VERITAS AI — Suraksha Suchan
 
-VERITAS is an investigation workspace for misinformation incidents. It helps an analyst examine suspicious media, research a claim, inspect how related posts spread, and connect the evidence in one case.
+VERITAS is a workspace for investigating misinformation. It helps analysts inspect suspicious media, research claims, examine related posts, and connect their evidence in one case.
 
-Most tools answer only one part of that problem: a detector scores a file, a fact-checker reviews a sentence, or a graph tool groups accounts. VERITAS keeps those findings separate until an analyst has reviewed them, then records exactly how they are connected. The result is an inspectable evidence trail—not a single “fake” score.
+An image detector cannot tell whether a caption is true. A fact-check does not show how posts spread. VERITAS connects those findings in one case while keeping the sources, uncertainty, and analyst decisions visible.
 
 [Run the local demo](#run-the-demo) · [Take the judge’s tour](#judges-quick-tour) · [Read the verification ledger](docs/FINAL_VERIFICATION.md) · [See known limitations](#limitations)
 
@@ -58,7 +58,9 @@ The diagram mirrors the current implementation: React and TypeScript in the brow
 
 ## Judge’s Quick Tour
 
-After setup, the complete authored workflow takes a few minutes:
+Start here if you're reviewing the project. The six steps below use the normal application and supplied fictional files, not a separate presentation screen. Setup instructions follow in [Run the demo](#run-the-demo).
+
+After setup:
 
 1. Start the demo and sign in with the ephemeral token printed in the terminal.
 2. Open **Media Forensics** and upload [`fixtures/submission/notice.png`](fixtures/submission/notice.png). Inspect the measurements and save the inconclusive result.
@@ -155,7 +157,7 @@ Static-only hosting and `npm run preview` do not serve the API. The historical `
 
 ## Testing and technical evidence
 
-Engineering tests and scientific evaluation answer different questions. A passing API or browser test shows that evidence moves through the system correctly; it does not establish detector accuracy.
+**Verified engineering:** the end-to-end investigation, evidence integrity across the API and reports, and error handling. **Not validated:** reliable real-world deepfake classification, automatic claim truth, or malicious-intent identification. Passing software tests do not establish model accuracy.
 
 ### Reproducibility and software verification
 
@@ -206,6 +208,8 @@ Optional live-model, OCR-runtime, and browser suites need their documented servi
 | **Not available or not claimed** | Validated universal deepfake detection, automatic truth verification, proof of malicious coordination, Hindi/Telugu OCR, speech/video transcription, public deployment, Docker deployment, or multiwriter storage |
 
 ## Limitations
+
+This section summarizes the most important limitations. Methods and results are linked above.
 
 - **Deepfake accuracy is not validated.** The media adapters expose measurements and research scores, not a dependable universal detector or calibrated authenticity probability.
 - **The NLI model failed validation.** Its suggestions cannot create an authoritative factual verdict. Human-reviewed source evidence remains decisive.
