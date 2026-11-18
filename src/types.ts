@@ -64,6 +64,13 @@ export interface AudioSpectralAnalysis {
 }
 
 export interface ForensicAnalysisResult {
+  geminiMediaAssessment?: {
+    status: "not_requested" | "not_configured" | "complete" | "input_limit" | "unsupported_duration" | "quota_exceeded" | "rate_limited" | "timeout" | "provider_error";
+    explanation: string;
+    observations: string[];
+    limitations: string[];
+    model: string | null;
+  };
   submittedMedia?:{sha256:string;byteLength:number;scope:'submitted_original_image_bytes'|'submitted_analysis_bytes';computedBy:'server'};
   analysis?:AnalysisDiagnostics;
   modality: "image" | "video" | "audio";

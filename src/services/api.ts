@@ -70,6 +70,7 @@ export const attachResult = (id: string, kind: "media" | "claim" | "campaign", r
   );
 export const analyzeMedia = (p: {
   modality: string;
+  geminiConsent?: boolean;
   fileName: string;
   mimeType: string;
   measurements: any;

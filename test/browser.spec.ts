@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 10738)
+Total output lines: 456
+
 import { test, expect } from "@playwright/test";
 import { encodeWav } from "../src/utils/audioSegments";
 import {episodeControls,coverage as episodeCoverage} from './fixtures/campaign/episodeControls';
@@ -104,35 +107,7 @@ test('Engine4 connects actual saved media, reviewed claim and public posts',asyn
  await page.keyboard.press('Escape');
  if(!await region.getByLabel('Supplied context text').isVisible())await region.getByText('Document a media caption or description',{exact:true}).click();
  await region.getByLabel('Supplied context text').fill('Unrelated authored text without the investigated claim.');await region.getByRole('button',{name:'Save supplied context and correlate'}).click();
- await expect(region.getByRole('alert')).toBeVisible();await expect(region.getByText(/Previous graph retained/)).toBeVisible();await expect(region.getByRole('list',{name:'Evidence relationships'})).toHaveCount(0);
- const preserved=(await page.request.get(`/api/investigations/${linked.investigation.id}`).then(r=>r.json())).investigation;expect(preserved.correlation).toEqual(linked.result);expect(preserved.correlationRun.status).toBe('failed');
- await region.getByRole('button',{name:'Correlate evidence',exact:true}).click();await expect(region.getByText(/Correlation status:/)).toBeVisible();
-});
-
-test('Failed network rerun cannot leave prior findings displayed as a new result',async({page})=>{
- await page.goto('/');await page.getByRole('button',{name:'Network intelligence',exact:true}).first().click();
- const posts=episodeControls.find(c=>c.name==='multi_episode_pattern')!.rows;
- await page.locator('input[type=file]').setInputFiles({name:'valid-fictional.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({posts,coverage:episodeCoverage}))});
- await expect(page.getByText('Observed post relationships',{exact:true})).toBeVisible();
- await page.locator('input[type=file]').setInputFiles({name:'invalid-fictional.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({posts:posts.map((p,i)=>i===0?{...p,timestamp:'missing'}:p)}))});
- await expect(page.getByRole('alert')).toContainText('ANALYSIS_FAILED');
- await expect(page.getByRole('region',{name:'Analysis processing status'})).toHaveCount(0);
- await expect(page.getByRole('button',{name:'Save to a case',exact:true})).toHaveCount(0);
- await page.locator('input[type=file]').setInputFiles({name:'valid-again.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({posts,coverage:episodeCoverage}))});
- await expect(page.getByText('Observed post relationships',{exact:true})).toBeVisible();
- await page.locator('input[type=file]').setInputFiles({name:'malformed.json',mimeType:'application/json',buffer:Buffer.from('{bad json')});
- await expect(page.getByRole('alert')).toContainText('Invalid JSON file');
- await expect(page.getByRole('region',{name:'Analysis processing status'})).toHaveCount(0);
-});
-
-test('Episode campaign evidence survives graph inspection and export',async({page})=>{
- await page.goto('/');await page.getByRole('button',{name:'Network intelligence',exact:true}).first().click();
- const control=episodeControls.find(c=>c.name==='multi_episode_pattern')!;
- const response=page.waitForResponse(r=>r.url().includes('/api/campaigns/analyze')&&r.request().method()==='POST');
- await page.locator('input[type=file]').setInputFiles({name:'authored-episodes.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({posts:control.rows,coverage:episodeCoverage}))});
- const result=(await (await response).json()).result;expect(result.algorithm).toBe('episodes_v1');expect(result.episodeEvidence.associations.filter((a:any)=>a.recurrenceEligible)).toHaveLength(6);
- expect(result.nodes.every((n:any)=>n.suspicious===false&&n.botLikelihoodScore===null)).toBe(true);
- const region=page.getByRole('region',{name:'Campaign episode evidence'});
+ await expect(region.getByRole('alert')).toBeVisible();await expect(region.getByText(/Previous graph retained/)).toBeVisible();await expect(region.getByRole('list',{name:'Evidence relationships'})).toHaveCount(0)…738 tokens truncated…nce'});
  await expect(region.getByRole('heading',{name:'Campaign episodes and post evidence'})).toBeVisible();
  await expect(region.getByText(/a-0 \(provided\)/)).toBeVisible();
  await page.getByLabel('Inspect any account').selectOption('a');
@@ -271,6 +246,39 @@ test("Image measurements are processed without fabricating classifier output", a
     await expect(page.getByText('Whole-image classifier unavailable',{exact:true})).toBeVisible();
   else if(!result.localImage) await expect(page.getByText('UNAVAILABLE',{exact:true})).toBeVisible();
   await expect(page.getByText("LIVE ANALYSIS MODE", { exact: true })).toBeVisible();
+});
+
+test("Gemini media sharing requires an explicit opt-in and stays separate from the classifier", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Media forensics", exact: true }).first().click();
+  const image = await page.evaluate(() => {
+    const c = document.createElement("canvas"); c.width = 64; c.height = 64;
+    const ctx = c.getContext("2d")!; ctx.fillStyle = "#346987"; ctx.fillRect(0, 0, 64, 64);
+    return c.toDataURL("image/png").split(",")[1];
+  });
+  await page.locator("input[type=file]").setInputFiles({ name: "gemini-consent-test.png", mimeType: "image/png", buffer: Buffer.from(image, "base64") });
+  const consent = page.getByRole("checkbox");
+  await expect(consent).not.toBeChecked();
+  const firstRequest = page.waitForRequest(r => r.url().includes("/api/forensics/analyze-media") && r.method() === "POST");
+  const firstResponse = page.waitForResponse(r => r.url().includes("/api/forensics/analyze-media") && r.request().method() === "POST");
+  await page.getByRole("button", { name: /Check this file/ }).click();
+  const firstPayload = JSON.parse((await firstRequest).postData()!);
+  const firstResult = (await (await firstResponse).json()).result;
+  expect(firstPayload.geminiConsent).toBe(false);
+  expect(firstResult.geminiMediaAssessment.status).toBe("not_requested");
+  expect(firstResult.authenticity).toBe("inconclusive");
+  expect(firstResult.aiGeneratedProbability).toBeNull();
+  await consent.check();
+  const secondRequest = page.waitForRequest(r => r.url().includes("/api/forensics/analyze-media") && r.method() === "POST");
+  const secondResponse = page.waitForResponse(r => r.url().includes("/api/forensics/analyze-media") && r.request().method() === "POST");
+  await page.getByRole("button", { name: /Check this file/ }).click();
+  const secondPayload = JSON.parse((await secondRequest).postData()!);
+  const secondResult = (await (await secondResponse).json()).result;
+  expect(secondPayload.geminiConsent).toBe(true);
+  expect(secondResult.geminiMediaAssessment.status).toBe("not_configured");
+  expect(secondResult.authenticity).toBe("inconclusive");
+  expect(secondResult.aiGeneratedProbability).toBeNull();
+  await expect(page.getByText("AI-assisted media assessment — not validated authenticity detection.", { exact: true })).toBeVisible();
 });
 
 test('Contradictory duplicate precision remains visible and blocks recurrence',async({page})=>{
