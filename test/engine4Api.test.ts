@@ -13,9 +13,12 @@ try{
  await api.patch(`/api/investigations/${inv.id}`).set(a).send({correlation:{state:'fake'}}).expect(400);
  const bytes=fs.readFileSync('test/fixtures/face/headshot_cc0.jpg');
  const media=(await api.post('/api/forensics/analyze-media').set(a).send({modality:'image',fileName:'CC0 software fixture.jpg',mimeType:'image/jpeg',mediaData:'data:image/jpeg;base64,'+bytes.toString('base64'),measurements:{elaScore:0}}).expect(200)).body.result;
- assert.equal(media.submittedMedia.sha256,createHash('sha256').update(bytes).digest('hex'));assert.equal(media.submittedMedia.computedBy,'server');assert.equal(media.aiGeneratedProbability,null);assert.equal(media.authenticity,'inconclusive');assert.equal(media.geminiMediaAssessment.status,'not_requested');
+ assert.equal(media.submittedMedia.sha256,createHash('sha256').update(bytes).digest('hex'));assert.equal(media.submittedMedia.computedBy,'server');assert.equal(media.aiGeneratedProbability,null);assert.equal(media.authenticity,'inconclusive');assert.equal(media.geminiMediaAssessment.status,'not_requested');assert.equal(media.geminiMediaAssessment.additionalInvestigation.required,null);
  const optedIn=(await api.post('/api/forensics/analyze-media').set(a).send({modality:'image',fileName:'CC0 software fixture.jpg',mimeType:'image/jpeg',geminiConsent:true,mediaData:'data:image/jpeg;base64,'+bytes.toString('base64'),measurements:{elaScore:0}}).expect(200)).body.result;
  assert.equal(optedIn.geminiMediaAssessment.status,'not_configured');assert.equal(optedIn.aiGeneratedProbability,null);assert.equal(optedIn.authenticity,'inconclusive');
+ const videoBytes=Buffer.from('0000ftypisom','ascii');
+ const video=(await api.post('/api/forensics/analyze-media').set(a).send({modality:'video',fileName:'short-clip.mp4',mimeType:'video/mp4',geminiConsent:true,mediaData:'data:video/mp4;base64,'+videoBytes.toString('base64'),keyframes:['data:image/jpeg;base64,'+bytes.toString('base64')],frameTimes:[0],measurements:{duration:5,framesSampled:1}}).expect(200)).body.result;
+ assert.equal(video.geminiMediaAssessment.status,'not_configured');assert.equal(video.aiGeneratedProbability,null);assert.equal(video.authenticity,'inconclusive');
  const text='Software fixture: the fictional museum opens at nine.';
  const claim=(await api.post('/api/claims/verify').set(a).send({claimText:text}).expect(200)).body.result;
  const posts=episodeControls.find(c=>c.name==='multi_episode_pattern')!.rows.map(r=>({...r,content:text}));

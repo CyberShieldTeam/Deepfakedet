@@ -19,10 +19,11 @@ assert.equal(prepareGeminiMedia({ modality: "video", measurements: { duration: 3
 assert.equal(prepareGeminiMedia({ modality: "audio", measurements: {}, mediaData: frame }).status, "unsupported_media");
 assert.equal(prepareGeminiMedia({ modality: "video", measurements: { duration: 1 }, keyframes: ["data:image/jpeg;base64," + "A".repeat(9 * 1024 * 1024)] }).status, "input_limit");
 
-assert.deepEqual(parseGeminiMediaResponse(JSON.stringify({ explanation: "Visible scene details.", observations: ["A sign appears in the frame."], limitations: ["A still image cannot establish provenance."] })), {
-  explanation: "Visible scene details.", observations: ["A sign appears in the frame."], limitations: ["A still image cannot establish provenance."],
+assert.deepEqual(parseGeminiMediaResponse(JSON.stringify({ explanation: "Visible scene details.", observations: ["A sign appears in the frame."], alternativeExplanations: ["The blur may be motion blur."], additionalInvestigation: { required: true, rationale: "Review the original resolution." }, limitations: ["A still image cannot establish provenance."] })), {
+  explanation: "Visible scene details.", observations: ["A sign appears in the frame."], alternativeExplanations: ["The blur may be motion blur."], additionalInvestigation: { required: true, rationale: "Review the original resolution." }, limitations: ["A still image cannot establish provenance."],
 });
 assert.equal(parseGeminiMediaResponse('{"verdict":"real","probability":0.99}'), null);
+assert.equal(parseGeminiMediaResponse(JSON.stringify({ explanation: "A visible sign.", observations: [], alternativeExplanations: [], additionalInvestigation: { required: false, rationale: "None indicated." }, limitations: [], probability: 0.99 })), null);
 assert.equal(parseGeminiMediaResponse("not json"), null);
 assert.equal(notRequestedGeminiAssessment().status, "not_requested");
 assert.equal(geminiMediaFailure("quota_exceeded").status, "quota_exceeded");

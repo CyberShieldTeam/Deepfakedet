@@ -10,6 +10,8 @@ export type GeminiMediaAssessment = {
   status: "not_requested" | "not_configured" | "complete" | "input_limit" | "unsupported_duration" | "quota_exceeded" | "rate_limited" | "timeout" | "provider_error";
   explanation: string;
   observations: string[];
+  alternativeExplanations: string[];
+  additionalInvestigation: { required: boolean | null; rationale: string };
   limitations: string[];
   model: string | null;
 };
@@ -23,12 +25,14 @@ export function geminiMediaFailure(kind: "quota_exceeded" | "rate_limited" | "ov
     : status === "rate_limited" ? "Gemini could not assess this media because the provider is rate limiting requests."
     : status === "timeout" ? "Gemini media assessment timed out."
     : "Gemini media assessment is temporarily unavailable due to a provider error.";
-  return { status, explanation, observations: [] as string[], limitations: ["No Gemini observations were returned; the existing classifier and forensic measurements are unchanged."], model: null };
+  return { status, explanation, observations: [], alternativeExplanations: [], additionalInvestigation: { required: null, rationale: "Gemini did not complete a visual assessment; analyst follow-up remains unassessed." }, limitations: ["No Gemini observations were returned; the existing classifier and forensic measurements are unchanged."], model: null };
 }
 
 const responseSchema = z.object({
   explanation: z.string().trim().min(1).max(1200),
   observations: z.array(z.string().trim().min(1).max(300)).max(8),
+  alternativeExplanations: z.array(z.string().trim().min(1).max(300)).max(6),
+  additionalInvestigation: z.object({ required: z.boolean(), rationale: z.string().trim().min(1).max(500) }).strict(),
   limitations: z.array(z.string().trim().min(1).max(300)).max(8),
 }).strict();
 
@@ -90,6 +94,8 @@ export const notRequestedGeminiAssessment = (): GeminiMediaAssessment => ({
   status: "not_requested",
   explanation: "No media was sent to Gemini because optional sharing consent was not selected.",
   observations: [],
+  alternativeExplanations: [],
+  additionalInvestigation: { required: null, rationale: "Gemini was not requested; analyst follow-up was not assessed." },
   limitations: ["This optional assessment was not requested."],
   model: null,
 });

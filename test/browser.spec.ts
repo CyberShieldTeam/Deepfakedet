@@ -304,6 +304,7 @@ test("Gemini media sharing requires an explicit opt-in and stays separate from t
   expect(secondResult.authenticity).toBe("inconclusive");
   expect(secondResult.aiGeneratedProbability).toBeNull();
   await expect(page.getByText("AI-assisted media assessment — not validated authenticity detection.", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Additional investigation: Not assessed/)).toBeVisible();
 });
 
 test('Contradictory duplicate precision remains visible and blocks recurrence',async({page})=>{
