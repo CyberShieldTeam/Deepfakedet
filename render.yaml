@@ -1,0 +1,59 @@
+services:
+  - type: web
+    name: veritas-media-free
+    runtime: docker
+    plan: free
+    branch: codex/free-public-cloud-deployment
+    dockerfilePath: deploy/Dockerfile.media
+    healthCheckPath: /health
+    envVars:
+      - key: VERITAS_SERVICE_PUBLIC
+        value: "1"
+      - key: VERITAS_AI_SERVICE_TOKEN
+        generateValue: true
+      - key: OMP_NUM_THREADS
+        value: "1"
+      - key: OPENBLAS_NUM_THREADS
+        value: "1"
+  - type: web
+    name: veritas-api-free
+    runtime: docker
+    plan: free
+    branch: codex/free-public-cloud-deployment
+    dockerfilePath: deploy/Dockerfile.backend
+    healthCheckPath: /api/health
+    envVars:
+      - key: VERITAS_PUBLIC_GUESTS
+        value: "1"
+      - key: VERITAS_CLOUD_PROFILE
+        value: free
+      - key: VERITAS_PUBLIC_ORIGIN
+        sync: false
+      - key: VERITAS_AI_SERVICE_URL
+        fromService:
+          type: web
+          name: veritas-media-free
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: VERITAS_AI_SERVICE_TOKEN
+        fromService:
+          type: web
+          name: veritas-media-free
+          envVarKey: VERITAS_AI_SERVICE_TOKEN
+      - key: VERITAS_STORE
+        value: /tmp/veritas-public/investigations.json
+      - key: VERITAS_TRUST_PROXY
+        value: "1"
+      - key: VERITAS_WIKIPEDIA_ENABLED
+        value: "1"
+      - key: VERITAS_WIKIPEDIA_LANGUAGE
+        value: en
+      - key: VERITAS_DEMO_FEED
+        value: "false"
+      - key: VERITAS_AUTHORED_DEMO
+        value: "0"
+      - key: VERITAS_NLI_ENABLED
+        value: "0"
+      - key: VERITAS_RERANKER_ENABLED
+        value: "0"
+      - key: VERITAS_WORKER_MEMORY_MB
+        value: "128"

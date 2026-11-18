@@ -10,11 +10,20 @@ export const correlateInvestigation=(id:string,contexts?:MediaContextInput[])=>p
 export const extractionRequest=(id:string,action:string,body:unknown)=>post<{investigation:Investigation}>(`/api/investigations/${encodeURIComponent(id)}/${action}`,body);
 
 async function req<T>(url: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(url, {
+  let res = await fetch(url, {
     headers: { "Content-Type": "application/json" },
     signal: AbortSignal.timeout(180000),
     ...init,
   });
+  if(res.status===401){
+    const health=await fetch('/api/health').then(r=>r.json()).catch(()=>null);
+    if(health?.publicGuests){
+      guestBootstrap??=fetch('/api/guest/session',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}).then(r=>{if(!r.ok)throw new Error('Public session unavailable; please retry shortly')}).finally(()=>{guestBootstrap=undefined});
+      await guestBootstrap;
+      res=await fetch(url,{headers:{'Content-Type':'application/json'},signal:AbortSignal.timeout(180000),...init});
+    }
+  }
+  if(!res.headers.get('content-type')?.includes('application/json'))throw new Error('The analysis service is starting or unavailable. Wait about one minute and retry; no analysis result was produced.');
   const data = await res.json().catch(() => ({}));
   if (res.status === 401) window.dispatchEvent(new Event("veritas:auth-required"));
   if (!res.ok) {
@@ -23,10 +32,14 @@ async function req<T>(url: string, init?: RequestInit): Promise<T> {
   }
   return data as T;
 }
+let guestBootstrap:Promise<void>|undefined;
 const post = <T>(url: string, body: any) =>
   req<T>(url, { method: "POST", body: JSON.stringify(body) });
 
 export interface Health {
+  publicGuests?:boolean;
+  storage?:string;
+  cloudProfile?:string|null;
   authoredDemonstration?: boolean;
   status: string;
   authenticationMode: string;

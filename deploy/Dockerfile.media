@@ -1,0 +1,12 @@
+FROM python:3.13-slim-bookworm
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 && rm -rf /var/lib/apt/lists/*
+COPY ai_service/requirements-cloud.txt ./requirements-cloud.txt
+RUN pip install --no-cache-dir -r requirements-cloud.txt
+COPY ai_service ./ai_service
+# Explicit, small, pinned MIT face-region detector only. No Torch/classifier weights.
+RUN python -m ai_service.download_yunet
+ENV VERITAS_IMAGE_MODEL_ENABLED=0 VERITAS_FACE_MODEL_ENABLED=0 VERITAS_AUDIO_MODEL_ENABLED=0 PYTHONUNBUFFERED=1
+RUN useradd --create-home veritas
+USER veritas
+CMD ["sh", "-c", "exec uvicorn ai_service.app:app --host 0.0.0.0 --port ${PORT:-8001}"]

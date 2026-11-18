@@ -11,7 +11,7 @@ export function runCorrelation(input:CorrelationProjection,contexts:MediaContext
  return new Promise((resolve,reject)=>{
   let worker:Worker;
   const env=Object.fromEntries(Object.entries(process.env).filter(([key])=>/^(PATH|PATHEXT|SYSTEMROOT|WINDIR|TEMP|TMP|LOCALAPPDATA|APPDATA|HOME|USERPROFILE)$/i.test(key)));
-  try{worker=new Worker(new URL('./correlationWorker.mjs',import.meta.url),{workerData:{input,contexts},env,execArgv:['--import','tsx'],resourceLimits:{maxOldGenerationSizeMb:512,maxYoungGenerationSizeMb:32,stackSizeMb:4}});}
+  try{worker=new Worker(new URL('./correlationWorker.mjs',import.meta.url),{workerData:{input,contexts},env,execArgv:['--import','tsx'],resourceLimits:{maxOldGenerationSizeMb:process.env.VERITAS_WORKER_MEMORY_MB==='128'?128:512,maxYoungGenerationSizeMb:32,stackSizeMb:4}});}
   catch{active=false;reject(new CorrelationError('Correlation worker unavailable.',503,'CORRELATION_UNAVAILABLE'));return;}
   let done=false;
   const finish=async(error?:Error,result?:CorrelationResult)=>{if(done)return;done=true;clearTimeout(timer);signal?.removeEventListener('abort',abort);await worker.terminate();active=false;if(error)reject(error);else resolve(result!);};

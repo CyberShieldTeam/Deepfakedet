@@ -4,7 +4,7 @@ export async function callImageEvidence(data: string, endpoint: string, fetcher:
   const match = /^data:image\/(?:png|jpeg|webp);base64,([A-Za-z0-9+/=]+)$/.exec(data);
   if (!match || match[1].length > 4 * Math.ceil(10 * 1024 * 1024 / 3)) throw new Error('Unsupported or oversized image evidence input');
   const response = await fetcher(`${endpoint.replace(/\/$/, '')}/v1/image/evidence`, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    method: 'POST', headers: pythonServiceHeaders(),
     body: JSON.stringify({ image_base64: match[1] }), signal: AbortSignal.timeout(20_000), redirect: 'error'
   });
   if (!response.ok) throw new Error('Image evidence service unavailable');
@@ -38,3 +38,4 @@ export async function callImageEvidence(data: string, endpoint: string, fetcher:
   }
   return value;
 }
+import {pythonServiceHeaders} from './pythonService';

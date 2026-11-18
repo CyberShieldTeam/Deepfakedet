@@ -17,6 +17,8 @@
     "test:advanced-claims": "tsx test/advancedClaim.test.ts && tsx test/claimReranking.test.ts",
     "docs:check": "node scripts/check-docs.mjs",
     "build": "vite build",
+    "build:vercel": "node scripts/build-vercel.mjs",
+    "test:guest": "tsx test/guestAccess.test.ts && node test/cloudOutput.test.mjs",
     "preview": "vite preview",
     "format": "oxfmt",
     "lint": "tsc --noEmit",

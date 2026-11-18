@@ -1,6 +1,7 @@
 import type { ForensicAnalysisResult } from '../src/types';
 import {createHash} from 'node:crypto';
 import {audioTraceSchema} from './mediaTrace';
+import {pythonServiceHeaders} from './pythonService';
 
 export interface LocalAudioResponse {
   inputTrace?:import('../src/mediaTraceTypes').AudioInputTrace;
@@ -20,7 +21,7 @@ export async function callLocalAudio(mediaData: string, endpoint: string, fetche
   const match = /^data:audio\/[\w.+-]+;base64,([A-Za-z0-9+/=]+)$/.exec(mediaData);
   if (!match || match[1].length > 17_000_000) throw new Error('Unsupported or oversized audio data');
   const response = await fetcher(`${endpoint.replace(/\/$/, '')}/v1/audio/analyze`, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    method: 'POST', headers: pythonServiceHeaders(), redirect:'error',
     body: JSON.stringify({ audio_base64: match[1] }), signal: AbortSignal.timeout(60_000)
   });
   if (!response.ok) throw new Error(`Local audio service returned HTTP ${response.status}`);

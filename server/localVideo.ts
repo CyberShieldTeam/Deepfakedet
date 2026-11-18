@@ -1,6 +1,7 @@
 import type { ForensicAnalysisResult } from '../src/types';
 import {createHash} from 'node:crypto';
 import {imageTraceSchema,audioTraceSchema} from './mediaTrace';
+import {pythonServiceHeaders} from './pythonService';
 import { callLocalImage, type LocalImageResponse } from './localImage';
 import type { LocalAudioResponse } from './localAudio';
 import { computeFaceContinuity, type FaceContinuity } from './videoFaces';
@@ -83,7 +84,7 @@ export async function callLocalVideo(mediaData: string, endpoint: string, fetche
   if (!match || match[1].length > 4 * Math.ceil(8 * 1024 * 1024 / 3))
     throw new Error('Unsupported or oversized original video');
   const response = await fetcher(`${endpoint.replace(/\/$/, '')}/v1/video/analyze`, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    method: 'POST', headers: pythonServiceHeaders(), redirect:'error',
     body: JSON.stringify({ video_base64: match[1], temporal_interval_seconds:interval }), signal: AbortSignal.timeout(120_000)
   });
   if (!response.ok) throw new Error(`Local video service returned HTTP ${response.status}`);

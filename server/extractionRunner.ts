@@ -73,7 +73,8 @@ export async function runExtraction(
   try {
     const response = await fetch(new URL("/v1/extraction/image/prepare", endpoint), {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: pythonServiceHeaders(),
+      redirect:'error',
       body: JSON.stringify({ image_base64: encoded, profile }),
       signal: controller.signal,
     });
@@ -267,3 +268,4 @@ export async function runExtraction(
     active = false;
   }
 }
+import {pythonServiceHeaders} from './pythonService';

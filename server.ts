@@ -32,7 +32,7 @@ import {canonicalUrl,projectInvestigation,correlationFingerprint,correlationHash
 import {runCorrelation,CorrelationError} from './server/correlationRunner';
 import {installExtractionRoutes} from './server/extractionRoutes';
 import type {MediaContext} from './src/correlationTypes';
-import { createServer as createViteServer } from "vite";
+import type { ViteDevServer } from "vite";
 import path from "path";
 import fs from "fs";
 import crypto from "crypto";
@@ -306,7 +306,6 @@ const fallbackNote = (kind: string) =>
 export const app = express();
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 if (!Number.isInteger(PORT) || PORT < 1 || PORT > 65535) throw new Error('PORT must be an integer from 1 to 65535');
-app.use(express.json({ limit: "36mb" }));
 installSecurity(app);
 
 // ---------------------------------------------------------------- Local JSON persistence
@@ -364,11 +363,12 @@ const repository = new AtomicRepository<Investigation[]>(
       .parse(value) as Investigation[],
 );
 let investigations = repository.read(() =>
-  INITIAL_INVESTIGATIONS.map(sanitizeSeed).map((i) => ({ ...i, ownerId: "local-analyst" })),
+  process.env.VERITAS_PUBLIC_GUESTS==='1' ? [] : INITIAL_INVESTIGATIONS.map(sanitizeSeed).map((i) => ({ ...i, ownerId: "local-analyst" })),
 );
 let committed = structuredClone(investigations);
 function persist() {
   try {
+    if(process.env.VERITAS_PUBLIC_GUESTS==='1' && Buffer.byteLength(JSON.stringify(investigations))>8*1024*1024) throw new Error('Public temporary store capacity reached; export reports');
     repository.write(investigations);
     committed = structuredClone(investigations);
   } catch (error) {
@@ -703,8 +703,11 @@ function parseJSON(text: string): any | null {
 app.get("/api/health", (_req, res) => {
   res.json({
     authoredDemonstration: process.env.VERITAS_AUTHORED_DEMO === '1',
+    publicGuests: process.env.VERITAS_PUBLIC_GUESTS==='1',
+    cloudProfile: process.env.VERITAS_CLOUD_PROFILE || null,
+    storage: process.env.VERITAS_PUBLIC_GUESTS==='1' ? 'temporary; lost on service restart; export reports' : 'operator-managed',
     authenticationMode:
-      process.env.NODE_ENV === "production" ||
+      process.env.VERITAS_PUBLIC_GUESTS==='1' ? 'public-isolated-guest' : process.env.NODE_ENV === "production" ||
       Object.keys(JSON.parse(process.env.VERITAS_USERS || "{}")).length
         ? "required"
         : "development-single-analyst",
@@ -728,7 +731,7 @@ app.get("/api/health", (_req, res) => {
         }
       : null,
     activeInvestigations: investigations.filter(visible).length,
-    streamClients: clients.size,
+    streamClients: process.env.VERITAS_PUBLIC_GUESTS==='1' ? [...clients.values()].filter(id=>id===owner()).length : clients.size,
     timestamp: new Date().toISOString(),
   });
 });
@@ -774,6 +777,7 @@ app.get("/api/investigations/:id", (req, res) => {
 });
 
 app.post("/api/investigations", validate(caseCreate), (req, res) => {
+  if(owner().startsWith('guest:') && (investigations.filter(i=>i.ownerId===owner()).length>=10 || investigations.filter(i=>i.ownerId?.startsWith('guest:')).length>=500)) return void res.status(429).json({error:'Temporary investigation limit reached; export existing reports'});
   const { title, targetSubject, modality, description, analyst, tags, riskLevel } = req.body || {};
   if (!title || typeof title !== "string")
     return res.status(400).json({ error: "title is required" });
@@ -1130,8 +1134,9 @@ app.use(errorHandler);
 
 // ---------------------------------------------------------------- Vite / static
 async function start() {
-  let vite: Awaited<ReturnType<typeof createViteServer>> | undefined;
+  let vite: ViteDevServer | undefined;
   if (process.env.NODE_ENV !== "production") {
+    const {createServer:createViteServer}=await import('vite');
     vite = await createViteServer({ server: { middlewareMode: true }, appType: "spa" });
     app.use(vite.middlewares);
   } else {

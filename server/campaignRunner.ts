@@ -18,7 +18,8 @@ export function runCampaign(job:CampaignJob,signal?:AbortSignal,timeoutMs=20000)
   return new Promise((resolve,reject)=>{
     // The worker does not inherit provider credentials, auth or investigation paths.
     const env=Object.fromEntries(Object.entries(process.env).filter(([key])=>/^(PATH|PATHEXT|SYSTEMROOT|WINDIR|TEMP|TMP|LOCALAPPDATA|APPDATA|HOME|USERPROFILE)$/i.test(key)));
-    const child=spawn(process.execPath,['--max-old-space-size=768','--import','tsx',fileURLToPath(new URL('./campaignWorker.ts',import.meta.url))],{stdio:['pipe','pipe','pipe'],windowsHide:true,env});
+    const heap=process.env.VERITAS_WORKER_MEMORY_MB==='128'?128:768;
+    const child=spawn(process.execPath,[`--max-old-space-size=${heap}`,'--import','tsx',fileURLToPath(new URL('./campaignWorker.ts',import.meta.url))],{stdio:['pipe','pipe','pipe'],windowsHide:true,env});
     let output='',bytes=0,settled=false,failure:CampaignRunError|undefined;
     const fail=(error:CampaignRunError)=>{
       failure??=error;

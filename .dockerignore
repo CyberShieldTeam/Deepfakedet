@@ -1,0 +1,15 @@
+.git
+node_modules
+dist
+.vercel
+.model-cache
+.venv*
+data
+reports
+test-results
+playwright-report
+**/.env*
+ai_service/models
+**/__pycache__
+**/*.pyc
+*.zip

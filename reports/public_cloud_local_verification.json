@@ -1,0 +1,35 @@
+{
+  "scope": "Fresh isolated guest browser with real retrieval, processing and algorithm execution; procedural controls are not detector accuracy evaluation",
+  "deployed": false,
+  "result": "passed",
+  "checks": [
+    "fresh visitor, automatic session, no login, live dashboard",
+    "image upload: actual available processing, explicit classifier unavailable",
+    "audio upload: actual available processing, explicit classifier unavailable",
+    "video upload: actual available processing, explicit classifier unavailable",
+    "real Wikipedia/BM25/citations; no automatic truth verdict",
+    "actual network worker, temporal episodes, save",
+    "Engine4 graph/timeline and rendered report; API/store agreement",
+    "second visitor cannot read first visitor cases or report"
+  ],
+  "errors": [],
+  "nodeHeapLimitMiB": 192,
+  "observedFinalNodeRssBytes": 226893824,
+  "observedPythonPeakWindowsWorkingSetBytes": 150126592,
+  "tests": {
+    "pythonCollected": 142,
+    "engine4": "passed",
+    "guestIsolation": "passed",
+    "nodeApi": "passed",
+    "pythonSkipped": 2,
+    "pythonExecutedPassed": 140,
+    "engine3": "passed"
+  },
+  "limitations": [
+    "No Linux container build or live cloud verification",
+    "Vercel team authorization pending",
+    "Render tools/credential unavailable",
+    "Trained local models not supported by free profile",
+    "Temporary session-bound JSON storage"
+  ]
+}

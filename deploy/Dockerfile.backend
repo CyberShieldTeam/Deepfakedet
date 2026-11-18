@@ -1,0 +1,11 @@
+FROM node:24-bookworm-slim
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --include=dev
+COPY . .
+RUN node --import tsx scripts/download-ocr.mjs
+ENV VITE_PUBLIC_GUEST_MODE=1
+RUN npm run build
+ENV NODE_ENV=production VERITAS_HOST=0.0.0.0
+USER node
+CMD ["node", "--max-old-space-size=192", "--import", "tsx", "server.ts"]

@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import { AsyncLocalStorage } from "node:async_hooks";
 import type { Express, RequestHandler, ErrorRequestHandler } from "express";
+import {json as jsonBody} from 'express';
 import { z } from "zod";
 import {engineForPath,failedDiagnostic,logAnalysis} from './analysisDiagnostics';
 
@@ -212,14 +213,18 @@ export const validate =
 
 export function installSecurity(app: Express) {
   const production = process.env.NODE_ENV === "production";
+  const publicGuests = process.env.VERITAS_PUBLIC_GUESTS === '1';
+  const parseJson=jsonBody({limit:publicGuests?'12mb':'36mb'});
+  if (publicGuests && !process.env.VERITAS_PUBLIC_ORIGIN) throw new Error('Public guests require an exact VERITAS_PUBLIC_ORIGIN');
   const users: Record<string, string> = JSON.parse(process.env.VERITAS_USERS || "{}");
   if (Object.entries(users).some(([token, id]) => token.length < 32 || !id.trim()))
     throw new Error(
       "VERITAS_USERS requires tokens of at least 32 characters mapped to nonempty owner IDs",
     );
-  const sessions = new Map<string, { ownerId: string; expires: number }>();
+  const sessions = new Map<string, { ownerId: string; expires: number; guest?: boolean }>();
   const limits = new Map<string, { count: number; until: number }>();
   app.disable("x-powered-by");
+  if (process.env.VERITAS_TRUST_PROXY === '1') app.set('trust proxy', 1);
   app.use("/api", (req, res, next) => {
     const requestId = crypto.randomUUID();
     res.set({
@@ -253,7 +258,8 @@ export function installSecurity(app: Express) {
     if (req.method !== "GET") {
       const key = req.ip || "unknown",
         now = Date.now();
-      if (limits.size > 10000) for (const [k, v] of limits) if (v.until < now) limits.delete(k);
+      if (limits.size >= (publicGuests?2000:10000)) for (const [k, v] of limits) if (v.until < now) limits.delete(k);
+      if (publicGuests && limits.size >= 2000 && !limits.has(key)) return void res.status(503).json({error:'Public request capacity reached'});
       let bucket = limits.get(key);
       if (!bucket || bucket.until < now)
         limits.set(key, (bucket = { count: 0, until: now + 60000 }));
@@ -265,7 +271,19 @@ export function installSecurity(app: Express) {
     }
     next();
   });
-  app.post("/api/session", validate(z.object({ token: text(512) }).strict()), (req, res) => {
+  app.post('/api/guest/session', (req,res) => {
+    if (!publicGuests) return void res.status(404).json({error:'Public guest access is not enabled'});
+    if (req.headers.origin !== process.env.VERITAS_PUBLIC_ORIGIN) return void res.status(403).json({error:'Guest session origin rejected'});
+    for (const [id,s] of sessions) if (s.expires < Date.now()) sessions.delete(id);
+    const existing=/(?:^|;\s*)veritas_session=([^;]+)/.exec(req.headers.cookie||'')?.[1];
+    if (existing && sessions.get(existing)?.guest) return void res.json({authenticated:true,guest:true});
+    if (sessions.size>=500) return void res.status(503).json({error:'Guest capacity reached; retry later'});
+    const id=crypto.randomBytes(32).toString('hex');
+    sessions.set(id,{ownerId:'guest:'+crypto.randomUUID(),guest:true,expires:Date.now()+8*3600000});
+    res.cookie('veritas_session',id,{httpOnly:true,sameSite:'strict',secure:production,maxAge:8*3600000,path:'/api'});
+    res.json({authenticated:true,guest:true});
+  });
+  app.post("/api/session", jsonBody({limit:'2kb'}), validate(z.object({ token: text(512) }).strict()), (req, res) => {
     const digest = (value: string) => crypto.createHash("sha256").update(value).digest();
     const match = Object.entries(users).find(([token]) =>
       crypto.timingSafeEqual(digest(token), digest(req.body.token)),
@@ -302,11 +320,26 @@ export function installSecurity(app: Express) {
       : undefined;
     const ownerId = session && session.expires > Date.now() ? session.ownerId : match?.[1];
     if (req.path === "/health") return context.run({ ownerId: ownerId || "anonymous" }, next);
-    if (ownerId) return context.run({ ownerId }, next);
+    if (ownerId) {
+      if (session?.guest && (req.path.startsWith('/demo') || req.path.startsWith('/admin'))) return void res.status(403).json({error:'Not available to public guests'});
+      return context.run({ ownerId }, next);
+    }
     if (!production && !Object.keys(users).length)
       return context.run({ ownerId: "local-analyst" }, next);
     res.status(401).json({ error: "Analyst authentication required", code: "AUTH_REQUIRED" });
   });
+  let activePublicJob=false;
+  let publicWindowUntil=0,publicJobs=0;
+  app.use('/api',(req,res,next)=>{
+    if (!publicGuests || !owner().startsWith('guest:') || req.method!=='POST' || !/analyze|verify|correlate|extract/.test(req.path)) return next();
+    if(activePublicJob)return void res.status(429).set('Retry-After','10').json({error:'Public analysis is busy; retry in ten seconds'});
+    const now=Date.now();if(now>=publicWindowUntil){publicWindowUntil=now+60000;publicJobs=0;}
+    if(++publicJobs>20)return void res.status(429).set('Retry-After','60').json({error:'Public analysis quota reached; retry in one minute'});
+    activePublicJob=true;let released=false;const release=()=>{if(!released){released=true;activePublicJob=false}};
+    res.once('finish',release);res.once('close',release);next();
+  });
+  // Rate, identity and job admission run before decoding large visitor JSON bodies.
+  app.use('/api',parseJson);
 }
 
 export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
