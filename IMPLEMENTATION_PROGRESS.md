@@ -1,5 +1,20 @@
 # VERITAS AI implementation progress
 
+## Public cloud guest deployment profile — 2026-11-18
+
+Deployment work is isolated on `codex/free-public-cloud-deployment`, based on reviewed
+teammate commit99493f4 (unmerged PR6, including the three newer paired-frame commits). No private case/credential or existing checkout
+was overwritten. Implemented bounded browser guest sessions with owner/receipt/CSRF
+protection, public-stage/storage warnings, lean protected Python service packaging,
+free-only Render services and Vercel Build Output API routing. No threshold/model verdict
+changed; free-host trained classifier/NLI/reranker/embedding limitations are explicit.
+Actual local two-visitor browser processing, case/graph/report and isolation checks pass.
+Linux CI also built and exercised both containers under separate512MiB limits, including
+protected image/video measurements and guest case APIs; no OOM. The missing lean SciPy
+dependency found by actual processing was added. Full CI Python:140passes/3setup skips.
+Cloud deployment remains **unverified**, blocked on Vercel team authorization and Render
+provisioning. Full setup/results/limits: [free public deployment](docs/FREE_PUBLIC_DEPLOYMENT.md).
+
 ## Engine 1 multimodal evaluation and evidence continuity — 2026-11-17
 
 Starting clean/synchronized0a8fb07 on codex/integrate-figma-upgrade. User-approved bounded

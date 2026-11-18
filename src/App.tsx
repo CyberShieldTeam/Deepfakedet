@@ -81,7 +81,7 @@ const NAV: { id: Tab; label: string; icon: React.ElementType; group: string }[] 
 
 export default function App() {
   const [tab, setTab] = useState<Tab>("dashboard");
-  const [mode, setMode] = useState<"live" | "demo">("demo");
+  const [mode, setMode] = useState<"live" | "demo">(import.meta.env.VITE_PUBLIC_GUEST_MODE==='1'?'live':'demo');
   const [cases, setCases] = useState<Investigation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [health, setHealth] = useState<Health | null>(null);
@@ -121,7 +121,7 @@ export default function App() {
       .catch((e) => setError(e.message));
     const poll = () =>
       fetchHealth()
-        .then(setHealth)
+        .then(h=>{setHealth(h);if(h.publicGuests)setMode('live')})
         .catch(() => setHealth(null));
     poll();
     const timer = setInterval(poll, 15000);
@@ -303,7 +303,7 @@ export default function App() {
               <span className="text-slate-300">{current.label}</span>
             </div>
             <div className="hidden items-center rounded-lg border border-slate-700/60 bg-slate-950/40 p-1 sm:flex">
-              {(["live", "demo"] as const).map((m) => (
+              {(["live", "demo"] as const).filter(m=>!health?.publicGuests||m==='live').map((m) => (
                 <button
                   key={m}
                   onClick={() => changeMode(m)}
@@ -351,6 +351,7 @@ export default function App() {
           </div>
         </header>
         <main id="main" className="mx-auto w-full max-w-[1600px] flex-1 px-5 py-6 lg:px-8 lg:py-7">
+          {health?.publicGuests && <p role="note" className="mb-4 rounded border border-amber-700 p-3 text-sm text-amber-200">Public guest workspace. Cases belong only to this browser session. Storage is temporary and can disappear on restart; download reports to keep them. {health.cloudProfile==='free'?'Local audio/image classifiers, NLI, reranking and semantic embeddings are unavailable on this free-host profile. Browser measurements and configured source retrieval remain available.':'Check individual analysis stages for actual model availability.'}</p>}
           <div
             className={`mb-6 flex flex-wrap items-center justify-between gap-2 rounded-lg border px-3.5 py-2 text-[10px] ${mode === "demo" ? "border-violet-400/15 bg-violet-400/5 text-violet-200/80" : "border-cyan-500/15 bg-cyan-400/5 text-cyan-200/80"}`}
           >
@@ -366,6 +367,7 @@ export default function App() {
             </span>
             <button
               onClick={() => changeMode(mode === "demo" ? "live" : "demo")}
+              hidden={health?.publicGuests}
               className="text-[10px] underline decoration-slate-600 underline-offset-4"
             >
               Switch to {mode === "demo" ? "live analysis" : "demonstration"}

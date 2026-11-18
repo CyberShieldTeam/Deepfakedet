@@ -1,0 +1,68 @@
+name: Verify free cloud containers
+on:
+  pull_request:
+    paths:
+      - 'deploy/**'
+      - 'render.yaml'
+      - 'ai_service/**'
+      - 'server/**'
+      - 'server.ts'
+      - 'package*.json'
+      - '.dockerignore'
+      - '.github/workflows/cloud-profile.yml'
+permissions:
+  contents: read
+concurrency:
+  group: cloud-profile-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  containers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build actual lean images
+        run: |
+          docker build -t veritas-media-check -f deploy/Dockerfile.media .
+          docker build -t veritas-api-check -f deploy/Dockerfile.backend .
+      - name: Check startup and service boundary under free memory limits
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Disposable software-control credential, never a production secret.
+          export SERVICE_TOKEN=$(openssl rand -hex 32)
+          docker network create veritas-check
+          docker run -d --name media --network veritas-check --memory=512m --memory-swap=512m -p 8005:8001 -e VERITAS_SERVICE_PUBLIC=1 -e VERITAS_AI_SERVICE_TOKEN="$SERVICE_TOKEN" -e OMP_NUM_THREADS=1 -e OPENBLAS_NUM_THREADS=1 veritas-media-check
+          docker run -d --name api --network veritas-check --memory=512m --memory-swap=512m -p 3348:3000 -e PORT=3000 -e VERITAS_PUBLIC_GUESTS=1 -e VERITAS_PUBLIC_ORIGIN=http://localhost:3348 -e VERITAS_CLOUD_PROFILE=free -e VERITAS_STORE=/tmp/veritas-public/cases.json -e VERITAS_AI_SERVICE_URL=http://media:8001 -e VERITAS_AI_SERVICE_TOKEN="$SERVICE_TOKEN" -e VERITAS_WORKER_MEMORY_MB=128 -e VERITAS_NLI_ENABLED=0 -e VERITAS_RERANKER_ENABLED=0 veritas-api-check
+          curl --fail --retry 30 --retry-delay 2 --retry-all-errors --max-time 10 http://127.0.0.1:8005/health
+          curl --fail --retry 30 --retry-delay 2 --retry-all-errors --max-time 10 http://127.0.0.1:3348/api/health
+          test "$(curl -s -o /dev/null -w '%{http_code}' -X POST http://127.0.0.1:8005/analyze-image -H 'Content-Type: application/json' -d '{}')" = 401
+          python - <<'PY'
+          import base64,json,os,pathlib,urllib.request
+          payload=json.dumps({'image_base64':base64.b64encode(pathlib.Path('fixtures/submission/notice.png').read_bytes()).decode()}).encode()
+          request=urllib.request.Request('http://127.0.0.1:8005/v1/image/evidence',data=payload,headers={'Content-Type':'application/json','X-Veritas-Service-Token':os.environ['SERVICE_TOKEN']})
+          result=json.load(urllib.request.urlopen(request,timeout=60))
+          assert result['classification']=='INCONCLUSIVE' and result['decision_probability'] is None
+          assert result['signals']['status']=='measured'
+          print('Actual protected image measurements passed; no trained authenticity verdict')
+          payload=json.dumps({'video_base64':base64.b64encode(pathlib.Path('test/fixtures/video/test_pattern_with_tone_3s.mp4').read_bytes()).decode()}).encode()
+          request=urllib.request.Request('http://127.0.0.1:8005/v1/video/analyze',data=payload,headers={'Content-Type':'application/json','X-Veritas-Service-Token':os.environ['SERVICE_TOKEN']})
+          result=json.load(urllib.request.urlopen(request,timeout=90))
+          assert result['frames'] and result['audioTrack']['status']=='model_unavailable'
+          print('Actual protected video frame/audio extraction passed; no AASIST inference')
+          PY
+          curl --fail http://127.0.0.1:3348/ -o /tmp/frontend.html
+          curl --fail -c /tmp/guest-cookie -X POST http://127.0.0.1:3348/api/guest/session -H 'Origin: http://localhost:3348'
+          curl --fail -b /tmp/guest-cookie -X POST http://127.0.0.1:3348/api/investigations -H 'Content-Type: application/json' -d '{"title":"Container software control"}' -o /tmp/created.json
+          curl --fail -b /tmp/guest-cookie http://127.0.0.1:3348/api/investigations -o /tmp/cases.json
+          python -c "import json; a=json.load(open('/tmp/created.json'))['investigation']; b=json.load(open('/tmp/cases.json'))['investigations']; assert a['ownerId'].startswith('guest:'); assert len(b)==1 and b[0]['id']==a['id']"
+          docker stats --no-stream media api
+          test "$(docker inspect -f '{{.State.OOMKilled}}' media)" = false
+          test "$(docker inspect -f '{{.State.OOMKilled}}' api)" = false
+      - name: Container logs and cleanup
+        if: always()
+        run: |
+          docker logs media 2>&1 || true
+          docker logs api 2>&1 || true
+          docker rm -f api media 2>/dev/null || true
+          docker network rm veritas-check 2>/dev/null || true

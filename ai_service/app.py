@@ -68,6 +68,11 @@ async def lifespan(_app: FastAPI):
     _timing("face_detector", "end")
     audio_service.load_model()
     face_service.load_model()
+    # Hosted readiness must include the native provenance SDK, rather than spending
+    # the first visitor's bounded request deadline importing it in a worker thread.
+    if os.getenv('VERITAS_SERVICE_PUBLIC','0')=='1':
+        try:__import__('c2pa')
+        except ImportError:pass  # Existing evidence contract explicitly reports SDK unavailable.
     if os.getenv("VERITAS_IMAGE_MODEL_ENABLED", "0") == "1":
         try:
             require_headroom(5 if MODEL_KIND=='smaug' else 2)
@@ -111,6 +116,8 @@ async def lifespan(_app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+from ai_service.service_auth import install_service_auth
+install_service_auth(app)
 app.include_router(extraction_router)
 app.include_router(audio_service.router)
 app.include_router(video_service.router)

@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from ai_service.extraction_prepare import router
 
 app = FastAPI(title='VERITAS bounded OCR preparation')
+from ai_service.service_auth import install_service_auth
+install_service_auth(app)
 app.include_router(router)
 
 @app.get('/health')

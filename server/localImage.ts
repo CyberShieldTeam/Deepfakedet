@@ -1,6 +1,7 @@
 import type { ForensicAnalysisResult } from '../src/types';
 import {createHash} from 'node:crypto';
 import {imageTraceSchema} from './mediaTrace';
+import {pythonServiceHeaders} from './pythonService';
 
 export interface LocalImageResponse {
   inputTrace?:import('../src/mediaTraceTypes').ImageInputTrace;
@@ -24,7 +25,7 @@ export async function callLocalImage(mediaData: string, endpoint: string, fetche
   const match = /^data:image\/(?:png|jpeg|webp);base64,([A-Za-z0-9+/=]+)$/.exec(mediaData);
   if (!match || match[1].length > 14_000_000) throw new Error('Unsupported or oversized image data');
   const response = await fetcher(`${endpoint.replace(/\/$/, '')}/v1/image/analyze`, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    method: 'POST', headers: pythonServiceHeaders(), redirect:'error',
     body: JSON.stringify({ image_base64: match[1] }), signal: AbortSignal.timeout(45_000)
   });
   if (!response.ok) throw new Error(`Local image service returned HTTP ${response.status}`);
