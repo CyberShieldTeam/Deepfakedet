@@ -68,6 +68,8 @@ export interface ForensicAnalysisResult {
     status: "not_requested" | "not_configured" | "complete" | "input_limit" | "unsupported_duration" | "quota_exceeded" | "rate_limited" | "timeout" | "provider_error";
     explanation: string;
     observations: string[];
+    alternativeExplanations: string[];
+    additionalInvestigation: { required: boolean | null; rationale: string };
     limitations: string[];
     model: string | null;
   };
