@@ -68,6 +68,8 @@ export const ResultPanel: React.FC<{ r: ForensicAnalysisResult; onSeek?: (second
           <p className="text-xs uppercase tracking-wide text-cyan-300">Status: {gemini.status.replaceAll("_", " ")}</p>
           <p>{gemini.explanation}</p>
           {gemini.observations.length > 0 && <><p className="font-medium text-slate-100">Gemini observations</p><ul className="list-disc space-y-1 pl-5">{gemini.observations.map((item, i) => <li key={i}>{item}</li>)}</ul></>}
+          {gemini.alternativeExplanations.length > 0 && <><p className="font-medium text-slate-100">Other possible explanations</p><ul className="list-disc space-y-1 pl-5">{gemini.alternativeExplanations.map((item, i) => <li key={i}>{item}</li>)}</ul></>}
+          <p><span className="font-medium text-slate-100">Additional investigation:</span> {gemini.additionalInvestigation.required === null ? "Not assessed" : gemini.additionalInvestigation.required ? "Recommended for analyst review" : "Not indicated by this visual assessment"} — {gemini.additionalInvestigation.rationale}</p>
           <p className="font-medium text-slate-100">Limitations</p><ul className="list-disc space-y-1 pl-5">{gemini.limitations.map((item, i) => <li key={i}>{item}</li>)}</ul>
           {gemini.model && <p className="text-xs text-slate-500">Provider model: {gemini.model}</p>}
           <p className="text-xs text-amber-200">This separate visual assessment does not change the classifier verdict above.</p>
