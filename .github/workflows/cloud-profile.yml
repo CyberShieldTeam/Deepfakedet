@@ -45,6 +45,11 @@ jobs:
           assert result['classification']=='INCONCLUSIVE' and result['decision_probability'] is None
           assert result['signals']['status']=='measured'
           print('Actual protected image measurements passed; no trained authenticity verdict')
+          payload=json.dumps({'video_base64':base64.b64encode(pathlib.Path('test/fixtures/video/test_pattern_with_tone_3s.mp4').read_bytes()).decode()}).encode()
+          request=urllib.request.Request('http://127.0.0.1:8005/v1/video/analyze',data=payload,headers={'Content-Type':'application/json','X-Veritas-Service-Token':os.environ['SERVICE_TOKEN']})
+          result=json.load(urllib.request.urlopen(request,timeout=90))
+          assert result['frames'] and result['audioTrack']['status']=='model_unavailable'
+          print('Actual protected video frame/audio extraction passed; no AASIST inference')
           PY
           curl --fail http://127.0.0.1:3348/ -o /tmp/frontend.html
           curl --fail -c /tmp/guest-cookie -X POST http://127.0.0.1:3348/api/guest/session -H 'Origin: http://localhost:3348'
