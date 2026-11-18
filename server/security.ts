@@ -44,6 +44,7 @@ const dataUrl = z
 export const mediaInput = z
   .object({
     modality: z.enum(["image", "video", "audio"]),
+    geminiConsent: z.boolean().default(false),
     fileName: text(255),
     mimeType: z.enum([
       "image/jpeg",

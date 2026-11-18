@@ -29,6 +29,7 @@ try{
   assert.equal("geminiModel" in health.body,false);
   assert.equal("geminiMessage" in health.body,false);
   assert.equal("geminiModelCandidates" in health.body,false);
+  assert.equal("localMediaService" in health.body,false);
 
   await api.get("/api/investigations").expect(401);
   await api.get("/api/investigations").set("Authorization","Bearer private-test-token-not-a-real-secret-000000").expect(401);

@@ -51,7 +51,7 @@ test('Engine4.1 actual OCR requires human review before claim investigation',asy
  // Actual Engine3 public-post controls joined to this same case through the owned API.
  const claim=investigated.result.originalInput;const posts=episodeControls.find(c=>c.name==='multi_episode_pattern')!.rows.map(p=>({...p,content:claim+' https://example.org/engine4-source'}));
  if(process.env.VERITAS_SUBMISSION_DEMO==='1'){
-  await page.getByRole('button',{name:'Network intelligence',exact:true}).first().click();await expect(page.getByRole('heading',{name:'Network intelligence',exact:true})).toBeVisible();await page.getByLabel('Upload posts (CSV / JSON)').setInputFiles('fixtures/submission/posts.json');await expect(page.getByText('Observed post relationships',{exact:true})).toBeVisible();await page.getByRole('button',{name:'Save to a case',exact:true}).click();await expect(page.getByRole('button',{name:/Saved to SUR-/})).toBeVisible();await page.getByRole('button',{name:'Investigations',exact:true}).first().click();
+  await page.getByRole('button',{name:'Network intelligence',exact:true}).first().click();await expect(page.getByRole('heading',{name:'Network intelligence',exact:true})).toBeVisible();await page.getByLabel('Upload posts (CSV / JSON)').setInputFiles('fixtures/submission/posts.json');await expect(page.getByText('Repeated coordination signals observed',{exact:true})).toBeVisible();await page.getByRole('button',{name:'Save to a case',exact:true}).click();await expect(page.getByRole('button',{name:/Saved to SUR-/})).toBeVisible();await page.getByRole('button',{name:'Investigations',exact:true}).first().click();
  }else{
   const network=(await(await page.request.post('/api/campaigns/analyze',{data:{posts,coverage:episodeCoverage,datasetName:'Authored OCR public-post controls'}})).json()).result;
   expect((await page.request.post(`/api/investigations/${extracted.investigation.id}/attach`,{data:{kind:'campaign',result:network}})).ok()).toBe(true);
@@ -271,6 +271,39 @@ test("Image measurements are processed without fabricating classifier output", a
     await expect(page.getByText('Whole-image classifier unavailable',{exact:true})).toBeVisible();
   else if(!result.localImage) await expect(page.getByText('UNAVAILABLE',{exact:true})).toBeVisible();
   await expect(page.getByText("LIVE ANALYSIS MODE", { exact: true })).toBeVisible();
+});
+
+test("Gemini media sharing requires an explicit opt-in and stays separate from the classifier", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Media forensics", exact: true }).first().click();
+  const image = await page.evaluate(() => {
+    const c = document.createElement("canvas"); c.width = 64; c.height = 64;
+    const ctx = c.getContext("2d")!; ctx.fillStyle = "#346987"; ctx.fillRect(0, 0, 64, 64);
+    return c.toDataURL("image/png").split(",")[1];
+  });
+  await page.locator("input[type=file]").setInputFiles({ name: "gemini-consent-test.png", mimeType: "image/png", buffer: Buffer.from(image, "base64") });
+  const consent = page.getByRole("checkbox");
+  await expect(consent).not.toBeChecked();
+  const firstRequest = page.waitForRequest(r => r.url().includes("/api/forensics/analyze-media") && r.method() === "POST");
+  const firstResponse = page.waitForResponse(r => r.url().includes("/api/forensics/analyze-media") && r.request().method() === "POST");
+  await page.getByRole("button", { name: /Check this file/ }).click();
+  const firstPayload = JSON.parse((await firstRequest).postData()!);
+  const firstResult = (await (await firstResponse).json()).result;
+  expect(firstPayload.geminiConsent).toBe(false);
+  expect(firstResult.geminiMediaAssessment.status).toBe("not_requested");
+  expect(firstResult.authenticity).toBe("inconclusive");
+  expect(firstResult.aiGeneratedProbability).toBeNull();
+  await consent.check();
+  const secondRequest = page.waitForRequest(r => r.url().includes("/api/forensics/analyze-media") && r.method() === "POST");
+  const secondResponse = page.waitForResponse(r => r.url().includes("/api/forensics/analyze-media") && r.request().method() === "POST");
+  await page.getByRole("button", { name: /Check this file/ }).click();
+  const secondPayload = JSON.parse((await secondRequest).postData()!);
+  const secondResult = (await (await secondResponse).json()).result;
+  expect(secondPayload.geminiConsent).toBe(true);
+  expect(secondResult.geminiMediaAssessment.status).toBe("not_configured");
+  expect(secondResult.authenticity).toBe("inconclusive");
+  expect(secondResult.aiGeneratedProbability).toBeNull();
+  await expect(page.getByText("AI-assisted media assessment — not validated authenticity detection.", { exact: true })).toBeVisible();
 });
 
 test('Contradictory duplicate precision remains visible and blocks recurrence',async({page})=>{

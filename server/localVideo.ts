@@ -164,7 +164,7 @@ export function localVideoResult(evidence: LocalVideoEvidence, fileName: string,
   const audioScored = evidence.audioTrack?.status === 'analyzed';
   return {
     modality: 'video', fileName, engine: 'local_video_frames',
-    engineNote: `${evidence.frames.length} ${source} frame(s) screened locally. Image-model scores are experimental and cannot determine video authenticity.`,
+    engineNote: `${evidence.frames.length} ${source} frame(s) retained. ${firstModel?'Experimental image-model outputs are shown separately and cannot determine video authenticity.':'No optional image classifier was available; decode, timestamp, quality and motion evidence remain available.'}`,
     authenticity: 'inconclusive', confidenceScore: 0, aiGeneratedProbability: null,
     headlineSummary: 'Frame-level evidence is available, but video authenticity is undetermined.',
     detailedFindings: [`Screened ${evidence.frames.length} sampled frame(s).`,

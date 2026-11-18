@@ -8,7 +8,7 @@ export type ModalityType = "image" | "video" | "audio" | "text_claim" | "social_
 /** Processing/evidence state, independent of authenticity, truth or maliciousness verdicts. */
 export type AnalysisState='SUFFICIENT_EVIDENCE'|'INSUFFICIENT_EVIDENCE'|'NO_RELEVANT_SIGNALS'|'ANALYSIS_UNAVAILABLE'|'ANALYSIS_FAILED'|'PARTIAL_ANALYSIS';
 export interface AnalysisStage {
-  stage:string;status:'available'|'unconfigured'|'unavailable'|'failed'|'skipped';count?:number;errorCategory?:string;
+  stage:string;status:'available'|'unconfigured'|'unavailable'|'failed'|'skipped';count?:number;errorCategory?:string;message?:string;
 }
 export interface AnalysisDiagnostics {
   id:string;engine:'media'|'claim'|'network';state:AnalysisState;
@@ -64,6 +64,13 @@ export interface AudioSpectralAnalysis {
 }
 
 export interface ForensicAnalysisResult {
+  geminiMediaAssessment?: {
+    status: "not_requested" | "not_configured" | "complete" | "input_limit" | "unsupported_duration" | "quota_exceeded" | "rate_limited" | "timeout" | "provider_error";
+    explanation: string;
+    observations: string[];
+    limitations: string[];
+    model: string | null;
+  };
   submittedMedia?:{sha256:string;byteLength:number;scope:'submitted_original_image_bytes'|'submitted_analysis_bytes';computedBy:'server'};
   analysis?:AnalysisDiagnostics;
   modality: "image" | "video" | "audio";

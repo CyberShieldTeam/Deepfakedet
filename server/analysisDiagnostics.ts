@@ -10,7 +10,10 @@ export function diagnostics(engine:AnalysisDiagnostics['engine'],state:AnalysisS
 }
 export function mediaDiagnostics(r:ForensicAnalysisResult,stages:AnalysisStage[],elapsedMs:number){
   const clientMeasurements=Object.values(r.measurements??{}).filter(v=>typeof v==='number'&&Number.isFinite(v)).length;
-  const frames=r.localVideo?.frames.length??r.sampledFrames?.filter(f=>f.status==='available').length??0;
+  const serverFrames=r.localVideo?.frames.length??0;
+  const browserFrames=r.sampledFrames?.length??0;
+  const classifierScoredFrames=r.localVideo?.frames.filter(f=>f.image.model_status==='ready'&&f.image.fake_probability!=null).length??r.sampledFrames?.filter(f=>f.status==='available'&&f.probability!=null).length??0;
+  const frames=serverFrames||browserFrames;
   const segments=r.localAudio?.segments.length??r.localVideo?.audioTrack?.evidence?.segments.length??r.audioSegments?.length??0;
   const imageSignalMeasurements=r.imageDiagnostics?.signals.status==='measured'?['high_frequency_energy_fraction','noise_residual_std','laplacian_variance'].filter(k=>Number.isFinite(r.imageDiagnostics!.signals[k])).length:0;
   const rawClassifierOutputs=(r.localImage?.fake_probability!=null?1:0)+(r.aiGeneratedProbability!=null?1:0);
@@ -18,9 +21,10 @@ export function mediaDiagnostics(r:ForensicAnalysisResult,stages:AnalysisStage[]
   const modelRan=rawClassifierOutputs>0||segments>0||r.inference?.status==='available'||!!r.localVideo?.frames.some(f=>f.image.model_status==='ready');
   const failed=stages.some(s=>s.status==='failed'),missing=stages.some(s=>['unavailable','unconfigured'].includes(s.status)&&!(modelRan&&s.status==='unconfigured'&&(s.stage.startsWith('dedicated_classifier')||s.stage==='local_evidence_service')));
   const state:AnalysisState=failed||missing?(evidenceItems?'PARTIAL_ANALYSIS':failed?'ANALYSIS_FAILED':'ANALYSIS_UNAVAILABLE'):'INSUFFICIENT_EVIDENCE';
+  const frameSummary=serverFrames?`${serverFrames} server-decoded frames retained (${classifierScoredFrames} classifier-scored)`:`${browserFrames} browser-sampled frames retained (${classifierScoredFrames} classifier-scored)`;
   const summary=state==='ANALYSIS_FAILED'?'Media analysis failed; no successful forensic result is available.':state==='ANALYSIS_UNAVAILABLE'?'Media analysis is unavailable; no configured analysis produced evidence.':
-    `${clientMeasurements} client-supplied measurements, ${imageSignalMeasurements} server image measurements, ${frames} sampled frames and ${segments} scored audio segments retained. ${state==='PARTIAL_ANALYSIS'?'Some analysis stages were unavailable or failed. ':''}Authenticity remains undetermined; measurements and experimental scores are not a validated verdict.`;
-  return diagnostics('media',state,{evidenceItems,clientMeasurements,imageSignalMeasurements,sampledFrames:frames,scoredAudioSegments:segments,rawClassifierOutputs},stages,summary,elapsedMs,['Uncalibrated local scores remain separate from authenticity verdicts.','Client measurements are supplied by the browser, not independent server attestation.']);
+    `${clientMeasurements} client-supplied measurements, ${imageSignalMeasurements} server image measurements, ${frameSummary} and ${segments} scored audio segments retained. ${state==='PARTIAL_ANALYSIS'?'Some analysis stages were unavailable or failed. ':''}Authenticity remains undetermined; measurements and experimental scores are not a validated verdict.`;
+  return diagnostics('media',state,{evidenceItems,clientMeasurements,imageSignalMeasurements,sampledFrames:frames,serverDecodedFrames:serverFrames,browserSampledFrames:browserFrames,classifierScoredFrames,scoredAudioSegments:segments,rawClassifierOutputs},stages,summary,elapsedMs,['Uncalibrated local scores remain separate from authenticity verdicts.','Client measurements and browser-sampled frames are supplied by the browser, not independent server attestation.']);
 }
 export function claimDiagnostics(r:ClaimVerificationResult,elapsedMs:number){
   const providers=r.retrievalDetails?.providers??[];

@@ -239,7 +239,7 @@ export async function analyzeMediaPipeline(input: {
     result.analysis=mediaDiagnostics(result,stages,performance.now()-started);
     return result;
   };
-  if (!localEndpoint) {stages.push({stage:'local_evidence_service',status:'unconfigured'});return finish();}
+  if (!localEndpoint) {stages.push({stage:'local_evidence_service',status:'unconfigured',message:'VERITAS_AI_SERVICE_URL is not configured; original-video server decoding was not attempted.'});return finish();}
   let localImage: LocalImageResponse | undefined;
   let localAudio: LocalAudioResponse | undefined;
   let localVideo: LocalVideoEvidence | undefined;
@@ -253,8 +253,10 @@ export async function analyzeMediaPipeline(input: {
         try {
           localVideo = await callLocalVideo(mediaData, localEndpoint, fetch, input.temporalIntervalSeconds ?? 1);
         } catch (error) {
-          stages.push({stage:'original_video_decode',status:'failed',errorCategory:diagnosticError(error)});
+          stages.push({stage:'original_video_decode',status:'failed',errorCategory:diagnosticError(error),message:error instanceof Error?error.message.slice(0,180):'Original-video service failed.'});
         }
+      } else {
+        stages.push({stage:'original_video_decode',status:'skipped',message:'Original video bytes were not submitted within the 8 MiB server-decoding limit; only browser-sampled fallback frames can be retained.'});
       }
       if (!localVideo && keyframes.length) {
         localVideo = await callLocalVideoFrames(
@@ -267,7 +269,7 @@ export async function analyzeMediaPipeline(input: {
       }
     }
   } catch (error) {
-    stages.push({stage:`local_${modality}_service`,status:'failed',errorCategory:diagnosticError(error)});
+    stages.push({stage:`local_${modality}_service`,status:'failed',errorCategory:diagnosticError(error),message:error instanceof Error?error.message.slice(0,180):'Local media service failed.'});
   }
 
   if (localImage) {
@@ -279,7 +281,9 @@ export async function analyzeMediaPipeline(input: {
     if (available.length === 0) result = localAudioResult(localAudio, fileName, m, findings);
     else result.localAudio = localAudio;
   } else if (localVideo) {
-    stages.push({stage:'local_video_service',status:'available',count:localVideo.frames.length});
+    const scoredFrames=localVideo.frames.filter(frame=>frame.image.model_status==='ready'&&frame.image.fake_probability!=null).length;
+    stages.push({stage:'local_video_service',status:'available',count:localVideo.frames.length,message:`${localVideo.scope==='server_decoded_frames'?'Original video decoded by server':'Browser frame fallback retained'}.`},
+      {stage:'video_frame_classifier',status:scoredFrames?'available':'unavailable',count:scoredFrames,message:scoredFrames?`${scoredFrames}/${localVideo.frames.length} frames received experimental classifier outputs.`:'Frame decoding succeeded, but no optional image classifier checkpoint was available.'});
     if(localVideo.temporalDiagnostics&&['partial','timed_out','failed'].includes(localVideo.temporalDiagnostics.status))stages.push({stage:'temporal_analysis',status:'failed',errorCategory:'INCOMPLETE_TEMPORAL_ANALYSIS'});
     if(localVideo.audioTrack&&['model_unavailable','extraction_failed'].includes(localVideo.audioTrack.status))stages.push({stage:'video_audio_analysis',status:localVideo.audioTrack.status==='model_unavailable'?'unavailable':'failed',...(localVideo.audioTrack.status==='extraction_failed'?{errorCategory:'AUDIO_EXTRACTION_FAILED'}:{})});
     if (available.length === 0) result = localVideoResult(localVideo, fileName, m, findings);

@@ -45,6 +45,7 @@ export interface Health {
   geminiStatus?: string;
   geminiMessage?: string;
   geminiModel?: string | null;
+  localMediaService?:{status:'unconfigured'|'available'|'unavailable';video?:{status:string;decoder?:string;ffmpeg?:string};image?:{status:string;model?:string;revision?:string;reason?:string};audio?:{status:string;reason?:string};faceDetector?:string;faceClassifier?:{status:string;reason?:string};detail?:string};
   activeInvestigations: number;
 }
 export interface Stats {
@@ -80,6 +81,7 @@ export const attachResult = (id: string, kind: "media" | "claim" | "campaign", r
   );
 export const analyzeMedia = (p: {
   modality: string;
+  geminiConsent?: boolean;
   fileName: string;
   mimeType: string;
   measurements: any;

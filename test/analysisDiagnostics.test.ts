@@ -35,6 +35,9 @@ assert.equal(media.analysis!.state,'PARTIAL_ANALYSIS');assert.equal(media.aiGene
 assert.equal(mediaDiagnostics({...media,measurements:{}},[{stage:'provider',status:'failed',errorCategory:'DEPENDENCY_FAILED'}],1).state,'ANALYSIS_FAILED');
 assert.equal(mediaDiagnostics({...media,measurements:{}},[{stage:'provider',status:'unconfigured'}],1).state,'ANALYSIS_UNAVAILABLE');
 assert.equal(mediaDiagnostics(media,[{stage:'measurements',status:'available'}],1).state,'INSUFFICIENT_EVIDENCE');
+const retainedBrowserFrames={...media,modality:'video' as const,sampledFrames:[{timestamp:0,status:'unavailable',probability:null,thumbnail:'data:image/jpeg;base64,AA=='},{timestamp:1,status:'unavailable',probability:null,thumbnail:'data:image/jpeg;base64,AA=='}]};
+const retainedDiagnostics=mediaDiagnostics(retainedBrowserFrames,[{stage:'local_evidence_service',status:'unconfigured',message:'Full media service not configured.'}],1);
+assert.equal(retainedDiagnostics.counts.sampledFrames,2);assert.equal(retainedDiagnostics.counts.browserSampledFrames,2);assert.equal(retainedDiagnostics.counts.classifierScoredFrames,0);assert.match(retainedDiagnostics.summary,/2 browser-sampled frames retained \(0 classifier-scored\)/);
 assert.equal(mediaDiagnostics({...media,inference:{status:'available',modelId:'fixture',version:'1',calibration:'Unvalidated',trainingData:'fixture',license:'fixture',limitations:'fixture'}},[{stage:'dedicated_classifier',status:'available'},{stage:'local_evidence_service',status:'unconfigured'}],1).state,'INSUFFICIENT_EVIDENCE');
 assert.equal(plainMedia(media).headline,'Authenticity remains undetermined');
 const pattern=episodeControls.find(c=>c.name==='multi_episode_pattern')!;
@@ -45,6 +48,7 @@ assert.equal(networkDiagnostics({...network,truncated:true},12,1).state,'PARTIAL
 const invalid=failedDiagnostic('network','INVALID_INPUT',0,true);assert.equal(invalid.inputValidation,'invalid');assert.equal(invalid.state,'ANALYSIS_FAILED');
 assert.equal(failedDiagnostic('media','EXECUTION_FAILED').elapsedMs,null);
 const html=renderToStaticMarkup(React.createElement(AnalysisStatus,{analysis:network.analysis}));assert.ok(html.includes('6 observed relationships'));assert.ok(html.includes('Developer diagnostics'));
+const unavailableHtml=renderToStaticMarkup(React.createElement(AnalysisStatus,{analysis:retainedDiagnostics}));assert.ok(unavailableHtml.includes('Full media service not configured.'));
 const inv=buildDemoInvestigation();inv.forensicResult=media;inv.mediaFindings=[media];inv.claimResult=candidate;inv.claimResults=[candidate];inv.campaignResult=network;
 const report=reportHtml({reportId:'diagnostic',generatedAt:new Date().toISOString(),integrityHash:'fixture',geminiConfigured:false,recommendations:[],investigation:inv});assert.ok(report.includes('Processing and evidence status'));assert.ok(report.includes(network.analysis.id));assert.ok(report.includes('18 pair episodes'));
 const oldLog=console.info;const logs:string[]=[];console.info=(line:string)=>{logs.push(line);};

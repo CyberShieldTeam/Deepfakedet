@@ -3,6 +3,7 @@ import type {Investigation} from '../types';
 import type {CorrelationResult,MediaContextInput} from '../correlationTypes';
 import {correlateInvestigation} from '../services/api';
 import {Button,ErrorBox} from './ui';
+import {correlationResultSummary} from '../resultSummaries';
 export function CorrelationView({investigation:inv,onChanged}:{investigation:Investigation;onChanged:()=>Promise<Investigation[]>}){
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[local,setLocal]=useState<CorrelationResult|null>(null);
  const [engine,setEngine]=useState('all'),[type,setType]=useState('all'),[relation,setRelation]=useState('all'),[strength,setStrength]=useState('all'),[selected,setSelected]=useState('');
@@ -19,6 +20,7 @@ export function CorrelationView({investigation:inv,onChanged}:{investigation:Inv
   return (engine==='all'||a.engines.includes(engine as any)||b.engines.includes(engine as any))&&(type==='all'||a.type===type||b.type===type)&&(relation==='all'||e.type===relation)&&(strength==='all'||e.strength===strength);
  })??[];
  const chosen=visible.find(e=>e.id===selected)??visible[0];
+ const summary=graph?correlationResultSummary(graph):null;
  const mediaNodes=graph?.nodes.filter(n=>n.type==='media_asset')??[],claims=graph?.nodes.filter(n=>n.type==='claim')??[];
  const existingContexts=():MediaContextInput[]=>(inv.correlationContexts??[]).map(({mediaId,claimId,kind,text,rationale,mediaUrl})=>({mediaId,claimId,kind,text,rationale,...(mediaUrl?{mediaUrl}:{})}));
  const fieldClass='max-w-full rounded border border-slate-700 bg-slate-950 p-2 text-xs';
@@ -31,6 +33,7 @@ export function CorrelationView({investigation:inv,onChanged}:{investigation:Inv
   {!graph&&inv.correlation&&<p className="text-amber-200">Previous graph retained in the saved case; it is not shown as a new/current result. Last run: {inv.correlationRun?.status??'unknown'}. Regenerate after evidence changes.</p>}
   {!graph&&!inv.correlation&&!busy&&<p>Generate a graph from attached media, claims and network findings. No correlation has been saved yet.</p>}
   {graph&&<>
+   <div className="rounded-lg border border-cyan-700/60 bg-cyan-950/20 p-3 text-sm" aria-label="Correlation result summary"><div className="font-semibold text-cyan-200">Investigation Result · {summary!.headline}</div><p className="mt-1">{summary!.explanation}</p>{summary!.important.length?<ul className="mt-2 list-disc pl-4">{summary!.important.map((item,i)=><li key={i}>{item}</li>)}</ul>:<p className="mt-2 text-slate-400">No supported cross-engine link is available to highlight.</p>}<p className="mt-2"><b>What remains unresolved:</b> {summary!.unresolved[0]||'No additional missing evidence was recorded; source-engine limitations still apply.'}</p><p className="mt-2 text-slate-400"><b>Next action:</b> {summary!.nextAction}</p></div>
    <p role="status"><b>Correlation status: {graph.state}</b> · {graph.counts.nodes} nodes · {graph.counts.relationships} relationships · {graph.counts.crossEngineLinks} cross-engine links · {graph.elapsedMs.toFixed(1)} ms</p>
    <p className="text-amber-200">{graph.truncated?'Bounded processing omitted evidence; inspect the limits and original engine results.':'No correlation cap was reached.'} No overall misinformation score is computed.</p>
    <Button variant="ghost" onClick={()=>{const objectUrl=URL.createObjectURL(new Blob([JSON.stringify(graph,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=objectUrl;a.download='veritas-correlation.json';a.click();setTimeout(()=>URL.revokeObjectURL(objectUrl),1000);}}>Download correlation JSON</Button>
